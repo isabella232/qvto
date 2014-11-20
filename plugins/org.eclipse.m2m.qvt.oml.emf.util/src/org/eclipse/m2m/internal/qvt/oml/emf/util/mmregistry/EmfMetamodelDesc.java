@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -61,16 +61,6 @@ public class EmfMetamodelDesc implements IMetamodelDesc {
     			myPackage = myPackageDescriptor.getEPackage();
     		}
     		catch (Throwable ex) {
-    			EPackage pkg = null;
-    			try {
-	    			pkg = EPackage.Registry.INSTANCE.getEPackage(getId());
-	                if (pkg != null) {
-	                    return pkg;
-	                }
-    			}
-    			catch (Throwable ex1) {
-    			}
-    			
     			String errMessage = NLS.bind(Messages.MetamodelRegistry_LoadError, getId(), ex.getClass().getName());    			
     			//this.status = new Status(IStatus.ERROR, EmfUtilPlugin.ID, errMessage, ex);
     			this.status = EmfUtilPlugin.createErrorDiagnostic(errMessage, ex);
