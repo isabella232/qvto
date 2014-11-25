@@ -29,15 +29,32 @@ public class QVTEvaluationOptions {
 	/**
 	 * Decorator classes to be used when constructing a QVTo evaluation visitor.
 	 * 
-	 * Visitor decorators should extend QvtGenericVisitorDecorator. They can be contributed by third parties
-	 * by setting this value on the transformation context before executing. 
+	 * <p> Visitor decorators should extend QvtGenericVisitorDecorator. They can be contributed by third parties
+	 * by setting this value on the transformation context before executing:
 	 * 
-	 * For example:
+	 * <p> <blockquote><pre>
+	 * public static class TestQvtGenericVisitorDecorator extends QvtGenericVisitorDecorator {
 	 * 
+	 *   public TestQvtGenericVisitorDecorator(InternalEvaluator qvtExtVisitor) {
+	 *     super(qvtExtVisitor);
+	 *   }
+	 * 
+	 *   public Object visitModule(Module module) {
+	 *     //...
+	 *     return super.visitModule(module);
+	 *   }
+	 *   // ...
+	 * }
+	 * </pre></blockquote>
+	 * 
+	 * Usage example:
+	 * 
+	 * <p> <blockquote><pre>
 	 * ExecutionContextImpl context = new ExecutionContextImpl();
-	 * context.getSessionData().setValue(QVTEvaluationOptions.VISITOR_DECORATORS, myDecoratorsList);
-	 * TransformationExecutor executor = new TransformationExecutor(transformationURI);
+	 * context.getSessionData().setValue(QVTEvaluationOptions.VISITOR_DECORATORS, Collections.singletonList(TestQvtGenericVisitorDecorator.class));
+	 * TransformationExecutor executor = new TransformationExecutor(uri);
 	 * ExecutionDiagnostic result = executor.execute(context);
+	 * </pre></blockquote>
 	 * 
 	 * @see org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory#createEvaluationVisitor()
 	 */

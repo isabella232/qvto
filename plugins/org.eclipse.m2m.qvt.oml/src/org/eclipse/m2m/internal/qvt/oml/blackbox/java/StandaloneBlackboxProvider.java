@@ -13,7 +13,6 @@
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	
-	private final Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+	private Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
 	
 	@Override
 	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) { 
@@ -37,14 +36,34 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		} catch(ClassNotFoundException e) {
 			return null;
 		}
-	}	
+	}
+	
+	public void registerDescriptor(final Class<?> cls) {
+		JavaUnitDescriptor d = new JavaUnitDescriptor(cls.getName()) {};
+		
+		try {
+			d.addModuleHandle(new StandaloneModuleHandle(d.getQualifiedName(), cls.getSimpleName()) {
+				@Override
+				public Class<?> getModuleJavaClass() throws ClassNotFoundException {
+					return cls;
+				}
+			});
+
+			fDescriptorMap.put(d.getQualifiedName(), d);
+		} catch (ClassNotFoundException e) {
+		}
+	}
 
 	@Override
 	public Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
-		// TODO not supported
-		return Collections.emptyList();
+		return fDescriptorMap.values();
 	}
 
+	@Override
+	public void cleanup() {
+		super.cleanup();
+		fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+	}
 	
 	private class StandaloneDescriptor extends JavaUnitDescriptor {		
 				

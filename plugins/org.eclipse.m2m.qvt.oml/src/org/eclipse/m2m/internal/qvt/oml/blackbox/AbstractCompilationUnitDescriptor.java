@@ -21,8 +21,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 
 
-
-
 public abstract class AbstractCompilationUnitDescriptor {
 	
 	public static final String URI_SCHEME = "qvto"; //$NON-NLS-1$

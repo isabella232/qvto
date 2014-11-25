@@ -15,7 +15,7 @@ package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,18 +42,13 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	private static final String METAMODEL_ELEM = "metamodel"; //$NON-NLS-1$
 	private static final String NSURI_ATTR = "nsURI"; //$NON-NLS-1$
 	
-	private final Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap;
+	private Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap;
 		
 	public BundleBlackboxProvider() {
-		if(EMFPlugin.IS_ECLIPSE_RUNNING) {
-			fDescriptorMap = readDescriptors();
-		} else {
-			fDescriptorMap = Collections.emptyMap();
-		}
 	}	
 
 	private Map<String, AbstractCompilationUnitDescriptor> readDescriptors() {
-    	Map<String, AbstractCompilationUnitDescriptor> providers = new HashMap<String, AbstractCompilationUnitDescriptor>();
+    	Map<String, AbstractCompilationUnitDescriptor> providers = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
         
         IConfigurationElement[] configs = Platform.getExtensionRegistry()
         		.getConfigurationElementsFor(QvtPlugin.ID, EXTENSION_POINT);
@@ -111,13 +106,33 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	@Override
 	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
 		// TODO - Should we necessarily be available in all contexts ? 
-		return fDescriptorMap.get(qualifiedName);
+		return getDescriptorMap().get(qualifiedName);
 	}
 
 	@Override
 	public Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
 		// TODO - Should we necessarily be available in all contexts ?
-		return fDescriptorMap.values();
+		return getDescriptorMap().values();
+	}
+	
+	@Override
+	public void cleanup() {
+		super.cleanup();
+		fDescriptorMap = null;
+	}
+	
+	private Map<String, AbstractCompilationUnitDescriptor> getDescriptorMap() {
+		if (fDescriptorMap != null) {
+			return fDescriptorMap;
+		}
+
+		if(EMFPlugin.IS_ECLIPSE_RUNNING) {
+			fDescriptorMap = readDescriptors();
+		} else {
+			fDescriptorMap = Collections.emptyMap();
+		}
+		
+		return fDescriptorMap;
 	}
 	
 	private class BundleDescriptor extends JavaUnitDescriptor {		

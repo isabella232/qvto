@@ -16,12 +16,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.EvaluationUtil;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Library;
+import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.ocl.util.TypeUtil;
 
@@ -78,7 +78,7 @@ public class OperationMatcher {
 			return false;
 		}
 		
-		List<ETypedElement> expectedParams = EvaluationUtil.getBlackboxSignature(trans);
+		List<ModelParameter> expectedParams = EvaluationUtil.getBlackboxSignature(trans);
 		
 		if (expectedParams.size() != libraryOp.getEParameters().size()) {
 			return false;

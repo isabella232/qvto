@@ -26,13 +26,11 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -43,10 +41,8 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MModelURIMapFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.qvt.oml.util.IContext;
-import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.TreeComparator;
@@ -120,20 +116,21 @@ public abstract class ModelTestData {
         return myContext; 
     }
     
-    public EPackage.Registry getMetamodelResolutionRegistry(IProject project, ResourceSet resSet) {
-    	if(!ecoreFileMetamodels.isEmpty()) {
-			myEcoreFilePackageRegistry = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
-			Registry reg = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project.getProject(),resSet);
-			myEcoreFilePackageRegistry.putAll(reg);
-			
-    		TestCase.assertNotNull("EPackage registry for workspace ecore file must be ready", myEcoreFilePackageRegistry); //$NON-NLS-1$
-    	}
-    	return myEcoreFilePackageRegistry;
+    public List<URI> getEcoreMetamodels() {
+    	return ecoreFileMetamodels;
     }
     
-    public void setPackageRegistry(EPackage.Registry myEcoreFilePackageRegistry) {
-		this.myEcoreFilePackageRegistry = myEcoreFilePackageRegistry;
-	}
+    public EPackage.Registry getMetamodelResolutionRegistry(IProject project, ResourceSet resSet) {
+    	EPackage.Registry packageRegistry = null;
+    	if(!ecoreFileMetamodels.isEmpty()) {
+    		packageRegistry = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
+    		EPackage.Registry reg = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project.getProject(),resSet);
+			packageRegistry.putAll(reg);
+			
+    		TestCase.assertNotNull("EPackage registry for workspace ecore file must be ready", packageRegistry); //$NON-NLS-1$
+    	}
+    	return packageRegistry;
+    }
     
     public void dispose() {     	
 //    	Trace trace = getContext().getTrace();
@@ -141,7 +138,6 @@ public abstract class ModelTestData {
 //    	trace.getTraceRecordMap().clear();
 //    	trace.getSourceToTraceRecordMap().clear();
 //    	trace.getTargetToTraceRecordMap().clear();
-    	myEcoreFilePackageRegistry = null;
     }
     
     abstract public List<URI> getIn(IProject project); 
@@ -198,9 +194,9 @@ public abstract class ModelTestData {
     }
     
     private File getDestFolder(String name, IProject project) throws IOException {
-        File srcRootFolder = TestUtil.getPluginRelativeFile(getBundle(), getTestDataFolder() + "/models"); //$NON-NLS-1$
+        File srcRootFolder = TestUtil.getPluginRelativeFile(getBundle(), getTestDataFolder() + IPath.SEPARATOR + MODEL_FOLDER); 
         File srcFolder = getFolder(srcRootFolder, name);
-        File destFolder = getFolder(new File(project.getLocation().toString() + "/models/"), srcFolder.getName()); //$NON-NLS-1$
+        File destFolder = getFolder(new File(project.getLocation().toString() + IPath.SEPARATOR + MODEL_FOLDER + IPath.SEPARATOR), srcFolder.getName());
         return destFolder;
     }
     
@@ -237,18 +233,6 @@ public abstract class ModelTestData {
         return context;
     }
     
-    protected static IContext makeMyUmlContext(String destProjectName) {
-        IContext context = new Context();
-        final IProject toProject = ResourcesPlugin.getWorkspace().getRoot().getProject(destProjectName);
-        if(toProject == null) {
-            throw new IllegalArgumentException("Project not found: " + destProjectName); //$NON-NLS-1$
-        }
-        
-        ISessionData.NamedEntry<IProject> projectData = new ISessionData.NamedEntry<IProject>("project"); //$NON-NLS-1$
-		context.getSessionData().setValue(projectData, toProject);
-        return context;
-    }
-    
     public String getTestDataFolder() {
     	return "parserTestData"; //$NON-NLS-1$
     }
@@ -260,7 +244,6 @@ public abstract class ModelTestData {
     private final String myName;
     private final IContext myContext;
     protected final List<URI> ecoreFileMetamodels = new ArrayList<URI>();
-    private EPackage.Registry myEcoreFilePackageRegistry;    
     
     public static final String ENCODING = "UTF-8"; //$NON-NLS-1$
 }

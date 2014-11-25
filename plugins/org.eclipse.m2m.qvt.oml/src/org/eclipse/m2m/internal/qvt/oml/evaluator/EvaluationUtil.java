@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
@@ -198,15 +197,11 @@ public class EvaluationUtil {
 	static Context createAggregatedContext(QvtOperationalEvaluationEnv evalEnv) {
 		final IContext parentContext = evalEnv.getContext();
 		
-		Context nestedContext = new Context() {
-			@Override
-			protected ISessionData createSessionData() {
-				return copySessionData();
-			}
-		};
-
+		Context nestedContext = new Context();
 		nestedContext.setLog(parentContext.getLog());
 		nestedContext.setProgressMonitor(parentContext.getProgressMonitor());
+		
+		nestedContext.setSessionData(parentContext.getSessionData());
 		nestedContext.getSessionData().setValue(AGGREGATING_ROOT_ENV, evalEnv);
 
 		Map<String,Object> configProps = parentContext.getConfigProperties();
@@ -300,18 +295,10 @@ public class EvaluationUtil {
 		}
 		
 		return initialValue;
-		
 	}
 	
-	public static List<ETypedElement> getBlackboxSignature(OperationalTransformation transformation) {
-		
-		List<ETypedElement> signatureTypedElements = new ArrayList<ETypedElement>();
-		
-		signatureTypedElements.addAll(transformation.getModelParameter());
-		signatureTypedElements.addAll(transformation.getConfigProperty());
-		
-		return signatureTypedElements;
-		
+	public static List<ModelParameter> getBlackboxSignature(OperationalTransformation transformation) {
+		return transformation.getModelParameter();
 	}
     
 }

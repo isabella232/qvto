@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
 
 /**
@@ -25,7 +26,7 @@ import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
  * 
  * @noextend This interface is not intended to be extended by clients.
  */
-public interface ExecutionDiagnostic extends Diagnostic {
+public interface ExecutionDiagnostic extends Diagnostic, DiagnosticChain {
 
 	/**
 	 * The execution was terminated by failed QVT assertion.

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -67,7 +67,7 @@ public class ModelParameterExtent {
 		myModelParameter = modelParameter;
 		myReadonlyAdapter = isReadonly() ? new ReadonlyExtentAdapter() : null;
 		
-		myResourceAdditionalEObjects = !isReadonly() ? new HashSet<EObject>() : Collections.<EObject>emptySet();
+		myResourceAdditionalEObjects = !isReadonly() ? new LinkedHashSet<EObject>() : Collections.<EObject>emptySet();
 		myResourceAdapter = !isReadonly() ? new ResourceModificationAdapter() : null;
 		myResourceInstalledAdapters = !isReadonly() ? new HashSet<Resource>() : Collections.<Resource>emptySet();
 

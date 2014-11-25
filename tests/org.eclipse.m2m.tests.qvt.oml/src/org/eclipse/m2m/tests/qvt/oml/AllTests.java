@@ -68,6 +68,7 @@ public class AllTests {
         suite.addTest(TransformTests.interpreterSuite());
         suite.addTest(TransformTests.javalessSuite());
         suite.addTest(TransformTests.walkerSuite());
+        suite.addTest(TransformTests.executorSuite());
         suite.addTest(TransformManyModelTests.interpreterSuite());
         suite.addTest(QvtoTransfHelperTests.suite());
         

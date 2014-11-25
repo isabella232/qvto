@@ -112,6 +112,11 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 		fBlackboxUnits.put(libDescriptor, compilationUnit);
 		return compilationUnit;
 	}
+	
+	@Override
+	public void cleanup() {
+		fBlackboxUnits.clear();		
+	}
 
 	private JavaModuleLoader createJavaModuleLoader() {
 		return new JavaModuleLoader() {
@@ -225,7 +230,7 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 
 			return result;
 		}
-
+		
 	}
 
 }

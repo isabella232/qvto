@@ -26,6 +26,7 @@ import junit.framework.TestSuite;
 
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.qvt.oml.util.IContext;
+import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtExecutor;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessQvtTest;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessUtil;
 
@@ -61,6 +62,7 @@ public class TransformTests {
         		return ctx;
         	}
         }));
+        suite.addTest(new TestFailedTransformation(new FilesToFilesData("bug289982_failed"))); //$NON-NLS-1$
 
         for (ModelTestData data : datas) {
             suite.addTest(new TestQvtInterpreter(data));
@@ -99,7 +101,19 @@ public class TransformTests {
 
         return suite;
     }
+
+    public static TestSuite executorSuite() {
+        TestSuite suite = new TestSuite("QVT executor"); //$NON-NLS-1$
+
+        ModelTestData[] datas = createTestData();
+
+        for (ModelTestData data : datas) {
+            suite.addTest(new TestQvtExecutor(data));
+        }
         
+        return suite;
+    }
+
     
     public static ModelTestData[] createTestData() {
         return new ModelTestData[] {        		
@@ -410,6 +424,7 @@ public class TransformTests {
         		new FilesToFilesData("bug433292"), //$NON-NLS-1$
         		new FilesToFilesData("bug370098"), //$NON-NLS-1$
         		new FilesToFilesData("bug326871"), //$NON-NLS-1$
+        		new FilesToFilesData("bug326871a"), //$NON-NLS-1$
         		new FilesToFilesData("emptyExtents", Arrays.asList("in1.ecore", "in2.ecore"), Collections.singletonList("expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
         		new FilesToFilesData("urilessModeltype"), //$NON-NLS-1$
         		};

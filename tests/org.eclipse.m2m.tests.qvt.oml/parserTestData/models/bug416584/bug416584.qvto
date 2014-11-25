@@ -56,6 +56,7 @@ transformation T3()
 		log(prop2);	
 		assert fatal (prop3.repr() = "123");
 		log(prop3.repr());	
+		assert fatal (lib_helper() = "lib_helper 123");
 	}
 	
 	helper T3_helper() : String {

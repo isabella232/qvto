@@ -168,8 +168,8 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 		        if (containers == null) {
 		        	containers = new HashSet<IPath>();
 		        	sourceContainers.put(namespace, containers);
-		        	containers.add(new Path(containerPath));
 		        }
+	        	containers.add(new Path(containerPath));
 	        }
 	    }
 	    return Collections.unmodifiableMap(sourceContainers);

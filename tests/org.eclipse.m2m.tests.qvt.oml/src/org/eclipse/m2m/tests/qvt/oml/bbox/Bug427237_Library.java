@@ -17,13 +17,14 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.m2m.qvt.oml.blackbox.java.JavaModelInstance;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation.Kind;
+import org.eclipse.m2m.qvt.oml.util.IContext;
 
 public class Bug427237_Library {
 
-	@Operation(contextual = false, kind = Kind.TRANSFORMATION)
-	public void bug427237(JavaModelInstance in, JavaModelInstance out, Integer prop) {
+	@Operation(contextual = false, kind = Kind.TRANSFORMATION, withExecutionContext = true)
+	public void bug427237(IContext context, JavaModelInstance in, JavaModelInstance out) {
 		EPackage rootPackage = EcoreFactory.eINSTANCE.createEPackage();
-		rootPackage.setName("root" + prop);
+		rootPackage.setName("root" + context.getConfigProperties().get("prop"));
 		out.getExtent().addObject(rootPackage);
 		
 		for (int i = 0; i < in.getExtent().getRootObjects().size(); ++i) {
@@ -34,9 +35,9 @@ public class Bug427237_Library {
 		}
 	}
 
-	@Operation(contextual = false, kind = Kind.TRANSFORMATION)
-	public void bug427237_javaless(JavaModelInstance in, JavaModelInstance out, Integer i) {
-		bug427237(in, out, i);
+	@Operation(contextual = false, kind = Kind.TRANSFORMATION, withExecutionContext = true)
+	public void bug427237_javaless(IContext context, JavaModelInstance in, JavaModelInstance out) {
+		bug427237(context, in, out);
 	}
 	
 }

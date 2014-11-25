@@ -42,14 +42,6 @@ public class Context implements IContext {
 		myData = new SessionDataImpl();
     }
 
-    protected ISessionData createSessionData() {
-    	return new SessionDataImpl(myData);
-    }
-    
-    protected ISessionData copySessionData() {
-    	return new SessionDataImpl(myData);
-    }
-
     public void setProgressMonitor(IProgressMonitor monitor) {
     	if(monitor == null) {
     		throw new IllegalArgumentException("Non-null monitor required"); //$NON-NLS-1$
@@ -80,6 +72,10 @@ public class Context implements IContext {
     	return myLog;
     }
             
+    public void setSessionData(ISessionData sessionData) {    
+    	myData = new SessionDataImpl((SessionDataImpl) sessionData);
+    }
+    
     public ISessionData getSessionData() {    
     	return myData;
     }

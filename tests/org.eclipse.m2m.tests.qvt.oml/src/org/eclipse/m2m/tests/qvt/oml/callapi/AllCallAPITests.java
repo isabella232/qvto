@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2010 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,6 +26,9 @@ public class AllCallAPITests {
 		suite.addTestSuite(DynamicRegisteredModelInvocationTest.class);
 		suite.addTestSuite(ChildInTreeInputInvocationTest.class);
 		suite.addTestSuite(Bug431055.class);
+		suite.addTest(new TransformationExecutorWithVisitorDecoratorTest());
+		suite.addTest(new BlackboxModuleStandaloneSetupTest("bug326871_standalone")); //$NON-NLS-1$
+		suite.addTest(new BlackboxModuleStandaloneSetupTest("bug326871a_standalone")); //$NON-NLS-1$
 		
 		//$JUnit-END$
 		return suite;

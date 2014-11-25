@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<pack:cls1 xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pack="http:///pack" xsi:schemaLocation="http:///pack platform:/resource/TransformationTest/models/numconversion/mm.ecore" attrELong="1" attrEInt="1" attrEShort="1" attrEByte="1" attrEDouble="1.0" attrEFloat="1.0">
+<pack:cls1 xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pack="http:///pack" xsi:schemaLocation="http:///pack mm.ecore" attrELong="1" attrEInt="1" attrEShort="1" attrEByte="1" attrEDouble="1.0" attrEFloat="1.0">
   <attrELongs>1</attrELongs>
   <attrELongs>2</attrELongs>
   <attrEInts>1</attrEInts>

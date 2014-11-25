@@ -71,7 +71,7 @@ public class JavalessFileToFileData extends ModelTestData {
     	if(myPatchedData == null) {
     		try {
 				myPatchedData = createPatchedData(project);
-				project.getFolder(new Path(MODEL_FOLDER + "/" + myFileData.getName())).refreshLocal(IResource.DEPTH_INFINITE, null); //$NON-NLS-1$
+				project.getFolder(new Path(MODEL_FOLDER + IPath.SEPARATOR + myFileData.getName())).refreshLocal(IResource.DEPTH_INFINITE, null);
 			} 
     		catch (Exception e) {
 				throw new RuntimeException(e);

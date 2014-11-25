@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.common.util.LineNumberProvider;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingModuleCS;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
@@ -59,7 +60,7 @@ public class ASTBindingHelper {
 		return (IModuleSourceInfo)EcoreUtil.getExistingAdapter(astModule, ModuleSourceAdapter.class);
 	}
 		
-	public static void createModuleBinding(MappingModuleCS cstModule, Module astModule, EcoreEnvironment env, URI unitURI) {
+	public static void createModuleBinding(MappingModuleCS cstModule, Module astModule, QvtOperationalModuleEnv env, URI unitURI) {
 		ASTAdapter<ASTNode> astAdapter = new ModuleASTAdapter(cstModule, astModule, env, unitURI);
 		astModule.eAdapters().add(astAdapter);	
 		cstModule.eAdapters().add(astAdapter);		
@@ -73,11 +74,17 @@ public class ASTBindingHelper {
         return null;
     }
 
-    public static EcoreEnvironment resolveEnvironment(MappingModuleCS cstModule) {
-        ModuleASTAdapter moduleASTAdapter = getModuleASTAdapter(cstModule);
+    public static QvtOperationalModuleEnv resolveModuleEnvironment(EObject eObj) {
+        ModuleASTAdapter moduleASTAdapter = getModuleASTAdapter(eObj);
         if (moduleASTAdapter != null) {
-            return moduleASTAdapter.getEnvironment();           
+            return (QvtOperationalModuleEnv) moduleASTAdapter.getEnvironment();           
         }
+		List<ASTAdapter<Object>> adapters = getASTBindings(eObj);
+		for (ASTAdapter<Object> nextAdapter : adapters) {
+			if(nextAdapter.getEnvironment() instanceof QvtOperationalModuleEnv) {
+				return (QvtOperationalModuleEnv) nextAdapter.getEnvironment();
+			}
+		}
         return null;
     }
 
@@ -242,7 +249,7 @@ public class ASTBindingHelper {
 		private URI uri;
 		
 		protected ModuleASTAdapter(CSTNode cstNode, ASTNode astNode,
-				EcoreEnvironment env, URI unitURI) {
+				QvtOperationalModuleEnv env, URI unitURI) {
 			super(cstNode, astNode, env);
 			
 			this.uri = unitURI;

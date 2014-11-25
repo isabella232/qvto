@@ -75,6 +75,12 @@ public class LegacyNativeLibraryProviderAdapter extends AbstractBlackboxProvider
 		}
 	}
 	
+	@Override
+	public void cleanup() {
+		fBlackboxUnits.clear();
+		fDescriptorMap = null;
+	}
+	
 	private Map<String, AbstractCompilationUnitDescriptor> getDescriptorMap() {
 		if (fDescriptorMap != null) {
 			return fDescriptorMap;

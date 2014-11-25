@@ -1949,7 +1949,7 @@ public class QvtOperationalVisitorCS
 			
         if(myCompilerOptions.isGenerateCompletionData()) {
             ASTBindingHelper.createCST2ASTBinding(outExpCS, objectExp, env);
-			}
+		}
 
         if (isValidationChecked) {
             validateObjectExp(objectExp, outExpCS, env);
@@ -2114,11 +2114,10 @@ public class QvtOperationalVisitorCS
         Module module = (Module)moduleCS.getAst();
 		module.setStartPosition(moduleCS.getStartOffset());
 		module.setEndPosition(moduleCS.getEndOffset());
-        // AST binding
-        if(myCompilerOptions.isGenerateCompletionData()) {
-            ASTBindingHelper.createModuleBinding(moduleCS, module, env, unitURI);
-        }
-        //
+		// AST binding
+		// FIXME - workaround to make Environment available with the module
+		ASTBindingHelper.createModuleBinding(moduleCS, module, env, unitURI);
+		//
         
 		for (ModelTypeCS modelTypeCS : moduleCS.getMetamodels()) {
 			ModelType modelType = visitModelTypeCS(modelTypeCS, env, module, resSet);
@@ -2285,10 +2284,6 @@ public class QvtOperationalVisitorCS
 						duplicate.getName(), QvtOperationalParserUtil.getMappingStringRepresentation(methodCS));			
 				env.reportWarning(errMessage, QvtOperationalParserUtil.getMethodNameProblemNodeCS(methodCS));
 			}
-			
-	        if(myCompilerOptions.isGenerateCompletionData()) {
-				//ASTBindingHelper.createCST2ASTBinding(methodCS, imperativeOp, env);
-			} 
 			
 			if ((!QvtOperationalEnv.MAIN.equals(imperativeOp.getName()) || 
 					getModelParameter(env.getModuleContextType()).isEmpty()) == false) {
@@ -3868,14 +3863,9 @@ public class QvtOperationalVisitorCS
 					.getSimpleNameCS());
 		}
 
-		//newEnv.defineOperationParameters(helper);
-
         if(myCompilerOptions.isGenerateCompletionData()) {          
             ASTBindingHelper.createCST2ASTBinding(methodCS, helper, newEnv);
         }
-
-		// FIXME - use CST info to set the flag
-		//helper.setIsQuery(true);				
 
         if (methodCS.getBody() != null) {
 			OperationBody body = ExpressionsFactory.eINSTANCE.createOperationBody();

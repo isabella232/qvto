@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
+import org.eclipse.m2m.internal.qvt.oml.TransformationExecutorBlackboxRegistry;
 
 /**
  * A utility class that enables to execute existing transformation in the
@@ -26,6 +27,40 @@ import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
  * @since 2.0
  */
 public final class TransformationExecutor {
+	
+	/**
+	 * Support for blackbox libraries in standalone mode.
+	 * Allows to import a Java classes by means of their fully qualified names, and call its methods directly from QVTo.
+	 * 
+	 * <p> To make this work, there is {@code Annotation} type called 'Module' which enables annotating a Java class with 
+	 * the set of nsURIs that it requires to resolve types:
+	 * 
+	 * <p> <blockquote><pre>
+	 *  @Module(packageURIs={"http://www.eclipse.org/emf/2002/Ecore"})
+	 *  public class Test {
+   	 *    ...
+	 *  }
+	 * </pre></blockquote>
+	 * 
+	 * Usage example:
+	 * 
+	 * <p> <blockquote><pre>
+	 * TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(Test.class);
+
+	 * TransformationExecutor executor = new TransformationExecutor(uri);
+	 * ExecutionContextImpl context = new ExecutionContextImpl();
+	 * ExecutionDiagnostic result = executor.execute(context);
+	 * </pre></blockquote>
+	 * 
+	 * @since 3.4
+	 * 
+	 */
+	public interface BlackboxRegistry {
+		BlackboxRegistry INSTANCE = new TransformationExecutorBlackboxRegistry();
+				
+		Diagnostic registerModules(Class<?>... classes);		
+	}
+	
 
 	private InternalTransformationExecutor fExector;
 	

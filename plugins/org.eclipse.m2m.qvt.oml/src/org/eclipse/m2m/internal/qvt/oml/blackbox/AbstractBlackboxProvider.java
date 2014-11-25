@@ -100,6 +100,8 @@ public abstract class AbstractBlackboxProvider {
 			AbstractCompilationUnitDescriptor descriptor,
 			LoadContext loadContext) throws BlackboxException;
 	
+	public abstract void cleanup();
+	
 	private void handleBlackboxException(BlackboxException e, AbstractCompilationUnitDescriptor descriptor) {
 		
 		Diagnostic diagnostic = e.getDiagnostic();

@@ -42,7 +42,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
@@ -150,7 +149,6 @@ import org.eclipse.ocl.EvaluationVisitorImpl;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.EcoreEnvironment;
 import org.eclipse.ocl.ecore.EcoreFactory;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
@@ -172,7 +170,6 @@ import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.VoidType;
 import org.eclipse.ocl.util.CollectionUtil;
 import org.eclipse.ocl.util.Tuple;
-import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.UMLReflection;
 
@@ -184,10 +181,12 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 	private static int tempCounter = 0;
 	
+    private boolean myIsSuppressLoggin = false;
+
     private QvtOperationalEvaluationEnv myEvalEnv;
     // FIXME - move me to the root environment?
     private OCLAnnotationSupport oclAnnotationSupport;
-
+    
     public QvtOperationalEvaluationVisitorImpl(QvtOperationalEnv env, QvtOperationalEvaluationEnv evalEnv) {
         super(env, evalEnv, evalEnv.createExtentMap(null));
 
@@ -551,14 +550,10 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     private Object doVisitBlackboxOperation(ImperativeOperation operation) {
     	
     	assert operation.isIsBlackbox() : "Blackbox operation expected"; //$NON-NLS-1$
-    	
-    	EcoreEnvironment moduleEnv = ASTBindingHelper.resolveEnvironment((ASTNode) operation.eContainer());
-    	if (false == moduleEnv instanceof QvtOperationalModuleEnv) {
-    		moduleEnv = ASTBindingHelper.getEnvironment(operation.eContainer(), QvtOperationalModuleEnv.class);
-    	}
-    	
-		Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(operation,
-				(QvtOperationalModuleEnv) moduleEnv);
+    	    	
+    	QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(operation.eContainer());
+    	    	
+		Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(operation, moduleEnv);
     	if (handlers.isEmpty()) {
         	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
         			QvtOperationalParserUtil.safeGetMappingQualifiedName(getOperationalEnv(), operation))));
@@ -702,7 +697,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     public Object visitOperationCallExp(OperationCallExp<EClassifier, EOperation> operationCallExp) {
     	// TODO - review the note bellow
     	// set IP of the current stack (represented by the top operation fEnv)
-    	// to the this operation call in order to refeflect this call position 
+    	// to the this operation call in order to reflect this call position 
     	// in possible QVT stack, in case an exception is thrown 
         EObject oldIP = setCurrentEnvInstructionPointer(operationCallExp);
         Object result = doVisitOperationCallExp(operationCallExp);    	        
@@ -900,11 +895,12 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	}
 
     public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
+    	boolean isSuppressLoggin = myIsSuppressLoggin;
     	try {
-    		return doVisitTransformation(transformation);
+    		myIsSuppressLoggin = true;
+    		return transformation.accept(getVisitor());
     	} finally {
-    		IntermediatePropertyModelAdapter.cleanup(transformation);
-    		getOperationalEvaluationEnv().cleanup();
+    		myIsSuppressLoggin = isSuppressLoggin;
 		}    		
     }
     
@@ -917,14 +913,15 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			return doVisitTransformation((OperationalTransformation) module);
 		} 
 		catch (QvtRuntimeException e) {
-			StringWriter strWriter = new StringWriter();
-			PrintWriter printWriter = new PrintWriter(strWriter);
-			e.printQvtStackTrace(printWriter);
-
-			Log logger = getContext().getLog();
-			logger.log(EvaluationMessages.TerminatingExecution);
-			logger.log(strWriter.getBuffer().toString());
-			
+			if (!myIsSuppressLoggin) {
+				StringWriter strWriter = new StringWriter();
+				PrintWriter printWriter = new PrintWriter(strWriter);
+				e.printQvtStackTrace(printWriter);
+	
+				Log logger = getContext().getLog();
+				logger.log(EvaluationMessages.TerminatingExecution);
+				logger.log(strWriter.getBuffer().toString());
+			}			
 			throw e;
 		} finally {
 			IntermediatePropertyModelAdapter.cleanup(module);
@@ -1142,13 +1139,10 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 				TransformationInstance transformation = (TransformationInstance) source;				
 				
-				EcoreEnvironment moduleEnv = ASTBindingHelper.resolveEnvironment(transformation.getTransformation());
-		    	if (false == moduleEnv instanceof QvtOperationalModuleEnv) {
-		    		moduleEnv = ASTBindingHelper.getEnvironment(transformation, QvtOperationalModuleEnv.class);
-		    	}
-		    	
-		    	Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(transformation.getTransformation(),
-						(QvtOperationalModuleEnv) moduleEnv);
+				QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(transformation.getModule());
+								    	
+		    	Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
+		    			transformation.getTransformation(), moduleEnv);
 		    	if (handlers.isEmpty()) {
 		        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
 		        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation.getTransformation()))));
@@ -1160,12 +1154,10 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		    	
 		    	evaluateModelParameterConditions(transformation.getTransformation());
 		    	
-		    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformation, evalEnv);
-		    	
+		    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformation, evalEnv);		    	
 				Object result = handlers.iterator().next().invoke(transformation, source, actualArgs.toArray(), evalEnv);					
 				
-				return new OperationCallResult(result, evalEnv);
-				
+				return new OperationCallResult(result, evalEnv);				
 			}
 		};
 	}
@@ -2408,17 +2400,16 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		
 		List<Object> actualArgs = new ArrayList<Object>();   	
     	
-		for (ETypedElement param : EvaluationUtil.getBlackboxSignature(transformation.getTransformation())) {
-    		Object arg = null;
-    		if (param instanceof ModelParameter) {
-    			ModelInstance modelInst = transformation.getModel((ModelParameter) param);
-    			arg = createJavaModelInstance(modelInst, evalEnv);
-    		}
-    		else if (param instanceof EStructuralFeature) {
-    			arg = evalEnv.navigateProperty((EStructuralFeature) param, Collections.EMPTY_LIST, transformation);
-    		}
+		for (ModelParameter param : EvaluationUtil.getBlackboxSignature(transformation.getTransformation())) {
+			ModelInstance modelInst = transformation.getModel(param);
+			Object arg = createJavaModelInstance(modelInst, evalEnv);
     		actualArgs.add(arg);
     	}
+		
+		for (EStructuralFeature p : transformation.getTransformation().getConfigProperty()) {
+			Object val = evalEnv.navigateProperty(p, Collections.emptyList(), transformation);
+			((Context) evalEnv.getContext()).setConfigProperty(p.getName(), val);
+		}
     	
 		return actualArgs;
 	}

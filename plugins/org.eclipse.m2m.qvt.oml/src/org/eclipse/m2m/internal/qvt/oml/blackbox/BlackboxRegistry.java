@@ -90,6 +90,33 @@ public class BlackboxRegistry {
 		
 		return result;
 	}
+	
+	public void addStandaloneModules(Class<?>... classes) {
+		StandaloneBlackboxProvider standaloneProvider = null;
+		for (AbstractBlackboxProvider provider : fProviders) {
+			if (provider instanceof StandaloneBlackboxProvider) {
+				standaloneProvider = (StandaloneBlackboxProvider) provider;
+				break;
+			}
+		}
+		
+		if (standaloneProvider == null) {
+			standaloneProvider = new StandaloneBlackboxProvider();
+			List<AbstractBlackboxProvider> prov = new ArrayList<AbstractBlackboxProvider>(fProviders);
+			prov.add(standaloneProvider);
+			fProviders = prov;
+		}
+		
+		for (Class<?> cls : classes) {
+			standaloneProvider.registerDescriptor(cls);
+		}
+	}
+	
+	public void cleanup() {
+		for (AbstractBlackboxProvider provider : fProviders) {
+			provider.cleanup();
+		}
+	}
 
 	private static class Eclipse {
 	    private static List<AbstractBlackboxProvider> readProviders() {
