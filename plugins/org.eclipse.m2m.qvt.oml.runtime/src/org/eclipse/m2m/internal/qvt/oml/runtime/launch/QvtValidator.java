@@ -36,7 +36,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
-import org.eclipse.m2m.internal.qvt.oml.runtime.util.ValidationUtil;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.osgi.util.NLS;
 
 public class QvtValidator {
@@ -53,8 +53,8 @@ public class QvtValidator {
 			boolean useTrace, ValidationType validationType) throws MdaException {
         IStatus result = StatusUtil.makeOkStatus();
         
-        if (!ValidationUtil.isRunnable(transformation)) {
-            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_TransformaionMissedEntryOp,
+        if (!TransformationUtil.isRunnable(transformation)) {
+            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_TransformationMissedEntryOp,
             		transformation.getModuleName()));
         }
         
@@ -87,8 +87,8 @@ public class QvtValidator {
 			String traceFileName) throws MdaException {
         IStatus result = StatusUtil.makeOkStatus();
         
-        if (!ValidationUtil.isRunnable(transformation)) {
-            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_TransformaionMissedEntryOp,
+        if (!TransformationUtil.isRunnable(transformation)) {
+            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_TransformationMissedEntryOp,
             		transformation.getModuleName()));
         }
         

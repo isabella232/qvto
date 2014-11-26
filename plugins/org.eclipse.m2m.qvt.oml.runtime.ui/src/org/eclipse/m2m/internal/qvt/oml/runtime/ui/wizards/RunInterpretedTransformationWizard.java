@@ -52,7 +52,6 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.Transf
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.QvtRuntimePluginImages;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.QvtRuntimeUIPlugin;
-import org.eclipse.m2m.internal.qvt.oml.runtime.util.ValidationUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.progress.WorkbenchJob;
@@ -104,7 +103,7 @@ public class RunInterpretedTransformationWizard extends PersistedValuesWizard im
 	        try {
 	            transformation = new QvtInterpretedTransformation(TransformationUtil.getQvtModule(myTransfUri));
 	            
-	            if (!ValidationUtil.isRunnable(transformation)) {
+	            if (!TransformationUtil.isRunnable(transformation)) {
 	            	transformation = null;
 	            }
 	        }

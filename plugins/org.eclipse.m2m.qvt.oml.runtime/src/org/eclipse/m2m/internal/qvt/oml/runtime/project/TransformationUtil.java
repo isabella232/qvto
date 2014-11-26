@@ -76,4 +76,8 @@ public class TransformationUtil {
 		}
 	}
 
+	public static boolean isRunnable(QvtTransformation transformation) throws MdaException {
+		return transformation.hasEntryOperation() || transformation.isBlackbox();
+	}
+	
 }
