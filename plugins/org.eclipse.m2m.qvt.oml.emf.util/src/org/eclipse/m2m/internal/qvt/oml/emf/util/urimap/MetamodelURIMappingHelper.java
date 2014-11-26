@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,19 +24,23 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider.IRepositoryContext;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelRegistryProvider;
 
 public class MetamodelURIMappingHelper {
 
-	public static final String MAPPING_CONTAINER = ".settings"; //$NON-NLS-1$ 
+	private static final String MAPPING_CONTAINER = ".settings"; //$NON-NLS-1$ 
 	
-	public static final String MMODEL_URI_MAPPING_FILENAME = "org.eclipse.m2m.qvt.oml.mmodel.urimap"; //$NON-NLS-1$  
+	private static final String MMODEL_URI_MAPPING_FILENAME = "org.eclipse.m2m.qvt.oml.mmodel.urimap"; //$NON-NLS-1$
+	
 
 	private MetamodelURIMappingHelper() {
 		super();
@@ -151,55 +155,17 @@ public class MetamodelURIMappingHelper {
 		return container;
 	}
 
-	public static EPackage.Registry mappingsToEPackageRegistry(IProject project, ResourceSet resourceSet) {
+	public static EPackage.Registry mappingsToEPackageRegistry(final IProject project, ResourceSet resourceSet) {
+		
 		if(!hasMappingResource(project)) {
 			return null;
 		}
-		EPackage.Registry result = null;
-		try {
-			MappingContainer container = loadMappings(project);
-			if(container == null || container.getMapping().isEmpty()) {
-				return null;
-			}
-			
-			result = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
-			
-			for (URIMapping next : container.getMapping()) {
-				String nsURI = next.getSourceURI();
-				String locationURIStr = next.getTargetURI();
-				URI locationURI = null;
-				try {
-					locationURI = URI.createURI(locationURIStr);
-				} catch (IllegalArgumentException e) {
-					EmfUtilPlugin.log(e);
-				}
 				
-				if(nsURI != null && locationURI != null) {
-					EPackage metamodel = loadEPackage(locationURI, resourceSet);
-					if(metamodel != null) {
-						result.put(nsURI, metamodel);
-					}
-				}
-			}
-		} catch (IOException e) {
-			EmfUtilPlugin.log(e);
-		}
+		IMetamodelRegistryProvider registryProvider = new WorkspaceMetamodelRegistryProvider(resourceSet);
+		IRepositoryContext repositoryContext = MetamodelRegistryProvider.createContext(
+				URI.createPlatformResourceURI(project.getFullPath().toString(), true));
 		
-		return result;
-	}
-
-	private static EPackage loadEPackage(URI uri, ResourceSet rs) {
-		try {
-			if(uri.hasFragment()) {
-				EObject eObject = rs.getEObject(uri, true);
-				return (eObject instanceof EPackage) ? (EPackage)eObject : null;
-			} 
-			
-			Resource resource = rs.getResource(uri.trimFragment(), true);
-			return (EPackage) EcoreUtil.getObjectByType(resource.getContents(), EcorePackage.eINSTANCE.getEPackage());
-		} catch (Exception e) {
-			EmfUtilPlugin.log(e);
-		}
-		return null;
+		MetamodelRegistry metamodelRegistry = registryProvider.getRegistry(repositoryContext);
+		return metamodelRegistry.toEPackageRegistry();
 	}
 }

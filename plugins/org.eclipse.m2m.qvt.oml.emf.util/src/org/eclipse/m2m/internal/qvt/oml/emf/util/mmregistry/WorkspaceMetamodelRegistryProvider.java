@@ -9,7 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
+package org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -25,11 +25,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.m2m.internal.qvt.oml.common.CommonPlugin;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelProvider;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
@@ -51,7 +47,7 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 		
 		this.resolutionRSet = resourceSet;
 	}
-	
+		
 	public ResourceSet getResolutionResourceSet() {
 		return resolutionRSet;
 	}
@@ -88,7 +84,7 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 						perProjectRegs.put(projectKey, reg);
 						return reg;
 					} catch (IOException e) {
-						CommonPlugin.log(e);
+						EmfUtilPlugin.log(e);
 					}
 				} else {
 					return reg;
@@ -125,7 +121,7 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 				String message = NLS.bind("Invalid metamodel uri mapping. nsUri:''{0}'' modelUri:''{1}''",  //$NON-NLS-1$
 						nextMapping.getSourceURI(), nextMapping.getTargetURI());
 				
-				CommonPlugin.log(new Status(IStatus.ERROR, CommonPlugin.ID, message, error));
+				EmfUtilPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, EmfUtilPlugin.ID, message, error));
 			}
 		}
 		

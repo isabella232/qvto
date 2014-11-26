@@ -29,11 +29,11 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
-import org.eclipse.m2m.internal.qvt.oml.common.io.CResourceRepositoryContext;
-import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.WorkspaceMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelRegistryProvider;
 
 public class CompilerUtils {
 
@@ -98,8 +98,9 @@ public class CompilerUtils {
 		return new BasicMonitor();
 	}
 	
-    static EPackage.Registry getEPackageRegistry(URI context, IMetamodelRegistryProvider metamodelRegistryProvider) {
-    	MetamodelRegistry metamodelRegistry = metamodelRegistryProvider.getRegistry(new CResourceRepositoryContext(context));
+    static EPackage.Registry getEPackageRegistry(URI uri, IMetamodelRegistryProvider metamodelRegistryProvider) {
+    	MetamodelRegistry metamodelRegistry = metamodelRegistryProvider.getRegistry(
+    			MetamodelRegistryProvider.createContext(uri));
     	EPackage.Registry packageRegistry;
 
     	if(metamodelRegistry != null) {
