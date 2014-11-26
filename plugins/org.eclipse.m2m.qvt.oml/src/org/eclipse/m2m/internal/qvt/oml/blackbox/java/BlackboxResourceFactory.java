@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents.ModelContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
+import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 
 public class BlackboxResourceFactory implements Resource.Factory {
 	
@@ -43,7 +43,7 @@ public class BlackboxResourceFactory implements Resource.Factory {
 			@Override
 			public void load(Map<?, ?> options) throws IOException {
 			    if (!isLoaded) {
-					UnitProxy unitProxy = BlackboxUnitResolver.getUnit(uri);
+					UnitProxy unitProxy = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
 					if(unitProxy != null) {
 					    getContents().addAll(loadBlackboxUnit(unitProxy, new ResourceSetImpl()));
 					}

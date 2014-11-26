@@ -27,31 +27,34 @@ import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 
 public abstract class UnitResolverFactory {
 
-	public abstract boolean accepts(URI uri);
+	protected abstract boolean accepts(URI uri);
 	
-	public abstract UnitResolver getResolver(URI uri);
+	protected abstract UnitResolver getResolver(URI uri);
 	
-	public abstract String getQualifiedName(URI uri);
+	protected abstract String getQualifiedName(URI uri);
 
-	final UnitProxy findUnit(URI uri) {
+	
+	private UnitProxy findUnit(URI uri) {
 		UnitResolver resolver = getResolver(uri);
 		return resolver != null ? resolver.resolveUnit(getQualifiedName(uri)) : null;
-	};
+	}
 	
 	
 	public interface Registry {
-		String POINT_ID = QvtPlugin.ID + ".unitResolverFactory"; //$NON-NLS-1$
-		String CLASS_ATTR = "class"; //$NON-NLS-1$
-		
-		UnitResolverFactory getFactory(URI uri);		
 		
 		UnitProxy getUnit(URI uri);
+		
+		List<UnitProxy> findAllUnits(URI uri);
+		
 		
 		Registry INSTANCE = EMFPlugin.IS_ECLIPSE_RUNNING ? new EclipseRegistry() : new BasicRegistry();
 	
 	
 		class EclipseRegistry extends BasicRegistry {
 	
+			private static final String POINT_ID = QvtPlugin.ID + ".unitResolverFactory"; //$NON-NLS-1$
+			private static final String CLASS_ATTR = "class"; //$NON-NLS-1$
+			
 			public EclipseRegistry() {
 				super(readFactories());		
 			}
@@ -84,37 +87,63 @@ public abstract class UnitResolverFactory {
 		
 		class BasicRegistry implements Registry {
 			
-				private List<UnitResolverFactory> fFactories;
+			private final List<UnitResolverFactory> fFactories;
+			
+			BasicRegistry() {
+				this(Collections.<UnitResolverFactory>emptyList());
+			}
+			
+			BasicRegistry(List<UnitResolverFactory> factories) {
+				assert factories != null;
 				
-				BasicRegistry() {
-					this(Collections.<UnitResolverFactory>emptyList());
+				factories = new ArrayList<UnitResolverFactory>(factories);
+				factories.add(new URIUnitResolverFactory());
+									
+				this.fFactories = factories;
+			}
+			
+			UnitResolverFactory getFactory(URI uri) {
+				for (UnitResolverFactory nextFactory : fFactories) {
+					if(nextFactory.accepts(uri)) {
+						return nextFactory;
+					}
 				}
+				return null;
+			}
+			
+			public UnitProxy getUnit(URI uri) {
+				UnitResolverFactory factory = getFactory(uri);
+				if(factory != null) {
+					return factory.findUnit(uri);
+				}
+				return null;
+			}
+			
+			public List<UnitProxy> findAllUnits(URI uri) {
+				UnitResolverFactory factory = getFactory(uri);
+				if(factory == null) {
+					return Collections.emptyList();
+				}
+
+				UnitResolver resolver = factory.getResolver(uri);
+				if (false == resolver instanceof UnitProvider) {
+					return Collections.emptyList();
+				}
+
+				final List<UnitProxy> result = new ArrayList<UnitProxy>();
 				
-				BasicRegistry(List<UnitResolverFactory> factories) {
-					assert factories != null;
+				UnitProvider.UnitVisitor visitor = new UnitProvider.UnitVisitor() {
 					
-					factories = new ArrayList<UnitResolverFactory>(factories);
-					factories.add(new URIUnitResolverFactory());
-										
-					this.fFactories = factories;
-				}
-				
-				public UnitResolverFactory getFactory(URI uri) {
-					for (UnitResolverFactory nextFactory : fFactories) {
-						if(nextFactory.accepts(uri)) {
-							return nextFactory;
-						}
+					public boolean visitUnit(UnitProxy unit) {
+						result.add(unit);
+						return true;
 					}
-					return null;
-				}
-				
-				public UnitProxy getUnit(URI uri) {
-					UnitResolverFactory factory = getFactory(uri);
-					if(factory != null) {
-						return factory.findUnit(uri);
-					}
-					return null;
-				}				
+				};
+
+				((UnitProvider) resolver).accept(visitor, null, UnitProvider.UnitVisitor.DEPTH_INFINITE, true);		
+				return result;
+			}
+			
 		}
 	
 	}

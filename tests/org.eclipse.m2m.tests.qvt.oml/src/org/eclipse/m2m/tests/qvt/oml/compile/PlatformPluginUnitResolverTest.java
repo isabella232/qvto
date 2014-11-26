@@ -21,6 +21,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
+import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
@@ -103,7 +104,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 	public void testUnitAccessByURI() throws Exception {
 		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/T1.qvto", false);
 		
-		UnitProxy unit = PlatformPluginUnitResolver.getUnit(uri);
+		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
 		assertResolvedCompiledUnit(unit);
 
 		// deployed included in the namespace as we have not any container info passed

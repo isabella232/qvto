@@ -11,8 +11,9 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.project.builder;
 
+import java.util.Collections;
+
 import org.eclipse.core.resources.IContainer;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.EMFPlugin;
@@ -37,10 +38,13 @@ public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
 			uri = URI.createPlatformResourceURI(uri.path(), false);
 		}
 		
-		IFile file = URIUtils.getFile(uri);
+		IResource file = URIUtils.getResource(uri);
 		
 		try {	
-			return WorkspaceUnitResolver.getResolver(file.getProject());
+			IContainer sourceContainer = QVTOBuilderConfig.getConfig(file.getProject()).getSourceContainer();
+			if(sourceContainer != null) {
+				return new WorkspaceUnitResolver(Collections.singletonList(sourceContainer));
+			}
 		}
 		catch (CoreException e) {
 			QVTOProjectPlugin.log(e.getStatus());

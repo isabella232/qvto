@@ -34,8 +34,9 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
-import org.eclipse.m2m.internal.qvt.oml.project.builder.WorkspaceUnitResolver;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
@@ -69,7 +70,7 @@ public class QvtCompilerFacade {
 
 			final String contents = document.get();			
 			try {
-				UnitProxy unit = WorkspaceUnitResolver.getUnit(file);
+				UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(URIUtils.getResourceURI(file));
 				UnitResolver unitResolver = unit.getResolver();
 				final UnitProxy inMemoryUnit = new InMemoryUnitProxy(unit.getNamespace(), unit.getName(), unit.getURI(), contents, unitResolver);
 				

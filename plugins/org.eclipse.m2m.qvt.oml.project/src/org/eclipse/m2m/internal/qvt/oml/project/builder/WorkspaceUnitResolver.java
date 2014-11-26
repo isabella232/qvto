@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,7 +16,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IContainer;
@@ -40,53 +39,13 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
-import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.DeployedImportResolver;
 
 
 
 public class WorkspaceUnitResolver extends DelegatingUnitResolver implements UnitProvider {
 
-	private List<IContainer> fRoots;
-	
-	public static WorkspaceUnitResolver getResolver(IProject project) throws CoreException {
-		IContainer sourceContainer = QVTOBuilderConfig.getConfig(project).getSourceContainer();
-		if(sourceContainer != null) {
-			return new WorkspaceUnitResolver(Collections.singletonList(sourceContainer));
-		}
-		
-		return null;
-	}
-	
-	public void addSourceContainer(IContainer container) {
-		if(container == null) {
-			throw new IllegalArgumentException();
-		}
-
-		fRoots.add(container);
-	}
-	
-	public static UnitProxy getUnit(IFile unitFile) {
-		if(unitFile.exists()) {
-			try {
-				WorkspaceUnitResolver resolver = getResolver(unitFile.getProject());
-				if(resolver != null) {
-					for (IContainer nextContainer : resolver.fRoots) {
-						IPath srcContainerPath = nextContainer.getFullPath();
-						IPath unitPath = unitFile.getFullPath();
-
-						if(srcContainerPath.isPrefixOf(unitPath)) {
-							return resolver.createFileUnit(srcContainerPath, unitPath);
-						}						
-					}
-				}
-			} catch (CoreException e) {
-				QVTOProjectPlugin.log(e.getStatus());
-			}
-		}
-
-		return null;
-	}
+	private final List<IContainer> fRoots;
 	
 	public WorkspaceUnitResolver(List<IContainer> sourceContainers) {
 		if(sourceContainers == null || sourceContainers.contains(null)) {
@@ -237,21 +196,7 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 		}		
 	}
 	
-	public static List<UnitProxy> findAllUnits(IProject project) {
-		WorkspaceUnitResolver resolver;
-		try {
-			resolver = getResolver(project);
-			if(resolver != null) {
-				return ResolverUtils.findAllUnits(resolver);
-			}			
-		} catch (CoreException e) {
-			QVTOProjectPlugin.log(e.getStatus());
-		}
 
-		return Collections.emptyList();
-	}
-	
-	
 	private class FileUnit extends UnitProxy {
 		
 		public FileUnit(String namespace, String unitName, URI uri) {

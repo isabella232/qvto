@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -40,6 +40,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
+import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.actions.OpenDeclarationAction;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.colorer.QVTColorManager;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.colorer.SemanticHighlightingManager;
@@ -49,9 +50,9 @@ import org.eclipse.m2m.internal.qvt.oml.editor.ui.outline.QvtOutlineLabelProvide
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.outline.QvtOutlineNodeSelector;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.outline.QvtOutlineSelectionListener;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilder;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
-import org.eclipse.m2m.internal.qvt.oml.project.builder.WorkspaceUnitResolver;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.widgets.Composite;
@@ -162,7 +163,7 @@ public class QvtEditor extends TextEditor implements IQVTReconcilingListener {
     	// FIXME - should handle bundle units too 
     	if(input instanceof IFileEditorInput) {
     		IFileEditorInput fileInput = (IFileEditorInput) input; 
-    		fUnitProxy = WorkspaceUnitResolver.getUnit(fileInput.getFile());
+    		fUnitProxy = UnitResolverFactory.Registry.INSTANCE.getUnit(URIUtils.getResourceURI(fileInput.getFile()));
     	}
 
     	if(isEditingInQVTSourceContainer(input)) {

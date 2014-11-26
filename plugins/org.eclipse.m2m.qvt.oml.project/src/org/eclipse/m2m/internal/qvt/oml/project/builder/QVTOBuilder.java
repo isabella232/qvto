@@ -54,8 +54,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMISerializer;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
-import org.eclipse.m2m.internal.qvt.oml.compiler.ResolverUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
+import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
@@ -228,10 +228,8 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 				sources[i] = new EclipseFile(files[i]);
 			}
 			
-	        WorkspaceUnitResolver resolver = WorkspaceUnitResolver.getResolver(getProject());	        
 	        QVTOCompiler compiler = CompilerUtils.createCompiler();
-	        
-	        List<UnitProxy> allUnits = ResolverUtils.findAllUnits(resolver);
+	        List<UnitProxy> allUnits = UnitResolverFactory.Registry.INSTANCE.findAllUnits(URIUtils.getResourceURI(getProject()));
 
 	        units = compiler.compile(allUnits.toArray(new UnitProxy[allUnits.size()]),
 						options, CompilerUtils.createMonitor(BasicMonitor.toMonitor(progress.newChild(8, SubMonitor.SUPPRESS_NONE)), 8));

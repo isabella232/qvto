@@ -15,8 +15,6 @@ package org.eclipse.m2m.internal.qvt.oml.compiler;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IPath;
@@ -109,22 +107,6 @@ public class ResolverUtils {
 		return buf.toString();
 	}
 
-		
-	public static List<UnitProxy> findAllUnits(UnitProvider unitProvider) {
-		final List<UnitProxy> result = new ArrayList<UnitProxy>();
-		
-		UnitProvider.UnitVisitor visitor = new UnitProvider.UnitVisitor() {
-			
-			public boolean visitUnit(UnitProxy unit) {
-				result.add(unit);
-				return true;
-			}
-		};
-
-		unitProvider.accept(visitor, null, UnitProvider.UnitVisitor.DEPTH_INFINITE, true);		
-		return result;
-	}
-	
 	public static String toQualifiedName(String path) {
 		return path.replace(IPath.SEPARATOR, UnitProxy.NAMESPACE_SEP);
 	}

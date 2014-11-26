@@ -111,47 +111,6 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 		}		
 	}
 	
-	public static UnitProxy getUnit(URI uri) {
-		if (!uri.isPlatformPlugin() || uri.segmentCount() < 2) {
-			return null;
-		}
-
-		String bundleId = uri.segment(1);
-		Bundle bundle = Platform.getBundle(bundleId);
-		if (bundle == null) {
-			return null;
-		}
-				
-		PlatformPluginUnitResolver resolver;
-		IPath qualifiedName;
-
-		IPath path = new Path(uri.toPlatformString(true));		
-		URI sourceFolderURI = ResolverUtils.getSourceFolderURI(uri);		
-		
-		if(sourceFolderURI != null && sourceFolderURI.segmentCount() > 2) {
-			IPath plugingRelativePath = new Path(sourceFolderURI.toPlatformString(true)).removeFirstSegments(1);
-			resolver = new PlatformPluginUnitResolver(bundle, plugingRelativePath);			
-			qualifiedName = new Path(uri.deresolve(sourceFolderURI).trimFileExtension().trimQuery().toString());
-		} else {
-			resolver = new PlatformPluginUnitResolver(bundle);
-			qualifiedName = path.removeFirstSegments(1).removeFileExtension();
-			
-			/**
-			 * In case passed URI contains full path then truncate it related to specified source container.
-			 */
-			for (IPath sourceContainer : getSourceContainers(bundle)) {
-				int matchCount = qualifiedName.matchingFirstSegments(sourceContainer);
-				if (matchCount > 0) {
-					qualifiedName = qualifiedName.removeFirstSegments(matchCount);
-					break;
-				}
-			}
-		}
-		
-		PlatformPluginUnitResolver.setupResolver(resolver, true, true);
-		return resolver.resolveUnit(ResolverUtils.toQualifiedName(qualifiedName));
-	}
-
 	private static Map<String, Set<IPath>> loadPluginSourceContainers() {
 		Map<String, Set<IPath>> sourceContainers = new HashMap<String, Set<IPath>>();
 	    IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(SOURCE_CONTAINER_POINT);

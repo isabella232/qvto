@@ -17,7 +17,7 @@ public class BlackboxUnitResolverFactory extends UnitResolverFactory {
 
 	@Override
 	public boolean accepts(URI uri) {
-		return BlackboxUnitResolver.isBlackboxUnitURI(uri);
+		return BlackboxUnitResolver.isBlackboxUnitURI(uri) && (uri.segmentCount() > 0);
 	}
 
 	@Override
@@ -27,6 +27,7 @@ public class BlackboxUnitResolverFactory extends UnitResolverFactory {
 
 	@Override
 	public String getQualifiedName(URI uri) {
+		// TODO - use 1st segment as provider ID to be used in library ID clash resolution
 		return uri.lastSegment(); 
 	}
 

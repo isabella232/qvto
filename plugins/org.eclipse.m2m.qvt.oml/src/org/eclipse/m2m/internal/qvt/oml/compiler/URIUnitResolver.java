@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2009, 2014 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -117,16 +117,5 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 		} 
 		
 		return null;
-	}
-	
-	public static UnitProxy getUnit(URI unitURI) {
-		URI baseURI;
-		if(unitURI.segmentCount() > 1) {
-			baseURI = unitURI.trimSegments(1);
-		} else {
-			baseURI = URI.createURI("/"); //$NON-NLS-1$
-		}
-		
-		return new URIUnitResolver(baseURI).resolveUnit(unitURI.trimFileExtension().lastSegment());
 	}
 }
