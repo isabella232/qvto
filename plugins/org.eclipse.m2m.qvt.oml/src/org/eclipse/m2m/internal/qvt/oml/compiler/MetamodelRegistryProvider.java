@@ -8,9 +8,11 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry;
+package org.eclipse.m2m.internal.qvt.oml.compiler;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
 
 
 /**

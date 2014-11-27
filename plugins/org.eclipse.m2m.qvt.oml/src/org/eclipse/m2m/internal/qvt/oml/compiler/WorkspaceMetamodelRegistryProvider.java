@@ -9,9 +9,8 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry;
+package org.eclipse.m2m.internal.qvt.oml.compiler;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,17 +18,14 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
-import org.eclipse.osgi.util.NLS;
 
 public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryProvider {
 
@@ -78,17 +74,13 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 				
 				String projectKey = project.getFullPath().toString();
 				MetamodelRegistry reg = perProjectRegs.get(projectKey);
-				if(reg == null) {
-					try {
-						reg = createRegistry(MetamodelURIMappingHelper.loadMappings(project));
-						perProjectRegs.put(projectKey, reg);
-						return reg;
-					} catch (IOException e) {
-						EmfUtilPlugin.log(e);
-					}
-				} else {
-					return reg;
+				if (reg == null) {
+					IMetamodelProvider provider = MetamodelURIMappingHelper.createMetamodelProvider(project,
+							createDelegateMetamodelProvider(), resolutionRSet);
+					reg = new MetamodelRegistry(provider);
+					perProjectRegs.put(projectKey, reg);
 				}
+				return reg;
 			}			
 		}
 		
@@ -103,28 +95,4 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 		return MetamodelRegistry.getDefaultMetamodelProvider();
 	}
 	
-	private MetamodelRegistry createRegistry(MappingContainer mappings) {
-		WorkspaceMetamodelProvider metamodelProvider = new WorkspaceMetamodelProvider(createDelegateMetamodelProvider(), resolutionRSet);				
-		
-		for (URIMapping nextMapping : mappings.getMapping()) {
-			URI uri = null;
-			IllegalArgumentException error = null;
-			try {
-				uri = URI.createURI(nextMapping.getTargetURI());
-			} catch (IllegalArgumentException e) {
-				error = e;
-			}
-			
-			if(uri != null && nextMapping.getSourceURI() != null) {
-				metamodelProvider.addMetamodel(nextMapping.getSourceURI(), uri);				
-			} else {
-				String message = NLS.bind("Invalid metamodel uri mapping. nsUri:''{0}'' modelUri:''{1}''",  //$NON-NLS-1$
-						nextMapping.getSourceURI(), nextMapping.getTargetURI());
-				
-				EmfUtilPlugin.getDefault().getLog().log(new Status(IStatus.ERROR, EmfUtilPlugin.ID, message, error));
-			}
-		}
-		
-		return new MetamodelRegistry(metamodelProvider);
-	}
 }

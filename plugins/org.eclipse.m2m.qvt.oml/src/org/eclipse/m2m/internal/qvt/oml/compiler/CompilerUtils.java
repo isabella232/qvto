@@ -32,8 +32,6 @@ import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistryProvider;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelRegistryProvider;
 
 public class CompilerUtils {
 

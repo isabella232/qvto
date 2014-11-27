@@ -55,7 +55,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalValidationVisitor;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalVisitorCS;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils.Eclipse;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents.ModelContents;
 import org.eclipse.m2m.internal.qvt.oml.cst.ImportCS;

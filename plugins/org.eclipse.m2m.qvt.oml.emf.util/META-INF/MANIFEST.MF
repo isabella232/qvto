@@ -38,6 +38,7 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml.emf.util;
    org.eclipse.m2m.qvt.oml.editor.ui,
    org.eclipse.m2m.qvt.oml.project,
    org.eclipse.m2m.qvt.oml.ui,
+   org.eclipse.m2m.qvt.oml,
    org.eclipse.m2m.tests.qvt.oml,
    org.eclipse.m2m.qvt.oml.common"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
