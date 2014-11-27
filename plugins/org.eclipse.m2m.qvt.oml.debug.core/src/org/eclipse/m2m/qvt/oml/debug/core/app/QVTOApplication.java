@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2009, 2014 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -30,6 +30,7 @@ public class QVTOApplication implements IApplication {
 	public static final String ARG_PORT = "-port"; //$NON-NLS-1$
 	public static final String ARG_TRANSFORMATION = "-transform"; //$NON-NLS-1$
 	public static final String ARG_PARAM = "-param"; //$NON-NLS-1$
+	public static final String ARG_MMAPINGS = "-mmapings"; //$NON-NLS-1$
 	public static final String ARG_TRACE = "-trace"; //$NON-NLS-1$
 
 	public static final String ARG_HELP = "-help"; //$NON-NLS-1$
@@ -37,6 +38,7 @@ public class QVTOApplication implements IApplication {
 	private static final String CMD_LINE_USAGE = ID
 			+ squareBracket(ARG_TRANSFORMATION + " uri") + " " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_PARAM + " uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
+			squareBracket(ARG_MMAPINGS + " nsURI;uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_TRACE + " uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_HELP);
 
@@ -121,14 +123,23 @@ public class QVTOApplication implements IApplication {
 			String val = getArgValue(ARG_PARAM, nextArg);
 			factory.modelParamURI.add(val);
 
+		} else if (isValueSpecArg(ARG_MMAPINGS, nextArg)) {
+			String val = getArgValue(ARG_MMAPINGS, nextArg);
+			String[] mmaping = val.split(";");
+			if (mmaping.length != 2) {
+				throw new IllegalArgumentException("Malformed argument: " + ARG_MMAPINGS + " " + nextArg); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+			factory.addMetamodelMapping(mmaping[0], mmaping[1]);
+
 		} else if (isValueSpecArg(ARG_TRACE, nextArg)) {
 			String val = getArgValue(ARG_TRACE, nextArg);
 			factory.traceFileURI = val;
 
 		} else if (ARG_HELP.equals(nextArg)) {
 			System.out.println(getCommandLineUsage());
+			
 		} else {
-			System.err.println("Unsupported argument: " + nextArg);
+			System.err.println("Unsupported argument: " + nextArg); //$NON-NLS-1$
 			return false;
 		}
 

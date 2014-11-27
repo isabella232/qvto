@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
@@ -81,7 +82,6 @@ public class QvtTransformationConfigurationTab extends AbstractLaunchConfigurati
         Dialog.applyDialogFont(composite);
     }
 
-	@SuppressWarnings("unchecked")
 	public void initializeFrom(ILaunchConfiguration configuration) {
         String fileName = ""; //$NON-NLS-1$
         try {
@@ -92,7 +92,10 @@ public class QvtTransformationConfigurationTab extends AbstractLaunchConfigurati
         
         QvtTransformation qvtTransformation = null;
         try {
-        	qvtTransformation = myTransformationMaker.makeTransformation(EmfUtil.makeUri(fileName));
+        	URI uri = EmfUtil.makeUri(fileName);
+        	if (uri != null) {
+        		qvtTransformation = myTransformationMaker.makeTransformation(uri);
+        	}
 		} catch (MdaException e) {
 			QvtRuntimeUIPlugin.getDefault().getLog().log(MiscUtil.makeErrorStatus(e));
 		}

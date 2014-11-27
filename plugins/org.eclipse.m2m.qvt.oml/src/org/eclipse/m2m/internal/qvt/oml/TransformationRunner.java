@@ -74,7 +74,7 @@ public class TransformationRunner  {
 			throw new IllegalArgumentException();
 		}
 
-		fExecutor = new Executor(transformationURI, packageRegistry);
+		fExecutor = packageRegistry == null ? new Executor(transformationURI) : new Executor(transformationURI, packageRegistry);
 		fTransformationURI = transformationURI;
 		fModelParamURIs = modelParamURIs;
 	}

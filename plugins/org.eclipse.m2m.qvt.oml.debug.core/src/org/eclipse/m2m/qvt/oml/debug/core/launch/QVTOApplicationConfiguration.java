@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2009, 2014 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -31,8 +31,15 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.WorkspaceQvtModule;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugTarget;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugUtil;
@@ -72,7 +79,7 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 		String transformationURI = QvtLaunchUtil.getTransformationURI(configuration);
 		if(transformationURI != null) {
 			result.add(createArgStr(QVTOApplication.ARG_TRANSFORMATION,
-					createTransformationURI(transformationURI).toString()));
+					createPlatformURI(transformationURI).toString()));
 		}
 		
 		String traceFileURI = QvtLaunchUtil.getTraceFileURI(configuration);
@@ -81,17 +88,26 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 		if (traceFileURI != null && traceFileURI.trim().length() != 0 && shouldGenerateTraceFile) {
 			fTraceURI = QVTODebugUtil.toFileURI(traceFileURI);
 			result.add(createArgStr(QVTOApplication.ARG_TRACE,
-					fTraceURI.toString().toString()));
+					fTraceURI.toString()));
 		}
+		
+		List<DirectionKind> transfParams = getTransfParams(transformationURI);
+		int paramIndex = 0;
 		
 		List<TargetUriData> modelURIs = QvtLaunchUtil.getTargetUris(configuration);				
 		for (TargetUriData targetUriData : modelURIs) {
 			String nextURI = targetUriData.getUriString();
-			URI nextModelURI = QVTODebugUtil.toFileURI(nextURI);
+			boolean isPlatformUri = paramIndex < transfParams.size() && transfParams.get(paramIndex++) == DirectionKind.IN;
+			URI nextModelURI = isPlatformUri ? createPlatformURI(nextURI) : QVTODebugUtil.toFileURI(nextURI);
 			fModels.add(nextModelURI);
 			
 			result.add(createArgStr(QVTOApplication.ARG_PARAM, 
 					nextModelURI.toString()));
+		}
+		
+		List<String> mappings = createMetamodelMappings(transformationURI);
+		for (String m : mappings) {
+			result.add(createArgStr(QVTOApplication.ARG_MMAPINGS, m));
 		}
 		
 		return result.toArray(new String[result.size()]);
@@ -128,14 +144,14 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 				}
 			};
 			
-			vm = new QVTOVirtualMachineProxy("localhost", getPort(), connectMonitor);
+			vm = new QVTOVirtualMachineProxy("localhost", getPort(), connectMonitor); //$NON-NLS-1$
 		} catch (IOException e) {
 			IProcess p = getProcess(launch);
 			if(p != null && p.isTerminated() && p.getExitValue() != 0) {
 				return;
 			}
 			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR,
-					"Failed to connect to QVTO VM", e));
+					"Failed to connect to QVTO VM", e)); //$NON-NLS-1$
 		}
 		
 		try {
@@ -171,22 +187,69 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 		return launchedProcesses[0];
 	}
 	
-	private URI createTransformationURI(String uriStr) throws CoreException {
+	private URI createPlatformURI(String uriStr) {
 		URI uri = URI.createURI(uriStr, true);
-		IFile file = QVTODebugUtil.toFile(uri);
-		if(file != null && file.exists()) {
+		IFile file = getIFile(uriStr);
+		if (file != null) {
 			URI platformPluginURI = QVTODebugCore.getDefault().resolvePlatformPluginURI(file);
-			if(platformPluginURI != null) {
-				uri = platformPluginURI;
-			} 
+			if (platformPluginURI != null) {
+				return platformPluginURI;
+			}
 		}
 		return uri;
+	}
+	
+	private IFile getIFile(String uriStr) {
+		try {
+			URI uri = URI.createURI(uriStr);
+			IFile file = QVTODebugUtil.toFile(uri);
+			if (file != null && file.exists()) {
+				return file;
+			}
+		} catch (Exception e) {
+		}
+		return null;
 	}
 	
 	private static String createArgStr(String argName, String argValue) {
 		return argName + "=" + argValue; //$NON-NLS-1$
 	}
 	
+	private List<String> createMetamodelMappings(String transformationURI) throws CoreException {
+		IFile file = getIFile(transformationURI);
+		if (file == null) {
+			return Collections.emptyList();
+		}
+
+		try {
+			MappingContainer mappings = MetamodelURIMappingHelper.loadMappings(file.getProject());
+			List<String> args = new ArrayList<String>(mappings.getMapping().size());
+			for (URIMapping m : mappings.getMapping()) {
+				args.add(m.getSourceURI() + ';' + createPlatformURI(m.getTargetURI()).toString());
+			}
+			return args;
+		} catch (Exception e) {
+			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR, "Failed to load metamodel mappings", e)); //$NON-NLS-1$
+		}
+	}
+
+	private List<DirectionKind> getTransfParams(String transformationURI) throws CoreException {
+		IFile file = getIFile(transformationURI);
+		if (file == null) {
+			return Collections.emptyList();
+		}
+		
+		try {
+			List<DirectionKind> params = new ArrayList<DirectionKind>(2);
+			for (TransformationParameter p : new WorkspaceQvtModule(file).getParameters()) {
+				params.add(p.getDirectionKind());
+			}
+			return params;
+		} catch (MdaException e) {
+			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR, "Failed to load transformation", e)); //$NON-NLS-1$
+		}
+	}
+
 	private void addTerminationHook(final IProcess process) {
 		DebugPlugin.getDefault().addDebugEventListener(new IDebugEventSetListener() {
 			public void handleDebugEvents(DebugEvent[] events) {

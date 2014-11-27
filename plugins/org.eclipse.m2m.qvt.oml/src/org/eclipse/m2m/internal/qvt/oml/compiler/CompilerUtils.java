@@ -132,7 +132,7 @@ public class CompilerUtils {
     static class Eclipse {
 
         static QVTOCompiler createCompiler() {
-        	return new QVTOCompiler(createMetamodelRegistryProvider(createResourceSet()));
+        	return new QVTOCompiler(new WorkspaceMetamodelRegistryProvider(createResourceSet()));
         }    	
 
     	static Monitor createMonitor(Monitor monitor, int ticks) {
@@ -142,12 +142,6 @@ public class CompilerUtils {
     	static void throwOperationCanceled() throws RuntimeException {
     		throw new OperationCanceledException();
     	}
-
-		static WorkspaceMetamodelRegistryProvider createMetamodelRegistryProvider(ResourceSet metamodelResourceSet) {
-			return metamodelResourceSet != null ?
-						new WorkspaceMetamodelRegistryProvider(metamodelResourceSet) :
-						new WorkspaceMetamodelRegistryProvider();
-		}
 
 		static WorkspaceMetamodelRegistryProvider createMetamodelRegistryProvider(final EPackage.Registry packageRegistry, ResourceSet metamodelResourceSet) {
 			return new WorkspaceMetamodelRegistryProvider(metamodelResourceSet) {

@@ -29,13 +29,8 @@ import org.eclipse.debug.core.model.ITerminate;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticException;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.StreamsProxy;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
@@ -106,8 +101,6 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 		String moduleUri = QvtLaunchUtil.getTransformationURI(configuration);
 		runnerFactory.transformationURI = moduleUri;
 		
-		runnerFactory.packageRegistry = createPackageRegistry(moduleUri);
-		
 		List<String> modelURIs = new ArrayList<String>();
 		for (TargetUriData uriData : QvtLaunchUtil.getTargetUris(configuration)) {
 			modelURIs.add(uriData.getUriString());
@@ -155,20 +148,4 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 	
 	}
 
-	private EPackage.Registry createPackageRegistry(String transformationURIStr) {
-		URI transformationURI = URI.createURI(transformationURIStr);
-		try {		
-			if(transformationURI.isPlatformResource()) {
-				IFile file = QVTODebugUtil.toFile(transformationURI);
-				if(file != null && file.exists()) {	
-					return MetamodelURIMappingHelper.mappingsToEPackageRegistry(file.getProject(), new ResourceSetImpl());
-				}
-			}
-		} catch(Exception e) {
-			// FIXME
-			QVTODebugCore.log(e);
-		}		
-
-		return new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
-	}
 }
