@@ -246,8 +246,9 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 			}
 			return params;
 		} catch (MdaException e) {
-			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR, "Failed to load transformation", e)); //$NON-NLS-1$
+			QVTODebugCore.log(QVTODebugCore.createStatus(IStatus.ERROR, "Failed to load transformation", e)); //$NON-NLS-1$
 		}
+		return Collections.emptyList();
 	}
 
 	private void addTerminationHook(final IProcess process) {
