@@ -32,8 +32,7 @@ main() {
 	
 	var localOrderedSet : OrderedSet(String) := OrderedSet { 'a', 'b' }; 
 	this.propStrOrderedSet += localOrderedSet;
-	this.propStrOrderedSet += invalid;
-	this.propStrOrderedSet += null;	
+	this.propStrOrderedSet += invalid;	
 	
 	assert fatal (localOrderedSet->includesAll(this.propStrOrderedSet));
 	p.eClassifiers += map foo('propStrOrderedSet', propStrOrderedSet);

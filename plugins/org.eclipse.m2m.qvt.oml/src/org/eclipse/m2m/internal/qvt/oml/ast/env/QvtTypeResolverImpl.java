@@ -43,6 +43,7 @@ import org.eclipse.ocl.TypeResolver;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.ecore.impl.CollectionTypeImpl;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.types.CollectionType;
 import org.eclipse.ocl.types.MessageType;
@@ -273,7 +274,15 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 
 	public CollectionType<EClassifier, EOperation> resolveCollectionType(
 			CollectionKind kind, EClassifier elementType) {
-		return getDelegate().resolveCollectionType(kind, elementType);
+				
+		CollectionType<EClassifier, EOperation> result = getDelegate().resolveCollectionType(kind, elementType);
+		
+		// enable initialization of Collection properties for bug 449445
+		if (kind == CollectionKind.COLLECTION_LITERAL && result instanceof CollectionTypeImpl) {
+			((CollectionTypeImpl) result).setInstanceClass(Collection.class);
+		}
+		
+		return result;
 	}
 
 	public MessageType<EClassifier, EOperation, EStructuralFeature> resolveOperationMessageType(

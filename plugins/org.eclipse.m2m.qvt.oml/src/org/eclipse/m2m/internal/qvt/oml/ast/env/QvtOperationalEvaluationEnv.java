@@ -63,6 +63,7 @@ import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.internal.qvt.oml.trace.TraceFactory;
 import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.m2m.qvt.oml.util.IContext;
+import org.eclipse.m2m.qvt.oml.util.MutableList;
 import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.ecore.EcoreEvaluationEnvironment;
 import org.eclipse.ocl.ecore.EcorePackage;
@@ -198,7 +199,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			resolvedProperty = shadow.getProperty();
 		}
 		
-		// FIXME - workaround for a issue of multiple typle type instances, possibly coming from 
+		// FIXME - workaround for a issue of multiple tuple type instances, possibly coming from 
 		// imported modules. The super impl. looks for the property by feature instance, do it
 		// by name here to avoid lookup failure, IllegalArgExc...
 		if(target instanceof Tuple<?, ?>) {
@@ -554,6 +555,63 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		
 		return internalEnv().getUnboundExtent();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public Object getAssignResult(EClassifier variableType, Object oldValue, Object exprValue, boolean isReset) {
+
+		Object newValue = null;
+
+		if (variableType instanceof CollectionType && !isOclInvalid(exprValue)) {
+			if (isReset) {
+				if (exprValue instanceof MutableList || exprValue instanceof Dictionary) {
+					newValue = exprValue;
+				} else if (exprValue instanceof Collection) {
+					Collection<Object> exprValueCollection = (Collection<Object>) exprValue;
+					newValue = CollectionUtil.createNewCollection(exprValueCollection);
+				} else {
+					CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) variableType;
+					newValue = EvaluationUtil.createNewCollection(collectionType);
+					if (newValue == null) {
+						newValue = CollectionUtil.createNewSet();
+					}
+
+					if (exprValue != null) {
+						((Collection<Object>) newValue).add(exprValue);
+					}
+				}
+			} else {
+				Collection<Object> newOclCollection = null;
+
+				if (oldValue instanceof Collection) {
+					Collection<Object> oldOclCollection = (Collection<Object>) oldValue;
+
+					if (oldOclCollection instanceof MutableList || oldOclCollection instanceof Dictionary) {
+						newOclCollection = oldOclCollection;
+					} else {
+						newOclCollection = CollectionUtil.createNewCollection(oldOclCollection);
+					}
+				} else {
+					CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) variableType;
+					newOclCollection = EvaluationUtil.createNewCollection(collectionType);
+					if (newOclCollection == null) {
+						newOclCollection = CollectionUtil.createNewSet();
+					}
+				}
+
+				if (exprValue instanceof Collection) {
+					newOclCollection.addAll((Collection<Object>) exprValue);
+				} else {
+					newOclCollection.add(exprValue);
+				}
+
+				newValue = newOclCollection;
+			}
+		} else {
+			newValue = exprValue;
+		}
+
+		return newValue;
+	}
 
 	@SuppressWarnings("unchecked")
 	public void callSetter(EObject target, EStructuralFeature eStructuralFeature, Object exprValue, boolean valueIsUndefined, boolean isReset) {
@@ -582,35 +640,12 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
         if(eStructuralFeature.getEType() instanceof CollectionType) {
         	// OCL collection type used directly, set in module properties
         	Collection<Object> currentValues = (Collection<Object>) owner.eGet(eStructuralFeature);        	
-    		if(currentValues == null) {
-            	CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) eStructuralFeature.getEType();    			
-				currentValues = EvaluationUtil.createNewCollection(collectionType);
-    			owner.eSet(eStructuralFeature, currentValues);        			
-    		}
-
-        	if(isReset) {
-        		currentValues.clear();
-        	}
-        	
-        	if (exprValue instanceof Dictionary<?, ?> && currentValues instanceof Dictionary<?, ?>) {
-        		Dictionary<Object, Object> newVal = (Dictionary<Object, Object>) exprValue;
-        		for (Object nextKey : newVal.keys()) {
-        			Object nextValue = newVal.get(nextKey);
-        			//if (nextValue != getInvalidResult() && nextValue != null) {
-        				((Dictionary<Object, Object>) currentValues).put(nextKey, nextValue);
-        			//}
-				}
-        	}
-        	else if (exprValue instanceof Collection) {
-        		Collection<Object> newVal = (Collection<Object>) exprValue;
-        		for (Object nextElement : newVal) {
-        			if (nextElement != getInvalidResult() && nextElement != null) {
-        				currentValues.add(nextElement);
-        			}
-				}
-        	}
-        	else if (exprValue != getInvalidResult() && exprValue != null) {
-        		currentValues.add(exprValue);
+    		        	
+        	Object newValues = getAssignResult(eStructuralFeature.getEType(), currentValues, exprValue, isReset);
+    		// EAttribute of collection type cannot carry invalid as its value so avoid ClassCastException
+        	// see: https://bugs.eclipse.org/bugs/show_bug.cgi?id=449445 
+        	if (!isOclInvalid(newValues)) {
+        		owner.eSet(eStructuralFeature, newValues);
         	}
         	
         	return;

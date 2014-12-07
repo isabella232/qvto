@@ -29,7 +29,7 @@ main() {
 	coll1 += p;		
 	assert fatal (coll1->size() = 2);
 	
-	-- check incremental assignment on 'invalid''
+	-- check incremental assignment of 'invalid''
 	coll1 += invalid;
 	assert fatal (coll1->oclIsUndefined());
 	
@@ -48,13 +48,16 @@ main() {
 	var coll3 : OrderedSet(EPackage);
 	assert fatal(coll3->isEmpty());
 	
-	-- check explicit 'null' assignment
-	coll3 := null;
-	assert fatal (coll3 = null);
-	
-	-- check implicit initialization on incremental assignment
+	-- check conversion to empty collection on explicit 'null' assignment
 	coll3 += p;
 	assert fatal (coll3->includes(p));
+	coll3 := null;
+	assert fatal (coll3->isEmpty());
+	
+	-- check that uninitialized abstract 'Collection' type is converted to Set{}
+	var c1 : Collection(OclAny);
+	c1 += "a";
+	assert fatal (c1 = Set{"a"});
 	
 	-- check implicit result initialization inside mapping 'init' section
 	map m1();

@@ -380,51 +380,16 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			// but at deferred time in the end of the transformation
 			return null;
 		}
-
+		
 		if (lValue instanceof VariableExp<?, ?>) {
 			VariableExp<EClassifier, EParameter> varExp = (VariableExp<EClassifier, EParameter>) lValue;
 			Variable<EClassifier, EParameter> referredVariable = varExp.getReferredVariable();
 			if (referredVariable != null) {
 				String varName = referredVariable.getName();
 				Object oldValue = getRuntimeValue(varName);
-				Object newValue = null;
 				EClassifier variableType = lValue.getType();
-				if (variableType instanceof CollectionType && exprValue != getInvalid()) {
-					if (assignExp.isIsReset()) {
-						if (exprValue instanceof MutableList || exprValue instanceof Dictionary || isUndefined(exprValue)) {
-							newValue = exprValue;
-						}
-						else if (exprValue instanceof Collection) {
-							Collection<Object> exprValueCollection = (Collection<Object>) exprValue;
-							newValue = CollectionUtil.createNewCollection(exprValueCollection);
-						}
-					} else {
-						Collection<Object> newOclCollection = null;
-
-						if (oldValue instanceof Collection) {
-							Collection<Object> oldOclCollection = (Collection<Object>) oldValue;
-
-							if (oldOclCollection instanceof MutableList || oldOclCollection instanceof Dictionary) {
-								newOclCollection = oldOclCollection;
-							} else {
-								newOclCollection = CollectionUtil.createNewCollection(oldOclCollection);
-							}
-						} else if (isUndefined(oldValue)) {
-							newOclCollection = EvaluationUtil
-									.createNewCollection((CollectionType<EClassifier, EOperation>) variableType);
-						}
-
-						if (exprValue instanceof Collection) {
-							newOclCollection.addAll((Collection<Object>) exprValue);
-						} else {
-							newOclCollection.add(exprValue);
-						}
-
-						newValue = newOclCollection;
-					}
-				} else {
-					newValue = exprValue;
-				}
+				
+				Object newValue = env.getAssignResult(variableType, oldValue, exprValue, assignExp.isIsReset());
 
 				replaceInEnv(varName, newValue, variableType);
 			}

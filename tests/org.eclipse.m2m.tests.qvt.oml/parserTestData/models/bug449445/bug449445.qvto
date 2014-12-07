@@ -1,0 +1,26 @@
+transformation bug449445();
+
+property c : Collection(String) = OrderedSet { 'a' , 'b' };
+
+main() {
+
+	assert fatal (c = OrderedSet{'a', 'b'});
+	
+	var c2 : Collection(String) = c;
+	
+	c += "c";	
+	assert fatal (c->includes("c"));
+	assert fatal (c2 = OrderedSet{'a', 'b'});
+	
+	c += invalid;
+	assert fatal (c = OrderedSet{'a', 'b', 'c'});
+	
+	c += null;
+	assert fatal (c->includes(null));
+	
+	c := Sequence {};
+	c += 'a';
+	c += 'a';
+	assert fatal (c->size() = 2);
+	
+}
