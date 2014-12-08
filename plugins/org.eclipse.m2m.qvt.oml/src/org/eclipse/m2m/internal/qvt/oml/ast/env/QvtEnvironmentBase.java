@@ -151,15 +151,13 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
             myImplicitVars.add(elemVar);
         }
         
-        if(elemVar instanceof VarParameter == false) {
+        if(elemVar instanceof VarParameter == false && elemVar.eContainer() == null) {
             if(getContextOperation() instanceof ImperativeOperation) {
                 ImperativeOperation imperativeOperation = (ImperativeOperation) getContextOperation();
-                if(elemVar.eContainer() == null) {
-                    if (imperativeOperation.getBody() != null) {
-                        imperativeOperation.getBody().getVariable().add((org.eclipse.ocl.ecore.Variable)elemVar);
-                    } else {
-                        super.addedVariable(name, elemVar, isExplicit);
-                    }
+                if (imperativeOperation.getBody() != null) {
+                    imperativeOperation.getBody().getVariable().add((org.eclipse.ocl.ecore.Variable)elemVar);
+                } else {
+                    super.addedVariable(name, elemVar, isExplicit);
                 }
             } else {
                 super.addedVariable(name, elemVar, isExplicit);

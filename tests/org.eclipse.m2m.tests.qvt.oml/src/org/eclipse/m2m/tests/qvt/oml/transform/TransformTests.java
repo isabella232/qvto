@@ -428,6 +428,7 @@ public class TransformTests {
         		new FilesToFilesData("emptyExtents", Arrays.asList("in1.ecore", "in2.ecore"), Collections.singletonList("expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
         		new FilesToFilesData("urilessModeltype"), //$NON-NLS-1$
         		new FilesToFilesData("bug449445"), //$NON-NLS-1$
+        		new FilesToFilesData("bug449912", Collections.<String>emptyList(), Collections.singletonList("expected.qvtoperational")), //$NON-NLS-1$ //$NON-NLS-2$
         		};
     }
 

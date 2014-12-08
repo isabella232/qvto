@@ -239,12 +239,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					return thisObj;
 				}
 			}
-		} else if(vd instanceof ModelParameter || value instanceof ModelParameter) {
-			// Handling of 'self'->Param->ModelInstance in WHERE clauses
-			if (value instanceof ModelParameter) {
-				vd = (ModelParameter)value;
-			}
-			
+		} else if(vd instanceof ModelParameter) {			
 			OperationalTransformation transformation = (OperationalTransformation) vd.eContainer();
 			TransformationInstance transformationInstance = (TransformationInstance)evalEnv.getThisOfType(transformation);
 			assert transformationInstance != null;
@@ -1086,11 +1081,12 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         return evalResult;
     }
 
-	private static CallHandler createEntryOperationHandler(final InternalEvaluator evaluator) {
+	private CallHandler createEntryOperationHandler(final InternalEvaluator evaluator) {
 		return new CallHandler() {
 			public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 				TransformationInstance transformation = (TransformationInstance) source;				
 				try {
+					evaluateModelParameterConditions(transformation, evalEnv);
 					return evaluator.runMainEntry(transformation.getTransformation(), Arrays.asList(args));
 				} finally {
 					transformation.getAdapter(InternalTransformation.class).dispose();
@@ -1117,7 +1113,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation.getTransformation()))));
 		    	}
 		    	
-		    	evaluateModelParameterConditions(transformation.getTransformation());
+		    	evaluateModelParameterConditions(transformation, evalEnv);
 		    	
 		    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformation, evalEnv);		    	
 				Object result = handlers.iterator().next().invoke(transformation, source, actualArgs.toArray(), evalEnv);					
@@ -2506,26 +2502,29 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 	public OperationCallResult runMainEntry(OperationalTransformation transformation, List<Object> args) {
 		ImperativeOperation entryOperation = QvtOperationalParserUtil.getMainOperation(transformation);				
-		
-		evaluateModelParameterConditions(transformation);
-		
+				
 		OperationCallResult result = executeImperativeOperation(entryOperation, null, args, false);        	        					
 		processDeferredTasks();
 		return result;
 	}
 
-	private void evaluateModelParameterConditions(OperationalTransformation transformation) {
-		for (ModelParameter parameter : transformation.getModelParameter()) {
+	private void evaluateModelParameterConditions(TransformationInstance transformationInstance, QvtOperationalEvaluationEnv evalEnv) {
+		for (ModelParameter parameter : transformationInstance.getTransformation().getModelParameter()) {
 			if (parameter.getEType() instanceof ModelType && parameter.getKind() != DirectionKind.OUT) {
 				ModelType parameterType = (ModelType) parameter.getEType();
+				ModelInstance modelInstance = transformationInstance.getModel(parameter);
 				for (OCLExpression<EClassifier> whereExpression : parameterType.getAdditionalCondition()) {
-					myEvalEnv.add(Environment.SELF_VARIABLE_NAME, parameter);
-					boolean isConditionMet = Boolean.TRUE.equals(visitExpression(whereExpression));
-					myEvalEnv.remove(Environment.SELF_VARIABLE_NAME);
-		    		if(!isConditionMet) {
-		    			throwQVTException(new QvtAssertionFailed(NLS.bind(EvaluationMessages.ModelTypeConstraintFailed, 
-		    					parameter.getName(), transformation.getName())));
-		    		}		    		
+					myEvalEnv.add(Environment.SELF_VARIABLE_NAME, modelInstance);
+					try {
+						boolean isConditionMet = Boolean.TRUE.equals(visitExpression(whereExpression));
+			    		if(!isConditionMet) {
+			    			throwQVTException(new QvtAssertionFailed(NLS.bind(EvaluationMessages.ModelTypeConstraintFailed, 
+			    					parameter.getName(), transformationInstance.getTransformation().getName())));
+			    		}
+					}
+					finally {
+						myEvalEnv.remove(Environment.SELF_VARIABLE_NAME);
+					}
 				}
 			}
 		}
