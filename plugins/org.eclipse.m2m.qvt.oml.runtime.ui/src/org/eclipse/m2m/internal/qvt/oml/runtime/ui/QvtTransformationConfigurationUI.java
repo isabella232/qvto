@@ -44,7 +44,6 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.config.QvtConfigurationProperty;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.config.QvtConfigurationPropertyType;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.wizards.ApplyTransformationData;
-import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -167,7 +166,8 @@ public class QvtTransformationConfigurationUI {
                     myProperties.addProperty(property, valueMap.get(property.getName()));
                 }
             } catch (MdaException e) {
-                QvtRuntimeUIPlugin.getDefault().getLog().log(MiscUtil.makeErrorStatus(e));
+            	// Error is already reported in UI, no need for duplication in log
+                //QvtRuntimeUIPlugin.getDefault().getLog().log(MiscUtil.makeErrorStatus(e));
             }
         }
         myTableViewer.refresh();

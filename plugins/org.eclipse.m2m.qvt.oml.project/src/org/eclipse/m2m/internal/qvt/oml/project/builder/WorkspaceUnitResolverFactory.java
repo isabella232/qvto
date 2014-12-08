@@ -39,6 +39,9 @@ public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
 		}
 		
 		IResource file = URIUtils.getResource(uri);
+		if (file == null) {
+			return null;
+		}
 		
 		try {	
 			IContainer sourceContainer = QVTOBuilderConfig.getConfig(file.getProject()).getSourceContainer();
