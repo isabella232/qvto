@@ -56,6 +56,9 @@ public class EmfStandaloneMetamodelProvider implements IMetamodelProvider {
 		
 	public IMetamodelDesc getMetamodel(String nsURI) {
 		EPackage pack = fRegistry.getEPackage(nsURI);
+		if (pack == null) {
+			return null;
+		}
 		return new EmfMetamodelDesc(pack, nsURI);
     }
     
