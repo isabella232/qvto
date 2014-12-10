@@ -89,7 +89,8 @@ public class TestStackTrace extends AbstractStackTraceTest {
 			assertEquals("causeStackOverFlow", element.getOperationName()); //$NON-NLS-1$
 			assertEquals("auxtransf", element.getModuleName()); //$NON-NLS-1$
 			assertEquals("auxtransf.qvto", element.getUnitName()); //$NON-NLS-1$
-			assertEquals(6, element.getLineNumber());			
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=449753
+			assertTrue((5 == element.getLineNumber()) || (6 == element.getLineNumber()));			
 		}
 	}
 	
