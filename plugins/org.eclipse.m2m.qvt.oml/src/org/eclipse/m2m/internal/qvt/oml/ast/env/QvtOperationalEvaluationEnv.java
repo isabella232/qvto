@@ -615,20 +615,20 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 
 	@SuppressWarnings("unchecked")
 	public void callSetter(EObject target, EStructuralFeature eStructuralFeature, Object exprValue, boolean valueIsUndefined, boolean isReset) {
-		if(getInvalidResult() == target) {
+		if (getInvalidResult() == target) {
 			// call performed on OclInvalid, can not continue
 			return;
 		}
-		
+
 		EObject owner = target;
-		if(target instanceof ModuleInstance) {
+		if (target instanceof ModuleInstance) {
 			ModuleInstance moduleTarget = (ModuleInstance) target;
 			owner = moduleTarget.getThisInstanceOf(moduleTarget.getModule());
 		}
-		
+
 		if (eStructuralFeature instanceof ContextualProperty) {
 			IntermediatePropertyModelAdapter.ShadowEntry shadow = IntermediatePropertyModelAdapter.getPropertyHolder(
-										eStructuralFeature.getEContainingClass(), (ContextualProperty)eStructuralFeature, owner);
+					eStructuralFeature.getEContainingClass(), (ContextualProperty) eStructuralFeature, owner);
 			owner = shadow.getPropertyRuntimeOwner(owner, this);
 			eStructuralFeature = shadow.getProperty();
 		}
@@ -636,52 +636,42 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		if (isReadonlyGuardEnabled()) {
 			checkReadonlyGuard(eStructuralFeature, exprValue, owner);
 		}
-		
-        if(eStructuralFeature.getEType() instanceof CollectionType) {
-        	// OCL collection type used directly, set in module properties
-        	Collection<Object> currentValues = (Collection<Object>) owner.eGet(eStructuralFeature);        	
-    		        	
-        	Object newValues = getAssignResult(eStructuralFeature.getEType(), currentValues, exprValue, isReset);
-    		// EAttribute of collection type cannot carry invalid as its value so avoid ClassCastException
-        	// see: https://bugs.eclipse.org/bugs/show_bug.cgi?id=449445 
-        	if (!isOclInvalid(newValues)) {
-        		owner.eSet(eStructuralFeature, newValues);
-        	}
-        	
-        	return;
-        }
-        
-        Class<?> expectedType = eStructuralFeature.getEType().getInstanceClass();
 
-        if (FeatureMapUtil.isMany(owner, eStructuralFeature))  {
-			List<Object> featureValues = (List<Object>) owner.eGet(eStructuralFeature);
+		Object currentValue = owner.eGet(eStructuralFeature);
+		Object newValue = getAssignResult(eStructuralFeature.getEType(), currentValue, exprValue, isReset);
+
+		Class<?> expectedType = eStructuralFeature.getEType().getInstanceClass();
+
+		if (FeatureMapUtil.isMany(owner, eStructuralFeature)) {
+			List<Object> featureValues = (List<Object>) currentValue;
 			if (isReset) {
 				featureValues.clear();
 			}
-			if (exprValue instanceof Collection) {
-                for (Object element : (Collection<Object>) exprValue) {
-                    if (element != null) {
-                        featureValues.add(ensureTypeCompatibility(element, expectedType, this));
-                    }
-                }
+			if (newValue instanceof Collection) {
+				for (Object element : (Collection<Object>) newValue) {
+					if (element != null) {
+						featureValues.add(ensureTypeCompatibility(element, expectedType, this));
+					}
+				}
 			} else if (!valueIsUndefined) {
-				featureValues.add(ensureTypeCompatibility(exprValue, expectedType, this));
+				featureValues.add(ensureTypeCompatibility(newValue, expectedType, this));
 			}
-        } else if (!valueIsUndefined || acceptsNullValue(expectedType)) {
-			if (exprValue instanceof Collection) {
-                for (Object element : (Collection<Object>) exprValue) {
-                    if (element != null) {
-                    	owner.eSet(eStructuralFeature, ensureTypeCompatibility(element, expectedType, this));
-        				break;
-                    }
-                }
+		} else if (!valueIsUndefined || acceptsNullValue(expectedType)) {
+			if (newValue instanceof Collection && (eStructuralFeature.getUpperBound() == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
+				for (Object element : (Collection<Object>) newValue) {
+					if (element != null) {
+						owner.eSet(eStructuralFeature, ensureTypeCompatibility(element, expectedType, this));
+						break;
+					}
+				}
+			} else if (!isOclInvalid(newValue)) {
+				owner.eSet(eStructuralFeature, ensureTypeCompatibility(newValue, expectedType, this));
+			} else if (isReset) {
+				owner.eUnset(eStructuralFeature);
 			}
-			else {
-				owner.eSet(eStructuralFeature, ensureTypeCompatibility(exprValue, expectedType, this));
-			}
-        } else {
-        	owner.eUnset(eStructuralFeature);
-        }
+		} else {
+			owner.eUnset(eStructuralFeature);
+		}
 	}
 
 	private boolean isReadonlyGuardEnabled() {
@@ -750,15 +740,12 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			// In OCL Integer conforms to Real, in Java Integer doesn't conform to Double.
 			return Double.valueOf(((Integer) value).doubleValue());
 		}
-		if (value == evalEnv.getInvalidResult()) {
-			return null;
-		}
-		
-		if(expectedType != null) {
-			// perform the type conversion only the expected type is available 
+
+		if (expectedType != null) {
+			// perform the type conversion only the expected type is available
 			return NumberConversions.convertNumber(value, expectedType);
 		}
-		
+
 		return value;
 	}
 
