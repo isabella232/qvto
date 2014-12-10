@@ -650,22 +650,22 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			if (newValue instanceof Collection) {
 				for (Object element : (Collection<Object>) newValue) {
 					if (element != null) {
-						featureValues.add(ensureTypeCompatibility(element, expectedType, this));
+						featureValues.add(ensureTypeCompatibility(element, expectedType));
 					}
 				}
 			} else if (!valueIsUndefined) {
-				featureValues.add(ensureTypeCompatibility(newValue, expectedType, this));
+				featureValues.add(ensureTypeCompatibility(newValue, expectedType));
 			}
 		} else if (!valueIsUndefined || acceptsNullValue(expectedType)) {
 			if (newValue instanceof Collection && (eStructuralFeature.getUpperBound() == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
 				for (Object element : (Collection<Object>) newValue) {
 					if (element != null) {
-						owner.eSet(eStructuralFeature, ensureTypeCompatibility(element, expectedType, this));
+						owner.eSet(eStructuralFeature, ensureTypeCompatibility(element, expectedType));
 						break;
 					}
 				}
 			} else if (!isOclInvalid(newValue)) {
-				owner.eSet(eStructuralFeature, ensureTypeCompatibility(newValue, expectedType, this));
+				owner.eSet(eStructuralFeature, ensureTypeCompatibility(newValue, expectedType));
 			} else if (isReset) {
 				owner.eUnset(eStructuralFeature);
 			}
@@ -735,7 +735,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	 *            the expected type (may be <code>null</code>)
 	 * @return the converted value
 	 */
-	private Object ensureTypeCompatibility(Object value, Class<?> expectedType, QvtOperationalEvaluationEnv evalEnv) {
+	private Object ensureTypeCompatibility(Object value, Class<?> expectedType) {
 		if ((expectedType == Double.class || expectedType == double.class) && value instanceof Integer) {
 			// In OCL Integer conforms to Real, in Java Integer doesn't conform to Double.
 			return Double.valueOf(((Integer) value).doubleValue());
