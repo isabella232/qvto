@@ -50,8 +50,7 @@ public class TestQvtInterpreter extends TestTransformation {
     }
     
     protected ITransformer getTransformer() {
-    	// execute compiled XMI
-		return new DefaultTransformer(true, getMetamodelRegistry());
+		return new DefaultTransformer(getData().isUseCompiledXmi(), getMetamodelRegistry());
     }
 
 	protected Registry getMetamodelRegistry() {
@@ -79,15 +78,17 @@ public class TestQvtInterpreter extends TestTransformation {
         checkTransformation(new TransformationChecker(getTransformer()));
     }
     
-    public static final ITransformer TRANSFORMER = new DefaultTransformer();
+    public static ITransformer getDefaultTransformer(ModelTestData data) {
+    	return new DefaultTransformer(data);
+    }
     
 	public static class DefaultTransformer implements ITransformer {
 		
 		private final boolean fExecuteCompiledAST;
 		private final EPackage.Registry fRegistry;
 		
-		public DefaultTransformer() {
-			this(true, null);
+		public DefaultTransformer(ModelTestData data) {
+			this(data.isUseCompiledXmi(), null);
 		}
 		
 		public DefaultTransformer(boolean executeCompiledAST, EPackage.Registry registry) {

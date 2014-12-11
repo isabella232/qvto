@@ -112,6 +112,10 @@ public abstract class ModelTestData {
         return getFile(destFolder, myName + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT); 
     }
     
+    public boolean isUseCompiledXmi() {
+    	return true;
+    }
+    
     public IContext getContext() { 
         return myContext; 
     }

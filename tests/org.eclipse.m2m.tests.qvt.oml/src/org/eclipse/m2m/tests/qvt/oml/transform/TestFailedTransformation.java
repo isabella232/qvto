@@ -44,7 +44,7 @@ public class TestFailedTransformation extends TestTransformation {
 	}
 	
 	private QvtRuntimeException runTransformation() throws Exception {
-        ITransformer transformer = TestQvtInterpreter.TRANSFORMER;
+        ITransformer transformer = TestQvtInterpreter.getDefaultTransformer(getData());
 		try {
 			Context context = (Context) getData().getContext();
 			context.setLog(new WriterLog(myLogger));

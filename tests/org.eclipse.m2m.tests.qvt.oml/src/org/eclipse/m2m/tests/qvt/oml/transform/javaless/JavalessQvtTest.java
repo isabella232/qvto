@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2010 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -54,7 +54,7 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 	
 	@Override
 	protected ITransformer getTransformer() {
-		return new DefaultTransformer(true, getMetamodelRegistry()) {
+		return new DefaultTransformer(getData().isUseCompiledXmi(), getMetamodelRegistry()) {
 			@Override
 			public List<URI> transform(IFile transformation, List<URI> inUris, IContext qvtContext) throws Exception {
 				List<URI> outUris = super.transform(transformation, inUris, qvtContext);

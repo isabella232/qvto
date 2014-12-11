@@ -84,11 +84,19 @@ public abstract class TestTransformation extends TestCase {
     	return myData;
     }
     
+    protected String getProjectName() {
+    	return "TransformationTest"; //$NON-NLS-1$
+    }
+    
+    protected boolean isSaveXmi() {
+    	return myData.isUseCompiledXmi();
+    }
+    
     @Override
 	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();     
         
-        String name = "TransformationTest"; //$NON-NLS-1$
+        String name = getProjectName();
         myProject = TestProject.getExistingProject(name);
         if(myProject == null) {
             myProject = new TestProject(name, new String[] {}, 0); 
@@ -102,9 +110,7 @@ public abstract class TestTransformation extends TestCase {
     		
     		assertNotNull(buildCommand);		
     		Map<String, String> arguments = buildCommand.getArguments();
-    		// Remark: internal option for saving xmi, used for testing at the moment
-    		//temporarily commented out for [290002] "Adopt QVT CST to latest OCL 3.0.0 CST "
-    		arguments.put(QVTOBuilder.SAVE_AST_XMI, "true"); //$NON-NLS-1$
+    		arguments.put(QVTOBuilder.SAVE_AST_XMI, Boolean.toString(isSaveXmi()));
     		
     		buildCommand.setArguments(arguments);
     		description.setBuildSpec(buildSpec);

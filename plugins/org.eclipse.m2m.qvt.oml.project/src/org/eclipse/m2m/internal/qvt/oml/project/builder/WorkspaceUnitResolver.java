@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -39,6 +42,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.DeployedImportResolver;
 
 
@@ -70,9 +74,52 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 		fRoots = new ArrayList<IContainer>(sourceContainers);
 		if(project != null) {
 			setParent(new CompositeUnitResolver(
+						getReferencedProjectsResolver(project, new HashMap<IProject, UnitResolver>()),
 						new BlackboxUnitResolver(URIUtils.getResourceURI(project)),
 						DeployedImportResolver.INSTANCE));
 		}
+	}
+	
+	private WorkspaceUnitResolver(IContainer sourceContainer, Map<IProject, UnitResolver> analizedProjects) {
+		fRoots = Collections.singletonList(sourceContainer);
+
+		IProject project = sourceContainer.getProject();
+		setParent(new CompositeUnitResolver(
+					getReferencedProjectsResolver(project, analizedProjects),
+					new BlackboxUnitResolver(URIUtils.getResourceURI(project)),
+					DeployedImportResolver.INSTANCE));
+	}
+	
+	private UnitResolver getReferencedProjectsResolver(IProject project, Map<IProject, UnitResolver> analizedProjects) {
+		analizedProjects.put(project, this);
+
+		List<UnitResolver> resolvers = Collections.emptyList();
+		try {
+			IProject[] referencedProjects = project.getReferencedProjects();
+			resolvers = new ArrayList<UnitResolver>(referencedProjects.length);
+
+			for (IProject referenced : referencedProjects) {
+				if (analizedProjects.containsKey(referenced)) {
+					resolvers.add(analizedProjects.get(referenced));
+					continue;
+				}
+				
+				if (referenced == null || !referenced.exists()) {
+					continue;
+				}
+
+				IContainer sourceContainer = QVTOBuilderConfig.getConfig(referenced).getSourceContainer();
+				if (sourceContainer == null || !sourceContainer.exists()) {
+					continue;
+				}
+
+				resolvers.add(new WorkspaceUnitResolver(sourceContainer, analizedProjects));
+			}
+		} catch (CoreException e) {
+			QVTOProjectPlugin.log(e.getStatus());
+		}
+
+		return new CompositeUnitResolver(resolvers.toArray(new UnitResolver[resolvers.size()]));
 	}
 	
 	@Override

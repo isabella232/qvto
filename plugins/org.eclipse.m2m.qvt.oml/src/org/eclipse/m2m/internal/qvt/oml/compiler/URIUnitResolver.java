@@ -80,8 +80,11 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 			fBaseURIs.add(normalizedURI);
 		}
 		
-		// enable resolution of black-box module dependencies
-		setParent(BlackboxUnitResolver.DEFAULT);		
+		// enable resolution of black-box module dependencies and classpath imports
+		setParent(new CompositeUnitResolver(
+				BlackboxUnitResolver.DEFAULT,
+				ClassPathUnitResolver.INSTANCE)
+		);		
 	}
 		
 	@Override

@@ -429,6 +429,13 @@ public class TransformTests {
         		new FilesToFilesData("urilessModeltype"), //$NON-NLS-1$
         		new FilesToFilesData("bug449445"), //$NON-NLS-1$
         		new FilesToFilesData("bug449912", Collections.<String>emptyList(), Collections.singletonList("expected.qvtoperational")), //$NON-NLS-1$ //$NON-NLS-2$
+        		new ReferencedProjectData("bug433937", "bug433937_referenced") { //$NON-NLS-1$ //$NON-NLS-2$
+        			@Override
+        			public boolean isUseCompiledXmi() {
+        				// TODO it should be possible to run this test with the using of compiled XMI
+        				return false;
+        			}
+        		}, 
         		};
     }
 

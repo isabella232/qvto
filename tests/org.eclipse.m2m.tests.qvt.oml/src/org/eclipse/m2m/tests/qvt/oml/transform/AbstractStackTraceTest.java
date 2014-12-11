@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -119,7 +119,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	}
 
 	private ITransformer createTransformer() {
-		return new TestQvtInterpreter.DefaultTransformer(true, EPackage.Registry.INSTANCE) {
+		return new TestQvtInterpreter.DefaultTransformer(getData().isUseCompiledXmi(), EPackage.Registry.INSTANCE) {
 			
 	        public List<URI> transform(IFile transformation, List<URI> inUris, IContext context) throws Exception {
 	        	QvtInterpretedTransformation transf;
