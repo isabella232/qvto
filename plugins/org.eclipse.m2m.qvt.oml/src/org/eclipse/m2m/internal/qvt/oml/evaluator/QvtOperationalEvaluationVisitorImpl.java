@@ -960,18 +960,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				setOperationalEvaluationEnv(nestedEvalEnv);
 				
 				ModuleInstance moduleInstance = nestedVisitor.callTransformationImplicitConstructor(targetTransf, actualArguments);
-				//nestedEvalEnv.add(QvtOperationalEnv.THIS, moduleInstance);
 				
-				CallHandler handler = null;
-				
-				if (targetTransf.isIsBlackbox()) {
-					handler = createBlackboxTransformationHandler(nestedVisitor);
-				}
-				else {
-					handler = createEntryOperationHandler(nestedVisitor);
-				}
-				
-				moduleInstance.getAdapter(InternalTransformation.class).setTransformationHandler(handler);
 				return moduleInstance;
 			} finally {
 				setOperationalEvaluationEnv(currentEnv);
@@ -1025,10 +1014,56 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		
 		ModelParameterHelper modelParameters = new ModelParameterHelper(transformation, transfArgs);
 		initModule(instance, modelParameters);
+		
+		CallHandler handler = createTransformationHandler();
+		InternalTransformation internTransf = instance.getAdapter(InternalTransformation.class);		
+		internTransf.setTransformationHandler(handler);
+		
 		// we are initialized set back the pointer to the module 
 		setCurrentEnvInstructionPointer(transformation);		
 		return instance;
-	}	
+	}
+	
+	protected final CallHandler createTransformationHandler() {
+		return new CallHandler() {
+			public OperationCallResult invoke(ModuleInstance moduleInstance, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
+				assert (args.length == 0) : "transformation instance must be invoked with zero arguments";
+				
+				TransformationInstance transformationInstance = (TransformationInstance) source;
+				
+				try {
+					evaluateModelParameterConditions(transformationInstance, evalEnv);
+					
+					OperationalTransformation transformation = transformationInstance.getTransformation();
+					
+					if (transformation.isIsBlackbox()) {
+						QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(transformationInstance.getModule());
+				    	
+				    	Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
+				    			transformation, moduleEnv);
+				    	if (handlers.isEmpty()) { 
+				        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
+				        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
+				    	}
+				    	if (handlers.size() > 1) {
+				        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.AmbiguousBlackboxOperationFound,
+				        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
+				    	}
+				    				    	
+				    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformationInstance, evalEnv);		    	
+						Object result = handlers.iterator().next().invoke(transformationInstance, source, actualArgs.toArray(), evalEnv);					
+						
+						return new OperationCallResult(result, evalEnv);
+					}
+					else {
+						return runMainEntry(transformation, makeEntryOperationArgs(transformation));
+					}
+				} finally {
+					transformationInstance.getAdapter(InternalTransformation.class).dispose();
+				}	
+			}
+		};
+	}
 		
 	// FIXME - review the strange case of having various return types
 	private Object doVisitTransformation(OperationalTransformation transformation) {
@@ -1038,30 +1073,15 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 		TransformationInstance moduleInstance = callTransformationImplicitConstructor(transformation, modelArgs); 
 				
-		CallHandler handler;
-		List<Object> args;
-		
-		if (transformation.isIsBlackbox()) {
-			handler = createBlackboxTransformationHandler(this);
-			args = Collections.emptyList(); // blackbox transformation always composes arguments inside handler.invoke()
-		}
-		else {
-			ImperativeOperation entryPoint = QvtOperationalParserUtil.getMainOperation(transformation);        
-	        if (entryPoint == null) {
-	            throw new IllegalArgumentException(NLS.bind(EvaluationMessages.ExtendedOclEvaluatorVisitorImpl_ModuleNotExecutable, transformation.getName()));
-	        }
-			
-			handler = createEntryOperationHandler(this);
-			args = makeEntryOperationArgs(entryPoint, transformation);
-		}
 		InternalTransformation internTransf = moduleInstance.getAdapter(InternalTransformation.class);		
-		internTransf.setTransformationHandler(handler);
+		
+		CallHandler handler = internTransf.getTransformationHandler();
         			
-        // call main entry operation
+        // call main entry operation or blackbox implementation
         OperationCallResult callResult = (OperationCallResult) handler.invoke(
         		null, 
         		moduleInstance,
-        		args.toArray(), 
+        		Collections.emptyList().toArray(), 
         		evaluationEnv);
         
         QvtEvaluationResult evalResult = EvaluationUtil.createEvaluationResult(callResult.myEvalEnv);
@@ -1080,49 +1100,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         
         return evalResult;
     }
-
-	private CallHandler createEntryOperationHandler(final InternalEvaluator evaluator) {
-		return new CallHandler() {
-			public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
-				TransformationInstance transformation = (TransformationInstance) source;				
-				try {
-					evaluateModelParameterConditions(transformation, evalEnv);
-					return evaluator.runMainEntry(transformation.getTransformation(), Arrays.asList(args));
-				} finally {
-					transformation.getAdapter(InternalTransformation.class).dispose();
-				}
-			}
-		};
-	}
-	
-	private CallHandler createBlackboxTransformationHandler(final InternalEvaluator evaluator) {
-		return new CallHandler() {
-			public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
-				TransformationInstance transformation = (TransformationInstance) source;				
 				
-				QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(transformation.getModule());
-								    	
-		    	Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
-		    			transformation.getTransformation(), moduleEnv);
-		    	if (handlers.isEmpty()) {
-		        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
-		        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation.getTransformation()))));
-		    	}
-		    	if (handlers.size() > 1) {
-		        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.AmbiguousBlackboxOperationFound,
-		        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation.getTransformation()))));
-		    	}
-		    	
-		    	evaluateModelParameterConditions(transformation, evalEnv);
-		    	
-		    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformation, evalEnv);		    	
-				Object result = handlers.iterator().next().invoke(transformation, source, actualArgs.toArray(), evalEnv);					
-				
-				return new OperationCallResult(result, evalEnv);				
-			}
-		};
-	}
-	
 	protected void processDeferredTasks() {
 		InternalEvaluationEnv internalEvalEnv = getOperationalEvaluationEnv().getAdapter(InternalEvaluationEnv.class);
 		internalEvalEnv.processDeferredTasks();
@@ -2310,9 +2288,14 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		}
     }
     
-    private List<Object> makeEntryOperationArgs(ImperativeOperation entryPoint, OperationalTransformation module) {
+    private List<Object> makeEntryOperationArgs(OperationalTransformation module) {
     	
     	assert !module.isIsBlackbox() : "Non-blackbox module expected";
+    	
+    	ImperativeOperation entryPoint = QvtOperationalParserUtil.getMainOperation(module);        
+        if (entryPoint == null) {
+            throw new IllegalArgumentException(NLS.bind(EvaluationMessages.ExtendedOclEvaluatorVisitorImpl_ModuleNotExecutable, module.getName()));
+        }
     	
 		List<Object> args = new ArrayList<Object>(entryPoint.getEParameters().size());
 				
