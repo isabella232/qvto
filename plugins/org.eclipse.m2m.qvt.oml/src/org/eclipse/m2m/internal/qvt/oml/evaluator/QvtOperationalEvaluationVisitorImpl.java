@@ -20,7 +20,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -1024,7 +1023,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		return instance;
 	}
 	
-	protected final CallHandler createTransformationHandler() {
+	private CallHandler createTransformationHandler() {
 		return new CallHandler() {
 			public OperationCallResult invoke(ModuleInstance moduleInstance, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 				assert (args.length == 0) : "transformation instance must be invoked with zero arguments";
@@ -1038,19 +1037,19 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					
 					if (transformation.isIsBlackbox()) {
 						QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(transformationInstance.getModule());
-				    	
-				    	Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
-				    			transformation, moduleEnv);
-				    	if (handlers.isEmpty()) { 
-				        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
-				        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
-				    	}
-				    	if (handlers.size() > 1) {
-				        	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.AmbiguousBlackboxOperationFound,
-				        			QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
-				    	}
-				    				    	
-				    	List<Object> actualArgs = makeBlackboxTransformationArgs(transformationInstance, evalEnv);		    	
+						
+						Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
+								transformation, moduleEnv);
+						if (handlers.isEmpty()) { 
+							throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
+									QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
+						}
+						if (handlers.size() > 1) {
+							throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.AmbiguousBlackboxOperationFound,
+									QvtOperationalParserUtil.safeGetQualifiedName(getOperationalEnv(), transformation))));
+						}
+									    	
+						List<Object> actualArgs = makeBlackboxTransformationArgs(transformationInstance, evalEnv);		    	
 						Object result = handlers.iterator().next().invoke(transformationInstance, source, actualArgs.toArray(), evalEnv);					
 						
 						return new OperationCallResult(result, evalEnv);
