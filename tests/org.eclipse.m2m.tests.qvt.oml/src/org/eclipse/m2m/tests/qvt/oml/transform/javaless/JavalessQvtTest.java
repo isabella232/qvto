@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
-import org.eclipse.m2m.tests.qvt.oml.transform.TestDataMapper;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestQvtInterpreter;
 
 public class JavalessQvtTest extends TestQvtInterpreter {
@@ -30,10 +29,6 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 	
 	private final boolean isPatchOutput;
 	 
-	public JavalessQvtTest(String testName) {
-		this(createJavalessData(TestDataMapper.getTestDataByTestNameWithPrefix(PREFIX, testName)), false);
-	}
-
 	public JavalessQvtTest(ModelTestData testData, boolean patchOutput) {
 		super(createJavalessData(testData));
 		setName(PREFIX + testData.getName());

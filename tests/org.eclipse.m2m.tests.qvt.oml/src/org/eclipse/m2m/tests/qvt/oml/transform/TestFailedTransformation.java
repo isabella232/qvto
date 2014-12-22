@@ -27,10 +27,6 @@ public class TestFailedTransformation extends TestTransformation {
         setName(TestQvtInterpreter.PREFIX + data.getName());
     }
 	
-	public TestFailedTransformation(String testName) {
-		this(new FileToFileData(TestDataMapper.getActualTestName(TestQvtInterpreter.PREFIX, testName)));
-	}    
-	
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();

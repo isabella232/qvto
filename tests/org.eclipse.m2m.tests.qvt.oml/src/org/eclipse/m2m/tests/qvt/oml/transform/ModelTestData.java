@@ -136,7 +136,7 @@ public abstract class ModelTestData {
     	return packageRegistry;
     }
     
-    public void dispose() {     	
+    public void dispose(TestProject project) throws Exception {
 //    	Trace trace = getContext().getTrace();
 //		trace.getTraceRecords().clear();
 //    	trace.getTraceRecordMap().clear();

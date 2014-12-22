@@ -36,17 +36,9 @@ public class TestQvtInterpreter extends TestTransformation {
 	
 	static final String PREFIX = "interpret_"; //$NON-NLS-1$
 	
-	public TestQvtInterpreter(String testName) {
-		this(TestDataMapper.getTestDataByTestNameWithPrefix(PREFIX, testName));
-	}
-	
     public TestQvtInterpreter(ModelTestData data) {
         super(data);        
 		setName(PREFIX + data.getName());
-    }
-    
-    protected static String getActualTestName(String executedTestName) {
-    	return TestDataMapper.getActualTestName(PREFIX, executedTestName);
     }
     
     protected ITransformer getTransformer() {
@@ -67,11 +59,15 @@ public class TestQvtInterpreter extends TestTransformation {
     	try {
     		buildTestProject();
     	}
-    	catch (Exception e) {
+       	catch (Throwable e) {
 			tearDown();
-			throw e;
+    		onBuildFailed(e);			
 		}
     }
+	
+	protected void onBuildFailed(Throwable e) {
+		throw new RuntimeException(e);
+	}
     
     @Override
 	public void runTest() throws Exception {

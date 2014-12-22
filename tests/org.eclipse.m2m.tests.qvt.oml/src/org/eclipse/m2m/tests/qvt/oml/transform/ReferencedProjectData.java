@@ -18,8 +18,9 @@ import org.eclipse.m2m.tests.qvt.oml.TestProject;
 public class ReferencedProjectData extends FilesToFilesData {
 	
 	private TestTransformation referencedProjectTestCase;
+	private boolean isUseCycleReferences;
 	
-	public ReferencedProjectData(String myName, String referencedName) {
+	public ReferencedProjectData(String myName, String referencedName, boolean useCycleReferences) {
 		super(myName);
 		
 		ModelTestData referencedProjectTestData = new FilesToFilesData(referencedName) {
@@ -36,6 +37,8 @@ public class ReferencedProjectData extends FilesToFilesData {
 		    	return "ReferencedTransformationTest"; //$NON-NLS-1$
 		    }
 		};
+		
+		isUseCycleReferences = useCycleReferences;
 	}
 	
 	@Override
@@ -50,6 +53,31 @@ public class ReferencedProjectData extends FilesToFilesData {
 		IProjectDescription desc = myProject.getDescription();
 		desc.setReferencedProjects(new IProject[] {referencedProject});
 		myProject.setDescription(desc, null);				
+
+		if (isUseCycleReferences) {
+			IProjectDescription referencedDesc = referencedProject.getDescription();
+			referencedDesc.setReferencedProjects(new IProject[] {myProject});
+			referencedProject.setDescription(referencedDesc, null);
+		}
+	}
+	
+	@Override
+	public void dispose(TestProject project) throws Exception {
+		super.dispose(project);
+
+		IProject myProject = project.getProject();
+		
+		IProjectDescription desc = myProject.getDescription();
+		desc.setReferencedProjects(new IProject[] {});
+		myProject.setDescription(desc, null);				
+		
+		if (isUseCycleReferences) {
+			IProject referencedProject = referencedProjectTestCase.getProject();
+			
+			IProjectDescription referencedDesc = referencedProject.getDescription();
+			referencedDesc.setReferencedProjects(new IProject[] {});
+			referencedProject.setDescription(referencedDesc, null);
+		}
 	}
 
 }

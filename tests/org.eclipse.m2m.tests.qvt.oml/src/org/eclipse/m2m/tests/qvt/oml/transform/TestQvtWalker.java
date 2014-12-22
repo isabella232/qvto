@@ -27,10 +27,6 @@ public class TestQvtWalker extends TestTransformation {
 	
 	private static final String PREFIX = "walker_"; //$NON-NLS-1$
 	
-	public TestQvtWalker(String testName) {
-		this(TestDataMapper.getTestDataByTestNameWithPrefix(PREFIX, testName));
-	}
-	
 	public TestQvtWalker(ModelTestData data) {
         super(data);        
 		setName(PREFIX + data.getName());

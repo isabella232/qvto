@@ -176,7 +176,11 @@ public abstract class TestTransformation extends TestCase {
     
     @Override
 	public void tearDown() throws Exception {
-    	getData().dispose();
+    	if (myData == null) {
+    		return;
+    	}
+    	
+    	getData().dispose(myProject);
         if (myDestFolder.exists()) {
             delete(myDestFolder);
         }

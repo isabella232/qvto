@@ -381,60 +381,57 @@ public class QVTOCompiler {
 	            	continue;
 	            }
 
-            	List<String> importedUnitQName = QvtOperationalParserUtil.getSequenceOfNames(nextImportCS.getPathNameCS().getSimpleNames());
-            	UnitProxy importedUnit = resolveImportedUnit(source, importQNameStr);
-            	CompiledUnit compiledImport = null;	            	
-
-            	if(importedUnit != null) {
-            		// check for cyclic import error condition
-            		dependencyElement.currentProcessedImport = nextImportCS;
-            		
-            		DependencyPathElement importerDependencyElement = findDependencyElement(importedUnit);
-            		if(importerDependencyElement != null) {
-		            	ImportCS importedCS = importerDependencyElement.currentProcessedImport;
-            			// not cached compiled unit yet, but we got here into a cycle 
-		            	if(env != importerDependencyElement.importerEnv) {
-		            		reportCyclicImportError(nextImportCS, importedCS, importerDependencyElement.importerEnv);
-		            	}
-		            	
-		            	// report the cyclic problem in the opposite direction
-		            	reportCyclicImportError(importedCS, nextImportCS, env);
-		            	// skip addition to the list of imports
-		            	continue;			            		
-            		}
-            		
-            		compiledImport = doCompile(importedUnit, options, CompilerUtils.createMonitor(importsMonitor, 1));
-            		
-            	} else {
+            	UnitProxy importedUnit = resolveImportedUnit(source, importQNameStr);            	
+            	if(importedUnit == null) {
             		// report that unit was not resolved
         			String notFoundMessage = NLS.bind(CompilerMessages.importedCompilationUnitNotFound, 
         					QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS(), NAMESPACE_SEP));
 	        		env.reportError(notFoundMessage, nextImportCS.getPathNameCS());
 	        		
 	        		importsMonitor.worked(1);
+	        		continue;
             	}
 
-        		if(compiledImport != null) {
-        			if(!compiledImport.getErrors().isEmpty()) {
-        				if(importedUnit.getContentType() == UnitProxy.TYPE_CST_STREAM) {
-	        				String errorInImportMessage = NLS.bind(CompilerMessages.importHasCompilationError, 
-	        						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));	        				
-	        				env.reportError(errorInImportMessage, nextImportCS.getPathNameCS());
-        				} else {
-        					String rootMessage = compiledImport.getErrors().get(0).getMessage();
-							env.reportError(rootMessage, nextImportCS.getPathNameCS());
-        				}
-        			}
-        				        				        			
-        			if(compiledImports == null) {
-        				// Note: Must be uniques as we process import duplicates to report problems
-        				compiledImports = new UniqueEList<CompiledUnit>();
-        			}
-
-        			compiledImports.add(compiledImport);
-
-        			unitResolver.addUnit(importedUnitQName, compiledImport);
+        		// check for cyclic import error condition
+        		dependencyElement.currentProcessedImport = nextImportCS;
+        		
+        		DependencyPathElement importerDependencyElement = findDependencyElement(importedUnit);
+        		if(importerDependencyElement != null) {
+	            	ImportCS importedCS = importerDependencyElement.currentProcessedImport;
+        			// not cached compiled unit yet, but we got here into a cycle 
+	            	if(env != importerDependencyElement.importerEnv) {
+	            		reportCyclicImportError(importedUnit.getURI(), source.getURI(),
+	            				importedCS.getPathNameCS(), importerDependencyElement.importerEnv);
+	            	}
+	            	
+	            	// report the cyclic problem in the opposite direction
+	            	reportCyclicImportError(source.getURI(), importedUnit.getURI(), nextImportCS.getPathNameCS(), env);
+	            	// skip addition to the list of imports
+	            	continue;			            		
         		}
+        		
+        		CompiledUnit compiledImport = doCompile(importedUnit, options, CompilerUtils.createMonitor(importsMonitor, 1));
+            		
+    			if(!compiledImport.getErrors().isEmpty()) {
+    				if(importedUnit.getContentType() == UnitProxy.TYPE_CST_STREAM) {
+        				String errorInImportMessage = NLS.bind(CompilerMessages.importHasCompilationError, 
+        						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));	        				
+        				env.reportError(errorInImportMessage, nextImportCS.getPathNameCS());
+    				} else {
+    					String rootMessage = compiledImport.getErrors().get(0).getMessage();
+						env.reportError(rootMessage, nextImportCS.getPathNameCS());
+    				}
+    			}
+    				        				        			
+    			if(compiledImports == null) {
+    				// Note: Must be unique as we process import duplicates to report problems
+    				compiledImports = new UniqueEList<CompiledUnit>();
+    			}
+
+    			compiledImports.add(compiledImport);
+
+            	List<String> importedUnitQName = QvtOperationalParserUtil.getSequenceOfNames(nextImportCS.getPathNameCS().getSimpleNames());
+    			unitResolver.addUnit(importedUnitQName, compiledImport);
         		
 	    	} // end of imports processing
 			    	
@@ -643,15 +640,9 @@ public class QVTOCompiler {
 		}
     }
     
-    private static void reportCyclicImportError(ImportCS from, ImportCS to, QvtOperationalEnv env) {
-    	// Remark: we are safe to access pathNameCS as they must have been used to detect the cycle
-    	PathNameCS fromQNameCS = from.getPathNameCS();
-		PathNameCS toQNameCS = to.getPathNameCS();
-		String message = NLS.bind(CompilerMessages.cyclicImportError, 
-				QvtOperationalParserUtil.getStringRepresentation(fromQNameCS, NAMESPACE_SEP), 
-				QvtOperationalParserUtil.getStringRepresentation(toQNameCS, NAMESPACE_SEP));
-		
-    	env.reportError(message, toQNameCS);
+    private static void reportCyclicImportError(URI from, URI to, CSTNode cstNode, QvtOperationalEnv env) {
+		String message = NLS.bind(CompilerMessages.cyclicImportError, from, to); 
+    	env.reportError(message, cstNode);
     }
     
     static void clearITokens(CSTNode node) {    	

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -32,7 +32,8 @@ class Pair<A, B> {
             return false;
         }
         Pair<?, ?> p = (Pair<?, ?>) obj; 
-        return getFirst().equals(p.getFirst()) && getSecond().equals(p.getSecond());
+        return safeCompare(getFirst(), p.getFirst()) 
+        		&& safeCompare(getSecond(), p.getSecond());
     }
     
     @Override
@@ -45,6 +46,13 @@ class Pair<A, B> {
             result += 37 * getSecond().hashCode();
         }
         return result;
+    }
+    
+    private boolean safeCompare(Object o1, Object o2) {
+    	if (o1 == null) {
+    		return o2 == null;
+    	}
+    	return o1.equals(o2);
     }
     
     private A myFirst;

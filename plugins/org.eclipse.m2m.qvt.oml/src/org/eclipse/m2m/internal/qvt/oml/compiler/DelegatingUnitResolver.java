@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2014 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,7 +11,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
-public abstract class DelegatingUnitResolver implements UnitResolver {
+import java.util.HashSet;
+import java.util.Set;
+
+public abstract class DelegatingUnitResolver implements UnitResolver, RecursiveUnitResolver {
 	
 	private UnitResolver fParent;
 	
@@ -31,15 +34,27 @@ public abstract class DelegatingUnitResolver implements UnitResolver {
 	}
 		
 	public final UnitProxy resolveUnit(String qualifiedName) {	
+		return resolveUnit(qualifiedName, new HashSet<RecursiveUnitResolver>());
+	}
+
+	public final UnitProxy resolveUnit(String qualifiedName, Set<RecursiveUnitResolver> accessedParents) {
+		if (accessedParents.contains(this)) {
+			return null;
+		}
+		
 		UnitProxy unit = doResolveUnit(qualifiedName);
 		if(unit == null) {
 			UnitResolver parent = getParent();
-			if(parent != null) {
+			if(parent instanceof RecursiveUnitResolver) {
+				accessedParents.add(this);
+				return ((RecursiveUnitResolver) parent).resolveUnit(qualifiedName, accessedParents);
+			}
+			else if(parent != null) {
 				return parent.resolveUnit(qualifiedName);
 			}
 		}
 		
 		return unit;
 	}
-		
+	
 }
