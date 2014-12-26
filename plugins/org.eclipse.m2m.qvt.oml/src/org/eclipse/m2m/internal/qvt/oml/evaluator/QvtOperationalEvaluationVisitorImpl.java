@@ -121,7 +121,6 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictLiteralPart;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ForExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeIterateExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeLoopExp;
-import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.InstantiationExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.LogExp;
@@ -139,7 +138,6 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.WhileExp;
 import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.Log;
-import org.eclipse.m2m.qvt.oml.util.MutableList;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
 import org.eclipse.ocl.EvaluationEnvironment;
@@ -149,7 +147,6 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreFactory;
-import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.CollectionItem;
 import org.eclipse.ocl.expressions.CollectionLiteralExp;
@@ -671,7 +668,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		if (isImperative && !CallHandler.Access.hasHandler(referredOperation)) {
 			Object source = visitExpression(operationCallExp.getSource());
 			if (((ImperativeOperation) referredOperation).getContext() != null) {
-				source = doImplicitListCoercion(((ImperativeOperation) referredOperation).getContext().getEType(), source);
+				source = EvaluationUtil.doImplicitListCoercion(
+						((ImperativeOperation) referredOperation).getContext().getEType(), source);
 			}
             List<Object> args = makeArgs(operationCallExp);
             // does not make sense continue at all, call on invalid results in invalid 
@@ -721,7 +719,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 							(MappingOperation) method);
 				}
 
-				return doImplicitListCoercion(referredOperation.getEType(), opResult.myResult);
+				return EvaluationUtil.doImplicitListCoercion(referredOperation.getEType(), opResult.myResult);
             }
         }
 
@@ -768,30 +766,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		return actualOperation;
 	}
 	
-	/**
-	 * Performs implicit coercion of instances of List type into Sequence type and vice versa.
-	 * See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=418961 
-	 * @param declaredType Expected type of expression
-	 * @param actualValue Actual value of expression
-	 * @return In case coercion is needed then converted value is returned. Otherwise returns 'actualValue'.
-	 */
-	@SuppressWarnings("unchecked")
-	private Object doImplicitListCoercion(EClassifier declaredType, Object actualValue) {
-		if (declaredType instanceof CollectionType<?, ?> && actualValue instanceof Collection<?>) {
-			if (declaredType.eClass() == ImperativeOCLPackage.eINSTANCE.getListType() && false == actualValue instanceof MutableList<?>) {
-				Collection<Object> newCollection = EvaluationUtil.createNewCollection((CollectionType<EClassifier, EOperation>) declaredType);
-				newCollection.addAll((Collection<Object>) actualValue);
-				return newCollection;
-			}
-			if (declaredType.eClass() == EcorePackage.eINSTANCE.getSequenceType() && actualValue instanceof MutableList<?>) {
-				Collection<Object> newCollection = EvaluationUtil.createNewCollection((CollectionType<EClassifier, EOperation>) declaredType);
-				newCollection.addAll((Collection<Object>) actualValue);
-				return newCollection;
-			}
-		}
-		return actualValue;
-	}
-        
     @Override
     public Object visitEnumLiteralExp(EnumLiteralExp<EClassifier, EEnumLiteral> el) {
         return el.getReferredEnumLiteral().getInstance();
@@ -981,7 +955,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				Constructor constructorOp = ((ConstructorOperationAdapter) adapter).getReferredConstructor();
 				
 				for (int i = 0, in = constructorOp.getEParameters().size(); i < in; ++i) {
-					actualArguments.set(i, doImplicitListCoercion(constructorOp.getEParameters().get(i).getEType(), actualArguments.get(i)));
+					actualArguments.set(i, EvaluationUtil.doImplicitListCoercion(
+							constructorOp.getEParameters().get(i).getEType(), actualArguments.get(i)));
 				}
 
 				executeImperativeOperation(constructorOp, owner, actualArguments, false);
@@ -2243,7 +2218,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         for (OCLExpression<EClassifier> arg : operationCallExp.getArgument()) {
         	Object value = visitExpression(arg);
         	EParameter param = iterParam.next();
-            argValues.add(doImplicitListCoercion(param.getEType(), value));
+            argValues.add(EvaluationUtil.doImplicitListCoercion(param.getEType(), value));
         }
 
         return argValues;

@@ -53,6 +53,7 @@ import org.eclipse.m2m.qvt.oml.util.MutableList;
 import org.eclipse.m2m.qvt.oml.util.Utils;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.ecore.SequenceType;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.types.CollectionType;
 import org.eclipse.ocl.types.OCLStandardLibrary;
@@ -297,6 +298,30 @@ public class EvaluationUtil {
 		return initialValue;
 	}
 	
+	/**
+	 * Performs implicit coercion of instances of List type into Sequence type and vice versa.
+	 * See: https://bugs.eclipse.org/bugs/show_bug.cgi?id=418961 
+	 * @param declaredType Expected type of expression
+	 * @param actualValue Actual value of expression
+	 * @return In case coercion is needed then converted value is returned. Otherwise returns 'actualValue'.
+	 */
+	@SuppressWarnings("unchecked")
+	public static Object doImplicitListCoercion(EClassifier declaredType, Object actualValue) {
+		if (declaredType instanceof CollectionType && actualValue instanceof Collection) {
+			if (declaredType instanceof ListType && false == actualValue instanceof MutableList) {
+				Collection<Object> newCollection = createNewCollection((CollectionType<EClassifier, EOperation>) declaredType);
+				newCollection.addAll((Collection<Object>) actualValue);
+				return newCollection;
+			}
+			if (declaredType instanceof SequenceType && actualValue instanceof MutableList) {
+				Collection<Object> newCollection = createNewCollection((CollectionType<EClassifier, EOperation>) declaredType);
+				newCollection.addAll((Collection<Object>) actualValue);
+				return newCollection;
+			}
+		}
+		return actualValue;
+	}
+        
 	public static List<ModelParameter> getBlackboxSignature(OperationalTransformation transformation) {
 		return transformation.getModelParameter();
 	}
