@@ -37,29 +37,17 @@ public class EmfStandaloneMetamodelProvider implements IMetamodelProvider {
     	return fRegistry;
     }
     
-    public IMetamodelDesc[] getMetamodels() {
-    	// do not iterate over the key set itself to avoid concurrent modification
-    	final List<String> uris = new ArrayList<String>(fRegistry.keySet());
-    	
-        final List<IMetamodelDesc> descs = new ArrayList<IMetamodelDesc>(uris.size());        
-        for (String uri : uris) {
-        	Object pack = fRegistry.get(uri);
-            if (pack instanceof EPackage.Descriptor) {
-            	descs.add(new EmfMetamodelDesc((EPackage.Descriptor) pack, uri));
-            } else if (pack instanceof EPackage) {
-            	descs.add(new EmfMetamodelDesc((EPackage) pack, uri));
-            }
+    public IMetamodelDesc[] getMetamodels() {    	
+        final List<IMetamodelDesc> descs = new ArrayList<IMetamodelDesc>(fRegistry.size());        
+        for (String uri : fRegistry.keySet()) {           
+            descs.add(getMetamodel(uri));
         }
         
         return descs.toArray(new IMetamodelDesc[descs.size()]);
     }
 		
 	public IMetamodelDesc getMetamodel(String nsURI) {
-		EPackage pack = fRegistry.getEPackage(nsURI);
-		if (pack == null) {
-			return null;
-		}
-		return new EmfMetamodelDesc(pack, nsURI);
+		return new EmfMetamodelDesc(fRegistry, nsURI);
     }
     
 }

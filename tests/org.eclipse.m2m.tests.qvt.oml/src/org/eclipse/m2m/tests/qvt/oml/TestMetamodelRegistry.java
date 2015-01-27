@@ -18,7 +18,9 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -174,6 +176,34 @@ public class TestMetamodelRegistry extends TestCase {
 		
 		desc = registry.getMetamodelDesc(ID);
 		assertSame(p2, desc.getModel());
+		
+	}
+	
+	public void testBug435699IllegalRegistration() throws Exception {
+		
+		final String ID = "myPackageID";
+		
+		EPackage.Descriptor descriptor = new EPackage.Descriptor() {
+			
+			public EPackage getEPackage() {
+				throw new UnsupportedOperationException();
+			}
+			
+			public EFactory getEFactory() {
+				return null;
+			}
+		};
+		
+		EPackage.Registry packageRegistry = new EPackageRegistryImpl();
+		packageRegistry.put(ID, descriptor);
+		
+		MetamodelRegistry registry = new MetamodelRegistry(new EmfStandaloneMetamodelProvider(packageRegistry));
+		
+		IMetamodelDesc desc = registry.getMetamodelDesc(ID);
+		
+		assertNotNull(desc);
+		assertTrue(desc.getLoadStatus().getSeverity() == Diagnostic.ERROR);
+		
 		
 	}
 	
