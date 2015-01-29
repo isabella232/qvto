@@ -13,7 +13,6 @@ package org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -42,22 +41,7 @@ public class EmfMetamodelDesc implements IMetamodelDesc {
 		myPackageDescriptor = packageDescriptor;
 		myNsURI = nsURI;
 	}
-	
-	public EmfMetamodelDesc(final EPackage.Registry registry, final String nsURI) {
-		this(new EPackage.Descriptor() {
-			
-			public EPackage getEPackage() {
-				return registry.getEPackage(nsURI);
-			}
-			
-			public EFactory getEFactory() {
-				EPackage ePackage = getEPackage();
-				
-				return ePackage == null ? null : ePackage.getEFactoryInstance();
-			}
-		}, nsURI);
-	}
-	
+		
 	public EmfMetamodelDesc(EPackage pack, String nsURI) {
 		if (pack == null) {
 			throw new IllegalArgumentException();

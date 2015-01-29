@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.compiler.MetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.WorkspaceMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.EmfStandaloneMetamodelProvider;
@@ -200,10 +201,17 @@ public class TestMetamodelRegistry extends TestCase {
 		MetamodelRegistry registry = new MetamodelRegistry(new EmfStandaloneMetamodelProvider(packageRegistry));
 		
 		IMetamodelDesc desc = registry.getMetamodelDesc(ID);
-		
+				
 		assertNotNull(desc);
 		assertTrue(desc.getLoadStatus().getSeverity() == Diagnostic.ERROR);
 		
+		try {
+			registry.getMetamodelDesc("unregisteredID");
+			fail();
+		}
+		catch(EmfException e) {
+			// succeed;
+		}
 		
 	}
 	

@@ -14,6 +14,7 @@ package org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 
@@ -46,8 +47,27 @@ public class EmfStandaloneMetamodelProvider implements IMetamodelProvider {
         return descs.toArray(new IMetamodelDesc[descs.size()]);
     }
 		
-	public IMetamodelDesc getMetamodel(String nsURI) {
-		return new EmfMetamodelDesc(fRegistry, nsURI);
+	public IMetamodelDesc getMetamodel(final String nsURI) {
+		
+		if (fRegistry.containsKey(nsURI)) {
+			
+			EPackage.Descriptor descriptor = new EPackage.Descriptor() {
+				
+				public EPackage getEPackage() {
+					return fRegistry.getEPackage(nsURI);
+				}
+				
+				public EFactory getEFactory() {
+					EPackage ePackage = getEPackage();
+					
+					return ePackage == null ? null : ePackage.getEFactoryInstance();
+				}
+			};
+			
+			return new EmfMetamodelDesc(descriptor, nsURI);
+		}
+		
+		return null;
     }
     
 }
