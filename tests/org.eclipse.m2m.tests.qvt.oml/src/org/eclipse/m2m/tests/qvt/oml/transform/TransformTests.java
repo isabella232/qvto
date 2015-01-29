@@ -462,6 +462,7 @@ public class TransformTests {
         				return false;
         			}
         		}, 
+        		new FilesToFilesData("bug457433", Arrays.asList("in.ecore", "in2.ecore"), Collections.<String>emptyList()), //$NON-NLS-1$ //$NON-NLS-2$
         		};
     }
 
