@@ -224,5 +224,6 @@ public class ParserTests {
     	new TestData("bug428028", 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug425634", 0, 6), //$NON-NLS-1$
     	new TestData("bug433585", 0), //$NON-NLS-1$
+    	new TestData("bug438038", 0) //$NON-NLS-1$
     };
 }

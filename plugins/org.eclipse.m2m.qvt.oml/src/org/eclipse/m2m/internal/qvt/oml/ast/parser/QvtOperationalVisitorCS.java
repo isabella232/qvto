@@ -8,7 +8,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bugs 302594, 310991, 289982, 391289, 425634, 427237, 
- *     						   433585, 433919
+ *     						   433585, 433919, 438038
  *     Alex Paperno - bugs 272869, 268636, 404647, 414363, 414363, 401521,
  *                         419299, 414619, 403440, 415024, 420970, 413391,
  *                         424584, 424869
@@ -3936,7 +3936,7 @@ public class QvtOperationalVisitorCS
 			owningType = env.getModuleContextType();
 			result = env.lookupMappingOperations(owningType, identifierCS.getName());
 		}
-		// filter out inherited mappings
+		// filter out inherited and overridden mappings
 		if(!result.isEmpty()) {
 			List<MappingOperation> ownerLocalOpers = new ArrayList<MappingOperation>(result.size());
 	        for (MappingOperation operation : result) {
@@ -3945,12 +3945,20 @@ public class QvtOperationalVisitorCS
 	                ownerLocalOpers.add(operation);
 	            }	            
 	        }
-	        result = ownerLocalOpers;
+	        
+	        List<MappingOperation> filteredMappings = new ArrayList<MappingOperation>(ownerLocalOpers.size());
+	        for (MappingOperation mapping : ownerLocalOpers) {
+	            if (!ownerLocalOpers.contains(mapping.getOverridden())) {
+	            	filteredMappings.add(mapping);
+	            }
+	        }
+	        
+	        result = filteredMappings;
 		} 
 		// validate the result
 		if(result.isEmpty()) {
 			if(owningType != null) {
-				// unresolved type reported above by visiTypeCS(...)
+				// unresolved type reported above by visitTypeCS(...)
 				String errMessage = NLS.bind(ValidationMessages.QvtOperationalVisitorCS_unresolvedMappingOperationReference,
 						QvtOperationalParserUtil.getStringRepresentation(identifierCS));
 				env.reportError(errMessage, identifierCS);
