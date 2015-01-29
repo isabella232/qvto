@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,13 +9,13 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bug 289982
+ *     Camille Letavernier - Bug 458651
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
@@ -57,13 +57,12 @@ class JavaMethodHandlerFactory {
 		
 	private class Handler extends CallHandler {
 				
-		private Method fMethod;
-		private Class<?>[] fCachedParamTypes;
-		private Object[] fArgs;
-		private boolean fIsContextual;
+		private final Method fMethod;
+		private final Class<?>[] fCachedParamTypes;
+		private final boolean fIsContextual;
 		private final boolean fWithExecutionContext;
-		private boolean fRequiresNumConversion;
-		private int fFatalErrorCount;		
+		private final boolean fRequiresNumConversion;
+		private volatile int fFatalErrorCount;		
 		
 		Handler(Method method, boolean isContextual, boolean isWithExecutionContext) {
 			assert method != null;
@@ -95,28 +94,28 @@ class JavaMethodHandlerFactory {
 				return fMethod.invoke(javaCallSource, actualArgs);
 			}
 			catch (IllegalArgumentException e) {
-				fFatalErrorCount++;
+				incrementFatalErrorCount();
 				QvtPlugin.error(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e);
 				evalEnv.getAdapter(InternalEvaluationEnv.class).throwQVTException(
 						new QvtRuntimeException(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e));
 				return CallHandlerAdapter.getInvalidResult(evalEnv);			
 			} 
 			catch (IllegalAccessException e) {
-				fFatalErrorCount++;				
+				incrementFatalErrorCount();				
 				QvtPlugin.error(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e);				
 				evalEnv.getAdapter(InternalEvaluationEnv.class).throwQVTException(
 						new QvtRuntimeException(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e));
 				return CallHandlerAdapter.getInvalidResult(evalEnv);
 			}
 			catch (InstantiationException e) {
-				fFatalErrorCount++;				
+				incrementFatalErrorCount();				
 				QvtPlugin.error(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e);				
 				evalEnv.getAdapter(InternalEvaluationEnv.class).throwQVTException(
 						new QvtRuntimeException(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e));
 				return CallHandlerAdapter.getInvalidResult(evalEnv);
 			}
 			catch (InvocationTargetException e) {
-				fFatalErrorCount++;
+				incrementFatalErrorCount();
 				QvtPlugin.error(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod), e.getTargetException());				
 				// should not happen at all, as we do not support QVT exception in signature yet
 				String localized = "\nCaused by: " + e.getTargetException().getClass().getName() + //$NON-NLS-1$ 
@@ -124,9 +123,11 @@ class JavaMethodHandlerFactory {
 				evalEnv.getAdapter(InternalEvaluationEnv.class).throwQVTException(
 						new QvtRuntimeException(NLS.bind(JavaBlackboxMessages.MethodInvocationError, fMethod) + localized, e.getTargetException()));
 				return CallHandlerAdapter.getInvalidResult(evalEnv);
-			} finally {
-				clearArguments();
 			}
+		}
+		
+		private void incrementFatalErrorCount(){
+			fFatalErrorCount++;
 		}
 						
 		private Object getJavaCallSource(ModuleInstance moduleInstance, Class<?> javaClass, QvtOperationalEvaluationEnv evalEnv)
@@ -150,7 +151,7 @@ class JavaMethodHandlerFactory {
 			return callSource;
 		}
 		
-		boolean isDisabled() {
+		private boolean isDisabled() {
 			return fFatalErrorCount > FAILURE_COUNT_TOLERANCE;
 		}
 		
@@ -163,17 +164,15 @@ class JavaMethodHandlerFactory {
 				argCount++;
 			}
 
-			if(fArgs == null) {
-				fArgs = new Object[argCount];
-			}
+			Object resultArgs[] = new Object[argCount];
 			
 			int argIndex = 0;
 			if (fWithExecutionContext) {
-				fArgs[argIndex] = evalEnv.getContext();
+				resultArgs[argIndex] = evalEnv.getContext();
 				argIndex++;
 			}
 			if (fIsContextual) {
-				fArgs[argIndex] = source;
+				resultArgs[argIndex] = source;
 				argIndex++;
 			}
 			
@@ -190,16 +189,10 @@ class JavaMethodHandlerFactory {
 				if(fRequiresNumConversion) {
 					nextArg = NumberConversions.convertNumber(nextArg, fCachedParamTypes[argIndex]);
 				}
-				fArgs[argIndex++] = nextArg;
+				resultArgs[argIndex++] = nextArg;
 			}
 			
-			return (fArgs != null) ? fArgs : args;
-		}
-		
-		private void clearArguments() {
-			if(fArgs != null) {
-				Arrays.fill(fArgs, null);
-			}
+			return resultArgs;
 		}
 		
 		private boolean requiresNumberConversion() {
