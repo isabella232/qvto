@@ -40,8 +40,11 @@ public class EmfStandaloneMetamodelProvider implements IMetamodelProvider {
     
     public IMetamodelDesc[] getMetamodels() {    	
         final List<IMetamodelDesc> descs = new ArrayList<IMetamodelDesc>(fRegistry.size());        
-        for (String uri : fRegistry.keySet()) {           
-            descs.add(getMetamodel(uri));
+        for (String uri : fRegistry.keySet()) {
+        	IMetamodelDesc desc = getMetamodel(uri);
+        	if (desc != null) {
+        		descs.add(desc);
+        	}
         }
         
         return descs.toArray(new IMetamodelDesc[descs.size()]);
