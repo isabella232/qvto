@@ -22,6 +22,7 @@ public class AllCompileTests {
 		//$JUnit-BEGIN$
 		suite.addTestSuite(PlatformPluginUnitResolverTest.class);
 		suite.addTestSuite(UnitResolverFactoryTest.class);
+		suite.addTestSuite(QVTOCompilerTest.class);
 		//$JUnit-END$
 		return suite;
 	}

@@ -142,7 +142,8 @@ public class CompilerUtils {
     	}
 
 		static WorkspaceMetamodelRegistryProvider createMetamodelRegistryProvider(final EPackage.Registry packageRegistry, ResourceSet metamodelResourceSet) {
-			return new WorkspaceMetamodelRegistryProvider(metamodelResourceSet) {
+			// Solved potential NullPointer issue if called from QVTOCompiler.createCompilerWithHistory(null);
+			return new WorkspaceMetamodelRegistryProvider(null == metamodelResourceSet ? createResourceSet() : metamodelResourceSet) {
 								
 				@Override
 				protected IMetamodelProvider createDelegateMetamodelProvider() {

@@ -500,7 +500,7 @@ public class InternalTransformationExecutor {
 		return "QVTO-Executor: " + fURI; //$NON-NLS-1$
 	}
 	
-	private QVTOCompiler createCompiler() {
+	protected QVTOCompiler createCompiler() {
 		if(fPackageRegistry == null) {
 			return CompilerUtils.createCompiler();
 		}
