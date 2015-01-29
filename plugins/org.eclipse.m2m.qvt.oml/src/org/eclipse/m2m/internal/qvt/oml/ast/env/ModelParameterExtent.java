@@ -203,7 +203,7 @@ public class ModelParameterExtent {
 	private static void getAllObjects(Collection<EObject> rootObjs, Collection<Object> result) {
 		for (EObject nextRoot : rootObjs) {
 			result.add(nextRoot);
-			TreeIterator<EObject> iterContents = EcoreUtil.getAllProperContents(nextRoot, false);
+			TreeIterator<EObject> iterContents = EcoreUtil.getAllContents(nextRoot, true);
 			while (iterContents.hasNext()) {
 				result.add(iterContents.next());
 			}
