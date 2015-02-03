@@ -7,8 +7,8 @@
  *   
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 302594, 310991, 289982, 391289, 425634, 427237, 
- *     						   433585, 433919
+ *     Christopher Gerking - bugs 302594, 310991, 289982, 391289, 425634, 432885,
+ *     							  427237, 433585, 433919
  *     Alex Paperno - bugs 272869, 268636, 404647, 414363, 414363, 401521,
  *                         419299, 414619, 403440, 415024, 420970, 413391,
  *                         424584, 424869
@@ -243,6 +243,7 @@ import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.OrderedSetType;
 import org.eclipse.ocl.types.SequenceType;
 import org.eclipse.ocl.types.TypeType;
+import org.eclipse.ocl.util.CollectionUtil;
 import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 import org.eclipse.ocl.util.OCLUtil;
 import org.eclipse.ocl.util.TypeUtil;
@@ -1535,6 +1536,154 @@ public class QvtOperationalVisitorCS
         
         return result;
     }
+	
+	/**
+	* Creates an implicit <code>collect</code> iterator expression for a
+	* resolve on a collection-type source expression.
+	* 
+	* @param source
+	*            the resolve source expression
+	* @param resolve
+	*            the resolve expression
+	* @param env
+	*            the current environment
+	* 
+	* @return the collect expression
+	*/
+	protected IteratorExp<EClassifier, EParameter> createImplicitCollect(OCLExpression<EClassifier> source,
+			ResolveExp resolve,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			CSTNode cstNode) {
+	
+		@SuppressWarnings("unchecked")
+		EClassifier sourceElementType = ((CollectionType<EClassifier, EOperation>) source.getType())
+			.getElementType();
+	
+		IteratorExp<EClassifier, EParameter> result = oclFactory.createIteratorExp();
+		initASTMapping(env, result, cstNode, null);
+		Variable<EClassifier, EParameter> itervar = genVariableDeclaration(cstNode,
+			"modelPropertyCallCS", env,//$NON-NLS-1$
+			null, sourceElementType, null, false, true, false);
+	
+		List<Variable<EClassifier, EParameter>> iters = result.getIterator();
+		iters.add(itervar);
+		result.setBody(resolve);
+		result.setName("collect");//$NON-NLS-1$
+		VariableExp<EClassifier, EParameter> vexp = createVariableExp(env, cstNode, itervar);
+	
+		/*
+		 * adjust the source variable for the body expression to be the newly
+		 * generated implicit iterator variable
+		 */
+		resolve.setSource(vexp);
+	
+		
+		// the overall start and end positions are the property positions
+		resolve.setStartPosition(resolve
+			.getPropertyStartPosition());
+		resolve.setEndPosition(resolve.getPropertyEndPosition());
+	
+		result.setSource(source);
+	
+		// the result of a collect() is flattened, so if the value
+		// that we are collecting is a Collection type, the resulting
+		// type must be flattened by taking its element type (recursively)
+		EClassifier bodyType = resolve.getType();
+		if (bodyType instanceof CollectionType<?, ?>) {
+			@SuppressWarnings("unchecked")
+			CollectionType<EClassifier, EOperation> ct = (CollectionType<EClassifier, EOperation>) bodyType;
+	
+			bodyType = CollectionUtil.getFlattenedElementType(ct);
+		}
+	
+		if (source.getType() instanceof SequenceType<?, ?>
+				|| source.getType() instanceof OrderedSetType<?, ?>
+				|| source.getType() instanceof ListType) {
+		    EClassifier c = resolveCollectionType(
+		            env,
+		            CollectionKind.SEQUENCE_LITERAL,
+		            bodyType);
+		    result.setType(c);
+		} else {
+		    EClassifier c = resolveCollectionType(
+		            env,
+		            CollectionKind.BAG_LITERAL,
+		            bodyType);
+		    result.setType(c);
+		}
+	
+		env.deleteElement(itervar.getName());
+	
+		return result;
+	}
+	
+	/**
+	* Creates an implicit <code>xcollect</code> iterator expression for a
+	* resolve on a collection-type source expression.
+	* 
+	* @param source the resolve source expression
+	* @param resolve the resolve expression
+	* @param fEnv the current environment
+	* 
+	* @return the xcollect expression
+	* @throws TerminateException 
+	*/
+	protected ImperativeIterateExp createImplicitXCollect(
+			OCLExpression<EClassifier> source,
+			ResolveExp resolve,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			CSTNode cstNode) {
+	
+		@SuppressWarnings("unchecked")
+		EClassifier sourceElementType = ((CollectionType<EClassifier, EOperation>) source.getType())
+		    .getElementType();
+		
+		ImperativeIterateExp result = ImperativeOCLFactory.eINSTANCE.createImperativeIterateExp();
+		initASTMapping(env, result, cstNode);       
+		Variable<EClassifier, EParameter> itervar =
+		    genVariableDeclaration(cstNode, "modelPropertyCallCS", env,//$NON-NLS-1$
+		                null, sourceElementType, null, false, true, false);
+		
+		List<Variable<EClassifier, EParameter>> iters = result.getIterator();
+		iters.add(itervar);
+		result.setBody(resolve);
+		result.setName("xcollect");//$NON-NLS-1$
+		VariableExp<EClassifier, EParameter> vexp = oclFactory.createVariableExp();
+		initASTMapping(env, vexp, cstNode);
+		vexp.setType(itervar.getType());
+		vexp.setReferredVariable(itervar);
+		vexp.setName(itervar.getName());
+		
+		/* adjust the source variable for the body expression to be the
+		   newly generated implicit iterator variable */
+		resolve.setSource(vexp);
+		
+	    // the overall start and end positions are the property positions
+	    resolve.setStartPosition(resolve.getPropertyStartPosition());
+	    resolve.setEndPosition(resolve.getPropertyEndPosition());
+		
+		result.setSource(source);
+		
+		EClassifier bodyType = resolve.getType();
+		         
+		if (source.getType() instanceof SequenceType<?, ?>
+				|| source.getType() instanceof OrderedSetType<?, ?>
+				|| source.getType() instanceof ListType) {
+		    EClassifier c = resolveCollectionType(
+		            env,
+		            CollectionKind.SEQUENCE_LITERAL,
+		            bodyType);
+		    result.setType(c);
+		} else {
+		    EClassifier c = resolveCollectionType(
+		            env,
+		            CollectionKind.BAG_LITERAL,
+		            bodyType);
+		    result.setType(c);
+		}
+		
+		return result;
+	}
     
     private boolean isArrowAccessToCollection(CallExpCS callExpCS, OCLExpression<EClassifier> source) {
         if (source == null) {
@@ -4775,7 +4924,21 @@ public class QvtOperationalVisitorCS
         
         DeprecatedImplicitSourceCallHelper.validateCallExp(resolveExpCS, resolveExp, env);
         
-        return resolveExp;
+        OCLExpression<EClassifier> source = resolveExp.getSource();
+        org.eclipse.ocl.ecore.OCLExpression result = resolveExp;
+        
+	    // FIXME - we should ask MDT OCL for a support to handle this in a better way
+		/*
+		 * If the source type is a collection, then need there is an implicit COLLECT 
+		 * or imperative COLLECT operator.
+		 */
+		if ((source != null) && (source.getType() instanceof CollectionType<?,?>)) {
+		    result = isArrowAccessToCollection(resolveExpCS, source) ?
+		            createImplicitXCollect(source, resolveExp, env, resolveExpCS)
+		            : (org.eclipse.ocl.ecore.OCLExpression) createImplicitCollect(source, resolveExp, env, resolveExpCS);
+		}
+                
+        return result;
     }
     
     private void validateResolveExp(ResolveExp  resolveExp, 

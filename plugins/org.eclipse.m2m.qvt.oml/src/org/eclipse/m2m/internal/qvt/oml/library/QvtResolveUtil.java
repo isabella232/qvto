@@ -8,7 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 358709, 433292
+ *     Christopher Gerking - bugs 358709, 432885, 433292
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.library;
 
@@ -35,6 +35,8 @@ import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.internal.qvt.oml.trace.TraceRecord;
 import org.eclipse.m2m.internal.qvt.oml.trace.VarParameterValue;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.AssignExp;
+import org.eclipse.ocl.ecore.CallExp;
+import org.eclipse.ocl.ecore.IteratorExp;
 import org.eclipse.ocl.ecore.OperationCallExp;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.PropertyCallExp;
@@ -90,6 +92,11 @@ public class QvtResolveUtil {
 			return true;
 		}
 		
+		if(rightValue instanceof IteratorExp) {
+			IteratorExp iterator = (IteratorExp) rightValue;
+			return isLateResolveImplicitCollect(iterator);
+		}
+		
 		if(rightValue instanceof OperationCallExp) {
 			OperationCallExp operCall = (OperationCallExp) rightValue;
 			return isLateResolveResultConversion(operCall);
@@ -122,9 +129,9 @@ public class QvtResolveUtil {
 	 * @param resolveExp
 	 *            a resolve expression
 	 * @return the assignment receiving the late resolve result, if the resolve
-	 *         expression is deferred and its result is assigned to it directly
-	 *         or by using a collection type conversion. Otherwise,
-	 *         <code>null</code> is returned.
+	 *         expression is deferred and its result is assigned to it either directly,
+	 *         by using a collection type conversion, or by using an implicit collect. 
+	 *         Otherwise, <code>null</code> is returned.
 	 */
 	public static AssignExp getDeferredAssignmentFor(ResolveExp resolveExp) {
 		if(!resolveExp.isIsDeferred()) {
@@ -137,17 +144,20 @@ public class QvtResolveUtil {
 			if(assignExp.getLeft() instanceof PropertyCallExp) {
 				return assignExp;
 			}
-		} else if(resolveContainer instanceof OperationCallExp) {
-			OperationCallExp operCall = (OperationCallExp) resolveContainer;
-			if(!isLateResolveResultConversion(operCall)) {
+		} else if(resolveContainer instanceof CallExp) {
+			CallExp call = (CallExp) resolveContainer;
+			if(call instanceof OperationCallExp && !isLateResolveResultConversion((OperationCallExp) call)) {
+				return null;
+			}
+			if(call instanceof IteratorExp && !isLateResolveImplicitCollect((IteratorExp) call)) {
 				return null;
 			}
 			// lookup the closest outer assignment node
-			EObject parent = operCall.eContainer();
+			EObject parent = call.eContainer();
 			while(parent != null) {
 				 if(parent instanceof AssignExp) {
 					 AssignExp assignExp = (AssignExp)parent;							 
-					 if(assignExp.getValue().indexOf(operCall) >= 0) {
+					 if(call != assignExp.getLeft()) {
 						 return assignExp;
 					 }
 				 }
@@ -156,21 +166,41 @@ public class QvtResolveUtil {
 		} 
 
 		return null;		
-	}	
-	
+	}
+		
 	/**
 	 * Indicate whether a operation call expression is supported collection
 	 * type conversion for late resolve results. 
 	 */	
 	private static boolean isLateResolveResultConversion(OperationCallExp operCall) {
+		
+		if (!isCollectionConversionCall(operCall)) {
+			return false;
+		}
+		
 		if(operCall.getSource() instanceof ResolveExp) {
 			ResolveExp resolveExp = (ResolveExp) operCall.getSource();
-			if(!resolveExp.isIsDeferred()) {
-				return false;
-			}
-
-			return isCollectionConversionCall(operCall) && resolveExp.getType() instanceof CollectionType<?, ?>;			
+			return isCollectionTypeLateResolve(resolveExp);			
 		}
+		
+		if(operCall.getSource() instanceof IteratorExp) {
+			IteratorExp iteratorExp = (IteratorExp) operCall.getSource();
+			return isLateResolveImplicitCollect(iteratorExp);			
+		}
+		
+		return false;
+	}
+	
+	private static boolean isCollectionTypeLateResolve(ResolveExp resolveExp) {
+		return resolveExp.isIsDeferred() && resolveExp.getType() instanceof CollectionType<?, ?>;
+	}
+	
+	private static boolean isLateResolveImplicitCollect(IteratorExp iterator) {
+		if(iterator.getBody() instanceof ResolveExp) {
+			ResolveExp resolveExp = (ResolveExp) iterator.getBody();
+			return isCollectionTypeLateResolve(resolveExp);
+		}
+		
 		return false;
 	}
 	    
@@ -337,22 +367,7 @@ public class QvtResolveUtil {
     		}
     	}
     	else {
-	    	// Remark: Should be removed as soon as implict collect is support on resolve too
-	        if(declaredSourceType instanceof CollectionType<?, ?> && source instanceof Collection<?>) {
-	        	Collection<?> srcCol = (Collection<?>)source;
-	        	for (Object nextSrc : srcCol) {
-	        		EList<TraceRecord> nextPart = source2RecordMap.get(nextSrc);
-	
-	        		if(nextPart != null) {
-	            		if(result == null) {
-	            			result = new BasicEList<TraceRecord>();
-	            		}        			
-	        			result.addAll(nextPart);
-	        		}
-				}	            	
-	        } else {
-	        	result = source2RecordMap.get(source);
-	        }
+	    	result = source2RecordMap.get(source);
     	}
     	
         return (result != null) ? Collections.unmodifiableList(result) : Collections.<TraceRecord>emptyList();

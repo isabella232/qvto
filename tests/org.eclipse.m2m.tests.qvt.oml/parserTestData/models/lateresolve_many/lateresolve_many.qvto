@@ -94,7 +94,7 @@ mapping ECORE::EClass::toClass(): UML::Class {
 					-- expect warn -> condition of late resolve evaluated in the end, checked it works as non-late;
 					t.late invresolveone() = self); 
 			}
-		)->collect(self).late resolveone(UML::Type);
+		)->collect(self).late resolveone(UML::Type)->any(true);
 	};
 }
 
