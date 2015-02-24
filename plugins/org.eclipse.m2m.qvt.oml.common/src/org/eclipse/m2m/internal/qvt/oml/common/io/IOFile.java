@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -52,18 +52,6 @@ public class IOFile extends IOResource implements CFile {
 	
 	public String getUnitName() {
 		return myUnitName;
-	}
-	
-	public long getTimeStamp() {
-		return myFile.lastModified();
-	}
-	
-	public void create(InputStream contents) throws IOException {
-		FileUtil.setContents(myFile, contents);
-	}
-
-	public void setContents(InputStream contents) throws IOException {
-		FileUtil.setContents(myFile, contents);
 	}
 	
 	public String getCharset() throws IOException {

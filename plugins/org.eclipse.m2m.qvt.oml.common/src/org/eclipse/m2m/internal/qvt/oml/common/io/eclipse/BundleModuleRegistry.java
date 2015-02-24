@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,18 +13,16 @@ package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.runtime.IPath;
 
 public class BundleModuleRegistry {
-	private Set<IPath> filePaths;
-	private Set<IPath> folderPaths;
-	private Set<IPath> defaultFolderItems;	
-	private String bundleID;
+	private final Set<IPath> filePaths;
+	private final Set<IPath> folderPaths;
+	private final Set<IPath> defaultFolderItems;	
+	private final String bundleID;
 	
 	public BundleModuleRegistry(String bundleSymbolicName, Collection<IPath> paths) {
 		if(bundleSymbolicName == null || bundleSymbolicName.length() == 0) {
@@ -37,19 +35,16 @@ public class BundleModuleRegistry {
 			}
 		}
 		
-		this.bundleID = bundleSymbolicName;
-		this.defaultFolderItems = Collections.emptySet();
-		this.filePaths = new HashSet<IPath>();
-		this.folderPaths = new HashSet<IPath>();
+		bundleID = bundleSymbolicName;
+		defaultFolderItems = new HashSet<IPath>();
+		filePaths = new HashSet<IPath>();
+		folderPaths = new HashSet<IPath>();
 		
 		for(IPath filePath : paths) {
 			if(filePath.segmentCount() > 1) {
 				extractFolderPaths(folderPaths, filePath);
 				filePaths.add(filePath);
 			} else {
-				if(defaultFolderItems.isEmpty()) {
-					defaultFolderItems = new HashSet<IPath>();
-				}
 				defaultFolderItems.add(filePath);
 			}
 		}
@@ -59,25 +54,6 @@ public class BundleModuleRegistry {
 		return bundleID;
 	}
 		
-	/** 
-	 * @return the root folderPaths of registered file. Can be empty 
-	 * 	in case all file are in the default, non-existing folder.
-	 *  (similarly as in Java)
-	 */
-	public List<IPath> getRootFolders() {			
-		List<IPath> rootFolders = new ArrayList<IPath>();
-		for (IPath path : folderPaths) {
-			if(path.segmentCount() == 1) {
-				rootFolders.add(path);
-			}
-		}
-		return Collections.unmodifiableList(rootFolders);
-	}
-	
-	public Collection<IPath> getRootFiles() {
-		return defaultFolderItems;
-	}
-	
 	public boolean fileExists(IPath filePath) {
 		return defaultFolderItems.contains(filePath) || filePaths.contains(filePath);
 	}
@@ -92,18 +68,6 @@ public class BundleModuleRegistry {
 			}
 		}
 		return children;			
-	}
-	
-	public Collection<IPath> getChildFolders(IPath parentPath) {
-		Collection<IPath> children = new ArrayList<IPath>();
-		for (IPath folderPath : folderPaths) {
-			if(parentPath.isPrefixOf(folderPath)) {
-				if(folderPath.segmentCount() + 1 == parentPath.segmentCount()) {
-					children.add(folderPath);
-				}
-			}
-		}		
-		return children;
 	}
 	
 	@Override

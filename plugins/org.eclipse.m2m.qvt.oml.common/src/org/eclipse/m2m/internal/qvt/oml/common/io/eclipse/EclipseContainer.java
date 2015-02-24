@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,18 +11,13 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
 
-import java.io.IOException;
-
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CFile;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CFolder;
-import org.eclipse.m2m.internal.qvt.oml.common.io.CResource;
 
 
 public abstract class EclipseContainer extends EclipseResource implements CFolder {
@@ -47,34 +42,6 @@ public abstract class EclipseContainer extends EclipseResource implements CFolde
 
 	public CFile getFile(String name) {
 		return new EclipseFile(getContainer().getFile(new Path(name)));
-	}
-
-	public CFolder getFolder(String name) {
-		return makeFolder(getContainer().getFolder(new Path(name)));
-	}
-	
-	public CResource[] members() throws IOException {
-		try { 
-			IResource[] resources = getContainer().members();
-			return EclipseFileUtil.members(resources);
-		}
-		catch(CoreException e) {
-			IOException io = new IOException();
-			io.initCause(e);
-			throw io;
-		}
-	}
-	
-	public 	String getDefaultCharset() throws IOException {
-		try {
-			String charset = getContainer().getDefaultCharset();
-			return charset;
-		}
-		catch (CoreException e) {
-			IOException io = new IOException();
-			io.initCause(e);
-			throw io;
-		}
 	}
 
 	private IContainer getContainer() {

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,8 +10,6 @@
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
-
-import java.io.IOException;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CResource;
@@ -39,10 +37,6 @@ public abstract class AbstractBundleResource implements CResource {
 		return resourcePath;
 	}	
 
-	public String getExtension() {
-		return resourcePath.getFileExtension();		
-	}	
-
 	public String getFullPath() {
 		return resourcePath.toOSString(); 
 	}
@@ -52,18 +46,6 @@ public abstract class AbstractBundleResource implements CResource {
 		return name != null ? name : ""; //$NON-NLS-1$
 	}
 
-	public void refresh() throws IOException {
-		// do nothing here as nothing can change
-	}
-
-	public void delete() throws IOException {
-		throw new UnsupportedOperationException("Deleting bundle-resource is not supported"); //$NON-NLS-1$
-	}	
-	
-	public void create() throws IOException {
-		throw new UnsupportedOperationException("Creating bundle-resource is not supported"); //$NON-NLS-1$
-	}
-	
 	@Override
 	public String toString() {	
 		return "platform:/plugin/" + resourceRegistry.getBundleSymbolicName() + "/" + resourcePath.toString(); //$NON-NLS-1$ //$NON-NLS-2$

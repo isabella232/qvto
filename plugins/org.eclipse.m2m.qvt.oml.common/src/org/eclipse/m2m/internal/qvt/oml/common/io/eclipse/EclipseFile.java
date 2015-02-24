@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -46,28 +46,6 @@ public class EclipseFile extends EclipseResource implements CFile {
 		return myUnitName;
 	}
 	
-	public void create(InputStream contents) throws IOException {
-		try {
-			getFile().create(contents, true, null);
-		}
-		catch(CoreException e) {
-			IOException io = new IOException();
-			io.initCause(e);
-			throw io;
-		}
-	}
-
-	public void setContents(InputStream contents) throws IOException {
-		try {
-			getFile().setContents(contents, true, true, null);
-		}
-		catch(CoreException e) {
-			IOException io = new IOException();
-			io.initCause(e);
-			throw io;
-		}
-	}
-	
 	public String getCharset() throws IOException {
 		try {
 			String charset = getFile().getCharset();
@@ -82,10 +60,6 @@ public class EclipseFile extends EclipseResource implements CFile {
 	
 	public org.eclipse.core.resources.IFile getFile() {
 		return (org.eclipse.core.resources.IFile)myResource;
-	}
-	
-	public long getTimeStamp() {
-		return getFile().getLocalTimeStamp();
 	}
 	
 	@Override

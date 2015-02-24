@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -78,7 +78,7 @@ public class QVTOCompiler {
     private final Map<URI, CompiledUnit> fSource2Compiled = new HashMap<URI, CompiledUnit>();
     private final Stack<DependencyPathElement> fDependencyWalkPath = new Stack<DependencyPathElement>();    
     private final IMetamodelRegistryProvider fMetamodelRegistryProvider;
-    private final ResourceSet resourceSet;
+    private final ResourceSet fResourceSet;
     private ResourceSetImpl fExeXMIResourceSet;
     private boolean fUseCompiledXMI = false;
 
@@ -166,7 +166,7 @@ public class QVTOCompiler {
     public QVTOCompiler(IMetamodelRegistryProvider metamodelRegistryProvider) {
         fMetamodelRegistryProvider = metamodelRegistryProvider;
         
-        this.resourceSet = (metamodelRegistryProvider instanceof WorkspaceMetamodelRegistryProvider) ?
+        fResourceSet = (metamodelRegistryProvider instanceof WorkspaceMetamodelRegistryProvider) ?
         		((WorkspaceMetamodelRegistryProvider) metamodelRegistryProvider).getResolutionResourceSet() : 
         			new ResourceSetImpl();
         
@@ -522,7 +522,7 @@ public class QVTOCompiler {
 	}
 	
 	public ResourceSet getResourceSet() {
-		return resourceSet;
+		return fResourceSet;
 	}
 	
 	public void cleanup() {

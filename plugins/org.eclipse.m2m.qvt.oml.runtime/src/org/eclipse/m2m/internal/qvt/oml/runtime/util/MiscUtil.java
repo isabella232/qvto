@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -59,18 +59,5 @@ public class MiscUtil {
 	 
 	    return contents.toString();
 	}	
-	
-	public static int getLineNumber(CharSequence data, int pos) {
-		int length = data.length();
-		pos = Math.min(pos, length);
-		int line = 1;
-		for(int i = 0; i < pos; i++) {
-			if(data.charAt(i) == '\n') {
-				line++;
-			}
-		}
-		
-		return line;
-    }
 	
 }

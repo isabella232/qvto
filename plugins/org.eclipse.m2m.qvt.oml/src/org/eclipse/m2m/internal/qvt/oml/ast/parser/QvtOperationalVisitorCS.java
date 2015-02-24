@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -3229,7 +3229,7 @@ public class QvtOperationalVisitorCS
 			}
 			
 			if (transformation.isIsBlackbox()) {
-				Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler((OperationalTransformation) module, env.getAdapter(QvtOperationalModuleEnv.class));
+				Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler((OperationalTransformation) module, env);
 				if (handlers.isEmpty()) {
 					String warning = NLS.bind(ValidationMessages.QvtOperationalVisitorCS_noBlackboxImplementationFound,
 							QvtOperationalParserUtil.getMappingModuleQualifiedName(moduleCS.getHeaderCS()));
@@ -3621,7 +3621,7 @@ public class QvtOperationalVisitorCS
 		}
 	}
 
-	protected void visitMappingMethodCS(MappingMethodCS methodCS, QvtOperationalEnv env, ImperativeOperation declaredOperation)
+	protected void visitMappingMethodCS(MappingMethodCS methodCS, QvtOperationalModuleEnv env, ImperativeOperation declaredOperation)
 			throws SemanticException {
 		methodCS.setAst(declaredOperation);
 		
@@ -3652,7 +3652,7 @@ public class QvtOperationalVisitorCS
 		} 
 		
 		if(declaredOperation.isIsBlackbox() && !QvtOperationalParserUtil.isDisjunctiveMappingOperation(methodCS)) {
-			Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(declaredOperation, env.getAdapter(QvtOperationalModuleEnv.class));
+			Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(declaredOperation, env);
 			if (handlers.isEmpty()) {
 				String warning = NLS.bind(ValidationMessages.QvtOperationalVisitorCS_noBlackboxImplementationFound,
 						QvtOperationalParserUtil.getMappingStringRepresentation(methodCS));

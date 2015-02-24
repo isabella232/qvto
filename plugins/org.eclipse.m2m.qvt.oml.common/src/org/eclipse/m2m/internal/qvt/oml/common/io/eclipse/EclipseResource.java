@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,11 +12,9 @@
 package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CFolder;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CResource;
@@ -31,10 +29,6 @@ public class EclipseResource implements CResource {
 		return myResource.getName();
 	}
     
-    public String getExtension() {
-        return myResource.getFileExtension();
-    }
-	
 	public String getFullPath() {
         IPath location = myResource.getLocation();
         if(location != null) {
@@ -58,28 +52,6 @@ public class EclipseResource implements CResource {
 		return EclipseContainer.makeFolder(parent);
 	}
 
-	public void delete() throws IOException {
-		try {
-			myResource.delete(true, null);
-		} 
-		catch(CoreException e) {
-			IOException io = new IOException();
-			io.initCause(e);
-			throw io;
-		}
-	}
-	
-    public void refresh() throws IOException {
-        try {
-            myResource.refreshLocal(IResource.DEPTH_INFINITE, null);
-        } 
-        catch (CoreException e) {
-            IOException io = new IOException();
-            io.initCause(e);
-            throw io;
-        }
-    }
-    
 	@Override
 	public boolean equals(Object other) {
 		return other instanceof EclipseResource && 

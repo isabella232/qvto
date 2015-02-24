@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.io.eclipse;
 
-import java.io.IOException;
-
 import org.eclipse.core.resources.IWorkspaceRoot;
 
 
@@ -21,7 +19,4 @@ public class EclipseRoot extends EclipseContainer {
 		super(root);
 	}
 	
-	public void create() throws IOException {
-        throw new UnsupportedOperationException();
-	}
 }

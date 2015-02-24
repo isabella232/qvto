@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -19,25 +19,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import org.eclipse.m2m.internal.qvt.oml.common.Messages;
-import org.eclipse.osgi.util.NLS;
-
 
 public class FileUtil {
 	private FileUtil() {}
-	
-    public static void delete(File file) throws IOException {
-		if(file.isDirectory()) {
-			File[] children = file.listFiles();
-			for(int i = 0; i < children.length; i++) {
-				delete(children[i]);
-			}
-		}
-		
-		if(!file.delete()) {
-			throw new IOException(NLS.bind(Messages.FileUtil_CannotDelete, file.getAbsolutePath()));
-		}
-    }
 	
 	public static void copyFolder(File sourceDir, File destDir) throws IOException {
         if (!sourceDir.isDirectory()) {
@@ -96,7 +80,7 @@ public class FileUtil {
         }
     }
     
-    public static void copyStream(InputStream input, OutputStream output) throws IOException {
+    private static void copyStream(InputStream input, OutputStream output) throws IOException {
     	byte[] buffer = new byte[8192];
         int read;
         while((read=input.read(buffer)) > 0) {

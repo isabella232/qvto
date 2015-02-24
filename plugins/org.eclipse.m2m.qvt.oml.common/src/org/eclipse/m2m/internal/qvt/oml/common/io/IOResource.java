@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,7 +12,6 @@
 package org.eclipse.m2m.internal.qvt.oml.common.io;
 
 import java.io.File;
-import java.io.IOException;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 
@@ -24,10 +23,6 @@ public class IOResource implements CResource {
 	public String getName() {
 		return myFile.getName();
 	}
-    
-    public String getExtension() {
-        return getExtension(getName());
-    }
     
     public static String getExtension(String name) {
         int lastDot = name.lastIndexOf('.');
@@ -67,13 +62,6 @@ public class IOResource implements CResource {
 		return String.valueOf(myFile);
 	}
 
-    public void delete() throws IOException {
-        FileUtil.delete(myFile);
-    }
-
-    public void refresh() {
-    }
-    
     public static String getWorkspaceCharset() {
 		return ResourcesPlugin.getEncoding();
     }

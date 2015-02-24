@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -45,22 +45,10 @@ public class BundleFile extends AbstractBundleResource implements CFile {
 		return unitName;
 	}
 	
-	public void create(InputStream contents) throws IOException {
-		throw new UnsupportedOperationException("Create bundle-file is not supported"); //$NON-NLS-1$
-	}
-
-	public void setContents(InputStream contents) throws IOException {
-		throw new UnsupportedOperationException("Set bundle-file contents is not supported"); //$NON-NLS-1$
-	}
-	
 	public String getCharset() throws IOException {
 		return ResourcesPlugin.getEncoding();
 	}
 		
-	public long getTimeStamp() {
-		return 0L;
-	}
-
 	public CFolder getParent() {
 		if(resourcePath.segmentCount() > 1) {
 			IPath parentPath = resourcePath.removeLastSegments(1);

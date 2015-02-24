@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -55,7 +55,7 @@ public class QvtCompletionVisitorCS extends QvtOperationalVisitorCS {
     }
 
     @Override
-    protected void visitMappingMethodCS(MappingMethodCS methodCS, QvtOperationalEnv env, ImperativeOperation operation) throws SemanticException {
+    protected void visitMappingMethodCS(MappingMethodCS methodCS, QvtOperationalModuleEnv env, ImperativeOperation operation) throws SemanticException {
         if (methodCS.getMappingDeclarationCS() != null && QvtOperationalParserUtil.hasOperationBody(methodCS)) {
             super.visitMappingMethodCS(methodCS, env, operation);
             EcoreEnvironment resolvedEnvironment = ASTBindingHelper.resolveEnvironment(operation);
