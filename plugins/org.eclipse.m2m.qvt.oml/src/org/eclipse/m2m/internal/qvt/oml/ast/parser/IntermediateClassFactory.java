@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.cst.adapters.AbstractGenericAdapter;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
@@ -263,8 +264,8 @@ public class IntermediateClassFactory extends EFactoryImpl {
 				
 				Object evalResult = expression != null ? evalVisitor.visitExpression(expression) : null;
 								
-				if (evalResult == null) {
-					// no init expression specified, or init expression evaluated to null 
+				if (evalResult == null && !FeatureMapUtil.isMany(eInstance, eFeature)) {
+					// no init expression specified for a single-valued feature, or init expression evaluated to null 
 					EClassifier featureType = eFeature.getEType();
 					evalResult = EvaluationUtil.createInitialValue(featureType, evalVisitor.getEnvironment().getOCLStandardLibrary(),
 							evalVisitor.getEvaluationEnvironment());
@@ -275,7 +276,7 @@ public class IntermediateClassFactory extends EFactoryImpl {
 				eFeature.setChangeable(true);
 				
 				boolean isUndefined = QvtOperationalUtil.isUndefined(evalResult, evalVisitor.getEvaluationEnvironment());
-				evalVisitor.getOperationalEvaluationEnv().callSetter(eInstance, eFeature, evalResult, isUndefined, false);
+				evalVisitor.getOperationalEvaluationEnv().callSetter(eInstance, eFeature, evalResult, isUndefined, true);
 				
 				eFeature.setChangeable(isChangeable);
 			}

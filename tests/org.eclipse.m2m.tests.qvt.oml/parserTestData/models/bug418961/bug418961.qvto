@@ -15,7 +15,7 @@ main() {
 		var coll : Sequence(EClass) := List {object EClass{}};
 	};
 
-	do -- test assignment
+	do -- test assignment via 'List::add()'
 	{
 		var list : List(EClass) := List {object EClass{}};
 		var coll : Sequence(EClass) := Sequence {object EClass{}};
@@ -26,6 +26,32 @@ main() {
 		var list1 : List(EClass) := coll;
 		list->add(object EClass{});
 		assert fatal (list->size() = 2 and list1->size() = 1);
+	};
+
+	do -- test assignment via '+='
+	{
+		var list : List(EClass) := List {object EClass{}};
+		var coll : Sequence(EClass) := Sequence {object EClass{}};
+
+		list := coll;
+		coll := list;
+		
+		var list1 : List(EClass) := coll;
+		list += object EClass{};
+		assert fatal (list->size() = 2 and list1->size() = 1);
+	};
+
+	do -- test list modification
+	{
+		var list : List(EClass) := List {object EClass{}};
+		var coll : Sequence(EClass) := Sequence {object EClass{}};
+
+		list := coll;
+		coll := list;
+		
+		var list1 : List(EClass) := list;
+		list += object EClass{};
+		assert fatal (list->size() = 2 and list1->size() = 2);
 	};
 
 	do -- test cross-assignment

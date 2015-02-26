@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -380,8 +380,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				Object oldValue = getRuntimeValue(varName);
 				EClassifier variableType = lValue.getType();
 				
-				Object newValue = env.getAssignResult(variableType, oldValue, exprValue, assignExp.isIsReset());
-
+				Object newValue = env.assign(variableType, oldValue, exprValue, assignExp.isIsReset());
+				
 				replaceInEnv(varName, newValue, variableType);
 			}
 		} else if (lValue instanceof PropertyCallExp<?, ?>) {
@@ -1162,7 +1162,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					getEvaluationEnvironment());
 		}
 		
-        replaceInEnv(referredVariable.getName(), value, variableInitExp.getType());
+        replaceInEnv(referredVariable.getName(), 
+        		EvaluationUtil.doImplicitListCoercion(variableInitExp.getType(), value), variableInitExp.getType());
         
         return variableInitExp.isWithResult() ? value : null;
     }

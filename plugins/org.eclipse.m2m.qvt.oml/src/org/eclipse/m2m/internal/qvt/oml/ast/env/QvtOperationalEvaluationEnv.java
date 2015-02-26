@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,11 +15,13 @@ package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -61,12 +63,16 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.QVTUMLReflection;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.internal.qvt.oml.trace.TraceFactory;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.MutableList;
+import org.eclipse.m2m.qvt.oml.util.Utils;
 import org.eclipse.ocl.ecore.EcoreEnvironmentFactory;
 import org.eclipse.ocl.ecore.EcoreEvaluationEnvironment;
 import org.eclipse.ocl.ecore.EcorePackage;
+import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.types.AnyType;
 import org.eclipse.ocl.types.CollectionType;
 import org.eclipse.ocl.util.CollectionUtil;
@@ -199,7 +205,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			resolvedProperty = shadow.getProperty();
 		}
 		
-		// FIXME - workaround for a issue of multiple tuple type instances, possibly coming from 
+		// FIXME - workaround for an issue of multiple tuple type instances, possibly coming from 
 		// imported modules. The super impl. looks for the property by feature instance, do it
 		// by name here to avoid lookup failure, IllegalArgExc...
 		if(target instanceof Tuple<?, ?>) {
@@ -222,14 +228,6 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	            	return null;
 	            }
 			}
-		}
-		else if(property.getEType() instanceof CollectionType<?, ?> && target instanceof EObject) {
-			// module property of direct OCL collection type => override the super impl which coerce the result value 
-			// and takes only the first element and returns from navigate call
-            EObject eTarget = (EObject) target;
-            if (eTarget.eClass().getEAllStructuralFeatures().contains(resolvedProperty)) {
-                return eTarget.eGet(resolvedProperty, true);
-            }
 		}
 		
 		try {
@@ -468,20 +466,77 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}
 		return super.getType(object);
 	}
-	
+		
 	@Override
 	protected Object coerceValue(ETypedElement element, Object value, boolean copy) {
-		@SuppressWarnings("restriction")
-		EClassifier oclType = org.eclipse.ocl.ecore.internal.UMLReflectionImpl.INSTANCE.getOCLType(element);
-		if (oclType instanceof AnyType<?>) {
+		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(element);
+		
+		if (value instanceof MutableList<?> || value instanceof Dictionary<?,?>) {
+			// avoid coercion of mutable collections
+			return value;
+		}
+		else if (oclType instanceof AnyType<?>) {
+			// avoid coercion of collection to single element in case of OclAny type (bug 386115)
 			if (value instanceof Collection<?>) {
 				return copy
 					? CollectionUtil.createNewCollection((Collection<?>) value)
 					: value;
-			} else {
-				return value;
 			}
 		}
+		else if (oclType instanceof ListType) {
+			if (value instanceof Collection<?>) {
+				// enable coercion of arbitrary collection values in case of Collection type 
+				return copy
+						? Utils.createList((Collection<?>) value)
+						: value;
+			}
+			else {
+				// coerce 'null' to empty Set in case of Collection type
+				return copy
+						? Utils.createList(value != null ? Collections.singletonList(value) : Collections.emptyList())
+						: value;
+			}
+		}
+		else if (oclType instanceof DictionaryType) {
+			if (value instanceof Collection<?>) {
+				// enable coercion of arbitrary collection values in case of Collection type 
+				return copy
+						? Utils.createDictionary((Collection<?>) value)
+						: value;
+			}
+			else {
+				// coerce 'null' to empty Set in case of Collection type
+				return copy
+						? Utils.createDictionary(value != null ? Collections.singletonList(value) : Collections.emptyList())
+						: value;
+			}
+		}
+		else if (oclType instanceof CollectionType<?, ?>) {
+			@SuppressWarnings("unchecked")
+			CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) oclType;
+			
+			if (collectionType.getKind() == CollectionKind.COLLECTION_LITERAL) {
+				if (value instanceof Collection<?>) {
+					// enable coercion of arbitrary collection values in case of Collection type 
+					return copy
+							? CollectionUtil.createNewCollection((Collection<?>) value)
+							: value;
+				}
+				else {
+					// coerce 'null' to empty Set in case of Collection type
+					return copy
+							? CollectionUtil.createNewSet(value != null ? Collections.singletonList(value) : Collections.emptyList())
+							: value;
+				}
+			}
+			else if (value == null) {
+				// coerce 'null' to empty collection
+				return copy
+						? EvaluationUtil.createNewCollection(collectionType)
+						: value;
+			}
+		}
+		
 		return super.coerceValue(element, value, copy);
 	}
 	
@@ -556,63 +611,104 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		return internalEnv().getUnboundExtent();
 	}
 	
+	/**
+	 * Appends new content to the elements of the specified <code>collection</code>. 
+	 * Mutates the given <code>collection</code> if is mutable, otherwise creates a new collection of the same type and contents.
+	 * 
+	 * @param collection	the collection to be appended to, never <code>null</code> 
+	 * @param newContent 	the new content to be appended to the <code>collection</code>, may be an element that conforms to the given <code>classifier</code>, a collection of conforming elements, or <code>null</code> (never <code>invalid</code>)
+	 * @param classifier 	the classifier that the collection elements must conform to 
+	 * @return 				the resulting collection including the appended content
+	 */
 	@SuppressWarnings("unchecked")
-	public Object getAssignResult(EClassifier variableType, Object oldValue, Object exprValue, boolean isReset) {
-
-		Object newValue = null;
-
-		if (variableType instanceof CollectionType && !isOclInvalid(exprValue)) {
+	private Collection<Object> append(Collection<Object> collection, Object newContent, EClassifier classifier) {
+		
+		if (collection == null || isOclInvalid(newContent)) {
+			throw new IllegalArgumentException();
+		};
+		
+		Collection<Object> newCollection;
+		if (collection instanceof MutableList<?> || collection instanceof Dictionary<?,?>) {
+			newCollection = collection;
+		} 
+		else {
+			newCollection = CollectionUtil.createNewCollection(collection);
+		}
+		
+		Object convertedContent = ensureTypeCompatibility(newContent, classifier.getInstanceClass());
+		if (convertedContent == null || isKindOf(convertedContent, classifier)) {
+			newCollection.add(convertedContent);
+		} else if (newContent instanceof Collection<?>) {
+			for (Object element : (Collection<Object>) newContent) {
+				newCollection.add(ensureTypeCompatibility(element, classifier.getInstanceClass()));
+			}
+		}
+		
+		return newCollection;
+	}
+		
+	/**
+	 * Assigns a RHS <code>exprValue</code> to a LHS variable or property.
+	 * 
+	 * @param classifier	the LHS classifier of the assignment
+	 * @param oldValue		the old value of the LHS variable or property
+	 * @param exprValue		the RHS value to be assigned
+	 * @param isReset		in case of a collection assignment, indicates whether the current LHS elements should be discarded or not
+	 * @return				the new LHS value resulting from the assignment
+	 */
+	@SuppressWarnings("unchecked")
+	public Object assign(EClassifier classifier, Object oldValue, Object exprValue, boolean isReset) {
+		
+		Object newValue;
+		
+		if (classifier instanceof CollectionType<?, ?> && !isOclInvalid(exprValue)) {
+			CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) classifier;
+			
+			Collection<Object> newCollection = null;
+	
 			if (isReset) {
 				if (exprValue instanceof MutableList || exprValue instanceof Dictionary) {
-					newValue = exprValue;
+					newCollection = (Collection<Object>) exprValue;
 				} else if (exprValue instanceof Collection) {
 					Collection<Object> exprValueCollection = (Collection<Object>) exprValue;
-					newValue = CollectionUtil.createNewCollection(exprValueCollection);
+					newCollection = CollectionUtil.createNewCollection(exprValueCollection);
 				} else {
-					CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) variableType;
-					newValue = EvaluationUtil.createNewCollection(collectionType);
-					if (newValue == null) {
-						newValue = CollectionUtil.createNewSet();
+					newCollection = EvaluationUtil.createNewCollection(collectionType);
+					if (newCollection == null) {
+						newCollection = CollectionUtil.createNewSet();
 					}
-
+	
 					if (exprValue != null) {
-						((Collection<Object>) newValue).add(exprValue);
+						((Collection<Object>) newCollection).add(ensureTypeCompatibility(exprValue, collectionType.getElementType().getInstanceClass()));
 					}
+					
 				}
-			} else {
-				Collection<Object> newOclCollection = null;
-
-				if (oldValue instanceof Collection) {
-					Collection<Object> oldOclCollection = (Collection<Object>) oldValue;
-
-					if (oldOclCollection instanceof MutableList || oldOclCollection instanceof Dictionary) {
-						newOclCollection = oldOclCollection;
-					} else {
-						newOclCollection = CollectionUtil.createNewCollection(oldOclCollection);
+			} 
+			else {
+				Collection<Object> oldCollection;
+				
+				if (oldValue instanceof Collection<?>) {
+					oldCollection = (Collection<Object>) oldValue;
+				}
+				else {
+					oldCollection = EvaluationUtil.createNewCollection(collectionType);
+					if (oldCollection == null) {
+						oldCollection = CollectionUtil.createNewSet();
 					}
-				} else {
-					CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>) variableType;
-					newOclCollection = EvaluationUtil.createNewCollection(collectionType);
-					if (newOclCollection == null) {
-						newOclCollection = CollectionUtil.createNewSet();
-					}
-				}
-
-				if (exprValue instanceof Collection) {
-					newOclCollection.addAll((Collection<Object>) exprValue);
-				} else {
-					newOclCollection.add(exprValue);
-				}
-
-				newValue = newOclCollection;
+				} 
+				
+				newCollection = append(oldCollection, exprValue, collectionType.getElementType());
 			}
-		} else {
+			
+			newValue = newCollection;
+		}
+		else {
 			newValue = exprValue;
 		}
-
-		return newValue;
+		
+		return EvaluationUtil.doImplicitListCoercion(classifier, newValue);
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public void callSetter(EObject target, EStructuralFeature eStructuralFeature, Object exprValue, boolean valueIsUndefined, boolean isReset) {
 		if (getInvalidResult() == target) {
@@ -638,39 +734,54 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}
 
 		Object currentValue = owner.eGet(eStructuralFeature);
-		Object newValue = getAssignResult(eStructuralFeature.getEType(), currentValue, exprValue, isReset);
-
-		Class<?> expectedType = eStructuralFeature.getEType().getInstanceClass();
-
+		Object oclValue = valueIsUndefined ? exprValue : coerceValue(eStructuralFeature, exprValue, true);			
+		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(eStructuralFeature);
+		
+		Object newValue = assign(oclType, currentValue, oclValue, isReset);
+		
+		Class<?> expectedClass = eStructuralFeature.getEType().getInstanceClass();
+		
 		if (FeatureMapUtil.isMany(owner, eStructuralFeature)) {
-			List<Object> featureValues = (List<Object>) currentValue;
-			if (isReset) {
-				featureValues.clear();
-			}
-			if (newValue instanceof Collection) {
-				for (Object element : (Collection<Object>) newValue) {
-					if (element != null) {
-						featureValues.add(ensureTypeCompatibility(element, expectedType));
-					}
+			EList<Object> currentList = (EList<Object>) currentValue;
+			List<Object> newList;
+			
+			if (valueIsUndefined) {
+				if (isReset) {
+					newList = Collections.emptyList();
 				}
-			} else if (!valueIsUndefined) {
-				featureValues.add(ensureTypeCompatibility(newValue, expectedType));
-			}
-		} else if (!valueIsUndefined || acceptsNullValue(expectedType)) {
-			if (newValue instanceof Collection && (eStructuralFeature.getUpperBound() == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
-				for (Object element : (Collection<Object>) newValue) {
-					if (element != null) {
-						owner.eSet(eStructuralFeature, ensureTypeCompatibility(element, expectedType));
-						break;
-					}
+				else {
+					newList = currentList;
 				}
-			} else if (!isOclInvalid(newValue)) {
-				owner.eSet(eStructuralFeature, ensureTypeCompatibility(newValue, expectedType));
-			} else if (isReset) {
-				owner.eUnset(eStructuralFeature);
 			}
-		} else {
-			owner.eUnset(eStructuralFeature);
+			else {
+				Collection<?> newCollection = (Collection<?>) newValue;
+				newList = new ArrayList<Object>(newCollection.size());
+				
+				for (Object element : newCollection) {
+					newList.add(ensureTypeCompatibility(element, expectedClass));
+				}
+			}
+				
+			ECollections.setEList(currentList, newList);
+		}
+		else {		
+			if (isOclInvalid(newValue) || (newValue == null && !acceptsNullValue(expectedClass))) {
+				if (isReset) {
+					owner.eUnset(eStructuralFeature);
+				}
+			}
+			else {			
+				if (newValue instanceof Collection && (eStructuralFeature.getUpperBound() == ETypedElement.UNSPECIFIED_MULTIPLICITY)) {
+					for (Object element : (Collection<Object>) newValue) {
+						if (element != null) {
+							newValue = element;
+							break;
+						}
+					}
+				} 
+				
+				owner.eSet(eStructuralFeature, ensureTypeCompatibility(newValue, expectedClass));
+			}
 		}
 	}
 
