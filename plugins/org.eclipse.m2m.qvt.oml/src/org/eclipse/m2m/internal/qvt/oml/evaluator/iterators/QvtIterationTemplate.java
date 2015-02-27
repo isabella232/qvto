@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,7 +22,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EParameter;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtTransitionReachedException;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.BreakingResult;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.ContinueResult;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.expressions.OCLExpression;
@@ -80,17 +81,16 @@ public abstract class QvtIterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT,
             while (true) {
             	Object resultVal = null;
             	boolean isUpdateResultVal = true;
-            	try {
-            		resultVal = evaluateResultTemplate(iterators, target, resultName, condition, body, isOne);
-            	}
-            	catch (QvtTransitionReachedException ex) {
-            		if (ex.getReason() == QvtTransitionReachedException.REASON_BREAK) {
-            			setDone(true);
-            		}
-            		if (ex.getReason() == QvtTransitionReachedException.REASON_CONTINUE) {
-            		}
+        		resultVal = evaluateResultTemplate(iterators, target, resultName, condition, body, isOne);
+        		
+        		if(resultVal instanceof BreakingResult) {
+        			// Control flow was broken (break, continue, or return). 
+        			if(!(resultVal instanceof ContinueResult)) {
+        				// No continue, so no more iterations.
+        				setDone(true);
+        			}
             		isUpdateResultVal = false;
-            	}
+        		}
 
                 // set the result variable in the environment with the result value
                 if (isUpdateResultVal) {

@@ -1,6 +1,6 @@
 transformation continue_break();
 
-mapping main() { 
+main() { 
 
 	var index := 0;
 	while(true) { 
@@ -18,6 +18,12 @@ mapping main() {
 		
 	col->forEach(i) {
 		if i > 1 then continue endif;
+		index := index + 1;
+	};
+	assert fatal (index = 7);
+
+	col->forEach(i) {
+		if i = 1 then break endif;
 		index := index + 1;
 	};
 	assert fatal (index = 7);

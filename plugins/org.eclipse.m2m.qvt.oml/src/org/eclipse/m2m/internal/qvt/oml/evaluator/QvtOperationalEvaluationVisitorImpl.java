@@ -1113,25 +1113,28 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     	if(valueExp != null) {
     		value = visitExpression(valueExp);
     	}
-    	
-		OperationBody body = QvtOperationalParserUtil.findParentElement(returnExp, OperationBody.class);
-		if(body != null) {
-			EList<org.eclipse.ocl.ecore.OCLExpression> content = body.getContent(); 
-			if(!content.isEmpty() && content.get(content.size() - 1) == returnExp) {
-				// return is the last expression in the body, simply return the value
-				return value;
-			}
-		}    	
-
-		// TODO - analyze more complex structured execution flow and
-		// avoid the cost of exception throwing 
-		throw new ReturnExpEvent(value, getOperationalEvaluationEnv());
+    	// Wrap the result of the expression in an OperationCallResult object.
+    	// This type breaks control flow, so the value arrives directly at its
+    	// calling operation, where it is unwrapped again and returned.
+		return new OperationCallResult(value, getOperationalEvaluationEnv());
     }
     
     public Object visitOperationBody(OperationBody operationBody) {
         Object result = null;
         for (OCLExpression<EClassifier> exp : operationBody.getContent()) {
         	result = visitExpression(exp);
+        	
+        	// If control flow was broken (by means of a return statement,
+        	// stop executing the next lines and return this result.
+        	if(result instanceof BreakingResult) {
+	        	if(result instanceof OperationCallResult) {
+	        		result = ((OperationCallResult)result).myResult;
+	        	}
+	        	else {
+	        		result = null;
+	        	}
+	        	break;
+        	}
         }
         
         ImperativeOperation operation = operationBody.getOperation();
@@ -1175,6 +1178,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     private Object visitBlockExpImpl(EList<org.eclipse.ocl.ecore.OCLExpression> expList, boolean isInImperativeOper) {
     	List<String> scopeVars = null;
     	
+    	Object result = null;
+    	
         for (OCLExpression<EClassifier> exp : expList) {
         	if((exp instanceof VariableInitExp) && !isInImperativeOper) {
         		if(scopeVars == null) {
@@ -1184,7 +1189,13 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         		scopeVars.add(varInitExp.getName());
         	}
         	
-        	visitExpression(exp);
+        	result = visitExpression(exp);
+        	if(result instanceof BreakingResult) {
+        		break;
+        	}
+        	// Return null, unless control flow is broken (by break, continue or return).
+        	// When control flow is broken, propagate this upward in the AST.
+        	result = null;
         }
         
         if(scopeVars != null) {
@@ -1194,7 +1205,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			}
         }
         
-        return null;
+        return result;
     }
     
     public Object visitComputeExp(ComputeExp computeExp) {
@@ -1206,32 +1217,47 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         }
         replaceInEnv(returnedElement.getName(), initExpressionValue, returnedElement.getType());
         
-        visitExpression(computeExp.getBody());
+        Object result = visitExpression(computeExp.getBody());
+        
+        Object returnedValue = getEvaluationEnvironment().remove(returnedElement.getName()); 
+        
+        if(result instanceof BreakingResult) {
+        	// Control flow was broken (break or continue).
+        	// Instead of returning the value, propagate this.
+        	return result;
+        }
 
-        return getEvaluationEnvironment().remove(returnedElement.getName());
+        return returnedValue;
     }
 
     public Object visitWhileExp(WhileExp whileExp) {
+    	Object result = null;
         while (true) {
         	Object condition = visitExpression(whileExp.getCondition());
         	if (Boolean.TRUE.equals(condition)) {
-            	try {
-            		visitExpression(whileExp.getBody());
-            	}
-            	catch (QvtTransitionReachedException ex) {
-            		if (ex.getReason() == QvtTransitionReachedException.REASON_BREAK) {
-            			break;
-            		}
-            		if (ex.getReason() == QvtTransitionReachedException.REASON_CONTINUE) {
-            			continue;
-            		}
+            	result = visitExpression(whileExp.getBody());
+
+            	if(result instanceof BreakingResult) {
+            		// Control flow is being broken (break, continue, or return).
+            		
+            		if(result instanceof BreakResult) {
+            			// Result must be null, unless it comes from a return statement.
+                		result = null;
+                		break;
+                	}
+                	if(result instanceof ContinueResult) {
+            			// Instead of breaking out of the loop, continue with the next iteration.
+                		result = null;
+                    	continue;
+                	}
+            		break;
             	}
             } else {
                 break;
             }
         }
         
-        return null;
+        return result;
     }
     
     private static class SwitchAltExpResult {
@@ -1525,7 +1551,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	}
 
 	public Object visitBreakExp(BreakExp astNode) {
-		throw new QvtTransitionReachedException(QvtTransitionReachedException.REASON_BREAK);
+		return BREAK;
 	}
 
 	public Object visitCatchtExp(CatchExp astNode) {
@@ -1534,7 +1560,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	}
 
 	public Object visitContinueExp(ContinueExp astNode) {
-		throw new QvtTransitionReachedException(QvtTransitionReachedException.REASON_CONTINUE);
+		return CONTINUE;
 	}
 
 	public Object visitDictLiteralPart(DictLiteralPart astNode) {
@@ -1793,8 +1819,39 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		}
     }
     
+    /**
+     * Tag interface which represents an evaluation result which,
+     * when encountered, breaks control flow.
+     * 
+     * Examples of this are break, continue, and return.
+     */
+    public static interface BreakingResult {
+    	
+    }
+    
+    /**
+     * Type of result which represents the situation in which a break statement is encountered.
+     */
+    public static class BreakResult implements BreakingResult {
+    	BreakResult() { }
+    }
+    
+    protected final static BreakResult BREAK = new BreakResult();
+    
+    /**
+     * Type of result which represents the situation in which a continue statement is encountered.
+     */
+    public static class ContinueResult implements BreakingResult {
+    	ContinueResult() { }
+    }
+    
+    protected final static ContinueResult CONTINUE = new ContinueResult();
 
-    protected static class OperationCallResult {
+    /**
+     * The result of an operation call.
+     * Represents the situation where a return statement was encountered.
+     */
+    public static class OperationCallResult implements BreakingResult {
     	public Object myResult;
     	public QvtOperationalEvaluationEnv myEvalEnv;
     	
@@ -1865,9 +1922,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	assert !isMapping || result instanceof MappingCallResult;        	
         	
         	callResult = (OperationCallResult)result;
-        }
-        catch (ReturnExpEvent e) {
-        	callResult = e.getResult();
         }
         catch (StackOverflowError e) {
         	throwQVTException(new QvtStackOverFlowError(e));
@@ -2488,26 +2542,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					}
 				}
 			}
-		}
-	}    
-    
-
-	/**
-	 * TODO - Avoid using this exception return expression to interrupt execution flow for 
-	 * immediate return from an operation.
-	 * Though, if the last statement in a body is return expression, no exception is thrown, we
-	 * should try to avoid this cost to be paid in general
-	 */
-	private static class ReturnExpEvent extends QvtRuntimeException {
-		private static final long serialVersionUID = 2971434369853642555L;		
-		private final OperationCallResult fResult;
-		
-		ReturnExpEvent(Object returnValue, QvtOperationalEvaluationEnv evalEnv) {
-			fResult = new OperationCallResult(returnValue, evalEnv);
-		}
-		
-		public OperationCallResult getResult() {
-			return fResult;
 		}
 	}
 

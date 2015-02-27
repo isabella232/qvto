@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.BreakingResult;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.expressions.Variable;
@@ -47,9 +48,12 @@ extends QvtIterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT, CLS, E> {
             isConditionOk = (conditionVal instanceof Boolean) && (Boolean) conditionVal;
         }
         if (isConditionOk) {
-            getEvaluationVisitor().visitExpression(body);
+            Object result = getEvaluationVisitor().visitExpression(body);
             if (isOne) {
                 setDone(true);
+            }
+            if(result instanceof BreakingResult) {
+            	return result;
             }
         }
         return null;
