@@ -1252,6 +1252,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         for (AltExp altExp : switchExp.getAlternativePart()) {
         	Object altResult = visitExpression(altExp);	
         	if (altResult instanceof SwitchAltExpResult) {
+        		if (isUndefined(((SwitchAltExpResult) altResult).myCondition)) {
+        			return getInvalid();
+        		}
             	if (Boolean.TRUE.equals(((SwitchAltExpResult) altResult).myCondition)) {
                     return ((SwitchAltExpResult) altResult).myResult;
                 }
