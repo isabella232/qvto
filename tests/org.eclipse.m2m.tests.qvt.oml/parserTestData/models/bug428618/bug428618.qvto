@@ -89,7 +89,6 @@ mapping m1() : OrderedSet(EPackage) {
 mapping m2() : r1 : OrderedSet(EPackage), r2 : EPackage {
 	
 	init {
-		assert fatal (not result->oclIsUndefined());
 		assert fatal (r1->isEmpty());
 		
 		r1 += object EPackage{};
@@ -97,7 +96,12 @@ mapping m2() : r1 : OrderedSet(EPackage), r2 : EPackage {
 		assert fatal (r1->size() = 1);
 	}
 	
+	assert fatal (not result->oclIsUndefined());
+	
 	assert fatal (not r2.oclIsUndefined());
 	assert fatal (r1->size() = 1);
+	
+	assert fatal (r1 = result.r1);
+	assert fatal (r2 = result.r2);
 } 
 

@@ -32,6 +32,8 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.cst.CSTNode;
@@ -206,5 +208,9 @@ public class QvtOperationalUtil {
 		}
 		
 		return types;
+	}
+	
+	public static boolean isMutableCollectionType(EClassifier classifier) {
+		return classifier instanceof ListType || classifier instanceof DictionaryType;
 	}
 }

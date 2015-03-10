@@ -386,12 +386,19 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			}
 		} else if (lValue instanceof PropertyCallExp<?, ?>) {
 			Object ownerObj = getAssignExpLValueOwner(lValue);
+			PropertyCallExp<EClassifier, EStructuralFeature> propertyCallExp = (PropertyCallExp<EClassifier, EStructuralFeature>) lValue;
+			EStructuralFeature property = propertyCallExp.getReferredProperty();
 			if (ownerObj instanceof EObject) {
 				EObject oldIP = setCurrentEnvInstructionPointer(assignExp);
 				env.callSetter((EObject) ownerObj,
-						((PropertyCallExp<EClassifier, EStructuralFeature>) lValue).getReferredProperty(), exprValue,
+						property, exprValue,
 						isUndefined(exprValue), assignExp.isIsReset());
 				setCurrentEnvInstructionPointer(oldIP);
+			}
+			else if (ownerObj != null) {
+				EClassifier classifier = propertyCallExp.getType();
+				Object oldValue = env.navigateProperty(property, Collections.emptyList(), ownerObj);
+				env.assign(classifier, oldValue, exprValue, assignExp.isIsReset());
 			}
 		} else {
 			throw new UnsupportedOperationException("Unsupported LValue type: " + ((lValue == null) ? null : lValue.getType())); //$NON-NLS-1$
@@ -564,7 +571,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     	return true;
     }
     
-    private void setupInitialResultValue(MappingBody mappingBody) {
+    private void setupInitialResultValues(MappingBody mappingBody) {
     	ImperativeOperation operation = mappingBody.getOperation();
     	QvtOperationalEvaluationEnv evalEnv = getOperationalEvaluationEnv();
 		// Note: the variables for result parameters may not be set or existing yet
@@ -575,21 +582,14 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     			Object initialValue = EvaluationUtil.createInitialValue(resultParam.getEType(), getStandardLibrary(), evalEnv);
     			replaceInEnv(resultParam.getName(), initialValue, resultParam.getEType());    			
     		}
-		}
-    	
-    	if(operation.getResult().size() > 1) {
-    		if(evalEnv.getValueOf(Environment.RESULT_VARIABLE_NAME) == null) {
-    			Object initialValue = EvaluationUtil.createInitialValue(operation.getEType(), getStandardLibrary(), evalEnv);
-    			replaceInEnv(Environment.RESULT_VARIABLE_NAME, initialValue, operation.getEType());
-    		}
-    	}    	
+		}   	
     }
     
     public Object visitMappingBody(MappingBody mappingBody) {
 		QvtOperationalEvaluationEnv evalEnv = getOperationalEvaluationEnv();
         MappingOperation currentMappingCalled = (MappingOperation) mappingBody.getOperation();
 		
-		setupInitialResultValue(mappingBody);
+		setupInitialResultValues(mappingBody);
     	
         for (OCLExpression<EClassifier> initExp : mappingBody.getInitSection()) {
         	visitExpression(initExp);
@@ -599,6 +599,15 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	// setup a meaningful IP after init section to avoid pointing to the last expression of init 
         	// section, so in case of error a proper error location can be computed        	
         	setCurrentEnvInstructionPointer(currentMappingCalled);
+        }
+        
+        // legacy support for 'result' tuples inside mapping body and 'end' section
+     	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=432112
+        if(currentMappingCalled.getResult().size() > 1) {
+        	if(evalEnv.getValueOf(Environment.RESULT_VARIABLE_NAME) == null) {
+        		Object initialValue = EvaluationUtil.createInitialValue(currentMappingCalled.getEType(), getStandardLibrary(), evalEnv);
+        		replaceInEnv(Environment.RESULT_VARIABLE_NAME, initialValue, currentMappingCalled.getEType());
+        	}
         }
         
 		Object result = createOrGetResult(currentMappingCalled);
@@ -1096,7 +1105,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	        	visitExpression(exp);    	
 	        }
     	}
-    	
+    	    	
     	// owner may have changed in body content, so retrieve it again (fixed by bug 388325)
     	owner = getOutOwner(objectExp);
     	

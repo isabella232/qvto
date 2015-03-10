@@ -3775,7 +3775,16 @@ public class QvtOperationalVisitorCS
 		if ((methodCS.getMappingBody() != null) && (methodCS.getMappingBody().getMappingInitCS() != null)) {
 			inits = visitMappingSectionCS(methodCS.getMappingBody().getMappingInitCS(), newEnv);
 		}
-
+		
+		// legacy support for 'result' tuples inside mapping body and 'end' section
+		// https://bugs.eclipse.org/bugs/show_bug.cgi?id=432112
+		if(methodCS.getMappingDeclarationCS().getResult().size() > 1) {
+			Variable<EClassifier, EParameter> var = EcoreFactory.eINSTANCE.createVariable();
+			var.setName(Environment.RESULT_VARIABLE_NAME);
+			var.setType(operation.getEType());
+			newEnv.addElement(var.getName(), var, true);
+		}
+		
 		MappingBody body = null;
 		MappingBodyCS mappingBodyCS = (methodCS.getMappingBody() == null) ? null : methodCS.getMappingBody().getMappingBodyCS();
 		if (mappingBodyCS != null) {
@@ -4196,6 +4205,9 @@ public class QvtOperationalVisitorCS
 	    }
 
 	    org.eclipse.ocl.ecore.OCLExpression lValue = oclExpressionCS(lValueCS, env);
+	    
+	    boolean isMutation = QvtOperationalUtil.isMutableCollectionType(lValue.getType()) && expressionCS.isIncremental();	    
+	    
 	    if (lValue instanceof VariableExp<?, ?>) {
 	    	VariableExp<EClassifier, EParameter> variableExp = (VariableExp<EClassifier, EParameter>) lValue;
 		    String referredVariableName = variableExp.getName();
@@ -4210,8 +4222,7 @@ public class QvtOperationalVisitorCS
 		    if (Environment.RESULT_VARIABLE_NAME.equals(referredVariableName)) {
 		    	if (!isInsideMappintInitSection(expressionCS)) {
 		    		if (expressionCS.isIncremental()) {
-		    			if (false == variable.getType() instanceof ListType
-		    					&& false == variable.getType() instanceof DictionaryType) {
+		    			if (!QvtOperationalUtil.isMutableCollectionType(variable.getType())) {
 			    			QvtOperationalUtil.reportError(env, ValidationMessages.QvtOperationalVisitorCS_incrementalAssignmentResultNotAllowed, lValueCS);
 			    			return null;
 		    			}
@@ -4231,13 +4242,7 @@ public class QvtOperationalVisitorCS
 		        return null;
 		    }
 		    
-			boolean isAssignment = true;
-			if (expressionCS.isIncremental()) {
-				if (variable.getType() instanceof ListType || variable.getType() instanceof DictionaryType) {
-					isAssignment = false;
-				}
-			}
-			QvtOperationalParserUtil.validateVariableModification(variable, lValueCS, null, env, isAssignment);
+			QvtOperationalParserUtil.validateVariableModification(variable, lValueCS, null, env, !isMutation);
 	        QvtOperationalParserUtil.validateAssignment(false, variable.getName(), variable.getType(), rightExpr.getType(),
 	        		expressionCS.isIncremental(), lValueCS, expressionCS.getOclExpressionCS(), env);
 	    } else if (lValue instanceof PropertyCallExp<?, ?>) {
@@ -4251,18 +4256,20 @@ public class QvtOperationalVisitorCS
 	                QvtOperationalUtil.reportError(env, NLS.bind(ValidationMessages.ReadOnlyProperty, property.getName()), lValueCS);
 	            } else {
 	                OCLExpression<EClassifier> source = propertyCallExp.getSource();
+	                
+	                if (source.getType() instanceof TupleType && !isMutation) {
+            	        QvtOperationalUtil.reportError(env, 
+            	        		NLS.bind(ValidationMessages.tupleMutationError, property.getName(), source.getName()),
+            	        		lValueCS);
+            	        return null;
+                	}
+	                
 	                if (source instanceof VariableExp) {
 	                    VariableExp<EClassifier, EParameter> sourceExp = (VariableExp<EClassifier, EParameter>) source;
 	                    Variable<EClassifier, EParameter> sourceVariable = sourceExp.getReferredVariable();
 	                    QvtOperationalParserUtil.validateVariableModification(sourceVariable, lValueCS, property, env, false);
 	                }
-	                else if (source instanceof PropertyCallExp) {
-	                	PropertyCallExp<EClassifier, EParameter> sourceExp = (PropertyCallExp<EClassifier, EParameter>) source;
-	                	if (sourceExp.getType() instanceof TupleType) {
-	            	        QvtOperationalUtil.reportError(env, ValidationMessages.notAnLValueError, lValueCS);
-	            	        return null;
-	                	}
-	                }
+	                
 	                QvtOperationalParserUtil.validateAssignment(true, property.getName(), env.getUMLReflection().getOCLType(property),
 	                		rightExpr.getType(), expressionCS.isIncremental(), lValueCS, expressionCS.getOclExpressionCS(), env);
 	            }

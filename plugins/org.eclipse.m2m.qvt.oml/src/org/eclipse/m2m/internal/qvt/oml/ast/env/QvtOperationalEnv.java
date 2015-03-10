@@ -49,7 +49,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveInExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
-import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.TypeChecker;
@@ -768,13 +767,6 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 			for (VarParameter parameter : imperativeOperation.getResult()) {
 		        defineParameterVar(parameter);
 			}
-		}
-
-		if(hasMultipleResultParams && isMapping) {			
-			Variable<EClassifier, EParameter> var = EcoreFactory.eINSTANCE.createVariable();
-			var.setName(Environment.RESULT_VARIABLE_NAME);
-			var.setType(operation.getEType());
-			addElement(var.getName(), var, true);
 		}
 	}
 
