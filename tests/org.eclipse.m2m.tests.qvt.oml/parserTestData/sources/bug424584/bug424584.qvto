@@ -39,7 +39,7 @@ mapping inout EClass :: m2(out outParam : EClass, in prefix:String) : EClass {
 	name := prefix + 'result_name';
 }
 
-mapping md1(in selfParam:EClass, out outParam1 : EClassifier) : EClass disjuncts /*<error>*/md2/*</error>*/, md3
+mapping md1(in selfParam:EClass, out outParam1 : EClassifier) : EClass disjuncts /*<error>*/md2/*</error>*/, /*<error>*/md3/*</error>*/
 {
 } 
 
@@ -59,8 +59,8 @@ mapping md3(in selfParam:EClass, out outParam3 : EClass) : EClass
 mapping inout EClass :: m_bad(/*<error>*/out outParam : String/*</error>*/, in prefix:String) : EClass {
 }
 
-mapping /*<error>*/inout EClass :: m_bad2(out outParam : EClassifier, in prefix:String) : EClass {
-}/*</error>*/
+mapping /*<error>*/inout EClass :: m_bad2(out outParam : EClassifier, in prefix:String) : EClass/*</error>*/ {
+}
 
 abstract mapping inout EClass :: m_ok(out outParam : EClassifier, in prefix:String) : EClass {
 }

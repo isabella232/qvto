@@ -16,7 +16,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -117,18 +116,11 @@ public class TestQvtParser extends TestCase {
 		
 		List<QvtMessage> allErrors = getAllErrors(myCompiled, collectOnlyCSTProblems);
 		assertEquals("Wrong error count for '" + folder.getName() + "', error(s)=" + allErrors, myData.getErrCount(), allErrors.size()); //$NON-NLS-1$ //$NON-NLS-2$
-		if (myData.getWarnings() != null) {
-	        List<QvtMessage> allWarnings = getAllWarnings(myCompiled, collectOnlyCSTProblems);
-	        expectedWarningsCycle : for (String expectedWarning : myData.getWarnings()) {
-	            for (QvtMessage qvtMessage : allWarnings) {
-	                if (expectedWarning.equals(qvtMessage.getMessage())) {
-	                    continue expectedWarningsCycle;
-	                }
-	            }
-	            fail(MessageFormat.format("Expected warning {0} not found!", new Object[] {expectedWarning})); //$NON-NLS-1$
-	        }
+		if (myData.getWarnCount() != -1) {
+			List<QvtMessage> allWarnings = getAllWarnings(myCompiled, collectOnlyCSTProblems);
+			assertEquals("Wrong warning count for '" + folder.getName() + "', warning(s)=" + allWarnings, myData.getWarnCount(), allWarnings.size()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-
+		
 		// check the AST is consistent
 		for (CompiledUnit compilationResult : myCompiled) {
 			if(compilationResult.getErrors().size() == 0) {
@@ -142,16 +134,18 @@ public class TestQvtParser extends TestCase {
 			for (CompiledUnit compilationResult : myCompiled) {
 				doCompiledUnitCheck(compilationResult, helpers);
 			}
-	
-			int expectedProblemCount = myData.getAllProblemsCount();
-			int foundProblemCount = 0;				
-			for (ProblemSourceAnnotationHelper nextHelper : helpers) {
-				foundProblemCount += nextHelper.getProblemsMap().size();
-			}
 
-			if (expectedProblemCount >= 0) {
-				TestCase.assertEquals(expectedProblemCount, foundProblemCount);
-			}			
+			// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=458233
+			//
+			// int expectedProblemCount = myData.getAllProblemsCount();
+			// int foundProblemCount = 0;				
+			// for (ProblemSourceAnnotationHelper nextHelper : helpers) {
+			// 		foundProblemCount += nextHelper.getProblemsMap().size();
+			// }
+			// 
+			// if (expectedProblemCount >= 0) {
+			// 		TestCase.assertEquals(expectedProblemCount, foundProblemCount);
+			// }			
 		}
 	}
 

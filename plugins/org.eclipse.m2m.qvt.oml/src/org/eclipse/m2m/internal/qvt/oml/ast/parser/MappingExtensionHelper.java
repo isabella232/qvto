@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,8 @@
  *   
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Alex Paperno - bugs 424584,
+ *     Alex Paperno - bug 424584
+ *     Christopher Gerking - bug 446375
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.parser;
 
@@ -78,12 +79,12 @@ class MappingExtensionHelper {
 			result &= reportInvalidExtensionsInDisjunctingMapping(env, fOperation.getInherited(), MappingExtensionKindCS.INHERITS);
 			result &= reportInvalidExtensionsInDisjunctingMapping(env, fOperation.getMerged(), MappingExtensionKindCS.MERGES);
 			
-			result &= repornInvalidOutParameters(env);
+			result &= reportInvalidOutParameters(env);
 			
 			return result && super.validate(env);
 		}
 
-		private boolean repornInvalidOutParameters(QvtOperationalEnv env) {
+		private boolean reportInvalidOutParameters(QvtOperationalEnv env) {
 			boolean result = true;
 			int pos = 0;
 			for (MappingOperation extended : fOperation.getDisjunct()) {
@@ -92,18 +93,21 @@ class MappingExtensionHelper {
 				while (itParams.hasNext()) {
 
 					MappingParameter mappingParam = (MappingParameter) itParams.next();
-					MappingParameter mappingParamExtended = (MappingParameter) itExtendedParams.next();
 					if (mappingParam.getKind() != DirectionKind.OUT) {
 						continue;
 					}
 
-					if (mappingParamExtended.getType() != mappingParam.getEType()) {
+					if (!itExtendedParams.hasNext()) {
+						break;
+					}
+
+					if (itExtendedParams.next().getEType() != mappingParam.getEType()) {
 						result = false;
 						ExtensionSourceRefAdapter adapter = getSrcAdapter();
 						if (adapter != null) {
 							int startOffset = extended.getStartPosition();
 							int endOffset = extended.getEndPosition();
-							MappingSourceReference ref = safeGetSourceRef(adapter.getDisjunctReferences(), pos++);
+							MappingSourceReference ref = safeGetSourceRef(adapter.getDisjunctReferences(), pos);
 							if (ref != null) {
 								startOffset = ref.getStartOffset();
 								endOffset = ref.getEndOffset();
@@ -111,14 +115,19 @@ class MappingExtensionHelper {
 
 							env.reportError(
 									NLS.bind(
-											ValidationMessages.MappingExtension_illegalOutParamDisjunctingMapping,
-											new Object[] { QvtOperationalParserUtil.safeGetMappingQualifiedName(env, fOperation),
-													mappingParam.getName(),
-													QvtOperationalParserUtil.safeGetMappingQualifiedName(env, extended), }),
+										ValidationMessages.MappingExtension_illegalOutParamDisjunctingMapping,
+										new Object[] { 
+												QvtOperationalParserUtil.safeGetMappingQualifiedName(env, extended),
+												mappingParam.getName(),
+												QvtOperationalParserUtil.safeGetMappingQualifiedName(env, fOperation)
+										}
+									),
 									startOffset, endOffset);
 						}
 					}
 				}
+				
+				pos++;
 			}
 			return result;
 		}

@@ -1,3 +1,5 @@
+modeltype Ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
 library deprecated_importLocation;
 
-import /*<warn>*/org.bar.Foo/*</warn>*/;
+/*<warn>*/import org.bar.Foo;/*</warn>*/

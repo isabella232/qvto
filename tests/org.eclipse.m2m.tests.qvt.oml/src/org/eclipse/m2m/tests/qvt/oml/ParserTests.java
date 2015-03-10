@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -31,23 +31,20 @@ public class ParserTests {
     }
     
     public static class TestData {
-        public TestData(String dir, int errCount) { this(dir, errCount, new String[0]); }
+        public TestData(String dir, int errCount) { 
+        	this(dir, errCount, -1);
+        }
         
         public TestData(String dir, int errCount, int warnCount) {
-        	this(dir, errCount, new String[0]);
-        	this.myWarnCount = warnCount; 
-        }
-        public TestData(String dir, int errCount, String... warnings) { 
             myDir = dir; 
             myErrCount = errCount; 
-            myWarnings = warnings;
-            myWarnCount = warnings.length;
+            myWarnCount = warnCount;
             usesSourceAnnotations = false;
-        } 
+        }
         
         public String getDir() { return myDir; }
         public int getErrCount() { return myErrCount; }
-        public String[] getWarnings() { return myWarnings; }
+        public int getWarnCount() { return myWarnCount; }
         
         public int getAllProblemsCount() {
 			return myErrCount + myWarnCount;
@@ -59,8 +56,7 @@ public class ParserTests {
         
         private final String myDir;
         private final int myErrCount;
-        private final String[] myWarnings;
-        private int myWarnCount;
+        private final int myWarnCount;
         private boolean usesSourceAnnotations;
 
         /**
@@ -115,7 +111,7 @@ public class ParserTests {
     	TestData.createSourceChecked("blackboxlib_annotation_java", 1, 2), //$NON-NLS-1$
     	TestData.createSourceChecked("dupImportFileUnit", 0, 1),    	 //$NON-NLS-1$
     	TestData.createSourceChecked("dupImportLibrary", 0, 1),    	 //$NON-NLS-1$
-    	TestData.createSourceChecked("testmodelparamtype", 3, 1),    	 //$NON-NLS-1$
+    	TestData.createSourceChecked("testmodelparamtype", 3, 0),    	 //$NON-NLS-1$
     	TestData.createSourceChecked("resolvecond", 1, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("intermPropClash", 9, 0),    	    	 //$NON-NLS-1$
     	TestData.createSourceChecked("noClassInImplicitPopulate", 3, 1),    	 //$NON-NLS-1$
@@ -220,10 +216,11 @@ public class ParserTests {
     	TestData.createSourceChecked("bug289982_ambiguousLib", 0, 1), //$NON-NLS-1$
     	TestData.createSourceChecked("bug289982_undefinedLib", 0, 1), //$NON-NLS-1$
     	TestData.createSourceChecked("bug289982_validation", 7, 7), //$NON-NLS-1$
-    	new TestData("bug424584", 10), //$NON-NLS-1$
+    	TestData.createSourceChecked("bug424584", 11, 0), //$NON-NLS-1$
     	new TestData("bug428028", 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug425634", 0, 6), //$NON-NLS-1$
     	new TestData("bug433585", 0), //$NON-NLS-1$
-    	new TestData("bug438038", 0) //$NON-NLS-1$
+    	new TestData("bug438038", 0), //$NON-NLS-1$
+    	TestData.createSourceChecked("bug446375", 2, 0), //$NON-NLS-1$
     };
 }

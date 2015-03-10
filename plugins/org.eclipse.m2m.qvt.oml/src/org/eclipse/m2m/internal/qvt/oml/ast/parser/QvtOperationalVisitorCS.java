@@ -5858,6 +5858,9 @@ public class QvtOperationalVisitorCS
 			QvtOperationalFileEnv fileEnv = (QvtOperationalFileEnv) env.getFileParent();
 			return fileEnv.getFile();
 		}
+		else if (env.getModuleContextType() != null) {
+			return env.getModuleContextType().eResource().getURI();
+		}
 		return null;
 	}
 	

@@ -625,11 +625,11 @@ public class QVTOCompiler {
     	List<ImportCS> dupImports = new LinkedList<ImportCS>();
     	for(ImportCS nextImportCS : imports) {
 			if(nextImportCS.getAst() != null &&
-					checkedImports.contains(nextImportCS.getAst()) && !checkedImportTokens.contains(nextImportCS.getStartToken())) {
+					checkedImports.contains(nextImportCS.getAst()) && !checkedImportTokens.contains(nextImportCS.getStartOffset())) {
 				dupImports.add(nextImportCS);
 			} else {
 				checkedImports.add(nextImportCS.getAst());
-				checkedImportTokens.add(nextImportCS.getStartToken());
+				checkedImportTokens.add(nextImportCS.getStartOffset());
 			}
 		}
     	
