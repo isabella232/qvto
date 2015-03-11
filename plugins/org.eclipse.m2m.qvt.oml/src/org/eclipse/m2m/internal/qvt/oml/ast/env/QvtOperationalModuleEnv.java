@@ -76,24 +76,26 @@ public class QvtOperationalModuleEnv extends QvtOperationalEnv {
 	}
 			    
     public void setContextModule(Module module) {
-    	deleteElement(THIS);
-    	
-		myContextModule = null;    	
+    	if (myContextModule != module) {
+	    	deleteElement(THIS);
+	    	
+			myContextModule = null;    	
+	
+	    	if(module != null) {
+	    		myContextModule = module;
+	    		org.eclipse.ocl.ecore.Variable thisVar = EcoreFactory.eINSTANCE.createVariable();
+	    		thisVar.setName(THIS);
+	    		thisVar.setType(module);    		
+	            addElement(THIS, thisVar, false);    		
 
-    	if(module != null) {
-    		myContextModule = module;
-    		org.eclipse.ocl.ecore.Variable thisVar = EcoreFactory.eINSTANCE.createVariable();
-    		thisVar.setName(THIS);
-    		thisVar.setType(module);    		
-            addElement(THIS, thisVar, false);    		
+	        	// confine module in resource
+	        	getTypeResolver().getResource().getContents().add(module);
+	    	}
     	}
     	
     	if(module instanceof OperationalTransformation) {
     		registerModelParameters((OperationalTransformation)module);
     	}
-    	
-    	// confine module in resource
-    	getTypeResolver().getResource().getContents().add(module);
     }
     
     public ModelParameter lookupModelParameter(String name, DirectionKind directionKind) {
