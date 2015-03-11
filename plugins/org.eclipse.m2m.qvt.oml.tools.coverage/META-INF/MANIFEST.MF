@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Coverage Plug-in
+Bundle-SymbolicName: org.eclipse.m2m.qvt.oml.tools.coverage;singleton:=true
+Bundle-Version: 1.0.8.qualifier
+Bundle-ClassPath: .
+Export-Package: org.eclipse.m2m.qvt.oml.tools.coverage,
+ org.eclipse.m2m.qvt.oml.tools.coverage.common
+Require-Bundle: org.eclipse.jface,
+ org.eclipse.ui.workbench,
+ org.eclipse.debug.core,
+ org.eclipse.jdt.junit,
+ org.eclipse.jdt.junit.core,
+ org.eclipse.jdt.launching,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.ide,
+ org.eclipse.m2m.qvt.oml.common,
+ org.eclipse.jdt.core,
+ org.eclipse.ocl,
+ org.eclipse.m2m.qvt.oml,
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jdt.junit.runtime,
+ com.google.guava;bundle-version="15.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
