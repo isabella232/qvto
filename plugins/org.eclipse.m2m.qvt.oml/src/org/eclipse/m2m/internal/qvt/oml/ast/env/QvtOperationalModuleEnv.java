@@ -64,6 +64,16 @@ public class QvtOperationalModuleEnv extends QvtOperationalEnv {
 			}
 		}
 	}
+	
+	@Override
+	protected void removedVariable(String name, Variable<EClassifier, EParameter> variable, boolean isExplicit) {
+		super.removedVariable(name, variable, isExplicit);
+		if(name != null && name.equals(THIS)) {
+			if(myContextModule != null) {
+				myContextModule.getOwnedVariable().remove((org.eclipse.ocl.ecore.Variable)variable);
+			}
+		}
+	}
 			    
     public void setContextModule(Module module) {
     	deleteElement(THIS);

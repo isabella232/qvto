@@ -25,12 +25,14 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.IModelParameterInfo;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.IUriGroup;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.TransformationControls;
+import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator;
@@ -165,17 +167,20 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 	
 	private void createContents(Composite parent, final List<IUriGroup.IModifyListener> listeners) {
 		try {
+        	myParamGroups = new LinkedHashMap<ModelParameterInfo, IUriGroup>();
+        	
 			List<ModelParameterInfo> transfParameters = getTransfParameters();
 			if (transfParameters.size() > 0) {
 				createValidationButton(parent, listeners);
-			}
-		
-        	myParamGroups = new LinkedHashMap<ModelParameterInfo, IUriGroup>();
-			for (ModelParameterInfo paramInfo : transfParameters) {
-				IUriGroup uriGroup = TransformationControls.createUriGroup(parent, paramInfo, myTransformation.getResourceSet());
-				myParamGroups.put(paramInfo, uriGroup);
-				for (IUriGroup.IModifyListener listener : listeners) {
-					uriGroup.addModifyListener(listener);
+
+				ResourceSet mappingAwareRS = CompilerUtils.cloneResourceSet(myTransformation.getURI(), myTransformation.getResourceSet());				
+				
+				for (ModelParameterInfo paramInfo : transfParameters) {
+					IUriGroup uriGroup = TransformationControls.createUriGroup(parent, paramInfo, mappingAwareRS);
+					myParamGroups.put(paramInfo, uriGroup);
+					for (IUriGroup.IModifyListener listener : listeners) {
+						uriGroup.addModifyListener(listener);
+					}
 				}
 			}
 		} catch (MdaException e) {

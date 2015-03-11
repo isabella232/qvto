@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
+import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
@@ -64,7 +65,10 @@ public class QvtValidator {
 	            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_EmptyInputTransfParam,
 	            		transfParam.getName()));
 			}
-			IStatus nextStatus = validateTransformationParameter(transfParam, itrTargetData.next(), transformation.getResourceSet(), validationType);
+			
+			ResourceSet validationRS = CompilerUtils.cloneResourceSet(transformation.getURI(), transformation.getResourceSet());
+			
+			IStatus nextStatus = validateTransformationParameter(transfParam, itrTargetData.next(), validationRS, validationType);
             if (nextStatus.getSeverity() > result.getSeverity()) {
         		result = nextStatus;
         	}
@@ -199,9 +203,8 @@ public class QvtValidator {
 
 			URI sourceUri = EmfUtil.makeUri(targetData.getUriString());
 	        EObject in = null;
-	        ResourceSet rs = (classifier.eResource() != null && classifier.eResource().getResourceSet() != null ? classifier.eResource().getResourceSet() : validationRS);
 	        try {
-	        	ModelContent loadModel = EmfUtil.loadModel(sourceUri, rs);
+	        	ModelContent loadModel = EmfUtil.loadModel(sourceUri, validationRS);
 	        	in = (loadModel != null && !loadModel.getContent().isEmpty() ? loadModel.getContent().get(0) : null);
 	        }
 	        catch (Exception e) {
@@ -209,7 +212,7 @@ public class QvtValidator {
 	        if (in == null) {
 	            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_InvalidSourceUri, targetData.getUriString(), transfParam.getName()));
 	        }
-	        ResourceSet inputRs = (rs == null ? in.eResource().getResourceSet() : null);
+	        ResourceSet inputRs = (validationRS == null ? in.eResource().getResourceSet() : null);
 	        try {
 		        try {
 		        	in = EmfUtil.resolveSource(in, classifier);
@@ -237,16 +240,16 @@ public class QvtValidator {
 
 			URI sourceUri = EmfUtil.makeUri(targetData.getUriString());
 	        ModelContent in = null;
-	        ResourceSet rs = (metamodel.eResource() != null && metamodel.eResource().getResourceSet() != null ? metamodel.eResource().getResourceSet() : validationRS);
+	        
 	        try {
-	        	in = EmfUtil.loadModel(sourceUri, rs);
+	        	in = EmfUtil.loadModel(sourceUri, validationRS);
 	        }
 	        catch (Exception e) {
 	        }
 	        if (in == null) {
 	            return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_InvalidSourceUri, targetData.getUriString(), transfParam.getName()));
 	        }
-	        ResourceSet inputRs = (rs == null ? in.getResourceSet() : null);
+	        ResourceSet inputRs = (validationRS == null ? in.getResourceSet() : null);
 	        try {
 	        	in = in.getResolvedContent(metamodel);
 	        }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,7 +21,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -36,6 +36,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ui.provider.EmfModelContentProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ui.provider.EmfModelLabelProvider;
 import org.eclipse.swt.SWT;
@@ -55,11 +56,13 @@ public class SelectUriControl extends Composite {
         void selectionChanged(URI uri);
     }
     
-    public SelectUriControl(Composite parentComposite, String defaultFileName, boolean isConsiderAdaptes) {
+    public SelectUriControl(Composite parentComposite, String defaultFileName, boolean isConsiderAdaptes, ResourceSet resourceSet) {
         super(parentComposite,SWT.NULL);
         mySelectionListeners = new ArrayList<ISelectionListener>();
         myDefaultFileName = defaultFileName;
         myIsConsiderAdaptes = isConsiderAdaptes;
+        
+        myResourceSet = resourceSet;
         
         setLayout(new GridLayout());
         
@@ -140,6 +143,8 @@ public class SelectUriControl extends Composite {
     
     private final List<ISelectionListener> mySelectionListeners;
     
+    private final ResourceSet myResourceSet;
+    
     private static final int DEFAUL_AUTO_EXPAND_LEVEL = 0;
     private static final String NAME_COLUMN = "name"; //$NON-NLS-1$
     
@@ -150,8 +155,8 @@ public class SelectUriControl extends Composite {
 				IFile file = (IFile)parentElement;
 				List<EmfModelContentProvider.Node> children = new ArrayList<EmfModelContentProvider.Node>();
 				try {
-					Resource res = EmfUtil.loadResource(URI.createPlatformResourceURI(file.getFullPath().toString(), false));
-					for(EObject obj : res.getContents()) {
+					ModelContent res = EmfUtil.loadModel(URI.createPlatformResourceURI(file.getFullPath().toString(), false), myResourceSet);
+					for(EObject obj : res.getContent()) {
 						children.add(new EmfModelContentProvider.EObjectNode(obj, file));
 					}
 					

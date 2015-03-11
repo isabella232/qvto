@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -34,7 +34,7 @@ public class ResourceSourceChooser extends ChooserAdapter implements ISourceChoo
     }
     
     public Control createControl(Composite parent) {
-        myControl = new SelectUriControl(parent, getDefaultFileName(), myIsConsiderAdaptes);
+        myControl = new SelectUriControl(parent, getDefaultFileName(), myIsConsiderAdaptes, myResourceSet);
         myControl.addSelectionListener(new SelectUriControl.ISelectionListener() {
             public void selectionChanged(URI uri) {
                 if(uri == null) {

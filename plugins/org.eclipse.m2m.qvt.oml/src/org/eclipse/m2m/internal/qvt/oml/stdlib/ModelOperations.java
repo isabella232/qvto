@@ -18,6 +18,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.m2m.internal.qvt.oml.Messages;
+import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance;
@@ -70,7 +72,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final  CallHandler OBJECTS = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_NAME));
 			}
 
 			Set<Object> instances = new LinkedHashSet<Object>();			
@@ -85,7 +87,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final CallHandler ROOT_OBJECTS = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, ROOT_OBJECTS_NAME));
 			}
 			
 			Set<Object> instances = new LinkedHashSet<Object>();			
@@ -99,7 +101,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final CallHandler OBJECTS_OF_TYPE = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_OF_TYPE_NAME));
 			}
 			
 	        Set<Object> instances = new LinkedHashSet<Object>();	       
@@ -118,7 +120,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final CallHandler REMOVE_ELEMENT = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, REMOVE_ELEMENT_NAME));
 			}
 			ModelInstance model = (ModelInstance) source;
 			ModelParameterExtent modelParam = model.getExtent();
@@ -133,7 +135,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final CallHandler COPY = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, COPY_NAME));
 			}
 			ModelInstance model = (ModelInstance) source;
 	        ModelInstance modelCopy = model.copy();
@@ -145,7 +147,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	private static final CallHandler CREATE_EMPTY_MODEL = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelType == false) {
-				throw new IllegalArgumentException();
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, CREATE_EMPTY_MODEL_NAME));
 			}
 			
 			ModelType modelType = (ModelType) source;
