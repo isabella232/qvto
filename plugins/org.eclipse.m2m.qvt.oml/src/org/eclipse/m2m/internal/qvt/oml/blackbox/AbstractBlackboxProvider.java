@@ -35,7 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
 public abstract class AbstractBlackboxProvider {
-	
+		
 	private static final ResolutionContext GLOBAL_RESOLUTION_CONTEXT = new ResolutionContextImpl(BlackboxUnitResolver.GLOBAL_CONTEXT);
 
 	public interface InstanceAdapterFactory {

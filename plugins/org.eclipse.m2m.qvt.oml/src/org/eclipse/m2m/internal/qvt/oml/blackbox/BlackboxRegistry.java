@@ -1,19 +1,6 @@
-/*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
- * 
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *   
- * Contributors:
- *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 289982, 326871, 427237
- *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -34,33 +21,21 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
  * TODO - handle collisions of multiple descriptors of the same qualified name
  */
 public class BlackboxRegistry {
+
+	public static BlackboxRegistry INSTANCE = EMFPlugin.IS_ECLIPSE_RUNNING ? new BlackboxRegistry.Eclipse() : new BlackboxRegistry();
 	
-	private static final String CLASS_ATTR = "class"; //$NON-NLS-1$
-
-	private static final String PROVIDER_ELEMENT = "provider"; //$NON-NLS-1$
-
-	private static final String BLACKBOX_PROVIDER_EXTENSION = "blackboxProvider"; //$NON-NLS-1$
-
-	public static BlackboxRegistry INSTANCE = new BlackboxRegistry();
-
-	// instance fields
-	private List<? extends AbstractBlackboxProvider> fProviders;
-		
-	private BlackboxRegistry() {
-		try {
-			if(EMFPlugin.IS_ECLIPSE_RUNNING) {
-				fProviders = Eclipse.readProviders();
-			} else {
-				fProviders = Arrays.asList(new StandaloneBlackboxProvider());
-			}
-		} catch (RuntimeException e) {
-			fProviders = Collections.emptyList();
-			QvtPlugin.error(e);
-		}
+	private StandaloneBlackboxProvider fStandaloneProvider = new StandaloneBlackboxProvider();
+	
+	public BlackboxRegistry() {
+		super();
 	}
 	
+	public List<? extends AbstractBlackboxProvider> getProviders() {
+		return Collections.singletonList(fStandaloneProvider);
+	};
+	
 	public AbstractCompilationUnitDescriptor getCompilationUnitDescriptor(String qualifiedName, ResolutionContext context) {
-		for (AbstractBlackboxProvider provider : fProviders) {
+		for (AbstractBlackboxProvider provider : getProviders()) {
 			AbstractCompilationUnitDescriptor descriptor = provider.getModuleDescriptor(qualifiedName, context);
 			if(descriptor != null) {
 				return descriptor;
@@ -69,20 +44,21 @@ public class BlackboxRegistry {
 		
 		return null;
 	}
-	
-	public CompilationUnit loadCompilationUnit(AbstractCompilationUnitDescriptor descriptor, LoadContext loadContext) throws BlackboxException {
-		if(descriptor == null) {
-			throw new IllegalArgumentException("Null blackbox descriptor"); //$NON-NLS-1$
-		}
-		
-		AbstractBlackboxProvider provider = descriptor.getProvider();
-		return provider.loadCompilationUnit(descriptor, loadContext);
-	}
-		
+
+	public CompilationUnit loadCompilationUnit(AbstractCompilationUnitDescriptor descriptor, LoadContext loadContext)
+			throws BlackboxException {
+				if(descriptor == null) {
+					throw new IllegalArgumentException("Null blackbox descriptor"); //$NON-NLS-1$
+				}
+				
+				AbstractBlackboxProvider provider = descriptor.getProvider();
+				return provider.loadCompilationUnit(descriptor, loadContext);
+			}
+
 	public List<AbstractCompilationUnitDescriptor> getCompilationUnitDescriptors(ResolutionContext loadContext) {
 		ArrayList<AbstractCompilationUnitDescriptor> result = new ArrayList<AbstractCompilationUnitDescriptor>();
 		
-		for (AbstractBlackboxProvider provider : fProviders) {
+		for (AbstractBlackboxProvider provider : getProviders()) {
 			for (AbstractCompilationUnitDescriptor abstractCompilationUnitDescriptor : provider.getModuleDescriptors(loadContext)) {
 				result.add(abstractCompilationUnitDescriptor);
 			}
@@ -90,35 +66,73 @@ public class BlackboxRegistry {
 		
 		return result;
 	}
-	
-	public void addStandaloneModules(Class<?>... classes) {
-		StandaloneBlackboxProvider standaloneProvider = null;
-		for (AbstractBlackboxProvider provider : fProviders) {
-			if (provider instanceof StandaloneBlackboxProvider) {
-				standaloneProvider = (StandaloneBlackboxProvider) provider;
-				break;
-			}
-		}
-		
-		if (standaloneProvider == null) {
-			standaloneProvider = new StandaloneBlackboxProvider();
-			List<AbstractBlackboxProvider> prov = new ArrayList<AbstractBlackboxProvider>(fProviders);
-			prov.add(standaloneProvider);
-			fProviders = prov;
-		}
-		
-		for (Class<?> cls : classes) {
-			standaloneProvider.registerDescriptor(cls);
-		}
-	}
-	
+
 	public void cleanup() {
-		for (AbstractBlackboxProvider provider : fProviders) {
+		for (AbstractBlackboxProvider provider : getProviders()) {
 			provider.cleanup();
 		}
 	}
 
-	private static class Eclipse {
+	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
+		Collection<CallHandler> result = Collections.emptyList();
+		for (AbstractBlackboxProvider provider : getProviders()) {			
+			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(operation, env);
+			if (!handlers.isEmpty()) {
+				if (result.isEmpty()) {
+					result = new LinkedList<CallHandler>();
+				}
+				result.addAll(handlers);
+			}			
+		}		
+		return result;
+	}
+
+	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
+		Collection<CallHandler> result = Collections.emptyList();
+		for (AbstractBlackboxProvider provider : getProviders()) {			
+			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(transformation, env);
+			if (!handlers.isEmpty()) {
+				if (result.isEmpty()) {
+					result = new LinkedList<CallHandler>();
+				}
+				result.addAll(handlers);
+			}			
+		}		
+		return result;
+	}
+
+	public void addStandaloneModules(Class<?>... classes) {
+		for (Class<?> cls : classes) {
+			fStandaloneProvider.registerDescriptor(cls);
+		}
+	}
+	
+	private static class Eclipse extends BlackboxRegistry {
+		
+		private static final String CLASS_ATTR = "class"; //$NON-NLS-1$
+
+		private static final String PROVIDER_ELEMENT = "provider"; //$NON-NLS-1$
+
+		private static final String BLACKBOX_PROVIDER_EXTENSION = "blackboxProvider"; //$NON-NLS-1$
+
+		private List<? extends AbstractBlackboxProvider> fProviders;
+		
+		@Override
+		public List<? extends AbstractBlackboxProvider> getProviders() {
+			List<AbstractBlackboxProvider> providers = new LinkedList<AbstractBlackboxProvider>(fProviders);
+			providers.addAll(super.getProviders());
+			return providers;
+		}
+
+		Eclipse() {
+			try {
+				fProviders = readProviders();
+			} catch (RuntimeException e) {
+				fProviders = Collections.emptyList();
+				QvtPlugin.error(e);
+			}
+		}
+		
 	    private static List<AbstractBlackboxProvider> readProviders() {
 	        List<AbstractBlackboxProvider> providers = new LinkedList<AbstractBlackboxProvider>();
 	        
@@ -145,33 +159,5 @@ public class BlackboxRegistry {
 	        return providers;
 	    }
 	}
-	
-	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
-		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractBlackboxProvider provider : fProviders) {			
-			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(operation, env);
-			if (!handlers.isEmpty()) {
-				if (result.isEmpty()) {
-					result = new LinkedList<CallHandler>();
-				}
-				result.addAll(handlers);
-			}			
-		}		
-		return result;
-	}
-	
-	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
-		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractBlackboxProvider provider : fProviders) {			
-			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(transformation, env);
-			if (!handlers.isEmpty()) {
-				if (result.isEmpty()) {
-					result = new LinkedList<CallHandler>();
-				}
-				result.addAll(handlers);
-			}			
-		}		
-		return result;
-	}
-	
+
 }

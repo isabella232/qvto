@@ -38,7 +38,7 @@ abstract class ModuleHandle {
 	}
 	
 	public abstract List<String> getUsedPackages();
-	
+		
 	public Class<?> getModuleJavaClass() throws ClassNotFoundException {
 		return Class.forName(className);
 	}

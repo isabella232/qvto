@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
@@ -51,6 +52,7 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 
 			fDescriptorMap.put(d.getQualifiedName(), d);
 		} catch (ClassNotFoundException e) {
+			QvtPlugin.error(e);
 		}
 	}
 

@@ -130,7 +130,14 @@ abstract class JavaModuleLoader {
 		EPackage.Registry registry = fEnv.getEPackageRegistry();
 		List<EPackage> ePackages = new ArrayList<EPackage>(nsURIs.size());
 		for (String nextURI : nsURIs) {
-			EPackage resolvedPackage = registry.getEPackage(nextURI);
+			EPackage resolvedPackage;
+			try {
+				resolvedPackage = registry.getEPackage(nextURI);
+			}
+			catch (Throwable t) {
+				resolvedPackage = null;
+			}
+			
 			if(resolvedPackage != null) {
 				ePackages.add(resolvedPackage);				
 			} else {
