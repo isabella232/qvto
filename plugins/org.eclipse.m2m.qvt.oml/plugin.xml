@@ -12,12 +12,6 @@
     </provider>
  </extension>
  
-  <extension name="Java standalone blackbox implementation provider" point="org.eclipse.m2m.qvt.oml.blackboxProvider">
-    <provider
-          class="org.eclipse.m2m.internal.qvt.oml.blackbox.java.StandaloneBlackboxProvider">
-    </provider>
-  </extension>
- 
  <extension point="org.eclipse.emf.ecore.generated_package">
    <package 
       uri = "http:///www.eclipse.org/m2m/qvt/operational/trace.ecore" 
