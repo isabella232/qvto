@@ -1320,9 +1320,9 @@ public class QvtOperationalVisitorCS
 		if (oper == null) {
 			String message;
 			String operationString = operationString(env, operName, args);
-			String operationSourceTypeString = (operationSourceType == null) ?
-					null : uml.getName(operationSourceType);
-			if (source.getType() == operationSourceType) {
+			String operationSourceTypeString = uml.getName(operationSourceType);
+			EClassifier srcType = source == null ? null : source.getType();
+			if (srcType == operationSourceType) {
 				message = NLS.bind(
 				ValidationMessages.QvtOperationalVisitorCS_OperationNotFound_ERROR_,
 				operationString,
@@ -1330,7 +1330,7 @@ public class QvtOperationalVisitorCS
 			} else {
 				message = NLS.bind(
 						ValidationMessages.QvtOperationalVisitorCS_OperationNotFoundForCollectionAndItsElement,
-						new Object[] {operationString, uml.getName(source.getType()), operationSourceTypeString});
+						new Object[] {operationString, uml.getName(srcType), operationSourceTypeString});
 			}
 			ERROR(operationCallExpCS, rule, message);
 			result.setType(env.getOCLStandardLibrary().getOclVoid());
