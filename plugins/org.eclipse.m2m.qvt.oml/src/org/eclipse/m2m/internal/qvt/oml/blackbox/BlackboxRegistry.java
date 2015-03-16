@@ -34,7 +34,7 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
  */
 public class BlackboxRegistry {
 
-	public static BlackboxRegistry INSTANCE = EMFPlugin.IS_ECLIPSE_RUNNING ? new BlackboxRegistry.Eclipse()
+	public static final BlackboxRegistry INSTANCE = EMFPlugin.IS_ECLIPSE_RUNNING ? new BlackboxRegistry.Eclipse()
 			: new BlackboxRegistry();
 
 	private final StandaloneBlackboxProvider fStandaloneProvider = new StandaloneBlackboxProvider();
@@ -44,7 +44,7 @@ public class BlackboxRegistry {
 		fProviders = Collections.<AbstractBlackboxProvider>singletonList(fStandaloneProvider);
 	}
 
-	public List<? extends AbstractBlackboxProvider> getProviders() {
+	protected List<? extends AbstractBlackboxProvider> getProviders() {
 		return fProviders;
 	}
 
@@ -130,7 +130,7 @@ public class BlackboxRegistry {
 		private final List<AbstractBlackboxProvider> fProviders;
 
 		@Override
-		public List<? extends AbstractBlackboxProvider> getProviders() {
+		protected List<? extends AbstractBlackboxProvider> getProviders() {
 			return fProviders;
 		}
 
