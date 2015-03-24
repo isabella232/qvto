@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Borland Software Corporation and others.
+ * Copyright (c) 2014, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
-import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
 import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 
@@ -35,9 +34,6 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 	}
 
 	private static List<String> getInModels(ModelTestData data) {
-		if (data instanceof FileToFileData) {
-			return Collections.singletonList(((FileToFileData) data).getFromFile());
-		}
 		if (data instanceof FilesToFilesData) {
 			return ((FilesToFilesData) data).getFromFiles();
 		}
@@ -45,9 +41,6 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 	}
 	
 	private static List<String> getOutModels(ModelTestData data) {
-		if (data instanceof FileToFileData) {
-			return Collections.singletonList(((FileToFileData) data).getExpectedFile());
-		}
 		if (data instanceof FilesToFilesData) {
 			return ((FilesToFilesData) data).getExpectedFiles();
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -90,7 +90,7 @@ public abstract class AbstractBlackboxProvider {
 		CallHandlerAdapter.attach(operation, actualHandler);
 	}
 
-	public abstract Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(
+	public abstract Collection<? extends AbstractCompilationUnitDescriptor> getModuleDescriptors(
 			ResolutionContext resolutionContext);
 
 	public abstract AbstractCompilationUnitDescriptor getModuleDescriptor(

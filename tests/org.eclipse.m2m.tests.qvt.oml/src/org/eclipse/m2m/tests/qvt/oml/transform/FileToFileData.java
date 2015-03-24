@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
-public class FileToFileData extends ModelTestData {
+public class FileToFileData extends FilesToFilesData {
     public FileToFileData(String name) {
         this(name, "in.ecore", "expected.ecore");  //$NON-NLS-1$//$NON-NLS-2$
     }
@@ -38,7 +38,7 @@ public class FileToFileData extends ModelTestData {
     }
     
     public FileToFileData(String name, String fromFile, String expectedFile, IContext context) {
-        super(name, context);
+        super(name, Collections.singletonList(fromFile), Collections.singletonList(expectedFile), context);
         myFromFile = fromFile;
         myExpectedFile = expectedFile;
     }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Borland Software Corporation and others.
+ * Copyright (c) 2014, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
@@ -179,9 +180,11 @@ public class TransformationExecutorTest extends TestCase {
 		return paramKinds;
     }
     
-    private ResourceSet getMetamodelResolutionRS() {
+    protected ResourceSet getMetamodelResolutionRS() {
     	ResourceSet resSet = new ResourceSetImpl();
-
+    	
+    	resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+    	
     	if (getEcoreMetamodels().isEmpty()) {
     		return resSet;
     	}

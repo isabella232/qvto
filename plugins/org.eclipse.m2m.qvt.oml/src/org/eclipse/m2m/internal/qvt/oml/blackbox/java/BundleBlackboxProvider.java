@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -48,7 +48,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	}	
 
 	private Map<String, AbstractCompilationUnitDescriptor> readDescriptors() {
-    	Map<String, AbstractCompilationUnitDescriptor> providers = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+    	Map<String, AbstractCompilationUnitDescriptor> descriptors = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
         
         IConfigurationElement[] configs = Platform.getExtensionRegistry()
         		.getConfigurationElementsFor(QvtPlugin.ID, EXTENSION_POINT);
@@ -57,8 +57,8 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
             try {
             	BundleDescriptor descriptor = createDescriptor(element);
         		String id = descriptor.getQualifiedName();            	
-            	if(!providers.containsKey(id)) {
-					providers.put(id, descriptor);
+            	if(!descriptors.containsKey(id)) {
+					descriptors.put(id, descriptor);
             	} else {
             		String message = NLS.bind(JavaBlackboxMessages.UnitAlreadyRegisteredContributionIgnored, id, descriptor.getContributorId());
 					QvtPlugin.error(message);
@@ -68,7 +68,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
             }
         }
 
-        return providers;
+        return descriptors;
     }
         
 	private BundleDescriptor createDescriptor(IConfigurationElement configurationElement) throws IllegalArgumentException {

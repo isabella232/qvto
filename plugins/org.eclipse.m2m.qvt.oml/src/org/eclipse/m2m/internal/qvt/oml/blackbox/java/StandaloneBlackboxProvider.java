@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,8 +12,11 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
@@ -23,12 +26,12 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	
-	private Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+	private Map<String, JavaUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	
 	@Override
 	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) { 
 		try {
-			AbstractCompilationUnitDescriptor d = fDescriptorMap.get(qualifiedName);
+			JavaUnitDescriptor d = fDescriptorMap.get(qualifiedName);
 			if (d == null) {
 				d = new StandaloneDescriptor(qualifiedName);
 				fDescriptorMap.put(qualifiedName, d);
@@ -39,40 +42,56 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		}
 	}
 	
-	public void registerDescriptor(final Class<?> cls) {
-		JavaUnitDescriptor d = new JavaUnitDescriptor(cls.getName()) {};
+	public void registerDescriptor(final Class<?> cls, String unitName, String moduleName, final String[] packageURIs) {
+		JavaUnitDescriptor d = fDescriptorMap.get(unitName);
+		
+		if (d == null) {
+			d = new JavaUnitDescriptor(unitName) {};
+			fDescriptorMap.put(unitName, d);
+		}
 		
 		try {
-			d.addModuleHandle(new StandaloneModuleHandle(d.getQualifiedName(), cls.getSimpleName()) {
-				@Override
-				public Class<?> getModuleJavaClass() throws ClassNotFoundException {
-					return cls;
+			d.addModuleHandle(
+				new StandaloneModuleHandle(cls.getName(), moduleName) {
+					@Override
+					public Class<?> getModuleJavaClass() throws ClassNotFoundException {
+						return cls;
+					}
+					
+					@Override
+					public List<String> getUsedPackages() {
+						return Arrays.asList(packageURIs);
+					}
 				}
-			});
-
-			fDescriptorMap.put(d.getQualifiedName(), d);
+			);
 		} catch (ClassNotFoundException e) {
 			QvtPlugin.error(e);
 		}
 	}
 
 	@Override
-	public Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
+	public Collection<JavaUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
 		return fDescriptorMap.values();
 	}
 
 	@Override
 	public void cleanup() {
 		super.cleanup();
-		fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+		fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	}
 	
 	private class StandaloneDescriptor extends JavaUnitDescriptor {		
 				
 		StandaloneDescriptor(String unitQualifiedName) throws ClassNotFoundException {
+			this(unitQualifiedName, Collections.singletonList(getSimpleNameFromJavaClass(unitQualifiedName))); 
+		}
+		
+		StandaloneDescriptor(String unitQualifiedName, List<String> moduleNames) throws ClassNotFoundException {
 			super(unitQualifiedName); 
 			
-			addModuleHandle(new StandaloneModuleHandle(unitQualifiedName, getSimpleNameFromJavaClass(unitQualifiedName)));			
+			for(String moduleName : moduleNames) {
+				addModuleHandle(new StandaloneModuleHandle(unitQualifiedName, moduleName));
+			}
 		}
 						
 	}

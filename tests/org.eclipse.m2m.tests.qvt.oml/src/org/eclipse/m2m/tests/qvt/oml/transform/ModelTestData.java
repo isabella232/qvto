@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -31,6 +31,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,6 +43,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.qvt.oml.TransformationExecutor.BlackboxRegistry;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
@@ -244,6 +246,14 @@ public abstract class ModelTestData {
     public String getBundle() {
     	return AllTests.BUNDLE_ID;
     }
+    
+    public List<? extends EPackage> getUsedPackages() {
+    	return Collections.singletonList(EcorePackage.eINSTANCE);
+    }
+    
+    public void prepare(BlackboxRegistry blackboxRegistry) {
+    }
+    
     
     private final String myName;
     private final IContext myContext;

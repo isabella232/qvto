@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -58,7 +58,15 @@ public final class TransformationExecutor {
 	public interface BlackboxRegistry {
 		BlackboxRegistry INSTANCE = new TransformationExecutorBlackboxRegistry();
 				
-		Diagnostic registerModules(Class<?>... classes);		
+		Diagnostic registerModules(Class<?>... classes);
+		
+		Diagnostic registerModule(Class<?> cls);
+		
+		Diagnostic registerModule(Class<?> cls, String unitName);
+		
+		Diagnostic registerModule(Class<?> cls, String unitName, String moduleName);
+		
+		Diagnostic registerModule(Class<?> cls, String unitName, String moduleName, String[] packageURIs);
 	}
 	
 
