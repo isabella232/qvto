@@ -84,6 +84,7 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.UnlinkExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.UnpackExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.VariableInitExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.WhileExp;
+import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.Constraint;
@@ -91,6 +92,7 @@ import org.eclipse.ocl.ecore.IfExp;
 import org.eclipse.ocl.ecore.IterateExp;
 import org.eclipse.ocl.ecore.IteratorExp;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.eclipse.ocl.ecore.TupleType;
 import org.eclipse.ocl.expressions.CollectionLiteralExp;
 import org.eclipse.ocl.expressions.FeatureCallExp;
 import org.eclipse.ocl.expressions.OCLExpression;
@@ -1294,5 +1296,20 @@ final class CustomOclValidationVisitor extends
 		}
 
 		return Boolean.TRUE;
+	}
+	
+	public Boolean visitVariableExp(VariableExp<EClassifier, EParameter> variableExp) {
+		if (variableExp.getType() instanceof TupleType &&
+        	variableExp.getReferredVariable().getName().equals(Environment.RESULT_VARIABLE_NAME)) {
+     
+			EParameter param = variableExp.getReferredVariable().getRepresentedParameter();
+			if (param == null) {
+				// tuple result variable doesn't represent a parameter => deprecated synthetic result tuple
+				// https://bugs.eclipse.org/bugs/show_bug.cgi?id=432112
+				QvtOperationalUtil.reportWarning(myEnv, NLS.bind(ValidationMessages.QvtOperationalVisitorCS_deprecatedResultTupleAccess, new Object[] {}), variableExp.getStartPosition(), variableExp.getEndPosition());
+			}	
+        }
+		
+		return super.visitVariableExp(variableExp);
 	}
 }

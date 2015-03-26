@@ -115,7 +115,7 @@ public class ParserTests {
     	TestData.createSourceChecked("resolvecond", 1, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("intermPropClash", 9, 0),    	    	 //$NON-NLS-1$
     	TestData.createSourceChecked("noClassInImplicitPopulate", 3, 1),    	 //$NON-NLS-1$
-    	TestData.createSourceChecked("parmnamesclash", 22, 0), //$NON-NLS-1$
+    	TestData.createSourceChecked("parmnamesclash", 22, 1), //$NON-NLS-1$
     	TestData.createSourceChecked("stdlibElementAsOut", 7, 0),    	 //$NON-NLS-1$
         TestData.createSourceChecked("bug2732_wrongcondition", 1, 1), //$NON-NLS-1$      
         TestData.createSourceChecked("varscope", 10, 0), //$NON-NLS-1$      

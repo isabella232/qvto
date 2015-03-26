@@ -265,6 +265,7 @@ public final class ValidationMessages extends NLS {
 	public static String CannotRaiseNonException;
 	public static String StringTypeMessageExcArgumentError;
 	public static String UncatchableCatchBlock;
+	public static String QvtOperationalVisitorCS_deprecatedResultTupleAccess;
     
 	static {
 		NLS.initializeMessages(BUNDLE_NAME, ValidationMessages.class);

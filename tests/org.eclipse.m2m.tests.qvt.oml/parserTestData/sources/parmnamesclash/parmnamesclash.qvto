@@ -10,7 +10,7 @@ mapping EClass::fooMappingWrong(in aa:String, /*<error>*/aa:String/*</error>*/)
 	}
 	end {
 		var /*<error>*/a := null/*</error>*/;
-		var v1 := result;
+		var v1 := /*<warn>*/result/*</warn>*/;
 		var v2 := self;
 	}
 }
