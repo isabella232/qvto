@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -44,7 +44,7 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
 public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 
-	static final String CLASS_NAME_SEPARATOR = "."; //$NON-NLS-1$
+	public static final String CLASS_NAME_SEPARATOR = "."; //$NON-NLS-1$
 
 	private final Map<JavaUnitDescriptor, CompilationUnit> fBlackboxUnits = new LinkedHashMap<JavaUnitDescriptor, CompilationUnit>();
 

@@ -32,8 +32,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor.BlackboxRegistry;
-import org.eclipse.m2m.qvt.oml.ocl.emf.libraries.EmfToolsLibrary;
-import org.eclipse.m2m.qvt.oml.ocl.emf.libraries.StringLibrary;
+import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.EmfToolsLibrary;
+import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.StringLibrary;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestBlackboxLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.AnnotatedJavaLibrary;
@@ -166,13 +166,13 @@ public class TransformTests {
         			
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         			}
         		},
         		new FilesToFilesData("uml2_stereotypeApplication", Arrays.asList("in1.ecore", "in2.ecore"), Arrays.asList("expected1.ecore", "expected2.ecore", "expected3.ecore")) {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         			}
         		}, //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
         		new FilesToFilesData("subobjects", Arrays.asList("in.ecore"), Collections.<String>emptyList()), //$NON-NLS-1$ //$NON-NLS-2$
@@ -203,7 +203,7 @@ public class TransformTests {
         		new FileToFileData("listLiteral_259754") {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         				blackboxRegistry.registerModule(StringLibrary.class, "Strings", "Strings");
         			}
         		}, //$NON-NLS-1$
@@ -218,7 +218,7 @@ public class TransformTests {
         		new FileToFileData("stdlibList") {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         			}
         		}, //$NON-NLS-1$
         		new FileToFileData("stdlibDict"), //$NON-NLS-1$        		        		
@@ -259,7 +259,7 @@ public class TransformTests {
         			
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         			}
         		}, //$NON-NLS-1$                
                 new FileToFileData("bug233984"), //$NON-NLS-1$
@@ -563,8 +563,9 @@ public class TransformTests {
         		new FilesToFilesData("bug289982_importless") {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(Bug289982_Library.class, "org.bar.Foo", "Bug289982_Lib", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
+        				blackboxRegistry.registerModule(TestBlackboxLibrary.class, "TestBlackboxLibrary", "TestBlackboxLibrary", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
         				blackboxRegistry.registerModule(SimpleJavaLibrary.class);
-        				blackboxRegistry.registerModule(TestBlackboxLibrary.class);
         			}
         		}, //$NON-NLS-1$
         		new FilesToFilesData("bug289982") {
@@ -578,7 +579,7 @@ public class TransformTests {
         		new FilesToFilesData("bug400233") {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
-        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib", new String[] {"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml", "http://www.eclipse.org/emf/2002/Ecore", "http://www.eclipse.org/qvt/1.0.0/Operational/Expressions", "http://www.eclipse.org/m2m/qvt/oml/generics"});
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
         			}
         		}, //$NON-NLS-1$
         		new FilesToFilesData("bug424584", Collections.<String>emptyList(), Collections.singletonList("expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$

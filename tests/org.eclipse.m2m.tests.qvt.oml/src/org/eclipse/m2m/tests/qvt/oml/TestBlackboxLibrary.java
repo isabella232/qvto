@@ -15,12 +15,13 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
 public class TestBlackboxLibrary {
 	
-	public Set<ENamedElement> legacyAsRenamedSet(Object self, String name) {
-		if(self instanceof ENamedElement) {
-			ENamedElement namedElement = (ENamedElement) self;
+	public Set<ENamedElement> legacyAsRenamedSet(Object object, String name) {
+		if(object instanceof ENamedElement) {
+			ENamedElement namedElement = (ENamedElement) object;
 			namedElement.setName(name);
 			return Collections.singleton(namedElement);			
 		}
@@ -28,6 +29,7 @@ public class TestBlackboxLibrary {
 		return Collections.emptySet(); 
 	}
 	
+	@Operation(contextual=true)
 	public final Set<Object> legacyOclAnyAsSet(Object self) {
 		return Collections.singleton(self);
 	}

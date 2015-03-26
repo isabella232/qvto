@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 import org.eclipse.ocl.types.AnyType;
 import org.eclipse.ocl.types.PrimitiveType;
 import org.eclipse.ocl.types.VoidType;
@@ -120,6 +121,7 @@ public class EmfToolsLibrary {
         return GETTER_PREFIX + datatypeName;
     }
     
+    @Operation(contextual=true)
     public String getDetails(EAnnotation self, String key) {
     	if (self == null) {
     		return null;
@@ -127,6 +129,7 @@ public class EmfToolsLibrary {
     	return (String) self.getDetails().get(key);
     }
     
+    @Operation(contextual=true)
     public EObject asEObject(Object self) {
     	if (self instanceof EObject) {
     		return (EObject) self;

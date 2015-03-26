@@ -7,7 +7,7 @@ import emf.tools;
 mapping main() { 
 
 	var numberOfIterations := 1000;
-	var startTime := this.currentTimeMillis();
+	var startTime := currentTimeMillis();
 	
 	var x := 0;
 	while(true) { 
@@ -24,9 +24,9 @@ mapping main() {
 	};
 	assert fatal (x = numberOfIterations);
 	
-	dump("Elapsed: " + (this.currentTimeMillis() - startTime).toString());
+	dump("Elapsed: " + (currentTimeMillis() - startTime).toString());
 
-	startTime := this.currentTimeMillis();
+	startTime := currentTimeMillis();
 	
 	x := 0;
 	while(true) { 
@@ -43,7 +43,7 @@ mapping main() {
 	};
 	assert fatal (x = numberOfIterations);
 	
-	dump("Elapsed: " + (this.currentTimeMillis() - startTime).toString());
+	dump("Elapsed: " + (currentTimeMillis() - startTime).toString());
 
 }
 

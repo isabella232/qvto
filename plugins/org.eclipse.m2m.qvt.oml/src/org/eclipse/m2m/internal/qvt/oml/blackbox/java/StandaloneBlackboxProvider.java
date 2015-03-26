@@ -42,12 +42,12 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		}
 	}
 	
-	public void registerDescriptor(final Class<?> cls, String unitName, String moduleName, final String[] packageURIs) {
-		JavaUnitDescriptor d = fDescriptorMap.get(unitName);
+	public void registerDescriptor(final Class<?> cls, String unitQualifiedName, String moduleName, final String[] packageURIs) {
+		JavaUnitDescriptor d = fDescriptorMap.get(unitQualifiedName);
 		
 		if (d == null) {
-			d = new JavaUnitDescriptor(unitName) {};
-			fDescriptorMap.put(unitName, d);
+			d = new JavaUnitDescriptor(unitQualifiedName) {};
+			fDescriptorMap.put(unitQualifiedName, d);
 		}
 		
 		try {

@@ -61,12 +61,10 @@ public final class TransformationExecutor {
 		Diagnostic registerModules(Class<?>... classes);
 		
 		Diagnostic registerModule(Class<?> cls);
+				
+		Diagnostic registerModule(Class<?> cls, String unitQualifiedName, String moduleName);
 		
-		Diagnostic registerModule(Class<?> cls, String unitName);
-		
-		Diagnostic registerModule(Class<?> cls, String unitName, String moduleName);
-		
-		Diagnostic registerModule(Class<?> cls, String unitName, String moduleName, String[] packageURIs);
+		Diagnostic registerModule(Class<?> cls, String unitQualifiedName, String moduleName, String[] packageURIs);
 	}
 	
 

@@ -112,8 +112,8 @@ public class BlackboxRegistry {
 		return result;
 	}
 	
-	public void addStandaloneModule(Class<?> cls, String unitName, String moduleName, String[] packageURIs) {
-		fStandaloneProvider.registerDescriptor(cls, unitName, moduleName, packageURIs);
+	public void addStandaloneModule(Class<?> cls, String unitQualifiedName, String moduleName, String[] packageURIs) {
+		fStandaloneProvider.registerDescriptor(cls, unitQualifiedName, moduleName, packageURIs);
 	}
 
 

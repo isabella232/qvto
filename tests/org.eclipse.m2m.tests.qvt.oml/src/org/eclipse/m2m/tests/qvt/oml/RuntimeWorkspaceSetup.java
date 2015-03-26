@@ -88,7 +88,7 @@ public class RuntimeWorkspaceSetup {
 			"org.eclipse.emf.common", //$NON-NLS-1$
 			"org.eclipse.m2m.qvt.oml", //$NON-NLS-1$ 
 			"org.eclipse.m2m.qvt.oml.samples", //$NON-NLS-1$			
-			"org.eclipse.m2m.qvt.oml.ocl.emf.libraries", //$NON-NLS-1$                
+			"org.eclipse.m2m.qvt.oml.ocl", //$NON-NLS-1$                
 			AllTests.BUNDLE_ID,
 
 		});

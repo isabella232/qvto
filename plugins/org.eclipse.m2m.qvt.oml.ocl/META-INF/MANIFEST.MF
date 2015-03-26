@@ -12,5 +12,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)",
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.m2m.internal.qvt.oml.ocl;x-internal:=true,
  org.eclipse.m2m.internal.qvt.oml.ocl.metainfo;x-internal:=true,
- org.eclipse.m2m.internal.qvt.oml.ocl.transformations;x-internal:=true
+ org.eclipse.m2m.internal.qvt.oml.ocl.transformations;x-internal:=true,
+ org.eclipse.m2m.qvt.oml.ocl.legacy.libraries
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

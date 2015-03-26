@@ -35,9 +35,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.MutableListImpl;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
-import org.eclipse.m2m.qvt.oml.blackbox.java.Parameter;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation.Kind;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Parameter;
 import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.MutableList;
@@ -47,7 +48,11 @@ import org.eclipse.ocl.util.CollectionUtil;
 
 import simpleuml.Model;
 
-
+@Module(packageURIs={
+		"http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml",	    		
+    	"http://www.eclipse.org/emf/2002/Ecore",
+		"http://www.eclipse.org/qvt/1.0.0/Operational/Expressions",
+		"http://www.eclipse.org/m2m/qvt/oml/generics"})
 public class AnnotatedJavaLibrary {
 	
 	private String myState;

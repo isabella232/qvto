@@ -54,7 +54,6 @@ qvto-examples.psf
 qvto-tests.psf
 -->
 <provider id="org.eclipse.egit.core.GitProvider">
-<project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.ocl.emf.libraries"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,tests/org.eclipse.m2m.tests.qvt.oml"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,tests/org.eclipse.m2m.tests.qvt.oml.ui"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,tests/org.eclipse.m2m.tests.qvto.pluginProject"/>
@@ -64,7 +63,6 @@ qvto-tests.psf
 <item elementID="=org.eclipse.m2m.tests.qvt.oml.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.tests.qvt.oml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.tests.qvto.pluginProject" type="4"/>
-<item elementID="=org.eclipse.m2m.qvt.oml.ocl.emf.libraries" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.tests.qvto.transformationProject" type="4"/>
 </workingSets>
 <!--

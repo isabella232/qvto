@@ -13,6 +13,7 @@ package org.eclipse.m2m.internal.qvt.oml;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.java.JavaBlackboxProvider;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 
@@ -26,20 +27,30 @@ public class TransformationExecutorBlackboxRegistry implements TransformationExe
 	}
 	
 	public Diagnostic registerModule(Class<?> cls) {
-		return registerModule(cls, cls.getName());
+		return registerModule(cls, null, null);
+	}
+		
+	public Diagnostic registerModule(Class<?> cls, String unitQualifiedName, String moduleName) {
+		
+		return registerModule(cls, unitQualifiedName, moduleName, null);
 	}
 	
-	public Diagnostic registerModule(Class<?> cls, String unitName) {
-		return registerModule(cls, unitName, cls.getSimpleName());
-	}
-	
-	public Diagnostic registerModule(Class<?> cls, String unitName, String moduleName) {
-		Module annotation = cls.getAnnotation(Module.class);
-		return registerModule(cls, unitName, moduleName, annotation == null ? new String[] {} : annotation.packageURIs());
-	}
-	
-	public Diagnostic registerModule(Class<?> cls, String unitName, String moduleName, String[] packageURIs) {
-		BlackboxRegistry.INSTANCE.addStandaloneModule(cls, unitName, moduleName, packageURIs);
+	public Diagnostic registerModule(Class<?> cls, String unitQualifiedName, String moduleName, String[] packageURIs) {
+		
+		if (moduleName == null) {
+			moduleName = cls.getSimpleName();
+		}
+		
+		if (unitQualifiedName == null) {
+			unitQualifiedName = cls.getPackage().getName() + JavaBlackboxProvider.CLASS_NAME_SEPARATOR + moduleName;
+		}
+		
+		if (packageURIs == null) {
+			Module annotation = cls.getAnnotation(Module.class);
+			packageURIs = (annotation == null) ? new String[] {} : annotation.packageURIs();
+		}
+		
+		BlackboxRegistry.INSTANCE.addStandaloneModule(cls, unitQualifiedName, moduleName, packageURIs);
 		return Diagnostic.OK_INSTANCE;
 	}
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2012 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,6 +16,8 @@ package org.eclipse.m2m.qvt.oml.ocl.legacy.libraries;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
 public class StringLibrary {
     
@@ -157,7 +159,8 @@ public class StringLibrary {
 //        }
 //        return Boolean.valueOf(self.startsWith(prefix));
 //    }
-
+    
+    @Operation(contextual=true)
     public Boolean startsWith(String self, String prefix, Integer toffset) {
         if (self == null || prefix == null || toffset == null) {
             return Boolean.FALSE;
@@ -178,7 +181,8 @@ public class StringLibrary {
 //        }
 //        return new Integer(self.indexOf(str));
 //    }
-
+    
+    @Operation(contextual=true)
     public Integer indexOf(String self, String str, Integer fromIndex) {
         if (self == null || str == null || fromIndex == null) {
             return INDEX_NOT_FOUND;
@@ -193,6 +197,7 @@ public class StringLibrary {
 //        return new Integer(self.lastIndexOf(str)+1);
 //    }
 
+    @Operation(contextual=true)
     public Integer lastIndexOf(String self, String str, Integer fromIndex) {
         if (self == null || str == null || fromIndex == null) {
             return INDEX_NOT_FOUND;
@@ -214,6 +219,7 @@ public class StringLibrary {
 //        return self.replaceAll(regexp, replacement);
 //    }
 
+    @Operation(contextual=true)
     public String replace(String self, String what, String with) {
         if (self == null || what == null || with == null) {
             return self;
@@ -234,7 +240,8 @@ public class StringLibrary {
 //    	}
 //    	return self.toUpperCase();
 //    }
-
+    
+    @Operation(contextual=true)
     public List<String> split(String self, String regex) {
     	if (self == null || regex == null) {
     		return null;
@@ -242,6 +249,7 @@ public class StringLibrary {
     	return Arrays.asList(self.split(regex));
     }
     
+    @Operation(contextual=true)
     public List<String> split(String self, String regex, Integer limit) {
     	if (self == null || regex == null || limit == null) {
     		return null;
