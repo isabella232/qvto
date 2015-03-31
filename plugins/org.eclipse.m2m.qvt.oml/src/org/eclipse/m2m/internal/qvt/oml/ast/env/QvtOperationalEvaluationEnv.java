@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -21,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.AbstractEList;
+import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -743,36 +746,73 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			checkReadonlyGuard(eStructuralFeature, exprValue, owner);
 		}
 
-		Object currentValue = owner.eGet(eStructuralFeature);
+		final Object currentValue = owner.eGet(eStructuralFeature);
 		Object oclValue = valueIsUndefined ? exprValue : coerceValue(eStructuralFeature, exprValue, true);			
 		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(eStructuralFeature);
 		
 		Object newValue = assign(oclType, currentValue, oclValue, isReset);
 		
-		Class<?> expectedClass = eStructuralFeature.getEType().getInstanceClass();
+		final Class<?> expectedClass = eStructuralFeature.getEType().getInstanceClass();
 		
 		if (FeatureMapUtil.isMany(owner, eStructuralFeature)) {
-			EList<Object> currentList = (EList<Object>) currentValue;
+			
+			@SuppressWarnings("serial")
+			EList<Object> containerList = new DelegatingEList<Object>() {
+				
+				protected List<Object> delegateList() {
+					return (List<Object>) currentValue;
+				}
+				
+				@Override
+				public void add(int index, Object object) {
+					try {
+						super.add(index, ensureTypeCompatibility(object, expectedClass));
+					}
+					catch (Exception e) {
+						QvtPlugin.error(e);
+					}
+				}
+				
+				@Override
+				public boolean add(Object object) {
+					if (object == null && !canContainNull()) {
+						return false;
+					}
+
+					try {
+						return super.add(ensureTypeCompatibility(object, expectedClass));
+					}
+					catch (Exception e) {
+						QvtPlugin.error(e);
+						return false;
+					}
+				}
+				
+				protected boolean canContainNull() {
+					if (delegateList() instanceof AbstractEList) {
+						try {
+							Method method = AbstractEList.class.getDeclaredMethod("canContainNull", new Class[]{});
+							method.setAccessible(true);
+							return (Boolean) method.invoke(delegateList(), new Object[]{});
+						} catch (Exception e) {
+							return true;
+						}
+					}
+					return true;
+				}
+				
+			};
+			
 			List<Object> newList;
 			
 			if (valueIsUndefined) {
-				if (isReset) {
-					newList = Collections.emptyList();
-				}
-				else {
-					newList = currentList;
-				}
+				newList = isReset ? Collections.emptyList() : containerList;
 			}
 			else {
-				Collection<?> newCollection = (Collection<?>) newValue;
-				newList = new ArrayList<Object>(newCollection.size());
-				
-				for (Object element : newCollection) {
-					newList.add(ensureTypeCompatibility(element, expectedClass));
-				}
+				newList = new ArrayList<Object>((Collection<?>) newValue);
 			}
-				
-			ECollections.setEList(currentList, newList);
+							
+			ECollections.setEList(containerList, newList);
 		}
 		else {		
 			if (isOclInvalid(newValue) || (newValue == null && !acceptsNullValue(expectedClass))) {
@@ -847,7 +887,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 //	}
 	
 	/**
-	 * Ensures that the value has a type compatible with then expected type
+	 * Ensures that the value has a type compatible with the expected type,
 	 * converting it if necessary.
 	 * 
 	 * @param value
