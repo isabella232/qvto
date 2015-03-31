@@ -264,9 +264,9 @@ public class IntermediateClassFactory extends EFactoryImpl {
 				
 				Object evalResult = expression != null ? evalVisitor.visitExpression(expression) : null;
 								
-				if (evalResult == null && !FeatureMapUtil.isMany(eInstance, eFeature)) {
+				if (evalResult == null) {
 					// no init expression specified for a single-valued feature, or init expression evaluated to null 
-					EClassifier featureType = eFeature.getEType();
+					EClassifier featureType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(eFeature);
 					evalResult = EvaluationUtil.createInitialValue(featureType, evalVisitor.getEnvironment().getOCLStandardLibrary(),
 							evalVisitor.getEvaluationEnvironment());
 				}
