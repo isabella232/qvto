@@ -1125,6 +1125,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     	// Wrap the result of the expression in an OperationCallResult object.
     	// This type breaks control flow, so the value arrives directly at its
     	// calling operation, where it is unwrapped again and returned.
+    	if (value instanceof OperationCallResult) {
+    		return value;
+    	}
 		return new OperationCallResult(value, getOperationalEvaluationEnv());
     }
     
