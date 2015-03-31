@@ -75,5 +75,11 @@ main() {
 	assert fatal (cc2->size().oclIsInvalid());
 	cc2 += invalid;
 	assert fatal (cc2->size().oclIsInvalid());
+	
+	var reals : Set(Real) = Set{};
+	reals := Set{1};
+	assert fatal (reals->includes(1.0));
+	reals += 1.0;
+	assert fatal (reals = Set{1.0});
 
 }

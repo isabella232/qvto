@@ -669,19 +669,29 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			if (isReset) {
 				if (exprValue instanceof MutableList || exprValue instanceof Dictionary) {
 					newCollection = (Collection<Object>) exprValue;
-				} else if (exprValue instanceof Collection) {
-					Collection<Object> exprValueCollection = (Collection<Object>) exprValue;
-					newCollection = CollectionUtil.createNewCollection(exprValueCollection);
 				} else {
-					newCollection = EvaluationUtil.createNewCollection(collectionType);
-					if (newCollection == null) {
-						newCollection = CollectionUtil.createNewSet();
+					Collection<Object> exprValueCollection;
+					
+					if (exprValue instanceof Collection) {
+						exprValueCollection = (Collection<Object>) exprValue;
 					}
-	
-					if (exprValue != null) {
-						((Collection<Object>) newCollection).add(ensureTypeCompatibility(exprValue, collectionType.getElementType().getInstanceClass()));
+					else {
+						exprValueCollection = EvaluationUtil.createNewCollection(collectionType);
+						
+						if (exprValueCollection == null) {
+							exprValueCollection = CollectionUtil.createNewSet();
+						}
+						
+						if (exprValue != null) {
+							exprValueCollection.add(exprValue);
+						}
 					}
 					
+					newCollection = EvaluationUtil.createNewCollectionOfSameKind(exprValueCollection);
+					
+					for (Object element : exprValueCollection) {
+						newCollection.add(ensureTypeCompatibility(element, collectionType.getElementType().getInstanceClass()));
+					}		
 				}
 			} 
 			else {
