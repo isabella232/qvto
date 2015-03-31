@@ -29,7 +29,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
@@ -180,10 +179,12 @@ public class TransformationExecutorTest extends TestCase {
 		return paramKinds;
     }
     
+    protected ResourceSet createResourceSet() {
+    	return new ResourceSetImpl();
+    }
+    
     protected ResourceSet getMetamodelResolutionRS() {
-    	ResourceSet resSet = new ResourceSetImpl();
-    	
-    	resSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+    	ResourceSet resSet = createResourceSet();
     	
     	if (getEcoreMetamodels().isEmpty()) {
     		return resSet;

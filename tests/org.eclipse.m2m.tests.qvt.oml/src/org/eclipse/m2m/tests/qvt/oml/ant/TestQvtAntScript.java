@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -73,7 +73,7 @@ public class TestQvtAntScript extends TestCase {
     	
             URI expectedURI = myData.getExpected(getProject()).get(index);
             EObject expectedObject = loadObj.eResource().getResourceSet().getResource(expectedURI, true).getContents().get(0);
-			myData.compareWithExpected(expectedObject, loadObj);
+			ModelTestData.compareWithExpected(myData.getName(), expectedObject, loadObj);
             index++;
     	}
     	fileInputStream.close();

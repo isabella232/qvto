@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -53,7 +53,7 @@ public class UnitResolverFactoryTest extends TestCase {
 	protected void tearDown() throws Exception {
         File destinationFolder = getDestinationFolder();
         if (destinationFolder.exists()) {
-            delete(destinationFolder);
+            FileUtil.delete(destinationFolder);
         }
 	}	
 	
@@ -108,17 +108,6 @@ public class UnitResolverFactoryTest extends TestCase {
 	}
 	
 		    
-    static void delete(File file) {
-        if(file.isDirectory()) {
-            File[] children = file.listFiles();
-            for(int i = 0; i < children.length; i++) {
-                delete(children[i]);
-            }
-        }
-        
-        file.delete();
-    }	
-	    
 	File getDestinationFolder() {
 		return new File(myProject.getProject().getLocation().toString() + "/deployed");
 	}

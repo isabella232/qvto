@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -64,6 +64,10 @@ public class QvtLaunchUtil {
 	
 	public static boolean shouldGenerateTraceFile(ILaunchConfiguration configuration) throws CoreException {
 		return configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false);
+	}
+	
+	public static boolean isIncrementalUpdate(ILaunchConfiguration configuration) throws CoreException {
+		return configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false);
 	}
 	
     public static TargetUriData getTargetUriData(ILaunchConfiguration configuration, int index) throws CoreException {

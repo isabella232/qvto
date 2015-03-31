@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -35,9 +35,7 @@ public class Messages extends NLS {
 	public static String QvtValidator_DestinationExistsNonEObject;
 	public static String QvtValidator_TransformationMissedEntryOp;
 
-    public static String QvtValidator_TraceNotInWorkspace;
-
-    public static String QvtValidator_TraceProjectNotOpen;
+    public static String QvtValidator_InvalidTraceObjectUri;
 	
 	public static String QvtValidator_InvalidUri;
 	public static String QvtValidator_UriNotFile;

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -36,6 +36,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.ui.controls.UniSelectTransformati
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.IUriGroup;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.MdaLaunchTab;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.OptionalFileGroup;
+import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.TraceFileControl;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.TransformationControls;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
@@ -117,6 +118,8 @@ public class QvtLauncherTab extends MdaLaunchTab {
             @Override
 			public void widgetSelected(SelectionEvent e) {
             	
+            	final String fileName = myQvtFile.getText();
+            	
             	UniSelectTransformationControl.ISelectionListener selectionListener = new UniSelectTransformationControl.SelectionListenerAdapter() {
             		            		
 					public IStatus selectionChanged(URI selectedUri) {
@@ -133,11 +136,21 @@ public class QvtLauncherTab extends MdaLaunchTab {
 				        }
 				        return TransformationControls.makeStatus(IStatus.OK, NLS.bind(Messages.QvtLauncherTab_TransformationSelected, transfName));
 					}
+					
+					@Override
+					public TreeAction getTreeAction(URI uri) {
+						String item = uri.toString();
+						
+						if (fileName.equals(item)) {
+							return TreeAction.SELECT;
+						}
+						return fileName.startsWith(item) ? TreeAction.EXPAND : TreeAction.NONE;
+					}
             	};
             	
             	BrowseInterpretedTransformationDialog dialog = new BrowseInterpretedTransformationDialog(getShell(),
             			UniSelectTransformationControl.QVTO_FILE_FILTER,
-                		QvtTransformationRegistry.getInstance(), myQvtFile.getText(), selectionListener);
+                		QvtTransformationRegistry.getInstance(), fileName, selectionListener);
                 dialog.create();
                 PlatformUI.getWorkbench().getHelpSystem().setHelp(dialog.getShell(), MDAConstants.QVTO_TRANSFORMATION_CONTEXTID);
                 
@@ -150,7 +163,7 @@ public class QvtLauncherTab extends MdaLaunchTab {
             } 
         });
 
-        myTraceFile = new OptionalFileGroup(parent, Messages.QvtLauncherTab_TraceFile);
+        myTraceFile = new TraceFileControl(parent, Messages.QvtLauncherTab_TraceFile);
         myTraceFile.addModifyListener(new OptionalFileGroup.IModifyListener() {
             public void modified() {
             	myTraceNameNonChanged = myTraceFile.getText().equals(getTraceFileName());
@@ -176,12 +189,8 @@ public class QvtLauncherTab extends MdaLaunchTab {
     }
     
     private String getTraceFileName() {
-        URI uri = URI.createURI(myTransfSignatureControl.getTraceName());
-        if (uri.segmentCount() > 0) {
-        	uri = uri.trimFileExtension();
-        	uri = uri.appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
-        }
-        return uri.isEmpty() ? null : uri.toString();
+        URI uri = myTransfSignatureControl.getDefaultTraceName();
+        return uri == null ? null : uri.toString();
     }
 	
     @Override
@@ -232,7 +241,10 @@ public class QvtLauncherTab extends MdaLaunchTab {
         }
 */
 		try {
-			myQvtFile.setText(configuration.getAttribute(IQvtLaunchConstants.MODULE, "")); //$NON-NLS-1$
+			String module = configuration.getAttribute(IQvtLaunchConstants.MODULE, ""); //$NON-NLS-1$
+			if (!myQvtFile.getText().equals(module)) {
+				myQvtFile.setText(module);
+			}
 		} catch (CoreException e) {
 			myQvtFile.setText(""); //$NON-NLS-1$
 		}
@@ -243,12 +255,26 @@ public class QvtLauncherTab extends MdaLaunchTab {
 		}
 
         try {
-            myTraceFile.setText(configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, "")); //$NON-NLS-1$
+        	String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
+        	if (!traceFile.isEmpty()) {
+        		if (!myTraceFile.getText().equals(traceFile)) {
+        			myTraceFile.setText(traceFile);
+        		}
+        	}
+        	else {
+        		myTraceNameNonChanged = true;
+        		initTraceFileText();
+        	}
         } catch (CoreException e) {
         }
 
         try {
             myTraceFile.setUseFileFlag(configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false)); 
+        } catch (CoreException e) {
+        }
+
+        try {
+            myTraceFile.setIncrementalUpdate(configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false)); 
         } catch (CoreException e) {
         }
 	}
@@ -263,6 +289,7 @@ public class QvtLauncherTab extends MdaLaunchTab {
 		myTransfSignatureControl.performApply(configuration);
         configuration.setAttribute(IQvtLaunchConstants.TRACE_FILE, myTraceFile.getText());
         configuration.setAttribute(IQvtLaunchConstants.USE_TRACE_FILE, myTraceFile.getUseFileFlag());
+        configuration.setAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, myTraceFile.isIncrementalUpdate());
 	}
     
     @Override
@@ -295,7 +322,8 @@ public class QvtLauncherTab extends MdaLaunchTab {
             if (myTraceFile.getText().length() == 0) {
             	myTraceFile.update(moduleName, MDAConstants.QVTO_TRACEFILE_EXTENSION);
             }
-            IStatus status = myTransfSignatureControl.validate(moduleName, getShell(), myTraceFile.getText(), myTraceFile.getUseFileFlag(), validationType);
+            IStatus status = myTransfSignatureControl.validate(moduleName, getShell(), myTraceFile.getText(),
+            		myTraceFile.getUseFileFlag(), myTraceFile.isIncrementalUpdate(), validationType);
             return TransformationControls.statusToTab(status, SET_MESSAGE);
         }
     }
@@ -335,7 +363,8 @@ public class QvtLauncherTab extends MdaLaunchTab {
         public void modifyText(ModifyEvent e) {
             validateQvtFile();
             myTransfSignatureControl.setTransformation(myTransformation, myUriListeners);
-            myTraceNameNonChanged = myTraceFile.getText().equals(getTraceFileName());
+            myTraceNameNonChanged = true;
+            initTraceFileText();
             updateLaunchConfigurationDialog();            
         }
     };
@@ -363,7 +392,7 @@ public class QvtLauncherTab extends MdaLaunchTab {
     private final ITransformationMaker myTransformationMaker; 
     private Text myQvtFile;
     private QvtTransformation myTransformation;
-    private OptionalFileGroup myTraceFile;
+    private TraceFileControl myTraceFile;
     private boolean myTraceNameNonChanged;
     private TransformationSignatureLaunchControl myTransfSignatureControl;
     private final List<IUriGroup.IModifyListener> myUriListeners;

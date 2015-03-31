@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -44,6 +44,14 @@ public interface IContext {
 	 * @since 3.4
 	 */
     IProgressMonitor getProgressMonitor();
+    
+	/**
+	 * Retrieve the Trace object used for incremental update execution associated with this context.
+	 * 
+	 * @return the trace object, never <code>null</code>
+	 * @since 3.5
+	 */
+    Trace getTrace();
     
     /**
      * @deprecated Use getProgressMonitor() method

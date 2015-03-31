@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -44,6 +44,7 @@ public class TaskModel {
         myModuleUri = config.getAttribute(IQvtLaunchConstants.MODULE, ""); //$NON-NLS-1$
         myTraceFile = config.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
         myIsUseTraceFile = config.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false); 
+        myIsIncrementalUpdate = config.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false); 
     	myTargetUris = QvtLaunchUtil.getTargetUris(config);
     	myConfigProps = QvtLaunchUtil.getConfigurationProperty(config);
     	
@@ -131,10 +132,13 @@ public class TaskModel {
 			result += "\n";
 		}
 		
-		if (myIsUseTraceFile && myTraceFile != null && myTraceFile.trim().length() > 0) {
+		if ((myIsUseTraceFile || myIsIncrementalUpdate)
+				&& myTraceFile != null && myTraceFile.trim().length() > 0) {
 			result += "\n";
 			result += INDENT + "<trace\n";
 			result += INDENT + INDENT + "uri=\"" + myTraceFile + "\"\n";
+			result += INDENT + INDENT + "generate=\"" + myIsUseTraceFile + "\"\n";
+			result += INDENT + INDENT + "incrementalUpdate=\"" + myIsIncrementalUpdate + "\"\n";
 			result += INDENT + "/>\n";
 		}
 		
@@ -184,6 +188,7 @@ public class TaskModel {
 	private final String myModuleUri;
 	private final String myTraceFile;
 	private final boolean myIsUseTraceFile;
+	private final boolean myIsIncrementalUpdate;
 	private final List<TargetUriData> myTargetUris;
 	private final Map<String, Object> myConfigProps;
 	private final QvtTransformation myTransformation;

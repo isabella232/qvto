@@ -51,7 +51,7 @@ public class QvtValidator {
 	}
 
 	public static IStatus validateTransformation(QvtTransformation transformation, List<TargetUriData> targetUris, String traceFilePath,
-			boolean useTrace, ValidationType validationType) throws MdaException {
+			boolean useTrace, boolean isIncrementalUpdate, ValidationType validationType) throws MdaException {
         IStatus result = StatusUtil.makeOkStatus();
         
         if (!TransformationUtil.isRunnable(transformation)) {
@@ -59,6 +59,8 @@ public class QvtValidator {
             		transformation.getModuleName()));
         }
         
+		ResourceSet validationRS = CompilerUtils.cloneResourceSet(transformation.getURI(), transformation.getResourceSet());
+		
         Iterator<TargetUriData> itrTargetData = targetUris.iterator();
 		for (TransformationParameter transfParam : transformation.getParameters()) {
 			if (!itrTargetData.hasNext()) {
@@ -66,16 +68,30 @@ public class QvtValidator {
 	            		transfParam.getName()));
 			}
 			
-			ResourceSet validationRS = CompilerUtils.cloneResourceSet(transformation.getURI(), transformation.getResourceSet());
-			
 			IStatus nextStatus = validateTransformationParameter(transfParam, itrTargetData.next(), validationRS, validationType);
             if (nextStatus.getSeverity() > result.getSeverity()) {
         		result = nextStatus;
         	}
 		}
 
+		if (isIncrementalUpdate) {
+			IStatus traceStatus;			
+			if (validationType == ValidationType.LIGHTWEIGHT_VALIDATION) {
+				traceStatus = validateTraceObjectLightweight(traceFilePath, validationRS);
+			} else {
+				traceStatus = validateTraceObject(traceFilePath, validationRS);
+			}
+			
+	        if (StatusUtil.isError(traceStatus)) {
+	        	return traceStatus;
+	        }
+	        if (traceStatus.getSeverity() > result.getSeverity()) {
+	    		result = traceStatus;
+	    	}
+		}
+		
 		if (useTrace) {
-	    	IStatus traceStatus = validateTrace(traceFilePath, transformation.getResourceSet()); 
+	    	IStatus traceStatus = validateTrace(traceFilePath, validationRS); 
 	        if (StatusUtil.isError(traceStatus)) {
 	        	return traceStatus;
 	        }
@@ -197,6 +213,41 @@ public class QvtValidator {
 	    }
 	}
 
+	private static IStatus validateTraceObjectLightweight(String traceFilePath, ResourceSet validationRS) {
+		URI sourceUri = EmfUtil.makeUri(traceFilePath);
+		if (sourceUri == null) {
+			return StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_InvalidTraceObjectUri, traceFilePath));
+		}
+		
+		if (!EmfUtil.isUriExists(sourceUri, validationRS, false)) {
+			return StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_InvalidTraceObjectUri, traceFilePath));
+		}
+		
+		return StatusUtil.makeOkStatus();
+	}
+
+	private static IStatus validateTraceObject(String traceFilePath, ResourceSet validationRS) {
+		URI sourceUri = EmfUtil.makeUri(traceFilePath);
+        ModelContent in = null;
+        
+        try {
+        	in = EmfUtil.loadModel(sourceUri, validationRS);
+        }
+        catch (Exception e) {
+        }
+        
+        if (in == null) {
+            return StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_InvalidTraceObjectUri, traceFilePath));
+        }
+        else {
+	    	if (validationRS == null) {
+	    		EmfUtil.cleanupResourceSet(in.getResourceSet());
+	    	}
+        }
+        
+		return StatusUtil.makeOkStatus();
+	}
+	
 	private static IStatus validateTransformationParameterIn(TransformationParameter transfParam, TargetUriData targetData, ResourceSet validationRS) {
 		if (transfParam.getEntryType() != null) {
 			EClassifier classifier = transfParam.getEntryType();

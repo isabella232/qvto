@@ -14,10 +14,7 @@ package org.eclipse.m2m.tests.qvt.oml.callapi;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
@@ -33,14 +30,14 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 		ecoreMetamodels = data.getEcoreMetamodels();
 	}
 
-	private static List<String> getInModels(ModelTestData data) {
+	static List<String> getInModels(ModelTestData data) {
 		if (data instanceof FilesToFilesData) {
 			return ((FilesToFilesData) data).getFromFiles();
 		}
 		return Collections.emptyList();
 	}
 	
-	private static List<String> getOutModels(ModelTestData data) {
+	static List<String> getOutModels(ModelTestData data) {
 		if (data instanceof FilesToFilesData) {
 			return ((FilesToFilesData) data).getExpectedFiles();
 		}
@@ -70,16 +67,8 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 			ModelExtent modelExtent = extents.get(i);
 			URI modelUri = uriCreator.getModelUri(outModels.get(outIndex++));
 			Resource resource = resSet.getResource(modelUri, true);
-			compareWithExpected(resource.getContents(), modelExtent.getContents());
+			ModelTestData.compareWithExpected(name, resource.getContents(), modelExtent.getContents());
 		}
-	}
-
-	private void compareWithExpected(List<EObject> expected, List<EObject> out) {
-    	TestCase.assertEquals("transf output differs in size to expected result", expected.size(), out.size()); //$NON-NLS-1$ 
-    	for (int i = 0; i < out.size(); i++) {
-    		TestCase.assertNotSame("Actual output and expected output must not be the same instances", expected.get(i), out.get(i)); //$NON-NLS-1$
-    		ModelTestData.assertEquals(name + ":", expected.get(i), out.get(i)); //$NON-NLS-1$
-    	}
 	}
 
 }

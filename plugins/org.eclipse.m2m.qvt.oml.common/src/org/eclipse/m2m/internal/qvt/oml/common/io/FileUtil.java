@@ -111,4 +111,16 @@ public class FileUtil {
 	        try { reader.close(); } catch(Exception e) {}
 	    }
 	}
+
+    public static void delete(File file) {
+        if(file.isDirectory()) {
+            File[] children = file.listFiles();
+            for(int i = 0; i < children.length; i++) {
+                delete(children[i]);
+            }
+        }
+        
+        file.delete();
+    }	
+	    
 }

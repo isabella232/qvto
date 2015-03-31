@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -108,7 +108,7 @@ public class OptionalFileGroup {
         return myText;
     }
 
-    public void setUseFileFlag(boolean flag) {
+    void setUseFileFlag(boolean flag) {
         myCheckBox.setSelection(flag);
         myBrowse.setEnabled(getUseFileFlag());
         myTextControl.setEnabled(getUseFileFlag());
@@ -128,12 +128,12 @@ public class OptionalFileGroup {
         myChooser.initNewName(baseName, extension);
     }
     
-    private final Button myCheckBox;
+    final Button myCheckBox;
 
-    private final Text myTextControl;
-    private String myText;
+    final Text myTextControl;
+    String myText;
     
-    private final Button myBrowse;
+    final Button myBrowse;
     private final ResourceDestinationChooser myChooser;
     
     private List<IModifyListener> myModifyListeners;

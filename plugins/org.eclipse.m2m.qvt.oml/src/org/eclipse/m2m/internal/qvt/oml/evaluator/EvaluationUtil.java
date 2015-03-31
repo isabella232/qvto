@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -201,6 +201,7 @@ public class EvaluationUtil {
 		Context nestedContext = new Context();
 		nestedContext.setLog(parentContext.getLog());
 		nestedContext.setProgressMonitor(parentContext.getProgressMonitor());
+		nestedContext.getTrace().setTraceContent(parentContext.getTrace().getTraceContent());
 		
 		nestedContext.setSessionData(parentContext.getSessionData());
 		nestedContext.getSessionData().setValue(AGGREGATING_ROOT_ENV, evalEnv);

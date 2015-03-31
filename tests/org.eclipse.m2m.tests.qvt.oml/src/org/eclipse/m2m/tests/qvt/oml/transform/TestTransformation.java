@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -182,21 +182,10 @@ public abstract class TestTransformation extends TestCase {
     	
     	getData().dispose(myProject);
         if (myDestFolder.exists()) {
-            delete(myDestFolder);
+            FileUtil.delete(myDestFolder);
         }
         getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
     	myData = null;
-    }
-    
-    public static void delete(File file) {
-        if(file.isDirectory()) {
-            File[] children = file.listFiles();
-            for(int i = 0; i < children.length; i++) {
-                delete(children[i]);
-            }
-        }
-        
-        file.delete();
     }
     
     public static interface IChecker {
@@ -222,7 +211,7 @@ public abstract class TestTransformation extends TestCase {
         		Resource expectedResource = rs.getResource(uri, true);
         		
         		List<EObject> actualExtentObjects = rs.getResource(actualResultURI, true).getContents();
-        		data.compareWithExpected(expectedResource.getContents(), actualExtentObjects);
+        		ModelTestData.compareWithExpected(data.getName(), expectedResource.getContents(), actualExtentObjects);
 			}        	
         }
         

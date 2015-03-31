@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
@@ -59,10 +61,13 @@ public class TransformationRunner  {
 	private final Executor fExecutor;
 	private final List<URI> fModelParamURIs;
 	private URI fTraceFileURI;
+	private boolean fIsSaveTrace;
+	private boolean fIsIncrementalUpdate;
 	
 	private BasicDiagnostic fDiagnostic;
 	private List<ModelExtent> fModelParams;		
 	private ModelExtentHelper fExtentHelper;
+	private org.eclipse.m2m.qvt.oml.util.Trace fIncrementalTrace;
 	
 	
 	public TransformationRunner(URI transformationURI, 
@@ -91,8 +96,12 @@ public class TransformationRunner  {
 		fTraceFileURI = traceFileURI;
 	}
 	
-	public URI getTraceFileURI() {
-		return fTraceFileURI;
+	public void setSaveTrace(boolean isSaveTrace) {
+		fIsSaveTrace = isSaveTrace;
+	}
+
+	public void setIncrementalUpdate(boolean isIncrementalUpdate) {
+		fIsIncrementalUpdate = isIncrementalUpdate;
 	}
 
 	public Diagnostic initialize() {
@@ -129,6 +138,25 @@ public class TransformationRunner  {
 			fDiagnostic.add(extentsDiagnostic);
 		}
 		
+		fIncrementalTrace = org.eclipse.m2m.qvt.oml.util.Trace.EMPTY_TRACE;
+		if (fIsIncrementalUpdate) {
+			Diagnostic traceDiagnostic = Diagnostic.OK_INSTANCE; 
+
+			ModelContent traceContent = EmfUtil.safeLoadModel(fTraceFileURI, fExecutor.getResourceSet());
+			if (traceContent != null) {
+				fIncrementalTrace.setTraceContent(traceContent.getContent());
+			}
+			else {
+				traceDiagnostic = QvtPlugin.createWarnDiagnostic(
+						NLS.bind(Messages.FailToLoadTraceForIncrementalUpdateExecution, fTraceFileURI));
+			}
+			
+			handleLoadTrace(traceDiagnostic);
+			if(!QvtPlugin.isSuccess(traceDiagnostic)) {
+				fDiagnostic.add(traceDiagnostic);
+			}
+		}
+		
 		// FIXME - 
 		// add validation for configuration properties and param count
 		// into the internal executor
@@ -146,6 +174,10 @@ public class TransformationRunner  {
 	}	
 			
 	protected void handleLoadExtents(Diagnostic diagnostic) {
+		// do nothing
+	}	
+
+	protected void handleLoadTrace(Diagnostic diagnostic) {
 		// do nothing
 	}	
 
@@ -169,6 +201,7 @@ public class TransformationRunner  {
 		try {			
 			ModelExtent[] params = fModelParams.toArray(new ModelExtent[fModelParams.size()]);
 			
+			context.getTrace().setTraceContent(fIncrementalTrace.getTraceContent());
 			ExecutionDiagnostic execDiagnostic = fExecutor.execute(context, params);
 			handleExecution(execDiagnostic);
 			
@@ -200,7 +233,7 @@ public class TransformationRunner  {
 	}
 	
 	private Diagnostic saveTraces(Trace trace) { 
-		if(fTraceFileURI != null) {
+		if(fTraceFileURI != null && fIsSaveTrace) {
 			Resource resource = new ResourceSetImpl().createResource(fTraceFileURI);
 			resource.getContents().add(trace);
 			try {

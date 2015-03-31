@@ -47,6 +47,8 @@ public class Messages extends NLS {
 	public static String QvtNamesChecker_reservedQVTWord;
 	
 	public static String InvalidSourceForOperationCall;
+	
+	public static String FailToLoadTraceForIncrementalUpdateExecution;
 
 	static {
 		// initialize resource bundle

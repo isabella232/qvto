@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -27,6 +27,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.ShallowProcess;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
@@ -35,11 +36,12 @@ import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator.ValidationType;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.osgi.util.NLS;
 
@@ -89,6 +91,9 @@ public class QvtoAntTransformationTask extends Task {
 	public static final String QVTO_ANTTASK_NAME = "qvto:transformation"; //$NON-NLS-1$
 	
 	public static interface ModelParameter {
+		
+		public TargetUriData getTargetUriData(ProjectComponent project);
+		
 	}
 	
 	/**
@@ -105,6 +110,10 @@ public class QvtoAntTransformationTask extends Task {
 	    
 	    public void setUri(String uri) {
 	        myUri = uri;
+	    }
+	    
+	    public TargetUriData getTargetUriData(ProjectComponent project) {
+	        return new TargetUriData(getURI(project).toString());
 	    }
 	    
 	    @Override
@@ -140,7 +149,7 @@ public class QvtoAntTransformationTask extends Task {
 	    	myOutUri = uri;
 	    }
 	    
-	    TargetUriData getTargetUriData(ProjectComponent project) {
+	    public TargetUriData getTargetUriData(ProjectComponent project) {
 	        return new TargetUriData(getOutURI(project).toString());
 	    }
 	    
@@ -173,13 +182,13 @@ public class QvtoAntTransformationTask extends Task {
 	    	myFeature = feature;
 	    }
 	    
-	    TargetUriData getTargetUriData(ProjectComponent project) {
+	    public TargetUriData getTargetUriData(ProjectComponent project) {
 	    	String feature = myFeature != null ? myFeature.getName() : null;
 	        return new TargetUriData(
 	        		feature != null && feature.trim().length() > 0 ? TargetType.EXISTING_CONTAINER : TargetType.NEW_MODEL,
 	        		getURI(project).toString(),
 	        		feature,
-	        		myFeature != null ? Boolean.valueOf(myFeature.getClearContents()) : false
+	        		myFeature != null ? myFeature.isClearContents() : false
 	        		);
 	    }
 	    
@@ -202,8 +211,8 @@ public class QvtoAntTransformationTask extends Task {
             myName = name;
         }
         
-        public String getClearContents() {
-            return myClearcontents;
+        public boolean isClearContents() {
+            return Boolean.valueOf(myClearcontents);
         }
         
         public void setClearcontents(String clearcontents) {
@@ -231,7 +240,25 @@ public class QvtoAntTransformationTask extends Task {
 	        myUri = uri;
 	    }
 	    
+	    public boolean isGenerate() {
+	        return myGenerate == null ? true : Boolean.valueOf(myGenerate);
+	    }
+	    
+	    public void setGenerate(String generate) {
+	        myGenerate = generate;
+	    }
+	    
+	    public boolean isIncrementalUpdate() {
+	        return Boolean.valueOf(myIncrementalUpdate);
+	    }
+	    
+	    public void setIncrementalUpdate(String incrementalUpdate) {
+	        myIncrementalUpdate = incrementalUpdate;
+	    }
+	    
 	    private String myUri;
+	    private String myGenerate;
+	    private String myIncrementalUpdate;
 	}
 	
 	/**
@@ -306,16 +333,31 @@ public class QvtoAntTransformationTask extends Task {
 		        		loadTransformationParams(transformation, inObjects, targetData);
 		
 		        		String traceUri = getTraceUri(QvtoAntTransformationTask.this);
+		        		boolean useTrace = myTrace == null ? false : myTrace.isGenerate();
+		        		boolean isIncrementalUpdate = myTrace == null ? false : myTrace.isIncrementalUpdate();
+		        		List<TargetUriData> allTargetData = new ArrayList<TargetUriData>();
 		        		
-		                IStatus status = QvtValidator.validateTransformation(transformation, inObjects, traceUri);                    
+		        		for (ModelParameter p : myModelParameters) {
+		        	        allTargetData.add(p.getTargetUriData(QvtoAntTransformationTask.this));
+		        		}
+		        		
+		                IStatus status = QvtValidator.validateTransformation(transformation, allTargetData, traceUri, useTrace,
+		                		isIncrementalUpdate, ValidationType.FULL_VALIDATION);                    
 		                if (status.getSeverity() > IStatus.WARNING) {
 		                	throw new MdaException(status);
 		                }      	
 		        		
-						Context createContext = QvtLaunchUtil.createContext(getConfiguration());
-						createContext.setLog(createQVTLog());
+						Context context = QvtLaunchUtil.createContext(getConfiguration());
+						context.setLog(createQVTLog());
 						
-						QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData, traceUri, createContext);
+						if (isIncrementalUpdate && traceUri != null) {
+							ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceUri), transformation.getResourceSet());
+							if (traceContent != null) {
+								context.getTrace().setTraceContent(traceContent.getContent());
+							}
+						}
+						
+						QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData, traceUri, context);
 	            	}
 	            	finally {
 	            		transformation.cleanup();

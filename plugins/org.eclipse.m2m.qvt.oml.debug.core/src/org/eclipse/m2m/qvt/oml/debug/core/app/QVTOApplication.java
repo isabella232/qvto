@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,14 +32,18 @@ public class QVTOApplication implements IApplication {
 	public static final String ARG_PARAM = "-param"; //$NON-NLS-1$
 	public static final String ARG_MMAPINGS = "-mmapings"; //$NON-NLS-1$
 	public static final String ARG_TRACE = "-trace"; //$NON-NLS-1$
+	public static final String ARG_TRACE_SAVE = "-trace_save"; //$NON-NLS-1$
+	public static final String ARG_TRACE_INCREMENTAL = "-trace_incremental"; //$NON-NLS-1$
 
 	public static final String ARG_HELP = "-help"; //$NON-NLS-1$
 
-	private static final String CMD_LINE_USAGE = ID
-			+ squareBracket(ARG_TRANSFORMATION + " uri") + " " + //$NON-NLS-1$ //$NON-NLS-2$
+	private static final String CMD_LINE_USAGE = ID + " " + //$NON-NLS-1$ 
+			squareBracket(ARG_TRANSFORMATION + " uri") + " " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_PARAM + " uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_MMAPINGS + " nsURI;uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
-			squareBracket(ARG_TRACE + " uri") + " ... " + //$NON-NLS-1$ //$NON-NLS-2$
+			squareBracket(ARG_TRACE + " uri") + " " + //$NON-NLS-1$ //$NON-NLS-2$
+			squareBracket(ARG_TRACE_SAVE) + " " + //$NON-NLS-1$ //$NON-NLS-2$
+			squareBracket(ARG_TRACE_INCREMENTAL) + " " + //$NON-NLS-1$ //$NON-NLS-2$
 			squareBracket(ARG_HELP);
 
 
@@ -134,6 +138,12 @@ public class QVTOApplication implements IApplication {
 		} else if (isValueSpecArg(ARG_TRACE, nextArg)) {
 			String val = getArgValue(ARG_TRACE, nextArg);
 			factory.traceFileURI = val;
+
+		} else if (isValueSpecArg(ARG_TRACE_SAVE, nextArg)) {
+			factory.isSaveTrace = true;
+
+		} else if (isValueSpecArg(ARG_TRACE_INCREMENTAL, nextArg)) {
+			factory.isIncrementalUpdate = true;
 
 		} else if (ARG_HELP.equals(nextArg)) {
 			System.out.println(getCommandLineUsage());

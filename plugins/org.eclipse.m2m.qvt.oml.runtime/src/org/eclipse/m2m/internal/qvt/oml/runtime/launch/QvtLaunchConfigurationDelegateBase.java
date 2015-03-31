@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -97,9 +97,11 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
     	List<TargetUriData> targetUris = QvtLaunchUtil.getTargetUris(configuration);
         String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
         boolean useTraceFile = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false); 
+        boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false); 
         
         try {
-        	return QvtValidator.validateTransformation(transformation, targetUris, traceFile, useTraceFile, ValidationType.FULL_VALIDATION);
+        	return QvtValidator.validateTransformation(transformation, targetUris, traceFile, useTraceFile,
+        			isIncrementalUpdate, ValidationType.FULL_VALIDATION);
         }
         catch (MdaException ex) {
         	throw new CoreException(StatusUtil.makeErrorStatus(ex.getMessage(), ex));
@@ -139,16 +141,19 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
 		}
 
         boolean saveTrace = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false);
-        String traceFileName = saveTrace ? configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, "") : null; //$NON-NLS-1$
+        String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$        
+        boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false);
         
-        doLaunch(transformation, inObjects, targetData, traceFileName, context);
+		if (isIncrementalUpdate && traceFile != null) {
+			ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceFile), transformation.getResourceSet());
+			if (traceContent != null) {
+				context.getTrace().setTraceContent(traceContent.getContent());
+			}
+		}
+        
+        doLaunch(transformation, inObjects, targetData, saveTrace ? traceFile : null, context);
     }
     
-    public static List<URI> doLaunch(final QvtTransformation transformation, final List<ModelContent> inObjs,
-    		List<TargetUriData> targetData, Map<String, Object> configProps, final String traceFileName) throws Exception {
-    	return doLaunch(transformation, inObjs, targetData, traceFileName, QvtLaunchUtil.createContext(configProps));
-    }
-
     public static void doLaunch(QvtTransformation transformation, List<ModelContent> inObjs, Map<String, Object> configProps,
     		List<ModelExtentContents> outExtents, List<EObject> outMainParams, List<Trace> outTraces, List<String> outConsole) throws MdaException {
 
@@ -219,11 +224,14 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         	}
         }
         
-        if(traceFileName != null && out.getTrace() != null) {
-        	URI traceUri = EmfUtil.makeUri(traceFileName);
-           	TraceSerializer traceSerializer = new TraceSerializer(out.getTrace());
-           	traceSerializer.saveTraceModel(traceUri);
-           	traceSerializer.markUnboundObjects(traceUri);
+        if(out.getTrace() != null) {
+            if(traceFileName != null) {
+	        	URI traceUri = EmfUtil.makeUri(traceFileName);
+	           	TraceSerializer traceSerializer = new TraceSerializer(out.getTrace());
+	           	traceSerializer.saveTraceModel(traceUri);
+	           	traceSerializer.markUnboundObjects(traceUri);
+            }
+            //context.getTrace().setTraceContent(Collections.singletonList(out.getTrace()));
         }
         
         return result;

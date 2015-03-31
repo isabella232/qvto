@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,6 +22,7 @@ import org.eclipse.m2m.qvt.oml.util.EvaluationMonitor;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.m2m.qvt.oml.util.Log;
+import org.eclipse.m2m.qvt.oml.util.Trace;
 
 /**
  * @noextend
@@ -34,11 +35,13 @@ public class Context implements IContext {
 
     private Log myLog;
     private IProgressMonitor myMonitor;
+    private Trace myTrace;
     
     public Context() {
     	myConfiguration = new HashMap<String, Object>();
     	myLog = Log.NULL_LOG;
 		myMonitor = new NullProgressMonitor();
+		myTrace = Trace.EMPTY_TRACE;
 		myData = new SessionDataImpl();
     }
 
@@ -70,6 +73,10 @@ public class Context implements IContext {
     
     public Log getLog() {    	
     	return myLog;
+    }
+            
+    public Trace getTrace() {    	
+    	return myTrace;
     }
             
     public void setSessionData(ISessionData sessionData) {    

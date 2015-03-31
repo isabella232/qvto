@@ -16,6 +16,7 @@ import java.io.File;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
@@ -35,6 +36,13 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 	protected void setUp() {
 		data.prepare(TransformationExecutor.BlackboxRegistry.INSTANCE);	
 		super.setUp();
+	}
+	
+	@Override
+	protected ResourceSet createResourceSet() {
+		ResourceSet rs = super.createResourceSet();
+    	rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+    	return rs;
 	}
 	
 	protected ResourceSet getMetamodelResolutionRS() {

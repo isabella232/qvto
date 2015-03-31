@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -30,6 +30,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.ISetMessageEx;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.IUriGroup;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.OptionalFileGroup;
+import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.TraceFileControl;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.TransformationControls;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
@@ -85,7 +86,12 @@ public class TransformationParametersPage extends WizardPage {
 		if (myData.getTraceFile().length() > 0) {
 			myTraceFile.setText(myData.getTraceFile());
 		}
+		else {
+			myTraceNameNonChanged = true;
+			initTraceFileText();
+		}
         myTraceFile.setUseFileFlag(myData.isUseTraceFile());
+        myTraceFile.setIncrementalUpdate(myData.isIncrementalUpdate());
 
         isSkipValidation = false;
         performPageValidation();
@@ -105,7 +111,7 @@ public class TransformationParametersPage extends WizardPage {
 	}
 
 	protected void createTransformationSection(Composite parent) {
-        myTraceFile = new OptionalFileGroup(parent, Messages.QvtLauncherTab_TraceFile);
+        myTraceFile = new TraceFileControl(parent, Messages.QvtLauncherTab_TraceFile);
         myTraceFile.addModifyListener(new OptionalFileGroup.IModifyListener() {
             public void modified() {
             	myTraceNameNonChanged = myTraceFile.getText().equals(getTraceFileName());
@@ -202,8 +208,10 @@ public class TransformationParametersPage extends WizardPage {
 		myTransfSignatureControl.performApply(workingCopy);
 		workingCopy.setAttribute(IQvtLaunchConstants.TRACE_FILE, myTraceFile.getText());
 		workingCopy.setAttribute(IQvtLaunchConstants.USE_TRACE_FILE, myTraceFile.getUseFileFlag());
+		workingCopy.setAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, myTraceFile.isIncrementalUpdate());
     	myData.setTraceFile(myTraceFile.getText());
     	myData.setUseTraceFile(myTraceFile.getUseFileFlag());
+    	myData.setIncrementalUpdate(myTraceFile.isIncrementalUpdate());
 	}
 	
 	private void performPageValidation() {
@@ -230,17 +238,14 @@ public class TransformationParametersPage extends WizardPage {
         if (myTraceFile.getText().length() == 0) {
         	myTraceFile.update(moduleName, MDAConstants.QVTO_TRACEFILE_EXTENSION);
         }
-        IStatus status = myTransfSignatureControl.validate(moduleName, getShell(), myTraceFile.getText(), myTraceFile.getUseFileFlag(), validationType);
+        IStatus status = myTransfSignatureControl.validate(moduleName, getShell(), myTraceFile.getText(),
+        		myTraceFile.getUseFileFlag(), myTraceFile.isIncrementalUpdate(), validationType);
         return TransformationControls.statusToTab(status, SET_MESSAGE);
     }
 
     private String getTraceFileName() {
-        URI uri = URI.createURI(myTransfSignatureControl.getTraceName());
-        if (uri.segmentCount() > 0) {
-        	uri = uri.trimFileExtension();
-        	uri = uri.appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
-        }
-        return uri.isEmpty() ? null : uri.toString();
+        URI uri = myTransfSignatureControl.getDefaultTraceName();
+        return uri == null ? null : uri.toString();
     }
 
     private void initTraceFileText() {
@@ -278,7 +283,7 @@ public class TransformationParametersPage extends WizardPage {
     private QvtTransformation myTransformation;
     private final ApplyTransformationData myData;
     private final List<IUriGroup.IModifyListener> myUriListeners = new ArrayList<IUriGroup.IModifyListener>(1);
-    private OptionalFileGroup myTraceFile;
+    private TraceFileControl myTraceFile;
     private boolean myTraceNameNonChanged;
     private boolean isSkipValidation;
     private TransformationSignatureLaunchControl myTransfSignatureControl;

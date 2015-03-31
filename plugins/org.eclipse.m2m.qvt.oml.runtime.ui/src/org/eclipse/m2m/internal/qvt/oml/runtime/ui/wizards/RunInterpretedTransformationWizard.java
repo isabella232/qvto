@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -158,6 +158,7 @@ public class RunInterpretedTransformationWizard extends PersistedValuesWizard im
 	            );
 	            section.put(IQvtLaunchConstants.TRACE_FILE, launchConfig.getAttribute(IQvtLaunchConstants.TRACE_FILE, "")); //$NON-NLS-1$
 	            section.put(IQvtLaunchConstants.USE_TRACE_FILE, launchConfig.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false));
+	            section.put(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, launchConfig.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false));
 	            section.put(IQvtLaunchConstants.DONE_ACTION, myTransformationData.isOpenResult());
 	            section.put(IQvtLaunchConstants.CONFIGURATION_PROPERTIES, myTransformationData.getConfiguration());
 	            
@@ -335,6 +336,7 @@ public class RunInterpretedTransformationWizard extends PersistedValuesWizard im
 		        myTransformationData.getConfiguration().putAll(configProps);
 		        
 		        myTransformationData.setUseTraceFile(section.getBoolean(IQvtLaunchConstants.USE_TRACE_FILE, false));
+		        myTransformationData.setIncrementalUpdate(section.getBoolean(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false));
 		        myTransformationData.setTraceFile(section.get(IQvtLaunchConstants.TRACE_FILE, "")); //$NON-NLS-1$
 		        myTransformationData.setOpenResult(section.getBoolean(IQvtLaunchConstants.DONE_ACTION, false));
 	

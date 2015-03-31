@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -32,6 +32,10 @@ public class TransformationRunnerFactory {
 	public List<String> modelParamURI;
 
 	public String traceFileURI;
+	
+	public boolean isSaveTrace;
+	
+	public boolean isIncrementalUpdate;
 	
 	private EPackage.Registry packageRegistry;
 	
@@ -67,9 +71,12 @@ public class TransformationRunnerFactory {
 		
 		TransformationRunner runner = createRunner(uri, this.packageRegistry, paramURIs);
 		
+		runner.setIncrementalUpdate(isIncrementalUpdate);
+		runner.setSaveTrace(isSaveTrace);
+		
 		if(traceFileURI != null) {
 			try {
-				runner.setTraceFile(toURI(this.traceFileURI, "trace file"));
+				runner.setTraceFile(toURI(traceFileURI, "trace file"));
 			} catch(DiagnosticException e) {
 				diagnostic.add(e.getDiagnostic());
 			}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -29,6 +29,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
@@ -208,7 +209,8 @@ public abstract class AbstractApplyTransformationTask extends Task {
 	            			}
 	            		}
 	
-	            		List<URI> resultUris = QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData, getConfiguration(), getTraceFile());
+	            		List<URI> resultUris = QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData,
+	            				getTraceFile(), QvtLaunchUtil.createContext(getConfiguration()));
 	            		outUris.addAll(resultUris);
                 	}
                 	finally {

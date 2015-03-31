@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.m2m.qvt.oml.util.EvaluationMonitor;
 import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.m2m.qvt.oml.util.Log;
+import org.eclipse.m2m.qvt.oml.util.Trace;
 
 /**
  * The execution context interface groups the details needed by the execution
@@ -81,6 +82,14 @@ public interface ExecutionContext {
 	 * @since 3.4
 	 */
 	IProgressMonitor getProgressMonitor();
+	
+	/**
+	 * Gets the trace object used for incremental update execution assigned to this context.
+	 * 
+	 * @return the trace instance, never <code>null</code>
+	 * @since 3.5
+	 */
+	Trace getTrace();
 	
     /**
      * Returns execution specific settings like QVTEvaluationOptions.EVALUATION_MAX_STACK_DEPTH

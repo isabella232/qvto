@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -39,6 +39,8 @@ public class Messages extends NLS {
     public static String UniSelectTransformationControl_addingTransformations;
     public static String UniSelectTransformationControl_workspaceTransformations;
 	public static String UniSelectTransformationControl_platformTransformations;
+	
+	public static String TraceFileControl_inrementalUpdate;
 
     static {
         // initialize resource bundle

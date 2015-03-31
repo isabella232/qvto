@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -23,9 +23,11 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
@@ -102,7 +104,8 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 		getParent().layout();
 	}
 
-	public IStatus validate(String moduleName, Shell shell, String traceFilePath, boolean useTrace, ValidationType validationType) {
+	public IStatus validate(String moduleName, Shell shell, String traceFilePath, boolean useTrace, 
+			boolean isIncrementalUpdate, ValidationType validationType) {
 		for (Map.Entry<ModelParameterInfo, IUriGroup> entry : myParamGroups.entrySet()) {
 			entry.getValue().update(moduleName, entry.getKey(), shell);
 		}
@@ -114,7 +117,7 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 
 		try {
 			return QvtValidator.validateTransformation(myTransformation, targetUris,
-					traceFilePath, useTrace, validationType);
+					traceFilePath, useTrace, isIncrementalUpdate, validationType);
 		}
 		catch (Exception e) {
 	        return StatusUtil.makeErrorStatus(e.getMessage(), e);
@@ -156,13 +159,41 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 		}
 	}
 
-	public String getTraceName() {
+	public URI getDefaultTraceName() {
+		URI traceUri = null;
 		for (Map.Entry<ModelParameterInfo, IUriGroup> entry : myParamGroups.entrySet()) {
 			if (entry.getKey().isInOutParameter() || entry.getKey().isOutParameter()) {
-				return entry.getValue().getUriData().getUriString();
+				traceUri = URI.createURI(entry.getValue().getUriData().getUriString());
+				break;
 			}
     	}
-		return ""; //$NON-NLS-1$
+		
+		String moduleName = null;
+		if (myTransformation != null) {
+			try {
+				if (traceUri == null || traceUri.toString().isEmpty()) {
+					traceUri = myTransformation.getURI();
+				}
+				else {
+					moduleName = myTransformation.getModuleName();
+				}
+			} catch (MdaException e) {
+			}
+		}
+
+        if (traceUri == null || traceUri.toString().isEmpty()) {
+        	return null;
+        }
+
+        if (traceUri.segmentCount() > 0) {
+    		traceUri = traceUri.trimFileExtension();
+    	}
+    	if (moduleName != null) {
+    		traceUri = traceUri.appendFileExtension(moduleName);
+    	}
+    	traceUri = traceUri.appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
+		
+		return traceUri;
 	}
 	
 	private void createContents(Composite parent, final List<IUriGroup.IModifyListener> listeners) {

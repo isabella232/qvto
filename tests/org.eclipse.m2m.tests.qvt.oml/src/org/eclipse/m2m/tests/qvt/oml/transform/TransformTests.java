@@ -40,6 +40,7 @@ import org.eclipse.m2m.tests.qvt.oml.bbox.AnnotatedJavaLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug289982_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug427237_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary;
+import org.eclipse.m2m.tests.qvt.oml.callapi.DebugExecutorTest;
 import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtExecutor;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessQvtTest;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessUtil;
@@ -145,6 +146,18 @@ public class TransformTests {
 
         for (ModelTestData data : datas) {
             suite.addTest(new TestQvtExecutor(data));
+        }
+        
+        return suite;
+    }
+
+    public static TestSuite debugExecutorSuite() {
+        TestSuite suite = new TestSuite("QVT debug executor"); //$NON-NLS-1$
+
+        ModelTestData[] datas = createTestData();
+
+        for (ModelTestData data : datas) {
+            suite.addTest(new DebugExecutorTest(data));
         }
         
         return suite;

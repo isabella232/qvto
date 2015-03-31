@@ -71,20 +71,21 @@ public abstract class ModelTestData {
         return myName;
     }
     
-    public void compareWithExpected(List<EObject> expected, List<EObject> out) {
+    public static void compareWithExpected(String name, List<EObject> expected, List<EObject> out) {
     	TestCase.assertEquals("transf output differs in size to expected result", //$NON-NLS-1$ 
     			expected.size(), out.size());
     	for(int i = 0; i < out.size(); i++) {
-    		compareWithExpected(expected.get(i), out.get(i));
+    		compareWithExpected(name, expected.get(i), out.get(i));
     	}
     }
     
-    public void compareWithExpected(EObject expected, EObject out) {        
+    public static void compareWithExpected(String name, EObject expected, EObject out) {        
         TestCase.assertNotSame("Actual output and expected output must not be the same instances", expected, out); //$NON-NLS-1$
-        TestCase.assertFalse("Actual output and expected output must be at distinct location", //$NON-NLS-1$ 
-        		out.eResource().getURI().toString().equals(expected.eResource().getURI().toString())); 
-        
-        assertEquals(myName + ":", expected, out); //$NON-NLS-1$
+        if (out.eResource() != null) {
+        	TestCase.assertFalse("Actual output and expected output must be at distinct location", //$NON-NLS-1$ 
+        		out.eResource().getURI().toString().equals(expected.eResource().getURI().toString()));
+        }        
+        assertEquals(name + ":", expected, out); //$NON-NLS-1$
     }
     
     public static void assertEquals(String message, EObject left, EObject right) {
