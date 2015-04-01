@@ -164,7 +164,7 @@
    
        <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTOApplicationDelegate"            
              delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration"
-             modes="debug"
+             modes="debug, run"
              name="%QVTOAppLaunchConfig.name"
              sourceLocatorId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourceLookupDirector"
              sourcePathComputerId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourcePathComputer"
