@@ -1,0 +1,15 @@
+import LateResolveBase;
+
+modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation LateResolveExtends(out outModel:ecore)
+extends transformation LateResolveBase(out ecore);
+
+main() {
+	map p();
+}
+
+mapping EPackage::c():EClass
+{
+name := "overridden"
+}		

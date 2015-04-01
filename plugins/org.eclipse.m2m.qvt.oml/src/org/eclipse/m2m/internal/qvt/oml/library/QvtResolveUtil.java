@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 358709, 433292
+ *     Christopher Gerking - bugs 358709, 433292, 463416
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.library;
 
@@ -312,6 +312,13 @@ public class QvtResolveUtil {
             }
             for (TraceRecord traceRecord : traceRecords) {
                 MappingOperation inMapping = resolveInExp.getInMapping();
+                
+                // bug 463416: consider overriding mapping
+	    		ImperativeOperation overridingOper = EvaluationUtil.getOverridingOperation(env, inMapping);
+	    		if (overridingOper instanceof MappingOperation) {
+	    			inMapping = (MappingOperation) overridingOper;
+	    		}
+                
                 if (traceRecord.getMappingOperation().getRuntimeMappingOperation().equals(inMapping)) {
                     selectedTraceRecords.add(traceRecord);
                 }                
