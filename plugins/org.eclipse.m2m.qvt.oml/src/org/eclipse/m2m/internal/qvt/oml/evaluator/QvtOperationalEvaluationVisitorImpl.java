@@ -10,7 +10,8 @@
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bugs 302594, 309762, 310991, 325192, 377882, 388325, 
  *     							  392080, 392153, 394498, 397215, 397218, 269744, 
- *     							  415660, 415315, 414642, 427237, 428618, 425069
+ *     							  415660, 415315, 414642, 427237, 428618, 425069,
+ *     							  463410
  *     Alex Paperno - bugs 294127, 416584, 419299, 267917, 420970, 424584
  *     Christine Gerpheide - bugs 432969
  *******************************************************************************/
@@ -962,6 +963,11 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			Adapter adapter = EcoreUtil.getAdapter(objectExp.eAdapters(), ConstructorOperationAdapter.class);
 			if (adapter != null) {
 				Constructor constructorOp = ((ConstructorOperationAdapter) adapter).getReferredConstructor();
+				
+				ImperativeOperation overriding = EvaluationUtil.getOverridingOperation(getOperationalEvaluationEnv(), constructorOp);
+	    		if (overriding instanceof Constructor) {
+	    			constructorOp = (Constructor) overriding;
+	    		}
 				
 				for (int i = 0, in = constructorOp.getEParameters().size(); i < in; ++i) {
 					actualArguments.set(i, EvaluationUtil.doImplicitListCoercion(
