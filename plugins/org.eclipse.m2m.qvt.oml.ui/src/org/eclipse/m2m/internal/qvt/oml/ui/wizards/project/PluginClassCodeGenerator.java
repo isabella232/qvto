@@ -29,7 +29,6 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
-import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ui.QVTUIPlugin;
 import org.eclipse.pde.core.plugin.IPluginReference;
 import org.eclipse.pde.ui.templates.PluginReference;
@@ -218,7 +217,6 @@ class PluginClassCodeGenerator {
 		}
 		if (fIsPlugin) {
 			result.add(new PluginReference(QvtPlugin.ID, null, 0));
-			result.add(new PluginReference(QVTOProjectPlugin.ID, null, 0));
 		}
 		
 		return (IPluginReference[]) result.toArray(new IPluginReference[result.size()]);
