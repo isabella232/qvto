@@ -747,10 +747,9 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}
 
 		final Object currentValue = owner.eGet(eStructuralFeature);
-		Object oclValue = valueIsUndefined ? exprValue : coerceValue(eStructuralFeature, exprValue, true);			
 		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(eStructuralFeature);
 		
-		Object newValue = assign(oclType, currentValue, oclValue, isReset);
+		Object newValue = assign(oclType, currentValue, exprValue, isReset);
 		
 		final Class<?> expectedClass = eStructuralFeature.getEType().getInstanceClass();
 		
@@ -809,7 +808,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 				newList = isReset ? Collections.emptyList() : containerList;
 			}
 			else {
-				newList = new ArrayList<Object>((Collection<?>) newValue);
+				newList = newValue instanceof List ? (List<Object>) newValue : new ArrayList<Object>((Collection<?>) newValue);
 			}
 							
 			ECollections.setEList(containerList, newList);
