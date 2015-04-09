@@ -33,11 +33,17 @@ public class TransformationRunnerFactory {
 
 	public String traceFileURI;
 	
+	/**
+	 * @since 1.5
+	 */
 	public boolean isSaveTrace;
 	
+	/**
+	 * @since 1.5
+	 */
 	public boolean isIncrementalUpdate;
 	
-	private EPackage.Registry packageRegistry;
+	public EPackage.Registry packageRegistry;
 	
 	private ResourceSet mmapingsRs;
 	
@@ -89,6 +95,9 @@ public class TransformationRunnerFactory {
 		return new TransformationRunner(transformationURI, packageRegistry, modelParamURIs);
 	}
 	
+	/**
+	 * @since 1.5
+	 */
 	public void addMetamodelMapping(String nsURI, String uriLocation) {
 		if (mmapingsRs == null) {
 			mmapingsRs = new ResourceSetImpl();

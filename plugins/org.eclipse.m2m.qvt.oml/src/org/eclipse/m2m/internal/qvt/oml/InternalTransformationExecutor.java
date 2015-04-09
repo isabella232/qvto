@@ -22,6 +22,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -298,7 +299,7 @@ public class InternalTransformationExecutor {
 					ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS.bind(
 							Messages.FailedToCompileUnitError, fURI));
 
-			fLoadDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+			((DiagnosticChain) fLoadDiagnostic).merge(BasicDiagnostic.toDiagnostic(e));
 		}
 
 		if (fCompiledUnit != null

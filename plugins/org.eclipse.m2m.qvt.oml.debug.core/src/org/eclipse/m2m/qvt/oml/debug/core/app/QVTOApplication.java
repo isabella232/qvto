@@ -30,9 +30,18 @@ public class QVTOApplication implements IApplication {
 	public static final String ARG_PORT = "-port"; //$NON-NLS-1$
 	public static final String ARG_TRANSFORMATION = "-transform"; //$NON-NLS-1$
 	public static final String ARG_PARAM = "-param"; //$NON-NLS-1$
+	/**
+	 * @since 1.5
+	 */
 	public static final String ARG_MMAPINGS = "-mmapings"; //$NON-NLS-1$
 	public static final String ARG_TRACE = "-trace"; //$NON-NLS-1$
+	/**
+	 * @since 1.5
+	 */
 	public static final String ARG_TRACE_SAVE = "-trace_save"; //$NON-NLS-1$
+	/**
+	 * @since 1.5
+	 */
 	public static final String ARG_TRACE_INCREMENTAL = "-trace_incremental"; //$NON-NLS-1$
 
 	public static final String ARG_HELP = "-help"; //$NON-NLS-1$

@@ -1115,7 +1115,6 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}		
 		
 		Internal(Internal another) {
-			this();
 			myThisResolver = another.myThisResolver;
 			myCurrentIP = another.myCurrentIP;
 		}

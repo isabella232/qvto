@@ -19,6 +19,9 @@ import java.util.List;
 
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
+/**
+ * @since 3.5
+ */
 public class StringLibrary {
     
     /**

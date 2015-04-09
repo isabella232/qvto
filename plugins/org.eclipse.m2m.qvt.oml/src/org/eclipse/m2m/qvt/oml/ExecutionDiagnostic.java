@@ -15,7 +15,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
 
 /**
@@ -26,7 +25,7 @@ import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
  * 
  * @noextend This interface is not intended to be extended by clients.
  */
-public interface ExecutionDiagnostic extends Diagnostic, DiagnosticChain {
+public interface ExecutionDiagnostic extends Diagnostic {
 
 	/**
 	 * The execution was terminated by failed QVT assertion.

@@ -138,9 +138,7 @@ public class QVTOCompiler {
 			}
 		}
 				
-		IMetamodelRegistryProvider metamodelRegistryProvider = createMetamodelRegistryProvider(registry, rs);
-
-		return new QVTOCompiler(metamodelRegistryProvider);
+		return new QVTOCompiler(createMetamodelRegistryProvider(registry, rs));
 	}
 	
 	public static CompiledUnit[] compile(Set<URI> unitURIs, EPackage.Registry registry) throws MdaException {

@@ -27,7 +27,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.ui.wizards.RunInterpretedTransfo
 /**
  * @author sboyko
  * 
- * @since 3.4
+ * @since 3.5
  */
 public class TransformationWizardUtil {
 	

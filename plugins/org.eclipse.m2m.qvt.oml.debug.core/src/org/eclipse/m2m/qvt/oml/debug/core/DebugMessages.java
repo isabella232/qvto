@@ -16,11 +16,11 @@ public class DebugMessages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.m2m.qvt.oml.debug.core.DebugMessages"; //$NON-NLS-1$
 	
 	/**
-	 * @since 1.4
+	 * @since 1.5
 	 */
 	public static String QVTOVirtualProcess_processLabel;
 	/**
-	 * @since 1.4
+	 * @since 1.5
 	 */
 	public static String QVTOVirtualProcess_defaultLabel;
 	

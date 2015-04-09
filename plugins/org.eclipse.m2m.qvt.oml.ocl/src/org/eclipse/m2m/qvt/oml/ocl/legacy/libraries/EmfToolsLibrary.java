@@ -27,6 +27,9 @@ import org.eclipse.ocl.types.AnyType;
 import org.eclipse.ocl.types.PrimitiveType;
 import org.eclipse.ocl.types.VoidType;
 
+/**
+ * @since 3.5
+ */
 public class EmfToolsLibrary {
 
     public static class Metainfo {

@@ -52,7 +52,7 @@ public final class TransformationExecutor {
 	 * ExecutionDiagnostic result = executor.execute(context);
 	 * </pre></blockquote>
 	 * 
-	 * @since 3.4
+	 * @since 3.5
 	 * 
 	 */
 	public interface BlackboxRegistry {
@@ -151,7 +151,7 @@ public final class TransformationExecutor {
 	/**
 	 * Clean all resources associated with the executor.
 	 * 
-	 * @since 3.4
+	 * @since 3.5
 	 */
 	public void cleanup() {
 		fExector.cleanup();
