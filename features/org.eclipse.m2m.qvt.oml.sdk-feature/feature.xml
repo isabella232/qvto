@@ -57,6 +57,14 @@
          id="org.eclipse.m2m.qvt.oml.debug.source"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.m2m.qvt.oml.tools.coverage"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipse.m2m.qvt.oml.tools.coverage.source"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.m2m.qvt.oml.ui"
          download-size="0"

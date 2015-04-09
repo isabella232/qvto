@@ -18,7 +18,7 @@
        name="%launchDelegate.name"
        delegate="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching.JUnitCoverageLaunchDelegate"
        type="org.eclipse.jdt.junit.launchconfig"
-       modes="run, debug">
+       modes="run">
   </launchDelegate>
  </extension>
  
@@ -114,7 +114,7 @@
          delegate="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching.QvtLaunchConfigurationCoverageDelegate"
          delegateDescription="%launchDelegate.description"
          id="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launchDelegate"
-         modes="run,debug"
+         modes="run"
          name="%launchDelegate.name"
          type="org.eclipse.m2m.qvt.oml.QvtTransformation">
    </launchDelegate>
