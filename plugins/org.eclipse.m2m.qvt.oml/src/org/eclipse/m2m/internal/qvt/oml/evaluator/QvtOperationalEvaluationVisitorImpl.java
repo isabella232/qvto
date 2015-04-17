@@ -142,6 +142,7 @@ import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.EnvironmentFactory;
 import org.eclipse.ocl.EvaluationEnvironment;
+import org.eclipse.ocl.EvaluationHaltedException;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.EvaluationVisitorImpl;
 import org.eclipse.ocl.ParserException;
@@ -167,6 +168,7 @@ import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.VoidType;
 import org.eclipse.ocl.util.CollectionUtil;
 import org.eclipse.ocl.util.Tuple;
+import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.PredefinedType;
 import org.eclipse.ocl.utilities.UMLReflection;
 
@@ -401,11 +403,34 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				Object oldValue = env.navigateProperty(property, Collections.emptyList(), ownerObj);
 				env.assign(classifier, oldValue, exprValue, assignExp.isIsReset());
 			}
+			else {
+				throw new UnsupportedOperationException("Null owner for property '" + property.getName() + '\''); //$NON-NLS-1$
+			}
 		} else {
-			throw new UnsupportedOperationException("Unsupported LValue type: " + ((lValue == null) ? null : lValue.getType())); //$NON-NLS-1$
+			throw new UnsupportedOperationException("Unsupported LValue type '" + ((lValue == null) ? null : lValue.getType()) + '\''); //$NON-NLS-1$
 		}
 
 		return exprValue;
+    }
+    
+    @Override
+    public Object visitExpression(OCLExpression<EClassifier> expression) {
+        try {
+            return expression.accept(getVisitor());
+        } catch (EvaluationHaltedException e) {
+        	// evaluation stopped on demand, propagate further
+        	throw e;
+        } catch (RuntimeException e) {
+            String msg = e.getLocalizedMessage();
+            if (msg == null) {
+                msg = e.getClass().getSimpleName();
+            }
+			QvtPlugin.error(NLS.bind(EvaluationMessages.QvtOperationalEvaluationVisitorImpl_EvaluationFailed, 
+					getLocationInSource(expression), msg), e);
+            
+            // failure to evaluate results in invalid
+            return getInvalid();
+        }
     }
     
     private Object getAssignExpLValueOwner(OCLExpression<EClassifier> lValue) {
@@ -1058,7 +1083,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	private Object doVisitTransformation(OperationalTransformation transformation) {
         
         QvtOperationalEvaluationEnv evaluationEnv = getOperationalEvaluationEnv();        
-		List<ModelInstance> modelArgs = EvaluationUtil.getTransfromationModelArguments(evaluationEnv, transformation);		
+		List<ModelInstance> modelArgs = EvaluationUtil.getTransfromationModelArguments(evaluationEnv, transformation);
 
 		TransformationInstance moduleInstance = callTransformationImplicitConstructor(transformation, modelArgs); 
 				
@@ -1409,24 +1434,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		Object assertionValue = visitExpression(assertExp.getAssertion());
 		
 		if(!Boolean.TRUE.equals(assertionValue)) {	
-			InternalEvaluationEnv internEvalEnv = getOperationalEvaluationEnv().getAdapter(InternalEvaluationEnv.class);
-			Module currentModule = internEvalEnv.getCurrentModule().getModule();
-			IModuleSourceInfo moduleSource = ASTBindingHelper.getModuleSourceBinding(currentModule);
-			
-			String source;
-			if(moduleSource != null) {
-				source = moduleSource.getSourceURI().lastSegment();
-			} else {
-				source = EvaluationMessages.UknownSourceLabel;				
-			}
-
-			StringBuilder locationBuf = new StringBuilder(source);
-			if(assertExp.getStartPosition() >= 0 && moduleSource != null) {
-				int lineNum = moduleSource.getLineNumberProvider().getLineNumber(assertExp.getStartPosition());
-				locationBuf.append(':').append(lineNum);
-			}
-							
-			String message = NLS.bind(EvaluationMessages.AssertFailedMessage, assertExp.getSeverity(), locationBuf.toString());				
+			String message = NLS.bind(EvaluationMessages.AssertFailedMessage, assertExp.getSeverity(), getLocationInSource(assertExp));
 			Log logger = getContext().getLog();
 			
 			String logMessage = null;
@@ -1444,6 +1452,27 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		}			
 		
 		return null;
+	}
+	
+	private String getLocationInSource(ASTNode astNode) {
+		InternalEvaluationEnv internEvalEnv = getOperationalEvaluationEnv().getAdapter(InternalEvaluationEnv.class);
+		Module currentModule = internEvalEnv.getCurrentModule().getModule();
+		IModuleSourceInfo moduleSource = ASTBindingHelper.getModuleSourceBinding(currentModule);
+		
+		String source;
+		if(moduleSource != null) {
+			source = moduleSource.getSourceURI().lastSegment();
+		} else {
+			source = EvaluationMessages.UknownSourceLabel;				
+		}
+
+		StringBuilder locationBuf = new StringBuilder(source);
+		if(astNode.getStartPosition() >= 0 && moduleSource != null) {
+			int lineNum = moduleSource.getLineNumberProvider().getLineNumber(astNode.getStartPosition());
+			locationBuf.append(':').append(lineNum);
+		}
+		
+		return locationBuf.toString();
 	}
 	
     public Object visitImperativeLoopExp(ImperativeLoopExp imperativeLoopExp) {
@@ -2333,7 +2362,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			        setCurrentEnvInstructionPointer(oldIP);
 			    }
 			} else {
-			    throw new UnsupportedOperationException("Unsupported LValue type: " + ((arg == null) ? null : arg.getType())); //$NON-NLS-1$
+			    throw new UnsupportedOperationException("Unsupported LValue type '" + ((arg == null) ? null : arg.getType()) + '\''); //$NON-NLS-1$
 			}
 		}
     }
@@ -2380,7 +2409,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				}
 	        }
 			else {
-                throw new IllegalArgumentException("entry operation arguments mismatch: no argument for " + mappingParam + " parameter"); //$NON-NLS-1$ //$NON-NLS-2$
+                throw new IllegalArgumentException("entry operation arguments mismatch: no argument for '" + mappingParam + "' parameter"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 
 	        paramIndex++;

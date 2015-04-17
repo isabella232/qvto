@@ -12,7 +12,7 @@ intermediate class MyClass extends MyBase {
 
 intermediate class MyClass2 extends MyClass {
 	refSelf : MyClass2;
-	listRefs : Sequence(MyBase) = Sequence{object MyClass{}, object MyClass2{}} 
+	listRefs : Sequence(MyBase) = Sequence{object MyClass{}, object MyClass{}} 
 }
 
 

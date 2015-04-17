@@ -18,11 +18,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -135,12 +133,6 @@ public class IntermediateClassFactory extends EFactoryImpl {
 
 	@Override
 	public EObject create(EClass class_) {
-		if (myIsInitInProgress > 0) {
-			if (myInstantiatedClasses.contains(class_)) {
-				return null;
-			}
-			myInstantiatedClasses.add(class_);
-		}
 		// return super.create(class_);
 
 		if (myClassifierInitializations.get(class_) == null) {
@@ -240,9 +232,6 @@ public class IntermediateClassFactory extends EFactoryImpl {
 		}
 		EObject eInstance = (EObject) instance;
 
-		try {
-			myIsInitInProgress++;
-			
 			EClass intermediateClass = eInstance.eClass();
 			
 			Map<EStructuralFeature, OCLExpression<EClassifier>> clsFeatures = myClassifierInitializations
@@ -257,7 +246,7 @@ public class IntermediateClassFactory extends EFactoryImpl {
 				if (adapter != null && adapter.isInitialized()) {
 					continue;
 				}
-
+	
 				OCLExpression<EClassifier> expression = clsFeatures
 						.get(eFeature);
 				
@@ -269,7 +258,7 @@ public class IntermediateClassFactory extends EFactoryImpl {
 					evalResult = EvaluationUtil.createInitialValue(featureType, evalVisitor.getEnvironment().getOCLStandardLibrary(),
 							evalVisitor.getEvaluationEnvironment());
 				}
-
+	
 				// temporary switch off read-only property
 				boolean isChangeable = eFeature.isChangeable();
 				eFeature.setChangeable(true);
@@ -279,12 +268,6 @@ public class IntermediateClassFactory extends EFactoryImpl {
 				
 				eFeature.setChangeable(isChangeable);
 			}
-		} finally {
-			myIsInitInProgress--;
-			if (myIsInitInProgress == 0) {
-				myInstantiatedClasses.clear();
-			}
-		}
 	}
 
 	public static void markFeatureAsStatic(EStructuralFeature eFeature) {
@@ -424,9 +407,7 @@ public class IntermediateClassFactory extends EFactoryImpl {
 	private final ModelType myIntermediateModelType;
 
 	private final Map<EClass, Map<EStructuralFeature, OCLExpression<EClassifier>>> myClassifierInitializations = new HashMap<EClass, Map<EStructuralFeature, OCLExpression<EClassifier>>>();
-	private int myIsInitInProgress = 0;
-	private final Set<EClass> myInstantiatedClasses = new HashSet<EClass>(2);
-
+	
 	private static final String INTERMEDIATE_MODELTYPE_NAME = "_INTERMEDIATE"; //$NON-NLS-1$
 
 	private static final String INTERMEDIATE_PACKAGE_NAME = INTERMEDIATE_MODELTYPE_NAME.toLowerCase();
