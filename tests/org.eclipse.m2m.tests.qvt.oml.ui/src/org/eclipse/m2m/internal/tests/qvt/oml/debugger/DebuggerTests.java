@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -106,6 +106,11 @@ public class DebuggerTests {
 
 		@Override
 		public List<URI> getExpected(IProject project) {
+			return null;
+		}
+		
+		@Override
+		public URI getTrace(IProject project) {
 			return null;
 		}
 

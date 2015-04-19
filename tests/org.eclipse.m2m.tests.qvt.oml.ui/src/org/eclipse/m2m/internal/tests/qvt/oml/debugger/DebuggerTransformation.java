@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 S.Boyko and others.
+ * Copyright (c) 2013, 2015 S.Boyko and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,6 +11,7 @@
 package org.eclipse.m2m.internal.tests.qvt.oml.debugger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +28,7 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
 import org.eclipse.debug.core.Launch;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
@@ -82,7 +84,7 @@ public class DebuggerTransformation extends TestTransformation {
     
 	private class DebuggerTransformer implements ITransformer {
 		
-		public List<URI> transform(IFile transformation, List<URI> inUris, IContext qvtContext) throws Exception {
+		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
 	        ILaunchConfigurationType type = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurationType(QvtLaunchConfigurationDelegate.LAUNCH_CONFIGURATION_TYPE_ID);
 	        myLaunchConfigurationWorkingCopy = type.newInstance(null, "debugConfig"); //$NON-NLS-1$
 	        
@@ -102,6 +104,11 @@ public class DebuggerTransformation extends TestTransformation {
 	        	QvtLaunchUtil.saveTargetUriData(myLaunchConfigurationWorkingCopy, new TargetUriData(TargetType.NEW_MODEL, uri.toString(), null, false), index);
 	        	index++;
 	        }
+	        
+	        myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.TRACE_FILE, traceUri.toString());
+			if (new ResourceSetImpl().getURIConverter().exists(traceUri, Collections.emptyMap())) {
+		        myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, true);
+			}
 
 	    	myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.MODULE, URIUtils.getResourceURI(transformation).toString());
 	        myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.ELEM_COUNT, index-1);
