@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -187,7 +187,7 @@ public class QvtPlugin extends EMFPlugin {
 			} else {
 				// not in the Eclipse environment
 				//if (shouldTrace()) {
-					switch (code) {
+					switch (severity) {
 						case Diagnostic.WARNING :
 							System.err.print("WARNING "); //$NON-NLS-1$
 							break;

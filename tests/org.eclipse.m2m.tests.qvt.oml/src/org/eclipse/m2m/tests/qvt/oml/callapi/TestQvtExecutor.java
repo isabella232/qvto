@@ -16,6 +16,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
@@ -58,6 +60,8 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 	protected void runTest() throws Throwable {
 		super.runTest();
 		
+		ResourceSet checkingRs = CompilerUtils.cloneResourceSet(uriCreator.getTransformationUri(), resSet);
+		
 		int outIndex = 0;
 		for (int i = 0; i < paramKinds.size(); ++i) {
 			if (paramKinds.get(i) == DirectionKind.IN) {
@@ -66,7 +70,7 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 			
 			ModelExtent modelExtent = extents.get(i);
 			URI modelUri = uriCreator.getModelUri(outModels.get(outIndex++));
-			Resource resource = resSet.getResource(modelUri, true);
+			Resource resource = checkingRs.getResource(modelUri, true);
 			ModelTestData.compareWithExpected(name, resource.getContents(), modelExtent.getContents());
 		}
 	}

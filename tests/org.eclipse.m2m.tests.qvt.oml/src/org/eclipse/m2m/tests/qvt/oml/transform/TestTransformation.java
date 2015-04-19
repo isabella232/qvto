@@ -13,6 +13,7 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +46,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.EclipseFile;
 import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.EclipseResource;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilder;
@@ -52,9 +54,9 @@ import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
 import org.eclipse.m2m.internal.qvt.oml.project.nature.NatureUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
@@ -200,7 +202,7 @@ public abstract class TestTransformation extends TestCase {
         public void check(ModelTestData data, IProject project) throws Exception {
             IFile transformation = getIFile(data.getTransformation(project));
             
-            List<URI> transfResult = myTransformer.transform(transformation, data.getIn(project), data.getContext());
+            List<URI> transfResult = myTransformer.transform(transformation, data.getIn(project), data.getTrace(project), data.getContext());
         	List<URI> expectedResultURIs = data.getExpected(project);
         	
         	ResourceSetImpl rs = new ResourceSetImpl();
@@ -219,7 +221,7 @@ public abstract class TestTransformation extends TestCase {
     };
     
     public static interface ITransformer {
-    	List<URI> transform(IFile transformation, List<URI> inUris, IContext context) throws Exception;
+    	List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception;
     }	
 
     protected void checkTransformation(IChecker checker) throws Exception {
@@ -260,7 +262,7 @@ public abstract class TestTransformation extends TestCase {
         return modelExtentFile;
     }
     
-	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, IContext qvtContext,
+	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext,
 			QvtTransformation transf) throws Exception {
 		
 		EclipseFile eclipseFile = new EclipseFile(transformation);
@@ -300,8 +302,16 @@ public abstract class TestTransformation extends TestCase {
 			}
 		}
 
-		URI traceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
-		QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, traceURI.toString(), qvtContext);
+		if (transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap())) {
+			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, transf.getResourceSet());
+			if (traceContent != null) {
+				qvtContext.getTrace().setTraceContent(traceContent.getContent());
+				outExtentCount += 2; // one for trace itself and one for 'expected.ecore' ('in.ecore' is already loaded)
+			}
+		}
+		
+		URI outTraceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
+		QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
 		
 		assertTrue(
 				NLS.bind("Unexpected number of resources. Expected ({0}), got ({1}).", inoutExtentCount + outExtentCount, //$NON-NLS-1$

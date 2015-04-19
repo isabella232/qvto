@@ -149,6 +149,7 @@ public abstract class ModelTestData {
     
     abstract public List<URI> getIn(IProject project); 
     abstract public List<URI> getExpected(IProject project); 
+    abstract public URI getTrace(IProject project); 
     
     public void prepare(TestProject project) throws Exception {    	
     	Resource res = MetamodelURIMappingHelper.createMappingResource(project.getProject());

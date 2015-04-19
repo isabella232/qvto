@@ -33,6 +33,8 @@ import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -74,6 +76,12 @@ public class TransformationExecutorTest extends TestCase {
 		URI getModelUri(String name) {
 			return URI.createPlatformPluginURI(getBundle() + IPath.SEPARATOR + getTestDataFolder() + IPath.SEPARATOR
 					+ ModelTestData.MODEL_FOLDER + IPath.SEPARATOR + getName() + IPath.SEPARATOR + name, true);
+		}
+		
+		URI getTraceUri() {
+			return URI.createPlatformPluginURI(getBundle() + IPath.SEPARATOR + getTestDataFolder() + IPath.SEPARATOR
+					+ ModelTestData.MODEL_FOLDER + IPath.SEPARATOR + getName() + IPath.SEPARATOR + getName()
+					+ MDAConstants.QVTO_TRACEFILE_EXTENSION_WITH_DOT, true);
 		}
 		
 	}
@@ -121,6 +129,14 @@ public class TransformationExecutorTest extends TestCase {
 		executionContext = new ExecutionContextImpl();
 		for (String key : configProps.keySet()) {
 			executionContext.setConfigProperty(key, configProps.get(key));
+		}
+		
+		URI traceUri = uriCreator.getTraceUri();
+		if (resSet.getURIConverter().exists(traceUri, Collections.emptyMap())) {
+			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, resSet);
+			if (traceContent != null) {
+				executionContext.getTrace().setTraceContent(traceContent.getContent());
+			}
 		}
 	}
 	

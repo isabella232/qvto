@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -100,7 +100,7 @@ public class TraceImpl extends EObjectImpl implements Trace {
     /**
 	 * @generated NOT
 	 */
-    private Map<MappingOperation, Map<Object, TraceRecord>> mapping2Records = new HashMap<MappingOperation, Map<Object, TraceRecord>>();    
+    private final Map<MappingOperation, Map<Object, TraceRecord>> mapping2Records = new HashMap<MappingOperation, Map<Object, TraceRecord>>();    
     
     
     /**
@@ -286,6 +286,13 @@ public class TraceImpl extends EObjectImpl implements Trace {
     /**
 	 * @generated NOT
 	 */    
+    public boolean hasRecordsBySource() {
+		return !mapping2Records.isEmpty();
+    }
+
+    /**
+	 * @generated NOT
+	 */    
     public TraceRecord getRecordBySource(MappingOperation mapping, Object contextSource) {
 		Map<Object, TraceRecord> records = mapping2Records.get(mapping);
 		if(records != null) {
@@ -296,8 +303,6 @@ public class TraceImpl extends EObjectImpl implements Trace {
     }
 
     /**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public void addRecordBySource(Object sourceObject, MappingOperation mapping, TraceRecord traceRecord) {

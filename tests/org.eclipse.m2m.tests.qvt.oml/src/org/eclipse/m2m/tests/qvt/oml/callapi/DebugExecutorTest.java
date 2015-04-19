@@ -136,6 +136,13 @@ public class DebugExecutorTest extends TestCase {
 	@Override
 	protected void runTest() throws Throwable {
 		TransformationRunner runner = factory.createRunner();
+
+		URI traceUri = getTraceUri();
+		if (resSet.getURIConverter().exists(traceUri, Collections.emptyMap())) {
+			runner.setIncrementalUpdate(true);
+			runner.setTraceFile(traceUri);
+		}
+		
 		Diagnostic diagnostic = runner.execute(executionContext);
 		
 		if (Diagnostic.OK != diagnostic.getSeverity()
@@ -239,6 +246,11 @@ public class DebugExecutorTest extends TestCase {
     
     private URI getTransformationUri() {
 		IFile qvtoFile = getIFile(myData.getName() + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT, true);
+		return URI.createPlatformResourceURI(qvtoFile.getFullPath().toString(), true);
+	}
+	
+    private URI getTraceUri() {
+		IFile qvtoFile = getIFile(myData.getName() + MDAConstants.QVTO_TRACEFILE_EXTENSION_WITH_DOT, false);
 		return URI.createPlatformResourceURI(qvtoFile.getFullPath().toString(), true);
 	}
 	

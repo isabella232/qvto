@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,6 +22,12 @@ import java.util.List;
  * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface MutableList<E> extends List<E> {
+	
+	/**
+	 * @since 3.5
+	 */
+	String SINGLETON_NAME = "List"; //$NON-NLS-1$
+	
 	/** 
 	 * Adds a value at the end of the mutable list.
 	 * 

@@ -1,0 +1,26 @@
+import emf.tools;
+
+modeltype ecore "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation bug463572(in e : ecore, out ecore);
+
+main() {
+	var root := e.objects()![EPackage];
+	root.map mapPackage();
+}
+
+mapping EPackage::mapPackage() : EPackage {
+	if (name = null) {
+		name := self.name + "_" + currentTimeMillis().toString();
+	};
+	eClassifiers := self.eClassifiers.map mapClassifier(name).r1;
+}
+
+mapping EClassifier::mapClassifier(packName : String) : r1 : EClass, r2 : EPackage {
+	if (r1.name = null) {
+		r1.name := self.name + "_" + currentTimeMillis().toString();
+	};
+	if (r2.name = null) {
+		r2.name := self.name + packName + currentTimeMillis().toString();
+	};
+}

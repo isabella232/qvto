@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -59,6 +59,12 @@ public class JavalessFileToFileData extends ModelTestData {
 	public List<URI> getExpected(IProject project) {
     	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(getPatchedData(project).getExpectedFile());
         return Collections.singletonList(URI.createPlatformResourceURI(filePath.toString(), true)); 
+    }
+    
+    @Override
+    public URI getTrace(IProject project) {
+    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(getName()).addFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
+    	return URI.createPlatformResourceURI(filePath.toString(), true);
     }
     
     @Override

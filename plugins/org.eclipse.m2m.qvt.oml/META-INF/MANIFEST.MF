@@ -60,7 +60,12 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml;
  org.eclipse.m2m.internal.qvt.oml.expressions.impl;x-internal:=true,
  org.eclipse.m2m.internal.qvt.oml.expressions.util;x-friends:="org.eclipse.m2m.qvt.oml.runtime",
  org.eclipse.m2m.internal.qvt.oml.library;x-friends:="org.eclipse.m2m.qvt.oml.runtime,org.eclipse.m2m.tests.qvt.oml,org.eclipse.m2m.qvt.oml.debug.core",
- org.eclipse.m2m.internal.qvt.oml.stdlib;x-friends:="org.eclipse.m2m.qvt.oml.runtime,org.eclipse.m2m.qvt.oml.ocl,org.eclipse.m2m.tests.qvt.oml",
+ org.eclipse.m2m.internal.qvt.oml.stdlib;
+  x-friends:="org.eclipse.m2m.qvt.oml.runtime,
+   org.eclipse.m2m.qvt.oml.ocl,
+   org.eclipse.m2m.qvt.oml.debug.core,
+   org.eclipse.m2m.qvt.oml.runtime.ui,
+   org.eclipse.m2m.tests.qvt.oml",
  org.eclipse.m2m.internal.qvt.oml.trace;
   x-friends:="org.eclipse.m2m.tests.qvt.oml,
    org.eclipse.m2m.qvt.oml.runtime,

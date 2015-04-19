@@ -25,7 +25,9 @@ import org.eclipse.emf.ecore.EObject;
  */
 public class Trace {
 	
-	public static final Trace EMPTY_TRACE = new Trace(Collections.<EObject>emptyList());
+	public static Trace createEmptyTrace() {
+		return new Trace(Collections.<EObject>emptyList());
+	}
 	
 	public Trace(List<? extends EObject> traceContent) {
 		fTraceContent = new LinkedList<EObject>(traceContent);

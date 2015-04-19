@@ -138,7 +138,7 @@ public class TransformationRunner  {
 			fDiagnostic.add(extentsDiagnostic);
 		}
 		
-		fIncrementalTrace = org.eclipse.m2m.qvt.oml.util.Trace.EMPTY_TRACE;
+		fIncrementalTrace = org.eclipse.m2m.qvt.oml.util.Trace.createEmptyTrace();
 		if (fIsIncrementalUpdate) {
 			Diagnostic traceDiagnostic = Diagnostic.OK_INSTANCE; 
 

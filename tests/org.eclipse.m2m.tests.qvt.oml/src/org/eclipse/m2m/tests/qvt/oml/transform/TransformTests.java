@@ -648,6 +648,12 @@ public class TransformTests {
         		new FilesToFilesData("bug463396"), //$NON-NLS-1$
         		new FilesToFilesData("bug463410"), //$NON-NLS-1$
         		new FilesToFilesData("bug463416", Collections.<String>emptyList(), Collections.singletonList("expected.ecore")), //$NON-NLS-1$
+        		new FileToFileData("bug463572") { //$NON-NLS-1$
+        			@Override
+        			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(EmfToolsLibrary.class, "emf.tools", "tools", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
+        			}
+        		},
         		};
     }
 
@@ -676,6 +682,9 @@ public class TransformTests {
 
     		// EObjects are created inside blackbox transformation and later merged with javaless objects 
             "bug427237a", //$NON-NLS-1$
+            
+            // EObjects for incremental update are loaded from original 'in.ecore' so they don't match with those from 'in.ecore.javaless' 
+            "bug463572", //$NON-NLS-1$
     }));
 
     private static final Set<String> JAVALESS_PATCH_OUTPUT = new HashSet<String>(Arrays.asList(new String[] {

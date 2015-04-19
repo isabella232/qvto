@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
 import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.util.CollectionUtil;
 import org.eclipse.ocl.util.ObjectUtil;
@@ -112,7 +113,8 @@ public class TupleFactory extends EFactoryImpl {
 		@Override
 		public String toString() {
 			StringBuilder result = new StringBuilder();
-			result.append("Tuple{"); //$NON-NLS-1$
+			result.append(TupleType.SINGLETON_NAME);
+			result.append('{');
 
 			for (Iterator<EStructuralFeature> iter = getTupleType()
 					.oclProperties().iterator(); iter.hasNext();) {
@@ -128,7 +130,7 @@ public class TupleFactory extends EFactoryImpl {
 				}
 			}
 
-			result.append("}"); //$NON-NLS-1$
+			result.append('}');
 			return result.toString();
 		}
 
@@ -138,7 +140,7 @@ public class TupleFactory extends EFactoryImpl {
 			} else if (o instanceof Collection<?>) {
 				return CollectionUtil.toString((Collection<?>) o);
 			} else if (o == null) {
-				return "null"; //$NON-NLS-1$
+				return AbstractQVTStdlib.NULL_NAME;
 			} else {
 				return o.toString();
 			}

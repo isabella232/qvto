@@ -52,7 +52,7 @@ public final class ExecutionContextImpl implements ExecutionContext {
 	 */
 	public ExecutionContextImpl() {
 		fLog = Log.NULL_LOG;
-		fTrace = Trace.EMPTY_TRACE;
+		fTrace = Trace.createEmptyTrace();
 		fMonitor = createDefaultMonitor();
 		fSessionData = new Context.SessionDataImpl(fSessionStorage);
 	}

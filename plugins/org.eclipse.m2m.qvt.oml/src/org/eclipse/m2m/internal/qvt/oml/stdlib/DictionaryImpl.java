@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -143,7 +143,7 @@ public class DictionaryImpl<KeyT, T> implements Dictionary<KeyT, T> {
 	
 	@Override
 	public String toString() {	
-		return "Dict" + fMap.toString(); //$NON-NLS-1$
+		return Dictionary.SINGLETON_NAME + fMap.toString();
 	}
 	
 	@SuppressWarnings("rawtypes")

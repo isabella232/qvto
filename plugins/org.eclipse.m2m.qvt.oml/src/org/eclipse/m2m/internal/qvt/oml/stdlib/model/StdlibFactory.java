@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory.ExceptionClassInstance;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLFactory;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
@@ -110,7 +111,8 @@ public class StdlibFactory {
 
 	private static String getTypeName(ListType type) {
 		StringBuffer nameBuf = new StringBuffer();
-		nameBuf.append("List("); //$NON-NLS-1$
+		nameBuf.append(MutableList.SINGLETON_NAME);
+		nameBuf.append('(');
 
 		EClassifier elementType = type.getElementType();
 		String elementTypeName;
@@ -128,14 +130,15 @@ public class StdlibFactory {
 	
 	private static String getTypeName(DictionaryType dictionaryType) {
 		StringBuilder nameBuf = new StringBuilder();
-		nameBuf.append("Dictionary("); //$NON-NLS-1$
+		nameBuf.append(Dictionary.SINGLETON_NAME);
+		nameBuf.append('(');
 		EClassifier keyType = dictionaryType.getKeyType();
 		EClassifier elementType = dictionaryType.getElementType();		
 		
 		if(keyType != null) {
 			nameBuf.append(keyType.getName());		
 		} else {
-			nameBuf.append("null"); //$NON-NLS-1$
+			nameBuf.append(AbstractQVTStdlib.NULL_NAME);
 		}
 		
 		nameBuf.append(',').append(' ');
@@ -143,7 +146,7 @@ public class StdlibFactory {
 		if(elementType != null) {
 			nameBuf.append(elementType.getName());		
 		} else {
-			nameBuf.append("null"); //$NON-NLS-1$			
+			nameBuf.append(AbstractQVTStdlib.NULL_NAME);			
 		}
 
 		nameBuf.append(')');		

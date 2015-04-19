@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -149,11 +149,11 @@ public class TestQvtInterpreter extends TestTransformation {
 			return new QvtInterpretedTransformation(qvtModule); 
 		}
 		
-		public List<URI> transform(IFile transformation, List<URI> inUris, IContext qvtContext) throws Exception {
+		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
         	QvtInterpretedTransformation transf = getTransformation(transformation);
         	
-        	//TestUtil.assertAllPersistableAST(trans.getModule().getUnit());
-        	return launchTransform(transformation, inUris, qvtContext, transf);
+        	//TestUtil.assertAllPersistableAST(transf.getModule().getUnit());
+        	return launchTransform(transformation, inUris, traceUri, qvtContext, transf);
 		}
 
 	}

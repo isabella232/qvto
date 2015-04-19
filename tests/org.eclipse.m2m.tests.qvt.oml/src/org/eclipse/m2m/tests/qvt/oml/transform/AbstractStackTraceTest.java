@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -70,7 +70,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 			
 			transformer.transform(
 					getIFile(getData().getTransformation(getProject())),
-					getData().getIn(getProject()), context);
+					getData().getIn(getProject()), getData().getTrace(getProject()), context);
 		} catch (QvtRuntimeException e) {
 			return e;			
 		}
@@ -121,7 +121,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	private ITransformer createTransformer() {
 		return new TestQvtInterpreter.DefaultTransformer(getData().isUseCompiledXmi(), EPackage.Registry.INSTANCE) {
 			
-	        public List<URI> transform(IFile transformation, List<URI> inUris, IContext context) throws Exception {
+	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception {
 	        	QvtInterpretedTransformation transf;
 	        	if(fUseCompiledXMI) {
 	        		transf = getTransformation(transformation);
@@ -139,7 +139,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	        	Context qvtContext = QvtLaunchUtil.createContext(context.getConfigProperties());
 	        	qvtContext.setLog(new WriterLog(fLogger));
 	            
-	        	return launchTransform(transformation, inUris, qvtContext, transf);
+	        	return launchTransform(transformation, inUris, traceUri, qvtContext, transf);
 	        }
 		};
 	}	

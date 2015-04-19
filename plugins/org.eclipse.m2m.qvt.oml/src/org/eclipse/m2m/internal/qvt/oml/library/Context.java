@@ -41,7 +41,7 @@ public class Context implements IContext {
     	myConfiguration = new HashMap<String, Object>();
     	myLog = Log.NULL_LOG;
 		myMonitor = new NullProgressMonitor();
-		myTrace = Trace.EMPTY_TRACE;
+		myTrace = Trace.createEmptyTrace();
 		myData = new SessionDataImpl();
     }
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -34,7 +34,7 @@ public class TraceUtil {
 	public static Trace transform(ModelTestData data, IProject project, ITransformer transformer) throws Exception {
 		IFile transformation = TestTransformation.getIFile(data.getTransformation(project));
         
-        transformer.transform(transformation, data.getIn(project), data.getContext());
+        transformer.transform(transformation, data.getIn(project), data.getTrace(project), data.getContext());
         
         CFile traceFile = TestTransformation.getTraceFile(new EclipseFile(transformation));
         if(!traceFile.exists()) {

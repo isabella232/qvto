@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
@@ -59,6 +60,12 @@ public class FilesToFilesData extends ModelTestData {
         	outUris.add(URI.createPlatformResourceURI(filePath.toString(), true));
         }
         return outUris; 
+    }
+    
+    @Override
+    public URI getTrace(IProject project) {
+    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(getName()).addFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
+    	return URI.createPlatformResourceURI(filePath.toString(), true);
     }
     
     public List<String> getFromFiles() {

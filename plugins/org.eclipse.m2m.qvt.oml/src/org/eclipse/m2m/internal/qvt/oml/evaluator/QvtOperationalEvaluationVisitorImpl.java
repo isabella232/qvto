@@ -627,15 +627,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	setCurrentEnvInstructionPointer(currentMappingCalled);
         }
         
-        // legacy support for 'result' tuples inside mapping body and 'end' section
-     	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=432112
-        if(currentMappingCalled.getResult().size() > 1) {
-        	if(evalEnv.getValueOf(Environment.RESULT_VARIABLE_NAME) == null) {
-        		Object initialValue = EvaluationUtil.createInitialValue(currentMappingCalled.getEType(), getStandardLibrary(), evalEnv);
-        		replaceInEnv(Environment.RESULT_VARIABLE_NAME, initialValue, currentMappingCalled.getEType());
-        	}
-        }
-        
 		Object result = createOrGetResult(currentMappingCalled);
 		createOutParams(currentMappingCalled);		
 		setOutParamsValues(currentMappingCalled, myEvalEnv.getOperationArgs());
@@ -837,7 +828,13 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		if (traceRecord != null) {
 			return new MappingCallResult(TraceUtil.fetchResultFromTrace(evalEnv, traceRecord), evalEnv, MappingCallResult.FETCHED_FROM_TRACE);
 		}
-		
+
+        // in case of incremental update perform initialization of 'out' parameters (including 'result')
+		traceRecord = TraceUtil.getIncrementalTraceRecord(getOperationalEvaluationEnv(), getOperationalEnv(), mappingOperation);
+		if (traceRecord != null) {
+			TraceUtil.fetchIncrementalResultFromTrace(evalEnv, traceRecord);
+		}
+        
 		if(!mappingOperation.getDisjunct().isEmpty()) {
 			return dispatchDisjunctMapping(mappingOperation);
 		}
@@ -1722,6 +1719,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		QvtOperationalEnv env = (QvtOperationalEnv) getEnvironment();
 		QvtOperationalEvaluationEnv currentEvalEnv = getOperationalEvaluationEnv();	
 
+		getContext().getTrace().setTraceContent(
+				TraceUtil.resolveTrace(env, type, getContext().getTrace().getTraceContent()));
+		
 		QvtOperationalEvaluationEnv nestedEvalEnv = (QvtOperationalEvaluationEnv) env.getFactory().createEvaluationEnvironment(getOperationalEvaluationEnv());
 		// ensure 'this' instance available in the initialization code
 		nestedEvalEnv.add(QvtOperationalEnv.THIS, moduleInstance);

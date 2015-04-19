@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,24 +22,30 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.TupleFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.MappingOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.MappingParameter;
+import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
+import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.trace.EDirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.trace.EMappingContext;
@@ -56,13 +62,22 @@ import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.m2m.qvt.oml.util.MutableList;
 import org.eclipse.m2m.qvt.oml.util.Utils;
 import org.eclipse.ocl.Environment;
+import org.eclipse.ocl.expressions.Variable;
+import org.eclipse.ocl.types.BagType;
+import org.eclipse.ocl.types.CollectionType;
+import org.eclipse.ocl.types.OrderedSetType;
+import org.eclipse.ocl.types.PrimitiveType;
+import org.eclipse.ocl.types.SequenceType;
+import org.eclipse.ocl.types.SetType;
 import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.util.Bag;
+import org.eclipse.ocl.util.CollectionUtil;
 import org.eclipse.ocl.util.Tuple;
+import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.PredefinedType;
 
 public class TraceUtil {
-	
+
 	private TraceUtil() {
 	}
 
@@ -75,7 +90,7 @@ public class TraceUtil {
 		Object key = createKey(selfObj, evalEnv, mappingOperation);
 		if (key != null) {
 			TraceRecord record = trace.getRecordBySource(mappingOperation, key);
-			if (record != null && Boolean.TRUE.equals(TraceUtil.checkResultMatch(record, evalEnv))) {
+			if (record != null && Boolean.TRUE.equals(checkResultMatch(record, evalEnv))) {
 				return record;
 			}
 			// nothing found, mapping executed for the first time on the given
@@ -84,7 +99,7 @@ public class TraceUtil {
 		}
 
 		// Fall back on 'original' TraceUtil
-		return TraceUtil.getTraceRecordDefault(evalEnv, mappingOperation);
+		return getTraceRecordDefault(evalEnv, mappingOperation);
 	}
 
     private static TraceRecord getTraceRecordDefault(QvtOperationalEvaluationEnv evalEnv, MappingOperation mappingOperation) {
@@ -183,18 +198,18 @@ public class TraceUtil {
             EList<TraceRecord> contextMappings = createOrGetListElementFromMap(trace.getSourceToTraceRecordMap(), contextVPV.getValue().getOclObject());
             addUnique(traceRecord, contextMappings);
         }
-        else if(!mappingOperation.getEParameters().isEmpty()) {
+        else {
         	// make the first in parameter as the mapping source object
         	for (EParameter nextEParam : mappingOperation.getEParameters()) {
         		if(nextEParam instanceof VarParameter) {
         			VarParameter firstInVarParam = (VarParameter) nextEParam;
-        			if((firstInVarParam.getEType() instanceof PredefinedType<?> == false) && (firstInVarParam.getKind() == DirectionKind.IN || firstInVarParam.getKind() == DirectionKind.INOUT)) {
+        			if((firstInVarParam.getEType() instanceof PredefinedType<?> == false) 
+        					&& (firstInVarParam.getKind() == DirectionKind.IN || firstInVarParam.getKind() == DirectionKind.INOUT)) {
         				Object val = createVarParameterValue(mappingOperation, firstInVarParam.getKind() ,
         							firstInVarParam.getEType(), firstInVarParam.getName(), evalEnv).getValue().getOclObject();        	
         				EList<TraceRecord> sourceMappings = createOrGetListElementFromMap(trace.getSourceToTraceRecordMap(), val);
         				addUnique(traceRecord, sourceMappings);
         				break;
-        				
         			}
         		}
 			}
@@ -226,7 +241,7 @@ public class TraceUtil {
 		// Note: add it here so we ensure the record is fully initialized
         addUnique(traceRecord, trace.getTraceRecords());
         
-        addTraceRecordByMapping(evalEnv, mappingOperation, traceRecord, trace);
+        addTraceRecordByMapping(mappingOperation, traceRecord, trace);
         
         return traceRecord;
     }
@@ -235,14 +250,13 @@ public class TraceUtil {
 	 * Improves performance a lot for mapping operations with parameters by
 	 * means of (re)using the cache.
 	 */
-	private static void addTraceRecordByMapping(QvtOperationalEvaluationEnv evalEnv, MappingOperation mappingOperation,
-			TraceRecord traceRecord, Trace trace) {
+	private static void addTraceRecordByMapping(MappingOperation mappingOperation, TraceRecord traceRecord, Trace trace) {
 		Object selfObj = null;
 		if (traceRecord.getContext() != null && traceRecord.getContext().getContext() != null) {
 			EValue value = traceRecord.getContext().getContext().getValue();
 			selfObj = value.getOclObject();
 		}
-		Object key = createKey(selfObj, evalEnv, mappingOperation);
+		Object key = createKey(selfObj, traceRecord);
 		if (key != null) {
 			trace.addRecordBySource(key, mappingOperation, traceRecord);
 		}
@@ -262,11 +276,9 @@ public class TraceUtil {
 		ArrayList<Object> key = new ArrayList<Object>(eParameters.size() + 1);
 		key.add(selfObj);
 		for (EParameter param : eParameters) {
-			if (param instanceof VarParameter) {
-				VarParameter varParam = (VarParameter) param;
-				if (varParam.getKind() == DirectionKind.OUT) {
-					continue;
-				}
+			VarParameter varParam = (VarParameter) param;
+			if (varParam.getKind() == DirectionKind.OUT) {
+				continue;
 			}
 			key.add(evalEnv.getValueOf(param.getName()));
 		}
@@ -274,26 +286,46 @@ public class TraceUtil {
 		return key;
 	}
 
-    static Object fetchResultFromTrace(QvtOperationalEvaluationEnv evalEnv, TraceRecord trace) {
-    	MappingOperation operation = trace.getMappingOperation().getRuntimeMappingOperation();
+	/**
+	 * Creates a key for mapping operations, based on the context (if available)
+	 * and all parameters (if any).
+	 */
+	private static Object createKey(Object selfObj, TraceRecord traceRecord) {
+		EList<VarParameterValue> eParameters = traceRecord.getParameters().getParameters();
+		if (eParameters.isEmpty()) {
+			// Backwards compatible for isParameterLessContextual
+			return selfObj;
+		}
+
+		ArrayList<Object> key = new ArrayList<Object>(eParameters.size() + 1);
+		key.add(selfObj);
+		for (VarParameterValue param : eParameters) {
+			if (param.getKind() == EDirectionKind.OUT) {
+				continue;
+			}
+			key.add(param.getValue().getOclObject());
+		}
+
+		return key;
+	}
+
+    static Object fetchResultFromTrace(QvtOperationalEvaluationEnv evalEnv, TraceRecord record) {
+    	MappingOperation operation = record.getMappingOperation().getRuntimeMappingOperation();
     	if (operation.getResult().isEmpty()) {
             return null;
         }
     	
-		Iterator<EParameter> itParams = operation.getEParameters().iterator();
 		ListIterator<Object> itArgument = evalEnv.getOperationArgs().listIterator();
-		Iterator<VarParameterValue> itValues = trace.getParameters().getParameters().iterator();
+		Iterator<VarParameterValue> itValues = record.getParameters().getParameters().iterator();
 		while (itArgument.hasNext()) {
-			MappingParameter mappingParam = (MappingParameter) itParams.next();
-			VarParameterValue value = itValues.next();
+			VarParameterValue param = itValues.next();
 			itArgument.next();
-			if (mappingParam.getKind() != DirectionKind.OUT) {
-				continue;
+			if (param.getKind() == EDirectionKind.OUT) {
+				itArgument.set(param.getValue().getOclObject());
 			}
-			itArgument.set(value.getValue().getOclObject());
 		}
     	
-    	EList<VarParameterValue> traceResult = trace.getResult().getResult();
+    	EList<VarParameterValue> traceResult = record.getResult().getResult();
     	assert traceResult.size() == 1;
 		return traceResult.get(0).getValue().getOclObject();
     }
@@ -316,7 +348,7 @@ public class TraceUtil {
         if (oclObject != null) {
             if (oclObject instanceof Dictionary) {
             	Dictionary<Object, Object> dict = (Dictionary<Object, Object>) oclObject;
-                value.setCollectionType("Dictionary"); //$NON-NLS-1$
+                value.setCollectionType(Dictionary.SINGLETON_NAME);
                 for (Object dictKey : dict.keys()) {
                     ETuplePartValue tuplePartValue = TraceFactory.eINSTANCE.createETuplePartValue();
                     tuplePartValue.setName("key"); //$NON-NLS-1$
@@ -331,7 +363,7 @@ public class TraceUtil {
                 }
             } else if (oclObject instanceof Tuple) {
                 Tuple<EOperation, EStructuralFeature> tuple = (Tuple<EOperation, EStructuralFeature>) oclObject;
-                value.setCollectionType("Tuple"); //$NON-NLS-1$
+                value.setCollectionType(TupleType.SINGLETON_NAME);
                 TupleType<EOperation, EStructuralFeature> tupleType = tuple.getTupleType();
                 for (EStructuralFeature part : tupleType.oclProperties()) {
                     Object partValue = tuple.getValue(part);
@@ -349,7 +381,7 @@ public class TraceUtil {
                         value.getCollection().add(createEValue(collectionElement));
                     }
             } else if (oclObject instanceof ModelInstance) {
-                value.setCollectionType("ModelType"); //$NON-NLS-1$
+                value.setCollectionType(ModelType.SINGLETON_NAME);
                 for (Object collectionElement : ((ModelInstance) oclObject).getExtent().getInitialObjects()) {
                     value.getCollection().add(createEValue(collectionElement));
                 }
@@ -358,6 +390,7 @@ public class TraceUtil {
             } else {
                 if (oclObject != null) {
                     value.setPrimitiveValue(oclObject.toString());
+                    value.setCollectionType(getPrimitiveTypeName(oclObject));
                 }
             }
         }
@@ -365,23 +398,39 @@ public class TraceUtil {
     }
     
     private static String getCollectionTypeName(Collection<?> c) {
-    	String result = "OclCollection"; //$NON-NLS-1$
+    	String result = CollectionType.SINGLETON_NAME;
     	if (c instanceof MutableList<?>) {
-    		result = "List"; //$NON-NLS-1$
+    		result = MutableList.SINGLETON_NAME;
     	} else if (c instanceof Dictionary<?, ?>) {
-    		result = "Dictionary"; //$NON-NLS-1$
+    		result = Dictionary.SINGLETON_NAME;
     	} else if (c instanceof Bag<?>) {
-    		result = "Bag"; //$NON-NLS-1$
+    		result = BagType.SINGLETON_NAME;
     	} else if (c instanceof LinkedHashSet<?>) {
-    		result = "OrderedSet"; //$NON-NLS-1$
+    		result = OrderedSetType.SINGLETON_NAME;
     	} else if (c instanceof Set<?>) {
-    		result = "Set"; //$NON-NLS-1$
+    		result = SetType.SINGLETON_NAME;
     	} else if (c instanceof ArrayList<?>) {
-    		result = "Sequence"; //$NON-NLS-1$
+    		result = SequenceType.SINGLETON_NAME;
     	}
     	return result;
     }
 
+    private static String getPrimitiveTypeName(Object o) {
+    	if (o instanceof Boolean) {
+    		return PrimitiveType.BOOLEAN_NAME;
+    	}
+    	if (o instanceof Integer) {
+    		return PrimitiveType.INTEGER_NAME;
+    	}
+    	if (o instanceof Double) {
+    		return PrimitiveType.REAL_NAME;
+    	}
+    	if (o instanceof String) {
+    		return PrimitiveType.STRING_NAME;
+    	}
+    	return null;
+    }
+    
 	private static Object cloneOclObject(Object obj) {
 		return cloneOclObjectRec(obj, new IdentityHashMap<Object, Object>());
 	}
@@ -499,4 +548,412 @@ public class TraceUtil {
         	recordList.add(record);
         }    	
     }	
+    
+	static TraceRecord getIncrementalTraceRecord(QvtOperationalEvaluationEnv evalEnv, QvtOperationalEnv env, MappingOperation mappingOperation) {
+		List<EObject> traceContent = evalEnv.getContext().getTrace().getTraceContent();
+		if (traceContent.isEmpty()) {
+			return null;
+		}
+		
+		Object selfObj = evalEnv.getValueOf(Environment.SELF_VARIABLE_NAME);
+
+		Object key = createKey(selfObj, evalEnv, mappingOperation);
+		if (key != null) {
+			for (EObject o : traceContent) {
+				if (false == o instanceof Trace) {
+					continue;
+				}
+				
+				TraceRecord record = ((Trace) o).getRecordBySource(mappingOperation, key);
+				if (record != null && Boolean.TRUE.equals(checkIncrementalResultMatch(env, record))) {
+					return record;
+				}
+			}
+		}
+
+		// nothing found
+		return null;
+	}
+
+    private static boolean checkIncrementalResultMatch(QvtOperationalEnv env, TraceRecord record) {
+    	MappingOperation operation = record.getMappingOperation().getRuntimeMappingOperation();
+    	
+    	Iterator<VarParameterValue> itrRecordParams = record.getParameters().getParameters().iterator();
+		for (EParameter param : operation.getEParameters()) {
+			if (!itrRecordParams.hasNext()) {
+				return false;
+			}
+			VarParameterValue recordParam = itrRecordParams.next();
+			if (!recordParam.getType().equals(param.getEType().getName())) {
+				return false;
+			}
+		}
+		
+		if (operation.getResult().isEmpty()) {
+			return true;
+		}
+		if (record.getResult().getResult().size() != 1) {
+			return false;
+		}
+
+		VarParameterValue resultParam = record.getResult().getResult().get(0);
+
+		if (operation.getResult().size() == 1) {
+			if (!resultParam.getType().equals(operation.getResult().get(0).getEType().getName())) {
+				return false;
+			}
+		}
+		else {
+			EValue value = resultParam.getValue();
+			if (!TupleType.SINGLETON_NAME.equals(value.getCollectionType())) {
+				return false;
+			}
+			EClass resultType = (EClass) createOclTypeFromValue(env, value);
+			for (VarParameter param : operation.getResult()) {
+				EStructuralFeature feature = resultType.getEStructuralFeature(param.getName());
+				if (feature == null) {
+					return false;
+				}
+				if (!param.getEType().getName().equals(feature.getEType().getName())) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+
+	static void fetchIncrementalResultFromTrace(QvtOperationalEvaluationEnv evalEnv, TraceRecord record) {
+    	MappingOperation operation = record.getMappingOperation().getRuntimeMappingOperation();
+    	
+		Iterator<EParameter> itParams = operation.getEParameters().iterator();
+		for (VarParameterValue value : record.getParameters().getParameters()) {
+			MappingParameter mappingParam = (MappingParameter) itParams.next();
+			if (value.getKind() == EDirectionKind.OUT) {
+				Object oclObject = value.getValue().getOclObject();
+				evalEnv.replace(value.getName(), oclObject);
+				if (oclObject instanceof EObject) {
+					evalEnv.putInstanceToExtent((EObject) oclObject, mappingParam.getExtent());
+				}
+			}
+		}
+		
+		if (operation.getResult().isEmpty()) {
+			return;
+		}
+    	
+    	EList<VarParameterValue> traceResult = record.getResult().getResult();
+    	assert traceResult.size() == 1;
+
+    	if (operation.getResult().size() == 1) {
+    		Object oclObject = traceResult.get(0).getValue().getOclObject();
+			evalEnv.replace(Environment.RESULT_VARIABLE_NAME, oclObject);
+			if (oclObject instanceof EObject) {
+				MappingParameter resultParam = (MappingParameter) operation.getResult().get(0);
+				evalEnv.putInstanceToExtent((EObject) oclObject, resultParam.getExtent());
+			}
+    	}
+    	else if (operation.getResult().size() > 1) {
+	    	EObject tuple = (EObject) traceResult.get(0).getValue().getOclObject();
+
+	    	Iterator<VarParameter> itrResults = operation.getResult().iterator();
+			@SuppressWarnings("unchecked")
+			TupleType<EOperation, EStructuralFeature> tupleType = (TupleType<EOperation, EStructuralFeature>) tuple.eClass();
+			for (EStructuralFeature feature : tupleType.oclProperties()) {
+				Object oclObject = tuple.eGet(feature);
+				evalEnv.replace(feature.getName(), oclObject);
+				if (oclObject instanceof EObject) {
+					MappingParameter resultParam = (MappingParameter) itrResults.next();
+					evalEnv.putInstanceToExtent((EObject) oclObject, resultParam.getExtent());
+				}
+			}
+    	}
+    }
+    
+    public static List<EObject> resolveTrace(QvtOperationalEnv env, Module qvtModule, List<EObject> objects) {
+    	if (objects.isEmpty()) {
+    		return objects;
+    	}
+    	
+    	List<EObject> result = new ArrayList<EObject>(objects.size());
+    	
+    	Map<String, MappingOperation> mappings = new TreeMap<String, MappingOperation>();
+    	fetchAllMappings(qvtModule, mappings);
+    	
+    	for (EObject o : objects) {
+    		if (o instanceof Trace) {
+    			result.add(processTrace(env, (Trace) o, mappings));
+    		}
+    		else {
+    			result.add(o);
+    		}
+    	}
+    	
+    	return result;
+    }
+
+    private static EObject processTrace(QvtOperationalEnv env, Trace trace, Map<String, MappingOperation> mappings) {
+    	if (trace.hasRecordsBySource()) {
+    		return trace;
+    	}
+    	
+    	//EcoreUtil.resolveAll(trace);
+		for (TraceRecord traceRecord : trace.getTraceRecords()) {
+			EMappingOperation eMappingOperation = traceRecord.getMappingOperation();
+			MappingOperation mappingOperation = mappings.get(getMappingKey(eMappingOperation));
+			eMappingOperation.setRuntimeMappingOperation(mappingOperation);
+			
+			if (mappingOperation != null) {
+				if (traceRecord.getContext() != null && traceRecord.getContext().getContext() != null) {
+					VarParameterValue value = traceRecord.getContext().getContext();
+					value.getValue().setOclObject(createOclObjectFromValue(env, value.getValue()));
+				}
+
+				EList<VarParameterValue> eParameters = traceRecord.getParameters().getParameters();
+				for (VarParameterValue param : eParameters) {
+					param.getValue().setOclObject(createOclObjectFromValue(env, param.getValue()));
+				}
+				
+				EList<VarParameterValue> eResults = traceRecord.getResult().getResult();
+				for (VarParameterValue result : eResults) {
+					result.getValue().setOclObject(createOclObjectFromValue(env, result.getValue()));
+				}
+				
+				addTraceRecordByMapping(mappingOperation, traceRecord, trace);
+			}
+		}
+		return trace;
+	}
+
+	private static Object createOclObjectFromValue(QvtOperationalEnv env, EValue value) {
+		
+		if (value.getModelElement() != null) {
+			return value.getModelElement();
+		}
+		
+		final String type = value.getCollectionType();
+
+		if (value.getPrimitiveValue() != null) {
+			final String primitiveValue = value.getPrimitiveValue();
+			
+			if (PrimitiveType.STRING_NAME.equals(type)) {
+				return primitiveValue;
+			}
+			else if (PrimitiveType.BOOLEAN_NAME.equals(type)) {
+				return Boolean.valueOf(primitiveValue);
+			}
+			else if (PrimitiveType.INTEGER_NAME.equals(type)) {
+				return Integer.valueOf(primitiveValue);
+			}
+			else if (PrimitiveType.REAL_NAME.equals(type)) {
+				return Double.valueOf(primitiveValue);
+			}
+			else if (PrimitiveType.UNLIMITED_NATURAL_NAME.equals(type)) {
+				return Integer.valueOf(primitiveValue);
+			}
+			assert false : ("Unknown primitive type: " + type); //$NON-NLS-1$
+		}
+		
+		if (Dictionary.SINGLETON_NAME.equals(type)) {
+			Dictionary<Object, Object> dict = Utils.createDictionary();
+			
+			for (Iterator<EValue> itr = value.getCollection().iterator(); itr.hasNext(); ) {
+				ETuplePartValue key = (ETuplePartValue) itr.next();
+				assert "key".equals(key.getName());
+				
+				ETuplePartValue val = (ETuplePartValue) itr.next();
+				assert "value".equals(val.getName());
+				
+				
+				dict.put(createOclObjectFromValue(env, key.getValue()), createOclObjectFromValue(env, val.getValue()));
+			}
+			
+			return dict;
+		}
+
+		if (TupleType.SINGLETON_NAME.equals(type)) {
+			List<Variable<EClassifier, EParameter>> parts = new ArrayList<Variable<EClassifier,EParameter>>(value.getCollection().size());		
+			for (EValue elem : value.getCollection()) {
+				ETuplePartValue part = (ETuplePartValue) elem;
+				Variable<EClassifier, EParameter> var = env.getOCLFactory().createVariable();
+				var.setName(part.getName());
+				var.setType(createOclTypeFromValue(env, part.getValue()));
+				parts.add(var);
+			}		
+
+			EClassifier tupleType = env.getTypeResolver().resolve((EClassifier)env.getOCLFactory().createTupleType(parts));			
+			EObject tuple = TupleFactory.createTuple((EClass) tupleType);
+			
+			for (EValue elem : value.getCollection()) {
+				ETuplePartValue part = (ETuplePartValue) elem;
+				
+				EStructuralFeature feature = tuple.eClass().getEStructuralFeature(part.getName());
+				tuple.eSet(feature, createOclObjectFromValue(env, part.getValue()));
+			}
+			
+			return tuple;
+		}
+		
+		Collection<Object> oclCollection = null;
+		
+		if (MutableList.SINGLETON_NAME.equals(type)) {
+			oclCollection = Utils.createList();
+		}
+		else if (BagType.SINGLETON_NAME.equals(type)) {
+			oclCollection = CollectionUtil.createNewBag();
+		}
+		else if (OrderedSetType.SINGLETON_NAME.equals(type)) {
+			oclCollection = CollectionUtil.createNewOrderedSet();
+		}
+		else if (SetType.SINGLETON_NAME.equals(type)) {
+			oclCollection = CollectionUtil.createNewSet();
+		}
+		else if (SequenceType.SINGLETON_NAME.equals(type)) {
+			oclCollection = CollectionUtil.createNewSequence();
+		}
+		
+		if (oclCollection != null) {
+			for (EValue elem : value.getCollection()) {
+				oclCollection.add(createOclObjectFromValue(env, elem));
+			}
+			return oclCollection;
+		}
+		
+		assert false : ("Unsupported type: " + type); //$NON-NLS-1$
+
+		return null;
+	}
+
+	private static EClassifier createOclTypeFromValue(QvtOperationalEnv env, EValue value) {
+		if (value.getModelElement() != null) {
+			return value.getModelElement().eClass();
+		}
+		
+		final String type = value.getCollectionType();
+
+		if (value.getPrimitiveValue() != null) {
+			if (PrimitiveType.STRING_NAME.equals(type)) {
+				return env.getOCLStandardLibrary().getString();
+			}
+			else if (PrimitiveType.BOOLEAN_NAME.equals(type)) {
+				return env.getOCLStandardLibrary().getBoolean();
+			}
+			else if (PrimitiveType.INTEGER_NAME.equals(type)) {
+				return env.getOCLStandardLibrary().getInteger();
+			}
+			else if (PrimitiveType.REAL_NAME.equals(type)) {
+				return env.getOCLStandardLibrary().getReal();
+			}
+			else if (PrimitiveType.UNLIMITED_NATURAL_NAME.equals(type)) {
+				return env.getOCLStandardLibrary().getUnlimitedNatural();
+			}
+			assert false : ("Unknown primitive type: " + type); //$NON-NLS-1$
+		}
+		
+		if (Dictionary.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getQVTStandardLibrary().getDictionary();
+			}
+			else {
+				for (Iterator<EValue> itr = value.getCollection().iterator(); itr.hasNext(); ) {
+					ETuplePartValue key = (ETuplePartValue) itr.next();
+					assert "key".equals(key.getName());
+					
+					ETuplePartValue val = (ETuplePartValue) itr.next();
+					assert "value".equals(val.getName());
+					
+					return env.getTypeResolver().resolveDictionaryType(createOclTypeFromValue(env, key.getValue()), createOclTypeFromValue(env, val.getValue()));
+				}
+			}
+		}
+
+		if (TupleType.SINGLETON_NAME.equals(type)) {
+			List<Variable<EClassifier, EParameter>> parts = new ArrayList<Variable<EClassifier,EParameter>>(value.getCollection().size());		
+			for (EValue elem : value.getCollection()) {
+				ETuplePartValue part = (ETuplePartValue) elem;
+				Variable<EClassifier, EParameter> var = env.getOCLFactory().createVariable();
+				var.setName(part.getName());
+				var.setType(createOclTypeFromValue(env, part.getValue()));
+				parts.add(var);
+			}
+			return env.getTypeResolver().resolve((EClassifier)env.getOCLFactory().createTupleType(parts));			
+		}
+		
+		if (MutableList.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getQVTStandardLibrary().getList();
+			}
+			else {
+				return env.getTypeResolver().resolveListType(createOclTypeFromValue(env, value.getCollection().iterator().next()));
+			}
+		}
+		else if (BagType.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getOCLStandardLibrary().getBag();
+			}
+			else {
+				return TypeUtil.resolveBagType(env, createOclTypeFromValue(env, value.getCollection().iterator().next()));
+			}
+		}
+		else if (OrderedSetType.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getOCLStandardLibrary().getOrderedSet();
+			}
+			else {
+				return TypeUtil.resolveOrderedSetType(env, createOclTypeFromValue(env, value.getCollection().iterator().next()));
+			}
+		}
+		else if (SetType.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getOCLStandardLibrary().getSet();
+			}
+			else {
+				return TypeUtil.resolveSetType(env, createOclTypeFromValue(env, value.getCollection().iterator().next()));
+			}
+		}
+		else if (SequenceType.SINGLETON_NAME.equals(type)) {
+			if (value.getCollection().isEmpty()) {
+				return env.getOCLStandardLibrary().getSequence();
+			}
+			else {
+				return TypeUtil.resolveSequenceType(env, createOclTypeFromValue(env, value.getCollection().iterator().next()));
+			}
+		}
+		
+		assert false : ("Unsupported type: " + type); //$NON-NLS-1$
+
+		return null;
+	}
+
+	private static void fetchAllMappings(Module qvtModule, Map<String, MappingOperation> mappings) {
+    	for (EOperation op : qvtModule.getEOperations()) {
+    		if (op instanceof MappingOperation) {
+    			MappingOperation mappingOperation = (MappingOperation) op;
+    			mappings.put(getMappingKey(mappingOperation), mappingOperation);
+    		}
+    	}
+    	for (ModuleImport mi : qvtModule.getModuleImport()) {
+    		fetchAllMappings(mi.getImportedModule(), mappings);
+    	}
+    }
+    
+    private static String getMappingKey(MappingOperation mappingOperation) {
+        String result = mappingOperation.getName();
+        result += '#';
+        Module module = QvtOperationalParserUtil.getOwningModule(mappingOperation);
+        result += module.getNsPrefix();
+        result += '#';
+        result += module.getName();
+        return result;
+    }
+
+    private static String getMappingKey(EMappingOperation eMappingOperation) {
+        String result = eMappingOperation.getName();
+        result += '#';
+        result += eMappingOperation.getPackage();
+        result += '#';
+        result += eMappingOperation.getModule();
+        return result;
+    }
+
 }

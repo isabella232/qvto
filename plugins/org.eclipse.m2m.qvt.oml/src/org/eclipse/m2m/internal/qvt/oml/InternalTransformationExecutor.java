@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -492,6 +492,8 @@ public class InternalTransformationExecutor {
 		for (ISessionData.Entry<Object> key : executionContext.getSessionDataEntries()) {
 			ctx.getSessionData().setValue(key, executionContext.getSessionData().getValue(key));
 		}
+		
+		ctx.getTrace().setTraceContent(executionContext.getTrace().getTraceContent());
 
 		return ctx;
 	}

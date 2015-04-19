@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,6 +19,7 @@ import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IValue;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.VMVariable;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.Value;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMDetailRequest;
@@ -56,7 +57,7 @@ public class QVTOValue extends QVTODebugElement implements IValue {
 	}
 
 	public String getValueString() throws DebugException {
-		return (vmValue != null) ? String.valueOf(vmValue.value) : "null"; //$NON-NLS-1$
+		return (vmValue != null) ? String.valueOf(vmValue.value) : AbstractQVTStdlib.NULL_NAME;
 	}
 
 	public String getReferenceTypeName() throws DebugException {

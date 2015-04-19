@@ -543,7 +543,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		return super.coerceValue(element, value, copy);
 	}
 	
-	public EObject createInstance(EClassifier type, ModelParameter modelParam) {
+	public EObject createInstance(EClassifier type, ModelParameter extent) {
         if (type instanceof EClass == false) {
             internalEnv().throwQVTException(
                 	new QvtRuntimeException("Expected EClass, got " + type)); //$NON-NLS-1$
@@ -555,19 +555,28 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}
 		
 		EObject newObject = impl.getEPackage().getEFactoryInstance().create(impl);
+		if (newObject == null) {
+			return null;
+		}
 		
+		putInstanceToExtent(newObject, extent);
+
+		return newObject;
+	}
+	
+	public void putInstanceToExtent(EObject eObj, ModelParameter extent) {
 		TransformationInstance mainTransfInstance = internalEnv().getCurrentTransformation();
 		if(mainTransfInstance == null) {
-			assert modelParam == null;
+			assert extent == null;
 			// not running in a transformation, ignore extent
-			return newObject;
+			return;
 		}
 		
 		ModelParameterExtent targetExtent;
-		if(modelParam == null) {
-			targetExtent = getDefaultInstantiationExtent(impl);
+		if(extent == null) {
+			targetExtent = getDefaultInstantiationExtent(eObj.eClass());
 		} else {
-			OperationalTransformation targetTransf = (OperationalTransformation)modelParam.eContainer();
+			OperationalTransformation targetTransf = (OperationalTransformation)extent.eContainer();
 			assert targetTransf != null;
 
 			TransformationInstance targetThis = mainTransfInstance;
@@ -575,21 +584,19 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 				targetThis = (TransformationInstance)mainTransfInstance.getThisInstanceOf(targetTransf);				
 			}
 
-			ModelInstance model = targetThis.getModel(modelParam);
+			ModelInstance model = targetThis.getModel(extent);
 			assert model != null;
 			targetExtent = model.getExtent();			
 		}
 		
 		if (isReadonlyGuardEnabled() && targetExtent.isReadonly()) {
 			internalEnv().throwQVTException(new QvtRuntimeException(
-					NLS.bind(EvaluationMessages.ExtendedOclEvaluatorVisitorImpl_ReadOnlyInputModel, modelParam.getName() + 
-					" : " + QvtOperationalTypesUtil.getTypeFullName(modelParam.getEType())))); //$NON-NLS-1$
+					NLS.bind(EvaluationMessages.ExtendedOclEvaluatorVisitorImpl_ReadOnlyInputModel, extent.getName() + 
+					" : " + QvtOperationalTypesUtil.getTypeFullName(extent.getEType())))); //$NON-NLS-1$
 		}
 
-		targetExtent.addObject(newObject);
-
-		return newObject;
-	}
+		targetExtent.addObject(eObj);
+	}	
 
 	public ModelParameterExtent getDefaultInstantiationExtent(EClassifier type) {
 		TransformationInstance mainTransfInstance = internalEnv().getCurrentTransformation();

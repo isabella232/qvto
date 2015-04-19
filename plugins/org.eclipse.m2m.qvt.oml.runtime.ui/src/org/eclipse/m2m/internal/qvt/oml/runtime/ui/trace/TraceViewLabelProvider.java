@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -25,6 +25,7 @@ import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.CommonPluginImages;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ui.provider.EMFLabelProvider;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.trace.presentation.Node;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
 import org.eclipse.m2m.internal.qvt.oml.trace.EMappingOperation;
 import org.eclipse.m2m.internal.qvt.oml.trace.ETuplePartValue;
 import org.eclipse.m2m.internal.qvt.oml.trace.EValue;
@@ -164,7 +165,7 @@ public class TraceViewLabelProvider extends EMFLabelProvider {
         } else if (!eValue.getCollection().isEmpty()) {
             return eValue.getCollectionType() + '[' + eValue.getCollection().size() + ']';
 		} else {
-			return "null"; //$NON-NLS-1$
+			return AbstractQVTStdlib.NULL_NAME;
 		}
 	}
 

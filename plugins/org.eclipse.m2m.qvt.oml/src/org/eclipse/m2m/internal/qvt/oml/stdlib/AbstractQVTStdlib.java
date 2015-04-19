@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,6 +21,10 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.model.StdlibPackage;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 
 public abstract class AbstractQVTStdlib implements StdlibPackage {
+
+	public static final String NULL_NAME = "null"; //$NON-NLS-1$
+	
+	
 	/* FIXME -  */
 	static interface IFilter {
     	boolean matches(Object obj, Object type);

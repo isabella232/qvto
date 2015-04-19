@@ -127,9 +127,13 @@ public class CompilerUtils {
 			EPackage.Registry packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(contextResource.getProject(), parentRs);
 			resSet.setPackageRegistry(packageRegistry);
 		}
+		else if (parentRs != null) {
+			resSet.setPackageRegistry(parentRs.getPackageRegistry());
+		}
 		
 		if (parentRs instanceof ResourceSetImpl) {
 			resSet.setURIResourceMap(((ResourceSetImpl) parentRs).getURIResourceMap());
+			resSet.setResourceFactoryRegistry(parentRs.getResourceFactoryRegistry());
 		}
 		
 		return resSet;

@@ -12,11 +12,7 @@
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
 import java.util.Collections;
-import java.util.List;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
@@ -41,18 +37,6 @@ public class FileToFileData extends FilesToFilesData {
         super(name, Collections.singletonList(fromFile), Collections.singletonList(expectedFile), context);
         myFromFile = fromFile;
         myExpectedFile = expectedFile;
-    }
-    
-    @Override
-	public List<URI> getIn(IProject project) {
-    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(myFromFile);
-        return Collections.singletonList(URI.createPlatformResourceURI(filePath.toString(), true));
-    }
-    
-    @Override
-	public List<URI> getExpected(IProject project) {
-        IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(myExpectedFile);
-        return Collections.singletonList(URI.createPlatformResourceURI(filePath.toString(), true)); 
     }
     
     public String getFromFile() {

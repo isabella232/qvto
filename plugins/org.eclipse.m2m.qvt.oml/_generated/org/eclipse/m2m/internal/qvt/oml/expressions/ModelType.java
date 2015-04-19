@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -38,6 +38,12 @@ import org.eclipse.ocl.utilities.Visitor;
  * @generated
  */
 public interface ModelType extends EClass, VisitableASTNode {
+	
+	/**
+	 * @generated NOT
+	 */
+	String SINGLETON_NAME = "ModelType"; //$NON-NLS-1$
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

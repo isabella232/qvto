@@ -41,7 +41,7 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 	@Override
 	protected ResourceSet createResourceSet() {
 		ResourceSet rs = super.createResourceSet();
-    	rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+    	rs.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new EcoreResourceFactoryImpl());
     	return rs;
 	}
 	
@@ -77,6 +77,10 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 		
 		URI getModelUri(String name) {
 			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(name);
+		}
+		
+		URI getTraceUri() {
+			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(getName()).appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
 		}
 		
 	}
