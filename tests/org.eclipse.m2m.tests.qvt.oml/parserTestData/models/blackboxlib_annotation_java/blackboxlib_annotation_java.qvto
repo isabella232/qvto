@@ -163,6 +163,10 @@ main() {
 	var date : EDate := createDate('2008-10-31');
 	assert fatal (date.before(createDate('2008-11-01')));
 
+--  test data type not mapped by MDT OCL from SimpleJavaLibrary
+	var date2 : EDate := simpleCreateDate('2008-10-31');
+	assert fatal (date2.isBefore(simpleCreateDate('2008-11-01')));
+
 -- test generic collection type operations
 	var anyInt : Integer := Set { 1 }->anyElement();
 	assert fatal (anyInt = 1);

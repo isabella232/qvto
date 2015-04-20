@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,9 +16,13 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -31,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Library;
+import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 
 abstract class JavaModuleLoader {
 	
@@ -73,8 +78,14 @@ abstract class JavaModuleLoader {
 		fEnv = new QvtOperationalEnvFactory(loadContext.getMetamodelRegistry()).createModuleEnvironment(module);
 		loadModule(fEnv, javaClass);
 		
+		Set<String> usedPackages = new LinkedHashSet<String>(moduleHandle.getUsedPackages());
+		Module annotation = javaClass.getAnnotation(Module.class);
+		if (annotation != null) {
+			usedPackages.addAll(Arrays.asList(annotation.packageURIs()));
+		}
+		
 		Java2QVTTypeResolver typeResolver = new Java2QVTTypeResolver(fEnv, 
-				resolvePackages(moduleHandle.getUsedPackages(), fDiagnostics));
+				resolvePackages(usedPackages, fDiagnostics));
 		
 		fOperBuilder = new OperationBuilder(typeResolver);
 		for (Method method : javaClass.getDeclaredMethods()) {
@@ -126,7 +137,7 @@ abstract class JavaModuleLoader {
 		return Modifier.isPublic(javaClass.getModifiers());
 	}
 	
-	private List<EPackage> resolvePackages(List<String> nsURIs, DiagnosticChain diagnosticChain) {
+	private List<EPackage> resolvePackages(Collection<String> nsURIs, DiagnosticChain diagnosticChain) {
 		EPackage.Registry registry = fEnv.getEPackageRegistry();
 		List<EPackage> ePackages = new ArrayList<EPackage>(nsURIs.size());
 		for (String nextURI : nsURIs) {

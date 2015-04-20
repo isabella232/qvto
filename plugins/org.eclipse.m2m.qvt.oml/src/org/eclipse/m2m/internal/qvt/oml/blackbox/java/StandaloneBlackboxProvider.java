@@ -40,6 +40,9 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		} catch(ClassNotFoundException e) {
 			return null;
 		}
+		catch(RuntimeException e) {
+			return null;
+		}
 	}
 	
 	public void registerDescriptor(final Class<?> cls, String unitQualifiedName, String moduleName, final String[] packageURIs) {
