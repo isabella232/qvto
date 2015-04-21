@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -155,7 +155,9 @@ public class ModelParameterExtent {
 	public void addObject(EObject eObject) {
 		if (eObject != null) {
 			myAdditionalEObjects.add(eObject);
-			getInMemoryResource(true).getContents().add(eObject);
+			if (eObject.eResource() == null) {
+				getInMemoryResource(true).getContents().add(eObject);
+			}
 			
 			if(++myCountAddedAfterPurge >= myPurgeLimitSize) {
 				purgeContents(myAdditionalEObjects, true);

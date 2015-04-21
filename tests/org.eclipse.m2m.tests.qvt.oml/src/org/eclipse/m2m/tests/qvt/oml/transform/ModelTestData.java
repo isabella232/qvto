@@ -81,10 +81,7 @@ public abstract class ModelTestData {
     
     public static void compareWithExpected(String name, EObject expected, EObject out) {        
         TestCase.assertNotSame("Actual output and expected output must not be the same instances", expected, out); //$NON-NLS-1$
-        if (out.eResource() != null) {
-        	TestCase.assertFalse("Actual output and expected output must be at distinct location", //$NON-NLS-1$ 
-        		out.eResource().getURI().toString().equals(expected.eResource().getURI().toString()));
-        }        
+    	TestCase.assertNotSame("Actual output and expected output must be in distinct resources", expected.eResource(), out.eResource()); //$NON-NLS-1$ 
         assertEquals(name + ":", expected, out); //$NON-NLS-1$
     }
     

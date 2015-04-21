@@ -22,13 +22,14 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor.TracesAwareExecutor;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
@@ -37,28 +38,8 @@ import org.eclipse.m2m.qvt.oml.ModelExtent;
 
 public class TransformationRunner  {
 
-	protected static class Executor extends InternalTransformationExecutor {
-		
-		Trace fTraces;
-		
-		public Executor(URI uri, Registry registry) {
-			super(uri, registry);
-		}
-
-		public Executor(URI uri) {
-			super(uri);
-		}
-
-		@Override
-		protected void handleExecutionTraces(Trace traces) {				
-			super.handleExecutionTraces(traces);
-			fTraces = traces;
-		}
-
-	}
-		
 	private final URI fTransformationURI;	
-	private final Executor fExecutor;
+	private final TracesAwareExecutor fExecutor;
 	private final List<URI> fModelParamURIs;
 	private URI fTraceFileURI;
 	private boolean fIsSaveTrace;
@@ -79,7 +60,8 @@ public class TransformationRunner  {
 			throw new IllegalArgumentException();
 		}
 
-		fExecutor = packageRegistry == null ? new Executor(transformationURI) : new Executor(transformationURI, packageRegistry);
+		fExecutor = packageRegistry == null ? new TracesAwareExecutor(transformationURI) : 
+			new TracesAwareExecutor(transformationURI, packageRegistry);
 		fTransformationURI = transformationURI;
 		fModelParamURIs = modelParamURIs;
 	}
@@ -138,13 +120,13 @@ public class TransformationRunner  {
 			fDiagnostic.add(extentsDiagnostic);
 		}
 		
-		fIncrementalTrace = org.eclipse.m2m.qvt.oml.util.Trace.createEmptyTrace();
+		fIncrementalTrace = null;
 		if (fIsIncrementalUpdate) {
 			Diagnostic traceDiagnostic = Diagnostic.OK_INSTANCE; 
 
 			ModelContent traceContent = EmfUtil.safeLoadModel(fTraceFileURI, fExecutor.getResourceSet());
 			if (traceContent != null) {
-				fIncrementalTrace.setTraceContent(traceContent.getContent());
+				fIncrementalTrace = new org.eclipse.m2m.qvt.oml.util.Trace(traceContent.getContent());
 			}
 			else {
 				traceDiagnostic = QvtPlugin.createWarnDiagnostic(
@@ -201,13 +183,12 @@ public class TransformationRunner  {
 		try {			
 			ModelExtent[] params = fModelParams.toArray(new ModelExtent[fModelParams.size()]);
 			
-			context.getTrace().setTraceContent(fIncrementalTrace.getTraceContent());
+			if (fIncrementalTrace != null) {
+				context.getSessionData().setValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE, fIncrementalTrace);
+			}
 			ExecutionDiagnostic execDiagnostic = fExecutor.execute(context, params);
 			handleExecution(execDiagnostic);
 			
-			Trace traces = fExecutor.fTraces;
-			fExecutor.fTraces = null;
-
 			if(!isSuccess(execDiagnostic)) {
 				// skip saving any output
 				return execDiagnostic;
@@ -221,7 +202,7 @@ public class TransformationRunner  {
 				return saveExtentsDiagnostic;
 			}
 
-			Diagnostic saveTracesDiagnostic = saveTraces(traces);
+			Diagnostic saveTracesDiagnostic = saveTraces(fExecutor.getTraces());
 			if(!isSuccess(saveTracesDiagnostic)) {
 				return saveTracesDiagnostic;
 			}

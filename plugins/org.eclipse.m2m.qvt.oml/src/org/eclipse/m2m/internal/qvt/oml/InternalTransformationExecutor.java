@@ -54,6 +54,7 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.EvaluationMessages;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.InternalEvaluator;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelParameterHelper;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtInterruptedExecutionException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
@@ -107,14 +108,6 @@ public class InternalTransformationExecutor {
 		fURI = uri;
 	}
 	
-	public URI getURI() {
-		return fURI;
-	}
-	
-	public ResourceSet getResourceSet() {
-		return fCompilationRs;
-	}
-		
 	public InternalTransformationExecutor(URI uri, EPackage.Registry registry) {
 		this(uri);
 		
@@ -125,6 +118,14 @@ public class InternalTransformationExecutor {
 		fPackageRegistry = registry;
 	}	
 			
+	public URI getURI() {
+		return fURI;
+	}
+	
+	public ResourceSet getResourceSet() {
+		return fCompilationRs;
+	}
+		
 	/**
 	 * Attempts to load the transformation referred by this executor and checks
 	 * if it is valid for execution.
@@ -290,7 +291,6 @@ public class InternalTransformationExecutor {
 		try {
 			fCompiledUnit = compiler.compile(unit, null, BasicMonitor.toMonitor(monitor));
 			fCompilationRs = compiler.getResourceSet();
-		//	fCompilerKernel = compiler.getKernel();
 
 			fLoadDiagnostic = createCompilationDiagnostic(fCompiledUnit);
 
@@ -493,7 +493,10 @@ public class InternalTransformationExecutor {
 			ctx.getSessionData().setValue(key, executionContext.getSessionData().getValue(key));
 		}
 		
-		ctx.getTrace().setTraceContent(executionContext.getTrace().getTraceContent());
+		org.eclipse.m2m.qvt.oml.util.Trace trace = executionContext.getSessionData().getValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE);
+		if (trace != null) {
+			ctx.getTrace().setTraceContent(trace.getTraceContent());
+		}
 
 		return ctx;
 	}
@@ -511,4 +514,35 @@ public class InternalTransformationExecutor {
 		return QVTOCompiler.createCompiler(fPackageRegistry);
 	}
 
+	
+	public static class TracesAwareExecutor extends InternalTransformationExecutor {
+		
+		private Trace fTraces;
+		
+		public TracesAwareExecutor(URI uri, EPackage.Registry registry) {
+			super(uri, registry);
+		}
+
+		public TracesAwareExecutor(URI uri) {
+			super(uri);
+		}
+		
+		public Trace getTraces() {
+			return fTraces;
+		}
+
+		@Override
+		protected void handleExecutionTraces(Trace traces) {				
+			super.handleExecutionTraces(traces);
+			fTraces = traces;
+		}
+		
+		@Override
+		public void cleanup() {
+			super.cleanup();
+			fTraces = null;
+		}
+
+	}
+	
 }

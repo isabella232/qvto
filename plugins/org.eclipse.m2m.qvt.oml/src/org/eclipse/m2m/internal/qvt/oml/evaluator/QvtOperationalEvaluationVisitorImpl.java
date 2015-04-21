@@ -1084,6 +1084,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 		TransformationInstance moduleInstance = callTransformationImplicitConstructor(transformation, modelArgs); 
 				
+		getContext().getTrace().setTraceContent(
+				TraceUtil.resolveTrace((QvtOperationalEnv) getEnvironment(), transformation, getContext().getTrace().getTraceContent()));
+		
 		InternalTransformation internTransf = moduleInstance.getAdapter(InternalTransformation.class);		
 		
 		CallHandler handler = internTransf.getTransformationHandler();
@@ -1719,9 +1722,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		QvtOperationalEnv env = (QvtOperationalEnv) getEnvironment();
 		QvtOperationalEvaluationEnv currentEvalEnv = getOperationalEvaluationEnv();	
 
-		getContext().getTrace().setTraceContent(
-				TraceUtil.resolveTrace(env, type, getContext().getTrace().getTraceContent()));
-		
 		QvtOperationalEvaluationEnv nestedEvalEnv = (QvtOperationalEvaluationEnv) env.getFactory().createEvaluationEnvironment(getOperationalEvaluationEnv());
 		// ensure 'this' instance available in the initialization code
 		nestedEvalEnv.add(QvtOperationalEnv.THIS, moduleInstance);

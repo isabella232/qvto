@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -43,6 +44,7 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.eclipse.m2m.qvt.oml.util.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 
@@ -56,7 +58,7 @@ public class TransformationExecutorTest extends TestCase {
 	
 	TransformationExecutor executor;
 	ExecutionContextImpl executionContext;
-	List<ModelExtent> extents;
+	List<BasicModelExtent> extents;
 	UriCreator uriCreator;
 	List<DirectionKind> paramKinds;
 	ResourceSet resSet;
@@ -112,7 +114,7 @@ public class TransformationExecutorTest extends TestCase {
 	protected void setUp() {
 		resSet = getMetamodelResolutionRS();
 		paramKinds = getParamKinds();
-		extents = new ArrayList<ModelExtent>(paramKinds.size());
+		extents = new ArrayList<BasicModelExtent>(paramKinds.size());
 		
 		int inIndex = 0;
 		for (int i = 0; i < paramKinds.size(); ++i) {
@@ -135,7 +137,7 @@ public class TransformationExecutorTest extends TestCase {
 		if (resSet.getURIConverter().exists(traceUri, Collections.emptyMap())) {
 			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, resSet);
 			if (traceContent != null) {
-				executionContext.getTrace().setTraceContent(traceContent.getContent());
+				executionContext.getSessionData().setValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE, new Trace(traceContent.getContent()));
 			}
 		}
 	}

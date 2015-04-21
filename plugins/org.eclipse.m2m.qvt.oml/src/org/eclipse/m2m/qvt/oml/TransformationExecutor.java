@@ -12,13 +12,17 @@
  *******************************************************************************/
 package org.eclipse.m2m.qvt.oml;
 
+import java.util.Collections;
+
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
+import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor.TracesAwareExecutor;
 import org.eclipse.m2m.internal.qvt.oml.TransformationExecutorBlackboxRegistry;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
+import org.eclipse.m2m.qvt.oml.util.Trace;
 
 /**
  * A utility class that enables to execute existing transformation in the
@@ -68,7 +72,7 @@ public final class TransformationExecutor {
 	}
 	
 
-	private InternalTransformationExecutor fExector;
+	private TracesAwareExecutor fExector;
 	
 	/**
 	 * Constructs the executor for the given transformation URI.
@@ -79,7 +83,7 @@ public final class TransformationExecutor {
 	 *            the URI of an existing transformation
 	 */
 	public TransformationExecutor(URI uri) {
-		fExector = new InternalTransformationExecutor(uri);
+		fExector = new TracesAwareExecutor(uri);
 	}
 	
 	/**
@@ -95,7 +99,7 @@ public final class TransformationExecutor {
 	 * @since 3.0
 	 */
 	public TransformationExecutor(URI uri, EPackage.Registry registry) {
-		fExector = new InternalTransformationExecutor(uri, registry);
+		fExector = new TracesAwareExecutor(uri, registry);
 	}
 			
 	/**
@@ -145,7 +149,14 @@ public final class TransformationExecutor {
 	 */
 	public ExecutionDiagnostic execute(ExecutionContext executionContext,
 			ModelExtent... modelParameters) {
-		return fExector.execute(executionContext, modelParameters);
+		ExecutionDiagnostic executionDiagnostic = fExector.execute(executionContext, modelParameters);
+		
+		Trace trace = executionContext.getSessionData().getValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE);
+		if (trace != null) {
+			trace.setTraceContent(Collections.singletonList(fExector.getTraces()));
+		}
+		
+		return executionDiagnostic;
 	}
 	
 	/**

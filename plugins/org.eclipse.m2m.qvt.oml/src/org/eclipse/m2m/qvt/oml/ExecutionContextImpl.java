@@ -24,7 +24,6 @@ import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.qvt.oml.util.EvaluationMonitor;
 import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.m2m.qvt.oml.util.Log;
-import org.eclipse.m2m.qvt.oml.util.Trace;
 
 /**
  * Execution context implementation.
@@ -42,7 +41,6 @@ public final class ExecutionContextImpl implements ExecutionContext {
 	private IProgressMonitor fMonitor;
 
 	private Log fLog;
-	private Trace fTrace;
 	
 	private final Map<ISessionData.Entry<Object>, Object> fSessionStorage = new HashMap<ISessionData.Entry<Object>, Object>(5);
 	private final ISessionData fSessionData;
@@ -52,7 +50,6 @@ public final class ExecutionContextImpl implements ExecutionContext {
 	 */
 	public ExecutionContextImpl() {
 		fLog = Log.NULL_LOG;
-		fTrace = Trace.createEmptyTrace();
 		fMonitor = createDefaultMonitor();
 		fSessionData = new Context.SessionDataImpl(fSessionStorage);
 	}
@@ -117,31 +114,6 @@ public final class ExecutionContextImpl implements ExecutionContext {
 	 */
 	public Log getLog() {
 		return fLog;
-	}
-
-	/**
-	 * Sets the trace object used for incremental update execution to this context.
-	 * 
-	 * @param trace
-	 *            the trace object, never <code>null</code>
-	 * @since 3.5
-	 */
-	public void setTrace(Trace trace) {
-		if (trace == null) {
-			throw new IllegalArgumentException("Non-null trace required"); //$NON-NLS-1$
-		}
-
-		this.fTrace = trace;
-	}
-
-	/**
-	 * Returns the trace object used for incremental update execution assigned to this context.
-	 * 
-	 * @return the trace object, never <code>null</code>
-	 * @since 3.5
-	 */
-	public Trace getTrace() {
-		return fTrace;
 	}
 
 	/*

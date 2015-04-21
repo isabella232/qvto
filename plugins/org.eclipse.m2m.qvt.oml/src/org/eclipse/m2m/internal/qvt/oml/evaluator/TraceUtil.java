@@ -654,13 +654,13 @@ public class TraceUtil {
 			}
     	}
     	else if (operation.getResult().size() > 1) {
-	    	EObject tuple = (EObject) traceResult.get(0).getValue().getOclObject();
+    		@SuppressWarnings("unchecked")
+			Tuple<EOperation, EStructuralFeature> tuple = (Tuple<EOperation, EStructuralFeature>) traceResult.get(0).getValue().getOclObject();
 
 	    	Iterator<VarParameter> itrResults = operation.getResult().iterator();
-			@SuppressWarnings("unchecked")
-			TupleType<EOperation, EStructuralFeature> tupleType = (TupleType<EOperation, EStructuralFeature>) tuple.eClass();
+			TupleType<EOperation, EStructuralFeature> tupleType = tuple.getTupleType();
 			for (EStructuralFeature feature : tupleType.oclProperties()) {
-				Object oclObject = tuple.eGet(feature);
+				Object oclObject = tuple.getValue(feature);
 				evalEnv.replace(feature.getName(), oclObject);
 				if (oclObject instanceof EObject) {
 					MappingParameter resultParam = (MappingParameter) itrResults.next();

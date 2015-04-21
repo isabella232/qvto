@@ -21,7 +21,7 @@
     </result>
   </traceRecords>
   <traceRecords>
-    <mappingOperation name="mapClassifier" package="bug463572" module="bug463572">
+    <mappingOperation name="mapClassifier" package="bug463572_lib" module="bug463572_lib">
       <runtimeMappingOperation href="qvto:/module.env#//mapClassifier"/>
     </mappingOperation>
     <context>
@@ -33,7 +33,7 @@
     </context>
     <parameters>
       <parameters name="packName" type="String">
-        <value primitiveValue="test2_-1044881235" collectionType="String"/>
+        <value primitiveValue="test_-662974751" collectionType="String"/>
       </parameters>
     </parameters>
     <result>
@@ -41,7 +41,7 @@
         <value collectionType="Tuple">
           <collection xsi:type="trace:ETuplePartValue" name="r1">
             <value>
-              <modelElement href="expected.ecore#/0/Class_-1044761894"/>
+              <modelElement href="expected.ecore#/0/Class_-662974751"/>
             </value>
           </collection>
           <collection xsi:type="trace:ETuplePartValue" name="r2">
@@ -54,7 +54,7 @@
     </result>
   </traceRecords>
   <traceRecords>
-    <mappingOperation name="mapClassifier" package="bug463572" module="bug463572">
+    <mappingOperation name="mapClassifier" package="bug463572_lib" module="bug463572_lib">
       <runtimeMappingOperation href="qvto:/module.env#//mapClassifier"/>
     </mappingOperation>
     <context>
@@ -66,7 +66,7 @@
     </context>
     <parameters>
       <parameters name="packName" type="String">
-        <value primitiveValue="test2_-1044881235" collectionType="String"/>
+        <value primitiveValue="test_-662974751" collectionType="String"/>
       </parameters>
     </parameters>
     <result>
@@ -74,7 +74,7 @@
         <value collectionType="Tuple">
           <collection xsi:type="trace:ETuplePartValue" name="r1">
             <value>
-              <modelElement href="expected.ecore#/0/TestIdentifier_-1044880533"/>
+              <modelElement href="expected.ecore#/0/TestIdentifier_-662974741"/>
             </value>
           </collection>
           <collection xsi:type="trace:ETuplePartValue" name="r2">
