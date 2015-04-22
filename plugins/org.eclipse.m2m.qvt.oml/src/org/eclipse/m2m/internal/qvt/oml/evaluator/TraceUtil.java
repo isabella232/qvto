@@ -634,7 +634,9 @@ public class TraceUtil {
 			MappingParameter mappingParam = (MappingParameter) itParams.next();
 			if (value.getKind() == EDirectionKind.OUT) {
 				Object oclObject = value.getValue().getOclObject();
-				evalEnv.replace(value.getName(), oclObject);
+				if (oclObject != null) {
+					evalEnv.replace(value.getName(), oclObject);
+				}
 				if (oclObject instanceof EObject) {
 					evalEnv.putInstanceToExtent((EObject) oclObject, mappingParam.getExtent());
 				}
@@ -650,7 +652,9 @@ public class TraceUtil {
 
     	if (operation.getResult().size() == 1) {
     		Object oclObject = traceResult.get(0).getValue().getOclObject();
-			evalEnv.replace(Environment.RESULT_VARIABLE_NAME, oclObject);
+    		if (oclObject != null) {
+    			evalEnv.replace(Environment.RESULT_VARIABLE_NAME, oclObject);
+    		}
 			if (oclObject instanceof EObject) {
 				MappingParameter resultParam = (MappingParameter) operation.getResult().get(0);
 				evalEnv.putInstanceToExtent((EObject) oclObject, resultParam.getExtent());
@@ -664,7 +668,9 @@ public class TraceUtil {
 			TupleType<EOperation, EStructuralFeature> tupleType = tuple.getTupleType();
 			for (EStructuralFeature feature : tupleType.oclProperties()) {
 				Object oclObject = tuple.getValue(feature);
-				evalEnv.replace(feature.getName(), oclObject);
+				if (oclObject != null) {
+					evalEnv.replace(feature.getName(), oclObject);
+				}
 				if (oclObject instanceof EObject) {
 					MappingParameter resultParam = (MappingParameter) itrResults.next();
 					evalEnv.putInstanceToExtent((EObject) oclObject, resultParam.getExtent());
@@ -738,7 +744,8 @@ public class TraceUtil {
 	private static Object createOclObjectFromValue(QvtOperationalEnv env, EValue value) {
 		
 		if (value.getModelElement() != null) {
-			return value.getModelElement();
+			EObject modelElement = value.getModelElement();
+			return modelElement.eIsProxy() ? null : modelElement;
 		}
 		
 		final String type = value.getCollectionType();
