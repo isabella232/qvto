@@ -68,7 +68,7 @@ public class QvtValidator {
 	            		transfParam.getName()));
 			}
 			
-			IStatus nextStatus = validateTransformationParameter(transfParam, itrTargetData.next(), validationRS, validationType);
+			IStatus nextStatus = validateTransformationParameter(transfParam, itrTargetData.next(), validationRS, validationType, isIncrementalUpdate);
             if (nextStatus.getSeverity() > result.getSeverity()) {
         		result = nextStatus;
         	}
@@ -156,7 +156,7 @@ public class QvtValidator {
 	}
 	
 	private static IStatus validateTransformationParameter(TransformationParameter transfParam, TargetUriData targetData, ResourceSet validationRS,
-			final ValidationType validationType) {
+			final ValidationType validationType, boolean isIncrementalUpdate) {
 		if (transfParam.getMetamodels().isEmpty()) {
             return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_EmptyInputTransfParam,
             		transfParam.getName()));
@@ -182,9 +182,9 @@ public class QvtValidator {
 		}
 		
 		if (validationType == ValidationType.LIGHTWEIGHT_VALIDATION) {
-			return validateTransformationParameterOutLightweight(transfParam, targetData, validationRS);
+			return validateTransformationParameterOutLightweight(transfParam, targetData, validationRS, isIncrementalUpdate);
 		} else {
-			return validateTransformationParameterOut(transfParam, targetData, validationRS);
+			return validateTransformationParameterOut(transfParam, targetData, validationRS, isIncrementalUpdate);
 		}
 	}
 	
@@ -401,7 +401,8 @@ public class QvtValidator {
 		return result;
 	}
 
-	private static IStatus validateTransformationParameterOut(TransformationParameter transfParam, TargetUriData targetData, ResourceSet validationRS) {
+	private static IStatus validateTransformationParameterOut(TransformationParameter transfParam, TargetUriData targetData,
+			ResourceSet validationRS, boolean isIncrementalUpdate) {
         URI destUri = EmfUtil.makeUri(targetData.getUriString());
         if (destUri == null) {
             return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_InvalidTargetUri,
@@ -414,8 +415,10 @@ public class QvtValidator {
         	if (EmfUtil.isUriExists(destUri, validationRS, true)) {
                 if (result.getSeverity() < IStatus.WARNING) {
                 	if (EmfUtil.isUriExistsAsEObject(destUri, validationRS, true)) {
-                		result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExists,
-                				destUri, transfParam.getName()));
+                		if (!isIncrementalUpdate) {
+	                		result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExists,
+	                				destUri, transfParam.getName()));
+                		}
                 	}
                 	else {
                 		result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExistsNonEObject,
@@ -456,7 +459,7 @@ public class QvtValidator {
         	
         	String feature = targetData.getFeature();
         	if (feature == null || feature.trim().length() == 0) {
-                if (result.getSeverity() < IStatus.WARNING) {
+                if (!isIncrementalUpdate && result.getSeverity() < IStatus.WARNING) {
                 	result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExists,
                 			destUri, transfParam.getName()));
                 }
@@ -492,7 +495,8 @@ public class QvtValidator {
 		return result;
 	}
 
-	private static IStatus validateTransformationParameterOutLightweight(TransformationParameter transfParam, TargetUriData targetData, ResourceSet validationRS) {
+	private static IStatus validateTransformationParameterOutLightweight(TransformationParameter transfParam, TargetUriData targetData,
+			ResourceSet validationRS, boolean isIncrementalUpdate) {
         URI destUri = EmfUtil.makeUri(targetData.getUriString());
         if (destUri == null) {
             return StatusUtil.makeErrorStatus(NLS.bind(Messages.QvtValidator_InvalidTargetUri,
@@ -502,7 +506,7 @@ public class QvtValidator {
         IStatus result = StatusUtil.makeOkStatus();
         switch(targetData.getTargetType()) {
         case NEW_MODEL: {
-        	if (EmfUtil.isUriExists(destUri, validationRS, true)) {
+        	if (!isIncrementalUpdate && EmfUtil.isUriExists(destUri, validationRS, true)) {
                 if (result.getSeverity() < IStatus.WARNING) {
                		result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExists,
                				destUri, transfParam.getName()));
@@ -534,7 +538,7 @@ public class QvtValidator {
         	
         	String feature = targetData.getFeature();
         	if (feature == null || feature.trim().length() == 0) {
-                if (result.getSeverity() < IStatus.WARNING) {
+                if (!isIncrementalUpdate && result.getSeverity() < IStatus.WARNING) {
                 	result = StatusUtil.makeWarningStatus(NLS.bind(Messages.QvtValidator_DestinationExists,
                 			destUri, transfParam.getName()));
                 }
