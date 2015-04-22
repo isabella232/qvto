@@ -24,6 +24,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -34,6 +36,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
@@ -670,34 +673,40 @@ public class TraceUtil {
     	}
     }
     
-    public static List<EObject> resolveTrace(QvtOperationalEnv env, Module qvtModule, List<EObject> objects) {
-    	if (objects.isEmpty()) {
-    		return objects;
+    public static List<EObject> resolveTraces(QvtOperationalEnv env, Module qvtModule, List<EObject> traces) {
+    	if (traces.isEmpty()) {
+    		return traces;
     	}
     	
-    	List<EObject> result = new ArrayList<EObject>(objects.size());
+    	List<EObject> result = new ArrayList<EObject>(traces.size());
+    	Map<String, MappingOperation> mappings = null;
     	
-    	Map<String, MappingOperation> mappings = new TreeMap<String, MappingOperation>();
-    	fetchAllMappings(qvtModule, mappings);
-    	
-    	for (EObject o : objects) {
-    		if (o instanceof Trace) {
-    			result.add(processTrace(env, (Trace) o, mappings));
-    		}
-    		else {
+    	for (EObject o : traces) {
+    		if (false == o instanceof Trace) {
     			result.add(o);
+    			continue;
     		}
+    		
+    		Trace trace = (Trace) o;
+        	if (!trace.hasRecordsBySource() || getTraceRootModule(trace) != qvtModule) {
+            	if (mappings == null) {
+            		mappings = new TreeMap<String, MappingOperation>();
+                	fetchAllMappings(qvtModule, mappings);
+            	}
+
+        		setTraceRootModule(trace, qvtModule);
+    			processTrace(env, trace, mappings);
+        	}
+
+       		result.add(trace);
     	}
     	
     	return result;
     }
 
-    private static EObject processTrace(QvtOperationalEnv env, Trace trace, Map<String, MappingOperation> mappings) {
-    	if (trace.hasRecordsBySource()) {
-    		return trace;
-    	}
+    private static void processTrace(QvtOperationalEnv env, Trace trace, Map<String, MappingOperation> mappings) {
+		trace.clearRecordsBySource();
     	
-    	//EcoreUtil.resolveAll(trace);
 		for (TraceRecord traceRecord : trace.getTraceRecords()) {
 			EMappingOperation eMappingOperation = traceRecord.getMappingOperation();
 			MappingOperation mappingOperation = mappings.get(getMappingKey(eMappingOperation));
@@ -722,7 +731,8 @@ public class TraceUtil {
 				addTraceRecordByMapping(mappingOperation, traceRecord, trace);
 			}
 		}
-		return trace;
+
+    	//EcoreUtil.resolveAll(trace);
 	}
 
 	private static Object createOclObjectFromValue(QvtOperationalEnv env, EValue value) {
@@ -956,4 +966,47 @@ public class TraceUtil {
         return result;
     }
 
+	public static void setTraceRootModule(QvtOperationalEvaluationEnv evalEnv, Module module) {
+		InternalEvaluationEnv internEnv = evalEnv.getAdapter(InternalEvaluationEnv.class);
+		Trace trace = internEnv.getTraces();
+		
+		setTraceRootModule(trace, module);
+	}
+
+	private static void setTraceRootModule(Trace trace, Module module) {
+		Adapter adapter = EcoreUtil.getAdapter(trace.eAdapters(), TraceModuleAdapter.class);
+		if(adapter != null) {
+			trace.eAdapters().remove(adapter);
+		}
+		trace.eAdapters().add(new TraceModuleAdapter(module));
+	}
+
+	private static Module getTraceRootModule(Trace trace) {
+		Adapter adapter = EcoreUtil.getAdapter(trace.eAdapters(), TraceModuleAdapter.class);
+		if(adapter instanceof TraceModuleAdapter) {
+			return ((TraceModuleAdapter) adapter).getModule();
+		}
+		return null;
+	}
+
+
+	private static class TraceModuleAdapter extends AdapterImpl {
+
+		private final Module fModule;
+
+		TraceModuleAdapter(Module module) {
+			assert module != null;
+			fModule = module;
+		}
+
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return type == TraceModuleAdapter.class;
+		}
+		
+		Module getModule() {
+			return fModule;
+		}
+	}
+	
 }

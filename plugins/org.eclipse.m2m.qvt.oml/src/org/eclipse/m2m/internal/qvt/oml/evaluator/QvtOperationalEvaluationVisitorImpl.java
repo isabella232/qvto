@@ -1084,8 +1084,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 		TransformationInstance moduleInstance = callTransformationImplicitConstructor(transformation, modelArgs); 
 				
+		TraceUtil.setTraceRootModule(evaluationEnv, transformation);
 		getContext().getTrace().setTraceContent(
-				TraceUtil.resolveTrace((QvtOperationalEnv) getEnvironment(), transformation, getContext().getTrace().getTraceContent()));
+				TraceUtil.resolveTraces((QvtOperationalEnv) getEnvironment(), transformation, getContext().getTrace().getTraceContent()));
 		
 		InternalTransformation internTransf = moduleInstance.getAdapter(InternalTransformation.class);		
 		

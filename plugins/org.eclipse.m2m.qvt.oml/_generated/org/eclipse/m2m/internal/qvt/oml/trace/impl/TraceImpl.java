@@ -293,6 +293,13 @@ public class TraceImpl extends EObjectImpl implements Trace {
     /**
 	 * @generated NOT
 	 */    
+    public void  clearRecordsBySource() {
+		mapping2Records.clear();
+    }
+
+    /**
+	 * @generated NOT
+	 */    
     public TraceRecord getRecordBySource(MappingOperation mapping, Object contextSource) {
 		Map<Object, TraceRecord> records = mapping2Records.get(mapping);
 		if(records != null) {

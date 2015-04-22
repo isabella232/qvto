@@ -118,6 +118,11 @@ public interface Trace extends EObject {
     public boolean hasRecordsBySource();
     
     /**
+	 * @generated NOT
+	 */
+    public void clearRecordsBySource();
+    
+    /**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model
