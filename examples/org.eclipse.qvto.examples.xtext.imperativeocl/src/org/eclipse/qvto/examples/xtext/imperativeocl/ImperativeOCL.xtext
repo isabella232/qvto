@@ -14,17 +14,17 @@
  *
  * $Id$
  */
-grammar org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL with org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCL
+grammar org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL with org.eclipse.ocl.xtext.essentialocl.EssentialOCL
 
 //generate imperativeoclcs "http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCLCS"
-import "http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCLCS"
-//import "platform:/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore"
+//import "http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCLCS"
+import "platform:/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore"
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "http://www.eclipse.org/ocl/3.1.0/BaseCST" as base
-import "http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST" as essentialocl
-//import "platform:/resource/org.eclipse.ocl.examples.xtext.base/model/BaseCST.ecore" as base
-//import "platform:/resource/org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCST.ecore" as essentialocl
+//import "http://www.eclipse.org/ocl/3.1.0/BaseCST" as base
+//import "http://www.eclipse.org/ocl/3.1.0/EssentialOCLCST" as essentialocl
+import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as base
+import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
 
 GrammmarCS returns essentialocl::ExpCS: ImperativeOCLExpCS;
 
@@ -87,9 +87,10 @@ ImperativeOCLExpCS returns essentialocl::ExpCS: ExpCS;
 TypeLiteralCS returns base::TypedRefCS:
 	PrimitiveTypeCS
 	| CollectionTypeCS
+	| MapTypeCS
 	| TupleTypeCS
 	| ListTypeCS
-	| DictTypeCS;	
+	| DictTypeCS;
 
 ListTypeCS : 
 	'List' '(' type=TypeExpCS ')'
@@ -106,36 +107,18 @@ DictTypeCS :
 PrimaryExpCS returns essentialocl::ExpCS:	// These rules are ordered most rejectable first
 	NestedExpCS
 |	IfExpCS
-| 	SelfExpCS
-| 	PrimitiveLiteralExpCS
-| 	TupleLiteralExpCS
-| 	CollectionLiteralExpCS
-| ListLiteralExpCS
-| DictLiteralExpCS
-| 	TypeLiteralExpCS
-| ReturnExpCS
-| 	({essentialocl::NameExpCS} pathName=PathNameCS
-		(
-			(({essentialocl::IndexExpCS.nameExp=current} '[' firstIndexes+=ExpCS (',' firstIndexes+=ExpCS)* ']'
-										('[' secondIndexes+=ExpCS (',' secondIndexes+=ExpCS)* ']')?
-										(atPre?='@' 'pre')?
-			))
-		|
-			({essentialocl::ConstructorExpCS.nameExp=current} '{'
-				( (ownedParts+=ConstructorPartCS (',' ownedParts+=ConstructorPartCS)*)
-				| (value=StringLiteral)
-				) '}'
-			)
-		|	( (atPre?='@' 'pre')?
-				({essentialocl::InvocationExpCS.nameExp=current} '(' (
-					argument+=NavigatingArgCS (argument+=NavigatingCommaArgCS)*
-					(argument+=NavigatingSemiArgCS (argument+=NavigatingCommaArgCS)*)?
-					(argument+=NavigatingBarArgCS (argument+=NavigatingCommaArgCS)*)?
-					)? ')'
-				)?
-			)
-		)
-	);
+|	SelfExpCS
+|	PrimitiveLiteralExpCS
+|	TupleLiteralExpCS
+|	MapLiteralExpCS
+|	CollectionLiteralExpCS
+|	LambdaLiteralExpCS
+|	ListLiteralExpCS
+|	DictLiteralExpCS
+|	TypeLiteralExpCS
+|	ReturnExpCS
+|	NameExpCS
+;
 	
 ListLiteralExpCS : 
 	'List' '{' {ListLiteralExpCS} 

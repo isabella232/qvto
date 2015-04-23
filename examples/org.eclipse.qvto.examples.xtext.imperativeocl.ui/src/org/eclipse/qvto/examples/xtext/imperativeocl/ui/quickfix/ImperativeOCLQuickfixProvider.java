@@ -8,7 +8,7 @@ package org.eclipse.qvto.examples.xtext.imperativeocl.ui.quickfix;
  *
  * see http://www.eclipse.org/Xtext/documentation.html#quickfixes
  */
-public class ImperativeOCLQuickfixProvider extends org.eclipse.ocl.examples.xtext.essentialocl.ui.quickfix.EssentialOCLQuickfixProvider {
+public class ImperativeOCLQuickfixProvider extends org.eclipse.ocl.xtext.essentialocl.ui.quickfix.EssentialOCLQuickfixProvider {
 
 //	@Fix(MyJavaValidator.INVALID_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {

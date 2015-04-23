@@ -13,7 +13,8 @@
  */
 module qvto.SubGenerateCSModel
 
-import org.eclipse.ocl.examples.build.utilities.GenerateModel
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.qvto.examples.build.utilities.GenerateCS2ASVisitors
 import org.eclipse.emf.ecore.resource.ResourceSet
 
@@ -23,7 +24,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 var ResourceSet resourceSet
 
 /**
- * The name of the project hosting the generated models; e.g. "org.eclipse.ocl.examples.xtext.essentialocl"
+ * The name of the project hosting the generated models; e.g. "org.eclipse.ocl.xtext.essentialocl"
  */
 var projectName
 
@@ -38,7 +39,7 @@ var modelName
 var projectPrefix
 
 /**
- * The name of the inherited project hosting the generated models; e.g. "org.eclipse.ocl.examples.xtext.essentialocl", "" for a base visitor.
+ * The name of the inherited project hosting the generated models; e.g. "org.eclipse.ocl.xtext.essentialocl", "" for a base visitor.
  */
 var superProjectName
 
@@ -93,9 +94,9 @@ var superVisitorPackageName = "${superModelPackageName}.util"
 var superVisitorClassName = "${superProjectPrefix}Visitor"
 
 /**
- * (Optional) The package of the visitable interface class; default: "org.eclipse.ocl.examples.xtext.base.basecs.util"
+ * (Optional) The package of the visitable interface class; default: "org.eclipse.ocl.xtext.basecs.util"
  */
-var visitablePackageName = "org.eclipse.ocl.examples.xtext.base.basecs.util"
+var visitablePackageName = "org.eclipse.ocl.xtext.basecs.util"
 
 /**
  * (Optional) The name of the visitable interface class; default: "VisitableCS"
@@ -111,12 +112,15 @@ var genModel = "/${projectName}/${genModelFile}"
  *	Generate a Concrete Syntax Model and its visitors as used by the Xtext editors.
  */
 Workflow {
-    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateModel { resourceSet = resourceSet 
     	genModel = genModel
     	clearResourceSet = false
     }
-/*    component = GenerateCSVisitors { resourceSet = resourceSet skipOnErrors = true
+    component = GenerateCSVisitors { resourceSet = resourceSet skipOnErrors = true
     	projectName = projectName
+    	projectPrefix = projectPrefix
+    	superProjectName = superProjectName
+    	superProjectPrefix = superProjectPrefix
     	genModelFile = genModelFile
     	javaFolder = javaFolder
     	modelPackageName = modelPackageName    	
@@ -126,7 +130,8 @@ Workflow {
     	superVisitorClassName = superVisitorClassName
     	visitablePackageName = visitablePackageName
     	visitableClassName = visitableClassName
-    } */
+    } 
+    /*
     component = GenerateCS2ASVisitors { resourceSet = resourceSet skipOnErrors = true
     	projectName = projectName
     	projectPrefix = projectPrefix
@@ -141,5 +146,5 @@ Workflow {
     	superVisitorClassName = superVisitorClassName
     	visitablePackageName = visitablePackageName
     	visitableClassName= visitableClassName
-    }
+    }*/
 }

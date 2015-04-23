@@ -10,6 +10,6 @@ package org.eclipse.qvto.examples.xtext.imperativeocl.scoping;
  * on how and when to use it 
  *
  */
-public class ImperativeOCLScopeProvider extends org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScopeProvider {
+public class ImperativeOCLScopeProvider extends org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider {
 
 }

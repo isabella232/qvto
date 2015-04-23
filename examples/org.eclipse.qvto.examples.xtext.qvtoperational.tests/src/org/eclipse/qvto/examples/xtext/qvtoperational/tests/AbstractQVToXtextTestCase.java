@@ -17,6 +17,7 @@
 package org.eclipse.qvto.examples.xtext.qvtoperational.tests;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,26 +25,23 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.context.ModelContext;
-import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
+import org.eclipse.ocl.pivot.internal.context.ModelContext;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCLStandaloneSetup;
 import org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperationalStandaloneSetup;
 
 public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 {	
 	
-	protected MetaModelManager metaModelManager = null;
-
+	protected OCL ocl;
+	
 	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
 		String inputName = stem + "." + extension;
 		URI inputURI = getProjectFileURI(inputName);
@@ -59,12 +57,10 @@ public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 		//		URI savedURI = getProjectFileURI(savedName);
 		//		MetaModelManager metaModelManager = new MetaModelManager();
 		//		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-				CS2PivotResourceAdapter adapter = null;
 				try {
-					BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+					BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 					assertNoResourceErrors("Load failed", xtextResource);
-					adapter = xtextResource.getCS2ASAdapter(null);
-					Resource pivotResource = adapter.getASResource(xtextResource);
+					Resource pivotResource = xtextResource.getASResource();
 		//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 					assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
@@ -89,17 +85,16 @@ public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 				}
 	}
 
-	@Override
 	protected void doLoadFromString(@NonNull String fileName, @NonNull String testFile) throws Exception {
-		URI libraryURI = getProjectFileURI(fileName);
-		ModelContext modelContext = new ModelContext(metaModelManager, libraryURI);
-		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
-		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
-		Resource pivotResource = adapter.getASResource(xtextResource);
-		assertNoResourceErrors("File Model", pivotResource);
-		assertNoUnresolvedProxies("File Model", pivotResource);
-		assertNoValidationErrors("File Model", pivotResource);
+		doLoadFromString(ocl, fileName, testFile);
+//		URI libraryURI = getProjectFileURI(fileName);
+//		ModelContext modelContext = new ModelContext(ocl.getEnvironmentFactory(), libraryURI);
+//		BaseCSResource xtextResource = (BaseCSResource) modelContext.createBaseResource(testFile);
+//		assertNoResourceErrors("Load failed", xtextResource);
+//		Resource pivotResource = xtextResource.getASResource();
+//		assertNoResourceErrors("File Model", pivotResource);
+//		assertNoUnresolvedProxies("File Model", pivotResource);
+//		assertNoValidationErrors("File Model", pivotResource);
 	}
 	
 	protected void saveAsXMI(Resource resource, URI xmiURI) throws IOException {
@@ -119,26 +114,15 @@ public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 		super.setUp();
 		doImperativeOCLSetup();
 		doQVTOperationalSetup();
-		configurePlatformResources();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+		ocl = OCL.newInstance(OCL.NO_PROJECTS);
+		//configurePlatformResources();
+		//resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
+		//resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
-		if (adapter != null) {
-			MetaModelManager metaModelManager = adapter.getMetaModelManager();
-			if (metaModelManager != null) {
-				metaModelManager.dispose();
-			}
-		}
-		if (metaModelManager != null) {
-			metaModelManager.dispose();
-			metaModelManager = null;
-		}
-		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
-		super.tearDown();
+		ocl.dispose();
 	}
 	
 	protected static void doQVTOperationalSetup() {

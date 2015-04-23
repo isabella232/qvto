@@ -6,11 +6,15 @@
     modelName="QVTOperational" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     testsDirectory="/org.eclipse.qvto.examples.xtext.qvtoperational.tests/emf-gen"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.genmodel#//baseCST ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialOCLCST ../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel#//imperativeocl ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.genmodel#//imperativeoclcs ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.genmodel#//qvtoperational"
+    usedGenPackages="../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel#//imperativeocl ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.genmodel#//imperativeoclcs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.genmodel#//qvtoperational ../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialoclcs ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     importOrganizing="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor"/>
+  </genAnnotations>
   <foreignModel>QVTOperationalCS.ecore</foreignModel>
-  <genPackages prefix="QVTOperationalCS" basePackage="org.eclipse.qvto.examples.xtext.qvtoperational"
+  <genPackages prefix="QVTOperationalCS" basePackage="org.eclipse.qvto.examples.xtext"
       disposableProviderFactory="true" fileExtensions="qvto" ecorePackage="QVTOperationalCS.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="QVTOperationalCS.ecore#//ClassifierKind">
       <genEnumLiterals ecoreEnumLiteral="QVTOperationalCS.ecore#//ClassifierKind/DATATYPE"/>
@@ -60,6 +64,7 @@
     <genClasses ecoreClass="QVTOperationalCS.ecore#//TopLevelCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//TopLevelCS/import"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//TopLevelCS/unit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//TopLevelCS/ownedType"/>
       <genOperations ecoreOperation="QVTOperationalCS.ecore#//TopLevelCS/ast"/>
     </genClasses>
     <genClasses ecoreClass="QVTOperationalCS.ecore#//QVToClassCS">

@@ -15,7 +15,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 			+	"	property prop2 : c1;\n"
 			+	"}\n"
 			+"}";
-		doLoadFromString("loadAsString.oclinecore", testFile);
+		doLoadFromString(ocl, "loadAsString.oclinecore", testFile);
 	}
 	
 	public void testQVToLoadAsString() throws Exception {
@@ -29,7 +29,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 			+	"	prop2 : c1;\n"
 			+	"};\n"
 			+"}";
-		doLoadFromString("loadAsString.qvto", testFile);
+		doLoadFromString("loadAsString.qvto2", testFile);
 	}
 	
 	public void testSimpleMetamodelDefinition() throws Exception {
@@ -40,7 +40,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 				+ "		prop1 : String ;\n"
 				+ "	};"
 				+ "};";
-		doLoadFromString("simpleMetamodelDefinition.qvto", testFile);
+		doLoadFromString("simpleMetamodelDefinition.qvto2", testFile);
 	}
 	
 	public void testSimpleMetamodelDefinitionWithoutOptionalSemicolon() throws Exception {
@@ -57,7 +57,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	public void testSimpleTransformationDefinition() throws Exception {
 		String testFile =
 				"transformation t1;";
-		doLoadFromString("simpleTransformationDefinition.qvto", testFile);
+		doLoadFromString("simpleTransformationDefinition.qvto2", testFile);
 	}
 	
 	public void testSimpleMappingDefinition() throws Exception {
@@ -65,6 +65,6 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 				  "transformation t1 {\n"
 				+ " mapping m1 (in p1 : String);\n"
 				+ "}";
-		doLoadFromString("simpleMappingDefinition.qvto", testFile);
+		doLoadFromString("simpleMappingDefinition.qvto2", testFile);
 	}
 }

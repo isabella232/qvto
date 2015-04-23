@@ -9,7 +9,7 @@
             class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="qvto"
+            extensions="qvto2"
             id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational"
             name="QVTOperational Editor">
         </editor>
@@ -213,13 +213,13 @@
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
 			class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="qvto">
+			type="qvto2">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
             class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
-            uriExtension="qvto">
+            uriExtension="qvto2">
         </resourceServiceProvider>
     </extension>
 
@@ -250,7 +250,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="qvto2"
+            >
       </participant>
    </extension>
    <extension
@@ -277,6 +279,27 @@
 	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
         </page>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
+			<command
+				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
+				id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.OpenGeneratedCode"
+				style="push">
+					<visibleWhen checkEnabled="false">
+						<reference definitionId="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.Editor.opened" />
+					</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
+			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
+				<activeWhen>
+					<reference definitionId="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.Editor.opened" />
+				</activeWhen>
+		</handler>
+	</extension>
 
 	<!-- Quick Outline -->
 	<extension
@@ -377,20 +400,26 @@
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.compare.contentViewers"
             class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="qvto">
+            extensions="qvto2">
     </viewer>
   </extension>
   <extension point="org.eclipse.compare.contentMergeViewers">
     <viewer id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.compare.contentMergeViewers"
             class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
-            extensions="qvto" label="QVTOperational Compare">
+            extensions="qvto2" label="QVTOperational Compare">
      </viewer>
   </extension>
   <extension point="org.eclipse.ui.editors.documentProviders">
     <provider id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.editors.documentProviders"
             class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
-            extensions="qvto">
+            extensions="qvto2">
     </provider>
+  </extension>
+  <extension point="org.eclipse.team.core.fileTypes">
+    <fileTypes
+            extension="qvto2"
+            type="text">
+    </fileTypes>
   </extension>
 
 </plugin>
