@@ -15,38 +15,57 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-
-import org.eclipse.ocl.examples.pivot.util.Visitable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Feature;
+import org.eclipse.ocl.pivot.FeatureCallExp;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
 import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
-
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.*;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Constructor;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Helper;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Library;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelType;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Module;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Tag;
+import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -86,7 +105,7 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -113,8 +132,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(constructor);
 				if (result == null) result = caseNamespace(constructor);
 				if (result == null) result = caseTemplateableElement(constructor);
-				if (result == null) result = caseParameterableElement(constructor);
-				if (result == null) result = caseTypedMultiplicityElement(constructor);
 				if (result == null) result = caseTypedElement(constructor);
 				if (result == null) result = caseNamedElement(constructor);
 				if (result == null) result = caseElement(constructor);
@@ -137,8 +154,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				T result = caseContextualProperty(contextualProperty);
 				if (result == null) result = caseProperty(contextualProperty);
 				if (result == null) result = caseFeature(contextualProperty);
-				if (result == null) result = caseParameterableElement(contextualProperty);
-				if (result == null) result = caseTypedMultiplicityElement(contextualProperty);
 				if (result == null) result = caseTypedElement(contextualProperty);
 				if (result == null) result = caseNamedElement(contextualProperty);
 				if (result == null) result = caseElement(contextualProperty);
@@ -179,8 +194,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(entryOperation);
 				if (result == null) result = caseNamespace(entryOperation);
 				if (result == null) result = caseTemplateableElement(entryOperation);
-				if (result == null) result = caseParameterableElement(entryOperation);
-				if (result == null) result = caseTypedMultiplicityElement(entryOperation);
 				if (result == null) result = caseTypedElement(entryOperation);
 				if (result == null) result = caseNamedElement(entryOperation);
 				if (result == null) result = caseElement(entryOperation);
@@ -197,8 +210,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(helper);
 				if (result == null) result = caseNamespace(helper);
 				if (result == null) result = caseTemplateableElement(helper);
-				if (result == null) result = caseParameterableElement(helper);
-				if (result == null) result = caseTypedMultiplicityElement(helper);
 				if (result == null) result = caseTypedElement(helper);
 				if (result == null) result = caseNamedElement(helper);
 				if (result == null) result = caseElement(helper);
@@ -231,8 +242,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(imperativeOperation);
 				if (result == null) result = caseNamespace(imperativeOperation);
 				if (result == null) result = caseTemplateableElement(imperativeOperation);
-				if (result == null) result = caseParameterableElement(imperativeOperation);
-				if (result == null) result = caseTypedMultiplicityElement(imperativeOperation);
 				if (result == null) result = caseTypedElement(imperativeOperation);
 				if (result == null) result = caseNamedElement(imperativeOperation);
 				if (result == null) result = caseElement(imperativeOperation);
@@ -246,12 +255,10 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				T result = caseLibrary(library);
 				if (result == null) result = caseModule(library);
 				if (result == null) result = caseClass(library);
-				if (result == null) result = casePackage(library);
 				if (result == null) result = caseType(library);
 				if (result == null) result = caseNamespace(library);
-				if (result == null) result = caseNamedElement(library);
 				if (result == null) result = caseTemplateableElement(library);
-				if (result == null) result = caseParameterableElement(library);
+				if (result == null) result = caseNamedElement(library);
 				if (result == null) result = caseElement(library);
 				if (result == null) result = caseNameable(library);
 				if (result == null) result = caseVisitable(library);
@@ -293,8 +300,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(mappingOperation);
 				if (result == null) result = caseNamespace(mappingOperation);
 				if (result == null) result = caseTemplateableElement(mappingOperation);
-				if (result == null) result = caseParameterableElement(mappingOperation);
-				if (result == null) result = caseTypedMultiplicityElement(mappingOperation);
 				if (result == null) result = caseTypedElement(mappingOperation);
 				if (result == null) result = caseNamedElement(mappingOperation);
 				if (result == null) result = caseElement(mappingOperation);
@@ -310,7 +315,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseVariable(mappingParameter);
 				if (result == null) result = caseParameter(mappingParameter);
 				if (result == null) result = caseVariableDeclaration(mappingParameter);
-				if (result == null) result = caseTypedMultiplicityElement(mappingParameter);
 				if (result == null) result = caseTypedElement(mappingParameter);
 				if (result == null) result = caseNamedElement(mappingParameter);
 				if (result == null) result = caseElement(mappingParameter);
@@ -326,7 +330,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseVariable(modelParameter);
 				if (result == null) result = caseParameter(modelParameter);
 				if (result == null) result = caseVariableDeclaration(modelParameter);
-				if (result == null) result = caseTypedMultiplicityElement(modelParameter);
 				if (result == null) result = caseTypedElement(modelParameter);
 				if (result == null) result = caseNamedElement(modelParameter);
 				if (result == null) result = caseElement(modelParameter);
@@ -341,9 +344,8 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseClass(modelType);
 				if (result == null) result = caseType(modelType);
 				if (result == null) result = caseNamespace(modelType);
-				if (result == null) result = caseNamedElement(modelType);
 				if (result == null) result = caseTemplateableElement(modelType);
-				if (result == null) result = caseParameterableElement(modelType);
+				if (result == null) result = caseNamedElement(modelType);
 				if (result == null) result = caseElement(modelType);
 				if (result == null) result = caseNameable(modelType);
 				if (result == null) result = caseVisitable(modelType);
@@ -354,12 +356,10 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				Module module = (Module)theEObject;
 				T result = caseModule(module);
 				if (result == null) result = caseClass(module);
-				if (result == null) result = casePackage(module);
 				if (result == null) result = caseType(module);
 				if (result == null) result = caseNamespace(module);
-				if (result == null) result = caseNamedElement(module);
 				if (result == null) result = caseTemplateableElement(module);
-				if (result == null) result = caseParameterableElement(module);
+				if (result == null) result = caseNamedElement(module);
 				if (result == null) result = caseElement(module);
 				if (result == null) result = caseNameable(module);
 				if (result == null) result = caseVisitable(module);
@@ -401,12 +401,10 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				T result = caseOperationalTransformation(operationalTransformation);
 				if (result == null) result = caseModule(operationalTransformation);
 				if (result == null) result = caseClass(operationalTransformation);
-				if (result == null) result = casePackage(operationalTransformation);
 				if (result == null) result = caseType(operationalTransformation);
 				if (result == null) result = caseNamespace(operationalTransformation);
-				if (result == null) result = caseNamedElement(operationalTransformation);
 				if (result == null) result = caseTemplateableElement(operationalTransformation);
-				if (result == null) result = caseParameterableElement(operationalTransformation);
+				if (result == null) result = caseNamedElement(operationalTransformation);
 				if (result == null) result = caseElement(operationalTransformation);
 				if (result == null) result = caseNameable(operationalTransformation);
 				if (result == null) result = caseVisitable(operationalTransformation);
@@ -448,7 +446,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				if (result == null) result = caseVariable(varParameter);
 				if (result == null) result = caseParameter(varParameter);
 				if (result == null) result = caseVariableDeclaration(varParameter);
-				if (result == null) result = caseTypedMultiplicityElement(varParameter);
 				if (result == null) result = caseTypedElement(varParameter);
 				if (result == null) result = caseNamedElement(varParameter);
 				if (result == null) result = caseElement(varParameter);
@@ -462,14 +459,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 				T result = caseTag(tag);
 				if (result == null) result = caseElement(tag);
 				if (result == null) result = caseVisitable(tag);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTOperationalPackage.QVT_OPERATIONAL_VISITOR: {
-				QVTOperationalVisitor<?> qvtOperationalVisitor = (QVTOperationalVisitor<?>)theEObject;
-				T result = caseQVTOperationalVisitor(qvtOperationalVisitor);
-				if (result == null) result = caseImperativeOCLVisitor(qvtOperationalVisitor);
-				if (result == null) result = caseVisitor(qvtOperationalVisitor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -868,21 +857,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <R> T caseQVTOperationalVisitor(QVTOperationalVisitor<R> object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -958,21 +932,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Multiplicity Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypedMultiplicityElement(TypedMultiplicityElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1014,21 +973,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTemplateableElement(TemplateableElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 
@@ -1178,22 +1122,7 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClass(org.eclipse.ocl.examples.pivot.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
+	public T caseClass(org.eclipse.ocl.pivot.Class object) {
 		return null;
 	}
 
@@ -1254,36 +1183,6 @@ public class QVTOperationalSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseInstantiationExp(InstantiationExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <R> T caseVisitor(Visitor<R> object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <R> T caseImperativeOCLVisitor(ImperativeOCLVisitor<R> object) {
 		return null;
 	}
 

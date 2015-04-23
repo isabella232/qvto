@@ -13,28 +13,20 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.internal.ClassImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ModelType;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
@@ -45,12 +37,12 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelTypeImpl#getAdditionalCondition <em>Additional Condition</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelTypeImpl#getConformanceKind <em>Conformance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelTypeImpl#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -93,7 +85,7 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> metamodel;
+	protected EList<org.eclipse.ocl.pivot.Package> metamodel;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -152,29 +144,11 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getMetamodel() {
+	public EList<org.eclipse.ocl.pivot.Package> getMetamodel() {
 		if (metamodel == null) {
-			metamodel = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTOperationalPackage.MODEL_TYPE__METAMODEL);
+			metamodel = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTOperationalPackage.MODEL_TYPE__METAMODEL);
 		}
 		return metamodel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitModelType(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitModelType(this);
 	}
 
 	/**
@@ -227,7 +201,7 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 				return;
 			case QVTOperationalPackage.MODEL_TYPE__METAMODEL:
 				getMetamodel().clear();
-				getMetamodel().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				getMetamodel().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -278,23 +252,6 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.MODEL_TYPE___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.MODEL_TYPE___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
@@ -303,6 +260,16 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 		result.append(conformanceKind);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitModelType(this);
 	}
 
 } //ModelTypeImpl

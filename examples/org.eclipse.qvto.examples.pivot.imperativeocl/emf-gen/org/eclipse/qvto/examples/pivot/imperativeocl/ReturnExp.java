@@ -13,9 +13,7 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,10 +22,10 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getReturnExp()
  * @model
@@ -59,23 +57,5 @@ public interface ReturnExp extends ImperativeExpression {
 	 * @generated
 	 */
 	void setValue(OCLExpression value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitReturnExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitReturnExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ReturnExp

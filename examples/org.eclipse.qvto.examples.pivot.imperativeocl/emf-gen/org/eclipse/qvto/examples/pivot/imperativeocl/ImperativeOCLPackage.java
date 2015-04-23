@@ -16,11 +16,9 @@ package org.eclipse.qvto.examples.pivot.imperativeocl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -89,40 +87,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_EXPRESSION = 12;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_EXPRESSION__EXTENSION = PivotPackage.OCL_EXPRESSION__EXTENSION;
+	int IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS = PivotPackage.OCL_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_EXPRESSION__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
+	int IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_EXPRESSION__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
+	int IMPERATIVE_EXPRESSION__OWNED_COMMENTS = PivotPackage.OCL_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_EXPRESSION__IS_STATIC = PivotPackage.OCL_EXPRESSION__IS_STATIC;
+	int IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS = PivotPackage.OCL_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -132,6 +130,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_EXPRESSION__NAME = PivotPackage.OCL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_EXPRESSION__IS_MANY = PivotPackage.OCL_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -150,6 +157,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_EXPRESSION__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_EXPRESSION__TYPE_VALUE = PivotPackage.OCL_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Imperative Expression</em>' class.
@@ -179,6 +195,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING = PivotPackage.OCL_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OCL_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The number of operations of the '<em>Imperative Expression</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,40 +223,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ALT_EXP = 0;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int ALT_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int ALT_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int ALT_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int ALT_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -241,6 +266,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ALT_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALT_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -259,6 +293,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ALT_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ALT_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -306,22 +349,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ALT_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ALT_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int ALT_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Alt Exp</em>' class.
@@ -330,7 +364,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ALT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int ALT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssertExpImpl <em>Assert Exp</em>}' class.
@@ -343,40 +377,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ASSERT_EXP = 1;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int ASSERT_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int ASSERT_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int ASSERT_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int ASSERT_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -386,6 +420,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSERT_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERT_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -404,6 +447,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSERT_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSERT_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Assertion</b></em>' containment reference.
@@ -460,22 +512,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ASSERT_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSERT_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int ASSERT_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Assert Exp</em>' class.
@@ -484,7 +527,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSERT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int ASSERT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssignExpImpl <em>Assign Exp</em>}' class.
@@ -497,40 +540,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ASSIGN_EXP = 2;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int ASSIGN_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int ASSIGN_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int ASSIGN_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int ASSIGN_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -540,6 +583,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGN_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -558,6 +610,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ASSIGN_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGN_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Default Value</b></em>' containment reference.
@@ -623,22 +684,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ASSIGN_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGN_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int ASSIGN_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Assign Exp</em>' class.
@@ -647,7 +699,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int ASSIGN_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.BlockExpImpl <em>Block Exp</em>}' class.
@@ -660,40 +712,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int BLOCK_EXP = 3;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int BLOCK_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int BLOCK_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int BLOCK_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int BLOCK_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -703,6 +755,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int BLOCK_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -721,6 +782,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int BLOCK_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
@@ -759,22 +829,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int BLOCK_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BLOCK_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int BLOCK_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Block Exp</em>' class.
@@ -783,7 +844,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int BLOCK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.BreakExpImpl <em>Break Exp</em>}' class.
@@ -796,40 +857,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int BREAK_EXP = 4;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int BREAK_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int BREAK_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int BREAK_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int BREAK_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -839,6 +900,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int BREAK_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BREAK_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -857,6 +927,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int BREAK_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BREAK_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Break Exp</em>' class.
@@ -886,22 +965,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int BREAK_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BREAK_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int BREAK_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Break Exp</em>' class.
@@ -910,7 +980,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BREAK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int BREAK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.CatchExpImpl <em>Catch Exp</em>}' class.
@@ -923,40 +993,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int CATCH_EXP = 5;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int CATCH_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int CATCH_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int CATCH_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int CATCH_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -966,6 +1036,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int CATCH_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATCH_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -984,6 +1063,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int CATCH_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CATCH_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
@@ -1031,22 +1119,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int CATCH_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CATCH_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int CATCH_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Catch Exp</em>' class.
@@ -1055,7 +1134,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CATCH_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int CATCH_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ComputeExpImpl <em>Compute Exp</em>}' class.
@@ -1068,40 +1147,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int COMPUTE_EXP = 6;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int COMPUTE_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int COMPUTE_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int COMPUTE_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int COMPUTE_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1111,6 +1190,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPUTE_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPUTE_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1129,6 +1217,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPUTE_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPUTE_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -1176,22 +1273,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int COMPUTE_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPUTE_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int COMPUTE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Compute Exp</em>' class.
@@ -1200,7 +1288,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPUTE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int COMPUTE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ContinueExpImpl <em>Continue Exp</em>}' class.
@@ -1213,40 +1301,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int CONTINUE_EXP = 7;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int CONTINUE_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int CONTINUE_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int CONTINUE_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int CONTINUE_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1256,6 +1344,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTINUE_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTINUE_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1274,6 +1371,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTINUE_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTINUE_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The number of structural features of the '<em>Continue Exp</em>' class.
@@ -1303,22 +1409,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int CONTINUE_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTINUE_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int CONTINUE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Continue Exp</em>' class.
@@ -1327,7 +1424,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONTINUE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int CONTINUE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictLiteralExpImpl <em>Dict Literal Exp</em>}' class.
@@ -1340,40 +1437,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICT_LITERAL_EXP = 8;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP__EXTENSION = PivotPackage.LITERAL_EXP__EXTENSION;
+	int DICT_LITERAL_EXP__ANNOTATING_COMMENTS = PivotPackage.LITERAL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP__OWNED_ANNOTATION = PivotPackage.LITERAL_EXP__OWNED_ANNOTATION;
+	int DICT_LITERAL_EXP__OWNED_ANNOTATIONS = PivotPackage.LITERAL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
+	int DICT_LITERAL_EXP__OWNED_COMMENTS = PivotPackage.LITERAL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP__IS_STATIC = PivotPackage.LITERAL_EXP__IS_STATIC;
+	int DICT_LITERAL_EXP__OWNED_EXTENSIONS = PivotPackage.LITERAL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1383,6 +1480,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int DICT_LITERAL_EXP__NAME = PivotPackage.LITERAL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICT_LITERAL_EXP__IS_MANY = PivotPackage.LITERAL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1401,6 +1507,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int DICT_LITERAL_EXP__TYPE = PivotPackage.LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICT_LITERAL_EXP__TYPE_VALUE = PivotPackage.LITERAL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Part</b></em>' containment reference list.
@@ -1439,22 +1554,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICT_LITERAL_EXP___GET_VALUE__TYPE_STRING = PivotPackage.LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICT_LITERAL_EXP___ACCEPT__VISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
+	int DICT_LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Dict Literal Exp</em>' class.
@@ -1463,7 +1569,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 2;
+	int DICT_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictLiteralPartImpl <em>Dict Literal Part</em>}' class.
@@ -1476,31 +1582,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICT_LITERAL_PART = 9;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_PART__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int DICT_LITERAL_PART__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_PART__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int DICT_LITERAL_PART__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_PART__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int DICT_LITERAL_PART__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICT_LITERAL_PART__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' containment reference.
@@ -1548,31 +1663,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICT_LITERAL_PART___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICT_LITERAL_PART___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICT_LITERAL_PART___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Dict Literal Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICT_LITERAL_PART_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int DICT_LITERAL_PART_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictionaryTypeImpl <em>Dictionary Type</em>}' class.
@@ -1585,40 +1682,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE = 10;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__EXTENSION = PivotPackage.COLLECTION_TYPE__EXTENSION;
+	int DICTIONARY_TYPE__ANNOTATING_COMMENTS = PivotPackage.COLLECTION_TYPE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__OWNED_ANNOTATION = PivotPackage.COLLECTION_TYPE__OWNED_ANNOTATION;
+	int DICTIONARY_TYPE__OWNED_ANNOTATIONS = PivotPackage.COLLECTION_TYPE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__OWNED_COMMENT = PivotPackage.COLLECTION_TYPE__OWNED_COMMENT;
+	int DICTIONARY_TYPE__OWNED_COMMENTS = PivotPackage.COLLECTION_TYPE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__IS_STATIC = PivotPackage.COLLECTION_TYPE__IS_STATIC;
+	int DICTIONARY_TYPE__OWNED_EXTENSIONS = PivotPackage.COLLECTION_TYPE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1630,22 +1727,31 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE__NAME = PivotPackage.COLLECTION_TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__OWNED_TEMPLATE_SIGNATURE = PivotPackage.COLLECTION_TYPE__OWNED_TEMPLATE_SIGNATURE;
+	int DICTIONARY_TYPE__OWNED_CONSTRAINTS = PivotPackage.COLLECTION_TYPE__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__TEMPLATE_BINDING = PivotPackage.COLLECTION_TYPE__TEMPLATE_BINDING;
+	int DICTIONARY_TYPE__OWNED_BINDINGS = PivotPackage.COLLECTION_TYPE__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__OWNED_SIGNATURE = PivotPackage.COLLECTION_TYPE__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -1657,31 +1763,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE__UNSPECIALIZED_ELEMENT = PivotPackage.COLLECTION_TYPE__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__OWNING_TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__EXTENDED_BYS = PivotPackage.COLLECTION_TYPE__EXTENDED_BYS;
+	int DICTIONARY_TYPE__EXTENDERS = PivotPackage.COLLECTION_TYPE__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -1691,60 +1779,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int DICTIONARY_TYPE__INSTANCE_CLASS_NAME = PivotPackage.COLLECTION_TYPE__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__OWNED_ATTRIBUTE = PivotPackage.COLLECTION_TYPE__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__OWNED_INVARIANT = PivotPackage.COLLECTION_TYPE__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__OWNED_OPERATION = PivotPackage.COLLECTION_TYPE__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__PACKAGE = PivotPackage.COLLECTION_TYPE__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__SUPER_CLASS = PivotPackage.COLLECTION_TYPE__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE__OWNED_RULE = PivotPackage.COLLECTION_TYPE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -1774,31 +1808,67 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE__IS_INTERFACE = PivotPackage.COLLECTION_TYPE__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__NESTED_TYPE = PivotPackage.COLLECTION_TYPE__NESTED_TYPE;
+	int DICTIONARY_TYPE__OWNED_BEHAVIORS = PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__OWNED_BEHAVIOR = PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR;
+	int DICTIONARY_TYPE__OWNED_INVARIANTS = PivotPackage.COLLECTION_TYPE__OWNED_INVARIANTS;
 
 	/**
-	 * The feature id for the '<em><b>Behavioral Type</b></em>' reference.
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE__BEHAVIORAL_TYPE = PivotPackage.COLLECTION_TYPE__BEHAVIORAL_TYPE;
+	int DICTIONARY_TYPE__OWNED_OPERATIONS = PivotPackage.COLLECTION_TYPE__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__OWNED_PROPERTIES = PivotPackage.COLLECTION_TYPE__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__OWNING_PACKAGE = PivotPackage.COLLECTION_TYPE__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__SUPER_CLASSES = PivotPackage.COLLECTION_TYPE__SUPER_CLASSES;
+
+	/**
+	 * The feature id for the '<em><b>Behavioral Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__BEHAVIORAL_CLASS = PivotPackage.COLLECTION_TYPE__BEHAVIORAL_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Serializable</b></em>' attribute.
@@ -1873,31 +1943,22 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE___GET_VALUE__TYPE_STRING = PivotPackage.COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE___IS_TEMPLATE = PivotPackage.COLLECTION_TYPE___IS_TEMPLATE;
+	int DICTIONARY_TYPE___FLATTENED_TYPE = PivotPackage.COLLECTION_TYPE___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE___PARAMETERABLE_ELEMENTS = PivotPackage.COLLECTION_TYPE___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int DICTIONARY_TYPE___IS_CLASS = PivotPackage.COLLECTION_TYPE___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -1909,6 +1970,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE___IS_TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.COLLECTION_TYPE___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1918,40 +1988,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DICTIONARY_TYPE___ACCEPT__VISITOR = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Dictionary Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DICTIONARY_TYPE_OPERATION_COUNT = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 2;
+	int DICTIONARY_TYPE_OPERATION_COUNT = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeLoopExpImpl <em>Imperative Loop Exp</em>}' class.
@@ -1964,40 +2007,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_LOOP_EXP = 14;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__EXTENSION = PivotPackage.LOOP_EXP__EXTENSION;
+	int IMPERATIVE_LOOP_EXP__ANNOTATING_COMMENTS = PivotPackage.LOOP_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__OWNED_ANNOTATION = PivotPackage.LOOP_EXP__OWNED_ANNOTATION;
+	int IMPERATIVE_LOOP_EXP__OWNED_ANNOTATIONS = PivotPackage.LOOP_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__OWNED_COMMENT = PivotPackage.LOOP_EXP__OWNED_COMMENT;
+	int IMPERATIVE_LOOP_EXP__OWNED_COMMENTS = PivotPackage.LOOP_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__IS_STATIC = PivotPackage.LOOP_EXP__IS_STATIC;
+	int IMPERATIVE_LOOP_EXP__OWNED_EXTENSIONS = PivotPackage.LOOP_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2007,6 +2050,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_LOOP_EXP__NAME = PivotPackage.LOOP_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_LOOP_EXP__IS_MANY = PivotPackage.LOOP_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2027,40 +2079,58 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_LOOP_EXP__TYPE = PivotPackage.LOOP_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__IMPLICIT = PivotPackage.LOOP_EXP__IMPLICIT;
+	int IMPERATIVE_LOOP_EXP__TYPE_VALUE = PivotPackage.LOOP_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__SOURCE = PivotPackage.LOOP_EXP__SOURCE;
+	int IMPERATIVE_LOOP_EXP__IS_IMPLICIT = PivotPackage.LOOP_EXP__IS_IMPLICIT;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__BODY = PivotPackage.LOOP_EXP__BODY;
+	int IMPERATIVE_LOOP_EXP__IS_SAFE = PivotPackage.LOOP_EXP__IS_SAFE;
 
 	/**
-	 * The feature id for the '<em><b>Iterator</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_LOOP_EXP__ITERATOR = PivotPackage.LOOP_EXP__ITERATOR;
+	int IMPERATIVE_LOOP_EXP__OWNED_SOURCE = PivotPackage.LOOP_EXP__OWNED_SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_LOOP_EXP__OWNED_BODY = PivotPackage.LOOP_EXP__OWNED_BODY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Iterators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_LOOP_EXP__OWNED_ITERATORS = PivotPackage.LOOP_EXP__OWNED_ITERATORS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Iteration</b></em>' reference.
@@ -2108,6 +2178,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_LOOP_EXP___GET_VALUE__TYPE_STRING = PivotPackage.LOOP_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2145,40 +2224,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int FOR_EXP = 11;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__EXTENSION = IMPERATIVE_LOOP_EXP__EXTENSION;
+	int FOR_EXP__ANNOTATING_COMMENTS = IMPERATIVE_LOOP_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__OWNED_ANNOTATION = IMPERATIVE_LOOP_EXP__OWNED_ANNOTATION;
+	int FOR_EXP__OWNED_ANNOTATIONS = IMPERATIVE_LOOP_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__OWNED_COMMENT = IMPERATIVE_LOOP_EXP__OWNED_COMMENT;
+	int FOR_EXP__OWNED_COMMENTS = IMPERATIVE_LOOP_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__IS_STATIC = IMPERATIVE_LOOP_EXP__IS_STATIC;
+	int FOR_EXP__OWNED_EXTENSIONS = IMPERATIVE_LOOP_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2188,6 +2267,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int FOR_EXP__NAME = IMPERATIVE_LOOP_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXP__IS_MANY = IMPERATIVE_LOOP_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2208,40 +2296,58 @@ public interface ImperativeOCLPackage extends EPackage {
 	int FOR_EXP__TYPE = IMPERATIVE_LOOP_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__IMPLICIT = IMPERATIVE_LOOP_EXP__IMPLICIT;
+	int FOR_EXP__TYPE_VALUE = IMPERATIVE_LOOP_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__SOURCE = IMPERATIVE_LOOP_EXP__SOURCE;
+	int FOR_EXP__IS_IMPLICIT = IMPERATIVE_LOOP_EXP__IS_IMPLICIT;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__BODY = IMPERATIVE_LOOP_EXP__BODY;
+	int FOR_EXP__IS_SAFE = IMPERATIVE_LOOP_EXP__IS_SAFE;
 
 	/**
-	 * The feature id for the '<em><b>Iterator</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP__ITERATOR = IMPERATIVE_LOOP_EXP__ITERATOR;
+	int FOR_EXP__OWNED_SOURCE = IMPERATIVE_LOOP_EXP__OWNED_SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXP__OWNED_BODY = IMPERATIVE_LOOP_EXP__OWNED_BODY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Iterators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXP__OWNED_ITERATORS = IMPERATIVE_LOOP_EXP__OWNED_ITERATORS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Iteration</b></em>' reference.
@@ -2289,6 +2395,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int FOR_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_LOOP_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2307,31 +2422,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int FOR_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP = IMPERATIVE_LOOP_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOR_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FOR_EXP___ACCEPT__VISITOR = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>For Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FOR_EXP_OPERATION_COUNT = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 2;
+	int FOR_EXP_OPERATION_COUNT = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeIterateExpImpl <em>Imperative Iterate Exp</em>}' class.
@@ -2344,40 +2441,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_ITERATE_EXP = 13;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__EXTENSION = IMPERATIVE_LOOP_EXP__EXTENSION;
+	int IMPERATIVE_ITERATE_EXP__ANNOTATING_COMMENTS = IMPERATIVE_LOOP_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__OWNED_ANNOTATION = IMPERATIVE_LOOP_EXP__OWNED_ANNOTATION;
+	int IMPERATIVE_ITERATE_EXP__OWNED_ANNOTATIONS = IMPERATIVE_LOOP_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__OWNED_COMMENT = IMPERATIVE_LOOP_EXP__OWNED_COMMENT;
+	int IMPERATIVE_ITERATE_EXP__OWNED_COMMENTS = IMPERATIVE_LOOP_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__IS_STATIC = IMPERATIVE_LOOP_EXP__IS_STATIC;
+	int IMPERATIVE_ITERATE_EXP__OWNED_EXTENSIONS = IMPERATIVE_LOOP_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2387,6 +2484,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_ITERATE_EXP__NAME = IMPERATIVE_LOOP_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_ITERATE_EXP__IS_MANY = IMPERATIVE_LOOP_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2407,40 +2513,58 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_ITERATE_EXP__TYPE = IMPERATIVE_LOOP_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__IMPLICIT = IMPERATIVE_LOOP_EXP__IMPLICIT;
+	int IMPERATIVE_ITERATE_EXP__TYPE_VALUE = IMPERATIVE_LOOP_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__SOURCE = IMPERATIVE_LOOP_EXP__SOURCE;
+	int IMPERATIVE_ITERATE_EXP__IS_IMPLICIT = IMPERATIVE_LOOP_EXP__IS_IMPLICIT;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__BODY = IMPERATIVE_LOOP_EXP__BODY;
+	int IMPERATIVE_ITERATE_EXP__IS_SAFE = IMPERATIVE_LOOP_EXP__IS_SAFE;
 
 	/**
-	 * The feature id for the '<em><b>Iterator</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP__ITERATOR = IMPERATIVE_LOOP_EXP__ITERATOR;
+	int IMPERATIVE_ITERATE_EXP__OWNED_SOURCE = IMPERATIVE_LOOP_EXP__OWNED_SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_ITERATE_EXP__OWNED_BODY = IMPERATIVE_LOOP_EXP__OWNED_BODY;
+
+	/**
+	 * The feature id for the '<em><b>Owned Iterators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_ITERATE_EXP__OWNED_ITERATORS = IMPERATIVE_LOOP_EXP__OWNED_ITERATORS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Iteration</b></em>' reference.
@@ -2497,6 +2621,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_ITERATE_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_LOOP_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_ITERATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2515,31 +2648,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_ITERATE_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP = IMPERATIVE_LOOP_EXP___VALIDATE_SOURCE_IS_COLLECTION__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_ITERATE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_ITERATE_EXP___ACCEPT__VISITOR = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Imperative Iterate Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_ITERATE_EXP_OPERATION_COUNT = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 2;
+	int IMPERATIVE_ITERATE_EXP_OPERATION_COUNT = IMPERATIVE_LOOP_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.InstantiationExpImpl <em>Instantiation Exp</em>}' class.
@@ -2552,40 +2667,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int INSTANTIATION_EXP = 15;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int INSTANTIATION_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int INSTANTIATION_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int INSTANTIATION_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int INSTANTIATION_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2595,6 +2710,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int INSTANTIATION_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANTIATION_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2613,6 +2737,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int INSTANTIATION_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANTIATION_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
@@ -2669,22 +2802,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int INSTANTIATION_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INSTANTIATION_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int INSTANTIATION_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Instantiation Exp</em>' class.
@@ -2693,7 +2817,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int INSTANTIATION_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int INSTANTIATION_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ListLiteralExpImpl <em>List Literal Exp</em>}' class.
@@ -2706,40 +2830,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_LITERAL_EXP = 16;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP__EXTENSION = PivotPackage.LITERAL_EXP__EXTENSION;
+	int LIST_LITERAL_EXP__ANNOTATING_COMMENTS = PivotPackage.LITERAL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP__OWNED_ANNOTATION = PivotPackage.LITERAL_EXP__OWNED_ANNOTATION;
+	int LIST_LITERAL_EXP__OWNED_ANNOTATIONS = PivotPackage.LITERAL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
+	int LIST_LITERAL_EXP__OWNED_COMMENTS = PivotPackage.LITERAL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP__IS_STATIC = PivotPackage.LITERAL_EXP__IS_STATIC;
+	int LIST_LITERAL_EXP__OWNED_EXTENSIONS = PivotPackage.LITERAL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2749,6 +2873,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIST_LITERAL_EXP__NAME = PivotPackage.LITERAL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_LITERAL_EXP__IS_MANY = PivotPackage.LITERAL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2767,6 +2900,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIST_LITERAL_EXP__TYPE = PivotPackage.LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_LITERAL_EXP__TYPE_VALUE = PivotPackage.LITERAL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Element</b></em>' containment reference list.
@@ -2805,22 +2947,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_LITERAL_EXP___GET_VALUE__TYPE_STRING = PivotPackage.LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_LITERAL_EXP___ACCEPT__VISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
+	int LIST_LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>List Literal Exp</em>' class.
@@ -2829,7 +2962,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 2;
+	int LIST_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ListTypeImpl <em>List Type</em>}' class.
@@ -2842,40 +2975,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE = 17;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__EXTENSION = PivotPackage.COLLECTION_TYPE__EXTENSION;
+	int LIST_TYPE__ANNOTATING_COMMENTS = PivotPackage.COLLECTION_TYPE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__OWNED_ANNOTATION = PivotPackage.COLLECTION_TYPE__OWNED_ANNOTATION;
+	int LIST_TYPE__OWNED_ANNOTATIONS = PivotPackage.COLLECTION_TYPE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__OWNED_COMMENT = PivotPackage.COLLECTION_TYPE__OWNED_COMMENT;
+	int LIST_TYPE__OWNED_COMMENTS = PivotPackage.COLLECTION_TYPE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__IS_STATIC = PivotPackage.COLLECTION_TYPE__IS_STATIC;
+	int LIST_TYPE__OWNED_EXTENSIONS = PivotPackage.COLLECTION_TYPE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2887,22 +3020,31 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE__NAME = PivotPackage.COLLECTION_TYPE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__OWNED_TEMPLATE_SIGNATURE = PivotPackage.COLLECTION_TYPE__OWNED_TEMPLATE_SIGNATURE;
+	int LIST_TYPE__OWNED_CONSTRAINTS = PivotPackage.COLLECTION_TYPE__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__TEMPLATE_BINDING = PivotPackage.COLLECTION_TYPE__TEMPLATE_BINDING;
+	int LIST_TYPE__OWNED_BINDINGS = PivotPackage.COLLECTION_TYPE__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__OWNED_SIGNATURE = PivotPackage.COLLECTION_TYPE__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -2914,31 +3056,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE__UNSPECIALIZED_ELEMENT = PivotPackage.COLLECTION_TYPE__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__OWNING_TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__EXTENDED_BYS = PivotPackage.COLLECTION_TYPE__EXTENDED_BYS;
+	int LIST_TYPE__EXTENDERS = PivotPackage.COLLECTION_TYPE__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -2948,60 +3072,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIST_TYPE__INSTANCE_CLASS_NAME = PivotPackage.COLLECTION_TYPE__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__OWNED_ATTRIBUTE = PivotPackage.COLLECTION_TYPE__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__OWNED_INVARIANT = PivotPackage.COLLECTION_TYPE__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__OWNED_OPERATION = PivotPackage.COLLECTION_TYPE__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__PACKAGE = PivotPackage.COLLECTION_TYPE__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__SUPER_CLASS = PivotPackage.COLLECTION_TYPE__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE__OWNED_RULE = PivotPackage.COLLECTION_TYPE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -3031,31 +3101,67 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE__IS_INTERFACE = PivotPackage.COLLECTION_TYPE__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__NESTED_TYPE = PivotPackage.COLLECTION_TYPE__NESTED_TYPE;
+	int LIST_TYPE__OWNED_BEHAVIORS = PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__OWNED_BEHAVIOR = PivotPackage.COLLECTION_TYPE__OWNED_BEHAVIOR;
+	int LIST_TYPE__OWNED_INVARIANTS = PivotPackage.COLLECTION_TYPE__OWNED_INVARIANTS;
 
 	/**
-	 * The feature id for the '<em><b>Behavioral Type</b></em>' reference.
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE__BEHAVIORAL_TYPE = PivotPackage.COLLECTION_TYPE__BEHAVIORAL_TYPE;
+	int LIST_TYPE__OWNED_OPERATIONS = PivotPackage.COLLECTION_TYPE__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__OWNED_PROPERTIES = PivotPackage.COLLECTION_TYPE__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__OWNING_PACKAGE = PivotPackage.COLLECTION_TYPE__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__SUPER_CLASSES = PivotPackage.COLLECTION_TYPE__SUPER_CLASSES;
+
+	/**
+	 * The feature id for the '<em><b>Behavioral Class</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__BEHAVIORAL_CLASS = PivotPackage.COLLECTION_TYPE__BEHAVIORAL_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Serializable</b></em>' attribute.
@@ -3121,31 +3227,22 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE___GET_VALUE__TYPE_STRING = PivotPackage.COLLECTION_TYPE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE___IS_TEMPLATE = PivotPackage.COLLECTION_TYPE___IS_TEMPLATE;
+	int LIST_TYPE___FLATTENED_TYPE = PivotPackage.COLLECTION_TYPE___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE___PARAMETERABLE_ELEMENTS = PivotPackage.COLLECTION_TYPE___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.COLLECTION_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int LIST_TYPE___IS_CLASS = PivotPackage.COLLECTION_TYPE___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -3157,6 +3254,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE___IS_TEMPLATE_PARAMETER = PivotPackage.COLLECTION_TYPE___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.COLLECTION_TYPE___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3166,40 +3272,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.COLLECTION_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.COLLECTION_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIST_TYPE___ACCEPT__VISITOR = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>List Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIST_TYPE_OPERATION_COUNT = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 2;
+	int LIST_TYPE_OPERATION_COUNT = PivotPackage.COLLECTION_TYPE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.LogExpImpl <em>Log Exp</em>}' class.
@@ -3212,40 +3291,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP = 18;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__EXTENSION = PivotPackage.OPERATION_CALL_EXP__EXTENSION;
+	int LOG_EXP__ANNOTATING_COMMENTS = PivotPackage.OPERATION_CALL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__OWNED_ANNOTATION = PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION;
+	int LOG_EXP__OWNED_ANNOTATIONS = PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__OWNED_COMMENT = PivotPackage.OPERATION_CALL_EXP__OWNED_COMMENT;
+	int LOG_EXP__OWNED_COMMENTS = PivotPackage.OPERATION_CALL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__IS_STATIC = PivotPackage.OPERATION_CALL_EXP__IS_STATIC;
+	int LOG_EXP__OWNED_EXTENSIONS = PivotPackage.OPERATION_CALL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3255,6 +3334,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOG_EXP__NAME = PivotPackage.OPERATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP__IS_MANY = PivotPackage.OPERATION_CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -3275,22 +3363,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP__TYPE = PivotPackage.OPERATION_CALL_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__IMPLICIT = PivotPackage.OPERATION_CALL_EXP__IMPLICIT;
+	int LOG_EXP__TYPE_VALUE = PivotPackage.OPERATION_CALL_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__SOURCE = PivotPackage.OPERATION_CALL_EXP__SOURCE;
+	int LOG_EXP__IS_IMPLICIT = PivotPackage.OPERATION_CALL_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP__IS_SAFE = PivotPackage.OPERATION_CALL_EXP__IS_SAFE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP__OWNED_SOURCE = PivotPackage.OPERATION_CALL_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
@@ -3302,13 +3408,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP__IS_PRE = PivotPackage.OPERATION_CALL_EXP__IS_PRE;
 
 	/**
-	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP__ARGUMENT = PivotPackage.OPERATION_CALL_EXP__ARGUMENT;
+	int LOG_EXP__OWNED_ARGUMENTS = PivotPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
@@ -3356,6 +3462,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP___GET_VALUE__TYPE_STRING = PivotPackage.OPERATION_CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OPERATION_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3383,31 +3498,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOG_EXP___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOG_EXP___ACCEPT__VISITOR = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Log Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOG_EXP_OPERATION_COUNT = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 2;
+	int LOG_EXP_OPERATION_COUNT = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleLiteralExpImpl <em>Ordered Tuple Literal Exp</em>}' class.
@@ -3420,40 +3517,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_LITERAL_EXP = 19;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP__EXTENSION = PivotPackage.LITERAL_EXP__EXTENSION;
+	int ORDERED_TUPLE_LITERAL_EXP__ANNOTATING_COMMENTS = PivotPackage.LITERAL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP__OWNED_ANNOTATION = PivotPackage.LITERAL_EXP__OWNED_ANNOTATION;
+	int ORDERED_TUPLE_LITERAL_EXP__OWNED_ANNOTATIONS = PivotPackage.LITERAL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
+	int ORDERED_TUPLE_LITERAL_EXP__OWNED_COMMENTS = PivotPackage.LITERAL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP__IS_STATIC = PivotPackage.LITERAL_EXP__IS_STATIC;
+	int ORDERED_TUPLE_LITERAL_EXP__OWNED_EXTENSIONS = PivotPackage.LITERAL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3463,6 +3560,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORDERED_TUPLE_LITERAL_EXP__NAME = PivotPackage.LITERAL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_LITERAL_EXP__IS_MANY = PivotPackage.LITERAL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -3481,6 +3587,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORDERED_TUPLE_LITERAL_EXP__TYPE = PivotPackage.LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_LITERAL_EXP__TYPE_VALUE = PivotPackage.LITERAL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Part</b></em>' containment reference list.
@@ -3519,22 +3634,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_LITERAL_EXP___GET_VALUE__TYPE_STRING = PivotPackage.LITERAL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_LITERAL_EXP___ACCEPT__VISITOR = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 1;
+	int ORDERED_TUPLE_LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LITERAL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Ordered Tuple Literal Exp</em>' class.
@@ -3543,7 +3649,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 2;
+	int ORDERED_TUPLE_LITERAL_EXP_OPERATION_COUNT = PivotPackage.LITERAL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleLiteralPartImpl <em>Ordered Tuple Literal Part</em>}' class.
@@ -3556,31 +3662,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_LITERAL_PART = 20;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_PART__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int ORDERED_TUPLE_LITERAL_PART__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_PART__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int ORDERED_TUPLE_LITERAL_PART__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_PART__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int ORDERED_TUPLE_LITERAL_PART__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_LITERAL_PART__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -3619,31 +3734,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_LITERAL_PART___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_LITERAL_PART___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_LITERAL_PART___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Ordered Tuple Literal Part</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_LITERAL_PART_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int ORDERED_TUPLE_LITERAL_PART_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleTypeImpl <em>Ordered Tuple Type</em>}' class.
@@ -3656,40 +3753,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE = 21;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__EXTENSION = PivotPackage.CLASS__EXTENSION;
+	int ORDERED_TUPLE_TYPE__ANNOTATING_COMMENTS = PivotPackage.CLASS__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
+	int ORDERED_TUPLE_TYPE__OWNED_ANNOTATIONS = PivotPackage.CLASS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__OWNED_COMMENT = PivotPackage.CLASS__OWNED_COMMENT;
+	int ORDERED_TUPLE_TYPE__OWNED_COMMENTS = PivotPackage.CLASS__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__IS_STATIC = PivotPackage.CLASS__IS_STATIC;
+	int ORDERED_TUPLE_TYPE__OWNED_EXTENSIONS = PivotPackage.CLASS__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3701,22 +3798,31 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE__NAME = PivotPackage.CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__OWNED_TEMPLATE_SIGNATURE = PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE;
+	int ORDERED_TUPLE_TYPE__OWNED_CONSTRAINTS = PivotPackage.CLASS__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__TEMPLATE_BINDING = PivotPackage.CLASS__TEMPLATE_BINDING;
+	int ORDERED_TUPLE_TYPE__OWNED_BINDINGS = PivotPackage.CLASS__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE__OWNED_SIGNATURE = PivotPackage.CLASS__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -3728,31 +3834,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE__UNSPECIALIZED_ELEMENT = PivotPackage.CLASS__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__OWNING_TEMPLATE_PARAMETER = PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__TEMPLATE_PARAMETER = PivotPackage.CLASS__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__EXTENDED_BYS = PivotPackage.CLASS__EXTENDED_BYS;
+	int ORDERED_TUPLE_TYPE__EXTENDERS = PivotPackage.CLASS__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -3762,60 +3850,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int ORDERED_TUPLE_TYPE__INSTANCE_CLASS_NAME = PivotPackage.CLASS__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__OWNED_ATTRIBUTE = PivotPackage.CLASS__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__OWNED_INVARIANT = PivotPackage.CLASS__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__OWNED_OPERATION = PivotPackage.CLASS__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__PACKAGE = PivotPackage.CLASS__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__SUPER_CLASS = PivotPackage.CLASS__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE__OWNED_RULE = PivotPackage.CLASS__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -3845,22 +3879,58 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE__IS_INTERFACE = PivotPackage.CLASS__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__NESTED_TYPE = PivotPackage.CLASS__NESTED_TYPE;
+	int ORDERED_TUPLE_TYPE__OWNED_BEHAVIORS = PivotPackage.CLASS__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE__OWNED_BEHAVIOR = PivotPackage.CLASS__OWNED_BEHAVIOR;
+	int ORDERED_TUPLE_TYPE__OWNED_INVARIANTS = PivotPackage.CLASS__OWNED_INVARIANTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE__OWNED_OPERATIONS = PivotPackage.CLASS__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE__OWNED_PROPERTIES = PivotPackage.CLASS__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE__OWNING_PACKAGE = PivotPackage.CLASS__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE__SUPER_CLASSES = PivotPackage.CLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Element Type</b></em>' reference list.
@@ -3899,31 +3969,22 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE___GET_VALUE__TYPE_STRING = PivotPackage.CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE___IS_TEMPLATE = PivotPackage.CLASS___IS_TEMPLATE;
+	int ORDERED_TUPLE_TYPE___FLATTENED_TYPE = PivotPackage.CLASS___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE___PARAMETERABLE_ELEMENTS = PivotPackage.CLASS___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int ORDERED_TUPLE_TYPE___IS_CLASS = PivotPackage.CLASS___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -3935,6 +3996,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE___IS_TEMPLATE_PARAMETER = PivotPackage.CLASS___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORDERED_TUPLE_TYPE___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3944,40 +4014,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int ORDERED_TUPLE_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.CLASS_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ORDERED_TUPLE_TYPE___ACCEPT__VISITOR = PivotPackage.CLASS_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Ordered Tuple Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ORDERED_TUPLE_TYPE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 2;
+	int ORDERED_TUPLE_TYPE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.RaiseExpImpl <em>Raise Exp</em>}' class.
@@ -3990,40 +4033,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int RAISE_EXP = 22;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int RAISE_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int RAISE_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int RAISE_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int RAISE_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4033,6 +4076,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int RAISE_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAISE_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4051,6 +4103,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int RAISE_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RAISE_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Argument</b></em>' containment reference.
@@ -4098,22 +4159,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int RAISE_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RAISE_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int RAISE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Raise Exp</em>' class.
@@ -4122,7 +4174,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RAISE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int RAISE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ReturnExpImpl <em>Return Exp</em>}' class.
@@ -4135,40 +4187,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int RETURN_EXP = 23;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int RETURN_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int RETURN_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int RETURN_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int RETURN_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4178,6 +4230,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int RETURN_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4196,6 +4257,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int RETURN_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -4234,22 +4304,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int RETURN_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RETURN_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int RETURN_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Return Exp</em>' class.
@@ -4258,7 +4319,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RETURN_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int RETURN_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.SwitchExpImpl <em>Switch Exp</em>}' class.
@@ -4271,40 +4332,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int SWITCH_EXP = 24;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int SWITCH_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int SWITCH_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int SWITCH_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int SWITCH_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4314,6 +4375,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int SWITCH_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4332,6 +4402,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int SWITCH_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Alternative Part</b></em>' containment reference list.
@@ -4379,22 +4458,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int SWITCH_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SWITCH_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int SWITCH_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Switch Exp</em>' class.
@@ -4403,7 +4473,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int SWITCH_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TryExpImpl <em>Try Exp</em>}' class.
@@ -4416,40 +4486,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TRY_EXP = 25;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int TRY_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int TRY_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int TRY_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int TRY_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4459,6 +4529,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRY_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4477,6 +4556,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRY_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRY_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Except Clause</b></em>' containment reference list.
@@ -4524,22 +4612,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TRY_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRY_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int TRY_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Try Exp</em>' class.
@@ -4548,7 +4627,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRY_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int TRY_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TypedefImpl <em>Typedef</em>}' class.
@@ -4561,40 +4640,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF = 26;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__EXTENSION = PivotPackage.CLASS__EXTENSION;
+	int TYPEDEF__ANNOTATING_COMMENTS = PivotPackage.CLASS__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
+	int TYPEDEF__OWNED_ANNOTATIONS = PivotPackage.CLASS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__OWNED_COMMENT = PivotPackage.CLASS__OWNED_COMMENT;
+	int TYPEDEF__OWNED_COMMENTS = PivotPackage.CLASS__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__IS_STATIC = PivotPackage.CLASS__IS_STATIC;
+	int TYPEDEF__OWNED_EXTENSIONS = PivotPackage.CLASS__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4606,22 +4685,31 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF__NAME = PivotPackage.CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__OWNED_TEMPLATE_SIGNATURE = PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE;
+	int TYPEDEF__OWNED_CONSTRAINTS = PivotPackage.CLASS__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__TEMPLATE_BINDING = PivotPackage.CLASS__TEMPLATE_BINDING;
+	int TYPEDEF__OWNED_BINDINGS = PivotPackage.CLASS__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF__OWNED_SIGNATURE = PivotPackage.CLASS__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -4633,31 +4721,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF__UNSPECIALIZED_ELEMENT = PivotPackage.CLASS__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__OWNING_TEMPLATE_PARAMETER = PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__TEMPLATE_PARAMETER = PivotPackage.CLASS__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__EXTENDED_BYS = PivotPackage.CLASS__EXTENDED_BYS;
+	int TYPEDEF__EXTENDERS = PivotPackage.CLASS__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -4667,60 +4737,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPEDEF__INSTANCE_CLASS_NAME = PivotPackage.CLASS__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__OWNED_ATTRIBUTE = PivotPackage.CLASS__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__OWNED_INVARIANT = PivotPackage.CLASS__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__OWNED_OPERATION = PivotPackage.CLASS__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__PACKAGE = PivotPackage.CLASS__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__SUPER_CLASS = PivotPackage.CLASS__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF__OWNED_RULE = PivotPackage.CLASS__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -4750,22 +4766,58 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF__IS_INTERFACE = PivotPackage.CLASS__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__NESTED_TYPE = PivotPackage.CLASS__NESTED_TYPE;
+	int TYPEDEF__OWNED_BEHAVIORS = PivotPackage.CLASS__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF__OWNED_BEHAVIOR = PivotPackage.CLASS__OWNED_BEHAVIOR;
+	int TYPEDEF__OWNED_INVARIANTS = PivotPackage.CLASS__OWNED_INVARIANTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF__OWNED_OPERATIONS = PivotPackage.CLASS__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF__OWNED_PROPERTIES = PivotPackage.CLASS__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF__OWNING_PACKAGE = PivotPackage.CLASS__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF__SUPER_CLASSES = PivotPackage.CLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Base</b></em>' reference.
@@ -4813,31 +4865,22 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF___GET_VALUE__TYPE_STRING = PivotPackage.CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF___IS_TEMPLATE = PivotPackage.CLASS___IS_TEMPLATE;
+	int TYPEDEF___FLATTENED_TYPE = PivotPackage.CLASS___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF___PARAMETERABLE_ELEMENTS = PivotPackage.CLASS___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int TYPEDEF___IS_CLASS = PivotPackage.CLASS___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -4849,6 +4892,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF___IS_TEMPLATE_PARAMETER = PivotPackage.CLASS___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPEDEF___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4858,40 +4910,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int TYPEDEF___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF___ACCEPT__IMPERATIVEOCLVISITOR = PivotPackage.CLASS_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPEDEF___ACCEPT__VISITOR = PivotPackage.CLASS_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Typedef</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPEDEF_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 2;
+	int TYPEDEF_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.UnlinkExpImpl <em>Unlink Exp</em>}' class.
@@ -4904,40 +4929,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int UNLINK_EXP = 27;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int UNLINK_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int UNLINK_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int UNLINK_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int UNLINK_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4947,6 +4972,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNLINK_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLINK_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4965,6 +4999,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNLINK_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNLINK_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Item</b></em>' containment reference.
@@ -5012,22 +5055,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int UNLINK_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNLINK_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int UNLINK_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Unlink Exp</em>' class.
@@ -5036,7 +5070,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNLINK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int UNLINK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.UnpackExpImpl <em>Unpack Exp</em>}' class.
@@ -5049,40 +5083,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int UNPACK_EXP = 28;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int UNPACK_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int UNPACK_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int UNPACK_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int UNPACK_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5092,6 +5126,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNPACK_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACK_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5110,6 +5153,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int UNPACK_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNPACK_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' containment reference.
@@ -5157,22 +5209,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int UNPACK_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UNPACK_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int UNPACK_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Unpack Exp</em>' class.
@@ -5181,7 +5224,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UNPACK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int UNPACK_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.VariableInitExpImpl <em>Variable Init Exp</em>}' class.
@@ -5194,40 +5237,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int VARIABLE_INIT_EXP = 29;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int VARIABLE_INIT_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int VARIABLE_INIT_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int VARIABLE_INIT_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int VARIABLE_INIT_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5237,6 +5280,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_INIT_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_INIT_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5255,6 +5307,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int VARIABLE_INIT_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_INIT_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' containment reference.
@@ -5302,22 +5363,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int VARIABLE_INIT_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_INIT_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int VARIABLE_INIT_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Variable Init Exp</em>' class.
@@ -5326,7 +5378,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_INIT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
+	int VARIABLE_INIT_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.WhileExpImpl <em>While Exp</em>}' class.
@@ -5339,40 +5391,40 @@ public interface ImperativeOCLPackage extends EPackage {
 	int WHILE_EXP = 30;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP__EXTENSION = IMPERATIVE_EXPRESSION__EXTENSION;
+	int WHILE_EXP__ANNOTATING_COMMENTS = IMPERATIVE_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP__OWNED_ANNOTATION = IMPERATIVE_EXPRESSION__OWNED_ANNOTATION;
+	int WHILE_EXP__OWNED_ANNOTATIONS = IMPERATIVE_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP__OWNED_COMMENT = IMPERATIVE_EXPRESSION__OWNED_COMMENT;
+	int WHILE_EXP__OWNED_COMMENTS = IMPERATIVE_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP__IS_STATIC = IMPERATIVE_EXPRESSION__IS_STATIC;
+	int WHILE_EXP__OWNED_EXTENSIONS = IMPERATIVE_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5382,6 +5434,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int WHILE_EXP__NAME = IMPERATIVE_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_EXP__IS_MANY = IMPERATIVE_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5400,6 +5461,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int WHILE_EXP__TYPE = IMPERATIVE_EXPRESSION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WHILE_EXP__TYPE_VALUE = IMPERATIVE_EXPRESSION__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -5447,22 +5517,13 @@ public interface ImperativeOCLPackage extends EPackage {
 	int WHILE_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_EXPRESSION___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int WHILE_EXP___ACCEPT__VISITOR = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 1;
+	int WHILE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_EXPRESSION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>While Exp</em>' class.
@@ -5471,35 +5532,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WHILE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor <em>Visitor</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeOCLPackageImpl#getImperativeOCLVisitor()
-	 * @generated
-	 */
-	int IMPERATIVE_OCL_VISITOR = 31;
-
-	/**
-	 * The number of structural features of the '<em>Visitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OCL_VISITOR_FEATURE_COUNT = PivotPackage.VISITOR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Visitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OCL_VISITOR_OPERATION_COUNT = PivotPackage.VISITOR_OPERATION_COUNT + 0;
+	int WHILE_EXP_OPERATION_COUNT = IMPERATIVE_EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SeverityKind <em>Severity Kind</em>}' enum.
@@ -5509,7 +5542,7 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeOCLPackageImpl#getSeverityKind()
 	 * @generated
 	 */
-	int SEVERITY_KIND = 32;
+	int SEVERITY_KIND = 31;
 
 
 	/**
@@ -5543,26 +5576,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAltExp_Condition();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AltExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AltExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getAltExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AltExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AltExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getAltExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp <em>Assert Exp</em>}'.
@@ -5606,26 +5619,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getAssertExp_Severity();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getAssertExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getAssertExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp <em>Assign Exp</em>}'.
@@ -5682,26 +5675,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getAssignExp_Value();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getAssignExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getAssignExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp <em>Block Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5723,26 +5696,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getBlockExp_Body();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getBlockExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getBlockExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp <em>Break Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5751,26 +5704,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBreakExp();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getBreakExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getBreakExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp <em>Catch Exp</em>}'.
@@ -5805,26 +5738,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getCatchExp_Exception();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getCatchExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getCatchExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp <em>Compute Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5857,26 +5770,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getComputeExp_ReturnedElement();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getComputeExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getComputeExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp <em>Continue Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5885,26 +5778,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getContinueExp();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getContinueExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getContinueExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp <em>Dict Literal Exp</em>}'.
@@ -5926,26 +5799,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDictLiteralExp_Part();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getDictLiteralExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDictLiteralExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart <em>Dict Literal Part</em>}'.
@@ -5980,26 +5833,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getDictLiteralPart_Value();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getDictLiteralPart__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDictLiteralPart__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType <em>Dictionary Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6021,26 +5854,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getDictionaryType_KeyType();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getDictionaryType__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDictionaryType__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ForExp <em>For Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6049,26 +5862,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getForExp();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ForExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ForExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getForExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ForExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ForExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getForExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression <em>Imperative Expression</em>}'.
@@ -6100,26 +5893,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getImperativeIterateExp_Target();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getImperativeIterateExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getImperativeIterateExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp <em>Imperative Loop Exp</em>}'.
@@ -6186,26 +5959,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getInstantiationExp_InstantiatedClass();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getInstantiationExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getInstantiationExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp <em>List Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6227,26 +5980,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getListLiteralExp_Element();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getListLiteralExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getListLiteralExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListType <em>List Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6255,26 +5988,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getListType();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ListType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getListType__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListType#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ListType#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getListType__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.LogExp <em>Log Exp</em>}'.
@@ -6298,26 +6011,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getLogExp_Condition();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.LogExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.LogExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getLogExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.LogExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.LogExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getLogExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp <em>Ordered Tuple Literal Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6337,26 +6030,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOrderedTupleLiteralExp_Part();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleLiteralExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleLiteralExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart <em>Ordered Tuple Literal Part</em>}'.
@@ -6380,26 +6053,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getOrderedTupleLiteralPart_Value();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleLiteralPart__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleLiteralPart__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType <em>Ordered Tuple Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6419,26 +6072,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOrderedTupleType_ElementType();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleType__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getOrderedTupleType__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp <em>Raise Exp</em>}'.
@@ -6473,26 +6106,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getRaiseExp_Exception();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getRaiseExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getRaiseExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp <em>Return Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6512,26 +6125,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReturnExp_Value();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getReturnExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getReturnExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp <em>Switch Exp</em>}'.
@@ -6566,26 +6159,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getSwitchExp_ElsePart();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getSwitchExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getSwitchExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.TryExp <em>Try Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6616,26 +6189,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTryExp_TryBody();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.TryExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.TryExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getTryExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.TryExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.TryExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getTryExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.Typedef <em>Typedef</em>}'.
@@ -6670,26 +6223,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getTypedef_Condition();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.Typedef#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.Typedef#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getTypedef__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.Typedef#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.Typedef#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getTypedef__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp <em>Unlink Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6720,26 +6253,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getUnlinkExp_Target();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getUnlinkExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getUnlinkExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp <em>Unpack Exp</em>}'.
@@ -6774,26 +6287,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EReference getUnpackExp_TargetVariable();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getUnpackExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getUnpackExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp <em>Variable Init Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6826,26 +6319,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	EAttribute getVariableInitExp_WithResult();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getVariableInitExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getVariableInitExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp <em>While Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6876,37 +6349,6 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getWhileExp_Condition();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp#accept(org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor)
-	 * @generated
-	 */
-	EOperation getWhileExp__Accept__ImperativeOCLVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getWhileExp__Accept__Visitor();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor <em>Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Visitor</em>'.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor
-	 * @model instanceClass="org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor" typeParameters="R" superTypes="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 * @generated
-	 */
-	EClass getImperativeOCLVisitor();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SeverityKind <em>Severity Kind</em>}'.
@@ -6967,22 +6409,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference ALT_EXP__CONDITION = eINSTANCE.getAltExp_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ALT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getAltExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ALT_EXP___ACCEPT__VISITOR = eINSTANCE.getAltExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssertExpImpl <em>Assert Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7015,22 +6441,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ASSERT_EXP__SEVERITY = eINSTANCE.getAssertExp_Severity();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ASSERT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getAssertExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ASSERT_EXP___ACCEPT__VISITOR = eINSTANCE.getAssertExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssignExpImpl <em>Assign Exp</em>}' class.
@@ -7075,22 +6485,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference ASSIGN_EXP__VALUE = eINSTANCE.getAssignExp_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ASSIGN_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getAssignExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ASSIGN_EXP___ACCEPT__VISITOR = eINSTANCE.getAssignExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.BlockExpImpl <em>Block Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7109,22 +6503,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference BLOCK_EXP__BODY = eINSTANCE.getBlockExp_Body();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation BLOCK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getBlockExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation BLOCK_EXP___ACCEPT__VISITOR = eINSTANCE.getBlockExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.BreakExpImpl <em>Break Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7133,22 +6511,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BREAK_EXP = eINSTANCE.getBreakExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation BREAK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getBreakExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation BREAK_EXP___ACCEPT__VISITOR = eINSTANCE.getBreakExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.CatchExpImpl <em>Catch Exp</em>}' class.
@@ -7177,22 +6539,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference CATCH_EXP__EXCEPTION = eINSTANCE.getCatchExp_Exception();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CATCH_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getCatchExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CATCH_EXP___ACCEPT__VISITOR = eINSTANCE.getCatchExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ComputeExpImpl <em>Compute Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7219,22 +6565,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference COMPUTE_EXP__RETURNED_ELEMENT = eINSTANCE.getComputeExp_ReturnedElement();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COMPUTE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getComputeExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation COMPUTE_EXP___ACCEPT__VISITOR = eINSTANCE.getComputeExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ContinueExpImpl <em>Continue Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7243,22 +6573,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CONTINUE_EXP = eINSTANCE.getContinueExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONTINUE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getContinueExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONTINUE_EXP___ACCEPT__VISITOR = eINSTANCE.getContinueExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictLiteralExpImpl <em>Dict Literal Exp</em>}' class.
@@ -7277,22 +6591,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DICT_LITERAL_EXP__PART = eINSTANCE.getDictLiteralExp_Part();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICT_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getDictLiteralExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICT_LITERAL_EXP___ACCEPT__VISITOR = eINSTANCE.getDictLiteralExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictLiteralPartImpl <em>Dict Literal Part</em>}' class.
@@ -7321,22 +6619,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference DICT_LITERAL_PART__VALUE = eINSTANCE.getDictLiteralPart_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICT_LITERAL_PART___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getDictLiteralPart__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICT_LITERAL_PART___ACCEPT__VISITOR = eINSTANCE.getDictLiteralPart__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.DictionaryTypeImpl <em>Dictionary Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7355,22 +6637,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference DICTIONARY_TYPE__KEY_TYPE = eINSTANCE.getDictionaryType_KeyType();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICTIONARY_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getDictionaryType__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DICTIONARY_TYPE___ACCEPT__VISITOR = eINSTANCE.getDictionaryType__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ForExpImpl <em>For Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7379,22 +6645,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass FOR_EXP = eINSTANCE.getForExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation FOR_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getForExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation FOR_EXP___ACCEPT__VISITOR = eINSTANCE.getForExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeExpressionImpl <em>Imperative Expression</em>}' class.
@@ -7423,22 +6673,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference IMPERATIVE_ITERATE_EXP__TARGET = eINSTANCE.getImperativeIterateExp_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_ITERATE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getImperativeIterateExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_ITERATE_EXP___ACCEPT__VISITOR = eINSTANCE.getImperativeIterateExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeLoopExpImpl <em>Imperative Loop Exp</em>}' class.
@@ -7493,22 +6727,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference INSTANTIATION_EXP__INSTANTIATED_CLASS = eINSTANCE.getInstantiationExp_InstantiatedClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation INSTANTIATION_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getInstantiationExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation INSTANTIATION_EXP___ACCEPT__VISITOR = eINSTANCE.getInstantiationExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ListLiteralExpImpl <em>List Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7527,22 +6745,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference LIST_LITERAL_EXP__ELEMENT = eINSTANCE.getListLiteralExp_Element();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIST_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getListLiteralExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIST_LITERAL_EXP___ACCEPT__VISITOR = eINSTANCE.getListLiteralExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ListTypeImpl <em>List Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7551,22 +6753,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LIST_TYPE = eINSTANCE.getListType();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIST_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getListType__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIST_TYPE___ACCEPT__VISITOR = eINSTANCE.getListType__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.LogExpImpl <em>Log Exp</em>}' class.
@@ -7587,22 +6773,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference LOG_EXP__CONDITION = eINSTANCE.getLogExp_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LOG_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getLogExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LOG_EXP___ACCEPT__VISITOR = eINSTANCE.getLogExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleLiteralExpImpl <em>Ordered Tuple Literal Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7619,22 +6789,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ORDERED_TUPLE_LITERAL_EXP__PART = eINSTANCE.getOrderedTupleLiteralExp_Part();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_LITERAL_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getOrderedTupleLiteralExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_LITERAL_EXP___ACCEPT__VISITOR = eINSTANCE.getOrderedTupleLiteralExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleLiteralPartImpl <em>Ordered Tuple Literal Part</em>}' class.
@@ -7655,22 +6809,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference ORDERED_TUPLE_LITERAL_PART__VALUE = eINSTANCE.getOrderedTupleLiteralPart_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_LITERAL_PART___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getOrderedTupleLiteralPart__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_LITERAL_PART___ACCEPT__VISITOR = eINSTANCE.getOrderedTupleLiteralPart__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleTypeImpl <em>Ordered Tuple Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7687,22 +6825,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ORDERED_TUPLE_TYPE__ELEMENT_TYPE = eINSTANCE.getOrderedTupleType_ElementType();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_TYPE___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getOrderedTupleType__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ORDERED_TUPLE_TYPE___ACCEPT__VISITOR = eINSTANCE.getOrderedTupleType__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.RaiseExpImpl <em>Raise Exp</em>}' class.
@@ -7731,22 +6853,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference RAISE_EXP__EXCEPTION = eINSTANCE.getRaiseExp_Exception();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RAISE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getRaiseExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RAISE_EXP___ACCEPT__VISITOR = eINSTANCE.getRaiseExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ReturnExpImpl <em>Return Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7763,22 +6869,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RETURN_EXP__VALUE = eINSTANCE.getReturnExp_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RETURN_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getReturnExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RETURN_EXP___ACCEPT__VISITOR = eINSTANCE.getReturnExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.SwitchExpImpl <em>Switch Exp</em>}' class.
@@ -7807,22 +6897,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference SWITCH_EXP__ELSE_PART = eINSTANCE.getSwitchExp_ElsePart();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation SWITCH_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getSwitchExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation SWITCH_EXP___ACCEPT__VISITOR = eINSTANCE.getSwitchExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TryExpImpl <em>Try Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7847,22 +6921,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRY_EXP__TRY_BODY = eINSTANCE.getTryExp_TryBody();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TRY_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getTryExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TRY_EXP___ACCEPT__VISITOR = eINSTANCE.getTryExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TypedefImpl <em>Typedef</em>}' class.
@@ -7891,22 +6949,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference TYPEDEF__CONDITION = eINSTANCE.getTypedef_Condition();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TYPEDEF___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getTypedef__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TYPEDEF___ACCEPT__VISITOR = eINSTANCE.getTypedef__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.UnlinkExpImpl <em>Unlink Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7931,22 +6973,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference UNLINK_EXP__TARGET = eINSTANCE.getUnlinkExp_Target();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation UNLINK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getUnlinkExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation UNLINK_EXP___ACCEPT__VISITOR = eINSTANCE.getUnlinkExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.UnpackExpImpl <em>Unpack Exp</em>}' class.
@@ -7975,22 +7001,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EReference UNPACK_EXP__TARGET_VARIABLE = eINSTANCE.getUnpackExp_TargetVariable();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation UNPACK_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getUnpackExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation UNPACK_EXP___ACCEPT__VISITOR = eINSTANCE.getUnpackExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.VariableInitExpImpl <em>Variable Init Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8017,22 +7027,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		EAttribute VARIABLE_INIT_EXP__WITH_RESULT = eINSTANCE.getVariableInitExp_WithResult();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VARIABLE_INIT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getVariableInitExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VARIABLE_INIT_EXP___ACCEPT__VISITOR = eINSTANCE.getVariableInitExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.WhileExpImpl <em>While Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8057,32 +7051,6 @@ public interface ImperativeOCLPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WHILE_EXP__CONDITION = eINSTANCE.getWhileExp_Condition();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation WHILE_EXP___ACCEPT__IMPERATIVEOCLVISITOR = eINSTANCE.getWhileExp__Accept__ImperativeOCLVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation WHILE_EXP___ACCEPT__VISITOR = eINSTANCE.getWhileExp__Accept__Visitor();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor <em>Visitor</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor
-		 * @see org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeOCLPackageImpl#getImperativeOCLVisitor()
-		 * @generated
-		 */
-		EClass IMPERATIVE_OCL_VISITOR = eINSTANCE.getImperativeOCLVisitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.SeverityKind <em>Severity Kind</em>}' enum.

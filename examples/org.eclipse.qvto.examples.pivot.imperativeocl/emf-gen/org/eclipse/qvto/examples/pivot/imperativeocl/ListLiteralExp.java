@@ -14,13 +14,8 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.LiteralExp;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,19 +24,19 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp#getElement <em>Element</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getListLiteralExp()
  * @model
  * @generated
  */
-public interface ListLiteralExp extends EObject, LiteralExp {
+public interface ListLiteralExp extends LiteralExp {
 	/**
 	 * Returns the value of the '<em><b>Element</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Element</em>' containment reference list isn't clear,
@@ -55,23 +50,5 @@ public interface ListLiteralExp extends EObject, LiteralExp {
 	 * @generated
 	 */
 	EList<OCLExpression> getElement();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitListLiteralExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitListLiteralExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ListLiteralExp

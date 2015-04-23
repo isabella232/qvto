@@ -13,12 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,16 +23,16 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType#getKeyType <em>Key Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getDictionaryType()
  * @model
  * @generated
  */
-public interface DictionaryType extends EObject, CollectionType {
+public interface DictionaryType extends CollectionType {
 	/**
 	 * Returns the value of the '<em><b>Key Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -62,23 +58,5 @@ public interface DictionaryType extends EObject, CollectionType {
 	 * @generated
 	 */
 	void setKeyType(Type value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitDictionaryType(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitDictionaryType(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // DictionaryType

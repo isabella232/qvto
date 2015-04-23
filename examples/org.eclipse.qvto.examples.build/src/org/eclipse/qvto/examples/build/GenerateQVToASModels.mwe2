@@ -31,7 +31,7 @@ var javaSrcFolder = "emf-gen"
 /*
  * OCL related configuration variables
  */
-var oclProjectName = "org.eclipse.ocl.examples.pivot"
+var oclProjectName = "org.eclipse.ocl.pivot"
 var oclProjectURI = "platform:/resource/${oclProjectName}"
 var oclProjectPrefix = ""
 var oclEcoreProjectPath = "model/Pivot.ecore"
@@ -90,7 +90,12 @@ Workflow {
     bean = GenModelSetup { resourceSet = resourceSet }
     bean = UMLGenModelSetup { resourceSet = resourceSet }
     
-	
+	/*
+	FIXME: We can't weave the visitor pattern into the model because OCL doesn't do it.
+	We are forced to use the OCL approach, in essence, using GenModel annotations wiht source:
+	http://www.eclipse.org/OCL/GenModel/Visitor
+	See (org.eclipse.ocl.pivot/model/Pivot.genmodel)
+	 
     component = DerivedVisitorPatternWeaver {
     	resourceSet = resourceSet
     	in = imperativeOclEcoreURI
@@ -113,12 +118,13 @@ Workflow {
     	superVisitorInterfaceQualifiedName = imperativeOclVisitorQualifiedName
     	derivedVisitorInterfaceName = qvtOperationalVisitorName
     	derivedVisitorInterfaceQualifiedName = qvtOperationalVisitorQualifiedName
-    }
+    }   */
     
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 		genModel = imperativeOclGenModelPath
 		clearResourceSet = false
 	}
+	
 	
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
 		genModel = qvtOperationalGenModelPath

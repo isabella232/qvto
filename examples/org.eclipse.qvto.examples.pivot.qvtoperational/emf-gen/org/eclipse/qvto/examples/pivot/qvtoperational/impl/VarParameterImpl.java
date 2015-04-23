@@ -13,30 +13,17 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.ocl.examples.domain.values.IntegerValue;
-import org.eclipse.ocl.examples.domain.values.UnlimitedValue;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.internal.impl.VariableImpl;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.internal.VariableImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.DirectionKind;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
@@ -49,17 +36,38 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#getOperation <em>Operation</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#isIsTypeof <em>Is Typeof</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#getCtxOwner <em>Ctx Owner</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl#getResOwner <em>Res Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
 public class VarParameterImpl extends VariableImpl implements VarParameter {
+	/**
+	 * The default value of the '{@link #isIsTypeof() <em>Is Typeof</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTypeof()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_TYPEOF_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsTypeof() <em>Is Typeof</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsTypeof()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isTypeof = IS_TYPEOF_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -104,8 +112,29 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Operation getOperation() {
-		if (eContainerFeatureID() != QVTOperationalPackage.VAR_PARAMETER__OPERATION) return null;
+	public boolean isIsTypeof() {
+		return isTypeof;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsTypeof(boolean newIsTypeof) {
+		boolean oldIsTypeof = isTypeof;
+		isTypeof = newIsTypeof;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF, oldIsTypeof, isTypeof));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Operation getOwningOperation() {
+		if (eContainerFeatureID() != QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION) return null;
 		return (Operation)eInternalContainer();
 	}
 
@@ -114,8 +143,8 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperation(Operation newOperation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newOperation, QVTOperationalPackage.VAR_PARAMETER__OPERATION, msgs);
+	public NotificationChain basicSetOwningOperation(Operation newOwningOperation, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningOperation, QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION, msgs);
 		return msgs;
 	}
 
@@ -124,20 +153,20 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperation(Operation newOperation) {
-		if (newOperation != eInternalContainer() || (eContainerFeatureID() != QVTOperationalPackage.VAR_PARAMETER__OPERATION && newOperation != null)) {
-			if (EcoreUtil.isAncestor(this, (EObject)newOperation))
+	public void setOwningOperation(Operation newOwningOperation) {
+		if (newOwningOperation != eInternalContainer() || (eContainerFeatureID() != QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION && newOwningOperation != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningOperation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newOperation != null)
-				msgs = ((InternalEObject)newOperation).eInverseAdd(this, PivotPackage.OPERATION__OWNED_PARAMETER, Operation.class, msgs);
-			msgs = basicSetOperation(newOperation, msgs);
+			if (newOwningOperation != null)
+				msgs = ((InternalEObject)newOwningOperation).eInverseAdd(this, PivotPackage.OPERATION__OWNED_PARAMETERS, Operation.class, msgs);
+			msgs = basicSetOwningOperation(newOwningOperation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.VAR_PARAMETER__OPERATION, newOperation, newOperation));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION, newOwningOperation, newOwningOperation));
 	}
 
 	/**
@@ -248,79 +277,13 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitVarParameter(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitVarParameter(this);
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #CompatibleBody(org.eclipse.ocl.examples.pivot.ValueSpecification) <em>Compatible Body</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #CompatibleBody(org.eclipse.ocl.examples.pivot.ValueSpecification)
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate COMPATIBLE_BODY_VALUE_SPECIFICATION__EINVOCATION_DELEGATE = ((EOperation.Internal)PivotPackage.Literals.TYPED_MULTIPLICITY_ELEMENT___COMPATIBLE_BODY__VALUESPECIFICATION).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean CompatibleBody(ValueSpecification bodySpecification) {
-		try {
-			return (Boolean)COMPATIBLE_BODY_VALUE_SPECIFICATION__EINVOCATION_DELEGATE.dynamicInvoke(this, new BasicEList.UnmodifiableEList<Object>(1, new Object[]{bodySpecification}));
-		}
-		catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #makeParameter() <em>Make Parameter</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #makeParameter()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate MAKE_PARAMETER__EINVOCATION_DELEGATE = ((EOperation.Internal)PivotPackage.Literals.TYPED_MULTIPLICITY_ELEMENT___MAKE_PARAMETER).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Parameter makeParameter() {
-		try {
-			return (Parameter)MAKE_PARAMETER__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
-		}
-		catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOperation((Operation)otherEnd, msgs);
+				return basicSetOwningOperation((Operation)otherEnd, msgs);
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -341,8 +304,8 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				return basicSetOperation(null, msgs);
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				return basicSetOwningOperation(null, msgs);
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				return basicSetCtxOwner(null, msgs);
 			case QVTOperationalPackage.VAR_PARAMETER__RES_OWNER:
@@ -359,8 +322,8 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				return eInternalContainer().eInverseRemove(this, PivotPackage.OPERATION__OWNED_PARAMETER, Operation.class, msgs);
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				return eInternalContainer().eInverseRemove(this, PivotPackage.OPERATION__OWNED_PARAMETERS, Operation.class, msgs);
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				return eInternalContainer().eInverseRemove(this, QVTOperationalPackage.IMPERATIVE_OPERATION__CONTEXT, ImperativeOperation.class, msgs);
 			case QVTOperationalPackage.VAR_PARAMETER__RES_OWNER:
@@ -377,8 +340,10 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				return getOperation();
+			case QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF:
+				return isIsTypeof();
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				return getOwningOperation();
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				return getCtxOwner();
 			case QVTOperationalPackage.VAR_PARAMETER__KIND:
@@ -397,8 +362,11 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				setOperation((Operation)newValue);
+			case QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF:
+				setIsTypeof((Boolean)newValue);
+				return;
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				setOwningOperation((Operation)newValue);
 				return;
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				setCtxOwner((ImperativeOperation)newValue);
@@ -421,8 +389,11 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				setOperation((Operation)null);
+			case QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF:
+				setIsTypeof(IS_TYPEOF_EDEFAULT);
+				return;
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				setOwningOperation((Operation)null);
 				return;
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				setCtxOwner((ImperativeOperation)null);
@@ -445,8 +416,10 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalPackage.VAR_PARAMETER__OPERATION:
-				return getOperation() != null;
+			case QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF:
+				return isTypeof != IS_TYPEOF_EDEFAULT;
+			case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION:
+				return getOwningOperation() != null;
 			case QVTOperationalPackage.VAR_PARAMETER__CTX_OWNER:
 				return getCtxOwner() != null;
 			case QVTOperationalPackage.VAR_PARAMETER__KIND:
@@ -464,14 +437,10 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypedMultiplicityElement.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == Parameter.class) {
 			switch (derivedFeatureID) {
-				case QVTOperationalPackage.VAR_PARAMETER__OPERATION: return PivotPackage.PARAMETER__OPERATION;
+				case QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF: return PivotPackage.PARAMETER__IS_TYPEOF;
+				case QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION: return PivotPackage.PARAMETER__OWNING_OPERATION;
 				default: return -1;
 			}
 		}
@@ -485,14 +454,10 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypedMultiplicityElement.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == Parameter.class) {
 			switch (baseFeatureID) {
-				case PivotPackage.PARAMETER__OPERATION: return QVTOperationalPackage.VAR_PARAMETER__OPERATION;
+				case PivotPackage.PARAMETER__IS_TYPEOF: return QVTOperationalPackage.VAR_PARAMETER__IS_TYPEOF;
+				case PivotPackage.PARAMETER__OWNING_OPERATION: return QVTOperationalPackage.VAR_PARAMETER__OWNING_OPERATION;
 				default: return -1;
 			}
 		}
@@ -505,68 +470,26 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * @generated
 	 */
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == TypedMultiplicityElement.class) {
-			switch (baseOperationID) {
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___COMPATIBLE_BODY__VALUESPECIFICATION: return QVTOperationalPackage.VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION;
-				case PivotPackage.TYPED_MULTIPLICITY_ELEMENT___MAKE_PARAMETER: return QVTOperationalPackage.VAR_PARAMETER___MAKE_PARAMETER;
-				default: return -1;
-			}
-		}
-		if (baseClass == Parameter.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.VAR_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.VAR_PARAMETER___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-			case QVTOperationalPackage.VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION:
-				return CompatibleBody((ValueSpecification)arguments.get(0));
-			case QVTOperationalPackage.VAR_PARAMETER___MAKE_PARAMETER:
-				return makeParameter();
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (kind: ");
+		result.append(" (isTypeof: ");
+		result.append(isTypeof);
+		result.append(", kind: ");
 		result.append(kind);
 		result.append(')');
 		return result.toString();
 	}
 	
-	// FIXME copied from TypedMultiplicityElementImpl. See bug 409268
-	public boolean isMany() {
-		Type type = getType();
-		if (type instanceof CollectionType) {
-			CollectionType collectionType = (CollectionType)type;
-			IntegerValue upperValue = collectionType.getUpperValue();
-			return !(upperValue instanceof UnlimitedValue) && (upperValue.intValue() > 1);
-		}
-		return false;
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitVarParameter(this);
 	}
 
 } //VarParameterImpl

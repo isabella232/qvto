@@ -13,8 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,10 +23,10 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp#getCondition <em>Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getImperativeLoopExp()
  * @model abstract="true"

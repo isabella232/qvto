@@ -4,8 +4,13 @@
     modelDirectory="/org.eclipse.qvto.examples.pivot.qvtoperational/emf-gen" modelPluginID="org.eclipse.qvto.examples.pivot.qvtoperational"
     modelName="QVTOperational" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel#//imperativeocl ../../org.eclipse.ocl.examples.pivot/model/Pivot.merged.genmodel#//pivot"
+    usedGenPackages="../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel#//imperativeocl ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot"
     operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.pivot.util.Visitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor"/>
+    <details key="Visitable Class" value="org.eclipse.ocl.pivot.util.Visitable"/>
+  </genAnnotations>
   <foreignModel>QVTOperational.ecore</foreignModel>
   <modelPluginVariables>org.eclipse.jdt.annotation</modelPluginVariables>
   <genPackages prefix="QVTOperational" basePackage="org.eclipse.qvto.examples.pivot"

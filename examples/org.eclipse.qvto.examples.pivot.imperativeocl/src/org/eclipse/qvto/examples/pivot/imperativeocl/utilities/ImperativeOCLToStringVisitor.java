@@ -16,7 +16,7 @@ package org.eclipse.qvto.examples.pivot.imperativeocl.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;

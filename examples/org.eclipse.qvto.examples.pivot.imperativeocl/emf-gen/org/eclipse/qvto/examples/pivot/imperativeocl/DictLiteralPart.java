@@ -13,12 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,17 +23,17 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#getKey <em>Key</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getDictLiteralPart()
  * @model
  * @generated
  */
-public interface DictLiteralPart extends EObject, Element {
+public interface DictLiteralPart extends Element {
 	/**
 	 * Returns the value of the '<em><b>Key</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -91,23 +87,5 @@ public interface DictLiteralPart extends EObject, Element {
 	 * @generated
 	 */
 	void setValue(OCLExpression value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitDictLiteralPart(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitDictLiteralPart(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // DictLiteralPart

@@ -13,11 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,10 +23,10 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#isIsVirtual <em>Is Virtual</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getImperativeCallExp()
  * @model
@@ -48,7 +45,7 @@ public interface ImperativeCallExp extends OperationCallExp, ImperativeExpressio
 	 * @return the value of the '<em>Is Virtual</em>' attribute.
 	 * @see #setIsVirtual(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getImperativeCallExp_IsVirtual()
-	 * @model default="true" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model default="true" dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsVirtual();
@@ -62,23 +59,5 @@ public interface ImperativeCallExp extends OperationCallExp, ImperativeExpressio
 	 * @generated
 	 */
 	void setIsVirtual(boolean value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitImperativeCallExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitImperativeCallExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ImperativeCallExp

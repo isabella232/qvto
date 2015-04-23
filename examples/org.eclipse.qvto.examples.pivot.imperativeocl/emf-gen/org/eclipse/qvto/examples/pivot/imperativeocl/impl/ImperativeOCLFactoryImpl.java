@@ -17,12 +17,41 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.qvto.examples.pivot.imperativeocl.*;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ForExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLFactory;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
+import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ListType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.LogExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.SeverityKind;
+import org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.TryExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.Typedef;
+import org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp;
 
 /**
  * <!-- begin-user-doc -->

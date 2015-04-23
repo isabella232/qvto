@@ -14,11 +14,8 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,11 +24,11 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#getSource <em>Source</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp#getTargetVariable <em>Target Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getUnpackExp()
  * @model
@@ -66,7 +63,7 @@ public interface UnpackExp extends ImperativeExpression {
 
 	/**
 	 * Returns the value of the '<em><b>Target Variable</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Target Variable</em>' reference list isn't clear,
@@ -79,23 +76,5 @@ public interface UnpackExp extends ImperativeExpression {
 	 * @generated
 	 */
 	EList<Variable> getTargetVariable();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitUnpackExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitUnpackExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // UnpackExp

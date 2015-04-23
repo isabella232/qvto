@@ -13,23 +13,15 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.ClassImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.imperativeocl.Typedef;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
@@ -40,11 +32,11 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TypedefImpl#getBase <em>Base</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.TypedefImpl#getCondition <em>Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -94,7 +86,7 @@ public class TypedefImpl extends ClassImpl implements Typedef {
 	 * @generated
 	 */
 	public Type getBase() {
-		if (base != null && ((EObject)base).eIsProxy()) {
+		if (base != null && base.eIsProxy()) {
 			InternalEObject oldBase = (InternalEObject)base;
 			base = (Type)eResolveProxy(oldBase);
 			if (base != oldBase) {
@@ -167,24 +159,6 @@ public class TypedefImpl extends ClassImpl implements Typedef {
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLPackage.TYPEDEF__CONDITION, newCondition, newCondition));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final ImperativeOCLVisitor<R> v) {
-		return v.visitTypedef(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((ImperativeOCLVisitor<R>)v).visitTypedef(this);
 	}
 
 	/**
@@ -271,20 +245,13 @@ public class TypedefImpl extends ClassImpl implements Typedef {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ImperativeOCLPackage.TYPEDEF___ACCEPT__IMPERATIVEOCLVISITOR:
-				return accept((ImperativeOCLVisitor)arguments.get(0));
-			case ImperativeOCLPackage.TYPEDEF___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((ImperativeOCLVisitor<?>)visitor).visitTypedef(this);
 	}
 
 } //TypedefImpl

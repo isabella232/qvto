@@ -14,12 +14,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,21 +23,21 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#getAdditionalCondition <em>Additional Condition</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#getConformanceKind <em>Conformance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#getMetamodel <em>Metamodel</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getModelType()
  * @model
  * @generated
  */
-public interface ModelType extends EObject, org.eclipse.ocl.examples.pivot.Class {
+public interface ModelType extends org.eclipse.ocl.pivot.Class {
 	/**
 	 * Returns the value of the '<em><b>Additional Condition</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Additional Condition</em>' containment reference list isn't clear,
@@ -69,7 +64,7 @@ public interface ModelType extends EObject, org.eclipse.ocl.examples.pivot.Class
 	 * @return the value of the '<em>Conformance Kind</em>' attribute.
 	 * @see #setConformanceKind(String)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getModelType_ConformanceKind()
-	 * @model default="effective" dataType="org.eclipse.ocl.examples.pivot.String"
+	 * @model default="effective" dataType="org.eclipse.ocl.pivot.String"
 	 * @generated
 	 */
 	String getConformanceKind();
@@ -86,7 +81,7 @@ public interface ModelType extends EObject, org.eclipse.ocl.examples.pivot.Class
 
 	/**
 	 * Returns the value of the '<em><b>Metamodel</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Package}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Package}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Metamodel</em>' reference list isn't clear,
@@ -98,24 +93,6 @@ public interface ModelType extends EObject, org.eclipse.ocl.examples.pivot.Class
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Package> getMetamodel();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitModelType(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitModelType(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
+	EList<org.eclipse.ocl.pivot.Package> getMetamodel();
 
 } // ModelType

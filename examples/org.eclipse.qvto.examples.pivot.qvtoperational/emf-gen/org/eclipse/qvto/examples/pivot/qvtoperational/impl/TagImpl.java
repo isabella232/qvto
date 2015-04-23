@@ -13,24 +13,16 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
-
-import org.eclipse.ocl.examples.pivot.Element;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.Tag;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
@@ -41,12 +33,12 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.TagImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.TagImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.TagImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -179,24 +171,6 @@ public class TagImpl extends ElementImpl implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitTag(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitTag(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -278,23 +252,6 @@ public class TagImpl extends ElementImpl implements Tag {
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.TAG___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.TAG___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
@@ -305,6 +262,16 @@ public class TagImpl extends ElementImpl implements Tag {
 		result.append(value);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitTag(this);
 	}
 
 } //TagImpl

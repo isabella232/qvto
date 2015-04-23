@@ -13,21 +13,15 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain;
 import org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
-import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
 
 /**
@@ -36,11 +30,11 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingParameterImpl#getExtent <em>Extent</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingParameterImpl#getReferredDomain <em>Referred Domain</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -165,24 +159,6 @@ public class MappingParameterImpl extends VarParameterImpl implements MappingPar
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitMappingParameter(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitMappingParameter(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -249,37 +225,13 @@ public class MappingParameterImpl extends VarParameterImpl implements MappingPar
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == VarParameter.class) {
-			switch (baseOperationID) {
-				case QVTOperationalPackage.VAR_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR: return QVTOperationalPackage.MAPPING_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR;
-				case QVTOperationalPackage.VAR_PARAMETER___ACCEPT__VISITOR: return QVTOperationalPackage.MAPPING_PARAMETER___ACCEPT__VISITOR;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.MAPPING_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.MAPPING_PARAMETER___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitMappingParameter(this);
 	}
 
 } //MappingParameterImpl

@@ -13,24 +13,14 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.Variable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
-import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.impl.InstantiationExpImpl;
-
 import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
@@ -42,11 +32,11 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ObjectExpImpl#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ObjectExpImpl#getReferredObject <em>Referred Object</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -139,7 +129,7 @@ public class ObjectExpImpl extends InstantiationExpImpl implements ObjectExp {
 	 * @generated
 	 */
 	public Variable getReferredObject() {
-		if (referredObject != null && ((EObject)referredObject).eIsProxy()) {
+		if (referredObject != null && referredObject.eIsProxy()) {
 			InternalEObject oldReferredObject = (InternalEObject)referredObject;
 			referredObject = (Variable)eResolveProxy(oldReferredObject);
 			if (referredObject != oldReferredObject) {
@@ -169,24 +159,6 @@ public class ObjectExpImpl extends InstantiationExpImpl implements ObjectExp {
 		referredObject = newReferredObject;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.OBJECT_EXP__REFERRED_OBJECT, oldReferredObject, referredObject));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitObjectExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitObjectExp(this);
 	}
 
 	/**
@@ -273,36 +245,13 @@ public class ObjectExpImpl extends InstantiationExpImpl implements ObjectExp {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == InstantiationExp.class) {
-			switch (baseOperationID) {
-				case ImperativeOCLPackage.INSTANTIATION_EXP___ACCEPT__VISITOR: return QVTOperationalPackage.OBJECT_EXP___ACCEPT__VISITOR;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.OBJECT_EXP___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.OBJECT_EXP___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitObjectExp(this);
 	}
 
 } //ObjectExpImpl

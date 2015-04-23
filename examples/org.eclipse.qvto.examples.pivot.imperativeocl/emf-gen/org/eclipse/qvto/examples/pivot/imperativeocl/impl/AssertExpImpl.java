@@ -13,19 +13,13 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.imperativeocl.LogExp;
@@ -38,12 +32,12 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssertExpImpl#getAssertion <em>Assertion</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssertExpImpl#getLog <em>Log</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.AssertExpImpl#getSeverity <em>Severity</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -219,24 +213,6 @@ public class AssertExpImpl extends ImperativeExpressionImpl implements AssertExp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final ImperativeOCLVisitor<R> v) {
-		return v.visitAssertExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((ImperativeOCLVisitor<R>)v).visitAssertExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -332,23 +308,6 @@ public class AssertExpImpl extends ImperativeExpressionImpl implements AssertExp
 	 * @generated
 	 */
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ImperativeOCLPackage.ASSERT_EXP___ACCEPT__IMPERATIVEOCLVISITOR:
-				return accept((ImperativeOCLVisitor)arguments.get(0));
-			case ImperativeOCLPackage.ASSERT_EXP___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
@@ -357,6 +316,16 @@ public class AssertExpImpl extends ImperativeExpressionImpl implements AssertExp
 		result.append(severity);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((ImperativeOCLVisitor<?>)visitor).visitAssertExp(this);
 	}
 
 } //AssertExpImpl

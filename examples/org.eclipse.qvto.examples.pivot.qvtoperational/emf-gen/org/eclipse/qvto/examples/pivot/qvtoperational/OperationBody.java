@@ -14,14 +14,9 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,21 +25,21 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#getContent <em>Content</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#getVariable <em>Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getOperationBody()
  * @model
  * @generated
  */
-public interface OperationBody extends EObject, Element {
+public interface OperationBody extends Element {
 	/**
 	 * Returns the value of the '<em><b>Content</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Content</em>' containment reference list isn't clear,
@@ -89,7 +84,7 @@ public interface OperationBody extends EObject, Element {
 
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,
@@ -103,23 +98,5 @@ public interface OperationBody extends EObject, Element {
 	 * @generated
 	 */
 	EList<Variable> getVariable();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitOperationBody(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitOperationBody(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // OperationBody

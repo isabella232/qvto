@@ -15,16 +15,11 @@ package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.LoopExpImpl;
-
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.internal.LoopExpImpl;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 
@@ -34,10 +29,10 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.ImperativeLoopExpImpl#getCondition <em>Condition</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

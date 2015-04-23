@@ -16,11 +16,10 @@ package org.eclipse.qvto.examples.pivot.qvtoperational;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
-import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.PivotPackage;
 
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 
@@ -92,40 +91,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION = 9;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__EXTENSION = PivotPackage.OPERATION__EXTENSION;
+	int IMPERATIVE_OPERATION__ANNOTATING_COMMENTS = PivotPackage.OPERATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNED_ANNOTATION = PivotPackage.OPERATION__OWNED_ANNOTATION;
+	int IMPERATIVE_OPERATION__OWNED_ANNOTATIONS = PivotPackage.OPERATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNED_COMMENT = PivotPackage.OPERATION__OWNED_COMMENT;
+	int IMPERATIVE_OPERATION__OWNED_COMMENTS = PivotPackage.OPERATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__IS_STATIC = PivotPackage.OPERATION__IS_STATIC;
+	int IMPERATIVE_OPERATION__OWNED_EXTENSIONS = PivotPackage.OPERATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -135,6 +134,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_OPERATION__NAME = PivotPackage.OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_OPERATION__IS_MANY = PivotPackage.OPERATION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -173,31 +181,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION__IMPLEMENTATION_CLASS = PivotPackage.OPERATION__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNED_RULE = PivotPackage.OPERATION__OWNED_RULE;
+	int IMPERATIVE_OPERATION__IS_STATIC = PivotPackage.OPERATION__IS_STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNED_TEMPLATE_SIGNATURE = PivotPackage.OPERATION__OWNED_TEMPLATE_SIGNATURE;
+	int IMPERATIVE_OPERATION__OWNED_CONSTRAINTS = PivotPackage.OPERATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__TEMPLATE_BINDING = PivotPackage.OPERATION__TEMPLATE_BINDING;
+	int IMPERATIVE_OPERATION__OWNED_BINDINGS = PivotPackage.OPERATION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_OPERATION__OWNED_SIGNATURE = PivotPackage.OPERATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -209,24 +226,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION__UNSPECIALIZED_ELEMENT = PivotPackage.OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION__OWNING_TEMPLATE_PARAMETER = PivotPackage.OPERATION__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION__TEMPLATE_PARAMETER = PivotPackage.OPERATION__TEMPLATE_PARAMETER;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -234,15 +233,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_OPERATION__BODY_EXPRESSION = PivotPackage.OPERATION__BODY_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION__CLASS = PivotPackage.OPERATION__CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
@@ -254,6 +244,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION__IS_INVALIDATING = PivotPackage.OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_OPERATION__IS_TYPEOF = PivotPackage.OPERATION__IS_TYPEOF;
+
+	/**
 	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -263,31 +262,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION__IS_VALIDATING = PivotPackage.OPERATION__IS_VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNED_PARAMETER = PivotPackage.OPERATION__OWNED_PARAMETER;
+	int IMPERATIVE_OPERATION__OWNED_PARAMETERS = PivotPackage.OPERATION__OWNED_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Postconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__OWNING_TYPE = PivotPackage.OPERATION__OWNING_TYPE;
+	int IMPERATIVE_OPERATION__OWNED_POSTCONDITIONS = PivotPackage.OPERATION__OWNED_POSTCONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Preconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__POSTCONDITION = PivotPackage.OPERATION__POSTCONDITION;
+	int IMPERATIVE_OPERATION__OWNED_PRECONDITIONS = PivotPackage.OPERATION__OWNED_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_OPERATION__OWNING_CLASS = PivotPackage.OPERATION__OWNING_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -299,31 +307,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION__PRECEDENCE = PivotPackage.OPERATION__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Raised Exceptions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__PRECONDITION = PivotPackage.OPERATION__PRECONDITION;
+	int IMPERATIVE_OPERATION__RAISED_EXCEPTIONS = PivotPackage.OPERATION__RAISED_EXCEPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
+	 * The feature id for the '<em><b>Redefined Operations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION__RAISED_EXCEPTION = PivotPackage.OPERATION__RAISED_EXCEPTION;
-
-	/**
-	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION__REDEFINED_OPERATION = PivotPackage.OPERATION__REDEFINED_OPERATION;
+	int IMPERATIVE_OPERATION__REDEFINED_OPERATIONS = PivotPackage.OPERATION__REDEFINED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -407,51 +406,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___MAKE_PARAMETER = PivotPackage.OPERATION___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___IS_TEMPLATE = PivotPackage.OPERATION___IS_TEMPLATE;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___PARAMETERABLE_ELEMENTS = PivotPackage.OPERATION___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___IS_TEMPLATE_PARAMETER = PivotPackage.OPERATION___IS_TEMPLATE_PARAMETER;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Return</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -488,31 +442,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.OPERATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_OPERATION___ACCEPT__VISITOR = PivotPackage.OPERATION_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Imperative Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_OPERATION_OPERATION_COUNT = PivotPackage.OPERATION_OPERATION_COUNT + 2;
+	int IMPERATIVE_OPERATION_OPERATION_COUNT = PivotPackage.OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ConstructorImpl <em>Constructor</em>}' class.
@@ -525,40 +461,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR = 0;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__EXTENSION = IMPERATIVE_OPERATION__EXTENSION;
+	int CONSTRUCTOR__ANNOTATING_COMMENTS = IMPERATIVE_OPERATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNED_ANNOTATION = IMPERATIVE_OPERATION__OWNED_ANNOTATION;
+	int CONSTRUCTOR__OWNED_ANNOTATIONS = IMPERATIVE_OPERATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNED_COMMENT = IMPERATIVE_OPERATION__OWNED_COMMENT;
+	int CONSTRUCTOR__OWNED_COMMENTS = IMPERATIVE_OPERATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
+	int CONSTRUCTOR__OWNED_EXTENSIONS = IMPERATIVE_OPERATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -568,6 +504,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRUCTOR__NAME = IMPERATIVE_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__IS_MANY = IMPERATIVE_OPERATION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -606,31 +551,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR__IMPLEMENTATION_CLASS = IMPERATIVE_OPERATION__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNED_RULE = IMPERATIVE_OPERATION__OWNED_RULE;
+	int CONSTRUCTOR__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNED_TEMPLATE_SIGNATURE = IMPERATIVE_OPERATION__OWNED_TEMPLATE_SIGNATURE;
+	int CONSTRUCTOR__OWNED_CONSTRAINTS = IMPERATIVE_OPERATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__TEMPLATE_BINDING = IMPERATIVE_OPERATION__TEMPLATE_BINDING;
+	int CONSTRUCTOR__OWNED_BINDINGS = IMPERATIVE_OPERATION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__OWNED_SIGNATURE = IMPERATIVE_OPERATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -642,24 +596,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR__UNSPECIALIZED_ELEMENT = IMPERATIVE_OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__OWNING_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__TEMPLATE_PARAMETER;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -667,15 +603,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONSTRUCTOR__BODY_EXPRESSION = IMPERATIVE_OPERATION__BODY_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__CLASS = IMPERATIVE_OPERATION__CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
@@ -687,6 +614,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR__IS_INVALIDATING = IMPERATIVE_OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__IS_TYPEOF = IMPERATIVE_OPERATION__IS_TYPEOF;
+
+	/**
 	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -696,31 +632,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR__IS_VALIDATING = IMPERATIVE_OPERATION__IS_VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNED_PARAMETER = IMPERATIVE_OPERATION__OWNED_PARAMETER;
+	int CONSTRUCTOR__OWNED_PARAMETERS = IMPERATIVE_OPERATION__OWNED_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Postconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__OWNING_TYPE = IMPERATIVE_OPERATION__OWNING_TYPE;
+	int CONSTRUCTOR__OWNED_POSTCONDITIONS = IMPERATIVE_OPERATION__OWNED_POSTCONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Preconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__POSTCONDITION = IMPERATIVE_OPERATION__POSTCONDITION;
+	int CONSTRUCTOR__OWNED_PRECONDITIONS = IMPERATIVE_OPERATION__OWNED_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR__OWNING_CLASS = IMPERATIVE_OPERATION__OWNING_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -732,31 +677,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR__PRECEDENCE = IMPERATIVE_OPERATION__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Raised Exceptions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__PRECONDITION = IMPERATIVE_OPERATION__PRECONDITION;
+	int CONSTRUCTOR__RAISED_EXCEPTIONS = IMPERATIVE_OPERATION__RAISED_EXCEPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
+	 * The feature id for the '<em><b>Redefined Operations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__RAISED_EXCEPTION = IMPERATIVE_OPERATION__RAISED_EXCEPTION;
-
-	/**
-	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR__REDEFINED_OPERATION = IMPERATIVE_OPERATION__REDEFINED_OPERATION;
+	int CONSTRUCTOR__REDEFINED_OPERATIONS = IMPERATIVE_OPERATION__REDEFINED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -840,51 +776,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___MAKE_PARAMETER = IMPERATIVE_OPERATION___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___IS_TEMPLATE = IMPERATIVE_OPERATION___IS_TEMPLATE;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___PARAMETERABLE_ELEMENTS = IMPERATIVE_OPERATION___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = IMPERATIVE_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___IS_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION___IS_TEMPLATE_PARAMETER;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Return</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -921,31 +812,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = IMPERATIVE_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___ACCEPT__QVTOPERATIONALVISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR___ACCEPT__VISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Constructor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 2;
+	int CONSTRUCTOR_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationBodyImpl <em>Operation Body</em>}' class.
@@ -958,31 +831,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATION_BODY = 20;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BODY__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int OPERATION_BODY__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BODY__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int OPERATION_BODY__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BODY__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int OPERATION_BODY__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION_BODY__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Content</b></em>' containment reference list.
@@ -1039,31 +921,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATION_BODY___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_BODY___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_BODY___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Operation Body</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_BODY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int OPERATION_BODY_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ConstructorBodyImpl <em>Constructor Body</em>}' class.
@@ -1076,31 +940,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR_BODY = 1;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_BODY__EXTENSION = OPERATION_BODY__EXTENSION;
+	int CONSTRUCTOR_BODY__ANNOTATING_COMMENTS = OPERATION_BODY__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_BODY__OWNED_ANNOTATION = OPERATION_BODY__OWNED_ANNOTATION;
+	int CONSTRUCTOR_BODY__OWNED_ANNOTATIONS = OPERATION_BODY__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_BODY__OWNED_COMMENT = OPERATION_BODY__OWNED_COMMENT;
+	int CONSTRUCTOR_BODY__OWNED_COMMENTS = OPERATION_BODY__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONSTRUCTOR_BODY__OWNED_EXTENSIONS = OPERATION_BODY__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Content</b></em>' containment reference list.
@@ -1157,31 +1030,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONSTRUCTOR_BODY___GET_VALUE__TYPE_STRING = OPERATION_BODY___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR_BODY___ACCEPT__QVTOPERATIONALVISITOR = OPERATION_BODY_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONSTRUCTOR_BODY___ACCEPT__VISITOR = OPERATION_BODY_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Constructor Body</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_BODY_OPERATION_COUNT = OPERATION_BODY_OPERATION_COUNT + 2;
+	int CONSTRUCTOR_BODY_OPERATION_COUNT = OPERATION_BODY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ContextualPropertyImpl <em>Contextual Property</em>}' class.
@@ -1194,40 +1049,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY = 2;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__EXTENSION = PivotPackage.PROPERTY__EXTENSION;
+	int CONTEXTUAL_PROPERTY__ANNOTATING_COMMENTS = PivotPackage.PROPERTY__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__OWNED_ANNOTATION = PivotPackage.PROPERTY__OWNED_ANNOTATION;
+	int CONTEXTUAL_PROPERTY__OWNED_ANNOTATIONS = PivotPackage.PROPERTY__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__OWNED_COMMENT = PivotPackage.PROPERTY__OWNED_COMMENT;
+	int CONTEXTUAL_PROPERTY__OWNED_COMMENTS = PivotPackage.PROPERTY__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__IS_STATIC = PivotPackage.PROPERTY__IS_STATIC;
+	int CONTEXTUAL_PROPERTY__OWNED_EXTENSIONS = PivotPackage.PROPERTY__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1237,6 +1092,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTEXTUAL_PROPERTY__NAME = PivotPackage.PROPERTY__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXTUAL_PROPERTY__IS_MANY = PivotPackage.PROPERTY__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1275,22 +1139,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY__IMPLEMENTATION_CLASS = PivotPackage.PROPERTY__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__OWNING_TEMPLATE_PARAMETER = PivotPackage.PROPERTY__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY__TEMPLATE_PARAMETER = PivotPackage.PROPERTY__TEMPLATE_PARAMETER;
+	int CONTEXTUAL_PROPERTY__IS_STATIC = PivotPackage.PROPERTY__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Association Class</b></em>' reference.
@@ -1302,40 +1157,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY__ASSOCIATION_CLASS = PivotPackage.PROPERTY__ASSOCIATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
+	 * The feature id for the '<em><b>Default Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__CLASS = PivotPackage.PROPERTY__CLASS;
+	int CONTEXTUAL_PROPERTY__DEFAULT_VALUE = PivotPackage.PROPERTY__DEFAULT_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Default Value String</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__DEFAULT = PivotPackage.PROPERTY__DEFAULT;
-
-	/**
-	 * The feature id for the '<em><b>Default Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY__DEFAULT_EXPRESSION = PivotPackage.PROPERTY__DEFAULT_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY__IMPLICIT = PivotPackage.PROPERTY__IMPLICIT;
+	int CONTEXTUAL_PROPERTY__DEFAULT_VALUE_STRING = PivotPackage.PROPERTY__DEFAULT_VALUE_STRING;
 
 	/**
 	 * The feature id for the '<em><b>Is Composite</b></em>' attribute.
@@ -1363,6 +1200,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int CONTEXTUAL_PROPERTY__IS_ID = PivotPackage.PROPERTY__IS_ID;
+
+	/**
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXTUAL_PROPERTY__IS_IMPLICIT = PivotPackage.PROPERTY__IS_IMPLICIT;
 
 	/**
 	 * The feature id for the '<em><b>Is Read Only</b></em>' attribute.
@@ -1428,22 +1274,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY__OPPOSITE = PivotPackage.PROPERTY__OPPOSITE;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__OWNING_TYPE = PivotPackage.PROPERTY__OWNING_TYPE;
+	int CONTEXTUAL_PROPERTY__OWNED_EXPRESSION = PivotPackage.PROPERTY__OWNED_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Redefined Property</b></em>' reference list.
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY__REDEFINED_PROPERTY = PivotPackage.PROPERTY__REDEFINED_PROPERTY;
+	int CONTEXTUAL_PROPERTY__OWNING_CLASS = PivotPackage.PROPERTY__OWNING_CLASS;
+
+	/**
+	 * The feature id for the '<em><b>Redefined Properties</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CONTEXTUAL_PROPERTY__REDEFINED_PROPERTIES = PivotPackage.PROPERTY__REDEFINED_PROPERTIES;
 
 	/**
 	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
@@ -1527,31 +1382,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.PROPERTY___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
+	 * The operation id for the '<em>Is Attribute</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY___MAKE_PARAMETER = PivotPackage.PROPERTY___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.PROPERTY___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY___IS_TEMPLATE_PARAMETER = PivotPackage.PROPERTY___IS_TEMPLATE_PARAMETER;
+	int CONTEXTUAL_PROPERTY___IS_ATTRIBUTE__PROPERTY = PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY;
 
 	/**
 	 * The operation id for the '<em>Validate Compatible Default Expression</em>' operation.
@@ -1563,40 +1400,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int CONTEXTUAL_PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP = PivotPackage.PROPERTY___VALIDATE_COMPATIBLE_DEFAULT_EXPRESSION__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Is Attribute</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY___IS_ATTRIBUTE__PROPERTY = PivotPackage.PROPERTY___IS_ATTRIBUTE__PROPERTY;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.PROPERTY_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTEXTUAL_PROPERTY___ACCEPT__VISITOR = PivotPackage.PROPERTY_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Contextual Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONTEXTUAL_PROPERTY_OPERATION_COUNT = PivotPackage.PROPERTY_OPERATION_COUNT + 2;
+	int CONTEXTUAL_PROPERTY_OPERATION_COUNT = PivotPackage.PROPERTY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationImpl <em>Dummy Relation</em>}' class.
@@ -1609,31 +1419,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATION = 3;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int DUMMY_RELATION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int DUMMY_RELATION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int DUMMY_RELATION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_RELATION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Dummy Relation</em>' class.
@@ -1663,31 +1482,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATION___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATION___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATION___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Dummy Relation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int DUMMY_RELATION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationDomainImpl <em>Dummy Relation Domain</em>}' class.
@@ -1700,31 +1501,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATION_DOMAIN = 4;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION_DOMAIN__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int DUMMY_RELATION_DOMAIN__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION_DOMAIN__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int DUMMY_RELATION_DOMAIN__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION_DOMAIN__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int DUMMY_RELATION_DOMAIN__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_RELATION_DOMAIN__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Dummy Relation Domain</em>' class.
@@ -1754,31 +1564,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATION_DOMAIN___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATION_DOMAIN___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATION_DOMAIN___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Dummy Relation Domain</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATION_DOMAIN_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int DUMMY_RELATION_DOMAIN_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationalTransformationImpl <em>Dummy Relational Transformation</em>}' class.
@@ -1791,31 +1583,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATIONAL_TRANSFORMATION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int DUMMY_RELATIONAL_TRANSFORMATION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int DUMMY_RELATIONAL_TRANSFORMATION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int DUMMY_RELATIONAL_TRANSFORMATION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DUMMY_RELATIONAL_TRANSFORMATION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The number of structural features of the '<em>Dummy Relational Transformation</em>' class.
@@ -1845,31 +1646,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int DUMMY_RELATIONAL_TRANSFORMATION___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Dummy Relational Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DUMMY_RELATIONAL_TRANSFORMATION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int DUMMY_RELATIONAL_TRANSFORMATION_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.EntryOperationImpl <em>Entry Operation</em>}' class.
@@ -1882,40 +1665,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__EXTENSION = IMPERATIVE_OPERATION__EXTENSION;
+	int ENTRY_OPERATION__ANNOTATING_COMMENTS = IMPERATIVE_OPERATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNED_ANNOTATION = IMPERATIVE_OPERATION__OWNED_ANNOTATION;
+	int ENTRY_OPERATION__OWNED_ANNOTATIONS = IMPERATIVE_OPERATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNED_COMMENT = IMPERATIVE_OPERATION__OWNED_COMMENT;
+	int ENTRY_OPERATION__OWNED_COMMENTS = IMPERATIVE_OPERATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
+	int ENTRY_OPERATION__OWNED_EXTENSIONS = IMPERATIVE_OPERATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1925,6 +1708,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_OPERATION__NAME = IMPERATIVE_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_OPERATION__IS_MANY = IMPERATIVE_OPERATION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -1963,31 +1755,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION__IMPLEMENTATION_CLASS = IMPERATIVE_OPERATION__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNED_RULE = IMPERATIVE_OPERATION__OWNED_RULE;
+	int ENTRY_OPERATION__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNED_TEMPLATE_SIGNATURE = IMPERATIVE_OPERATION__OWNED_TEMPLATE_SIGNATURE;
+	int ENTRY_OPERATION__OWNED_CONSTRAINTS = IMPERATIVE_OPERATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__TEMPLATE_BINDING = IMPERATIVE_OPERATION__TEMPLATE_BINDING;
+	int ENTRY_OPERATION__OWNED_BINDINGS = IMPERATIVE_OPERATION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_OPERATION__OWNED_SIGNATURE = IMPERATIVE_OPERATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -1999,24 +1800,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION__UNSPECIALIZED_ELEMENT = IMPERATIVE_OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION__OWNING_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION__TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__TEMPLATE_PARAMETER;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2024,15 +1807,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENTRY_OPERATION__BODY_EXPRESSION = IMPERATIVE_OPERATION__BODY_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION__CLASS = IMPERATIVE_OPERATION__CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
@@ -2044,6 +1818,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION__IS_INVALIDATING = IMPERATIVE_OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_OPERATION__IS_TYPEOF = IMPERATIVE_OPERATION__IS_TYPEOF;
+
+	/**
 	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2053,31 +1836,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION__IS_VALIDATING = IMPERATIVE_OPERATION__IS_VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNED_PARAMETER = IMPERATIVE_OPERATION__OWNED_PARAMETER;
+	int ENTRY_OPERATION__OWNED_PARAMETERS = IMPERATIVE_OPERATION__OWNED_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Postconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__OWNING_TYPE = IMPERATIVE_OPERATION__OWNING_TYPE;
+	int ENTRY_OPERATION__OWNED_POSTCONDITIONS = IMPERATIVE_OPERATION__OWNED_POSTCONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Preconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__POSTCONDITION = IMPERATIVE_OPERATION__POSTCONDITION;
+	int ENTRY_OPERATION__OWNED_PRECONDITIONS = IMPERATIVE_OPERATION__OWNED_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENTRY_OPERATION__OWNING_CLASS = IMPERATIVE_OPERATION__OWNING_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -2089,31 +1881,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION__PRECEDENCE = IMPERATIVE_OPERATION__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Raised Exceptions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__PRECONDITION = IMPERATIVE_OPERATION__PRECONDITION;
+	int ENTRY_OPERATION__RAISED_EXCEPTIONS = IMPERATIVE_OPERATION__RAISED_EXCEPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
+	 * The feature id for the '<em><b>Redefined Operations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION__RAISED_EXCEPTION = IMPERATIVE_OPERATION__RAISED_EXCEPTION;
-
-	/**
-	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION__REDEFINED_OPERATION = IMPERATIVE_OPERATION__REDEFINED_OPERATION;
+	int ENTRY_OPERATION__REDEFINED_OPERATIONS = IMPERATIVE_OPERATION__REDEFINED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -2197,51 +1980,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___MAKE_PARAMETER = IMPERATIVE_OPERATION___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___IS_TEMPLATE = IMPERATIVE_OPERATION___IS_TEMPLATE;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___PARAMETERABLE_ELEMENTS = IMPERATIVE_OPERATION___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = IMPERATIVE_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___IS_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION___IS_TEMPLATE_PARAMETER;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Return</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2278,31 +2016,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int ENTRY_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = IMPERATIVE_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENTRY_OPERATION___ACCEPT__VISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Entry Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENTRY_OPERATION_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 2;
+	int ENTRY_OPERATION_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.HelperImpl <em>Helper</em>}' class.
@@ -2315,40 +2035,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER = 7;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__EXTENSION = IMPERATIVE_OPERATION__EXTENSION;
+	int HELPER__ANNOTATING_COMMENTS = IMPERATIVE_OPERATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNED_ANNOTATION = IMPERATIVE_OPERATION__OWNED_ANNOTATION;
+	int HELPER__OWNED_ANNOTATIONS = IMPERATIVE_OPERATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNED_COMMENT = IMPERATIVE_OPERATION__OWNED_COMMENT;
+	int HELPER__OWNED_COMMENTS = IMPERATIVE_OPERATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
+	int HELPER__OWNED_EXTENSIONS = IMPERATIVE_OPERATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2358,6 +2078,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int HELPER__NAME = IMPERATIVE_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER__IS_MANY = IMPERATIVE_OPERATION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2396,31 +2125,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER__IMPLEMENTATION_CLASS = IMPERATIVE_OPERATION__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNED_RULE = IMPERATIVE_OPERATION__OWNED_RULE;
+	int HELPER__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNED_TEMPLATE_SIGNATURE = IMPERATIVE_OPERATION__OWNED_TEMPLATE_SIGNATURE;
+	int HELPER__OWNED_CONSTRAINTS = IMPERATIVE_OPERATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__TEMPLATE_BINDING = IMPERATIVE_OPERATION__TEMPLATE_BINDING;
+	int HELPER__OWNED_BINDINGS = IMPERATIVE_OPERATION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER__OWNED_SIGNATURE = IMPERATIVE_OPERATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -2432,24 +2170,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER__UNSPECIALIZED_ELEMENT = IMPERATIVE_OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER__OWNING_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER__TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__TEMPLATE_PARAMETER;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2457,15 +2177,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int HELPER__BODY_EXPRESSION = IMPERATIVE_OPERATION__BODY_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER__CLASS = IMPERATIVE_OPERATION__CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
@@ -2477,6 +2188,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER__IS_INVALIDATING = IMPERATIVE_OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER__IS_TYPEOF = IMPERATIVE_OPERATION__IS_TYPEOF;
+
+	/**
 	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2486,31 +2206,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER__IS_VALIDATING = IMPERATIVE_OPERATION__IS_VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNED_PARAMETER = IMPERATIVE_OPERATION__OWNED_PARAMETER;
+	int HELPER__OWNED_PARAMETERS = IMPERATIVE_OPERATION__OWNED_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Postconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__OWNING_TYPE = IMPERATIVE_OPERATION__OWNING_TYPE;
+	int HELPER__OWNED_POSTCONDITIONS = IMPERATIVE_OPERATION__OWNED_POSTCONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Preconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__POSTCONDITION = IMPERATIVE_OPERATION__POSTCONDITION;
+	int HELPER__OWNED_PRECONDITIONS = IMPERATIVE_OPERATION__OWNED_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HELPER__OWNING_CLASS = IMPERATIVE_OPERATION__OWNING_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -2522,31 +2251,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER__PRECEDENCE = IMPERATIVE_OPERATION__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Raised Exceptions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__PRECONDITION = IMPERATIVE_OPERATION__PRECONDITION;
+	int HELPER__RAISED_EXCEPTIONS = IMPERATIVE_OPERATION__RAISED_EXCEPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
+	 * The feature id for the '<em><b>Redefined Operations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER__RAISED_EXCEPTION = IMPERATIVE_OPERATION__RAISED_EXCEPTION;
-
-	/**
-	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER__REDEFINED_OPERATION = IMPERATIVE_OPERATION__REDEFINED_OPERATION;
+	int HELPER__REDEFINED_OPERATIONS = IMPERATIVE_OPERATION__REDEFINED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -2639,51 +2359,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___MAKE_PARAMETER = IMPERATIVE_OPERATION___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___IS_TEMPLATE = IMPERATIVE_OPERATION___IS_TEMPLATE;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___PARAMETERABLE_ELEMENTS = IMPERATIVE_OPERATION___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = IMPERATIVE_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___IS_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION___IS_TEMPLATE_PARAMETER;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Return</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2720,31 +2395,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int HELPER___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = IMPERATIVE_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___ACCEPT__QVTOPERATIONALVISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HELPER___ACCEPT__VISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Helper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int HELPER_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 2;
+	int HELPER_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ImperativeCallExpImpl <em>Imperative Call Exp</em>}' class.
@@ -2757,40 +2414,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP = 8;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__EXTENSION = PivotPackage.OPERATION_CALL_EXP__EXTENSION;
+	int IMPERATIVE_CALL_EXP__ANNOTATING_COMMENTS = PivotPackage.OPERATION_CALL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__OWNED_ANNOTATION = PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATION;
+	int IMPERATIVE_CALL_EXP__OWNED_ANNOTATIONS = PivotPackage.OPERATION_CALL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__OWNED_COMMENT = PivotPackage.OPERATION_CALL_EXP__OWNED_COMMENT;
+	int IMPERATIVE_CALL_EXP__OWNED_COMMENTS = PivotPackage.OPERATION_CALL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__IS_STATIC = PivotPackage.OPERATION_CALL_EXP__IS_STATIC;
+	int IMPERATIVE_CALL_EXP__OWNED_EXTENSIONS = PivotPackage.OPERATION_CALL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2800,6 +2457,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_CALL_EXP__NAME = PivotPackage.OPERATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_CALL_EXP__IS_MANY = PivotPackage.OPERATION_CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -2820,22 +2486,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP__TYPE = PivotPackage.OPERATION_CALL_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__IMPLICIT = PivotPackage.OPERATION_CALL_EXP__IMPLICIT;
+	int IMPERATIVE_CALL_EXP__TYPE_VALUE = PivotPackage.OPERATION_CALL_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__SOURCE = PivotPackage.OPERATION_CALL_EXP__SOURCE;
+	int IMPERATIVE_CALL_EXP__IS_IMPLICIT = PivotPackage.OPERATION_CALL_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_CALL_EXP__IS_SAFE = PivotPackage.OPERATION_CALL_EXP__IS_SAFE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_CALL_EXP__OWNED_SOURCE = PivotPackage.OPERATION_CALL_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
@@ -2847,13 +2531,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP__IS_PRE = PivotPackage.OPERATION_CALL_EXP__IS_PRE;
 
 	/**
-	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP__ARGUMENT = PivotPackage.OPERATION_CALL_EXP__ARGUMENT;
+	int IMPERATIVE_CALL_EXP__OWNED_ARGUMENTS = PivotPackage.OPERATION_CALL_EXP__OWNED_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
@@ -2901,6 +2585,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP___GET_VALUE__TYPE_STRING = PivotPackage.OPERATION_CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OPERATION_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2928,31 +2621,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_CALL_EXP___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_CALL_EXP___ACCEPT__VISITOR = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Imperative Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP_OPERATION_COUNT = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 2;
+	int IMPERATIVE_CALL_EXP_OPERATION_COUNT = PivotPackage.OPERATION_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModuleImpl <em>Module</em>}' class.
@@ -2965,40 +2640,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE = 17;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__EXTENSION = PivotPackage.CLASS__EXTENSION;
+	int MODULE__ANNOTATING_COMMENTS = PivotPackage.CLASS__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
+	int MODULE__OWNED_ANNOTATIONS = PivotPackage.CLASS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_COMMENT = PivotPackage.CLASS__OWNED_COMMENT;
+	int MODULE__OWNED_COMMENTS = PivotPackage.CLASS__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__IS_STATIC = PivotPackage.CLASS__IS_STATIC;
+	int MODULE__OWNED_EXTENSIONS = PivotPackage.CLASS__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3010,22 +2685,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE__NAME = PivotPackage.CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_TEMPLATE_SIGNATURE = PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE;
+	int MODULE__OWNED_CONSTRAINTS = PivotPackage.CLASS__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__TEMPLATE_BINDING = PivotPackage.CLASS__TEMPLATE_BINDING;
+	int MODULE__OWNED_BINDINGS = PivotPackage.CLASS__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE__OWNED_SIGNATURE = PivotPackage.CLASS__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -3037,31 +2721,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE__UNSPECIALIZED_ELEMENT = PivotPackage.CLASS__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNING_TEMPLATE_PARAMETER = PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__TEMPLATE_PARAMETER = PivotPackage.CLASS__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__EXTENDED_BYS = PivotPackage.CLASS__EXTENDED_BYS;
+	int MODULE__EXTENDERS = PivotPackage.CLASS__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -3071,60 +2737,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODULE__INSTANCE_CLASS_NAME = PivotPackage.CLASS__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__OWNED_ATTRIBUTE = PivotPackage.CLASS__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__OWNED_INVARIANT = PivotPackage.CLASS__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__OWNED_OPERATION = PivotPackage.CLASS__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__PACKAGE = PivotPackage.CLASS__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__SUPER_CLASS = PivotPackage.CLASS__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__OWNED_RULE = PivotPackage.CLASS__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -3154,85 +2766,58 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE__IS_INTERFACE = PivotPackage.CLASS__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__NESTED_TYPE = PivotPackage.CLASS__NESTED_TYPE;
+	int MODULE__OWNED_BEHAVIORS = PivotPackage.CLASS__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_BEHAVIOR = PivotPackage.CLASS__OWNED_BEHAVIOR;
+	int MODULE__OWNED_INVARIANTS = PivotPackage.CLASS__OWNED_INVARIANTS;
 
 	/**
-	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__IMPORTED_PACKAGE = PivotPackage.CLASS_FEATURE_COUNT + 0;
+	int MODULE__OWNED_OPERATIONS = PivotPackage.CLASS__OWNED_OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__NESTED_PACKAGE = PivotPackage.CLASS_FEATURE_COUNT + 1;
+	int MODULE__OWNED_PROPERTIES = PivotPackage.CLASS__OWNED_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__NESTING_PACKAGE = PivotPackage.CLASS_FEATURE_COUNT + 2;
+	int MODULE__OWNING_PACKAGE = PivotPackage.CLASS__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__NS_PREFIX = PivotPackage.CLASS_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__NS_URI = PivotPackage.CLASS_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__OWNED_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Profile Application</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE__PROFILE_APPLICATION = PivotPackage.CLASS_FEATURE_COUNT + 6;
+	int MODULE__SUPER_CLASSES = PivotPackage.CLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Config Property</b></em>' reference list.
@@ -3241,7 +2826,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__CONFIG_PROPERTY = PivotPackage.CLASS_FEATURE_COUNT + 7;
+	int MODULE__CONFIG_PROPERTY = PivotPackage.CLASS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Entry</b></em>' reference.
@@ -3250,7 +2835,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__ENTRY = PivotPackage.CLASS_FEATURE_COUNT + 8;
+	int MODULE__ENTRY = PivotPackage.CLASS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Blackbox</b></em>' attribute.
@@ -3259,7 +2844,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__IS_BLACKBOX = PivotPackage.CLASS_FEATURE_COUNT + 9;
+	int MODULE__IS_BLACKBOX = PivotPackage.CLASS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Module Import</b></em>' containment reference list.
@@ -3268,7 +2853,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__MODULE_IMPORT = PivotPackage.CLASS_FEATURE_COUNT + 10;
+	int MODULE__MODULE_IMPORT = PivotPackage.CLASS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
@@ -3277,7 +2862,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 11;
+	int MODULE__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Variable</b></em>' containment reference list.
@@ -3286,7 +2871,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__OWNED_VARIABLE = PivotPackage.CLASS_FEATURE_COUNT + 12;
+	int MODULE__OWNED_VARIABLE = PivotPackage.CLASS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Used Model Type</b></em>' reference list.
@@ -3295,7 +2880,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE__USED_MODEL_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 13;
+	int MODULE__USED_MODEL_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Module</em>' class.
@@ -3304,7 +2889,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 14;
+	int MODULE_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3325,31 +2910,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE___GET_VALUE__TYPE_STRING = PivotPackage.CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE___IS_TEMPLATE = PivotPackage.CLASS___IS_TEMPLATE;
+	int MODULE___FLATTENED_TYPE = PivotPackage.CLASS___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE___PARAMETERABLE_ELEMENTS = PivotPackage.CLASS___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int MODULE___IS_CLASS = PivotPackage.CLASS___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -3361,6 +2937,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE___IS_TEMPLATE_PARAMETER = PivotPackage.CLASS___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3370,40 +2955,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.CLASS_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE___ACCEPT__VISITOR = PivotPackage.CLASS_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Module</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 2;
+	int MODULE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.LibraryImpl <em>Library</em>}' class.
@@ -3416,40 +2974,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY = 10;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__EXTENSION = MODULE__EXTENSION;
+	int LIBRARY__ANNOTATING_COMMENTS = MODULE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__OWNED_ANNOTATION = MODULE__OWNED_ANNOTATION;
+	int LIBRARY__OWNED_ANNOTATIONS = MODULE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__OWNED_COMMENT = MODULE__OWNED_COMMENT;
+	int LIBRARY__OWNED_COMMENTS = MODULE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__IS_STATIC = MODULE__IS_STATIC;
+	int LIBRARY__OWNED_EXTENSIONS = MODULE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3461,22 +3019,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY__NAME = MODULE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__OWNED_TEMPLATE_SIGNATURE = MODULE__OWNED_TEMPLATE_SIGNATURE;
+	int LIBRARY__OWNED_CONSTRAINTS = MODULE__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__TEMPLATE_BINDING = MODULE__TEMPLATE_BINDING;
+	int LIBRARY__OWNED_BINDINGS = MODULE__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY__OWNED_SIGNATURE = MODULE__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -3488,31 +3055,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY__UNSPECIALIZED_ELEMENT = MODULE__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__OWNING_TEMPLATE_PARAMETER = MODULE__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__TEMPLATE_PARAMETER = MODULE__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__EXTENDED_BYS = MODULE__EXTENDED_BYS;
+	int LIBRARY__EXTENDERS = MODULE__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -3522,60 +3071,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int LIBRARY__INSTANCE_CLASS_NAME = MODULE__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_ATTRIBUTE = MODULE__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_INVARIANT = MODULE__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_OPERATION = MODULE__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__PACKAGE = MODULE__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__SUPER_CLASS = MODULE__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_RULE = MODULE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -3605,85 +3100,58 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY__IS_INTERFACE = MODULE__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__NESTED_TYPE = MODULE__NESTED_TYPE;
+	int LIBRARY__OWNED_BEHAVIORS = MODULE__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__OWNED_BEHAVIOR = MODULE__OWNED_BEHAVIOR;
+	int LIBRARY__OWNED_INVARIANTS = MODULE__OWNED_INVARIANTS;
 
 	/**
-	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__IMPORTED_PACKAGE = MODULE__IMPORTED_PACKAGE;
+	int LIBRARY__OWNED_OPERATIONS = MODULE__OWNED_OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__NESTED_PACKAGE = MODULE__NESTED_PACKAGE;
+	int LIBRARY__OWNED_PROPERTIES = MODULE__OWNED_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__NESTING_PACKAGE = MODULE__NESTING_PACKAGE;
+	int LIBRARY__OWNING_PACKAGE = MODULE__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY__NS_PREFIX = MODULE__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__NS_URI = MODULE__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__OWNED_TYPE = MODULE__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Profile Application</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__PROFILE_APPLICATION = MODULE__PROFILE_APPLICATION;
+	int LIBRARY__SUPER_CLASSES = MODULE__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Config Property</b></em>' reference list.
@@ -3776,31 +3244,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY___GET_VALUE__TYPE_STRING = MODULE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___IS_TEMPLATE = MODULE___IS_TEMPLATE;
+	int LIBRARY___FLATTENED_TYPE = MODULE___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY___PARAMETERABLE_ELEMENTS = MODULE___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = MODULE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int LIBRARY___IS_CLASS = MODULE___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -3812,6 +3271,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY___IS_TEMPLATE_PARAMETER = MODULE___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIBRARY___SPECIALIZE_IN__CALLEXP_TYPE = MODULE___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3821,40 +3289,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int LIBRARY___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = MODULE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY___SPECIALIZE_IN__OCLEXPRESSION_TYPE = MODULE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY___ACCEPT__QVTOPERATIONALVISITOR = MODULE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY___ACCEPT__VISITOR = MODULE_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Library</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIBRARY_OPERATION_COUNT = MODULE_OPERATION_COUNT + 2;
+	int LIBRARY_OPERATION_COUNT = MODULE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingBodyImpl <em>Mapping Body</em>}' class.
@@ -3867,31 +3308,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_BODY = 11;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_BODY__EXTENSION = OPERATION_BODY__EXTENSION;
+	int MAPPING_BODY__ANNOTATING_COMMENTS = OPERATION_BODY__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_BODY__OWNED_ANNOTATION = OPERATION_BODY__OWNED_ANNOTATION;
+	int MAPPING_BODY__OWNED_ANNOTATIONS = OPERATION_BODY__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_BODY__OWNED_COMMENT = OPERATION_BODY__OWNED_COMMENT;
+	int MAPPING_BODY__OWNED_COMMENTS = OPERATION_BODY__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_BODY__OWNED_EXTENSIONS = OPERATION_BODY__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Content</b></em>' containment reference list.
@@ -3966,31 +3416,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_BODY___GET_VALUE__TYPE_STRING = OPERATION_BODY___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_BODY___ACCEPT__QVTOPERATIONALVISITOR = OPERATION_BODY_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_BODY___ACCEPT__VISITOR = OPERATION_BODY_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Mapping Body</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_BODY_OPERATION_COUNT = OPERATION_BODY_OPERATION_COUNT + 2;
+	int MAPPING_BODY_OPERATION_COUNT = OPERATION_BODY_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingCallExpImpl <em>Mapping Call Exp</em>}' class.
@@ -4003,40 +3435,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP = 12;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__EXTENSION = IMPERATIVE_CALL_EXP__EXTENSION;
+	int MAPPING_CALL_EXP__ANNOTATING_COMMENTS = IMPERATIVE_CALL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__OWNED_ANNOTATION = IMPERATIVE_CALL_EXP__OWNED_ANNOTATION;
+	int MAPPING_CALL_EXP__OWNED_ANNOTATIONS = IMPERATIVE_CALL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__OWNED_COMMENT = IMPERATIVE_CALL_EXP__OWNED_COMMENT;
+	int MAPPING_CALL_EXP__OWNED_COMMENTS = IMPERATIVE_CALL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__IS_STATIC = IMPERATIVE_CALL_EXP__IS_STATIC;
+	int MAPPING_CALL_EXP__OWNED_EXTENSIONS = IMPERATIVE_CALL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4046,6 +3478,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL_EXP__NAME = IMPERATIVE_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_EXP__IS_MANY = IMPERATIVE_CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4066,22 +3507,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP__TYPE = IMPERATIVE_CALL_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__IMPLICIT = IMPERATIVE_CALL_EXP__IMPLICIT;
+	int MAPPING_CALL_EXP__TYPE_VALUE = IMPERATIVE_CALL_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__SOURCE = IMPERATIVE_CALL_EXP__SOURCE;
+	int MAPPING_CALL_EXP__IS_IMPLICIT = IMPERATIVE_CALL_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_EXP__IS_SAFE = IMPERATIVE_CALL_EXP__IS_SAFE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_EXP__OWNED_SOURCE = IMPERATIVE_CALL_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
@@ -4093,13 +3552,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP__IS_PRE = IMPERATIVE_CALL_EXP__IS_PRE;
 
 	/**
-	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP__ARGUMENT = IMPERATIVE_CALL_EXP__ARGUMENT;
+	int MAPPING_CALL_EXP__OWNED_ARGUMENTS = IMPERATIVE_CALL_EXP__OWNED_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Referred Operation</b></em>' reference.
@@ -4156,6 +3615,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP___GET_VALUE__TYPE_STRING = IMPERATIVE_CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4183,31 +3651,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = IMPERATIVE_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_EXP___ACCEPT__QVTOPERATIONALVISITOR = IMPERATIVE_CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_EXP___ACCEPT__VISITOR = IMPERATIVE_CALL_EXP_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Mapping Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_EXP_OPERATION_COUNT = IMPERATIVE_CALL_EXP_OPERATION_COUNT + 2;
+	int MAPPING_CALL_EXP_OPERATION_COUNT = IMPERATIVE_CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingOperationImpl <em>Mapping Operation</em>}' class.
@@ -4220,40 +3670,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION = 13;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__EXTENSION = IMPERATIVE_OPERATION__EXTENSION;
+	int MAPPING_OPERATION__ANNOTATING_COMMENTS = IMPERATIVE_OPERATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNED_ANNOTATION = IMPERATIVE_OPERATION__OWNED_ANNOTATION;
+	int MAPPING_OPERATION__OWNED_ANNOTATIONS = IMPERATIVE_OPERATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNED_COMMENT = IMPERATIVE_OPERATION__OWNED_COMMENT;
+	int MAPPING_OPERATION__OWNED_COMMENTS = IMPERATIVE_OPERATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
+	int MAPPING_OPERATION__OWNED_EXTENSIONS = IMPERATIVE_OPERATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4263,6 +3713,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_OPERATION__NAME = IMPERATIVE_OPERATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_OPERATION__IS_MANY = IMPERATIVE_OPERATION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4301,31 +3760,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION__IMPLEMENTATION_CLASS = IMPERATIVE_OPERATION__IMPLEMENTATION_CLASS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNED_RULE = IMPERATIVE_OPERATION__OWNED_RULE;
+	int MAPPING_OPERATION__IS_STATIC = IMPERATIVE_OPERATION__IS_STATIC;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNED_TEMPLATE_SIGNATURE = IMPERATIVE_OPERATION__OWNED_TEMPLATE_SIGNATURE;
+	int MAPPING_OPERATION__OWNED_CONSTRAINTS = IMPERATIVE_OPERATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__TEMPLATE_BINDING = IMPERATIVE_OPERATION__TEMPLATE_BINDING;
+	int MAPPING_OPERATION__OWNED_BINDINGS = IMPERATIVE_OPERATION__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_OPERATION__OWNED_SIGNATURE = IMPERATIVE_OPERATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -4337,24 +3805,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION__UNSPECIALIZED_ELEMENT = IMPERATIVE_OPERATION__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION__OWNING_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION__TEMPLATE_PARAMETER = IMPERATIVE_OPERATION__TEMPLATE_PARAMETER;
-
-	/**
 	 * The feature id for the '<em><b>Body Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4362,15 +3812,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_OPERATION__BODY_EXPRESSION = IMPERATIVE_OPERATION__BODY_EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Class</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION__CLASS = IMPERATIVE_OPERATION__CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Is Invalidating</b></em>' attribute.
@@ -4382,6 +3823,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION__IS_INVALIDATING = IMPERATIVE_OPERATION__IS_INVALIDATING;
 
 	/**
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_OPERATION__IS_TYPEOF = IMPERATIVE_OPERATION__IS_TYPEOF;
+
+	/**
 	 * The feature id for the '<em><b>Is Validating</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4391,31 +3841,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION__IS_VALIDATING = IMPERATIVE_OPERATION__IS_VALIDATING;
 
 	/**
-	 * The feature id for the '<em><b>Owned Parameter</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNED_PARAMETER = IMPERATIVE_OPERATION__OWNED_PARAMETER;
+	int MAPPING_OPERATION__OWNED_PARAMETERS = IMPERATIVE_OPERATION__OWNED_PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Owned Postconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__OWNING_TYPE = IMPERATIVE_OPERATION__OWNING_TYPE;
+	int MAPPING_OPERATION__OWNED_POSTCONDITIONS = IMPERATIVE_OPERATION__OWNED_POSTCONDITIONS;
 
 	/**
-	 * The feature id for the '<em><b>Postcondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Preconditions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__POSTCONDITION = IMPERATIVE_OPERATION__POSTCONDITION;
+	int MAPPING_OPERATION__OWNED_PRECONDITIONS = IMPERATIVE_OPERATION__OWNED_PRECONDITIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Class</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_OPERATION__OWNING_CLASS = IMPERATIVE_OPERATION__OWNING_CLASS;
 
 	/**
 	 * The feature id for the '<em><b>Precedence</b></em>' reference.
@@ -4427,31 +3886,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION__PRECEDENCE = IMPERATIVE_OPERATION__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Precondition</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Raised Exceptions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__PRECONDITION = IMPERATIVE_OPERATION__PRECONDITION;
+	int MAPPING_OPERATION__RAISED_EXCEPTIONS = IMPERATIVE_OPERATION__RAISED_EXCEPTIONS;
 
 	/**
-	 * The feature id for the '<em><b>Raised Exception</b></em>' reference list.
+	 * The feature id for the '<em><b>Redefined Operations</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION__RAISED_EXCEPTION = IMPERATIVE_OPERATION__RAISED_EXCEPTION;
-
-	/**
-	 * The feature id for the '<em><b>Redefined Operation</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION__REDEFINED_OPERATION = IMPERATIVE_OPERATION__REDEFINED_OPERATION;
+	int MAPPING_OPERATION__REDEFINED_OPERATIONS = IMPERATIVE_OPERATION__REDEFINED_OPERATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Body</b></em>' containment reference.
@@ -4589,51 +4039,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_OPERATION___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___MAKE_PARAMETER = IMPERATIVE_OPERATION___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___IS_TEMPLATE = IMPERATIVE_OPERATION___IS_TEMPLATE;
-
-	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___PARAMETERABLE_ELEMENTS = IMPERATIVE_OPERATION___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = IMPERATIVE_OPERATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
-
-	/**
-	 * The operation id for the '<em>Is Template Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___IS_TEMPLATE_PARAMETER = IMPERATIVE_OPERATION___IS_TEMPLATE_PARAMETER;
-
-	/**
 	 * The operation id for the '<em>Validate Compatible Return</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4670,31 +4075,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP = IMPERATIVE_OPERATION___VALIDATE_UNIQUE_PRECONDITION_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_OPERATION___ACCEPT__VISITOR = IMPERATIVE_OPERATION_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Mapping Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_OPERATION_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 2;
+	int MAPPING_OPERATION_OPERATION_COUNT = IMPERATIVE_OPERATION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl <em>Var Parameter</em>}' class.
@@ -4707,40 +4094,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int VAR_PARAMETER = 24;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__EXTENSION = PivotPackage.VARIABLE__EXTENSION;
+	int VAR_PARAMETER__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__OWNED_ANNOTATION = PivotPackage.VARIABLE__OWNED_ANNOTATION;
+	int VAR_PARAMETER__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__OWNED_COMMENT = PivotPackage.VARIABLE__OWNED_COMMENT;
+	int VAR_PARAMETER__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__IS_STATIC = PivotPackage.VARIABLE__IS_STATIC;
+	int VAR_PARAMETER__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4750,6 +4137,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int VAR_PARAMETER__NAME = PivotPackage.VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_PARAMETER__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4770,22 +4166,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int VAR_PARAMETER__TYPE = PivotPackage.VARIABLE__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__IMPLICIT = PivotPackage.VARIABLE__IMPLICIT;
+	int VAR_PARAMETER__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__INIT_EXPRESSION = PivotPackage.VARIABLE__INIT_EXPRESSION;
+	int VAR_PARAMETER__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_PARAMETER__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
@@ -4797,13 +4202,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int VAR_PARAMETER__REPRESENTED_PARAMETER = PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
 
 	/**
-	 * The feature id for the '<em><b>Operation</b></em>' container reference.
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__OPERATION = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+	int VAR_PARAMETER__IS_TYPEOF = PivotPackage.VARIABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_PARAMETER__OWNING_OPERATION = PivotPackage.VARIABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ctx Owner</b></em>' container reference.
@@ -4812,7 +4226,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__CTX_OWNER = PivotPackage.VARIABLE_FEATURE_COUNT + 1;
+	int VAR_PARAMETER__CTX_OWNER = PivotPackage.VARIABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -4821,7 +4235,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__KIND = PivotPackage.VARIABLE_FEATURE_COUNT + 2;
+	int VAR_PARAMETER__KIND = PivotPackage.VARIABLE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Res Owner</b></em>' container reference.
@@ -4830,7 +4244,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER__RES_OWNER = PivotPackage.VARIABLE_FEATURE_COUNT + 3;
+	int VAR_PARAMETER__RES_OWNER = PivotPackage.VARIABLE_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Var Parameter</em>' class.
@@ -4839,7 +4253,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 4;
+	int VAR_PARAMETER_FEATURE_COUNT = PivotPackage.VARIABLE_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -4860,6 +4274,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int VAR_PARAMETER___GET_VALUE__TYPE_STRING = PivotPackage.VARIABLE___GET_VALUE__TYPE_STRING;
 
 	/**
+	 * The operation id for the '<em>Compatible Body</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
 	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4869,49 +4292,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int VAR_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = PivotPackage.VARIABLE___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Compatible Body</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_PARAMETER___MAKE_PARAMETER = PivotPackage.VARIABLE_OPERATION_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.VARIABLE_OPERATION_COUNT + 2;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VAR_PARAMETER___ACCEPT__VISITOR = PivotPackage.VARIABLE_OPERATION_COUNT + 3;
-
-	/**
 	 * The number of operations of the '<em>Var Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_PARAMETER_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 4;
+	int VAR_PARAMETER_OPERATION_COUNT = PivotPackage.VARIABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingParameterImpl <em>Mapping Parameter</em>}' class.
@@ -4924,40 +4311,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_PARAMETER = 14;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__EXTENSION = VAR_PARAMETER__EXTENSION;
+	int MAPPING_PARAMETER__ANNOTATING_COMMENTS = VAR_PARAMETER__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__OWNED_ANNOTATION = VAR_PARAMETER__OWNED_ANNOTATION;
+	int MAPPING_PARAMETER__OWNED_ANNOTATIONS = VAR_PARAMETER__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__OWNED_COMMENT = VAR_PARAMETER__OWNED_COMMENT;
+	int MAPPING_PARAMETER__OWNED_COMMENTS = VAR_PARAMETER__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__IS_STATIC = VAR_PARAMETER__IS_STATIC;
+	int MAPPING_PARAMETER__OWNED_EXTENSIONS = VAR_PARAMETER__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4967,6 +4354,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_PARAMETER__NAME = VAR_PARAMETER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER__IS_MANY = VAR_PARAMETER__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -4987,22 +4383,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_PARAMETER__TYPE = VAR_PARAMETER__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__IMPLICIT = VAR_PARAMETER__IMPLICIT;
+	int MAPPING_PARAMETER__TYPE_VALUE = VAR_PARAMETER__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__INIT_EXPRESSION = VAR_PARAMETER__INIT_EXPRESSION;
+	int MAPPING_PARAMETER__IS_IMPLICIT = VAR_PARAMETER__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER__OWNED_INIT = VAR_PARAMETER__OWNED_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
@@ -5014,13 +4419,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_PARAMETER__REPRESENTED_PARAMETER = VAR_PARAMETER__REPRESENTED_PARAMETER;
 
 	/**
-	 * The feature id for the '<em><b>Operation</b></em>' container reference.
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER__OPERATION = VAR_PARAMETER__OPERATION;
+	int MAPPING_PARAMETER__IS_TYPEOF = VAR_PARAMETER__IS_TYPEOF;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_PARAMETER__OWNING_OPERATION = VAR_PARAMETER__OWNING_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Ctx Owner</b></em>' container reference.
@@ -5095,15 +4509,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_PARAMETER___GET_VALUE__TYPE_STRING = VAR_PARAMETER___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = VAR_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5113,31 +4518,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER___MAKE_PARAMETER = VAR_PARAMETER___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = VAR_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_PARAMETER___ACCEPT__VISITOR = VAR_PARAMETER_OPERATION_COUNT + 1;
+	int MAPPING_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = VAR_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Mapping Parameter</em>' class.
@@ -5146,7 +4533,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_PARAMETER_OPERATION_COUNT = VAR_PARAMETER_OPERATION_COUNT + 2;
+	int MAPPING_PARAMETER_OPERATION_COUNT = VAR_PARAMETER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelParameterImpl <em>Model Parameter</em>}' class.
@@ -5159,40 +4546,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_PARAMETER = 15;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__EXTENSION = VAR_PARAMETER__EXTENSION;
+	int MODEL_PARAMETER__ANNOTATING_COMMENTS = VAR_PARAMETER__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__OWNED_ANNOTATION = VAR_PARAMETER__OWNED_ANNOTATION;
+	int MODEL_PARAMETER__OWNED_ANNOTATIONS = VAR_PARAMETER__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__OWNED_COMMENT = VAR_PARAMETER__OWNED_COMMENT;
+	int MODEL_PARAMETER__OWNED_COMMENTS = VAR_PARAMETER__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__IS_STATIC = VAR_PARAMETER__IS_STATIC;
+	int MODEL_PARAMETER__OWNED_EXTENSIONS = VAR_PARAMETER__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5202,6 +4589,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_PARAMETER__NAME = VAR_PARAMETER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_PARAMETER__IS_MANY = VAR_PARAMETER__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5222,22 +4618,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_PARAMETER__TYPE = VAR_PARAMETER__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__IMPLICIT = VAR_PARAMETER__IMPLICIT;
+	int MODEL_PARAMETER__TYPE_VALUE = VAR_PARAMETER__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__INIT_EXPRESSION = VAR_PARAMETER__INIT_EXPRESSION;
+	int MODEL_PARAMETER__IS_IMPLICIT = VAR_PARAMETER__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_PARAMETER__OWNED_INIT = VAR_PARAMETER__OWNED_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
@@ -5249,13 +4654,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_PARAMETER__REPRESENTED_PARAMETER = VAR_PARAMETER__REPRESENTED_PARAMETER;
 
 	/**
-	 * The feature id for the '<em><b>Operation</b></em>' container reference.
+	 * The feature id for the '<em><b>Is Typeof</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER__OPERATION = VAR_PARAMETER__OPERATION;
+	int MODEL_PARAMETER__IS_TYPEOF = VAR_PARAMETER__IS_TYPEOF;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_PARAMETER__OWNING_OPERATION = VAR_PARAMETER__OWNING_OPERATION;
 
 	/**
 	 * The feature id for the '<em><b>Ctx Owner</b></em>' container reference.
@@ -5312,15 +4726,6 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_PARAMETER___GET_VALUE__TYPE_STRING = VAR_PARAMETER___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = VAR_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
-
-	/**
 	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5330,31 +4735,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION = VAR_PARAMETER___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
-	 * The operation id for the '<em>Make Parameter</em>' operation.
+	 * The operation id for the '<em>Validate Compatible Initialiser Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER___MAKE_PARAMETER = VAR_PARAMETER___MAKE_PARAMETER;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = VAR_PARAMETER_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_PARAMETER___ACCEPT__VISITOR = VAR_PARAMETER_OPERATION_COUNT + 1;
+	int MODEL_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP = VAR_PARAMETER___VALIDATE_COMPATIBLE_INITIALISER_TYPE__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Model Parameter</em>' class.
@@ -5363,7 +4750,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_PARAMETER_OPERATION_COUNT = VAR_PARAMETER_OPERATION_COUNT + 2;
+	int MODEL_PARAMETER_OPERATION_COUNT = VAR_PARAMETER_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelTypeImpl <em>Model Type</em>}' class.
@@ -5376,40 +4763,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE = 16;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__EXTENSION = PivotPackage.CLASS__EXTENSION;
+	int MODEL_TYPE__ANNOTATING_COMMENTS = PivotPackage.CLASS__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_ANNOTATION = PivotPackage.CLASS__OWNED_ANNOTATION;
+	int MODEL_TYPE__OWNED_ANNOTATIONS = PivotPackage.CLASS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_COMMENT = PivotPackage.CLASS__OWNED_COMMENT;
+	int MODEL_TYPE__OWNED_COMMENTS = PivotPackage.CLASS__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__IS_STATIC = PivotPackage.CLASS__IS_STATIC;
+	int MODEL_TYPE__OWNED_EXTENSIONS = PivotPackage.CLASS__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5421,22 +4808,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE__NAME = PivotPackage.CLASS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_TEMPLATE_SIGNATURE = PivotPackage.CLASS__OWNED_TEMPLATE_SIGNATURE;
+	int MODEL_TYPE__OWNED_CONSTRAINTS = PivotPackage.CLASS__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__TEMPLATE_BINDING = PivotPackage.CLASS__TEMPLATE_BINDING;
+	int MODEL_TYPE__OWNED_BINDINGS = PivotPackage.CLASS__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__OWNED_SIGNATURE = PivotPackage.CLASS__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -5448,31 +4844,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE__UNSPECIALIZED_ELEMENT = PivotPackage.CLASS__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNING_TEMPLATE_PARAMETER = PivotPackage.CLASS__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__TEMPLATE_PARAMETER = PivotPackage.CLASS__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__EXTENDED_BYS = PivotPackage.CLASS__EXTENDED_BYS;
+	int MODEL_TYPE__EXTENDERS = PivotPackage.CLASS__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -5482,60 +4860,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MODEL_TYPE__INSTANCE_CLASS_NAME = PivotPackage.CLASS__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__OWNED_ATTRIBUTE = PivotPackage.CLASS__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__OWNED_INVARIANT = PivotPackage.CLASS__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__OWNED_OPERATION = PivotPackage.CLASS__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__PACKAGE = PivotPackage.CLASS__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__SUPER_CLASS = PivotPackage.CLASS__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE__OWNED_RULE = PivotPackage.CLASS__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -5565,22 +4889,58 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE__IS_INTERFACE = PivotPackage.CLASS__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__NESTED_TYPE = PivotPackage.CLASS__NESTED_TYPE;
+	int MODEL_TYPE__OWNED_BEHAVIORS = PivotPackage.CLASS__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE__OWNED_BEHAVIOR = PivotPackage.CLASS__OWNED_BEHAVIOR;
+	int MODEL_TYPE__OWNED_INVARIANTS = PivotPackage.CLASS__OWNED_INVARIANTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__OWNED_OPERATIONS = PivotPackage.CLASS__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__OWNED_PROPERTIES = PivotPackage.CLASS__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__OWNING_PACKAGE = PivotPackage.CLASS__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE__SUPER_CLASSES = PivotPackage.CLASS__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Additional Condition</b></em>' containment reference list.
@@ -5637,31 +4997,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE___GET_VALUE__TYPE_STRING = PivotPackage.CLASS___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE___IS_TEMPLATE = PivotPackage.CLASS___IS_TEMPLATE;
+	int MODEL_TYPE___FLATTENED_TYPE = PivotPackage.CLASS___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE___PARAMETERABLE_ELEMENTS = PivotPackage.CLASS___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = PivotPackage.CLASS___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int MODEL_TYPE___IS_CLASS = PivotPackage.CLASS___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -5673,6 +5024,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE___IS_TEMPLATE_PARAMETER = PivotPackage.CLASS___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE___SPECIALIZE_IN__CALLEXP_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5682,40 +5042,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODEL_TYPE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = PivotPackage.CLASS___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE___SPECIALIZE_IN__OCLEXPRESSION_TYPE = PivotPackage.CLASS___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.CLASS_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE___ACCEPT__VISITOR = PivotPackage.CLASS_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Model Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 2;
+	int MODEL_TYPE_OPERATION_COUNT = PivotPackage.CLASS_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModuleImportImpl <em>Module Import</em>}' class.
@@ -5728,31 +5061,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE_IMPORT = 18;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_IMPORT__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int MODULE_IMPORT__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_IMPORT__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int MODULE_IMPORT__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_IMPORT__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int MODULE_IMPORT__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODULE_IMPORT__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Binding</b></em>' reference list.
@@ -5818,31 +5160,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int MODULE_IMPORT___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE_IMPORT___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODULE_IMPORT___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Module Import</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODULE_IMPORT_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
+	int MODULE_IMPORT_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ObjectExpImpl <em>Object Exp</em>}' class.
@@ -5855,40 +5179,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int OBJECT_EXP = 19;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP__EXTENSION = ImperativeOCLPackage.INSTANTIATION_EXP__EXTENSION;
+	int OBJECT_EXP__ANNOTATING_COMMENTS = ImperativeOCLPackage.INSTANTIATION_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP__OWNED_ANNOTATION = ImperativeOCLPackage.INSTANTIATION_EXP__OWNED_ANNOTATION;
+	int OBJECT_EXP__OWNED_ANNOTATIONS = ImperativeOCLPackage.INSTANTIATION_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP__OWNED_COMMENT = ImperativeOCLPackage.INSTANTIATION_EXP__OWNED_COMMENT;
+	int OBJECT_EXP__OWNED_COMMENTS = ImperativeOCLPackage.INSTANTIATION_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP__IS_STATIC = ImperativeOCLPackage.INSTANTIATION_EXP__IS_STATIC;
+	int OBJECT_EXP__OWNED_EXTENSIONS = ImperativeOCLPackage.INSTANTIATION_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5898,6 +5222,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_EXP__NAME = ImperativeOCLPackage.INSTANTIATION_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_EXP__IS_MANY = ImperativeOCLPackage.INSTANTIATION_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -5916,6 +5249,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_EXP__TYPE = ImperativeOCLPackage.INSTANTIATION_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_EXP__TYPE_VALUE = ImperativeOCLPackage.INSTANTIATION_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Argument</b></em>' containment reference list.
@@ -5990,31 +5332,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int OBJECT_EXP___GET_VALUE__TYPE_STRING = ImperativeOCLPackage.INSTANTIATION_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP___ACCEPT__IMPERATIVEOCLVISITOR = ImperativeOCLPackage.INSTANTIATION_EXP___ACCEPT__IMPERATIVEOCLVISITOR;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_EXP___ACCEPT__QVTOPERATIONALVISITOR = ImperativeOCLPackage.INSTANTIATION_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_EXP___ACCEPT__VISITOR = ImperativeOCLPackage.INSTANTIATION_EXP_OPERATION_COUNT + 1;
+	int OBJECT_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = ImperativeOCLPackage.INSTANTIATION_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Object Exp</em>' class.
@@ -6023,7 +5347,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_EXP_OPERATION_COUNT = ImperativeOCLPackage.INSTANTIATION_EXP_OPERATION_COUNT + 2;
+	int OBJECT_EXP_OPERATION_COUNT = ImperativeOCLPackage.INSTANTIATION_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl <em>Operational Transformation</em>}' class.
@@ -6036,40 +5360,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION = 21;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__EXTENSION = MODULE__EXTENSION;
+	int OPERATIONAL_TRANSFORMATION__ANNOTATING_COMMENTS = MODULE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_ANNOTATION = MODULE__OWNED_ANNOTATION;
+	int OPERATIONAL_TRANSFORMATION__OWNED_ANNOTATIONS = MODULE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_COMMENT = MODULE__OWNED_COMMENT;
+	int OPERATIONAL_TRANSFORMATION__OWNED_COMMENTS = MODULE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__IS_STATIC = MODULE__IS_STATIC;
+	int OPERATIONAL_TRANSFORMATION__OWNED_EXTENSIONS = MODULE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6081,22 +5405,31 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION__NAME = MODULE__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_TEMPLATE_SIGNATURE = MODULE__OWNED_TEMPLATE_SIGNATURE;
+	int OPERATIONAL_TRANSFORMATION__OWNED_CONSTRAINTS = MODULE__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Template Binding</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__TEMPLATE_BINDING = MODULE__TEMPLATE_BINDING;
+	int OPERATIONAL_TRANSFORMATION__OWNED_BINDINGS = MODULE__OWNED_BINDINGS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATIONAL_TRANSFORMATION__OWNED_SIGNATURE = MODULE__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -6108,31 +5441,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION__UNSPECIALIZED_ELEMENT = MODULE__UNSPECIALIZED_ELEMENT;
 
 	/**
-	 * The feature id for the '<em><b>Owning Template Parameter</b></em>' container reference.
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__OWNING_TEMPLATE_PARAMETER = MODULE__OWNING_TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Template Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__TEMPLATE_PARAMETER = MODULE__TEMPLATE_PARAMETER;
-
-	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__EXTENDED_BYS = MODULE__EXTENDED_BYS;
+	int OPERATIONAL_TRANSFORMATION__EXTENDERS = MODULE__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -6142,60 +5457,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int OPERATIONAL_TRANSFORMATION__INSTANCE_CLASS_NAME = MODULE__INSTANCE_CLASS_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owned Attribute</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_ATTRIBUTE = MODULE__OWNED_ATTRIBUTE;
-
-	/**
-	 * The feature id for the '<em><b>Owned Invariant</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_INVARIANT = MODULE__OWNED_INVARIANT;
-
-	/**
-	 * The feature id for the '<em><b>Owned Operation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_OPERATION = MODULE__OWNED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Package</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__PACKAGE = MODULE__PACKAGE;
-
-	/**
-	 * The feature id for the '<em><b>Super Class</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__SUPER_CLASS = MODULE__SUPER_CLASS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_RULE = MODULE__OWNED_RULE;
 
 	/**
 	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
@@ -6225,85 +5486,58 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION__IS_INTERFACE = MODULE__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Nested Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__NESTED_TYPE = MODULE__NESTED_TYPE;
+	int OPERATIONAL_TRANSFORMATION__OWNED_BEHAVIORS = MODULE__OWNED_BEHAVIORS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_BEHAVIOR = MODULE__OWNED_BEHAVIOR;
+	int OPERATIONAL_TRANSFORMATION__OWNED_INVARIANTS = MODULE__OWNED_INVARIANTS;
 
 	/**
-	 * The feature id for the '<em><b>Imported Package</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__IMPORTED_PACKAGE = MODULE__IMPORTED_PACKAGE;
+	int OPERATIONAL_TRANSFORMATION__OWNED_OPERATIONS = MODULE__OWNED_OPERATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__NESTED_PACKAGE = MODULE__NESTED_PACKAGE;
+	int OPERATIONAL_TRANSFORMATION__OWNED_PROPERTIES = MODULE__OWNED_PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Nesting Package</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__NESTING_PACKAGE = MODULE__NESTING_PACKAGE;
+	int OPERATIONAL_TRANSFORMATION__OWNING_PACKAGE = MODULE__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
+	 * The feature id for the '<em><b>Super Classes</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION__NS_PREFIX = MODULE__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__NS_URI = MODULE__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__OWNED_TYPE = MODULE__OWNED_TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Profile Application</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION__PROFILE_APPLICATION = MODULE__PROFILE_APPLICATION;
+	int OPERATIONAL_TRANSFORMATION__SUPER_CLASSES = MODULE__SUPER_CLASSES;
 
 	/**
 	 * The feature id for the '<em><b>Config Property</b></em>' reference list.
@@ -6441,31 +5675,22 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION___GET_VALUE__TYPE_STRING = MODULE___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Is Template</em>' operation.
+	 * The operation id for the '<em>Flattened Type</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION___IS_TEMPLATE = MODULE___IS_TEMPLATE;
+	int OPERATIONAL_TRANSFORMATION___FLATTENED_TYPE = MODULE___FLATTENED_TYPE;
 
 	/**
-	 * The operation id for the '<em>Parameterable Elements</em>' operation.
+	 * The operation id for the '<em>Is Class</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION___PARAMETERABLE_ELEMENTS = MODULE___PARAMETERABLE_ELEMENTS;
-
-	/**
-	 * The operation id for the '<em>Is Compatible With</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT = MODULE___IS_COMPATIBLE_WITH__PARAMETERABLEELEMENT;
+	int OPERATIONAL_TRANSFORMATION___IS_CLASS = MODULE___IS_CLASS;
 
 	/**
 	 * The operation id for the '<em>Is Template Parameter</em>' operation.
@@ -6477,6 +5702,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION___IS_TEMPLATE_PARAMETER = MODULE___IS_TEMPLATE_PARAMETER;
 
 	/**
+	 * The operation id for the '<em>Specialize In</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATIONAL_TRANSFORMATION___SPECIALIZE_IN__CALLEXP_TYPE = MODULE___SPECIALIZE_IN__CALLEXP_TYPE;
+
+	/**
 	 * The operation id for the '<em>Validate Unique Invariant Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6486,40 +5720,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int OPERATIONAL_TRANSFORMATION___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP = MODULE___VALIDATE_UNIQUE_INVARIANT_NAME__DIAGNOSTICCHAIN_MAP;
 
 	/**
-	 * The operation id for the '<em>Specialize In</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION___SPECIALIZE_IN__OCLEXPRESSION_TYPE = MODULE___SPECIALIZE_IN__OCLEXPRESSION_TYPE;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR = MODULE_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATIONAL_TRANSFORMATION___ACCEPT__VISITOR = MODULE_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Operational Transformation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATIONAL_TRANSFORMATION_OPERATION_COUNT = MODULE_OPERATION_COUNT + 2;
+	int OPERATIONAL_TRANSFORMATION_OPERATION_COUNT = MODULE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ResolveExpImpl <em>Resolve Exp</em>}' class.
@@ -6532,40 +5739,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_EXP = 22;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__EXTENSION = PivotPackage.CALL_EXP__EXTENSION;
+	int RESOLVE_EXP__ANNOTATING_COMMENTS = PivotPackage.CALL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__OWNED_ANNOTATION = PivotPackage.CALL_EXP__OWNED_ANNOTATION;
+	int RESOLVE_EXP__OWNED_ANNOTATIONS = PivotPackage.CALL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__OWNED_COMMENT = PivotPackage.CALL_EXP__OWNED_COMMENT;
+	int RESOLVE_EXP__OWNED_COMMENTS = PivotPackage.CALL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__IS_STATIC = PivotPackage.CALL_EXP__IS_STATIC;
+	int RESOLVE_EXP__OWNED_EXTENSIONS = PivotPackage.CALL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6575,6 +5782,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOLVE_EXP__NAME = PivotPackage.CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_EXP__IS_MANY = PivotPackage.CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -6595,22 +5811,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_EXP__TYPE = PivotPackage.CALL_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__IMPLICIT = PivotPackage.CALL_EXP__IMPLICIT;
+	int RESOLVE_EXP__TYPE_VALUE = PivotPackage.CALL_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP__SOURCE = PivotPackage.CALL_EXP__SOURCE;
+	int RESOLVE_EXP__IS_IMPLICIT = PivotPackage.CALL_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_EXP__IS_SAFE = PivotPackage.CALL_EXP__IS_SAFE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_EXP__OWNED_SOURCE = PivotPackage.CALL_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -6685,22 +5919,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_EXP___GET_VALUE__TYPE_STRING = PivotPackage.CALL_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.CALL_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOLVE_EXP___ACCEPT__VISITOR = PivotPackage.CALL_EXP_OPERATION_COUNT + 1;
+	int RESOLVE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Resolve Exp</em>' class.
@@ -6709,7 +5934,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_EXP_OPERATION_COUNT = PivotPackage.CALL_EXP_OPERATION_COUNT + 2;
+	int RESOLVE_EXP_OPERATION_COUNT = PivotPackage.CALL_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ResolveInExpImpl <em>Resolve In Exp</em>}' class.
@@ -6722,40 +5947,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_IN_EXP = 23;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__EXTENSION = RESOLVE_EXP__EXTENSION;
+	int RESOLVE_IN_EXP__ANNOTATING_COMMENTS = RESOLVE_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__OWNED_ANNOTATION = RESOLVE_EXP__OWNED_ANNOTATION;
+	int RESOLVE_IN_EXP__OWNED_ANNOTATIONS = RESOLVE_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__OWNED_COMMENT = RESOLVE_EXP__OWNED_COMMENT;
+	int RESOLVE_IN_EXP__OWNED_COMMENTS = RESOLVE_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__IS_STATIC = RESOLVE_EXP__IS_STATIC;
+	int RESOLVE_IN_EXP__OWNED_EXTENSIONS = RESOLVE_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -6765,6 +5990,15 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int RESOLVE_IN_EXP__NAME = RESOLVE_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_IN_EXP__IS_MANY = RESOLVE_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -6785,22 +6019,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_IN_EXP__TYPE = RESOLVE_EXP__TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__IMPLICIT = RESOLVE_EXP__IMPLICIT;
+	int RESOLVE_IN_EXP__TYPE_VALUE = RESOLVE_EXP__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP__SOURCE = RESOLVE_EXP__SOURCE;
+	int RESOLVE_IN_EXP__IS_IMPLICIT = RESOLVE_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_IN_EXP__IS_SAFE = RESOLVE_EXP__IS_SAFE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RESOLVE_IN_EXP__OWNED_SOURCE = RESOLVE_EXP__OWNED_SOURCE;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -6884,22 +6136,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int RESOLVE_IN_EXP___GET_VALUE__TYPE_STRING = RESOLVE_EXP___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
+	 * The operation id for the '<em>Compatible Body</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP___ACCEPT__QVTOPERATIONALVISITOR = RESOLVE_EXP_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RESOLVE_IN_EXP___ACCEPT__VISITOR = RESOLVE_EXP_OPERATION_COUNT + 1;
+	int RESOLVE_IN_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = RESOLVE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
 	 * The number of operations of the '<em>Resolve In Exp</em>' class.
@@ -6908,7 +6151,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RESOLVE_IN_EXP_OPERATION_COUNT = RESOLVE_EXP_OPERATION_COUNT + 2;
+	int RESOLVE_IN_EXP_OPERATION_COUNT = RESOLVE_EXP_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.TagImpl <em>Tag</em>}' class.
@@ -6921,31 +6164,40 @@ public interface QVTOperationalPackage extends EPackage {
 	int TAG = 25;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int TAG__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int TAG__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int TAG__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TAG__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -7002,59 +6254,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int TAG___GET_VALUE__TYPE_STRING = PivotPackage.ELEMENT___GET_VALUE__TYPE_STRING;
 
 	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG___ACCEPT__QVTOPERATIONALVISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Accept</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TAG___ACCEPT__VISITOR = PivotPackage.ELEMENT_OPERATION_COUNT + 1;
-
-	/**
 	 * The number of operations of the '<em>Tag</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TAG_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor <em>Visitor</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.impl.QVTOperationalPackageImpl#getQVTOperationalVisitor()
-	 * @generated
-	 */
-	int QVT_OPERATIONAL_VISITOR = 26;
-
-	/**
-	 * The number of structural features of the '<em>Visitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QVT_OPERATIONAL_VISITOR_FEATURE_COUNT = ImperativeOCLPackage.IMPERATIVE_OCL_VISITOR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Visitor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int QVT_OPERATIONAL_VISITOR_OPERATION_COUNT = ImperativeOCLPackage.IMPERATIVE_OCL_VISITOR_OPERATION_COUNT + 0;
+	int TAG_OPERATION_COUNT = PivotPackage.ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DirectionKind <em>Direction Kind</em>}' enum.
@@ -7064,7 +6270,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.impl.QVTOperationalPackageImpl#getDirectionKind()
 	 * @generated
 	 */
-	int DIRECTION_KIND = 27;
+	int DIRECTION_KIND = 26;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImportKind <em>Import Kind</em>}' enum.
@@ -7074,7 +6280,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.impl.QVTOperationalPackageImpl#getImportKind()
 	 * @generated
 	 */
-	int IMPORT_KIND = 28;
+	int IMPORT_KIND = 27;
 
 
 	/**
@@ -7088,26 +6294,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EClass getConstructor();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Constructor#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Constructor#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getConstructor__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Constructor#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Constructor#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getConstructor__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody <em>Constructor Body</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7116,26 +6302,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getConstructorBody();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getConstructorBody__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getConstructorBody__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty <em>Contextual Property</em>}'.
@@ -7181,26 +6347,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getContextualProperty_Overridden();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getContextualProperty__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getContextualProperty__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation <em>Dummy Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7209,26 +6355,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getDummyRelation();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getDummyRelation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDummyRelation__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain <em>Dummy Relation Domain</em>}'.
@@ -7241,26 +6367,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EClass getDummyRelationDomain();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getDummyRelationDomain__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDummyRelationDomain__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation <em>Dummy Relational Transformation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7271,26 +6377,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EClass getDummyRelationalTransformation();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getDummyRelationalTransformation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getDummyRelationalTransformation__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation <em>Entry Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7299,26 +6385,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEntryOperation();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getEntryOperation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getEntryOperation__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Helper <em>Helper</em>}'.
@@ -7342,26 +6408,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EAttribute getHelper_IsQuery();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Helper#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Helper#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getHelper__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Helper#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Helper#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getHelper__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp <em>Imperative Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7381,26 +6427,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImperativeCallExp_IsVirtual();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getImperativeCallExp__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getImperativeCallExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation <em>Imperative Operation</em>}'.
@@ -7468,26 +6494,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getImperativeOperation_Result();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getImperativeOperation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getImperativeOperation__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Library <em>Library</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7496,26 +6502,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getLibrary();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Library#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Library#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getLibrary__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Library#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Library#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getLibrary__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody <em>Mapping Body</em>}'.
@@ -7550,26 +6536,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getMappingBody_InitSection();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getMappingBody__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getMappingBody__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp <em>Mapping Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7589,26 +6555,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getMappingCallExp_IsStrict();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getMappingCallExp__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getMappingCallExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation <em>Mapping Operation</em>}'.
@@ -7687,26 +6633,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getMappingOperation_Where();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getMappingOperation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getMappingOperation__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter <em>Mapping Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7739,26 +6665,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getMappingParameter_ReferredDomain();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getMappingParameter__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getMappingParameter__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter <em>Model Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7767,26 +6673,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getModelParameter();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getModelParameter__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getModelParameter__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType <em>Model Type</em>}'.
@@ -7830,26 +6716,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelType_Metamodel();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getModelType__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModelType#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getModelType__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module <em>Module</em>}'.
@@ -7939,26 +6805,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getModule_UsedModelType();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Module#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getModule__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Module#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getModule__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport <em>Module Import</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8013,26 +6859,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getModuleImport_Module();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getModuleImport__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getModuleImport__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp <em>Object Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8063,26 +6889,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getObjectExp_ReferredObject();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getObjectExp__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getObjectExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody <em>Operation Body</em>}'.
@@ -8126,26 +6932,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getOperationBody_Variable();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getOperationBody__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getOperationBody__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation <em>Operational Transformation</em>}'.
@@ -8213,26 +6999,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getOperationalTransformation_Relation();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getOperationalTransformation__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getOperationalTransformation__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp <em>Resolve Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8298,26 +7064,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getResolveExp_Target();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getResolveExp__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getResolveExp__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp <em>Resolve In Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8337,26 +7083,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getResolveInExp_InMapping();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getResolveInExp__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getResolveInExp__Accept__Visitor();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter <em>Var Parameter</em>}'.
@@ -8402,26 +7128,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EReference getVarParameter_ResOwner();
 
 	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getVarParameter__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getVarParameter__Accept__Visitor();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag <em>Tag</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8463,37 +7169,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTag_Elements();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Tag#accept(org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor)
-	 * @generated
-	 */
-	EOperation getTag__Accept__QVTOperationalVisitor();
-
-	/**
-	 * Returns the meta object for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag#accept(org.eclipse.ocl.examples.pivot.util.Visitor) <em>Accept</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Accept</em>' operation.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.Tag#accept(org.eclipse.ocl.examples.pivot.util.Visitor)
-	 * @generated
-	 */
-	EOperation getTag__Accept__Visitor();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor <em>Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Visitor</em>'.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
-	 * @model instanceClass="org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor" typeParameters="R" superTypes="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 * @generated
-	 */
-	EClass getQVTOperationalVisitor();
 
 	/**
 	 * Returns the meta object for enum '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DirectionKind <em>Direction Kind</em>}'.
@@ -8549,22 +7224,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EClass CONSTRUCTOR = eINSTANCE.getConstructor();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONSTRUCTOR___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getConstructor__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONSTRUCTOR___ACCEPT__VISITOR = eINSTANCE.getConstructor__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ConstructorBodyImpl <em>Constructor Body</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8573,22 +7232,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass CONSTRUCTOR_BODY = eINSTANCE.getConstructorBody();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONSTRUCTOR_BODY___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getConstructorBody__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONSTRUCTOR_BODY___ACCEPT__VISITOR = eINSTANCE.getConstructorBody__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ContextualPropertyImpl <em>Contextual Property</em>}' class.
@@ -8625,22 +7268,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference CONTEXTUAL_PROPERTY__OVERRIDDEN = eINSTANCE.getContextualProperty_Overridden();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONTEXTUAL_PROPERTY___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getContextualProperty__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation CONTEXTUAL_PROPERTY___ACCEPT__VISITOR = eINSTANCE.getContextualProperty__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationImpl <em>Dummy Relation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8649,22 +7276,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DUMMY_RELATION = eINSTANCE.getDummyRelation();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getDummyRelation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATION___ACCEPT__VISITOR = eINSTANCE.getDummyRelation__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationDomainImpl <em>Dummy Relation Domain</em>}' class.
@@ -8677,22 +7288,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EClass DUMMY_RELATION_DOMAIN = eINSTANCE.getDummyRelationDomain();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATION_DOMAIN___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getDummyRelationDomain__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATION_DOMAIN___ACCEPT__VISITOR = eINSTANCE.getDummyRelationDomain__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.DummyRelationalTransformationImpl <em>Dummy Relational Transformation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8703,22 +7298,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EClass DUMMY_RELATIONAL_TRANSFORMATION = eINSTANCE.getDummyRelationalTransformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getDummyRelationalTransformation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation DUMMY_RELATIONAL_TRANSFORMATION___ACCEPT__VISITOR = eINSTANCE.getDummyRelationalTransformation__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.EntryOperationImpl <em>Entry Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8727,22 +7306,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ENTRY_OPERATION = eINSTANCE.getEntryOperation();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENTRY_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getEntryOperation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENTRY_OPERATION___ACCEPT__VISITOR = eINSTANCE.getEntryOperation__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.HelperImpl <em>Helper</em>}' class.
@@ -8763,22 +7326,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EAttribute HELPER__IS_QUERY = eINSTANCE.getHelper_IsQuery();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation HELPER___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getHelper__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation HELPER___ACCEPT__VISITOR = eINSTANCE.getHelper__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ImperativeCallExpImpl <em>Imperative Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8795,22 +7342,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPERATIVE_CALL_EXP__IS_VIRTUAL = eINSTANCE.getImperativeCallExp_IsVirtual();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_CALL_EXP___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getImperativeCallExp__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_CALL_EXP___ACCEPT__VISITOR = eINSTANCE.getImperativeCallExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ImperativeOperationImpl <em>Imperative Operation</em>}' class.
@@ -8863,22 +7394,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference IMPERATIVE_OPERATION__RESULT = eINSTANCE.getImperativeOperation_Result();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getImperativeOperation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation IMPERATIVE_OPERATION___ACCEPT__VISITOR = eINSTANCE.getImperativeOperation__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.LibraryImpl <em>Library</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8887,22 +7402,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass LIBRARY = eINSTANCE.getLibrary();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIBRARY___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getLibrary__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation LIBRARY___ACCEPT__VISITOR = eINSTANCE.getLibrary__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingBodyImpl <em>Mapping Body</em>}' class.
@@ -8931,22 +7430,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference MAPPING_BODY__INIT_SECTION = eINSTANCE.getMappingBody_InitSection();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_BODY___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getMappingBody__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_BODY___ACCEPT__VISITOR = eINSTANCE.getMappingBody__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingCallExpImpl <em>Mapping Call Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -8963,22 +7446,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute MAPPING_CALL_EXP__IS_STRICT = eINSTANCE.getMappingCallExp_IsStrict();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_CALL_EXP___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getMappingCallExp__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_CALL_EXP___ACCEPT__VISITOR = eINSTANCE.getMappingCallExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingOperationImpl <em>Mapping Operation</em>}' class.
@@ -9039,22 +7506,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference MAPPING_OPERATION__WHERE = eINSTANCE.getMappingOperation_Where();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_OPERATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getMappingOperation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_OPERATION___ACCEPT__VISITOR = eINSTANCE.getMappingOperation__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.MappingParameterImpl <em>Mapping Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9081,22 +7532,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference MAPPING_PARAMETER__REFERRED_DOMAIN = eINSTANCE.getMappingParameter_ReferredDomain();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getMappingParameter__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MAPPING_PARAMETER___ACCEPT__VISITOR = eINSTANCE.getMappingParameter__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelParameterImpl <em>Model Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9105,22 +7540,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL_PARAMETER = eINSTANCE.getModelParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODEL_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getModelParameter__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODEL_PARAMETER___ACCEPT__VISITOR = eINSTANCE.getModelParameter__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModelTypeImpl <em>Model Type</em>}' class.
@@ -9155,22 +7574,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_TYPE__METAMODEL = eINSTANCE.getModelType_Metamodel();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODEL_TYPE___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getModelType__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODEL_TYPE___ACCEPT__VISITOR = eINSTANCE.getModelType__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModuleImpl <em>Module</em>}' class.
@@ -9239,22 +7642,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference MODULE__USED_MODEL_TYPE = eINSTANCE.getModule_UsedModelType();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODULE___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getModule__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODULE___ACCEPT__VISITOR = eINSTANCE.getModule__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ModuleImportImpl <em>Module Import</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9297,22 +7684,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference MODULE_IMPORT__MODULE = eINSTANCE.getModuleImport_Module();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODULE_IMPORT___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getModuleImport__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation MODULE_IMPORT___ACCEPT__VISITOR = eINSTANCE.getModuleImport__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ObjectExpImpl <em>Object Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9337,22 +7708,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OBJECT_EXP__REFERRED_OBJECT = eINSTANCE.getObjectExp_ReferredObject();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OBJECT_EXP___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getObjectExp__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OBJECT_EXP___ACCEPT__VISITOR = eINSTANCE.getObjectExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationBodyImpl <em>Operation Body</em>}' class.
@@ -9387,22 +7742,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference OPERATION_BODY__VARIABLE = eINSTANCE.getOperationBody_Variable();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OPERATION_BODY___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getOperationBody__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OPERATION_BODY___ACCEPT__VISITOR = eINSTANCE.getOperationBody__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl <em>Operational Transformation</em>}' class.
@@ -9455,22 +7794,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference OPERATIONAL_TRANSFORMATION__RELATION = eINSTANCE.getOperationalTransformation_Relation();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OPERATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getOperationalTransformation__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation OPERATIONAL_TRANSFORMATION___ACCEPT__VISITOR = eINSTANCE.getOperationalTransformation__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ResolveExpImpl <em>Resolve Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9521,22 +7844,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference RESOLVE_EXP__TARGET = eINSTANCE.getResolveExp_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RESOLVE_EXP___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getResolveExp__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RESOLVE_EXP___ACCEPT__VISITOR = eINSTANCE.getResolveExp__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ResolveInExpImpl <em>Resolve In Exp</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9553,22 +7860,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference RESOLVE_IN_EXP__IN_MAPPING = eINSTANCE.getResolveInExp_InMapping();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RESOLVE_IN_EXP___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getResolveInExp__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation RESOLVE_IN_EXP___ACCEPT__VISITOR = eINSTANCE.getResolveInExp__Accept__Visitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.VarParameterImpl <em>Var Parameter</em>}' class.
@@ -9605,22 +7896,6 @@ public interface QVTOperationalPackage extends EPackage {
 		EReference VAR_PARAMETER__RES_OWNER = eINSTANCE.getVarParameter_ResOwner();
 
 		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VAR_PARAMETER___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getVarParameter__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation VAR_PARAMETER___ACCEPT__VISITOR = eINSTANCE.getVarParameter__Accept__Visitor();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.TagImpl <em>Tag</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9653,32 +7928,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TAG__ELEMENTS = eINSTANCE.getTag_Elements();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TAG___ACCEPT__QVTOPERATIONALVISITOR = eINSTANCE.getTag__Accept__QVTOperationalVisitor();
-
-		/**
-		 * The meta object literal for the '<em><b>Accept</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation TAG___ACCEPT__VISITOR = eINSTANCE.getTag__Accept__Visitor();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor <em>Visitor</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
-		 * @see org.eclipse.qvto.examples.pivot.qvtoperational.impl.QVTOperationalPackageImpl#getQVTOperationalVisitor()
-		 * @generated
-		 */
-		EClass QVT_OPERATIONAL_VISITOR = eINSTANCE.getQVTOperationalVisitor();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.DirectionKind <em>Direction Kind</em>}' enum.

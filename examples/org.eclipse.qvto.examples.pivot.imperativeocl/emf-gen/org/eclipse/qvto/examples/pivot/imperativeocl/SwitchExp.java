@@ -14,10 +14,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,11 +23,11 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#getAlternativePart <em>Alternative Part</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp#getElsePart <em>Else Part</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getSwitchExp()
  * @model
@@ -80,23 +77,5 @@ public interface SwitchExp extends ImperativeExpression {
 	 * @generated
 	 */
 	void setElsePart(OCLExpression value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitSwitchExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitSwitchExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // SwitchExp

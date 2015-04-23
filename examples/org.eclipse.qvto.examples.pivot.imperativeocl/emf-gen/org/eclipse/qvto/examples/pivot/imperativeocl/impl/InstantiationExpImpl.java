@@ -13,27 +13,19 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
@@ -44,12 +36,12 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.InstantiationExpImpl#getArgument <em>Argument</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.InstantiationExpImpl#getExtent <em>Extent</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.InstantiationExpImpl#getInstantiatedClass <em>Instantiated Class</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -82,7 +74,7 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Class instantiatedClass;
+	protected org.eclipse.ocl.pivot.Class instantiatedClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,7 +113,7 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	 * @generated
 	 */
 	public Variable getExtent() {
-		if (extent != null && ((EObject)extent).eIsProxy()) {
+		if (extent != null && extent.eIsProxy()) {
 			InternalEObject oldExtent = (InternalEObject)extent;
 			extent = (Variable)eResolveProxy(oldExtent);
 			if (extent != oldExtent) {
@@ -158,10 +150,10 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getInstantiatedClass() {
-		if (instantiatedClass != null && ((EObject)instantiatedClass).eIsProxy()) {
+	public org.eclipse.ocl.pivot.Class getInstantiatedClass() {
+		if (instantiatedClass != null && instantiatedClass.eIsProxy()) {
 			InternalEObject oldInstantiatedClass = (InternalEObject)instantiatedClass;
-			instantiatedClass = (org.eclipse.ocl.examples.pivot.Class)eResolveProxy(oldInstantiatedClass);
+			instantiatedClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldInstantiatedClass);
 			if (instantiatedClass != oldInstantiatedClass) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ImperativeOCLPackage.INSTANTIATION_EXP__INSTANTIATED_CLASS, oldInstantiatedClass, instantiatedClass));
@@ -175,7 +167,7 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class basicGetInstantiatedClass() {
+	public org.eclipse.ocl.pivot.Class basicGetInstantiatedClass() {
 		return instantiatedClass;
 	}
 
@@ -184,29 +176,11 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInstantiatedClass(org.eclipse.ocl.examples.pivot.Class newInstantiatedClass) {
-		org.eclipse.ocl.examples.pivot.Class oldInstantiatedClass = instantiatedClass;
+	public void setInstantiatedClass(org.eclipse.ocl.pivot.Class newInstantiatedClass) {
+		org.eclipse.ocl.pivot.Class oldInstantiatedClass = instantiatedClass;
 		instantiatedClass = newInstantiatedClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLPackage.INSTANTIATION_EXP__INSTANTIATED_CLASS, oldInstantiatedClass, instantiatedClass));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final ImperativeOCLVisitor<R> v) {
-		return v.visitInstantiationExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((ImperativeOCLVisitor<R>)v).visitInstantiationExp(this);
 	}
 
 	/**
@@ -260,7 +234,7 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 				setExtent((Variable)newValue);
 				return;
 			case ImperativeOCLPackage.INSTANTIATION_EXP__INSTANTIATED_CLASS:
-				setInstantiatedClass((org.eclipse.ocl.examples.pivot.Class)newValue);
+				setInstantiatedClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,7 +255,7 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 				setExtent((Variable)null);
 				return;
 			case ImperativeOCLPackage.INSTANTIATION_EXP__INSTANTIATED_CLASS:
-				setInstantiatedClass((org.eclipse.ocl.examples.pivot.Class)null);
+				setInstantiatedClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -306,20 +280,13 @@ public class InstantiationExpImpl extends ImperativeExpressionImpl implements In
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ImperativeOCLPackage.INSTANTIATION_EXP___ACCEPT__IMPERATIVEOCLVISITOR:
-				return accept((ImperativeOCLVisitor)arguments.get(0));
-			case ImperativeOCLPackage.INSTANTIATION_EXP___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((ImperativeOCLVisitor<?>)visitor).visitInstantiationExp(this);
 	}
 
 } //InstantiationExpImpl

@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNullImperativeOCLVisitor<R, C>
-	extends org.eclipse.ocl.examples.pivot.util.AbstractNullVisitor<R, C> implements ImperativeOCLVisitor<R>
+	extends org.eclipse.ocl.pivot.util.AbstractNullVisitor<R, C> implements ImperativeOCLVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

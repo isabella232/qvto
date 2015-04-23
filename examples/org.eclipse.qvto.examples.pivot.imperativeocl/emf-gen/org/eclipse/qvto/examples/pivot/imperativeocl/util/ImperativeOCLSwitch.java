@@ -15,30 +15,57 @@ package org.eclipse.qvto.examples.pivot.imperativeocl.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-
-import org.eclipse.ocl.examples.pivot.util.Visitable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.FeatureCallExp;
+import org.eclipse.ocl.pivot.LiteralExp;
+import org.eclipse.ocl.pivot.LoopExp;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvto.examples.pivot.imperativeocl.*;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart;
+import org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ForExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
+import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ListType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.LogExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart;
+import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType;
+import org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.TryExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.Typedef;
+import org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp;
+import org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,7 +105,7 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -230,9 +257,8 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 				if (result == null) result = caseClass(dictionaryType);
 				if (result == null) result = caseType(dictionaryType);
 				if (result == null) result = caseNamespace(dictionaryType);
-				if (result == null) result = caseNamedElement(dictionaryType);
 				if (result == null) result = caseTemplateableElement(dictionaryType);
-				if (result == null) result = caseParameterableElement(dictionaryType);
+				if (result == null) result = caseNamedElement(dictionaryType);
 				if (result == null) result = caseElement(dictionaryType);
 				if (result == null) result = caseNameable(dictionaryType);
 				if (result == null) result = caseVisitable(dictionaryType);
@@ -332,9 +358,8 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 				if (result == null) result = caseClass(listType);
 				if (result == null) result = caseType(listType);
 				if (result == null) result = caseNamespace(listType);
-				if (result == null) result = caseNamedElement(listType);
 				if (result == null) result = caseTemplateableElement(listType);
-				if (result == null) result = caseParameterableElement(listType);
+				if (result == null) result = caseNamedElement(listType);
 				if (result == null) result = caseElement(listType);
 				if (result == null) result = caseNameable(listType);
 				if (result == null) result = caseVisitable(listType);
@@ -385,9 +410,8 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 				if (result == null) result = caseClass(orderedTupleType);
 				if (result == null) result = caseType(orderedTupleType);
 				if (result == null) result = caseNamespace(orderedTupleType);
-				if (result == null) result = caseNamedElement(orderedTupleType);
 				if (result == null) result = caseTemplateableElement(orderedTupleType);
-				if (result == null) result = caseParameterableElement(orderedTupleType);
+				if (result == null) result = caseNamedElement(orderedTupleType);
 				if (result == null) result = caseElement(orderedTupleType);
 				if (result == null) result = caseNameable(orderedTupleType);
 				if (result == null) result = caseVisitable(orderedTupleType);
@@ -452,9 +476,8 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 				if (result == null) result = caseClass(typedef);
 				if (result == null) result = caseType(typedef);
 				if (result == null) result = caseNamespace(typedef);
-				if (result == null) result = caseNamedElement(typedef);
 				if (result == null) result = caseTemplateableElement(typedef);
-				if (result == null) result = caseParameterableElement(typedef);
+				if (result == null) result = caseNamedElement(typedef);
 				if (result == null) result = caseElement(typedef);
 				if (result == null) result = caseNameable(typedef);
 				if (result == null) result = caseVisitable(typedef);
@@ -510,13 +533,6 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElement(whileExp);
 				if (result == null) result = caseNameable(whileExp);
 				if (result == null) result = caseVisitable(whileExp);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImperativeOCLPackage.IMPERATIVE_OCL_VISITOR: {
-				ImperativeOCLVisitor<?> imperativeOCLVisitor = (ImperativeOCLVisitor<?>)theEObject;
-				T result = caseImperativeOCLVisitor(imperativeOCLVisitor);
-				if (result == null) result = caseVisitor(imperativeOCLVisitor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -990,21 +1006,6 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <R> T caseImperativeOCLVisitor(ImperativeOCLVisitor<R> object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1045,7 +1046,7 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNameable(org.eclipse.ocl.examples.domain.elements.Nameable object) {
+	public T caseNameable(Nameable object) {
 		return null;
 	}
 
@@ -1110,36 +1111,6 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTemplateableElement(TemplateableElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameterableElement(ParameterableElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1170,6 +1141,21 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Templateable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTemplateableElement(TemplateableElement object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Class</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1180,7 +1166,7 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClass(org.eclipse.ocl.examples.pivot.Class object) {
+	public T caseClass(org.eclipse.ocl.pivot.Class object) {
 		return null;
 	}
 
@@ -1286,21 +1272,6 @@ public class ImperativeOCLSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperationCallExp(OperationCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Visitor</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public <R> T caseVisitor(Visitor<R> object) {
 		return null;
 	}
 

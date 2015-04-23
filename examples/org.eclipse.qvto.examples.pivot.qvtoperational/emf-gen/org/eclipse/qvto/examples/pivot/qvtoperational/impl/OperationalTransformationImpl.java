@@ -13,30 +13,22 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.examples.pivot.Property;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
-import org.eclipse.qvto.examples.pivot.qvtoperational.Module;
 import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
@@ -47,6 +39,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl#getIntermediateClass <em>Intermediate Class</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl#getIntermediateProperty <em>Intermediate Property</em>}</li>
@@ -54,7 +47,6 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl#getRefined <em>Refined</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.OperationalTransformationImpl#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -67,7 +59,7 @@ public class OperationalTransformationImpl extends ModuleImpl implements Operati
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Class> intermediateClass;
+	protected EList<org.eclipse.ocl.pivot.Class> intermediateClass;
 
 	/**
 	 * The cached value of the '{@link #getIntermediateProperty() <em>Intermediate Property</em>}' reference list.
@@ -133,9 +125,9 @@ public class OperationalTransformationImpl extends ModuleImpl implements Operati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Class> getIntermediateClass() {
+	public EList<org.eclipse.ocl.pivot.Class> getIntermediateClass() {
 		if (intermediateClass == null) {
-			intermediateClass = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Class>(org.eclipse.ocl.examples.pivot.Class.class, this, QVTOperationalPackage.OPERATIONAL_TRANSFORMATION__INTERMEDIATE_CLASS);
+			intermediateClass = new EObjectResolvingEList<org.eclipse.ocl.pivot.Class>(org.eclipse.ocl.pivot.Class.class, this, QVTOperationalPackage.OPERATIONAL_TRANSFORMATION__INTERMEDIATE_CLASS);
 		}
 		return intermediateClass;
 	}
@@ -219,24 +211,6 @@ public class OperationalTransformationImpl extends ModuleImpl implements Operati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitOperationalTransformation(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitOperationalTransformation(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -282,7 +256,7 @@ public class OperationalTransformationImpl extends ModuleImpl implements Operati
 		switch (featureID) {
 			case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION__INTERMEDIATE_CLASS:
 				getIntermediateClass().clear();
-				getIntermediateClass().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Class>)newValue);
+				getIntermediateClass().addAll((Collection<? extends org.eclipse.ocl.pivot.Class>)newValue);
 				return;
 			case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION__INTERMEDIATE_PROPERTY:
 				getIntermediateProperty().clear();
@@ -353,37 +327,13 @@ public class OperationalTransformationImpl extends ModuleImpl implements Operati
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == Module.class) {
-			switch (baseOperationID) {
-				case QVTOperationalPackage.MODULE___ACCEPT__QVTOPERATIONALVISITOR: return QVTOperationalPackage.OPERATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR;
-				case QVTOperationalPackage.MODULE___ACCEPT__VISITOR: return QVTOperationalPackage.OPERATIONAL_TRANSFORMATION___ACCEPT__VISITOR;
-				default: return super.eDerivedOperationID(baseOperationID, baseClass);
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitOperationalTransformation(this);
 	}
 
 } //OperationalTransformationImpl

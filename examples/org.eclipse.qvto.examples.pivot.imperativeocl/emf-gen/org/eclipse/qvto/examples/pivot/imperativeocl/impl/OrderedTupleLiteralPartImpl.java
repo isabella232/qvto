@@ -13,21 +13,14 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.internal.ElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
@@ -38,10 +31,10 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.impl.OrderedTupleLiteralPartImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -123,24 +116,6 @@ public class OrderedTupleLiteralPartImpl extends ElementImpl implements OrderedT
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <R> R accept(final ImperativeOCLVisitor<R> v) {
-		return v.visitOrderedTupleLiteralPart(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((ImperativeOCLVisitor<R>)v).visitOrderedTupleLiteralPart(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -209,20 +184,13 @@ public class OrderedTupleLiteralPartImpl extends ElementImpl implements OrderedT
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_PART___ACCEPT__IMPERATIVEOCLVISITOR:
-				return accept((ImperativeOCLVisitor)arguments.get(0));
-			case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_PART___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((ImperativeOCLVisitor<?>)visitor).visitOrderedTupleLiteralPart(this);
 	}
 
 } //OrderedTupleLiteralPartImpl

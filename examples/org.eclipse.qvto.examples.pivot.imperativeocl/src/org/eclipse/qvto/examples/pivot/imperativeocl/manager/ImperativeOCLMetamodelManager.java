@@ -13,9 +13,8 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.manager;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.StandaloneProjectMap;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 
 
 /**
@@ -24,18 +23,10 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
  * @author adolfosbh
  *
  */
-public class ImperativeOCLMetamodelManager extends MetaModelManager {
+public class ImperativeOCLMetamodelManager extends PivotMetamodelManager {
 
-	// FIXME initialize defaultStandardLibrary when available
-	public ImperativeOCLMetamodelManager() {
-		super();
-	}
-	
-	public ImperativeOCLMetamodelManager(@NonNull ResourceSet resourceSet) {
-		super(resourceSet);
-	}
-	
-	public ImperativeOCLMetamodelManager(@NonNull StandaloneProjectMap projectMap) {
-		super(projectMap);
+	public ImperativeOCLMetamodelManager(EnvironmentFactoryInternal environmentFactory, ResourceSet asResourceSet) {
+		super(environmentFactory, asResourceSet);
+		// TODO Auto-generated constructor stub
 	}
 }

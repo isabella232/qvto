@@ -13,11 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
-import java.lang.reflect.InvocationTargetException;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
@@ -26,8 +23,6 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Break Exp</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
@@ -52,38 +47,13 @@ public class BreakExpImpl extends ImperativeExpressionImpl implements BreakExp {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
-	public <R> R accept(final ImperativeOCLVisitor<R> v) {
-		return v.visitBreakExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((ImperativeOCLVisitor<R>)v).visitBreakExp(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case ImperativeOCLPackage.BREAK_EXP___ACCEPT__IMPERATIVEOCLVISITOR:
-				return accept((ImperativeOCLVisitor)arguments.get(0));
-			case ImperativeOCLPackage.BREAK_EXP___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((ImperativeOCLVisitor<?>)visitor).visitBreakExp(this);
 	}
 
 } //BreakExpImpl

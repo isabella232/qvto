@@ -1,4 +1,4 @@
-/**
+/*******************************************************************************
  * <copyright>
  * Copyright (c) 2013 Willink Transformations, University of York, and others.
  * All rights reserved. This program and the accompanying materials
@@ -21,18 +21,18 @@ package	org.eclipse.qvto.examples.pivot.qvtoperational.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLAS2MonikerVisitor;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLASSaverNormalizeVisitor;
 
 /**
- * An AbstractQVTOperationalAS2MonikerVisitor provides a default implementation for each
+ * An AbstractQVTOperationalASSaverNormalizeVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractQVTOperationalAS2MonikerVisitor
-	extends ImperativeOCLAS2MonikerVisitor
+public abstract class AbstractQVTOperationalASSaverNormalizeVisitor
+	extends ImperativeOCLASSaverNormalizeVisitor
 	implements QVTOperationalVisitor<Object>
 {
 	/**
@@ -40,7 +40,7 @@ public abstract class AbstractQVTOperationalAS2MonikerVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTOperationalAS2MonikerVisitor(@NonNull AS2Moniker context) {
+	protected AbstractQVTOperationalASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}	
 

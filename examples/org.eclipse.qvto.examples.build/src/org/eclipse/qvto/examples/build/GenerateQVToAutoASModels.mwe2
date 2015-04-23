@@ -57,6 +57,7 @@ var imperativeOclModelName = "imperativeocl"
 var imperativeOclVisitorPackage = "${imperativeOclProjectName}.util"
 var imperativeOclVisitorName = "${imperativeOclProjectPrefix}Visitor"
 var imperativeOclVisitorQualifiedName = "${imperativeOclVisitorPackage}.${imperativeOclVisitorName}"
+var imperativeOclLookupFilePath = "model/ImperativeOCLNameResolution.ocl"
 
 /*
  * QVTOperational related configuration variables
@@ -73,6 +74,7 @@ var qvtOperationalModelName = "qvtoperational"
 var qvtOperationalVisitorPackage = "${qvtOperationalProjectName}.util"
 var qvtOperationalVisitorName = "${qvtOperationalProjectPrefix}Visitor"
 var qvtOperationalVisitorQualifiedName = "${qvtOperationalVisitorPackage}.${qvtOperationalVisitorName}"
+var qvtOperationalLookupFilePath = "model/Imperative"
 
 /**
  *	Generate the Concrete Syntax Models used by the Xtext editors.
@@ -84,12 +86,8 @@ Workflow {
     	scanClassPath = true
     }
     bean = GenModelSetup { resourceSet = resourceSet }
-    bean = UMLGenModelSetup { resourceSet = resourceSet }
-//    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-//    	genModel = "/org.eclipse.ocl.examples.xtext.markup/model/Markup.genmodel"
-//    }
 
-    
+/*    
      component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = imperativeOclProjectName
     	projectPrefix = imperativeOclProjectPrefix 
@@ -97,6 +95,7 @@ Workflow {
     	superProjectPrefix = oclProjectPrefix
 //    	baseProjectPrefix = oclProjectPrefix
     	genModelFile = imperativeOclGenModelProjectPath
+    	lookupFilePath = imperativeOclLookupFilePath
     	modelPackageName = imperativeOclModelPackage
     	modelName = imperativeOclModelName
     	superModelName = oclModelName
@@ -106,7 +105,7 @@ Workflow {
     	superVisitorClassName = oclVisitorName
     	visitablePackageName = oclVisitablePackage
     	visitableClassName = oclVisitableName
-    }
+    }*/
           
    
     component = @SubGenerateAutoASModel {	resourceSet = resourceSet
@@ -116,6 +115,7 @@ Workflow {
     	superProjectPrefix = imperativeOclProjectPrefix
 //    	baseProjectPrefix = oclProjectPrefix
     	genModelFile = qvtOperationalGenModelProjectPath
+    	lookupFilePath = qvtOperationalLookupFilePath
     	modelPackageName = qvtOperationalModelPackage
     	modelName = qvtOperationalModelName
     	superModelName = imperativeOclModelName

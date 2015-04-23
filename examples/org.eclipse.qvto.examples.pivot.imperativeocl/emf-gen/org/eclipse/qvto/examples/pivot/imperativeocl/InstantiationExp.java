@@ -14,11 +14,8 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,12 +24,12 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#getArgument <em>Argument</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#getExtent <em>Extent</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#getInstantiatedClass <em>Instantiated Class</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getInstantiationExp()
  * @model
@@ -41,7 +38,7 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
 public interface InstantiationExp extends ImperativeExpression {
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.OCLExpression}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.OCLExpression}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Argument</em>' containment reference list isn't clear,
@@ -91,12 +88,12 @@ public interface InstantiationExp extends ImperativeExpression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Instantiated Class</em>' reference.
-	 * @see #setInstantiatedClass(org.eclipse.ocl.examples.pivot.Class)
+	 * @see #setInstantiatedClass(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getInstantiationExp_InstantiatedClass()
 	 * @model required="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Class getInstantiatedClass();
+	org.eclipse.ocl.pivot.Class getInstantiatedClass();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp#getInstantiatedClass <em>Instantiated Class</em>}' reference.
@@ -106,24 +103,6 @@ public interface InstantiationExp extends ImperativeExpression {
 	 * @see #getInstantiatedClass()
 	 * @generated
 	 */
-	void setInstantiatedClass(org.eclipse.ocl.examples.pivot.Class value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitInstantiationExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitInstantiationExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
+	void setInstantiatedClass(org.eclipse.ocl.pivot.Class value);
 
 } // InstantiationExp

@@ -16,7 +16,7 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.utilities;
 
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.AbstractQVTOperationalAS2XMIidVisitor;
 
 public class QVTOperationalAS2XMIidVisitor extends AbstractQVTOperationalAS2XMIidVisitor

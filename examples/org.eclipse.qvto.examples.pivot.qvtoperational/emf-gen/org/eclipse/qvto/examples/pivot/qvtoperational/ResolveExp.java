@@ -13,13 +13,10 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +25,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#getCondition <em>Condition</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#isIsDeferred <em>Is Deferred</em>}</li>
@@ -35,7 +33,6 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#isOne <em>One</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp#getTarget <em>Target</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getResolveExp()
  * @model
@@ -79,7 +76,7 @@ public interface ResolveExp extends CallExp, ImperativeExpression {
 	 * @return the value of the '<em>Is Deferred</em>' attribute.
 	 * @see #setIsDeferred(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getResolveExp_IsDeferred()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsDeferred();
@@ -105,7 +102,7 @@ public interface ResolveExp extends CallExp, ImperativeExpression {
 	 * @return the value of the '<em>Is Inverse</em>' attribute.
 	 * @see #setIsInverse(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getResolveExp_IsInverse()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsInverse();
@@ -131,7 +128,7 @@ public interface ResolveExp extends CallExp, ImperativeExpression {
 	 * @return the value of the '<em>One</em>' attribute.
 	 * @see #setOne(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getResolveExp_One()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isOne();
@@ -171,23 +168,5 @@ public interface ResolveExp extends CallExp, ImperativeExpression {
 	 * @generated
 	 */
 	void setTarget(Variable value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitResolveExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitResolveExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ResolveExp

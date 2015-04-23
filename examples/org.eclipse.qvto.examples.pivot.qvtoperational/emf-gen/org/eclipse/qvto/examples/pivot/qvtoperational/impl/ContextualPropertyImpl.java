@@ -13,23 +13,15 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.PropertyImpl;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.PropertyImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
@@ -40,12 +32,12 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ContextualPropertyImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ContextualPropertyImpl#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ContextualPropertyImpl#getOverridden <em>Overridden</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -58,7 +50,7 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Class context;
+	protected org.eclipse.ocl.pivot.Class context;
 
 	/**
 	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
@@ -104,10 +96,10 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getContext() {
-		if (context != null && ((EObject)context).eIsProxy()) {
+	public org.eclipse.ocl.pivot.Class getContext() {
+		if (context != null && context.eIsProxy()) {
 			InternalEObject oldContext = (InternalEObject)context;
-			context = (org.eclipse.ocl.examples.pivot.Class)eResolveProxy(oldContext);
+			context = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldContext);
 			if (context != oldContext) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTOperationalPackage.CONTEXTUAL_PROPERTY__CONTEXT, oldContext, context));
@@ -121,7 +113,7 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class basicGetContext() {
+	public org.eclipse.ocl.pivot.Class basicGetContext() {
 		return context;
 	}
 
@@ -130,8 +122,8 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContext(org.eclipse.ocl.examples.pivot.Class newContext) {
-		org.eclipse.ocl.examples.pivot.Class oldContext = context;
+	public void setContext(org.eclipse.ocl.pivot.Class newContext) {
+		org.eclipse.ocl.pivot.Class oldContext = context;
 		context = newContext;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.CONTEXTUAL_PROPERTY__CONTEXT, oldContext, context));
@@ -186,7 +178,7 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	 * @generated
 	 */
 	public Property getOverridden() {
-		if (overridden != null && ((EObject)overridden).eIsProxy()) {
+		if (overridden != null && overridden.eIsProxy()) {
 			InternalEObject oldOverridden = (InternalEObject)overridden;
 			overridden = (Property)eResolveProxy(oldOverridden);
 			if (overridden != oldOverridden) {
@@ -216,24 +208,6 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 		overridden = newOverridden;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalPackage.CONTEXTUAL_PROPERTY__OVERRIDDEN, oldOverridden, overridden));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final QVTOperationalVisitor<R> v) {
-		return v.visitContextualProperty(this);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public <R> R accept(final Visitor<R> v) {
-		return ((QVTOperationalVisitor<R>)v).visitContextualProperty(this);
 	}
 
 	/**
@@ -279,7 +253,7 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTOperationalPackage.CONTEXTUAL_PROPERTY__CONTEXT:
-				setContext((org.eclipse.ocl.examples.pivot.Class)newValue);
+				setContext((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 			case QVTOperationalPackage.CONTEXTUAL_PROPERTY__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)newValue);
@@ -300,7 +274,7 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTOperationalPackage.CONTEXTUAL_PROPERTY__CONTEXT:
-				setContext((org.eclipse.ocl.examples.pivot.Class)null);
+				setContext((org.eclipse.ocl.pivot.Class)null);
 				return;
 			case QVTOperationalPackage.CONTEXTUAL_PROPERTY__INIT_EXPRESSION:
 				setInitExpression((OCLExpression)null);
@@ -331,20 +305,13 @@ public class ContextualPropertyImpl extends PropertyImpl implements ContextualPr
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * {@inheritDoc}
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked" })
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case QVTOperationalPackage.CONTEXTUAL_PROPERTY___ACCEPT__QVTOPERATIONALVISITOR:
-				return accept((QVTOperationalVisitor)arguments.get(0));
-			case QVTOperationalPackage.CONTEXTUAL_PROPERTY___ACCEPT__VISITOR:
-				return accept((Visitor)arguments.get(0));
-		}
-		return super.eInvoke(operationID, arguments);
+	public <R> R accept(Visitor<R> visitor) {
+		return (R) ((QVTOperationalVisitor<?>)visitor).visitContextualProperty(this);
 	}
 
 } //ContextualPropertyImpl

@@ -33,7 +33,7 @@ public abstract class AbstractDelegatingQVTOperationalVisitor<R, C, D extends QV
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 

@@ -14,12 +14,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
+import org.eclipse.ocl.pivot.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,19 +23,19 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType#getElementType <em>Element Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage#getOrderedTupleType()
  * @model
  * @generated
  */
-public interface OrderedTupleType extends EObject, org.eclipse.ocl.examples.pivot.Class {
+public interface OrderedTupleType extends org.eclipse.ocl.pivot.Class {
 	/**
 	 * Returns the value of the '<em><b>Element Type</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Type}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Type}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Element Type</em>' reference list isn't clear,
@@ -53,23 +48,5 @@ public interface OrderedTupleType extends EObject, org.eclipse.ocl.examples.pivo
 	 * @generated
 	 */
 	EList<Type> getElementType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitOrderedTupleType(this);'"
-	 * @generated
-	 */
-	<R> R accept(ImperativeOCLVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((ImperativeOCLVisitor<R>)v).visitOrderedTupleType(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // OrderedTupleType

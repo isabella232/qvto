@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
-public interface ImperativeOCLVisitor<R> extends org.eclipse.ocl.examples.pivot.util.Visitor<R>
+public interface ImperativeOCLVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
 	@Nullable R visitAltExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AltExp object);
 	@Nullable R visitAssertExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp object);

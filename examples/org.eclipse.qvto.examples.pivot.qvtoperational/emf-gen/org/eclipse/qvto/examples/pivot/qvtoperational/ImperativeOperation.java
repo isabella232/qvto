@@ -14,12 +14,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.Operation;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +23,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#getBody <em>Body</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#getContext <em>Context</em>}</li>
@@ -35,13 +31,12 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#getOverridden <em>Overridden</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation#getResult <em>Result</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getImperativeOperation()
  * @model
  * @generated
  */
-public interface ImperativeOperation extends EObject, Operation {
+public interface ImperativeOperation extends Operation {
 	/**
 	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody#getOperation <em>Operation</em>}'.
@@ -109,7 +104,7 @@ public interface ImperativeOperation extends EObject, Operation {
 	 * @return the value of the '<em>Is Blackbox</em>' attribute.
 	 * @see #setIsBlackbox(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getImperativeOperation_IsBlackbox()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsBlackbox();
@@ -167,23 +162,5 @@ public interface ImperativeOperation extends EObject, Operation {
 	 * @generated
 	 */
 	EList<VarParameter> getResult();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitImperativeOperation(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitImperativeOperation(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ImperativeOperation

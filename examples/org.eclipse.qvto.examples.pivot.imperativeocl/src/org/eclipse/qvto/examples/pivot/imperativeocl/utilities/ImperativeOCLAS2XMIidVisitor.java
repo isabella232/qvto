@@ -15,7 +15,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractImperativeOCLAS2XMIidVisitor;
 
 public class ImperativeOCLAS2XMIidVisitor extends AbstractImperativeOCLAS2XMIidVisitor

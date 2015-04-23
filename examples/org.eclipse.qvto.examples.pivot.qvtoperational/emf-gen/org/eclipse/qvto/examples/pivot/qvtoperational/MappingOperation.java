@@ -14,10 +14,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +23,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#getDisjunct <em>Disjunct</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#getInherited <em>Inherited</em>}</li>
@@ -34,7 +32,6 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation#getWhere <em>Where</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getMappingOperation()
  * @model
@@ -168,23 +165,5 @@ public interface MappingOperation extends ImperativeOperation {
 	 * @generated
 	 */
 	void setWhere(OCLExpression value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitMappingOperation(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitMappingOperation(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // MappingOperation

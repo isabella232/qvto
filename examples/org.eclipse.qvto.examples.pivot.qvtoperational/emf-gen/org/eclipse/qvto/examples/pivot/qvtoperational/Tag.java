@@ -14,12 +14,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.Element;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,18 +23,18 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Tag#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getTag()
  * @model
  * @generated
  */
-public interface Tag extends EObject, Element {
+public interface Tag extends Element {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -51,7 +46,7 @@ public interface Tag extends EObject, Element {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getTag_Name()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
+	 * @model dataType="org.eclipse.ocl.pivot.String"
 	 * @generated
 	 */
 	String getName();
@@ -77,7 +72,7 @@ public interface Tag extends EObject, Element {
 	 * @return the value of the '<em>Value</em>' attribute.
 	 * @see #setValue(String)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getTag_Value()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.String"
+	 * @model dataType="org.eclipse.ocl.pivot.String"
 	 * @generated
 	 */
 	String getValue();
@@ -94,7 +89,7 @@ public interface Tag extends EObject, Element {
 
 	/**
 	 * Returns the value of the '<em><b>Elements</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Element}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Element}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Elements</em>' reference list isn't clear,
@@ -107,23 +102,5 @@ public interface Tag extends EObject, Element {
 	 * @generated
 	 */
 	EList<Element> getElements();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitTag(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitTag(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // Tag

@@ -17,21 +17,22 @@
 
 <plugin>
 
+
   <extension point="org.eclipse.team.core.fileTypes">
     <fileTypes extension="qvtoas" type="text" />
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="qvtoas"
+            class="org.eclipse.qvto.examples.pivot.qvtoperational.utilities.QVTOperationalASResourceFactory"/>
+   </extension>
+   
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTOperational -->
       <package
             uri="http://www.eclipse.org/qvt/pivot/1.0/QVTOperational"
             class="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage"
             genModel="model/QVTOperational.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="qvtoas"
-            class="org.eclipse.qvto.examples.pivot.qvtoperational.utilities.QVTOperationalASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">

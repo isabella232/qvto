@@ -13,11 +13,6 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
-
-
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Mapping Call Exp</b></em>'.
@@ -25,10 +20,10 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp#isIsStrict <em>Is Strict</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getMappingCallExp()
  * @model
@@ -46,7 +41,7 @@ public interface MappingCallExp extends ImperativeCallExp {
 	 * @return the value of the '<em>Is Strict</em>' attribute.
 	 * @see #setIsStrict(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getMappingCallExp_IsStrict()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsStrict();
@@ -60,23 +55,5 @@ public interface MappingCallExp extends ImperativeCallExp {
 	 * @generated
 	 */
 	void setIsStrict(boolean value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitMappingCallExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitMappingCallExp(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // MappingCallExp

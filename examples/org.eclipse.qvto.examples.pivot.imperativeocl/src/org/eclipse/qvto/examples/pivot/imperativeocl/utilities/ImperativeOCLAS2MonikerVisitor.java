@@ -15,7 +15,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractImperativeOCLAS2MonikerVisitor;
 
 public class ImperativeOCLAS2MonikerVisitor extends AbstractImperativeOCLAS2MonikerVisitor

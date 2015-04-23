@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractWrappingImperativeOCLVisitor delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
  */
 public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends ImperativeOCLVisitor<R>, P>
-	extends org.eclipse.ocl.examples.pivot.util.AbstractWrappingVisitor<R, C, D, P>
+	extends org.eclipse.ocl.pivot.util.AbstractWrappingVisitor<R, C, D, P>
 	implements ImperativeOCLVisitor<R>
 {
 	protected AbstractWrappingImperativeOCLVisitor(@NonNull D delegate, @NonNull C context) {

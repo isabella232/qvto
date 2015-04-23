@@ -21,8 +21,8 @@ package	org.eclipse.qvto.examples.pivot.imperativeocl.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
-import org.eclipse.ocl.examples.pivot.utilities.AS2MonikerVisitor;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
 
 /**
  * An AbstractImperativeOCLAS2MonikerVisitor provides a default implementation for each

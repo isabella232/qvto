@@ -13,12 +13,8 @@
  */
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,18 +23,18 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#getInitExpression <em>Init Expression</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#getOverridden <em>Overridden</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getContextualProperty()
  * @model
  * @generated
  */
-public interface ContextualProperty extends EObject, Property {
+public interface ContextualProperty extends Property {
 	/**
 	 * Returns the value of the '<em><b>Context</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -48,12 +44,12 @@ public interface ContextualProperty extends EObject, Property {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Context</em>' reference.
-	 * @see #setContext(org.eclipse.ocl.examples.pivot.Class)
+	 * @see #setContext(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getContextualProperty_Context()
 	 * @model required="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Class getContext();
+	org.eclipse.ocl.pivot.Class getContext();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty#getContext <em>Context</em>}' reference.
@@ -63,7 +59,7 @@ public interface ContextualProperty extends EObject, Property {
 	 * @see #getContext()
 	 * @generated
 	 */
-	void setContext(org.eclipse.ocl.examples.pivot.Class value);
+	void setContext(org.eclipse.ocl.pivot.Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Init Expression</b></em>' containment reference.
@@ -117,23 +113,5 @@ public interface ContextualProperty extends EObject, Property {
 	 * @generated
 	 */
 	void setOverridden(Property value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitContextualProperty(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitContextualProperty(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // ContextualProperty

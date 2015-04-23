@@ -15,7 +15,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractImperativeOCLASSaverLocateVisitor;
 
 public class ImperativeOCLASSaverLocateVisitor extends AbstractImperativeOCLASSaverLocateVisitor

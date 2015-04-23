@@ -21,7 +21,7 @@ package	org.eclipse.qvto.examples.pivot.qvtoperational.util;
 import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLAS2XMIidVisitor;
 
 /**

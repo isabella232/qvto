@@ -20,6 +20,11 @@
   <extension point="org.eclipse.team.core.fileTypes">
     <fileTypes extension="imperativeoclas" type="text" />
   </extension>
+  
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <parser type="imperativeoclas"
+            class="org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLASResourceFactory"/>
+   </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated ImperativeOCL -->
@@ -27,11 +32,6 @@
             uri="http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCL"
             class="org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage"
             genModel="model/ImperativeOCL.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <parser type="imperativeoclas"
-            class="org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLASResourceFactory"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.content_parser">

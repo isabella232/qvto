@@ -15,40 +15,58 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-
-import org.eclipse.ocl.examples.pivot.util.Visitable;
-
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.CallExp;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Feature;
+import org.eclipse.ocl.pivot.FeatureCallExp;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypedElement;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableDeclaration;
+import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
 import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
-
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.*;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Constructor;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Helper;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Library;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelType;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Module;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Tag;
+import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
 
 /**
  * <!-- begin-user-doc -->
@@ -211,10 +229,6 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 				return createTagAdapter();
 			}
 			@Override
-			public <R> Adapter caseQVTOperationalVisitor(QVTOperationalVisitor<R> object) {
-				return createQVTOperationalVisitorAdapter();
-			}
-			@Override
 			public Adapter caseVisitable(Visitable object) {
 				return createVisitableAdapter();
 			}
@@ -235,10 +249,6 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseTypedMultiplicityElement(TypedMultiplicityElement object) {
-				return createTypedMultiplicityElementAdapter();
-			}
-			@Override
 			public Adapter caseFeature(Feature object) {
 				return createFeatureAdapter();
 			}
@@ -249,10 +259,6 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTemplateableElement(TemplateableElement object) {
 				return createTemplateableElementAdapter();
-			}
-			@Override
-			public Adapter caseParameterableElement(ParameterableElement object) {
-				return createParameterableElementAdapter();
 			}
 			@Override
 			public Adapter caseOperation(Operation object) {
@@ -291,12 +297,8 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 				return createTypeAdapter();
 			}
 			@Override
-			public Adapter caseClass(org.eclipse.ocl.examples.pivot.Class object) {
+			public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
 				return createClassAdapter();
-			}
-			@Override
-			public Adapter casePackage(org.eclipse.ocl.examples.pivot.Package object) {
-				return createPackageAdapter();
 			}
 			@Override
 			public Adapter caseVariableDeclaration(VariableDeclaration object) {
@@ -313,14 +315,6 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseInstantiationExp(InstantiationExp object) {
 				return createInstantiationExpAdapter();
-			}
-			@Override
-			public <R> Adapter caseVisitor(Visitor<R> object) {
-				return createVisitorAdapter();
-			}
-			@Override
-			public <R> Adapter caseImperativeOCLVisitor(ImperativeOCLVisitor<R> object) {
-				return createImperativeOCLVisitorAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -707,27 +701,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor <em>Visitor</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.util.Visitable <em>Visitable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
-	 * @generated
-	 */
-	public Adapter createQVTOperationalVisitorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Visitable <em>Visitable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Visitable
+	 * @see org.eclipse.ocl.pivot.util.Visitable
 	 * @generated
 	 */
 	public Adapter createVisitableAdapter() {
@@ -735,13 +715,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Element <em>Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Element <em>Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Element
+	 * @see org.eclipse.ocl.pivot.Element
 	 * @generated
 	 */
 	public Adapter createElementAdapter() {
@@ -749,13 +729,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.domain.elements.Nameable <em>Nameable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.utilities.Nameable <em>Nameable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.domain.elements.Nameable
+	 * @see org.eclipse.ocl.pivot.utilities.Nameable
 	 * @generated
 	 */
 	public Adapter createNameableAdapter() {
@@ -763,13 +743,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.NamedElement <em>Named Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.NamedElement
+	 * @see org.eclipse.ocl.pivot.NamedElement
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
@@ -777,13 +757,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.TypedElement <em>Typed Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.TypedElement <em>Typed Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.TypedElement
+	 * @see org.eclipse.ocl.pivot.TypedElement
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
@@ -791,27 +771,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.TypedMultiplicityElement <em>Typed Multiplicity Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Feature <em>Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.TypedMultiplicityElement
-	 * @generated
-	 */
-	public Adapter createTypedMultiplicityElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Feature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Feature
+	 * @see org.eclipse.ocl.pivot.Feature
 	 * @generated
 	 */
 	public Adapter createFeatureAdapter() {
@@ -819,13 +785,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Namespace <em>Namespace</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Namespace <em>Namespace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Namespace
+	 * @see org.eclipse.ocl.pivot.Namespace
 	 * @generated
 	 */
 	public Adapter createNamespaceAdapter() {
@@ -833,13 +799,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.TemplateableElement <em>Templateable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.TemplateableElement <em>Templateable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.TemplateableElement
+	 * @see org.eclipse.ocl.pivot.TemplateableElement
 	 * @generated
 	 */
 	public Adapter createTemplateableElementAdapter() {
@@ -847,27 +813,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ParameterableElement <em>Parameterable Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Operation <em>Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.ParameterableElement
-	 * @generated
-	 */
-	public Adapter createParameterableElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Operation <em>Operation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Operation
+	 * @see org.eclipse.ocl.pivot.Operation
 	 * @generated
 	 */
 	public Adapter createOperationAdapter() {
@@ -875,13 +827,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Property <em>Property</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Property <em>Property</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Property
+	 * @see org.eclipse.ocl.pivot.Property
 	 * @generated
 	 */
 	public Adapter createPropertyAdapter() {
@@ -889,13 +841,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OCLExpression <em>OCL Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.OCLExpression <em>OCL Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.OCLExpression
+	 * @see org.eclipse.ocl.pivot.OCLExpression
 	 * @generated
 	 */
 	public Adapter createOCLExpressionAdapter() {
@@ -903,13 +855,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.CallExp <em>Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.CallExp <em>Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.CallExp
+	 * @see org.eclipse.ocl.pivot.CallExp
 	 * @generated
 	 */
 	public Adapter createCallExpAdapter() {
@@ -917,13 +869,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.FeatureCallExp <em>Feature Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.FeatureCallExp <em>Feature Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.FeatureCallExp
+	 * @see org.eclipse.ocl.pivot.FeatureCallExp
 	 * @generated
 	 */
 	public Adapter createFeatureCallExpAdapter() {
@@ -931,13 +883,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.ReferringElement <em>Referring Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.ReferringElement
+	 * @see org.eclipse.ocl.pivot.ReferringElement
 	 * @generated
 	 */
 	public Adapter createReferringElementAdapter() {
@@ -945,13 +897,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.OperationCallExp <em>Operation Call Exp</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.OperationCallExp <em>Operation Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.OperationCallExp
+	 * @see org.eclipse.ocl.pivot.OperationCallExp
 	 * @generated
 	 */
 	public Adapter createOperationCallExpAdapter() {
@@ -973,13 +925,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Type <em>Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Type
+	 * @see org.eclipse.ocl.pivot.Type
 	 * @generated
 	 */
 	public Adapter createTypeAdapter() {
@@ -987,13 +939,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Class <em>Class</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Class <em>Class</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Class
+	 * @see org.eclipse.ocl.pivot.Class
 	 * @generated
 	 */
 	public Adapter createClassAdapter() {
@@ -1001,27 +953,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Package <em>Package</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.VariableDeclaration <em>Variable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Package
-	 * @generated
-	 */
-	public Adapter createPackageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.VariableDeclaration <em>Variable Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.VariableDeclaration
+	 * @see org.eclipse.ocl.pivot.VariableDeclaration
 	 * @generated
 	 */
 	public Adapter createVariableDeclarationAdapter() {
@@ -1029,13 +967,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Variable <em>Variable</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Variable
+	 * @see org.eclipse.ocl.pivot.Variable
 	 * @generated
 	 */
 	public Adapter createVariableAdapter() {
@@ -1043,13 +981,13 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.Parameter <em>Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.Parameter
+	 * @see org.eclipse.ocl.pivot.Parameter
 	 * @generated
 	 */
 	public Adapter createParameterAdapter() {
@@ -1067,34 +1005,6 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createInstantiationExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.util.Visitor <em>Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.util.Visitor
-	 * @generated
-	 */
-	public Adapter createVisitorAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor <em>Visitor</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor
-	 * @generated
-	 */
-	public Adapter createImperativeOCLVisitorAdapter() {
 		return null;
 	}
 

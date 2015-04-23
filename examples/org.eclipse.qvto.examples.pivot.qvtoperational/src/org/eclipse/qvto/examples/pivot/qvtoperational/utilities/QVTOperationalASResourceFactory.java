@@ -16,17 +16,18 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.utilities;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrintVisitor;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.examples.pivot.resource.AbstractASResourceFactory;
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
-import org.eclipse.ocl.examples.pivot.utilities.AS2MonikerVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaverLocateVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaverResolveVisitor;
-import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
+import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
+import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 
 /**
@@ -49,7 +50,7 @@ public class QVTOperationalASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTOperationalASResourceFactory() {
-		super(QVTOperationalPackage.eCONTENT_TYPE, FILE_EXTENSION);
+		super(QVTOperationalPackage.eCONTENT_TYPE);
 	}
 
 	@Override
@@ -80,5 +81,11 @@ public class QVTOperationalASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
 		return new QVTOperationalToStringVisitor(s);
+	}
+
+	@Override
+	@NonNull
+	public ASResourceFactory getASResourceFactory() {
+		return INSTANCE;
 	}
 }

@@ -16,7 +16,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.qvto.examples.pivot.qvtoperational.util.AbstractQVTOperationalAS2MonikerVisitor;
 
 public class QVTOperationalAS2MonikerVisitor extends AbstractQVTOperationalAS2MonikerVisitor

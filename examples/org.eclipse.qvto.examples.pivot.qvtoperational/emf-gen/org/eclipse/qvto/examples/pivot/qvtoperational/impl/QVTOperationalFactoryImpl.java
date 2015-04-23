@@ -17,12 +17,39 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.qvto.examples.pivot.qvtoperational.*;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Constructor;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DirectionKind;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain;
+import org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Helper;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ImportKind;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Library;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModelType;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Module;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody;
+import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
+import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalFactory;
+import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp;
+import org.eclipse.qvto.examples.pivot.qvtoperational.Tag;
+import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
 
 /**
  * <!-- begin-user-doc -->

@@ -17,7 +17,7 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLPrettyPrintVisitor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.Constructor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;

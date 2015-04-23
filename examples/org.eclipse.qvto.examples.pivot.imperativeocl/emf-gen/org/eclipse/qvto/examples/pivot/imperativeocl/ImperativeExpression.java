@@ -13,9 +13,7 @@
  */
 package org.eclipse.qvto.examples.pivot.imperativeocl;
 
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,5 +25,5 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
  * @model abstract="true"
  * @generated
  */
-public interface ImperativeExpression extends EObject, OCLExpression {
+public interface ImperativeExpression extends OCLExpression {
 } // ImperativeExpression

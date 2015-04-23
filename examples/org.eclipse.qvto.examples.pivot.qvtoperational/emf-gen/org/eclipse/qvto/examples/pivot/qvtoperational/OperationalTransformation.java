@@ -14,10 +14,7 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,6 +23,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#getIntermediateClass <em>Intermediate Class</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#getIntermediateProperty <em>Intermediate Property</em>}</li>
@@ -33,7 +31,6 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#getRefined <em>Refined</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getOperationalTransformation()
  * @model
@@ -42,7 +39,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
 public interface OperationalTransformation extends Module {
 	/**
 	 * Returns the value of the '<em><b>Intermediate Class</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Class}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Class}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Intermediate Class</em>' reference list isn't clear,
@@ -54,11 +51,11 @@ public interface OperationalTransformation extends Module {
 	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='transfClient'"
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Class> getIntermediateClass();
+	EList<org.eclipse.ocl.pivot.Class> getIntermediateClass();
 
 	/**
 	 * Returns the value of the '<em><b>Intermediate Property</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Intermediate Property</em>' reference list isn't clear,
@@ -131,23 +128,5 @@ public interface OperationalTransformation extends Module {
 	 * @generated
 	 */
 	EList<DummyRelation> getRelation();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitOperationalTransformation(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitOperationalTransformation(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // OperationalTransformation

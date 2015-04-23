@@ -14,14 +14,9 @@
 package org.eclipse.qvto.examples.pivot.qvtoperational;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.TemplateableElement;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,6 +25,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#getConfigProperty <em>Config Property</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#getEntry <em>Entry</em>}</li>
@@ -39,16 +35,15 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.util.QVTOperationalVisitor
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#getOwnedVariable <em>Owned Variable</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.pivot.qvtoperational.Module#getUsedModelType <em>Used Model Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getModule()
  * @model
  * @generated
  */
-public interface Module extends EObject, org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.pivot.Package {
+public interface Module extends org.eclipse.ocl.pivot.Class {
 	/**
 	 * Returns the value of the '<em><b>Config Property</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Config Property</em>' reference list isn't clear,
@@ -99,7 +94,7 @@ public interface Module extends EObject, org.eclipse.ocl.examples.pivot.Class, o
 	 * @return the value of the '<em>Is Blackbox</em>' attribute.
 	 * @see #setIsBlackbox(boolean)
 	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage#getModule_IsBlackbox()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsBlackbox();
@@ -134,7 +129,7 @@ public interface Module extends EObject, org.eclipse.ocl.examples.pivot.Class, o
 
 	/**
 	 * Returns the value of the '<em><b>Owned Tag</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.TemplateableElement}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.TemplateableElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Tag</em>' containment reference list isn't clear,
@@ -151,7 +146,7 @@ public interface Module extends EObject, org.eclipse.ocl.examples.pivot.Class, o
 
 	/**
 	 * Returns the value of the '<em><b>Owned Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Variable</em>' containment reference list isn't clear,
@@ -181,23 +176,5 @@ public interface Module extends EObject, org.eclipse.ocl.examples.pivot.Class, o
 	 * @generated
 	 */
 	EList<ModelType> getUsedModelType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalVisitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return v.visitModule(this);'"
-	 * @generated
-	 */
-	<R> R accept(QVTOperationalVisitor<R> v);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model vType="org.eclipse.ocl.examples.pivot.Visitor<R>"
-	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='return ((QVTOperationalVisitor<R>)v).visitModule(this);'"
-	 * @generated
-	 */
-	<R> R accept(Visitor<R> v);
 
 } // Module

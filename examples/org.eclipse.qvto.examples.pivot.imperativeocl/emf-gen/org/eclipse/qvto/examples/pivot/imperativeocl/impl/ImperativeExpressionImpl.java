@@ -14,9 +14,7 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl;
-
+import org.eclipse.ocl.pivot.internal.OCLExpressionImpl;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 
@@ -24,8 +22,6 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Imperative Expression</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
