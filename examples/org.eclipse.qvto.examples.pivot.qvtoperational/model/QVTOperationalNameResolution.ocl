@@ -24,8 +24,8 @@ def : _env(child : pivot::Element) : lookup::Environment =
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
 			.addElements(self.ownedOperations) 
-			.addElements(self.ownedClasses)
-			.addElements(self.ownedPackages)
+			--.addElements(self.ownedClasses) No Package anymore
+			--.addElements(self.ownedPackages) No Package anymore
 			--.addElements(self.ownedTag)
 			.addElements(self.ownedVariable)
 
@@ -43,8 +43,8 @@ def : _env(child : pivot::Element) : lookup::Environment =
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
 			.addElements(self.ownedOperations) 
-			.addElements(self.ownedClasses)
-			.addElements(self.ownedPackages)
+			--.addElements(self.ownedClasses) No Package anymore
+			--.addElements(self.ownedPackages) No Package anymore
 			--.addElements(self.ownedTag)
 			.addElements(self.ownedVariable)
 	else
@@ -54,8 +54,8 @@ def : _env(child : pivot::Element) : lookup::Environment =
 			.addElements(self.ownedProperties)
 			-- .addElements(self.lookup::s->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
 			.addElements(self.ownedOperations)
-			.addElements(self.ownedClasses)
-			.addElements(self.ownedPackages)
+			--.addElements(self.ownedClasses) No Package anymore
+			--.addElements(self.ownedPackages) No Package anymore
 			--.addElements(self.ownedTag)
 			.addElements(self.ownedVariable)
 			.addElements(self.modelParameter)

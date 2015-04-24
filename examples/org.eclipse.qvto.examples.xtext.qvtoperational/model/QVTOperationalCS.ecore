@@ -3,17 +3,12 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtoperationalcs" nsURI="http://www.eclipse.org/qvt/pivot/1.0/QVTOperationalCS"
     nsPrefix="qvtoperationalcs">
   <eAnnotations source="http://www.eclipse.org/OCL/Import">
-    <details key="baseCST" value="/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/"/>
-    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore#/"/>
-    <details key="essentialOCLCST" value="/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/"/>
-    <details key="imperativeocl" value="/resource/org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL"/>
-    <details key="imperativeoclcs" value="/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/"/>
-    <details key="qvtoperational" value="/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational"/>
-  </eAnnotations>
-  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
-    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
-    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="baseCST" value="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/"/>
+    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
+    <details key="essentialOCLCST" value="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/"/>
+    <details key="imperativeocl" value="../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL"/>
+    <details key="imperativeoclcs" value="../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/"/>
+    <details key="qvtoperational" value="../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EEnum" name="ClassifierKind">
     <eLiterals name="DATATYPE"/>
@@ -38,11 +33,6 @@
     <eLiterals name="PACKAGE" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Model">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ocl::Package {&#xA;&#x9;&#x9;&#x9;&#x9;nestedPackage = ownedNestedPackage.ast()&#xA;&#x9;&#x9;&#x9;&#x9; &#xA;&#x9;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="import" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS"
         containment="true"/>
@@ -53,11 +43,6 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QVToClassCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Class">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ocl::Class {&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;ownedAttribute = ownedProperty.ast(),&#xA;&#x9;&#x9;&#x9;&#x9;ownedOperation = ownedOperation.ast()&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="intermediate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
@@ -74,11 +59,6 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationParameterDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ParameterCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational.VarParameter">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="qvtoperational::VarParameter {&#xA;&#x9;&#x9;&#x9;&#x9;name = name&#xA;&#x9;&#x9;&#x9;&#x9;--kind = if direction = DirectionKindCS::inout then&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;&#x9;qvtoperational::DirectionKind::inout&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;   else if direction = DirectionKindCS::out then&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;   &#x9;&#x9;qvtoperational::DirectionKind::out&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;   else &#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;   &#x9;&#x9;qvtoperational::DirectionKind::_in&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;   endif endif&#xA;&#x9;&#x9;&#x9;&#x9;--initExpression = if (initPart.oclIsUndefined()) then&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;&#x9;null&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;else&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;&#x9;initPart.expression -- FIXME todo .ast()&#xA;&#x9;&#x9;&#x9;&#x9;--&#x9;&#x9;&#x9;&#x9;endif&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//DirectionKindCS"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initPart" eType="#//InitPartCS"
@@ -94,20 +74,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetamodelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PackageCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Package">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ocl::Package {&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;nsPrefix = name,&#x9;-- QVTo spec doesn't provide concrete syntax for nsPrefix&#xA;&#x9;&#x9;&#x9;&#x9;nsURI = name,&#x9;&#x9;-- QVTo spec doesn't provide concrete syntax for nsURI. Build an internal protocol&#xA;&#x9;&#x9;&#x9;&#x9;ownedType = ownedType.ast()&#xA;&#x9;&#x9;&#x9;&#x9;-- type = TODO&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelKind" eType="#//MetamodelKind"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveTypeCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//DataTypeCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ClassifierPropertyCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuralFeatureCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="ocl::Property {&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;isComposite = qualifier->exists(x | x = 'composite')&#xA;&#x9;&#x9;&#x9;&#x9;-- type = TODO&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="opposite" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -201,11 +171,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingOperationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//OperationCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational.MappingOperation">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="qvtoperational::MappingOperation {&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;-- ownedParameter = signature.parameter.ast()&#xA;&#x9;&#x9;&#x9;&#x9;ownedParameter = ownedParameter.ast()&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypeCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" upperBound="-1"
@@ -368,11 +333,6 @@
         eType="#//ParameterDeclarationCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
-    <eOperations name="ast" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational.OperationalTransformation">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="qvtoperational::OperationalTransformation {&#xA;&#x9;&#x9;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;&#x9;&#x9;nsPrefix = name,&#xA;&#x9;&#x9;&#x9;&#x9;nsURI = name,&#xA;&#x9;&#x9;&#x9;&#x9;nestedPackage = ownedNestedPackage.ast(),&#xA;&#x9;&#x9;&#x9;&#x9;ownedType = ownedType.ast(),&#xA;&#x9;&#x9;&#x9;&#x9;ownedOperation = ownedOperation.ast()&#xA;&#x9;&#x9;&#x9;}"/>
-      </eAnnotations>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="qualifiers" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//StringLiteralExpCS"
         containment="true"/>
