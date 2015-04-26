@@ -30,7 +30,7 @@ import "platform:/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/I
 TopLevelCS : ^import+=ImportCS* 
 	// unit+=UnitElementCS* FIXME
 	(ownedPackages+= UnitPacakgeCS)*
-	unit+=TransformationCS // FIXME temporal workaround
+	unit+=TransformationCS* // FIXME temporal workaround
 	//(ownedType+=ModelTypeCS)*
 ;
 

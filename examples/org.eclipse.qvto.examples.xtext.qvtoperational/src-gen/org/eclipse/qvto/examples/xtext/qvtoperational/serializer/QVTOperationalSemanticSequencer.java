@@ -786,7 +786,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (import+=ImportCS* ownedPackages+=UnitPacakgeCS* unit+=TransformationCS)
+	 *     (import+=ImportCS* ownedPackages+=UnitPacakgeCS* unit+=TransformationCS*)
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

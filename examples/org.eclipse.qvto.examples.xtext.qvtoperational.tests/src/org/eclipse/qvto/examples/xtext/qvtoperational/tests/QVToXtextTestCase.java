@@ -35,10 +35,10 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	public void testSimpleMetamodelDefinition() throws Exception {
 		String testFile =
 				"metamodel mm1 {\n"
-				+ "	datatype myDataType;" 
+				+ "	datatype myDataType;\n" 
 				+ "	class c1 {\n"
-				+ "		prop1 : String ;\n"
-				+ "	};"
+				+ "		prop1 : String;\n"
+				+ "	}\n;"
 				+ "};";
 		doLoadFromString("simpleMetamodelDefinition.qvto2", testFile);
 	}
@@ -46,12 +46,12 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	public void testSimpleMetamodelDefinitionWithoutOptionalSemicolon() throws Exception {
 		String testFile =
 				"metamodel mm1 {\n"
-				+ "	datatype myDataType" 
+				+ "	datatype myDataType\n" 
 				+ "	class c1 {\n"
 				+ "		prop1 : String ;\n"
-				+ "	}"
+				+ "	}\n"
 				+ "}";
-		doLoadFromString("simpleMetamodelDefinitionWithouOptionalSemicolon.qvto", testFile);
+		doLoadFromString("simpleMetamodelDefinitionWithouOptionalSemicolon.qvto2", testFile);
 	}
 	
 	public void testSimpleTransformationDefinition() throws Exception {

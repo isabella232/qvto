@@ -139,7 +139,7 @@ ruleTopLevelCS returns [EObject current=null]
 	    }
 
 )
-))
+)*)
 ;
 
 

@@ -12,13 +12,8 @@ public class QVTOperationalStandaloneSetup
 		extends QVTOperationalStandaloneSetupGenerated {
 
 	public static void doSetup() {
-		init();
 		new QVTOperationalStandaloneSetup()
 			.createInjectorAndDoEMFRegistration();
 		
-	}
-	
-	public static void init() {
-		// QVTOperationalCS2MonikerVisitor.FACTORY.getClass(); // To register monikers Factory
 	}
 }

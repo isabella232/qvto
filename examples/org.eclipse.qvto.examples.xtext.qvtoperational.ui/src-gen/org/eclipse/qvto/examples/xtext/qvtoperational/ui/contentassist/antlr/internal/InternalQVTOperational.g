@@ -4731,7 +4731,7 @@ rule__TopLevelCS__Group__2__Impl
 :
 (
 { before(grammarAccess.getTopLevelCSAccess().getUnitAssignment_2()); }
-(rule__TopLevelCS__UnitAssignment_2)
+(rule__TopLevelCS__UnitAssignment_2)*
 { after(grammarAccess.getTopLevelCSAccess().getUnitAssignment_2()); }
 )
 

@@ -33,15 +33,15 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		////(ownedType+=ModelTypeCS)*
 		// TopLevelCS:
 		//	^import+=ImportCS* // unit+=UnitElementCS* FIXME
-		// ownedPackages+=UnitPacakgeCS* unit+= // FIXME temporal workaround
+		// ownedPackages+=UnitPacakgeCS* // FIXME temporal workaround
 		//
-		//	TransformationCS;
+		//	unit+=TransformationCS*;
 		@Override public ParserRule getRule() { return rule; }
 
 		//^import+=ImportCS* // unit+=UnitElementCS* FIXME
-		// ownedPackages+=UnitPacakgeCS* unit+= // FIXME temporal workaround
+		// ownedPackages+=UnitPacakgeCS* // FIXME temporal workaround
 		//
-		//TransformationCS
+		//unit+=TransformationCS*
 		public Group getGroup() { return cGroup; }
 
 		//^import+=ImportCS*
@@ -56,12 +56,11 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		//UnitPacakgeCS
 		public RuleCall getOwnedPackagesUnitPacakgeCSParserRuleCall_1_0() { return cOwnedPackagesUnitPacakgeCSParserRuleCall_1_0; }
 
-		//unit+= // FIXME temporal workaround
-		// TransformationCS
+		//// FIXME temporal workaround
+		// unit+=TransformationCS*
 		public Assignment getUnitAssignment_2() { return cUnitAssignment_2; }
 
-		//// FIXME temporal workaround
-		// TransformationCS
+		//TransformationCS
 		public RuleCall getUnitTransformationCSParserRuleCall_2_0() { return cUnitTransformationCSParserRuleCall_2_0; }
 	}
 
@@ -1924,9 +1923,9 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	////(ownedType+=ModelTypeCS)*
 	// TopLevelCS:
 	//	^import+=ImportCS* // unit+=UnitElementCS* FIXME
-	// ownedPackages+=UnitPacakgeCS* unit+= // FIXME temporal workaround
+	// ownedPackages+=UnitPacakgeCS* // FIXME temporal workaround
 	//
-	//	TransformationCS;
+	//	unit+=TransformationCS*;
 	public TopLevelCSElements getTopLevelCSAccess() {
 		return pTopLevelCS;
 	}

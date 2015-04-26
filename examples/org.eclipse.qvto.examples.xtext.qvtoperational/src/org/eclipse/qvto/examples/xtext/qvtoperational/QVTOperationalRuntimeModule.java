@@ -17,5 +17,5 @@ public class QVTOperationalRuntimeModule
 	@Override
 	public Class<? extends XtextResource> bindXtextResource() {
 		return QVTOperationalCSResource.class;
-	}
+	}	
 }
