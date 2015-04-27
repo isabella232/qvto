@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.generator.*
 var grammarURI = "classpath:/org/eclipse/qvto/examples/xtext/imperativeocl/ImperativeOCL.xtext"
 var fileExtensions = "iocl"
 var projectName = "org.eclipse.qvto.examples.xtext.imperativeocl"
-var runtimeProject = "../${projectName}"
+var runtimeProject = "../../examples/${projectName}"
 // var generateXtendStub = true
 
 /**
@@ -59,7 +59,7 @@ Workflow {
 		pathTestProject = "${runtimeProject}.tests"
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
-//		mergeManifest = false
+		mergeManifest = false
 		language = auto-inject {
 			uri = grammarURI
 			
@@ -111,7 +111,7 @@ Workflow {
 			fragment = builder.BuilderIntegrationFragment auto-inject {}
 
 			// generator API
-			fragment = generator.GeneratorFragment auto-inject {}
+			//fragment = generator.GeneratorFragment auto-inject {}
 			
 			// formatter API 
     		fragment = formatting.FormatterFragment auto-inject {}
@@ -148,17 +148,38 @@ Workflow {
 
     		// rename refactoring
     		fragment = refactoring.RefactorElementNameFragment auto-inject {}
+    		
+    		// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment auto-inject {}
 				
 			// EssentialOCL bindings 
 			fragment = fragments.EssentialOCLFragment auto-inject{}
 			// Support Markup in Hover text 
 			fragment = fragments.MarkupHoverFragment auto-inject{}
 			
-			    		// provides a preference page for template proposals
+			// provides a preference page for template proposals
 			fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
 			
 			// provides a compare view
 			fragment = compare.CompareFragment auto-inject {}
 		}
+	}
+	
+	component = xtend.GenerateGrammarXtend {
+		javaFolder = "${runtimeProject}/src-gen"
+		javaPackageName = "${projectName}"
+		grammarFileStem = "ImperativeOCL"
+	}
+	component = utilities.BackportToXtext_2_3_1 {
+		directory = "${runtimeProject}/src-gen"
+	}
+	component = utilities.BackportToXtext_2_3_1 {
+		directory = "${runtimeProject}.ui/src-gen"
+	}
+	component = utilities.ConvertToUnixLineEndings {
+		directory = "${runtimeProject}/src-gen"
+	}
+	component = utilities.ConvertToUnixLineEndings {
+		directory = "${runtimeProject}.ui/src-gen"
 	}
 }

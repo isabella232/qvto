@@ -34,14 +34,14 @@ TopLevelCS : ^import+=ImportCS*
 	//(ownedType+=ModelTypeCS)*
 ;
 
-enum ClassifierKind : DATATYPE='datatype' | PRIMITIVE='primitive' | EXCEPTION='exception' | CLASS='class';
-enum FeatureKey : COMPOSES='composes' | REFERRENCES='references' | READONLY='readonly' | DERIVED='derived' | STATIC='static';
+//enum ClassifierKind : DATATYPE='datatype' | PRIMITIVE='primitive' | EXCEPTION='exception' | CLASS='class';
+//enum FeatureKey : COMPOSES='composes' | REFERRENCES='references' | READONLY='readonly' | DERIVED='derived' | STATIC='static';
 enum InitOp : EQUALS='=' | COLON_EQUALS=':=' | COLON_COLON_EQUALS='::=';
 enum MetamodelKind : METAMODEL= 'metamodel' | PACKAGE='package';
 enum DirectionKindCS : in='in'| out='out' | inout='inout';
 //enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
 
-Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
+//Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
 
 FeatureQualifier returns ecore::EString : 'composes' & 'references' & 'readonly' & 'derived' & 'static';
 

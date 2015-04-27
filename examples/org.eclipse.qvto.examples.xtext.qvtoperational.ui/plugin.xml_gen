@@ -247,60 +247,6 @@
         <persistent value="true"/>
     </extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="qvto2"
-            >
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational"
-            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.compiler.preferencePage"
-            name="Compiler">
-            <keywordReference id="org.eclipse.qvto.examples.xtext.qvtoperational.ui.keyword_QVTOperational"/>
-        </page>
-    </extension>
-    <extension
-            point="org.eclipse.ui.propertyPages">
-        <page
-            category="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational"
-            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.compiler.propertyPage"
-            name="Compiler">
-            <keywordReference id="org.eclipse.qvto.examples.xtext.qvtoperational.ui.keyword_QVTOperational"/>
-            <enabledWhen>
-	            <adapt type="org.eclipse.core.resources.IProject"/>
-			</enabledWhen>
-	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
-        </page>
-    </extension>
-    <extension point="org.eclipse.ui.menus">
-		<menuContribution locationURI="popup:#TextEditorContext?after=xtext.ui.openDeclaration">
-			<command
-				commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand"
-				id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.OpenGeneratedCode"
-				style="push">
-					<visibleWhen checkEnabled="false">
-						<reference definitionId="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.Editor.opened" />
-					</visibleWhen>
-			</command>
-		</menuContribution>
-	</extension>
-	<extension point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.generator.trace.OpenGeneratedFileHandler"
-			commandId="org.eclipse.xtext.ui.OpenGeneratedFileCommand">
-				<activeWhen>
-					<reference definitionId="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.Editor.opened" />
-				</activeWhen>
-		</handler>
-	</extension>
-
 	<!-- Quick Outline -->
 	<extension
 		point="org.eclipse.ui.handlers">
@@ -396,6 +342,34 @@
 	        <keywordReference id="org.eclipse.qvto.examples.xtext.qvtoperational.ui.keyword_QVTOperational"/>
 	    </page>
 	</extension>
+    <!-- quickfix marker resolution generator for org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvto.examples.xtext.qvtoperational.ui.qvtoperational.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvto.examples.xtext.qvtoperational.ui.qvtoperational.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="org.eclipse.qvto.examples.xtext.qvtoperational.ui.QVTOperationalExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="org.eclipse.qvto.examples.xtext.qvtoperational.ui.qvtoperational.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
 
   <extension point="org.eclipse.compare.contentViewers">
     <viewer id="org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational.compare.contentViewers"

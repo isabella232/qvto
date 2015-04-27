@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.generator.*
 var grammarURI = "classpath:/org/eclipse/qvto/examples/xtext/qvtoperational/QVTOperational.xtext"
 var fileExtensions = "qvto2"
 var projectName = "org.eclipse.qvto.examples.xtext.qvtoperational"
-var runtimeProject = "../${projectName}"
+var runtimeProject = "../../examples/${projectName}"
 var generateXtendStub = true
 
 Workflow {
@@ -55,6 +55,7 @@ Workflow {
     	pathTestProject = "${runtimeProject}.tests"
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
+    	mergeManifest = false
     	language = auto-inject {
     		uri = grammarURI
     
@@ -100,7 +101,7 @@ Workflow {
     		fragment = builder.BuilderIntegrationFragment auto-inject {}
     
     		// generator API
-    		fragment = generator.GeneratorFragment auto-inject {}
+    		// fragment = generator.GeneratorFragment auto-inject {}
     
     		// formatter API
     		fragment = formatting.FormatterFragment auto-inject {}
@@ -138,6 +139,9 @@ Workflow {
     		// rename refactoring
     		fragment = refactoring.RefactorElementNameFragment auto-inject {}
     
+    		// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment auto-inject {}
+				
 			// EssentialOCL bindings 
 			fragment = fragments.EssentialOCLFragment auto-inject{}
 			// Support Markup in Hover text 
@@ -150,5 +154,23 @@ Workflow {
     		fragment = compare.CompareFragment auto-inject {}
     	}
     }
-}
 
+	component = xtend.GenerateGrammarXtend {
+		javaFolder = "${runtimeProject}/src-gen"
+		javaPackageName = "${projectName}"
+		grammarFileStem = "QVTOperational"
+	}
+	component = utilities.BackportToXtext_2_3_1 {
+		directory = "${runtimeProject}/src-gen"
+	}
+	component = utilities.BackportToXtext_2_3_1 {
+		directory = "${runtimeProject}.ui/src-gen"
+	}
+	 
+	component = utilities.ConvertToUnixLineEndings {
+		directory = "${runtimeProject}/src-gen"
+	}
+	component = utilities.ConvertToUnixLineEndings {
+		directory = "${runtimeProject}.ui/src-gen"
+	}
+}

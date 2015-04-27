@@ -2561,7 +2561,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		// Obtain other dependent packages
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
-		QVTOperationalPackage theQVTOperationalPackage = (QVTOperationalPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalPackage.eNS_URI);
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
 		ImperativeOCLCSPackage theImperativeOCLCSPackage = (ImperativeOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(ImperativeOCLCSPackage.eNS_URI);
 
@@ -2622,8 +2621,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		packageRefCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		scopedNameCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		simpleSignatureCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
+		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getStructuredClassCS());
 		transformationRefineCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		typeSpecCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedRefCS());
 		unitCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
@@ -2636,12 +2634,8 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEReference(getTopLevelCS_Unit(), theBaseCSPackage.getElementCS(), null, "unit", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTopLevelCS_OwnedType(), thePivotPackage.getType(), null, "ownedType", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(topLevelCSEClass, thePivotPackage.getModel(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(qvToClassCSEClass, QVToClassCS.class, "QVToClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getQVToClassCS_Intermediate(), ecorePackage.getEBoolean(), "intermediate", null, 1, 1, QVToClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(qvToClassCSEClass, thePivotPackage.getClass_(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(qvToImportCSEClass, QVToImportCS.class, "QVToImportCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQVToImportCS_Unit(), this.getUnitCS(), null, "unit", null, 0, 1, QVToImportCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2657,8 +2651,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEAttribute(getOperationParameterDeclarationCS_Direction(), this.getDirectionKindCS(), "direction", null, 0, 1, OperationParameterDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getOperationParameterDeclarationCS_InitPart(), this.getInitPartCS(), null, "initPart", null, 0, 1, OperationParameterDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(operationParameterDeclarationCSEClass, theQVTOperationalPackage.getVarParameter(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(operationSimpleSignatureCSEClass, OperationSimpleSignatureCS.class, "OperationSimpleSignatureCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getOperationSimpleSignatureCS_Parameter(), this.getOperationParameterDeclarationCS(), null, "parameter", null, 0, -1, OperationSimpleSignatureCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -2669,15 +2661,11 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEClass(metamodelCSEClass, MetamodelCS.class, "MetamodelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetamodelCS_MetamodelKind(), this.getMetamodelKind(), "metamodelKind", null, 0, 1, MetamodelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(metamodelCSEClass, thePivotPackage.getPackage(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(primitiveTypeCSEClass, PrimitiveTypeCS.class, "PrimitiveTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(classifierPropertyCSEClass, ClassifierPropertyCS.class, "ClassifierPropertyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassifierPropertyCS_Stereotypes(), theBaseCSPackage.getElementCS(), null, "stereotypes", null, 0, 1, ClassifierPropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getClassifierPropertyCS_Opposite(), ecorePackage.getEString(), "opposite", null, 0, 1, ClassifierPropertyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(classifierPropertyCSEClass, thePivotPackage.getProperty(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(stereotypeQualifierCSEClass, StereotypeQualifierCS.class, "StereotypeQualifierCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStereotypeQualifierCS_Stereotype(), ecorePackage.getEString(), "stereotype", null, 0, -1, StereotypeQualifierCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2741,8 +2729,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEAttribute(getMappingOperationCS_DirectionKindCS(), this.getDirectionKindCS(), "directionKindCS", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingOperationCS_MappingExtension(), this.getMappingExtensionCS(), null, "mappingExtension", null, 0, -1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingOperationCS_IsQuery(), ecorePackage.getEBoolean(), "isQuery", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		addEOperation(mappingOperationCSEClass, theQVTOperationalPackage.getMappingOperation(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(mappingEndCSEClass, MappingEndCS.class, "MappingEndCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2848,8 +2834,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEReference(getTransformationCS_ModuleUsages(), this.getModuleUsageCS(), null, "moduleUsages", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_TransformationRefineCS(), this.getTransformationRefineCS(), null, "transformationRefineCS", null, 0, 1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		addEOperation(transformationCSEClass, theQVTOperationalPackage.getOperationalTransformation(), "ast", 1, 1, IS_UNIQUE, IS_ORDERED);
-
 		initEClass(transformationRefineCSEClass, TransformationRefineCS.class, "TransformationRefineCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTransformationRefineCS_ModuleRefCS(), this.getModuleRefCS(), null, "moduleRefCS", null, 1, 1, TransformationRefineCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTransformationRefineCS_SimpleNameCS(), ecorePackage.getEString(), "simpleNameCS", null, 1, 1, TransformationRefineCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2928,10 +2912,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		// Create annotations
 		// http://www.eclipse.org/OCL/Import
 		createImportAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
-		createPivotAnnotations();
 	}
 
 	/**
@@ -2946,82 +2926,12 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		  (this, 
 		   source, 
 		   new String[] {
-			 "baseCST", "/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/",
-			 "ecore", "http://www.eclipse.org/emf/2002/Ecore#/",
-			 "essentialOCLCST", "/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/",
-			 "imperativeocl", "/resource/org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL",
-			 "imperativeoclcs", "/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/",
-			 "qvtoperational", "/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
-		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createPivotAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";	
-		addAnnotation
-		  (topLevelCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "ocl::Package {\n\t\t\t\tnestedPackage = ownedNestedPackage.ast()\n\t\t\t\t \n\t\t\t\t\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (qvToClassCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "ocl::Class {\n\t\t\t\tname = name,\n\t\t\t\townedAttribute = ownedProperty.ast(),\n\t\t\t\townedOperation = ownedOperation.ast()\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (operationParameterDeclarationCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "qvtoperational::VarParameter {\n\t\t\t\tname = name\n\t\t\t\t--kind = if direction = DirectionKindCS::inout then\n\t\t\t\t--\t\t\tqvtoperational::DirectionKind::inout\n\t\t\t\t--\t   else if direction = DirectionKindCS::out then\n\t\t\t\t--\t   \t\tqvtoperational::DirectionKind::out\n\t\t\t\t--\t   else \n\t\t\t\t--\t   \t\tqvtoperational::DirectionKind::_in\n\t\t\t\t--\t   endif endif\n\t\t\t\t--initExpression = if (initPart.oclIsUndefined()) then\n\t\t\t\t--\t\t\t\t\tnull\n\t\t\t\t--\t\t\t\telse\n\t\t\t\t--\t\t\t\t\tinitPart.expression -- FIXME todo .ast()\n\t\t\t\t--\t\t\t\tendif\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (metamodelCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "ocl::Package {\n\t\t\t\tname = name,\n\t\t\t\tnsPrefix = name,\t-- QVTo spec doesn\'t provide concrete syntax for nsPrefix\n\t\t\t\tnsURI = name,\t\t-- QVTo spec doesn\'t provide concrete syntax for nsURI. Build an internal protocol\n\t\t\t\townedType = ownedType.ast()\n\t\t\t\t-- type = TODO\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (classifierPropertyCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "ocl::Property {\n\t\t\t\tname = name,\n\t\t\t\tisComposite = qualifier->exists(x | x = \'composite\')\n\t\t\t\t-- type = TODO\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (mappingOperationCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "qvtoperational::MappingOperation {\n\t\t\t\tname = name,\n\t\t\t\t-- ownedParameter = signature.parameter.ast()\n\t\t\t\townedParameter = ownedParameter.ast()\n\t\t\t}"
-		   });	
-		addAnnotation
-		  (transformationCSEClass.getEOperations().get(0), 
-		   source, 
-		   new String[] {
-			 "body", "qvtoperational::OperationalTransformation {\n\t\t\t\tname = name,\n\t\t\t\tnsPrefix = name,\n\t\t\t\tnsURI = name,\n\t\t\t\tnestedPackage = ownedNestedPackage.ast(),\n\t\t\t\townedType = ownedType.ast(),\n\t\t\t\townedOperation = ownedOperation.ast()\n\t\t\t}"
+			 "baseCST", "../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/",
+			 "ecore", "http://www.eclipse.org/emf/2002/Ecore",
+			 "essentialOCLCST", "../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/",
+			 "imperativeocl", "../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL",
+			 "imperativeoclcs", "../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/",
+			 "qvtoperational", "../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational"
 		   });
 	}
 

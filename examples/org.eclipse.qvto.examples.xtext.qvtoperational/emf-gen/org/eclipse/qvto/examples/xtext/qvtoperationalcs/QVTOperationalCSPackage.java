@@ -24,8 +24,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
  * <!-- end-user-doc -->
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import baseCST='/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore#/' essentialOCLCST='/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/' imperativeocl='/resource/org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL' imperativeoclcs='/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/' qvtoperational='/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore invocationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' settingDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' validationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot'"
+ *        annotation="http://www.eclipse.org/OCL/Import baseCST='../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/' ecore='http://www.eclipse.org/emf/2002/Ecore' essentialOCLCST='../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/' imperativeocl='../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore#ImperativeOCL' imperativeoclcs='../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#/' qvtoperational='../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#QVTOperational'"
  * @generated
  */
 public interface QVTOperationalCSPackage extends EPackage {
@@ -133,15 +132,6 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int TOP_LEVEL_CS__OWNED_IMPORTS = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_IMPORTS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Libraries</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TOP_LEVEL_CS__OWNED_LIBRARIES = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARIES;
 
 	/**
 	 * The feature id for the '<em><b>Import</b></em>' containment reference list.
@@ -4646,7 +4636,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__CSI = BaseCSPackage.PACKAGE_CS__CSI;
+	int TRANSFORMATION_CS__CSI = BaseCSPackage.STRUCTURED_CLASS_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -4655,7 +4645,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PARENT = BaseCSPackage.PACKAGE_CS__PARENT;
+	int TRANSFORMATION_CS__PARENT = BaseCSPackage.STRUCTURED_CLASS_CS__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -4664,7 +4654,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PIVOT = BaseCSPackage.PACKAGE_CS__PIVOT;
+	int TRANSFORMATION_CS__PIVOT = BaseCSPackage.STRUCTURED_CLASS_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -4673,7 +4663,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.PACKAGE_CS__ORIGINAL_XMI_ID;
+	int TRANSFORMATION_CS__ORIGINAL_XMI_ID = BaseCSPackage.STRUCTURED_CLASS_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
@@ -4682,16 +4672,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.PACKAGE_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__OWNED_PACKAGES = BaseCSPackage.PACKAGE_CS__OWNED_PACKAGES;
+	int TRANSFORMATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -4700,34 +4681,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__NAME = BaseCSPackage.PACKAGE_CS__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Ns Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__NS_PREFIX = BaseCSPackage.PACKAGE_CS__NS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Ns URI</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__NS_URI = BaseCSPackage.PACKAGE_CS__NS_URI;
-
-	/**
-	 * The feature id for the '<em><b>Owned Classes</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__OWNED_CLASSES = BaseCSPackage.PACKAGE_CS__OWNED_CLASSES;
+	int TRANSFORMATION_CS__NAME = BaseCSPackage.STRUCTURED_CLASS_CS__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
@@ -4736,7 +4690,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_SIGNATURE = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 0;
+	int TRANSFORMATION_CS__OWNED_SIGNATURE = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -4745,7 +4699,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__INSTANCE_CLASS_NAME = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 1;
+	int TRANSFORMATION_CS__INSTANCE_CLASS_NAME = BaseCSPackage.STRUCTURED_CLASS_CS__INSTANCE_CLASS_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
@@ -4754,7 +4708,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_CONSTRAINTS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 2;
+	int TRANSFORMATION_CS__OWNED_CONSTRAINTS = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>Owning Package</b></em>' container reference.
@@ -4763,7 +4717,61 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNING_PACKAGE = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 3;
+	int TRANSFORMATION_CS__OWNING_PACKAGE = BaseCSPackage.STRUCTURED_CLASS_CS__OWNING_PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Is Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__IS_ABSTRACT = BaseCSPackage.STRUCTURED_CLASS_CS__IS_ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Is Interface</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__IS_INTERFACE = BaseCSPackage.STRUCTURED_CLASS_CS__IS_INTERFACE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Metaclass</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_METACLASS = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_METACLASS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Operations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_OPERATIONS = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_OPERATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Owned Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_PROPERTIES = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Owned Super Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_SUPER_TYPES = BaseCSPackage.STRUCTURED_CLASS_CS__OWNED_SUPER_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Qualifiers</b></em>' containment reference list.
@@ -4772,7 +4780,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__QUALIFIERS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 4;
+	int TRANSFORMATION_CS__QUALIFIERS = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Path Name CS</b></em>' containment reference.
@@ -4781,7 +4789,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PATH_NAME_CS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 5;
+	int TRANSFORMATION_CS__PATH_NAME_CS = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -4790,7 +4798,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PARAMETERS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 6;
+	int TRANSFORMATION_CS__PARAMETERS = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Module Usages</b></em>' containment reference list.
@@ -4799,7 +4807,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__MODULE_USAGES = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 7;
+	int TRANSFORMATION_CS__MODULE_USAGES = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Transformation Refine CS</b></em>' containment reference.
@@ -4808,7 +4816,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__TRANSFORMATION_REFINE_CS = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 8;
+	int TRANSFORMATION_CS__TRANSFORMATION_REFINE_CS = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Transformation CS</em>' class.
@@ -4817,7 +4825,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.PACKAGE_CS_FEATURE_COUNT + 9;
+	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.STRUCTURED_CLASS_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TransformationRefineCSImpl <em>Transformation Refine CS</em>}' class.

@@ -47,13 +47,4 @@ public interface QVToClassCS extends StructuredClassCS {
 	 */
 	void setIntermediate(boolean value);
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ocl::Class {\n\t\t\t\tname = name,\n\t\t\t\townedAttribute = ownedProperty.ast(),\n\t\t\t\townedOperation = ownedOperation.ast()\n\t\t\t}'"
-	 * @generated
-	 */
-	org.eclipse.ocl.pivot.Class ast();
-
 } // QVToClassCS

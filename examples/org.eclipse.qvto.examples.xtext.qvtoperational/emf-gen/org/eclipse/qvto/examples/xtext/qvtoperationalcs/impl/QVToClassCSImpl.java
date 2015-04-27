@@ -2,12 +2,8 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.impl.StructuredClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -87,30 +83,6 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 		intermediate = newIntermediate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE, oldIntermediate, intermediate));
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #ast() <em>Ast</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ast()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate AST__EINVOCATION_DELEGATE = ((EOperation.Internal)QVTOperationalCSPackage.Literals.QV_TO_CLASS_CS.getEOperations().get(0)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.ocl.pivot.Class ast() {
-		try {
-			return (org.eclipse.ocl.pivot.Class)AST__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
-		}
-		catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
 	}
 
 	/**

@@ -689,16 +689,15 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 			case QVTOperationalCSPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
-				if (result == null) result = casePackageCS(transformationCS);
+				if (result == null) result = caseStructuredClassCS(transformationCS);
 				if (result == null) result = caseClassCS(transformationCS);
-				if (result == null) result = casePackageOwnerCS(transformationCS);
 				if (result == null) result = caseNamespaceCS(transformationCS);
+				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseTypeCS(transformationCS);
 				if (result == null) result = caseTemplateableElementCS(transformationCS);
-				if (result == null) result = caseNamedElementCS(transformationCS);
 				if (result == null) result = caseModelElementCS(transformationCS);
-				if (result == null) result = casePivotableElementCS(transformationCS);
 				if (result == null) result = caseNameable(transformationCS);
+				if (result == null) result = casePivotableElementCS(transformationCS);
 				if (result == null) result = caseElementCS(transformationCS);
 				if (result == null) result = casePivotable(transformationCS);
 				if (result == null) result = caseVisitableCS(transformationCS);

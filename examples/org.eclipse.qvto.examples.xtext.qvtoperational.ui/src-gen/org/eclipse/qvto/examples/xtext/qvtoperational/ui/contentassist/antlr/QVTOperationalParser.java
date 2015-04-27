@@ -78,8 +78,6 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAlternatives_0(), "rule__MultiplicityStringCS__StringBoundsAlternatives_0");
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
-					put(grammarAccess.getClassifierKindAccess().getAlternatives(), "rule__ClassifierKind__Alternatives");
-					put(grammarAccess.getFeatureKeyAccess().getAlternatives(), "rule__FeatureKey__Alternatives");
 					put(grammarAccess.getInitOpAccess().getAlternatives(), "rule__InitOp__Alternatives");
 					put(grammarAccess.getMetamodelKindAccess().getAlternatives(), "rule__MetamodelKind__Alternatives");
 					put(grammarAccess.getDirectionKindCSAccess().getAlternatives(), "rule__DirectionKindCS__Alternatives");
@@ -451,7 +449,6 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_1");
 					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_2_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsAssignment_2_1(), "rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1");
-					put(grammarAccess.getQualifierAccess().getUnorderedGroup(), "rule__Qualifier__UnorderedGroup");
 					put(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), "rule__FeatureQualifier__UnorderedGroup");
 				}
 			};

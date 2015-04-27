@@ -3,7 +3,6 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
@@ -74,14 +73,5 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @generated
 	 */
 	EList<Type> getOwnedType();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ocl::Package {\n\t\t\t\tnestedPackage = ownedNestedPackage.ast()\n\t\t\t\t \n\t\t\t\t\n\t\t\t}'"
-	 * @generated
-	 */
-	Model ast();
 
 } // TopLevelCS

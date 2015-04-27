@@ -242,7 +242,7 @@ public abstract class AbstractExtendingQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS object) {
-		return visitPackageCS(object);
+		return visitStructuredClassCS(object);
 	}
 
 	public @Nullable R visitTransformationRefineCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS object) {

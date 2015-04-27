@@ -2,16 +2,11 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.impl.StructuralFeatureCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -145,30 +140,6 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 		opposite = newOpposite;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OPPOSITE, oldOpposite, opposite));
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #ast() <em>Ast</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ast()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate AST__EINVOCATION_DELEGATE = ((EOperation.Internal)QVTOperationalCSPackage.Literals.CLASSIFIER_PROPERTY_CS.getEOperations().get(0)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Property ast() {
-		try {
-			return (Property)AST__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
-		}
-		catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
 	}
 
 	/**

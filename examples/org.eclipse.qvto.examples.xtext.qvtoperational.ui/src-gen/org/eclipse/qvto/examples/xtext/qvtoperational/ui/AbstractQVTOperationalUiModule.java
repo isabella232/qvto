@@ -54,27 +54,12 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public void configureIResourceDescriptionsPersisted(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.PERSISTED_DESCRIPTIONS)).to(org.eclipse.xtext.builder.builderState.IBuilderState.class);
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.PERSISTED_DESCRIPTIONS")).to(org.eclipse.xtext.builder.builderState.IBuilderState.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.DocumentBasedDirtyResource> bindDocumentBasedDirtyResource() {
 		return org.eclipse.xtext.builder.impl.PersistentDataAwareDirtyResource.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public Class<? extends org.eclipse.xtext.builder.IXtextBuilderParticipant> bindIXtextBuilderParticipant() {
-		return org.eclipse.xtext.builder.BuilderParticipant.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public org.eclipse.core.resources.IWorkspaceRoot bindIWorkspaceRootToInstance() {
-		return org.eclipse.core.resources.ResourcesPlugin.getWorkspace().getRoot();
-	}
-
-	// contributed by org.eclipse.xtext.generator.generator.GeneratorFragment
-	public void configureBuilderPreferenceStoreInitializer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer.class).annotatedWith(com.google.inject.name.Names.named("builderPreferenceInitializer")).to(org.eclipse.xtext.builder.preferences.BuilderPreferenceAccess.Initializer.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
@@ -95,11 +80,6 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
 		return org.eclipse.qvto.examples.xtext.qvtoperational.ui.outline.QVTOperationalOutlineTreeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
-		return org.eclipse.qvto.examples.xtext.qvtoperational.ui.quickfix.QVTOperationalQuickfixProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment
@@ -150,6 +130,11 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
 	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameSupport.Factory> bindIRenameSupport$Factory() {
 		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
+		return org.eclipse.qvto.examples.xtext.qvtoperational.ui.quickfix.QVTOperationalQuickfixProvider.class;
 	}
 
 	// contributed by org.eclipse.ocl.examples.build.fragments.EssentialOCLFragment

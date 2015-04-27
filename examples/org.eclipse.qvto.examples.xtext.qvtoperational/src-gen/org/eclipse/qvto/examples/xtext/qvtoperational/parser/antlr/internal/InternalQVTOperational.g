@@ -146,8 +146,6 @@ ruleTopLevelCS returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleFeatureQualifier
 entryRuleFeatureQualifier returns [String current=null] 
 	@init { 
@@ -8031,10 +8029,6 @@ ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
     }
 
     ;
-
-
-
-
 
 
 

@@ -17,7 +17,6 @@
 package org.eclipse.qvto.examples.xtext.qvtoperational.tests;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +24,13 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.tests.XtextTestCase;
-import org.eclipse.ocl.pivot.internal.context.ModelContext;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCLStandaloneSetup;
 import org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperationalStandaloneSetup;
 
 public abstract class AbstractQVToXtextTestCase extends XtextTestCase
@@ -112,7 +108,6 @@ public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		doImperativeOCLSetup();
 		doQVTOperationalSetup();
 		ocl = OCL.newInstance(OCL.NO_PROJECTS);
 		//configurePlatformResources();
@@ -128,20 +123,6 @@ public abstract class AbstractQVToXtextTestCase extends XtextTestCase
 	protected static void doQVTOperationalSetup() {
 		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			QVTOperationalStandaloneSetup.doSetup();
-    	}
-    	else {
-    		// FIXME remove this if it's configured on bundle startup
-    		QVTOperationalStandaloneSetup.init();
-    	}
-	}
-	
-	protected static void doImperativeOCLSetup() {
-		if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-			ImperativeOCLStandaloneSetup.doSetup();
-    	}
-    	else {
-    		// FIXME remove this if it's configured on bundle startup
-    		ImperativeOCLStandaloneSetup.init();
     	}
 	}
 }

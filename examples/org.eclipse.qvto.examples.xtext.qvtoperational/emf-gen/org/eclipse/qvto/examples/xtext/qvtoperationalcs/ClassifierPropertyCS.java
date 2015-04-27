@@ -2,7 +2,6 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 
@@ -75,14 +74,5 @@ public interface ClassifierPropertyCS extends StructuralFeatureCS {
 	 * @generated
 	 */
 	void setOpposite(String value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='ocl::Property {\n\t\t\t\tname = name,\n\t\t\t\tisComposite = qualifier->exists(x | x = \'composite\')\n\t\t\t\t-- type = TODO\n\t\t\t}'"
-	 * @generated
-	 */
-	Property ast();
 
 } // ClassifierPropertyCS

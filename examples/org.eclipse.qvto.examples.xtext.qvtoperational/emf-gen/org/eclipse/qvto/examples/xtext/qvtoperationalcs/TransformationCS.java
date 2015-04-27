@@ -3,11 +3,9 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.xtext.basecs.ClassCS;
-import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.StructuredClassCS;
 import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
-import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +27,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
  * @model
  * @generated
  */
-public interface TransformationCS extends PackageCS, ClassCS {
+public interface TransformationCS extends StructuredClassCS {
 	/**
 	 * Returns the value of the '<em><b>Qualifiers</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS}.
@@ -129,14 +127,5 @@ public interface TransformationCS extends PackageCS, ClassCS {
 	 * @generated
 	 */
 	void setTransformationRefineCS(TransformationRefineCS value);
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model required="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot body='qvtoperational::OperationalTransformation {\n\t\t\t\tname = name,\n\t\t\t\tnsPrefix = name,\n\t\t\t\tnsURI = name,\n\t\t\t\tnestedPackage = ownedNestedPackage.ast(),\n\t\t\t\townedType = ownedType.ast(),\n\t\t\t\townedOperation = ownedOperation.ast()\n\t\t\t}'"
-	 * @generated
-	 */
-	OperationalTransformation ast();
 
 } // TransformationCS

@@ -2,12 +2,8 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
-import java.lang.reflect.InvocationTargetException;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.impl.PackageCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -88,30 +84,6 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 		metamodelKind = newMetamodelKind == null ? METAMODEL_KIND_EDEFAULT : newMetamodelKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.METAMODEL_CS__METAMODEL_KIND, oldMetamodelKind, metamodelKind));
-	}
-
-	/**
-	 * The cached invocation delegate for the '{@link #ast() <em>Ast</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #ast()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final EOperation.Internal.InvocationDelegate AST__EINVOCATION_DELEGATE = ((EOperation.Internal)QVTOperationalCSPackage.Literals.METAMODEL_CS.getEOperations().get(0)).getInvocationDelegate();
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public org.eclipse.ocl.pivot.Package ast() {
-		try {
-			return (org.eclipse.ocl.pivot.Package)AST__EINVOCATION_DELEGATE.dynamicInvoke(this, null);
-		}
-		catch (InvocationTargetException ite) {
-			throw new WrappedException(ite);
-		}
 	}
 
 	/**

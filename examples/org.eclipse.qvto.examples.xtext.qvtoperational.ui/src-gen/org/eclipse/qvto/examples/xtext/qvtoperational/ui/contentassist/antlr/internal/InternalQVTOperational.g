@@ -85,8 +85,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleFeatureQualifier
 entryRuleFeatureQualifier 
 :
@@ -3347,10 +3345,6 @@ finally {
 
 
 
-
-
-
-
 // Rule InitOp
 ruleInitOp
     @init {
@@ -4572,8 +4566,6 @@ rule__UPPER__Alternatives
 finally {
 	restoreStackSize(stackSize);
 }
-
-
 
 rule__InitOp__Alternatives
     @init {
@@ -17781,7 +17773,6 @@ rule__TypeParameterCS__Group_1_2__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
-
 
 
 
