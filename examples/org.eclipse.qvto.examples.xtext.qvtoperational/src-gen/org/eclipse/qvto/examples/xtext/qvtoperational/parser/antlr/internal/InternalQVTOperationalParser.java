@@ -24274,11 +24274,11 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred84_InternalQVTOperational() {
+    public final boolean synpred78_InternalQVTOperational() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred84_InternalQVTOperational_fragment(); // can never throw exception
+            synpred78_InternalQVTOperational_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -24288,11 +24288,11 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred78_InternalQVTOperational() {
+    public final boolean synpred84_InternalQVTOperational() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred78_InternalQVTOperational_fragment(); // can never throw exception
+            synpred84_InternalQVTOperational_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }

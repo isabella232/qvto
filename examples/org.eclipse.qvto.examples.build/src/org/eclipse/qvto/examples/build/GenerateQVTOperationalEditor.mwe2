@@ -27,7 +27,7 @@ var runtimeProject = "../../examples/${projectName}"
 var generateXtendStub = true
 
 Workflow {
-    bean = StandaloneSetup {    	
+    bean = StandaloneSetup {
     	scanClassPath = true
     	platformUri = "${runtimeProject}/.."
     	registerGeneratedEPackage = "org.eclipse.uml2.uml.UMLPackage"
@@ -173,4 +173,18 @@ Workflow {
 	component = utilities.ConvertToUnixLineEndings {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
+	
+	/*
+	// CS2AS Components
+	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : resourceSet {}
+	
+	component = @org.eclipse.qvtd.build.cs2as.mwe.GenerateCGedQVTiTransformation { 
+		resourceSet = resourceSet
+		// oclFileURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
+		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"  
+		javaPackage = "${projectName}"
+		environmentClassName = "${projectName}.cs2as.LookupEnvironment"
+		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
+		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
+	}*/
 }
