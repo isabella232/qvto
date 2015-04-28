@@ -82,4 +82,12 @@ main() {
 	reals += 1.0;
 	assert fatal (reals = Set{1.0});
 
+
+	var c = object EClass {};
+	var e = object EPackage {
+		eClassifiers := c;
+	};
+	e.eClassifiers := OrderedSet{object EClass {}, null};
+	
+	assert fatal (not e.eClassifiers->includes(c));
 }

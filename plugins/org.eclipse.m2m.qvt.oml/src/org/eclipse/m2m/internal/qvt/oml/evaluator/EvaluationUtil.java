@@ -13,6 +13,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.evaluator;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -326,5 +328,18 @@ public class EvaluationUtil {
 	public static List<ModelParameter> getBlackboxSignature(OperationalTransformation transformation) {
 		return transformation.getModelParameter();
 	}
-    
+
+	public static boolean canContainNull(Collection<?> coll) {
+		if (coll instanceof AbstractEList) {
+			try {
+				Method method = AbstractEList.class.getDeclaredMethod("canContainNull", new Class[] {}); //$NON-NLS-1$
+				method.setAccessible(true);
+				return (Boolean) method.invoke(coll, new Object[] {});
+			} catch (Exception e) {
+				return true;
+			}
+		}
+		return true;
+	}
+	
 }

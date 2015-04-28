@@ -36,6 +36,7 @@ public class EvaluationMessages extends NLS {
 	public static String NoBlackboxOperationFound;
 	public static String AmbiguousBlackboxOperationFound;
 	public static String BlackboxMappingFailedToAssignResult;
+	public static String ContentMergeForMultivaluedFeatureFailed;
 	
 	public static String IteratorNotImpl;
 	

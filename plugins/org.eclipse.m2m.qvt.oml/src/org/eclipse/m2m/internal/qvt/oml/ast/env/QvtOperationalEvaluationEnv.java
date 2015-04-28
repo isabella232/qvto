@@ -13,7 +13,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -22,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.AbstractEList;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.DelegatingEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -759,64 +758,60 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		final Class<?> expectedClass = eStructuralFeature.getEType().getInstanceClass();
 		
 		if (FeatureMapUtil.isMany(owner, eStructuralFeature)) {
-			
-			@SuppressWarnings("serial")
-			EList<Object> containerList = new DelegatingEList<Object>() {
-				
-				protected List<Object> delegateList() {
-					return (List<Object>) currentValue;
-				}
-				
-				@Override
-				public void add(int index, Object object) {
-					try {
-						super.add(index, ensureTypeCompatibility(object, expectedClass));
-					}
-					catch (Exception e) {
-						QvtPlugin.error(e);
-					}
-				}
-				
-				@Override
-				public boolean add(Object object) {
-					if (object == null && !canContainNull()) {
-						return false;
-					}
-
-					try {
-						return super.add(ensureTypeCompatibility(object, expectedClass));
-					}
-					catch (Exception e) {
-						QvtPlugin.error(e);
-						return false;
-					}
-				}
-				
-				protected boolean canContainNull() {
-					if (delegateList() instanceof AbstractEList) {
-						try {
-							Method method = AbstractEList.class.getDeclaredMethod("canContainNull", new Class[]{});
-							method.setAccessible(true);
-							return (Boolean) method.invoke(delegateList(), new Object[]{});
-						} catch (Exception e) {
-							return true;
-						}
-					}
-					return true;
-				}
-				
-			};
-			
-			List<Object> newList;
+			EList<Object> containerList = (EList<Object>) currentValue;
 			
 			if (valueIsUndefined) {
-				newList = isReset ? Collections.emptyList() : containerList;
+				if (isReset) {
+					containerList.clear();
+				}
 			}
 			else {
-				newList = newValue instanceof List ? (List<Object>) newValue : new ArrayList<Object>((Collection<?>) newValue);
+				Collection<?> coll = (Collection<?>) newValue;
+				List<Object> newList;
+				
+				if (!EvaluationUtil.canContainNull(containerList)) {
+					newList = new ArrayList<Object>(coll.size());
+					for (Object o : coll) {
+						if (o != null) {
+							newList.add(o);
+						}
+					}
+				}
+				else {
+					newList = newValue instanceof List ? (List<Object>) newValue : new ArrayList<Object>(coll);
+				}
+
+				@SuppressWarnings("serial")
+				EList<Object> delegatingList = new DelegatingEList<Object>() {
+					
+					protected List<Object> delegateList() {
+						return (List<Object>) currentValue;
+					}
+					
+					@Override
+					public void add(int index, Object object) {
+						super.add(index, ensureTypeCompatibility(object, expectedClass));
+					}
+					
+					@Override
+					public boolean add(Object object) {
+						return super.add(ensureTypeCompatibility(object, expectedClass));
+					}
+					
+				};
+				
+				// guard against incorrect behavior of ELists implementation.
+				// Inspired by https://bugs.eclipse.org/bugs/show_bug.cgi?id=465283
+				try {
+					ECollections.setEList(delegatingList, newList);
+				}
+				catch (RuntimeException e) {
+					QvtPlugin.warning(IStatus.OK, NLS.bind(EvaluationMessages.ContentMergeForMultivaluedFeatureFailed, 
+							eStructuralFeature.getName()), e);
+					containerList.clear();
+					containerList.addAll(newList);				
+				}
 			}
-							
-			ECollections.setEList(containerList, newList);
 		}
 		else {		
 			if (isOclInvalid(newValue) || (newValue == null && !acceptsNullValue(expectedClass))) {
@@ -901,16 +896,10 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	 * @return the converted value
 	 */
 	private Object ensureTypeCompatibility(Object value, Class<?> expectedType) {
-		if ((expectedType == Double.class || expectedType == double.class) && value instanceof Integer) {
-			// In OCL Integer conforms to Real, in Java Integer doesn't conform to Double.
-			return Double.valueOf(((Integer) value).doubleValue());
-		}
-
 		if (expectedType != null) {
 			// perform the type conversion only the expected type is available
 			return NumberConversions.convertNumber(value, expectedType);
 		}
-
 		return value;
 	}
 
