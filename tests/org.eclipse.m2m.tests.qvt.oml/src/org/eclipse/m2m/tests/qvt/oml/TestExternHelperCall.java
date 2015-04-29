@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -56,7 +56,7 @@ public class TestExternHelperCall extends TestCase {
 	}
 
 	protected void setupLibrary(String libraryName) throws MdaException {
-		TestModuleResolver importResolver = TestModuleResolver.createdTestPluginResolver(srcContainer);
+		TestModuleResolver importResolver = TestModuleResolver.createTestPluginResolver(srcContainer);
 
 		QVTOCompiler compiler = CompilerUtils.createCompiler();				
 		UnitProxy srcUnit = importResolver.resolveUnit(libraryName);

@@ -590,7 +590,6 @@ public class QVTOCompiler {
 		return options;
     }
 
-	@SuppressWarnings("deprecation")
 	private UnitProxy resolveImportedUnit(UnitProxy importingUnit, String unitQualifiedName) {
 		UnitResolver resolver = importingUnit.getResolver();
 		UnitProxy unit = resolver.resolveUnit(unitQualifiedName);
@@ -601,14 +600,7 @@ public class QVTOCompiler {
 				unit = resolver.resolveUnit(namespace + NAMESPACE_SEP + unitQualifiedName);
 			}
 		}
-		
-		// Handle legacy imports from deployed transformations
-    	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=240192
-    	if(unit == null && resolver instanceof LegacyResolverSupport) {
-    		LegacyResolverSupport legacyResolver = (LegacyResolverSupport)resolver;
-			unit = legacyResolver.resolveUnit(importingUnit, unitQualifiedName);
-    	}
-    	
+		   	
     	return unit;
 	}
     

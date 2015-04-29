@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 Borland Software Corporation and others.
+ * Copyright (c) 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -45,8 +45,8 @@ public class PlatformPluginUnitResolverFactory extends UnitResolverFactory {
 		URI sourceFolderURI = ResolverUtils.getSourceFolderURI(uri);		
 		
 		if(sourceFolderURI != null && sourceFolderURI.segmentCount() > 2) {
-			IPath plugingRelativePath = new Path(sourceFolderURI.toPlatformString(true)).removeFirstSegments(1);
-			resolver = new PlatformPluginUnitResolver(bundle, plugingRelativePath);
+			IPath pluginRelativePath = new Path(sourceFolderURI.toPlatformString(true)).removeFirstSegments(1);
+			resolver = new PlatformPluginUnitResolver(bundle, pluginRelativePath);
 		} else {
 			resolver = new PlatformPluginUnitResolver(bundle);
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -144,7 +144,7 @@ public class TestUtil extends Assert {
 	}
 	
 	public static Set<CompiledUnit> compileModules(String srcContainer, String[] modulePaths)  {
-		TestModuleResolver testResolver = TestModuleResolver.createdTestPluginResolver(srcContainer);
+		TestModuleResolver testResolver = TestModuleResolver.createTestPluginResolver(srcContainer);
 		
 		QVTOCompiler compiler = CompilerUtils.createCompiler();				
 		QvtCompilerOptions options = new QvtCompilerOptions();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -26,10 +26,8 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
-import org.eclipse.m2m.internal.qvt.oml.common.io.CFile;
 import org.eclipse.m2m.internal.qvt.oml.common.project.CompiledTransformation;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ResolverUtils;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.config.QvtConfigurationProperty;
@@ -80,12 +78,7 @@ public class QvtCompiledTransformation implements QvtTransformation, CompiledTra
     }
 
     public URI getUri() {
-    	DeployedImportResolver importResolver = DeployedImportResolver.INSTANCE;
-    	CFile srcFile = importResolver.resolveImport(myId);
-    	if (srcFile != null) {
-    		return EmfUtil.makeUri(srcFile.toString()); 
-    	}
-        return URI.createPlatformPluginURI(myId, false);
+    	return URI.createPlatformPluginURI(myNamespace, false).appendSegments(transformationFilePath.segments());
     }
 
     public String getNamespace() {

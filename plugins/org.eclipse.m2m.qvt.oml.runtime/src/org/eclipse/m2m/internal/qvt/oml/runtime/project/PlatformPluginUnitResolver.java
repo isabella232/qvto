@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -37,6 +37,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.ResolverUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
 import org.osgi.framework.Bundle;
 
 /**
@@ -44,7 +45,7 @@ import org.osgi.framework.Bundle;
  */
 public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 	
-    private static final String SOURCE_CONTAINER_POINT = "org.eclipse.m2m.qvt.oml.runtime.qvtTransformationContainer"; //$NON-NLS-1$
+    private static final String SOURCE_CONTAINER_POINT = QvtRuntimePlugin.ID + ".qvtTransformationContainer"; //$NON-NLS-1$
     private static final String SOURCE_CONTAINER = "sourceContainer"; //$NON-NLS-1$
     private static final String CONTAINER_PATH = "path"; //$NON-NLS-1$
 	
@@ -139,7 +140,8 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 		if (containers != null) {
 			return containers.toArray(new IPath[containers.size()]);
 		}
-		return new IPath[] { new Path("/") }; //$NON-NLS-1$
+				
+		return new IPath[] { Path.ROOT };
 	}
 
    

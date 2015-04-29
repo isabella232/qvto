@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -37,6 +37,10 @@ public class SourceContainerTests {
 		
 		suite.addTest(new DeployedPluginText("PlainProject",
 				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.pluginProject/transforms/root/RootTransformation.qvto", true)));
+		
+		// test transformation deployed with 'org.eclipse.m2m.tests.qvto.deployedTransfProject' plug-in
+		suite.addTest(new DeployedPluginText("DeployedTransfProject",
+				URI.createURI("deployedTransformationId", true)));
 		
 		return suite;
 	}

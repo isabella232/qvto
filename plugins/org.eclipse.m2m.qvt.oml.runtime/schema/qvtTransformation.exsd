@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="org.eclipse.m2m.qvt.oml.runtime">
+<schema targetNamespace="org.eclipse.m2m.qvt.oml.runtime" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
          <meta.schema plugin="org.eclipse.m2m.qvt.oml.runtime" id="qvtTransformation" name="QVT transformation"/>
@@ -11,6 +11,14 @@
    </annotation>
 
    <element name="extension">
+      <annotation>
+         <appInfo>
+            <meta.element />
+         </appInfo>
+         <documentation>
+            Extension point to register deployed QVTo modules
+         </documentation>
+      </annotation>
       <complexType>
          <sequence>
             <choice minOccurs="1" maxOccurs="unbounded">
@@ -46,20 +54,26 @@
    </element>
 
    <element name="input">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+         <documentation>
+            A classifier represesting an input parameter to a QVTo transformation
+         </documentation>
+      </annotation>
       <complexType>
-         <sequence>
-         </sequence>
          <attribute name="metamodel" type="string">
             <annotation>
                <documentation>
-                  
+                  The namespace URI of the input classifier&apos;s metamodel
                </documentation>
             </annotation>
          </attribute>
          <attribute name="metaclass" type="string">
             <annotation>
                <documentation>
-                  
+                  The fully qualified name of the input classifier
                </documentation>
             </annotation>
          </attribute>
@@ -67,20 +81,26 @@
    </element>
 
    <element name="output">
+      <annotation>
+         <appInfo>
+            <meta.element deprecated="true"/>
+         </appInfo>
+         <documentation>
+            A classifier represesting an output parameter of a QVTo transformation
+         </documentation>
+      </annotation>
       <complexType>
-         <sequence>
-         </sequence>
          <attribute name="metamodel" type="string">
             <annotation>
                <documentation>
-                  
+                  The namespace URI of the output classifier&apos;s metamodel
                </documentation>
             </annotation>
          </attribute>
          <attribute name="metaclass" type="string">
             <annotation>
                <documentation>
-                  
+                  The fully qualified name of the output classifier
                </documentation>
             </annotation>
          </attribute>
@@ -88,6 +108,11 @@
    </element>
 
    <element name="transformation">
+      <annotation>
+         <documentation>
+            A runnable transformation module containing a &lt;code&gt;main()&lt;/code&gt; operation
+         </documentation>
+      </annotation>
       <complexType>
          <sequence minOccurs="0" maxOccurs="1">
             <element ref="input"/>
@@ -96,7 +121,7 @@
          <attribute name="file" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The transformation file (*.qvto)
                </documentation>
                <appInfo>
                   <meta.attribute kind="resource"/>
@@ -106,19 +131,27 @@
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The identifier used to import the registered transformation
                </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <element name="library">
+      <annotation>
+         <documentation>
+            A library module that may be imported by other modules
+         </documentation>
+      </annotation>
       <complexType>
          <attribute name="file" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The registered library file (*.qvto)
                </documentation>
                <appInfo>
                   <meta.attribute kind="resource"/>
@@ -128,8 +161,11 @@
          <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
-                  
+                  The identifier used to import the registered library
                </documentation>
+               <appInfo>
+                  <meta.attribute kind="identifier"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
@@ -176,7 +212,7 @@
          <meta.section type="copyright"/>
       </appInfo>
       <documentation>
-         Copyright (c) 2007 Borland Software Corporation
+         Copyright (c) 2007, 2015 Borland Software Corporation
       </documentation>
    </annotation>
 

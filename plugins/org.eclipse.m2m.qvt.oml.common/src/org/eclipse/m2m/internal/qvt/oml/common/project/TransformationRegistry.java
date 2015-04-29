@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -49,11 +49,13 @@ public abstract class TransformationRegistry {
     public static interface Filter {
         boolean accept(IConfigurationElement element);
     };
-
+    
+    @Deprecated
     public static class InputFilter implements Filter {
         
     	private List<EClass> myInput = new ArrayList<EClass>();
-
+    	
+    	@Deprecated
 		public InputFilter(EClass input) {
             myInput.add(input);
             myInput.addAll(input.getEAllSuperTypes());
@@ -107,6 +109,7 @@ public abstract class TransformationRegistry {
         return transformations.isEmpty() ? null : transformations.get(0);
     }
     
+    @Deprecated
     public List<CompiledTransformation> getTransformationsByInput(final EClass input) {
         return getTransformations(new InputFilter(input));            
     }

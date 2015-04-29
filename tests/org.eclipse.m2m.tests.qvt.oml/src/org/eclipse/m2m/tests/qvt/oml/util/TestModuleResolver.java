@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,30 +11,20 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.util;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.List;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
-import org.eclipse.m2m.internal.qvt.oml.common.io.CFile;
-import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.BundleFile;
-import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.BundleModuleRegistry;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
-import org.eclipse.m2m.internal.qvt.oml.compiler.ResolverUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.DeployedImportResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
 
 public class TestModuleResolver implements UnitResolver {
 	
-	private UnitResolver fDeployedResolver;	
+	private UnitResolver fPluginResolver;	
 	private IPath fBasePath;
 			
 	/**
@@ -44,7 +34,7 @@ public class TestModuleResolver implements UnitResolver {
 	 *            a path relative to the given bundle
 	 * @return the resolver instance
 	 */
-	public static TestModuleResolver createdTestPluginResolver(String sourceContainerPath) {
+	public static TestModuleResolver createTestPluginResolver(String sourceContainerPath) {
 		return new TestModuleResolver(AllTests.BUNDLE_ID, sourceContainerPath);
 	}
 	
@@ -55,19 +45,12 @@ public class TestModuleResolver implements UnitResolver {
 		
 		Bundle bundle =  Platform.getBundle(bundleSymbolicName);
 		if(bundle == null) {
-			throw new IllegalArgumentException("Not existinging bundle" + bundleSymbolicName); //$NON-NLS-1$
-		}
-
-		Enumeration<java.net.URL> qvtFiles = bundle.findEntries(sourceContainerPath, "*" + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT, true); //$NON-NLS-1$
-		
-		List<IPath> pathList = new ArrayList<IPath>();
-		while(qvtFiles.hasMoreElements()) {
-			pathList.add(new Path(qvtFiles.nextElement().getPath()));
+			throw new IllegalArgumentException("Bundle not existing: " + bundleSymbolicName); //$NON-NLS-1$
 		}
 		
-		BundleModuleRegistry registry = new BundleModuleRegistry(bundleSymbolicName, pathList);
+		fBasePath = new Path(sourceContainerPath).makeAbsolute();
 		
-		fDeployedResolver = new DeployedImportResolver(Arrays.asList(registry)) {			
+		fPluginResolver = new PlatformPluginUnitResolver(bundle, fBasePath) {
 			UnitResolver fBlackboxResolver = new BlackboxUnitResolver(URI.createPlatformPluginURI(bundleSymbolicName, false));
 
 			@Override
@@ -78,26 +61,12 @@ public class TestModuleResolver implements UnitResolver {
 				}
 				return unit;
 			}
-			
-			@Override
-			public CFile resolveImport(String importedUnitName) {
-				CFile result = null; 
-				IPath fullPath = fBasePath.append(ResolverUtils.toNamespaceRelativeUnitFilePath(importedUnitName));
-				for (BundleModuleRegistry nextRegistry : getBundleModules()) {
-					if (nextRegistry.fileExists(fullPath)) {
-						result = new BundleFile(fullPath, nextRegistry);
-					}
-				}
-				
-				return result;
-			}
 		};
 		
-		fBasePath = new Path(sourceContainerPath).makeAbsolute();
 	}
 
 	public UnitProxy resolveUnit(String qualifiedName) {
-		return fDeployedResolver.resolveUnit(qualifiedName);		
+		return fPluginResolver.resolveUnit(qualifiedName);		
 //		CFile resolvedImport = fDeployedResolver.resolveUnit(qualifiedName);
 //		if(resolvedImport == null) {
 //			return fBlackboxResolver.resolveUnit(qualifiedName);			
