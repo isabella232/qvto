@@ -41,7 +41,7 @@ import com.google.inject.Singleton;
  * <p>
  * The grammar is immutable and is available as static INSTANCE and GRAMMAR fields.
  */
-@SuppressWarnings("nls")
+@SuppressWarnings({"nls", "unused"})
 public class QVTOperationalGrammarResource extends AbstractGrammarResource
 {
 	private static final @NonNull Grammar G_QVTOperational = createGrammar("org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational");
@@ -57,7 +57,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 	/**
 	 *	The shared immutable instance of the org.eclipse.qvto.examples.xtext.qvtoperational.QVTOperational Grammar model.
 	 */
-	public static final @NonNull Grammar GRAMMAR = (Grammar)INSTANCE.getContents().get(0);
+	public static final @SuppressWarnings("null")@NonNull Grammar GRAMMAR = (Grammar)INSTANCE.getContents().get(0);
 
 	/**
 	 *	The name of the language supported by this grammar.
