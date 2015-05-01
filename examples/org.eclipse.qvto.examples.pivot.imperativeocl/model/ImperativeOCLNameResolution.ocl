@@ -3,16 +3,6 @@ import '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'
 import '/resource/org.eclipse.ocl.pivot/model/PivotNameResolution.ocl'
 import 'ImperativeOCL.ecore'
 
-package lookup
-
-context Environment
-def : addElementsOf(element : pivot::Element) : Environment =
-	null
-
-def : addElementsOf(elements : Collection(pivot::Element)) : Environment =
-	null
-endpackage
-
 package imperativeocl
 
 context BlockExp

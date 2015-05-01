@@ -19,7 +19,7 @@ package qvtoperational
 context Module
 def : _env(child : pivot::Element) : lookup::Environment =
 	parentEnv().nestedEnv()		
-			.addElementsOf(self.moduleImport.module)
+			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
 			.nestedEnv()			
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
@@ -38,7 +38,7 @@ def : _env(child : pivot::Element) : lookup::Environment =
 
 	if self.modelParameter->includes(child) then
 		parentEnv().nestedEnv()
-			.addElementsOf(self.moduleImport.module)
+			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
 			.nestedEnv()
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
@@ -49,7 +49,7 @@ def : _env(child : pivot::Element) : lookup::Environment =
 			.addElements(self.ownedVariable)
 	else
 		parentEnv().nestedEnv()
-			.addElementsOf(self.moduleImport.module)
+			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
 			.nestedEnv()			
 			.addElements(self.ownedProperties)
 			-- .addElements(self.lookup::s->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
@@ -87,7 +87,7 @@ context ImperativeOperation
 def : _env(child : pivot::Element) : lookup::Environment =
 	if (self._body = child) then
 		parentEnv().nestedEnv()
-			.addElement(self._context)
+			-- FIXME CG conflict .addElement(self._context)
 			.addElements(self.result)
 			.addElements(self.ownedParameters)
 	else -- any other 
@@ -118,16 +118,16 @@ context  MappingOperation
 def : _env(child : pivot::Element) : lookup::Environment =
 	if (self._body = child) then
 		parentEnv().nestedEnv()
-		.addElement(self._context)
+		-- FIXME CG conflict .addElement(self._context)
 		.addElements(self.result)
 		.addElements(self.ownedParameters)
 	else if (self.when = child) then
 		parentEnv().nestedEnv()
-		.addElement(self._context)
+		-- FIXME CG conflict .addElement(self._context)
 		.addElements(self.ownedParameters)
 	else if (self.where = child) then
 		parentEnv().nestedEnv()
-		.addElement(self._context)
+		-- FIXME CG conflict .addElement(self._context)
 		.addElements(self.ownedParameters)
 		.addElements(self.result)
 	else
