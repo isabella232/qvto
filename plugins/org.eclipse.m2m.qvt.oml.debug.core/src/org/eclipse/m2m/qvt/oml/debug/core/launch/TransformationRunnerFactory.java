@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelProvider;
 import org.eclipse.osgi.util.NLS;
 
