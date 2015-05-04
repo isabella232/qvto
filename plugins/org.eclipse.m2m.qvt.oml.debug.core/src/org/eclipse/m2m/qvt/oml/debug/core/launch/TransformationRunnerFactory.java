@@ -7,6 +7,7 @@
  *
  * Contributors:
  *     Radek Dvorak - initial API and implementation
+ *     Christopher Gerking - bug 466289
  *******************************************************************************/
 package org.eclipse.m2m.qvt.oml.debug.core.launch;
 
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelProvider;
 import org.eclipse.osgi.util.NLS;
 
@@ -116,7 +118,7 @@ public class TransformationRunnerFactory {
 		IllegalArgumentException exc = null;
 		if(uriStr != null) {
 			try {
-				return URI.createURI(uriStr);
+				return URI.createURI(uriStr, true);
 			} catch(IllegalArgumentException e) {
 				exc = e; 
 			}
