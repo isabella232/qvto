@@ -94,6 +94,7 @@ Workflow {
     	superProjectName = oclProjectName
     	superProjectPrefix = oclProjectPrefix
     	baseProjectPrefix = oclProjectPrefix
+    	baseVisitorPackage = oclVisitorPackage
     	genModelFile = imperativeOclGenModelProjectPath
     	lookupFilePath = imperativeOclLookupFilePath
     	modelPackageName = imperativeOclModelPackage
@@ -114,6 +115,7 @@ Workflow {
     	superProjectName = imperativeOclProjectName
     	superProjectPrefix = imperativeOclProjectPrefix
     	baseProjectPrefix = oclProjectPrefix
+    	baseVisitorPackage = oclVisitorPackage
     	genModelFile = qvtOperationalGenModelProjectPath
     	lookupFilePath = qvtOperationalLookupFilePath
     	modelPackageName = qvtOperationalModelPackage

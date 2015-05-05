@@ -4,22 +4,12 @@ import '/resource/org.eclipse.ocl.pivot/model/PivotNameResolution.ocl'
 import '/resource/org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore'
 import 'QVTOperational.ecore'
 
-package lookup
-
-context Environment
-def : addElementsOf(element : pivot::Element) : Environment =
-	null
-
-def : addElementsOf(elements : Collection(pivot::Element)) : Environment =
-	null
-endpackage
-
 package qvtoperational
 
 context Module
 def : _env(child : pivot::Element) : lookup::Environment =
 	parentEnv().nestedEnv()		
-			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
+			.addElementsOf(self.moduleImport.module)
 			.nestedEnv()			
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
@@ -38,7 +28,7 @@ def : _env(child : pivot::Element) : lookup::Environment =
 
 	if self.modelParameter->includes(child) then
 		parentEnv().nestedEnv()
-			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
+			.addElementsOf(self.moduleImport.module)
 			.nestedEnv()
 			.addElements(self.ownedProperties)
 			-- .addElements(self.ownedOperations->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?
