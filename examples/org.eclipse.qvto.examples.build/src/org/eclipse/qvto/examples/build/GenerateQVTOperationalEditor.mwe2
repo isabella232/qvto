@@ -186,5 +186,6 @@ Workflow {
 		environmentClassName = "${projectName}.cs2as.LookupEnvironment"
 		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
 		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
+		tracePropertyName = "pivot"
 	}
 }
