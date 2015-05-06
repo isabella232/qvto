@@ -13,5 +13,5 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
  * @model
  * @generated
  */
-public interface QVToLibraryCS extends MappingModuleCS {
+public interface QVToLibraryCS extends ModuleCS {
 } // QVToLibraryCS

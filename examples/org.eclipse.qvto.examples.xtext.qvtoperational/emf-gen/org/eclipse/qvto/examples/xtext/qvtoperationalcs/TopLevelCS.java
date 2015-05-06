@@ -3,9 +3,8 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.TypeCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,9 +15,7 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS#getImport <em>Import</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS#getUnit <em>Unit</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS#getOwnedTypes <em>Owned Types</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTopLevelCS()
@@ -27,51 +24,19 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  */
 public interface TopLevelCS extends RootPackageCS {
 	/**
-	 * Returns the value of the '<em><b>Import</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.ElementCS}.
+	 * Returns the value of the '<em><b>Owned Types</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.TypeCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Import</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Types</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Import</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTopLevelCS_Import()
+	 * @return the value of the '<em>Owned Types</em>' containment reference list.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTopLevelCS_OwnedTypes()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ElementCS> getImport();
-
-	/**
-	 * Returns the value of the '<em><b>Unit</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.ElementCS}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Unit</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unit</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTopLevelCS_Unit()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ElementCS> getUnit();
-
-	/**
-	 * Returns the value of the '<em><b>Owned Type</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.pivot.Type}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owned Type</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Type</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTopLevelCS_OwnedType()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Type> getOwnedType();
+	EList<TypeCS> getOwnedTypes();
 
 } // TopLevelCS

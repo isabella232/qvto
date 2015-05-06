@@ -99,13 +99,17 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ReferencedMetamodel MM_imperativeocl = createReferencedMetamodel(org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.eINSTANCE, "imperativeocl"); // http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCLCS
 		
 		private static final @NonNull EnumRule ER_DirectionKindCS = createEnumRule("DirectionKindCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.DIRECTION_KIND_CS));
+		private static final @NonNull EnumRule ER_ImportKindEnum = createEnumRule("ImportKindEnum", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.IMPORT_KIND_ENUM));
 		private static final @NonNull EnumRule ER_InitOp = createEnumRule("InitOp", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.INIT_OP));
 		private static final @NonNull EnumRule ER_MetamodelKind = createEnumRule("MetamodelKind", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.METAMODEL_KIND));
+		private static final @NonNull EnumRule ER_ModuleKindEnum = createEnumRule("ModuleKindEnum", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODULE_KIND_ENUM));
 		
 		private static void initEnumRules() {
 			ER_DirectionKindCS.setAlternatives(createAlternatives(createEnumLiteral(createKeyword("in"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.DIRECTION_KIND_CS.getEEnumLiteral("in")), createEnumLiteral(createKeyword("out"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.DIRECTION_KIND_CS.getEEnumLiteral("out")), createEnumLiteral(createKeyword("inout"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.DIRECTION_KIND_CS.getEEnumLiteral("inout"))));
+			ER_ImportKindEnum.setAlternatives(createAlternatives(createEnumLiteral(createKeyword("access"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.IMPORT_KIND_ENUM.getEEnumLiteral("access")), createEnumLiteral(createKeyword("extends"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.IMPORT_KIND_ENUM.getEEnumLiteral("extension"))));
 			ER_InitOp.setAlternatives(createAlternatives(createEnumLiteral(createKeyword("="), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.INIT_OP.getEEnumLiteral("EQUALS")), createEnumLiteral(createKeyword(":="), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.INIT_OP.getEEnumLiteral("COLON_EQUALS")), createEnumLiteral(createKeyword("::="), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.INIT_OP.getEEnumLiteral("COLON_COLON_EQUALS"))));
 			ER_MetamodelKind.setAlternatives(createAlternatives(createEnumLiteral(createKeyword("metamodel"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.METAMODEL_KIND.getEEnumLiteral("METAMODEL")), createEnumLiteral(createKeyword("package"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.METAMODEL_KIND.getEEnumLiteral("PACKAGE"))));
+			ER_ModuleKindEnum.setAlternatives(createAlternatives(createEnumLiteral(createKeyword("library"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODULE_KIND_ENUM.getEEnumLiteral("library")), createEnumLiteral(createKeyword("transformation"), org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODULE_KIND_ENUM.getEEnumLiteral("transformation"))));
 		}
 		
 		private static final @NonNull ParserRule PR_ClassCS = createParserRule("ClassCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.CLASS_CS));
@@ -118,6 +122,11 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_FeatureQualifier = createParserRule("FeatureQualifier", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 		private static final @NonNull ParserRule PR_ImportCS = createParserRule("ImportCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_IMPORT_CS));
 		private static final @NonNull ParserRule PR_InitPartCS = createParserRule("InitPartCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.INIT_PART_CS));
+		private static final @NonNull ParserRule PR_LibraryCS = createParserRule("LibraryCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_LIBRARY_CS));
+		private static final @NonNull ParserRule PR_LibraryDeclCS = createParserRule("LibraryDeclCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_LIBRARY_CS));
+		private static final @NonNull ParserRule PR_LibraryDefCS = createParserRule("LibraryDefCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_LIBRARY_CS));
+		private static final @NonNull ParserRule PR_LibraryHeaderCS = createParserRule("LibraryHeaderCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_LIBRARY_CS));
+		private static final @NonNull ParserRule PR_LibraryQualifier = createParserRule("LibraryQualifier", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 		private static final @NonNull ParserRule PR_MappingDeclarationCS = createParserRule("MappingDeclarationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MAPPING_OPERATION_CS));
 		private static final @NonNull ParserRule PR_MappingDefinitionCS = createParserRule("MappingDefinitionCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MAPPING_OPERATION_CS));
 		private static final @NonNull ParserRule PR_MappingOperationCS = createParserRule("MappingOperationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MAPPING_OPERATION_CS));
@@ -126,13 +135,15 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_ModelTypeCS = createParserRule("ModelTypeCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODEL_TYPE_CS));
 		private static final @NonNull ParserRule PR_ModuleOperationCS = createParserRule("ModuleOperationCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.OPERATION_CS));
 		private static final @NonNull ParserRule PR_ModulePropertyCS = createParserRule("ModulePropertyCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.STRUCTURAL_FEATURE_CS));
-		private static final @NonNull ParserRule PR_ModuleTypeCS = createParserRule("ModuleTypeCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.CLASS_CS));
+		private static final @NonNull ParserRule PR_ModuleRefCS = createParserRule("ModuleRefCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODULE_REF_CS));
+		private static final @NonNull ParserRule PR_ModuleUsageCS = createParserRule("ModuleUsageCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.MODULE_USAGE_CS));
 		private static final @NonNull ParserRule PR_MultiplicityCS = createParserRule("MultiplicityCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.MULTIPLICITY_BOUNDS_CS));
 		private static final @NonNull ParserRule PR_OperationParameterDeclarationCS = createParserRule("OperationParameterDeclarationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.OPERATION_PARAMETER_DECLARATION_CS));
 		private static final @NonNull ParserRule PR_PackageRefCS = createParserRule("PackageRefCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.PACKAGE_REF_CS));
 		private static final @NonNull ParserRule PR_ParameterDeclarationCS = createParserRule("ParameterDeclarationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.PARAMETER_DECLARATION_CS));
+		private static final @NonNull ParserRule PR_PathElement2CS = createParserRule("PathElement2CS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.PATH_ELEMENT2_CS));
+		private static final @NonNull ParserRule PR_PathNameCS = createParserRule("PathNameCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.PATH_NAME2_CS));
 		private static final @NonNull ParserRule PR_QVToClassCS = createParserRule("QVToClassCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.QV_TO_CLASS_CS));
-		private static final @NonNull ParserRule PR_SimpleSignatureCS = createParserRule("SimpleSignatureCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.SIMPLE_SIGNATURE_CS));
 		private static final @NonNull ParserRule PR_StereotypeQualifierCS = createParserRule("StereotypeQualifierCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.STEREOTYPE_QUALIFIER_CS));
 		private static final @NonNull ParserRule PR_TagCS = createParserRule("TagCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TAG_CS));
 		private static final @NonNull ParserRule PR_TopLevelCS = createParserRule("TopLevelCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TOP_LEVEL_CS));
@@ -140,13 +151,14 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_TransformationDeclCS = createParserRule("TransformationDeclCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TRANSFORMATION_CS));
 		private static final @NonNull ParserRule PR_TransformationDefCS = createParserRule("TransformationDefCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TRANSFORMATION_CS));
 		private static final @NonNull ParserRule PR_TransformationHeaderCS = createParserRule("TransformationHeaderCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TRANSFORMATION_CS));
+		private static final @NonNull ParserRule PR_TransformationQualifier = createParserRule("TransformationQualifier", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 		private static final @NonNull ParserRule PR_TypeRefCS = createParserRule("TypeRefCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPE_REF_CS));
 		private static final @NonNull ParserRule PR_TypeSpecCS = createParserRule("TypeSpecCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.TYPE_SPEC_CS));
 		private static final @NonNull ParserRule PR_TypedMultiplicityRefCS = createParserRule("TypedMultiplicityRefCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_REF_CS));
 		private static final @NonNull ParserRule PR_TypedRefCS = createParserRule("TypedRefCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_REF_CS));
 		private static final @NonNull ParserRule PR_TypedTypeRefCS = createParserRule("TypedTypeRefCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_TYPE_REF_CS));
 		private static final @NonNull ParserRule PR_UnitCS = createParserRule("UnitCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.UNIT_CS));
-		private static final @NonNull ParserRule PR_UnitPacakgeCS = createParserRule("UnitPacakgeCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.PACKAGE_CS));
+		private static final @NonNull ParserRule PR_UnitPackageCS = createParserRule("UnitPackageCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.PACKAGE_CS));
 		private static final @NonNull ParserRule PR_UnitTypeCS = createParserRule("UnitTypeCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPE_CS));
 		
 		private static void initParserRules() {
@@ -158,38 +170,46 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_EnumerationLiteralCS.setAlternatives(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)));
 			PR_ExceptionCS.setAlternatives(createGroup(createKeyword("exception"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword("extends"), createGroup(createAssignment("ownedSuperTypes", "+=", createRuleCall(PR_TypedRefCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedSuperTypes", "+=", createRuleCall(PR_TypedRefCS)))))))));
 			PR_FeatureQualifier.setAlternatives(createUnorderedGroup(createKeyword("composes"), createKeyword("references"), createKeyword("readonly"), createKeyword("derived"), createKeyword("static")));
-			PR_ImportCS.setAlternatives(createAlternatives(createGroup(createKeyword("import"), createAssignment("unit", "=", createRuleCall(PR_UnitCS)), createKeyword(";")), createGroup(createKeyword("from"), createAssignment("unit", "=", createRuleCall(PR_UnitCS)), createKeyword("import"), createAlternatives(createGroup(createAssignment("importedUnitElement", "+=", createRuleCall(_Base.PR_Identifier)), setCardinality("*", createGroup(createKeyword(","), createAssignment("importedUnitElement", "+=", createRuleCall(_Base.PR_Identifier))))), createAssignment("all", "?=", createKeyword("*"))), createKeyword(";"))));
+			PR_ImportCS.setAlternatives(createAlternatives(createGroup(createKeyword("import"), createAssignment("unit", "=", createRuleCall(PR_UnitCS)), createKeyword(";")), createGroup(createKeyword("from"), createAssignment("unit", "=", createRuleCall(PR_UnitCS)), createKeyword("import"), createAlternatives(createGroup(createAssignment("importedUnitElement", "+=", createRuleCall(_Base.PR_Identifier)), setCardinality("*", createGroup(createKeyword(","), createAssignment("importedUnitElement", "+=", createRuleCall(_Base.PR_Identifier))))), createAssignment("isAll", "?=", createKeyword("*"))), createKeyword(";"))));
 			PR_InitPartCS.setAlternatives(createGroup(createAssignment("initOp", "=", createRuleCall(ER_InitOp)), createAssignment("expression", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
+			PR_LibraryCS.setAlternatives(createAlternatives(createRuleCall(PR_LibraryDeclCS), createRuleCall(PR_LibraryDefCS)));
+			PR_LibraryDeclCS.setAlternatives(createGroup(createRuleCall(PR_LibraryHeaderCS), createKeyword(";")));
+			PR_LibraryDefCS.setAlternatives(createGroup(createRuleCall(PR_LibraryHeaderCS), createKeyword("{"), setCardinality("*", createAlternatives(createAssignment("ownedProperties", "+=", createRuleCall(PR_ModulePropertyCS)), createAssignment("ownedOperations", "+=", createRuleCall(PR_ModuleOperationCS)))), createKeyword("}"), setCardinality("?", createKeyword(";"))));
+			PR_LibraryHeaderCS.setAlternatives(createGroup(setCardinality("*", createAssignment("qualifiers", "+=", createRuleCall(PR_LibraryQualifier))), createKeyword("library"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword("("), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)))), createKeyword(")"), setCardinality("*", createAssignment("moduleUsages", "+=", createRuleCall(PR_ModuleUsageCS)))));
+			PR_LibraryQualifier.setAlternatives(createKeyword("blackbox"));
 			PR_MappingDeclarationCS.setAlternatives(createGroup(createRuleCall(PR_MappingOperationHeaderCS), createKeyword(";")));
 			PR_MappingDefinitionCS.setAlternatives(createGroup(createRuleCall(PR_MappingOperationHeaderCS), createKeyword("{"), createKeyword("}")));
 			PR_MappingOperationCS.setAlternatives(createAlternatives(createRuleCall(PR_MappingDeclarationCS), createRuleCall(PR_MappingDefinitionCS)));
 			PR_MappingOperationHeaderCS.setAlternatives(createGroup(createKeyword("mapping"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedParameters", "+=", createRuleCall(PR_OperationParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParameters", "+=", createRuleCall(PR_OperationParameterDeclarationCS)))))), createKeyword(")")));
 			PR_MetamodelCS.setAlternatives(createGroup(createAssignment("metamodelKind", "=", createRuleCall(ER_MetamodelKind)), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword("{"), setCardinality("*", createAlternatives(createAssignment("ownedClasses", "+=", createRuleCall(PR_ClassCS)), createAssignment("ownedClasses", "+=", createRuleCall(PR_EnumerationCS)), createAssignment("ownedAnnotations", "+=", createRuleCall(PR_TagCS)))), createKeyword("}"), setCardinality("?", createKeyword(";"))));
-			PR_ModelTypeCS.setAlternatives(createGroup(createKeyword("modeltype"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createAssignment("complianceKindCS", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)), createKeyword("uses"), createAssignment("packageRefs", "+=", createRuleCall(PR_PackageRefCS))));
+			PR_ModelTypeCS.setAlternatives(createGroup(createKeyword("modeltype"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createAssignment("complianceKind", "=", createRuleCall(_ImperativeOCL.PR_StringLiteral))), createKeyword("uses"), createAssignment("packageRefs", "+=", createRuleCall(PR_PackageRefCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("packageRefs", "+=", createRuleCall(PR_PackageRefCS)))), setCardinality("?", createGroup(createKeyword("where"), createKeyword("{"), createKeyword("}"))), createKeyword(";")));
 			PR_ModuleOperationCS.setAlternatives(createRuleCall(PR_MappingOperationCS));
 			PR_ModulePropertyCS.setAlternatives(createRuleCall(PR_ClassifierPropertyCS));
-			PR_ModuleTypeCS.setAlternatives(createRuleCall(PR_ModelTypeCS));
+			PR_ModuleRefCS.setAlternatives(createGroup(createAssignment("pathNameCS", "=", createRuleCall(PR_PathNameCS)), setCardinality("?", createGroup(createKeyword("("), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)))), createKeyword(")")))));
+			PR_ModuleUsageCS.setAlternatives(createGroup(createAssignment("importKind", "=", createRuleCall(ER_ImportKindEnum)), setCardinality("?", createAssignment("moduleKind", "=", createRuleCall(ER_ModuleKindEnum))), createAssignment("moduleRefs", "+=", createRuleCall(PR_ModuleRefCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("moduleRefs", "+=", createRuleCall(PR_ModuleRefCS))))));
 			PR_MultiplicityCS.setAlternatives(createGroup(createKeyword("["), setCardinality("?", createGroup(createAssignment("lowerBound", "=", createRuleCall(_Base.PR_LOWER)), createKeyword("..."))), createAssignment("upperBound", "=", createRuleCall(_Base.PR_UPPER)), createKeyword("]")));
 			PR_OperationParameterDeclarationCS.setAlternatives(createGroup(setCardinality("?", createAssignment("direction", "=", createRuleCall(ER_DirectionKindCS))), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeSpecCS)))), setCardinality("?", createAssignment("initPart", "=", createRuleCall(PR_InitPartCS)))));
-			PR_PackageRefCS.setAlternatives(createAlternatives(createAssignment("uriCS", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)), createGroup(createAssignment("pathNameCS", "=", createRuleCall(_Base.PR_PathNameCS)), createAssignment("uriCS", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)))));
+			PR_PackageRefCS.setAlternatives(createAlternatives(createAssignment("uriCS", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)), createGroup(createAssignment("pathNameCS", "=", createRuleCall(PR_PathNameCS)), createKeyword("("), createAssignment("uriCS", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)), createKeyword(")"))));
 			PR_ParameterDeclarationCS.setAlternatives(createGroup(setCardinality("?", createAssignment("direction", "=", createRuleCall(ER_DirectionKindCS))), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypedMultiplicityRefCS)))), setCardinality("?", createAssignment("initPart", "=", createRuleCall(PR_InitPartCS)))));
+			PR_PathElement2CS.setAlternatives(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)));
+			PR_PathNameCS.setAlternatives(createGroup(createAssignment("ownedPathElements2", "+=", createRuleCall(PR_PathElement2CS)), setCardinality("*", createGroup(createKeyword("::"), createAssignment("ownedPathElements2", "+=", createRuleCall(PR_PathElement2CS))))));
 			PR_QVToClassCS.setAlternatives(createGroup(setCardinality("?", createAssignment("intermediate", "?=", createKeyword("intermediate"))), createKeyword("class"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword("extends"), createGroup(createAssignment("ownedSuperTypes", "+=", createRuleCall(PR_TypedRefCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedSuperTypes", "+=", createRuleCall(PR_TypedRefCS))))))), setCardinality("?", createGroup(createKeyword("{"), setCardinality("+", createGroup(createAlternatives(createAssignment("ownedProperties", "+=", createRuleCall(PR_ClassifierPropertyCS)), createAssignment("ownedOperations", "+=", createRuleCall(PR_ClassifierOperationCS)), createAssignment("ownedAnnotations", "+=", createRuleCall(PR_TagCS))), createKeyword(";"))), createKeyword("}")))));
-			PR_SimpleSignatureCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage.Literals.SIMPLE_SIGNATURE_CS)), createKeyword("("), setCardinality("?", createGroup(createAssignment("parameter", "+=", createRuleCall(PR_ParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("parameter", "+=", createRuleCall(PR_ParameterDeclarationCS)))))), createKeyword(")")));
 			PR_StereotypeQualifierCS.setAlternatives(createGroup(createKeyword("<<"), createGroup(createAssignment("stereotype", "+=", createRuleCall(_Base.PR_Identifier)), setCardinality("*", createGroup(createKeyword(","), createAssignment("stereotype", "+=", createRuleCall(_Base.PR_Identifier))))), createKeyword(">>")));
-			PR_TagCS.setAlternatives(createGroup(createKeyword("tag"), setCardinality("?", createAssignment("name", "=", createAlternatives(createRuleCall(_EssentialOCL.PR_UnrestrictedName), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING)))), createAssignment("pathName", "=", createRuleCall(_Base.PR_PathNameCS)), setCardinality("?", createGroup(createKeyword("="), createAssignment("expression", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), createKeyword(";")));
-			PR_TopLevelCS.setAlternatives(createGroup(setCardinality("*", createAssignment("import", "+=", createRuleCall(PR_ImportCS))), setCardinality("*", createAssignment("ownedPackages", "+=", createRuleCall(PR_UnitPacakgeCS))), setCardinality("*", createAssignment("unit", "+=", createRuleCall(PR_TransformationCS)))));
+			PR_TagCS.setAlternatives(createGroup(createKeyword("tag"), setCardinality("?", createAssignment("name", "=", createAlternatives(createRuleCall(_EssentialOCL.PR_UnrestrictedName), createRuleCall(_Base.TR_SINGLE_QUOTED_STRING)))), createAssignment("pathName", "=", createRuleCall(PR_PathNameCS)), setCardinality("?", createGroup(createKeyword("="), createAssignment("expression", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), createKeyword(";")));
+			PR_TopLevelCS.setAlternatives(createGroup(setCardinality("*", createAssignment("ownedImports", "+=", createRuleCall(PR_ImportCS))), setCardinality("*", createAlternatives(createAssignment("ownedPackages", "+=", createRuleCall(PR_UnitPackageCS)), createAssignment("ownedTypes", "+=", createRuleCall(PR_UnitTypeCS))))));
 			PR_TransformationCS.setAlternatives(createAlternatives(createRuleCall(PR_TransformationDeclCS), createRuleCall(PR_TransformationDefCS)));
 			PR_TransformationDeclCS.setAlternatives(createGroup(createRuleCall(PR_TransformationHeaderCS), createKeyword(";")));
-			PR_TransformationDefCS.setAlternatives(createGroup(createRuleCall(PR_TransformationHeaderCS), createKeyword("{"), setCardinality("*", createAssignment("ownedProperties", "+=", createRuleCall(PR_ModulePropertyCS))), setCardinality("*", createAssignment("ownedOperations", "+=", createRuleCall(PR_ModuleOperationCS))), createKeyword("}")));
-			PR_TransformationHeaderCS.setAlternatives(createGroup(createKeyword("transformation"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName))));
+			PR_TransformationDefCS.setAlternatives(createGroup(createRuleCall(PR_TransformationHeaderCS), createKeyword("{"), setCardinality("*", createAlternatives(createAssignment("ownedProperties", "+=", createRuleCall(PR_ModulePropertyCS)), createAssignment("ownedOperations", "+=", createRuleCall(PR_ModuleOperationCS)))), createKeyword("}"), setCardinality("?", createKeyword(";"))));
+			PR_TransformationHeaderCS.setAlternatives(createGroup(setCardinality("*", createAssignment("qualifiers", "+=", createRuleCall(PR_TransformationQualifier))), createKeyword("transformation"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword("("), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)))), createKeyword(")"), setCardinality("*", createAssignment("moduleUsages", "+=", createRuleCall(PR_ModuleUsageCS))), setCardinality("?", createGroup(createKeyword("refines"), createAssignment("refines", "=", createRuleCall(PR_ModuleRefCS))))));
+			PR_TransformationQualifier.setAlternatives(createUnorderedGroup(createKeyword("blackbox"), createKeyword("abstract"), createKeyword("static")));
 			PR_TypeRefCS.setAlternatives(createRuleCall(PR_TypedRefCS));
 			PR_TypeSpecCS.setAlternatives(createGroup(createAssignment("ownedType", "=", createRuleCall(PR_TypedRefCS)), setCardinality("?", createGroup(createKeyword("@"), createAssignment("extentLocation", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName))))));
 			PR_TypedMultiplicityRefCS.setAlternatives(createGroup(createRuleCall(PR_TypedRefCS), setCardinality("?", createAssignment("ownedMultiplicity", "=", createRuleCall(PR_MultiplicityCS)))));
 			PR_TypedRefCS.setAlternatives(createAlternatives(createRuleCall(_ImperativeOCL.PR_TypeLiteralCS), createRuleCall(PR_TypedTypeRefCS)));
-			PR_TypedTypeRefCS.setAlternatives(createAssignment("ownedPathName", "=", createRuleCall(_Base.PR_PathNameCS)));
+			PR_TypedTypeRefCS.setAlternatives(createAssignment("ownedPathName", "=", createRuleCall(PR_PathNameCS)));
 			PR_UnitCS.setAlternatives(createGroup(createAssignment("segment", "+=", createRuleCall(_Base.PR_Identifier)), setCardinality("*", createGroup(createKeyword("."), createAssignment("segment", "+=", createRuleCall(_Base.PR_Identifier))))));
-			PR_UnitPacakgeCS.setAlternatives(createRuleCall(PR_MetamodelCS));
-			PR_UnitTypeCS.setAlternatives(createRuleCall(PR_ModelTypeCS));
+			PR_UnitPackageCS.setAlternatives(createRuleCall(PR_MetamodelCS));
+			PR_UnitTypeCS.setAlternatives(createAlternatives(createRuleCall(PR_ModelTypeCS), createRuleCall(PR_TransformationCS), createRuleCall(PR_LibraryCS)));
 		}
 		
 		private static @NonNull Grammar initGrammar() {
@@ -210,12 +230,17 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 				rules.add(ER_InitOp);
 				rules.add(ER_MetamodelKind);
 				rules.add(ER_DirectionKindCS);
+				rules.add(ER_ImportKindEnum);
+				rules.add(ER_ModuleKindEnum);
+				rules.add(PR_TransformationQualifier);
+				rules.add(PR_LibraryQualifier);
 				rules.add(PR_FeatureQualifier);
+				rules.add(PR_PathNameCS);
+				rules.add(PR_PathElement2CS);
 				rules.add(PR_ImportCS);
 				rules.add(PR_UnitCS);
-				rules.add(PR_UnitPacakgeCS);
+				rules.add(PR_UnitPackageCS);
 				rules.add(PR_UnitTypeCS);
-				rules.add(PR_SimpleSignatureCS);
 				rules.add(PR_ParameterDeclarationCS);
 				rules.add(PR_OperationParameterDeclarationCS);
 				rules.add(PR_InitPartCS);
@@ -236,15 +261,20 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 				rules.add(PR_EnumerationCS);
 				rules.add(PR_EnumerationLiteralCS);
 				rules.add(PR_TagCS);
+				rules.add(PR_ModuleRefCS);
+				rules.add(PR_ModuleUsageCS);
 				rules.add(PR_TransformationCS);
 				rules.add(PR_TransformationDeclCS);
 				rules.add(PR_TransformationDefCS);
 				rules.add(PR_TransformationHeaderCS);
+				rules.add(PR_LibraryCS);
+				rules.add(PR_LibraryDeclCS);
+				rules.add(PR_LibraryDefCS);
+				rules.add(PR_LibraryHeaderCS);
 				rules.add(PR_ModelTypeCS);
 				rules.add(PR_PackageRefCS);
 				rules.add(PR_ModulePropertyCS);
 				rules.add(PR_ModuleOperationCS);
-				rules.add(PR_ModuleTypeCS);
 				rules.add(PR_MappingOperationCS);
 				rules.add(PR_MappingDeclarationCS);
 				rules.add(PR_MappingDefinitionCS);
@@ -300,6 +330,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_ListTypeCS = createParserRule("ListTypeCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.LIST_TYPE_CS));
 		private static final @NonNull ParserRule PR_PrimaryExpCS = createParserRule("PrimaryExpCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
 		private static final @NonNull ParserRule PR_ReturnExpCS = createParserRule("ReturnExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RETURN_EXP_CS));
+		private static final @NonNull ParserRule PR_StringLiteral = createParserRule("StringLiteral", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 		private static final @NonNull ParserRule PR_TypeLiteralCS = createParserRule("TypeLiteralCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_REF_CS));
 		
 		private static void initParserRules() {
@@ -316,6 +347,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_ListTypeCS.setAlternatives(createGroup(createKeyword("List"), createKeyword("("), createAssignment("type", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
 			PR_PrimaryExpCS.setAlternatives(createAlternatives(createRuleCall(_EssentialOCL.PR_NestedExpCS), createRuleCall(_EssentialOCL.PR_IfExpCS), createRuleCall(_EssentialOCL.PR_SelfExpCS), createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS), createRuleCall(_EssentialOCL.PR_TupleLiteralExpCS), createRuleCall(_EssentialOCL.PR_MapLiteralExpCS), createRuleCall(_EssentialOCL.PR_CollectionLiteralExpCS), createRuleCall(_EssentialOCL.PR_LambdaLiteralExpCS), createRuleCall(PR_ListLiteralExpCS), createRuleCall(PR_DictLiteralExpCS), createRuleCall(_EssentialOCL.PR_TypeLiteralExpCS), createRuleCall(PR_ReturnExpCS), createRuleCall(_EssentialOCL.PR_NameExpCS)));
 			PR_ReturnExpCS.setAlternatives(createGroup(createKeyword("return"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RETURN_EXP_CS)), setCardinality("?", createAssignment("value", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))));
+			PR_StringLiteral.setAlternatives(createAlternatives(createRuleCall(_Base.TR_SINGLE_QUOTED_STRING), createRuleCall(_Base.TR_DOUBLE_QUOTED_STRING)));
 			PR_TypeLiteralCS.setAlternatives(createAlternatives(createRuleCall(_EssentialOCL.PR_PrimitiveTypeCS), createRuleCall(_EssentialOCL.PR_CollectionTypeCS), createRuleCall(_EssentialOCL.PR_MapTypeCS), createRuleCall(_EssentialOCL.PR_TupleTypeCS), createRuleCall(PR_ListTypeCS), createRuleCall(PR_DictTypeCS)));
 		}
 		
@@ -355,6 +387,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 				rules.add(PR_DictLiteralExpCS);
 				rules.add(PR_DictLiteralPartCS);
 				rules.add(PR_ReturnExpCS);
+				rules.add(PR_StringLiteral);
 			}
 			{
 				List<Grammar> usedGrammars = grammar.getUsedGrammars();
@@ -443,7 +476,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_CollectionPatternCS.setAlternatives(createGroup(createAssignment("ownedType", "=", createRuleCall(PR_CollectionTypeCS)), createKeyword("{"), setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(PR_PatternExpCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_PatternExpCS)))), createGroup(createKeyword("++"), createAssignment("restVariableName", "=", createRuleCall(_Base.PR_Identifier))))), createKeyword("}")));
 			PR_CollectionTypeCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(PR_CollectionTypeIdentifier)), setCardinality("?", createGroup(createKeyword("("), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)), createKeyword(")")))));
 			PR_CollectionTypeIdentifier.setAlternatives(createAlternatives(createKeyword("Set"), createKeyword("Bag"), createKeyword("Sequence"), createKeyword("Collection"), createKeyword("OrderedSet")));
-			PR_CurlyBracketedClauseCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.CURLY_BRACKETED_CLAUSE_CS)), createKeyword("{"), createAlternatives(setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(PR_ShadowPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_ShadowPartCS)))))), createAssignment("value", "=", createRuleCall(_Base.PR_StringLiteral))), createKeyword("}")));
+			PR_CurlyBracketedClauseCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.CURLY_BRACKETED_CLAUSE_CS)), createKeyword("{"), createAlternatives(setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(PR_ShadowPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_ShadowPartCS)))))), createAssignment("value", "=", createRuleCall(_ImperativeOCL.PR_StringLiteral))), createKeyword("}")));
 			PR_ElseIfThenExpCS.setAlternatives(createGroup(createKeyword("elseif"), createAssignment("ownedCondition", "=", createRuleCall(PR_ExpCS)), createKeyword("then"), createAssignment("ownedThenExpression", "=", createRuleCall(PR_ExpCS))));
 			PR_EssentialOCLInfixOperatorName.setAlternatives(createAlternatives(createKeyword("*"), createKeyword("/"), createKeyword("+"), createKeyword("-"), createKeyword(">"), createKeyword("<"), createKeyword(">="), createKeyword("<="), createKeyword("="), createKeyword("<>"), createKeyword("and"), createKeyword("or"), createKeyword("xor"), createKeyword("implies")));
 			PR_EssentialOCLNavigationOperatorName.setAlternatives(createAlternatives(createKeyword("."), createKeyword("->"), createKeyword("?."), createKeyword("?->")));
@@ -462,7 +495,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_MapLiteralPartCS.setAlternatives(createGroup(createAssignment("ownedKey", "=", createRuleCall(PR_ExpCS)), createKeyword("<-"), createAssignment("ownedValue", "=", createRuleCall(PR_ExpCS))));
 			PR_MapTypeCS.setAlternatives(createGroup(createAssignment("name", "=", createKeyword("Map")), setCardinality("?", createGroup(createKeyword("("), createAssignment("ownedKeyType", "=", createRuleCall(PR_TypeExpCS)), createKeyword(","), createAssignment("ownedValueType", "=", createRuleCall(PR_TypeExpCS)), createKeyword(")")))));
 			PR_Model.setAlternatives(createAssignment("ownedExpression", "=", createRuleCall(PR_ExpCS)));
-			PR_NameExpCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(_Base.PR_PathNameCS)), setCardinality("*", createAssignment("ownedSquareBracketedClauses", "+=", createRuleCall(PR_SquareBracketedClauseCS))), setCardinality("?", createAssignment("ownedRoundBracketedClause", "=", createRuleCall(PR_RoundBracketedClauseCS))), setCardinality("?", createAssignment("ownedCurlyBracketedClause", "=", createRuleCall(PR_CurlyBracketedClauseCS))), setCardinality("?", createGroup(createAssignment("isPre", "?=", createKeyword("@")), createKeyword("pre")))));
+			PR_NameExpCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(_QVTOperational.PR_PathNameCS)), setCardinality("*", createAssignment("ownedSquareBracketedClauses", "+=", createRuleCall(PR_SquareBracketedClauseCS))), setCardinality("?", createAssignment("ownedRoundBracketedClause", "=", createRuleCall(PR_RoundBracketedClauseCS))), setCardinality("?", createAssignment("ownedCurlyBracketedClause", "=", createRuleCall(PR_CurlyBracketedClauseCS))), setCardinality("?", createGroup(createAssignment("isPre", "?=", createKeyword("@")), createKeyword("pre")))));
 			PR_NavigatingArgCS.setAlternatives(createAlternatives(createGroup(createAssignment("ownedNameExpression", "=", createRuleCall(PR_NavigatingArgExpCS)), setCardinality("?", createAlternatives(createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)), setCardinality("?", createGroup(createKeyword("="), createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS))))), createGroup(createKeyword("in"), createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS)))))), createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)))));
 			PR_NavigatingArgExpCS.setAlternatives(createRuleCall(PR_ExpCS));
 			PR_NavigatingBarArgCS.setAlternatives(createGroup(createAssignment("prefix", "=", createKeyword("|")), createAssignment("ownedNameExpression", "=", createRuleCall(PR_NavigatingArgExpCS)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)), setCardinality("?", createGroup(createKeyword("="), createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS))))))));
@@ -483,7 +516,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_SelfExpCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.SELF_EXP_CS)), createKeyword("self")));
 			PR_ShadowPartCS.setAlternatives(createGroup(createAssignment("referredProperty", "=", createCrossReference(createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.PROPERTY), createRuleCall(PR_UnrestrictedName))), createKeyword("="), createAssignment("ownedInitExpression", "=", createAlternatives(createRuleCall(PR_ExpCS), createRuleCall(PR_PatternExpCS)))));
 			PR_SquareBracketedClauseCS.setAlternatives(createGroup(createKeyword("["), createAssignment("ownedTerms", "+=", createRuleCall(PR_ExpCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedTerms", "+=", createRuleCall(PR_ExpCS)))), createKeyword("]")));
-			PR_StringLiteralExpCS.setAlternatives(setCardinality("+", createAssignment("segments", "+=", createRuleCall(_Base.PR_StringLiteral))));
+			PR_StringLiteralExpCS.setAlternatives(setCardinality("+", createAssignment("segments", "+=", createRuleCall(_ImperativeOCL.PR_StringLiteral))));
 			PR_TupleLiteralExpCS.setAlternatives(createGroup(createKeyword("Tuple"), createKeyword("{"), createAssignment("ownedParts", "+=", createRuleCall(PR_TupleLiteralPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_TupleLiteralPartCS)))), createKeyword("}")));
 			PR_TupleLiteralPartCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS)))), createKeyword("="), createAssignment("ownedInitExpression", "=", createRuleCall(PR_ExpCS))));
 			PR_TuplePartCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(PR_UnrestrictedName)), createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(PR_TypeExpCS))));
@@ -492,7 +525,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_TypeLiteralCS.setAlternatives(createAlternatives(createRuleCall(PR_PrimitiveTypeCS), createRuleCall(PR_CollectionTypeCS), createRuleCall(PR_MapTypeCS), createRuleCall(PR_TupleTypeCS)));
 			PR_TypeLiteralExpCS.setAlternatives(createAssignment("ownedType", "=", createRuleCall(PR_TypeLiteralWithMultiplicityCS)));
 			PR_TypeLiteralWithMultiplicityCS.setAlternatives(createGroup(createRuleCall(_ImperativeOCL.PR_TypeLiteralCS), setCardinality("?", createAssignment("ownedMultiplicity", "=", createRuleCall(_QVTOperational.PR_MultiplicityCS)))));
-			PR_TypeNameExpCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(_Base.PR_PathNameCS)), setCardinality("?", createGroup(createAssignment("ownedCurlyBracketedClause", "=", createRuleCall(PR_CurlyBracketedClauseCS)), setCardinality("?", createGroup(createKeyword("{"), createAssignment("ownedPatternGuard", "=", createRuleCall(PR_ExpCS)), createKeyword("}")))))));
+			PR_TypeNameExpCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(_QVTOperational.PR_PathNameCS)), setCardinality("?", createGroup(createAssignment("ownedCurlyBracketedClause", "=", createRuleCall(PR_CurlyBracketedClauseCS)), setCardinality("?", createGroup(createKeyword("{"), createAssignment("ownedPatternGuard", "=", createRuleCall(PR_ExpCS)), createKeyword("}")))))));
 			PR_URIFirstPathElementCS.setAlternatives(createAlternatives(createAssignment("referredElement", "=", createCrossReference(createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.NAMED_ELEMENT), createRuleCall(PR_UnrestrictedName))), createGroup(createAction(null, null, createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.PATH_ELEMENT_WITH_URICS)), createAssignment("referredElement", "=", createCrossReference(createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.NAMESPACE), createRuleCall(_Base.PR_URI))))));
 			PR_URIPathNameCS.setAlternatives(createGroup(createAssignment("ownedPathElements", "+=", createRuleCall(PR_URIFirstPathElementCS)), setCardinality("*", createGroup(createKeyword("::"), createAssignment("ownedPathElements", "+=", createRuleCall(_Base.PR_NextPathElementCS))))));
 			PR_UnaryOperatorName.setAlternatives(createRuleCall(PR_EssentialOCLUnaryOperatorName));
@@ -663,7 +696,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_TypeParameterCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword("extends"), createAssignment("ownedExtends", "+=", createRuleCall(_QVTOperational.PR_TypedRefCS)), setCardinality("*", createGroup(createKeyword("&&"), createAssignment("ownedExtends", "+=", createRuleCall(_QVTOperational.PR_TypedRefCS))))))));
 			PR_TypeRefCS.setAlternatives(createAlternatives(createRuleCall(_QVTOperational.PR_TypedRefCS), createRuleCall(PR_WildcardTypeRefCS)));
 			PR_TypedRefCS.setAlternatives(createRuleCall(_QVTOperational.PR_TypedTypeRefCS));
-			PR_TypedTypeRefCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(PR_PathNameCS)), setCardinality("?", createAssignment("ownedBinding", "=", createRuleCall(PR_TemplateBindingCS)))));
+			PR_TypedTypeRefCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(_QVTOperational.PR_PathNameCS)), setCardinality("?", createAssignment("ownedBinding", "=", createRuleCall(PR_TemplateBindingCS)))));
 			PR_UPPER.setAlternatives(createAlternatives(createRuleCall(TR_INT), createKeyword("*")));
 			PR_URI.setAlternatives(createRuleCall(TR_SINGLE_QUOTED_STRING));
 			PR_UnreservedName.setAlternatives(createRuleCall(_EssentialOCL.PR_UnrestrictedName));

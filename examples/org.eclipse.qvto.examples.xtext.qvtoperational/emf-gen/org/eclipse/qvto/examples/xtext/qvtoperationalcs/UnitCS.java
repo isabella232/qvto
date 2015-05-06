@@ -60,7 +60,7 @@ public interface UnitCS extends ElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Modules</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS}.
+	 * The list contents are of type {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Modules</em>' reference list isn't clear,
@@ -72,7 +72,7 @@ public interface UnitCS extends ElementCS {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<MappingModuleCS> getModules();
+	EList<ModuleCS> getModules();
 
 	/**
 	 * Returns the value of the '<em><b>Model Types</b></em>' reference list.

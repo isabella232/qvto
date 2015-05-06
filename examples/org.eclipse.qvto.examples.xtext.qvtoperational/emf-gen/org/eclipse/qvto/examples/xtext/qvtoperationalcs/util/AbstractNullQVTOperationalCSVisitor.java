@@ -105,10 +105,6 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitMappingModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS object) {
-		return null;
-	}
-
 	public @Nullable R visitMappingOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS object) {
 		return null;
 	}
@@ -134,6 +130,10 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitModelTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS object) {
+		return null;
+	}
+
+	public @Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object) {
 		return null;
 	}
 
@@ -178,6 +178,14 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS object) {
+		return null;
+	}
+
+	public @Nullable R visitPathElement2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS object) {
+		return null;
+	}
+
+	public @Nullable R visitPathName2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS object) {
 		return null;
 	}
 

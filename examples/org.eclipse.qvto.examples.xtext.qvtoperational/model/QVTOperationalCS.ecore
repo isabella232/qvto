@@ -32,28 +32,30 @@
     <eLiterals name="METAMODEL"/>
     <eLiterals name="PACKAGE" value="1"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathName2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathElements2" upperBound="-1"
+        eType="#//PathElement2CS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathElement2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PivotableElementCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningPathNameCS" eType="#//PathName2CS"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="import" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="unit" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Type"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypes" upperBound="-1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypeCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QVToClassCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="intermediate" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QVToImportCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
+  <eClassifiers xsi:type="ecore:EClass" name="QVToImportCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ImportCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" eType="#//UnitCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedUnitElement" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="all" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="QVToLibraryCS" eSuperTypes="#//MappingModuleCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QVToLibraryCS" eSuperTypes="#//ModuleCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="QVToOperationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//OperationCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" eType="#//StereotypeQualifierCS"
         containment="true"/>
@@ -198,24 +200,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingDeclarationCS" eType="#//MappingOperationCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingModuleCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="headerCS" lowerBound="1"
-        eType="#//TransformationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//QVToImportCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="metamodels" upperBound="-1"
-        eType="#//ModelTypeCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="renamings" upperBound="-1"
-        eType="#//RenameCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//ModulePropertyCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
-        eType="#//MappingMethodCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classifierDefCS" upperBound="-1"
-        eType="#//ClassifierDefCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//TagCS"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingQueryCS" eSuperTypes="#//MappingMethodCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -260,21 +244,30 @@
   <eClassifiers xsi:type="ecore:EClass" name="ModelTypeCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ClassCS #//ElementWithBody">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifierCS" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="complianceKindCS" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//StringLiteralExpCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="complianceKind" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral="strict"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageRefs" lowerBound="1"
         upperBound="-1" eType="#//PackageRefCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="whereStatements" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ParameterDeclarationCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleUsages" upperBound="-1"
+        eType="#//ModuleUsageCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//TagCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiers" upperBound="-1"
+        eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModulePropertyCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="simpleNameCS" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModuleUsageCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importKind" eType="#//ImportKindEnum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleKindCS" eType="#//ModuleKindCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="moduleKind" eType="#//ModuleKindEnum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRefs" lowerBound="1"
         upperBound="-1" eType="#//ModuleRefCS" containment="true"/>
   </eClassifiers>
@@ -332,19 +325,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
         eType="#//ParameterDeclarationCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="qualifiers" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//StringLiteralExpCS"
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="#//ModuleCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//ModuleRefCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//ParameterDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="moduleUsages" upperBound="-1"
-        eType="#//ModuleUsageCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformationRefineCS"
-        eType="#//TransformationRefineCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TransformationRefineCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="moduleRefCS" lowerBound="1"
@@ -365,8 +348,7 @@
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
-        eType="#//MappingModuleCS" changeable="false" volatile="true" transient="true"
-        derived="true"/>
+        eType="#//ModuleCS" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelTypes" upperBound="-1"
         eType="#//ModelTypeCS" changeable="false" volatile="true" transient="true"
         derived="true"/>

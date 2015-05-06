@@ -15,7 +15,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  *
  * @generated
  */
-public class QVToLibraryCSImpl extends MappingModuleCSImpl implements QVToLibraryCS {
+public class QVToLibraryCSImpl extends ModuleCSImpl implements QVToLibraryCS {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

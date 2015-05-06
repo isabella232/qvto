@@ -27,11 +27,8 @@ import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as bas
 import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
 import "platform:/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore" as imperativeocl
 
-TopLevelCS : ^import+=ImportCS* 
-	// unit+=UnitElementCS* FIXME
-	(ownedPackages+= UnitPacakgeCS)*
-	unit+=TransformationCS* // FIXME temporal workaround
-	//(ownedType+=ModelTypeCS)*
+TopLevelCS : (ownedImports += ImportCS)* 
+	(ownedPackages+= UnitPackageCS | ownedTypes+= UnitTypeCS )*	
 ;
 
 //enum ClassifierKind : DATATYPE='datatype' | PRIMITIVE='primitive' | EXCEPTION='exception' | CLASS='class';
@@ -39,38 +36,53 @@ TopLevelCS : ^import+=ImportCS*
 enum InitOp : EQUALS='=' | COLON_EQUALS=':=' | COLON_COLON_EQUALS='::=';
 enum MetamodelKind : METAMODEL= 'metamodel' | PACKAGE='package';
 enum DirectionKindCS : in='in'| out='out' | inout='inout';
+enum ImportKindEnum : access='access' | extension = 'extends';
+enum ModuleKindEnum : library='library' | transformation = 'transformation';
+
 //enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
 
 //Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
+TransformationQualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
+LibraryQualifier returns ecore::EString : 'blackbox';
 
 FeatureQualifier returns ecore::EString : 'composes' & 'references' & 'readonly' & 'derived' & 'static';
+
+
+
+// ****** OCL redifinitions ******//
+PathNameCS returns PathName2CS:
+	ownedPathElements2+=PathElement2CS ('::' ownedPathElements2+=PathElement2CS)*
+;
+	
+PathElement2CS:
+	name=UnrestrictedName
+;
 
 // ****** Imports ******
 ImportCS returns QVToImportCS :
 	  ('import' unit=UnitCS ';')
-	|  ('from' unit=UnitCS 'import' ((importedUnitElement+=Identifier (',' importedUnitElement+=Identifier)*) | all?='*') ';')
+	|  ('from' unit=UnitCS 'import' ((importedUnitElement+=Identifier (',' importedUnitElement+=Identifier)*) | isAll?='*') ';')
 ;
 
 UnitCS : 
 	segment+=Identifier ('.' segment+=Identifier)*
 ;
-
 	
 // ****** definitions in a compilation unit *******
-UnitPacakgeCS returns base::PackageCS:
+UnitPackageCS returns base::PackageCS:
 	MetamodelCS
 ;
 
 
 UnitTypeCS returns base::TypeCS:
-	ModelTypeCS
+	ModelTypeCS | TransformationCS | LibraryCS
 ;
 // ****** General rules ******
 //CompleteSignatureCS: SimpleSignatureCS (':' (param+=ParameterCS (',' param+=ParameterCS)*))?;
 //
-SimpleSignatureCS: {SimpleSignatureCS} 
-	'(' (parameter+=ParameterDeclarationCS (',' parameter+=ParameterDeclarationCS)*)? ')'
-;
+//SimpleSignatureCS: {SimpleSignatureCS} 
+//	'(' (parameter+=ParameterDeclarationCS (',' parameter+=ParameterDeclarationCS)*)? ')'
+//;
 
   
 ParameterDeclarationCS : 
@@ -91,8 +103,6 @@ OperationParameterDeclarationCS :
 	(':' ownedType=TypeSpecCS)?
 	initPart=InitPartCS?
 ;
-
-
 
 InitPartCS: 
 	initOp=InitOp expression= ExpCS
@@ -162,7 +172,6 @@ TypedTypeRefCS returns base::TypedTypeRefCS:
 ;
 
 
-
 ClassifierPropertyCS returns ClassifierPropertyCS:
 	stereotypes = StereotypeQualifierCS?
 	qualifiers+= FeatureQualifier*
@@ -206,6 +215,17 @@ TagCS returns TagCS:
 // typedefs
 // TypedefCS: 'typedef' name=Identifier '=' typespec=TypeExpCS ('[' condition=ExpCS ']')? ';';
 
+
+// ****** Transformation and Linbary imports
+
+ModuleRefCS: 
+	pathNameCS=PathNameCS ('(' parameters+=ParameterDeclarationCS (',' parameters+=ParameterDeclarationCS)* ')')?
+;
+
+ModuleUsageCS: 
+	importKind=ImportKindEnum moduleKind=ModuleKindEnum? moduleRefs+=ModuleRefCS (',' moduleRefs+=ModuleRefCS)*
+;
+
 // ****** Transformations, mappings, etc ******
 
 TransformationCS:
@@ -218,24 +238,56 @@ TransformationDeclCS returns TransformationCS:
 
 TransformationDefCS returns TransformationCS:
 	 TransformationHeaderCS '{'
-	 	// (ownedClasses+= ModuleTypeCS)* FIXME Transformation is not a package anymore
-		(ownedProperties+= ModulePropertyCS)*
-		(ownedOperations+= ModuleOperationCS)*
+	 	// (ownedClasses+= ModuleTypeCS)* FIXME Transformation is not a package anymore. Not allowed
+		(ownedProperties+= ModulePropertyCS
+		 | ownedOperations+= ModuleOperationCS)*
+
 		 
-	'}'
+	'}' ';'?
 ;
 
 TransformationHeaderCS returns TransformationCS:
+	qualifiers+=TransformationQualifier*
 	'transformation' name=UnrestrictedName
+		'(' parameters+= ParameterDeclarationCS (',' parameters+= ParameterDeclarationCS)* ')'
+		(moduleUsages+= ModuleUsageCS)*
+		('refines' refines = ModuleRefCS)? 
+;
+
+LibraryCS returns QVToLibraryCS:
+	LibraryDeclCS | LibraryDefCS
+;
+
+LibraryDeclCS returns QVToLibraryCS:
+	LibraryHeaderCS ';'
+;
+
+LibraryDefCS returns QVToLibraryCS:
+	 LibraryHeaderCS '{'
+		(ownedProperties+= ModulePropertyCS
+		 | ownedOperations+= ModuleOperationCS)*
+
+		 
+	'}' ';'?
+;
+
+LibraryHeaderCS returns QVToLibraryCS:
+	qualifiers+=LibraryQualifier*
+	'library' name=UnrestrictedName
+		'(' parameters+= ParameterDeclarationCS (',' parameters+= ParameterDeclarationCS)* ')'
+		(moduleUsages+= ModuleUsageCS)* 
 ;
 
 ModelTypeCS:
-	'modeltype' name=UnrestrictedName complianceKindCS=StringLiteralExpCS 'uses' (packageRefs+= PackageRefCS)
+	'modeltype' name=UnrestrictedName complianceKind=StringLiteral? 'uses' 
+		packageRefs+= PackageRefCS (',' packageRefs+=PackageRefCS)*
+		('where' '{' /*TODO (whereStatements+=ExpCS (';' whereStatements+=ExpCS)* ';'?))? */'}' )?
+		';'
 ;
 
 PackageRefCS:
 	uriCS= StringLiteralExpCS
-	| pathNameCS=PathNameCS (uriCS=StringLiteralExpCS)
+	| pathNameCS=PathNameCS '(' (uriCS=StringLiteralExpCS) ')'
 ;
 
 ModulePropertyCS returns base::StructuralFeatureCS:
@@ -244,10 +296,6 @@ ModulePropertyCS returns base::StructuralFeatureCS:
 
 ModuleOperationCS returns base::OperationCS: 
 	MappingOperationCS
-;
-
-ModuleTypeCS returns base::ClassCS:
-	ModelTypeCS
 ;
 
 MappingOperationCS:

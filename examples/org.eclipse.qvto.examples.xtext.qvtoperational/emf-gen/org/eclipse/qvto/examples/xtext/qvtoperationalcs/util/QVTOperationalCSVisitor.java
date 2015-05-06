@@ -36,7 +36,6 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitMappingExtensionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS object);
 	@Nullable R visitMappingInitCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS object);
 	@Nullable R visitMappingMethodCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS object);
-	@Nullable R visitMappingModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS object);
 	@Nullable R visitMappingOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS object);
 	@Nullable R visitMappingQueryCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS object);
 	@Nullable R visitMappingRuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS object);
@@ -44,6 +43,7 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitMappingSectionsCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS object);
 	@Nullable R visitMetamodelCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS object);
 	@Nullable R visitModelTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS object);
+	@Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object);
 	@Nullable R visitModuleKindCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS object);
 	@Nullable R visitModulePropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS object);
 	@Nullable R visitModuleRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS object);
@@ -55,6 +55,8 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitOppositePropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS object);
 	@Nullable R visitPackageRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS object);
 	@Nullable R visitParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS object);
+	@Nullable R visitPathElement2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS object);
+	@Nullable R visitPathName2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS object);
 	@Nullable R visitPrimitiveTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PrimitiveTypeCS object);
 	@Nullable R visitQVToClassCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS object);
 	@Nullable R visitQVToImportCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS object);

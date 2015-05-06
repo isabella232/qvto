@@ -496,6 +496,26 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getValueExpCSParserRuleCall_2_0() { return cValueExpCSParserRuleCall_2_0; }
 	}
+
+	public class StringLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cSINGLE_QUOTED_STRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDOUBLE_QUOTED_STRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//StringLiteral:
+		//	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING;
+		@Override public ParserRule getRule() { return rule; }
+
+		//SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//SINGLE_QUOTED_STRING
+		public RuleCall getSINGLE_QUOTED_STRINGTerminalRuleCall_0() { return cSINGLE_QUOTED_STRINGTerminalRuleCall_0; }
+
+		//DOUBLE_QUOTED_STRING
+		public RuleCall getDOUBLE_QUOTED_STRINGTerminalRuleCall_1() { return cDOUBLE_QUOTED_STRINGTerminalRuleCall_1; }
+	}
 	
 	
 	private final GrammmarCSElements pGrammmarCS;
@@ -521,6 +541,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private final DictLiteralExpCSElements pDictLiteralExpCS;
 	private final DictLiteralPartCSElements pDictLiteralPartCS;
 	private final ReturnExpCSElements pReturnExpCS;
+	private final StringLiteralElements pStringLiteral;
 	
 	private final Grammar grammar;
 
@@ -554,6 +575,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDictLiteralExpCS = new DictLiteralExpCSElements();
 		this.pDictLiteralPartCS = new DictLiteralPartCSElements();
 		this.pReturnExpCS = new ReturnExpCSElements();
+		this.pStringLiteral = new StringLiteralElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -795,6 +817,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getReturnExpCSRule() {
 		return getReturnExpCSAccess().getRule();
+	}
+
+	//StringLiteral:
+	//	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING;
+	public StringLiteralElements getStringLiteralAccess() {
+		return pStringLiteral;
+	}
+	
+	public ParserRule getStringLiteralRule() {
+		return getStringLiteralAccess().getRule();
 	}
 
 	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
@@ -1678,16 +1710,6 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNUMBER_LITERALRule() {
 		return getNUMBER_LITERALAccess().getRule();
-	}
-
-	//StringLiteral:
-	//	SINGLE_QUOTED_STRING;
-	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
-		return gaEssentialOCL.getStringLiteralAccess();
-	}
-	
-	public ParserRule getStringLiteralRule() {
-		return getStringLiteralAccess().getRule();
 	}
 
 	/// * An upperbounded integer is used to define the upperbound of a collection multiplicity. The value may be the unlimited value. * /

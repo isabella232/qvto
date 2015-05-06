@@ -831,6 +831,42 @@ ruleReturnExpCS returns [EObject current=null]
 
 
 
+// Entry rule entryRuleStringLiteral
+entryRuleStringLiteral returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getStringLiteralRule()); } 
+	 iv_ruleStringLiteral=ruleStringLiteral 
+	 { $current=$iv_ruleStringLiteral.current.getText(); }  
+	 EOF 
+;
+
+// Rule StringLiteral
+ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(    this_SINGLE_QUOTED_STRING_0=RULE_SINGLE_QUOTED_STRING    {
+		$current.merge(this_SINGLE_QUOTED_STRING_0);
+    }
+
+    { 
+    newLeafNode(this_SINGLE_QUOTED_STRING_0, grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall_0()); 
+    }
+
+    |    this_DOUBLE_QUOTED_STRING_1=RULE_DOUBLE_QUOTED_STRING    {
+		$current.merge(this_DOUBLE_QUOTED_STRING_1);
+    }
+
+    { 
+    newLeafNode(this_DOUBLE_QUOTED_STRING_1, grammarAccess.getStringLiteralAccess().getDOUBLE_QUOTED_STRINGTerminalRuleCall_1()); 
+    }
+)
+    ;
+
+
+
+
+
 
 
 
@@ -5656,34 +5692,6 @@ ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
 
     { 
     newLeafNode(this_INT_0, grammarAccess.getNUMBER_LITERALAccess().getINTTerminalRuleCall()); 
-    }
-
-    ;
-
-
-
-
-
-// Entry rule entryRuleStringLiteral
-entryRuleStringLiteral returns [String current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getStringLiteralRule()); } 
-	 iv_ruleStringLiteral=ruleStringLiteral 
-	 { $current=$iv_ruleStringLiteral.current.getText(); }  
-	 EOF 
-;
-
-// Rule StringLiteral
-ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-    this_SINGLE_QUOTED_STRING_0=RULE_SINGLE_QUOTED_STRING    {
-		$current.merge(this_SINGLE_QUOTED_STRING_0);
-    }
-
-    { 
-    newLeafNode(this_SINGLE_QUOTED_STRING_0, grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall()); 
     }
 
     ;

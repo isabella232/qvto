@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.ImportCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS;
@@ -28,12 +28,11 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVToImportCSImpl#getUnit <em>Unit</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVToImportCSImpl#getImportedUnitElement <em>Imported Unit Element</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVToImportCSImpl#isAll <em>All</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
+public class QVToImportCSImpl extends ImportCSImpl implements QVToImportCS {
 	/**
 	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -53,26 +52,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 	 * @ordered
 	 */
 	protected EList<String> importedUnitElement;
-
-	/**
-	 * The default value of the '{@link #isAll() <em>All</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAll()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ALL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isAll() <em>All</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAll()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean all = ALL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -153,27 +132,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isAll() {
-		return all;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAll(boolean newAll) {
-		boolean oldAll = all;
-		all = newAll;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.QV_TO_IMPORT_CS__ALL, oldAll, all));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String toString() {
 		return super.toString();
 	}
@@ -204,8 +162,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 				return getUnit();
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__IMPORTED_UNIT_ELEMENT:
 				return getImportedUnitElement();
-			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__ALL:
-				return isAll();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -226,9 +182,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 				getImportedUnitElement().clear();
 				getImportedUnitElement().addAll((Collection<? extends String>)newValue);
 				return;
-			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__ALL:
-				setAll((Boolean)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -247,9 +200,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__IMPORTED_UNIT_ELEMENT:
 				getImportedUnitElement().clear();
 				return;
-			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__ALL:
-				setAll(ALL_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -266,8 +216,6 @@ public class QVToImportCSImpl extends ElementCSImpl implements QVToImportCS {
 				return unit != null;
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__IMPORTED_UNIT_ELEMENT:
 				return importedUnitElement != null && !importedUnitElement.isEmpty();
-			case QVTOperationalCSPackage.QV_TO_IMPORT_CS__ALL:
-				return all != ALL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

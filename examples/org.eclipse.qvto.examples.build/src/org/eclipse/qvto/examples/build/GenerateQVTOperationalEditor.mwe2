@@ -174,7 +174,7 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 	
-	
+	/*	
 	// CS2AS Components
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : resourceSet {}
 	
@@ -187,5 +187,5 @@ Workflow {
 		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
 		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
 		tracePropertyName = "pivot"
-	}
+	}*/
 }

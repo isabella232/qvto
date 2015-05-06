@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
@@ -33,7 +32,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getBodyStartLocation <em>Body Start Location</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getBodyEndLocation <em>Body End Location</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getIdentifierCS <em>Identifier CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getComplianceKindCS <em>Compliance Kind CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getComplianceKind <em>Compliance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getPackageRefs <em>Package Refs</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getWhereStatements <em>Where Statements</em>}</li>
  * </ul>
@@ -102,14 +101,24 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	protected String identifierCS = IDENTIFIER_CS_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getComplianceKindCS() <em>Compliance Kind CS</em>}' containment reference.
+	 * The default value of the '{@link #getComplianceKind() <em>Compliance Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComplianceKindCS()
+	 * @see #getComplianceKind()
 	 * @generated
 	 * @ordered
 	 */
-	protected StringLiteralExpCS complianceKindCS;
+	protected static final String COMPLIANCE_KIND_EDEFAULT = "strict";
+
+	/**
+	 * The cached value of the '{@link #getComplianceKind() <em>Compliance Kind</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComplianceKind()
+	 * @generated
+	 * @ordered
+	 */
+	protected String complianceKind = COMPLIANCE_KIND_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getPackageRefs() <em>Package Refs</em>}' containment reference list.
@@ -218,8 +227,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringLiteralExpCS getComplianceKindCS() {
-		return complianceKindCS;
+	public String getComplianceKind() {
+		return complianceKind;
 	}
 
 	/**
@@ -227,33 +236,11 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetComplianceKindCS(StringLiteralExpCS newComplianceKindCS, NotificationChain msgs) {
-		StringLiteralExpCS oldComplianceKindCS = complianceKindCS;
-		complianceKindCS = newComplianceKindCS;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS, oldComplianceKindCS, newComplianceKindCS);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setComplianceKindCS(StringLiteralExpCS newComplianceKindCS) {
-		if (newComplianceKindCS != complianceKindCS) {
-			NotificationChain msgs = null;
-			if (complianceKindCS != null)
-				msgs = ((InternalEObject)complianceKindCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS, null, msgs);
-			if (newComplianceKindCS != null)
-				msgs = ((InternalEObject)newComplianceKindCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS, null, msgs);
-			msgs = basicSetComplianceKindCS(newComplianceKindCS, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS, newComplianceKindCS, newComplianceKindCS));
+	public void setComplianceKind(String newComplianceKind) {
+		String oldComplianceKind = complianceKind;
+		complianceKind = newComplianceKind;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND, oldComplianceKind, complianceKind));
 	}
 
 	/**
@@ -297,8 +284,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS:
-				return basicSetComplianceKindCS(null, msgs);
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
 				return ((InternalEList<?>)getPackageRefs()).basicRemove(otherEnd, msgs);
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE_STATEMENTS:
@@ -321,8 +306,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				return getBodyEndLocation();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
 				return getIdentifierCS();
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS:
-				return getComplianceKindCS();
+			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
+				return getComplianceKind();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
 				return getPackageRefs();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE_STATEMENTS:
@@ -349,8 +334,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
 				setIdentifierCS((String)newValue);
 				return;
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS:
-				setComplianceKindCS((StringLiteralExpCS)newValue);
+			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
+				setComplianceKind((String)newValue);
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
 				getPackageRefs().clear();
@@ -381,8 +366,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
 				setIdentifierCS(IDENTIFIER_CS_EDEFAULT);
 				return;
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS:
-				setComplianceKindCS((StringLiteralExpCS)null);
+			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
+				setComplianceKind(COMPLIANCE_KIND_EDEFAULT);
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
 				getPackageRefs().clear();
@@ -408,8 +393,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				return bodyEndLocation != BODY_END_LOCATION_EDEFAULT;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
 				return IDENTIFIER_CS_EDEFAULT == null ? identifierCS != null : !IDENTIFIER_CS_EDEFAULT.equals(identifierCS);
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND_CS:
-				return complianceKindCS != null;
+			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
+				return COMPLIANCE_KIND_EDEFAULT == null ? complianceKind != null : !COMPLIANCE_KIND_EDEFAULT.equals(complianceKind);
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
 				return packageRefs != null && !packageRefs.isEmpty();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE_STATEMENTS:

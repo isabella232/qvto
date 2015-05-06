@@ -105,10 +105,6 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 		return delegate.visitMappingMethodCS(object);
 	}
 
-	public @Nullable R visitMappingModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS object) {
-		return delegate.visitMappingModuleCS(object);
-	}
-
 	public @Nullable R visitMappingOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS object) {
 		return delegate.visitMappingOperationCS(object);
 	}
@@ -135,6 +131,10 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 
 	public @Nullable R visitModelTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS object) {
 		return delegate.visitModelTypeCS(object);
+	}
+
+	public @Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object) {
+		return delegate.visitModuleCS(object);
 	}
 
 	public @Nullable R visitModuleKindCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS object) {
@@ -179,6 +179,14 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 
 	public @Nullable R visitParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS object) {
 		return delegate.visitParameterDeclarationCS(object);
+	}
+
+	public @Nullable R visitPathElement2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS object) {
+		return delegate.visitPathElement2CS(object);
+	}
+
+	public @Nullable R visitPathName2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS object) {
+		return delegate.visitPathName2CS(object);
 	}
 
 	public @Nullable R visitPrimitiveTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PrimitiveTypeCS object) {

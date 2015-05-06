@@ -110,4 +110,7 @@ public class AbstractImperativeOCLProposalProvider extends org.eclipse.ocl.xtext
 	public void complete_ReturnExpCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_StringLiteral(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

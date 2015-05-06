@@ -141,3 +141,7 @@ DictLiteralPartCS :
 ReturnExpCS : 
 	'return' {ReturnExpCS} (value = ExpCS)?
 ;
+
+StringLiteral:
+	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+;

@@ -345,6 +345,34 @@ finally {
 
 
 
+// Entry rule entryRuleStringLiteral
+entryRuleStringLiteral 
+:
+{ before(grammarAccess.getStringLiteralRule()); }
+	 ruleStringLiteral
+{ after(grammarAccess.getStringLiteralRule()); } 
+	 EOF 
+;
+
+// Rule StringLiteral
+ruleStringLiteral
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getStringLiteralAccess().getAlternatives()); }
+(rule__StringLiteral__Alternatives)
+{ after(grammarAccess.getStringLiteralAccess().getAlternatives()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 
 
 
@@ -2460,34 +2488,6 @@ finally {
 
 
 
-// Entry rule entryRuleStringLiteral
-entryRuleStringLiteral 
-:
-{ before(grammarAccess.getStringLiteralRule()); }
-	 ruleStringLiteral
-{ after(grammarAccess.getStringLiteralRule()); } 
-	 EOF 
-;
-
-// Rule StringLiteral
-ruleStringLiteral
-    @init {
-		int stackSize = keepStackSize();
-    }
-	:
-(
-{ before(grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall()); }
-	RULE_SINGLE_QUOTED_STRING
-{ after(grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
 // Entry rule entryRuleUPPER
 entryRuleUPPER 
 :
@@ -2675,6 +2675,28 @@ rule__PrimaryExpCS__Alternatives
 { before(grammarAccess.getPrimaryExpCSAccess().getNameExpCSParserRuleCall_12()); }
 	ruleNameExpCS
 { after(grammarAccess.getPrimaryExpCSAccess().getNameExpCSParserRuleCall_12()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__StringLiteral__Alternatives
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall_0()); }
+	RULE_SINGLE_QUOTED_STRING
+{ after(grammarAccess.getStringLiteralAccess().getSINGLE_QUOTED_STRINGTerminalRuleCall_0()); }
+)
+
+    |(
+{ before(grammarAccess.getStringLiteralAccess().getDOUBLE_QUOTED_STRINGTerminalRuleCall_1()); }
+	RULE_DOUBLE_QUOTED_STRING
+{ after(grammarAccess.getStringLiteralAccess().getDOUBLE_QUOTED_STRINGTerminalRuleCall_1()); }
 )
 
 ;

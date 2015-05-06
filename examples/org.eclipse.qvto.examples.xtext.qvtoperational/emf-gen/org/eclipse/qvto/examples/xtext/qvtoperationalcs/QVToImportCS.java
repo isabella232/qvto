@@ -3,7 +3,7 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.ImportCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,14 +16,13 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getUnit <em>Unit</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getImportedUnitElement <em>Imported Unit Element</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#isAll <em>All</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToImportCS()
  * @model
  * @generated
  */
-public interface QVToImportCS extends ElementCS {
+public interface QVToImportCS extends ImportCS {
 	/**
 	 * Returns the value of the '<em><b>Unit</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -65,31 +64,5 @@ public interface QVToImportCS extends ElementCS {
 	 * @generated
 	 */
 	EList<String> getImportedUnitElement();
-
-	/**
-	 * Returns the value of the '<em><b>All</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>All</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>All</em>' attribute.
-	 * @see #setAll(boolean)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToImportCS_All()
-	 * @model
-	 * @generated
-	 */
-	boolean isAll();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#isAll <em>All</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>All</em>' attribute.
-	 * @see #isAll()
-	 * @generated
-	 */
-	void setAll(boolean value);
 
 } // QVToImportCS
