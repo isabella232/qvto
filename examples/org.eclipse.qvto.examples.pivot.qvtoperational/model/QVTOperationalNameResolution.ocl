@@ -77,7 +77,7 @@ context ImperativeOperation
 def : _env(child : pivot::Element) : lookup::Environment =
 	if (self._body = child) then
 		parentEnv().nestedEnv()
-			-- FIXME CG conflict .addElement(self._context)
+			.addElement(self._context)
 			.addElements(self.result)
 			.addElements(self.ownedParameters)
 	else -- any other 
@@ -108,16 +108,16 @@ context  MappingOperation
 def : _env(child : pivot::Element) : lookup::Environment =
 	if (self._body = child) then
 		parentEnv().nestedEnv()
-		-- FIXME CG conflict .addElement(self._context)
+		.addElement(self._context)
 		.addElements(self.result)
 		.addElements(self.ownedParameters)
 	else if (self.when = child) then
 		parentEnv().nestedEnv()
-		-- FIXME CG conflict .addElement(self._context)
+		.addElement(self._context)
 		.addElements(self.ownedParameters)
 	else if (self.where = child) then
 		parentEnv().nestedEnv()
-		-- FIXME CG conflict .addElement(self._context)
+		.addElement(self._context)
 		.addElements(self.ownedParameters)
 		.addElements(self.result)
 	else
