@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -129,6 +129,11 @@ public class BlackboxUnitResolver implements UnitResolver {
 			CompilationUnit cunit = null;
 			try {
 				cunit = BlackboxRegistry.INSTANCE.loadCompilationUnit(fDescriptor, loadContext);
+				if (cunit.getDiagnostic().getSeverity() == Diagnostic.ERROR) {
+					String errMessage = NLS.bind(ValidationMessages.FailedToLoadUnit, fDescriptor.getQualifiedName());
+					fProblems = new BasicDiagnostic(cunit.getDiagnostic().getSource(), cunit.getDiagnostic().getCode(), 
+							QvtOperationalParserUtil.wrappInSeeErrorLogMessage(errMessage), null);
+				}
 			} catch (BlackboxException e) {
 				Diagnostic diagnostic = e.getDiagnostic();
 				if(diagnostic != null) {

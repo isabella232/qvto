@@ -103,7 +103,19 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 		}
 
 		if (errors != null) {
-			fBlackboxUnits.put(libDescriptor, null);
+			final Diagnostic failDiagnostic = errors;
+			fBlackboxUnits.put(libDescriptor, new CompilationUnit() {
+
+				public List<QvtOperationalModuleEnv> getElements() {
+					return Collections.emptyList();
+				}
+
+				public Diagnostic getDiagnostic() {
+					return failDiagnostic;
+				}
+				
+			});
+			
 			assert errors.getSeverity() == Diagnostic.ERROR;
 			throw new BlackboxException(errors);
 		}

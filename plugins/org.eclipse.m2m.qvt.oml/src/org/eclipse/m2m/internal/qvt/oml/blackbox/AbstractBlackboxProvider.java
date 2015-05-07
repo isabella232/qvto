@@ -57,6 +57,9 @@ public abstract class AbstractBlackboxProvider {
 			public List<QvtOperationalModuleEnv> getElements() {
 				return Collections.unmodifiableList(loadedModules);
 			}
+			public Diagnostic getDiagnostic() {
+				return Diagnostic.OK_INSTANCE;
+			}
 		};
 	}
 
