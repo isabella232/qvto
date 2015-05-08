@@ -1,6 +1,6 @@
-package org.eclipse.qvto.examples.pivot.imperativeocl.internal.lookup;
+package org.eclipse.qvto.examples.pivot.imperativeocl.lookup;
 
-import org.eclipse.ocl.pivot.internal.lookup.LookupEnvironment;
+import org.eclipse.ocl.pivot.lookup.LookupEnvironment;
 import org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractImperativeOCLLookupVisitor;
 
 public class ImperativeOCLLookupVisitor extends AbstractImperativeOCLLookupVisitor {
