@@ -110,7 +110,10 @@ Workflow {
     		fragment = labeling.LabelProviderFragment auto-inject {}
     
     		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
+    		// fragment = outline.OutlineTreeProviderFragment auto-inject {}
+    		// To show AS in the outline view
+    		fragment = org.eclipse.qvtd.cs2as.xtext.generator.CS2ASOutlineTreeProviderFragment auto-inject {} 
+    		
     		fragment = outline.QuickOutlineFragment auto-inject {}
     
     		// quickfix API
@@ -174,7 +177,7 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 	
-	/*	
+		
 	// CS2AS Components
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : resourceSet {}
 	
@@ -187,5 +190,5 @@ Workflow {
 		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
 		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
 		tracePropertyName = "pivot"
-	}*/
+	}
 }

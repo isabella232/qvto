@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+ * Copyright (c) 2015 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
@@ -14,11 +14,11 @@ import java.util.Collection;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 
-public interface TransformationExecutor extends ModelManager
+public interface TypedModelInstance
 {
-	void addRootObjects(@NonNull String modelName, @NonNull Iterable<? extends EObject> rootObjects);
-    @NonNull Collection<EObject> getRootObjects(@NonNull String modelName);
-    boolean run() throws Exception;
+	@NonNull Collection<EObject> getAllObjects();
+	@NonNull Collection<EObject> getObjectsOfKind(@NonNull org.eclipse.ocl.pivot.Class type);
+	@NonNull Collection<EObject> getObjectsOfType(@NonNull org.eclipse.ocl.pivot.Class type);
+	@NonNull Collection<EObject> getRootObjects();
 }

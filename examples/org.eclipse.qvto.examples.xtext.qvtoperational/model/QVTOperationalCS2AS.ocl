@@ -11,7 +11,7 @@ def : ast() : ocl::Model =
 	ocl::Model {
 		ownedPackages = let dummyPackage = ocl::Package {
 							name = '',
-							ownedClasses = ownedTypes.ast() 
+							ownedClasses = ownedTypes.ast().oclAsType(ocl::Class) -- FIXME
 						} in dummyPackage->includingAll(ownedPackages.ast())
 	}
 		
@@ -19,7 +19,7 @@ context QVToClassCS
 def : ast() : ocl::Class =
 	ocl::Class {
 		name = name,
-		ownedProperties = ownedProperties.ast(),
+		ownedProperties = ownedProperties.ast().oclAsType(ocl::Property), -- FIXME 
 		ownedOperations = ownedOperations.ast()
 	}
 
@@ -47,7 +47,7 @@ def : ast() : ocl::Package =
 		name = name,
 		nsPrefix = name,	-- QVTo spec doesn't provide concrete syntax for nsPrefix
 		URI = name,			-- QVTo spec doesn't provide concrete syntax for nsURI. Build an internal protocol
-		ownedClasses = ownedClasses.ast()
+		ownedClasses = ownedClasses.oclAsType(QVToClassCS).ast() -- FIXME Why do I need the cast ?
 		-- type = TODO
 	}
 		
@@ -71,13 +71,39 @@ context TransformationCS
 def : ast() : qvtoperational::OperationalTransformation =
 	qvtoperational::OperationalTransformation {
 		name = name,
-		modelParameter = parameters.ast(),
+		modelParameter = parameters.ast().oclAsType(qvtoperational::ModelParameter),
 		ownedOperations = ownedOperations.ast(),
 		isBlackbox = qualifiers->exists(x | x = 'blackbox'),
 		isAbstract = qualifiers->exists(x | x = 'abstract')
 		-- refined = ast().lookupRelationalTransformation(refines)
 	}
-		
+
+context ParameterDeclarationCS
+def : ast() : qvtoperational::VarParameter =
+
+	if (self.oclContainer().oclIsKindOf(ModuleCS)) 
+	then
+		qvtoperational::ModelParameter {
+			name = name
+			-- TODO
+		}
+	else	
+		qvtoperational::VarParameter {
+			name = name
+			--kind = if direction = DirectionKindCS::inout then
+			--			qvtoperational::DirectionKind::inout
+			--	   else if direction = DirectionKindCS::out then
+			--	   		qvtoperational::DirectionKind::out
+			--	   else 
+			--	   		qvtoperational::DirectionKind::_in
+			--	   endif endif
+			--initExpression = if (initPart.oclIsUndefined()) then
+			--					null
+			--				else
+			--					initPart.expression -- FIXME todo .ast()
+			--				endif	
+		}
+	endif
 context QVToLibraryCS
 def : ast() : qvtoperational::Library =
 	qvtoperational::Library {
