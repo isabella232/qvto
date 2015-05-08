@@ -11,16 +11,21 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.bbox;
 
+import java.math.BigInteger;
 import java.util.Date;
+
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.xml.type.internal.XMLCalendar;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 import org.eclipse.m2m.qvt.oml.blackbox.java.Operation;
 
 
 @Module(packageURIs={
-	"http://www.eclipse.org/emf/2002/Ecore"
+	"http://www.eclipse.org/emf/2002/Ecore",
+	"http://www.eclipse.org/emf/2003/XMLType"
 	})
 public class SimpleJavaLibrary {
 	
@@ -41,4 +46,18 @@ public class SimpleJavaLibrary {
 		return self.before(when);
 	}		
 	
+	@Operation(contextual=true)
+	public static XMLGregorianCalendar toXMLCalendar(Date self) {
+		return new XMLCalendar(self, XMLCalendar.DATETIME);
+	}
+		
+	@Operation(contextual=true)
+	public static Date toDate(XMLCalendar self) {
+		return self.getDate();
+	}
+		
+	public Number simpleCreateBigInt(String value) {
+		return new BigInteger(value);
+	}
+
 }

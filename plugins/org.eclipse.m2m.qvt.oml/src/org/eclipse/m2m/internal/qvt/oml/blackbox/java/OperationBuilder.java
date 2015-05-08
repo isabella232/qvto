@@ -108,7 +108,7 @@ class OperationBuilder {
 		}
                 
         operation.setName(name);
-        operation.setEType(fTypeResolver.toEClassifier(resultType));
+        operation.setEType(fTypeResolver.toEClassifier(resultType, Java2QVTTypeResolver.ALLOW_SUBTYPE));
         if(operation.getEType() == null) {
         	reportError(NLS.bind(JavaBlackboxMessages.UnresolvedOclTypeForJavaType, method.getReturnType(), method), method);
         }
@@ -129,7 +129,7 @@ class OperationBuilder {
             	varParam.setKind(DirectionKind.IN);
             }
             
-            eParameter.setEType(fTypeResolver.toEClassifier(paramType));
+            eParameter.setEType(fTypeResolver.toEClassifier(paramType, Java2QVTTypeResolver.ALLOW_SUPERTYPE));
             if(eParameter.getEType() == null) {
             	reportError(NLS.bind(JavaBlackboxMessages.UnresolvedOclTypeForJavaType, paramType, method), method);
             }

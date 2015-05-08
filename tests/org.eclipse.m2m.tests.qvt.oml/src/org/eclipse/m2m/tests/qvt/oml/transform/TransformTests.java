@@ -654,6 +654,13 @@ public class TransformTests {
         				blackboxRegistry.registerModule(EmfToolsLibrary.class, "emf.tools", "tools", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
         			}
         		},
+        		new FilesToFilesData("bug466705") { //$NON-NLS-1$
+        			@Override
+        			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(AnnotatedJavaLibrary.class, "org.bar.Foo", "FooJavaLib");
+        				blackboxRegistry.registerModule(SimpleJavaLibrary.class);
+        			}
+        		},
         		};
     }
 

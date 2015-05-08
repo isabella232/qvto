@@ -16,9 +16,11 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EOperation;
@@ -36,7 +38,23 @@ import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.util.Bag;
 
 class Java2QVTTypeResolver {
+	
+	/**
+	 * Flag indicates that strict type equality is using.
+	 */
+	static final int STRICT_TYPE = 1;
 
+	/**
+	 * Flag indicates that subtypes of given type will be considered in case strict equality fails.
+	 */
+	static final int ALLOW_SUBTYPE = 2;
+
+	/**
+	 * Flag indicates that supertypes of given type will be considered in case strict equality fails.
+	 */
+	static final int ALLOW_SUPERTYPE = 4;
+
+	
 	private QvtOperationalModuleEnv fEnv;
 	private List<EPackage> fPackages;
 	// used to delegate the OCL type determination to MDT OCL UMLReflection 
@@ -51,8 +69,8 @@ class Java2QVTTypeResolver {
 		return fEnv;
 	}
 	
-	EClassifier toEClassifier(Type type) {
-		EClassifier result = type2EClassifier(type);
+	EClassifier toEClassifier(Type type, int relationship) {
+		EClassifier result = type2EClassifier(type, relationship);
 		if(result == null) {
 			if(type instanceof Class<?>) {
 				EClassifier eWrapper = asEClassifier((Class<?>) type);
@@ -68,13 +86,13 @@ class Java2QVTTypeResolver {
 		return result;
 	}
 	
-	private EClassifier type2EClassifier(Type type) {
+	private EClassifier type2EClassifier(Type type, int relationship) {
 		if(type instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;
-			return handleParameterizedType(parameterizedType);			
+			return handleParameterizedType(parameterizedType, relationship);
 		} 
 		else if(type instanceof Class<?>) {
-			return handleType((Class<?>)type);
+			return handleType((Class<?>)type, relationship);
 		} else if(type instanceof TypeVariable<?>) {
 			TypeVariable<?> typeVariable = (TypeVariable<?>) type;
 			OCLStandardLibrary<EClassifier> stdLib = fEnv.getOCLStandardLibrary();
@@ -91,7 +109,7 @@ class Java2QVTTypeResolver {
 		return null;
 	}
 		
-	private EClassifier handleParameterizedType(ParameterizedType parameterizedType) {	
+	private EClassifier handleParameterizedType(ParameterizedType parameterizedType, int relationship) {	
 		Type rawType = parameterizedType.getRawType();
 		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 		
@@ -106,43 +124,43 @@ class Java2QVTTypeResolver {
 		
 		Class<?> rawClass = (Class<?>) rawType;
 		if(rawClass == Dictionary.class) {
-			EClassifier keyType = toEClassifier(actualElementType);
+			EClassifier keyType = toEClassifier(actualElementType, relationship);
 			Type actualElementType2 = actualTypeArguments.length > 1 ? actualTypeArguments[1] : null;
 			if(keyType != null && actualElementType2 != null) {
-				EClassifier elementType = toEClassifier(actualElementType2);
+				EClassifier elementType = toEClassifier(actualElementType2, relationship);
 				if(elementType != null) {
 					return fEnv.getTypeResolver().resolveDictionaryType(keyType, elementType);
 				}
 			}
 		} else if(rawClass == MutableList.class) {
-			EClassifier listElementType = toEClassifier(actualElementType);
+			EClassifier listElementType = toEClassifier(actualElementType, relationship);
 			if(listElementType != null) {
 				return fEnv.getTypeResolver().resolveListType(listElementType);
 			}
 		} else if(rawClass == LinkedHashSet.class) {
-			return resolveCollectionType(CollectionKind.ORDERED_SET_LITERAL, actualElementType);			
+			return resolveCollectionType(CollectionKind.ORDERED_SET_LITERAL, actualElementType, relationship);
 		}
 		else if(Set.class.isAssignableFrom(rawClass)) {
-			return resolveCollectionType(CollectionKind.SET_LITERAL, actualElementType);			
+			return resolveCollectionType(CollectionKind.SET_LITERAL, actualElementType, relationship);
 		}		
 		else if(rawClass == Bag.class) {
-			return resolveCollectionType(CollectionKind.BAG_LITERAL, actualElementType);
+			return resolveCollectionType(CollectionKind.BAG_LITERAL, actualElementType, relationship);
 		}
 		else if(List.class.isAssignableFrom(rawClass)) {
-			return resolveCollectionType(CollectionKind.SEQUENCE_LITERAL, actualElementType);
+			return resolveCollectionType(CollectionKind.SEQUENCE_LITERAL, actualElementType, relationship);
 		}
 		else if(rawType == List.class) {
-			return resolveCollectionType(CollectionKind.SEQUENCE_LITERAL, actualElementType);			
+			return resolveCollectionType(CollectionKind.SEQUENCE_LITERAL, actualElementType, relationship);
 		}
 		else if(rawType == Collection.class) {			
-			return resolveCollectionType(CollectionKind.COLLECTION_LITERAL, actualElementType);
+			return resolveCollectionType(CollectionKind.COLLECTION_LITERAL, actualElementType, relationship);
 		}
 		
 		return lookupByInstanceClass(parameterizedType);
 	}
 	
 	
-	private EClassifier resolveCollectionType(CollectionKind kind, Type elementType) {
+	private EClassifier resolveCollectionType(CollectionKind kind, Type elementType, int relationship) {
 		TypeResolver<EClassifier, EOperation, EStructuralFeature> typeResolver = fEnv.getTypeResolver();
 
 		EClassifier actualElementClassifier = null;
@@ -163,7 +181,7 @@ class Java2QVTTypeResolver {
 			}
 		} 
 		else if(elementType != null) {
-			actualElementClassifier = toEClassifier(elementType);
+			actualElementClassifier = toEClassifier(elementType, relationship);
 		}
 		
 		if(actualElementClassifier != null) {
@@ -173,7 +191,7 @@ class Java2QVTTypeResolver {
 		return null;
 	}
 	
-	private EClassifier handleType(Class<?> type) {
+	private EClassifier handleType(Class<?> type, int relationship) {
 		OCLStandardLibrary<EClassifier> stdLibrary = fEnv.getOCLStandardLibrary();
 		
 		if(type == Object.class) {
@@ -198,21 +216,49 @@ class Java2QVTTypeResolver {
 			return fEnv.getQVTStandardLibrary().getModelClass();
 		}
 		
-		return lookupByInstanceClass(type);
+		return lookupByInstanceClass(type, relationship);
 	}
 	
-	private EClassifier lookupByInstanceClass(Class<?> type) {
+	private EClassifier lookupByInstanceClass(Class<?> type, int relationship) {
 		assert type != null;
+		
+		Set<EClassifier> subtypes = new TreeSet<EClassifier>(HIERARCHY_COMPARATOR_DESC);
+		Set<EClassifier> supertypes = new TreeSet<EClassifier>(HIERARCHY_COMPARATOR_ASC);
 		
 		for (EPackage ePackage : fPackages) {
 			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
-				if(type == eClassifier.getInstanceClass()) {
+				Class<?> instanceClass = eClassifier.getInstanceClass();
+				if(type == instanceClass) {
 					return eClassifier;
+				}
+
+				// fall-back strategy for resolving sub/super types 
+				if ((relationship & ALLOW_SUBTYPE) == ALLOW_SUBTYPE) {
+					if(isAssignableFromTo(type, instanceClass)) {
+						subtypes.add(eClassifier);
+					}
+				}
+				if ((relationship & ALLOW_SUPERTYPE) == ALLOW_SUPERTYPE) {
+					if(isAssignableFromTo(instanceClass, type)) {
+						supertypes.add(eClassifier);
+					}
 				}
 			}
 		}
 		
+		if ((relationship & ALLOW_SUBTYPE) == ALLOW_SUBTYPE && !subtypes.isEmpty()) {
+			return subtypes.iterator().next();
+		}
+		
+		if ((relationship & ALLOW_SUPERTYPE) == ALLOW_SUPERTYPE && !supertypes.isEmpty()) {
+			return supertypes.iterator().next();
+		}
+		
 		return null;
+	}
+	
+	private boolean isAssignableFromTo(Class<?> from, Class<?> to) {
+		return from != null && to != null && from.isAssignableFrom(to);
 	}
 	
 	private EClassifier lookupByInstanceClass(ParameterizedType type) {
@@ -243,4 +289,40 @@ class Java2QVTTypeResolver {
 		
 		return fHelperEClassiferAdapter;		
 	}
+
+	private static final Comparator<EClassifier> HIERARCHY_COMPARATOR_ASC = new Comparator<EClassifier>() {
+		public int compare(EClassifier o1, EClassifier o2) {
+            Class<?> o1Class = o1.getInstanceClass();
+            Class<?> o2Class = o2.getInstanceClass();
+
+            if (o2Class.equals(o1Class)) {
+                return 0;
+            } else if (o1Class.isAssignableFrom(o2Class)) {
+                return 1;
+            } else if (o2Class.isAssignableFrom(o1Class)) {
+                return -1;
+            } else {
+                return 0;
+            }
+		}
+	};
+	
+	private static final Comparator<EClassifier> HIERARCHY_COMPARATOR_DESC = new Comparator<EClassifier>() {
+		public int compare(EClassifier o1, EClassifier o2) {
+            Class<?> o1Class = o1.getInstanceClass();
+            Class<?> o2Class = o2.getInstanceClass();
+
+            if (o2Class.equals(o1Class)) {
+                return 0;
+            } else if (o1Class.isAssignableFrom(o2Class)) {
+                return -1;
+            } else if (o2Class.isAssignableFrom(o1Class)) {
+                return 1;
+            } else {
+                return 0;
+            }
+		}
+	};
+
+
 }
