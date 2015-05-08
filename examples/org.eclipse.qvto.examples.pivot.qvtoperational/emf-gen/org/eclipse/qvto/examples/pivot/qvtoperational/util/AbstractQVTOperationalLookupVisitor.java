@@ -82,7 +82,6 @@ public class AbstractQVTOperationalLookupVisitor
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvto_examples_pivot_qvtoperational_lookup = IdManager.getRootPackageId("java://org.eclipse.qvto.examples.pivot.qvtoperational.lookup");
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
-    public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_internal_lookup = IdManager.getRootPackageId("org.eclipse.ocl.pivot.internal.lookup");
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_AbstractQVTOperationalLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvto_examples_pivot_qvtoperational_lookup.getClassId("AbstractQVTOperationalLookupVisitor", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Constructor = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("Constructor", 0);
@@ -100,7 +99,6 @@ public class AbstractQVTOperationalLookupVisitor
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_ImperativeCallExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("ImperativeCallExp", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_ImperativeOperation = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("ImperativeOperation", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Library = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("Library", 0);
-    public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_LookupEnvironment = PACKid_org_eclipse_ocl_pivot_internal_lookup.getClassId("LookupEnvironment", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_MappingBody = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("MappingBody", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_MappingCallExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("MappingCallExp", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_MappingOperation = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("MappingOperation", 0);
@@ -141,13 +139,11 @@ public class AbstractQVTOperationalLookupVisitor
     protected /*@Nullable*/ /*@Thrown*/ Object child;
     protected final /*@NonNull*/ /*@Thrown*/ Evaluator evaluator;
     protected final /*@NonNull*/ /*@Thrown*/ IdResolver idResolver;
-    protected final /*@NonNull*/ /*@Thrown*/ LookupEnvironment visitorEnv;
     
     public AbstractQVTOperationalLookupVisitor(/*@NonNull*/ LookupEnvironment context) {
         super(context);
         this.evaluator = context.getEvaluator();
         this.idResolver = evaluator.getIdResolver();
-        this.visitorEnv = context;
     }
     
     /**
@@ -168,7 +164,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.content->includes(child)
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.variable)
+     *     inner : lookup::Environment[1] = context.addElements(element.variable)
      *     .addElements(
      *       element.content->select(x |
      *         element.content->indexOf(x) <
@@ -193,7 +189,7 @@ public class AbstractQVTOperationalLookupVisitor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
             final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_0.getVariable();
             assert variable != null;
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)variable);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue select;
@@ -339,7 +335,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.body = child
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElement(element.context)
+     *     inner : lookup::Environment[1] = context.addElement(element.context)
      *     .addElements(element.result)
      *     .addElements(element.ownedParameters)
      *   in
@@ -356,8 +352,8 @@ public class AbstractQVTOperationalLookupVisitor
         final /*@Thrown*/ boolean eq = (body != null) ? body.equals(child) : (child == null);
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
         if (eq) {
-            final /*@Nullable*/ /*@Thrown*/ VarParameter context = element_8.getContext();
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = visitorEnv.addElement((NamedElement)context);
+            final /*@Nullable*/ /*@Thrown*/ VarParameter context_0 = element_8.getContext();
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = context.addElement((NamedElement)context_0);
             final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result = element_8.getResult();
             assert result != null;
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = addElement.addElements((Collection)result);
@@ -399,7 +395,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.content->includes(child)
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.variable)
+     *     inner : lookup::Environment[1] = context.addElements(element.variable)
      *     .addElements(
      *       element.content->select(x |
      *         element.content->indexOf(x) <
@@ -414,7 +410,7 @@ public class AbstractQVTOperationalLookupVisitor
      *   if element.initSection->includes(child)
      *   then
      *     let
-     *       inner : lookup::Environment[1] = visitorEnv.addElements(element.variable)
+     *       inner : lookup::Environment[1] = context.addElements(element.variable)
      *       .addElements(
      *         element.content->select(x |
      *           element.initSection->indexOf(x) <
@@ -429,7 +425,7 @@ public class AbstractQVTOperationalLookupVisitor
      *     if element.endSection->includes(child)
      *     then
      *       let
-     *         inner : lookup::Environment[1] = visitorEnv.addElements(element.variable)
+     *         inner : lookup::Environment[1] = context.addElements(element.variable)
      *         .addElements(
      *           element.content->select(x |
      *             element.endSection->indexOf(x) <
@@ -456,7 +452,7 @@ public class AbstractQVTOperationalLookupVisitor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
             final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_10.getVariable();
             assert variable != null;
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)variable);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue select;
@@ -521,7 +517,7 @@ public class AbstractQVTOperationalLookupVisitor
                 final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_1 = idResolver.getClass(CLSSid_VariableInitExp, null);
                 final /*@Nullable*/ /*@Thrown*/ List<Variable> variable_0 = element_10.getVariable();
                 assert variable_0 != null;
-                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = visitorEnv.addElements((Collection)variable_0);
+                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = context.addElements((Collection)variable_0);
                 /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_1 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
                 /*@Nullable*/ Iterator<?> ITERATOR_x_0 = BOXED_content.iterator();
                 /*@NonNull*/ /*@Thrown*/ OrderedSetValue select_0;
@@ -586,7 +582,7 @@ public class AbstractQVTOperationalLookupVisitor
                     final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_2 = idResolver.getClass(CLSSid_VariableInitExp, null);
                     final /*@Nullable*/ /*@Thrown*/ List<Variable> variable_1 = element_10.getVariable();
                     assert variable_1 != null;
-                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_1 = visitorEnv.addElements((Collection)variable_1);
+                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_1 = context.addElements((Collection)variable_1);
                     /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_3 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
                     /*@Nullable*/ Iterator<?> ITERATOR_x_1 = BOXED_content.iterator();
                     /*@NonNull*/ /*@Thrown*/ OrderedSetValue select_1;
@@ -670,7 +666,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.body = child
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElement(element.context)
+     *     inner : lookup::Environment[1] = context.addElement(element.context)
      *     .addElements(element.result)
      *     .addElements(element.ownedParameters)
      *   in
@@ -682,7 +678,7 @@ public class AbstractQVTOperationalLookupVisitor
      *   if element.when = child
      *   then
      *     let
-     *       inner : lookup::Environment[1] = visitorEnv.addElement(element.context)
+     *       inner : lookup::Environment[1] = context.addElement(element.context)
      *       .addElements(element.ownedParameters)
      *     in
      *       if inner.hasFinalResult()
@@ -693,7 +689,7 @@ public class AbstractQVTOperationalLookupVisitor
      *     if element.where = child
      *     then
      *       let
-     *         inner : lookup::Environment[1] = visitorEnv.addElement(element.context)
+     *         inner : lookup::Environment[1] = context.addElement(element.context)
      *         .addElements(element.ownedParameters)
      *         .addElements(element.result)
      *       in
@@ -712,8 +708,8 @@ public class AbstractQVTOperationalLookupVisitor
         final /*@Thrown*/ boolean eq = (body != null) ? body.equals(child) : (child == null);
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_5;
         if (eq) {
-            final /*@Nullable*/ /*@Thrown*/ VarParameter context = element_12.getContext();
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = visitorEnv.addElement((NamedElement)context);
+            final /*@Nullable*/ /*@Thrown*/ VarParameter context_0 = element_12.getContext();
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = context.addElement((NamedElement)context_0);
             final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result = element_12.getResult();
             assert result != null;
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = addElement.addElements((Collection)result);
@@ -735,8 +731,8 @@ public class AbstractQVTOperationalLookupVisitor
             final /*@Thrown*/ boolean eq_0 = (when != null) ? when.equals(child) : (child == null);
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (eq_0) {
-                final /*@Nullable*/ /*@Thrown*/ VarParameter context_0 = element_12.getContext();
-                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement_0 = visitorEnv.addElement((NamedElement)context_0);
+                final /*@Nullable*/ /*@Thrown*/ VarParameter context_1 = element_12.getContext();
+                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement_0 = context.addElement((NamedElement)context_1);
                 final /*@NonNull*/ /*@Thrown*/ List<Parameter> ownedParameters_0 = element_12.getOwnedParameters();
                 final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = addElement_0.addElements((Collection)ownedParameters_0);
                 final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
@@ -755,8 +751,8 @@ public class AbstractQVTOperationalLookupVisitor
                 final /*@Thrown*/ boolean eq_1 = (where != null) ? where.equals(child) : (child == null);
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_3;
                 if (eq_1) {
-                    final /*@Nullable*/ /*@Thrown*/ VarParameter context_1 = element_12.getContext();
-                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement_1 = visitorEnv.addElement((NamedElement)context_1);
+                    final /*@Nullable*/ /*@Thrown*/ VarParameter context_2 = element_12.getContext();
+                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement_1 = context.addElement((NamedElement)context_2);
                     final /*@NonNull*/ /*@Thrown*/ List<Parameter> ownedParameters_1 = element_12.getOwnedParameters();
                     final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElement_1.addElements((Collection)ownedParameters_1);
                     final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result_0 = element_12.getResult();
@@ -813,7 +809,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.additionalCondition->includes(child)
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.metamodel)
+     *     inner : lookup::Environment[1] = context.addElements(element.metamodel)
      *   in
      *     if inner.hasFinalResult()
      *     then inner
@@ -821,7 +817,7 @@ public class AbstractQVTOperationalLookupVisitor
      *     endif
      * else
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.metamodel)
+     *     inner : lookup::Environment[1] = context.addElements(element.metamodel)
      *   in
      *     if inner.hasFinalResult()
      *     then inner
@@ -833,7 +829,7 @@ public class AbstractQVTOperationalLookupVisitor
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitModelType(final /*@NonNull*/ /*@NonInvalid*/ ModelType element_15) {
         final /*@Nullable*/ /*@Thrown*/ List<Package> metamodel_0 = element_15.getMetamodel();
         assert metamodel_0 != null;
-        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = visitorEnv.addElements((Collection)metamodel_0);
+        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)metamodel_0);
         final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
         if (hasFinalResult_0) {
@@ -862,7 +858,7 @@ public class AbstractQVTOperationalLookupVisitor
      * 
      * 
      * let
-     *   inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedProperties)
+     *   inner : lookup::Environment[1] = context.addElements(element.ownedProperties)
      *   .addElements(element.ownedOperations)
      *   .addElements(element.ownedVariable)
      * in
@@ -870,7 +866,7 @@ public class AbstractQVTOperationalLookupVisitor
      *   then inner
      *   else
      *     let
-     *       inner : lookup::Environment[?] = visitorEnv.addElementsOf(element.moduleImport.module)
+     *       inner : lookup::Environment[?] = context.addElementsOf(element.moduleImport.module)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -881,7 +877,7 @@ public class AbstractQVTOperationalLookupVisitor
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitModule(final /*@NonNull*/ /*@NonInvalid*/ Module element_16) {
         final /*@NonNull*/ /*@Thrown*/ List<Property> ownedProperties = element_16.getOwnedProperties();
-        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)ownedProperties);
+        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)ownedProperties);
         final /*@NonNull*/ /*@Thrown*/ List<Operation> ownedOperations = element_16.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElements.addElements((Collection)ownedOperations);
         final /*@Nullable*/ /*@Thrown*/ List<Variable> ownedVariable = element_16.getOwnedVariable();
@@ -915,7 +911,7 @@ public class AbstractQVTOperationalLookupVisitor
                 //
                 accumulator.add(module);
             }
-            /*@NonNull*/ /*@NonInvalid*/ LookupEnvironment acc = visitorEnv;
+            /*@NonNull*/ /*@NonInvalid*/ LookupEnvironment acc = context;
             /*@Nullable*/ Iterator<?> ITERATOR_element_25 = elements.iterator();
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment iterate;
             while (true) {
@@ -977,7 +973,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.content->includes(child)
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.variable)
+     *     inner : lookup::Environment[1] = context.addElements(element.variable)
      *     .addElements(
      *       element.content->select(x |
      *         element.content->indexOf(x) <
@@ -1002,7 +998,7 @@ public class AbstractQVTOperationalLookupVisitor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
             final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_19.getVariable();
             assert variable != null;
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)variable);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue select;
@@ -1071,7 +1067,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.modelParameter->includes(child)
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedProperties)
+     *     inner : lookup::Environment[1] = context.addElements(element.ownedProperties)
      *     .addElements(element.ownedOperations)
      *     .addElements(element.ownedVariable)
      *   in
@@ -1079,7 +1075,7 @@ public class AbstractQVTOperationalLookupVisitor
      *     then inner
      *     else
      *       let
-     *         inner : lookup::Environment[?] = visitorEnv.addElementsOf(element.moduleImport.module)
+     *         inner : lookup::Environment[?] = context.addElementsOf(element.moduleImport.module)
      *       in
      *         if inner.hasFinalResult()
      *         then inner
@@ -1088,14 +1084,21 @@ public class AbstractQVTOperationalLookupVisitor
      *     endif
      * else
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedProperties)
+     *     inner : lookup::Environment[1] = context.addElements(element.ownedProperties)
      *     .addElements(element.ownedOperations)
      *     .addElements(element.ownedVariable)
      *     .addElements(element.modelParameter)
      *   in
      *     if inner.hasFinalResult()
      *     then inner
-     *     else this.parentEnv(element)
+     *     else
+     *       let
+     *         inner : lookup::Environment[?] = context.addElementsOf(element.moduleImport.module)
+     *       in
+     *         if inner.hasFinalResult()
+     *         then inner
+     *         else this.parentEnv(element)
+     *         endif
      *     endif
      * endif
      */
@@ -1107,11 +1110,11 @@ public class AbstractQVTOperationalLookupVisitor
         final /*@Nullable*/ /*@Thrown*/ List<Variable> ownedVariable = element_20.getOwnedVariable();
         assert modelParameter != null;
         assert ownedVariable != null;
-        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)ownedProperties);
+        final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)ownedProperties);
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElements.addElements((Collection)ownedOperations);
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModelParameter, modelParameter);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_modelParameter, child).booleanValue();
-        /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_3;
+        /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
         if (includes) {
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = addElements_0.addElements((Collection)ownedVariable);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
@@ -1142,7 +1145,7 @@ public class AbstractQVTOperationalLookupVisitor
                     //
                     accumulator.add(module);
                 }
-                /*@NonNull*/ /*@NonInvalid*/ LookupEnvironment acc = visitorEnv;
+                /*@NonNull*/ /*@NonInvalid*/ LookupEnvironment acc = context;
                 /*@Nullable*/ Iterator<?> ITERATOR_element_25 = elements.iterator();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment iterate;
                 while (true) {
@@ -1172,23 +1175,72 @@ public class AbstractQVTOperationalLookupVisitor
                 }
                 symbol_1 = symbol_0;
             }
-            symbol_3 = symbol_1;
+            symbol_4 = symbol_1;
         }
         else {
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_3 = addElements_0.addElements((Collection)ownedVariable);
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = addElements_3.addElements((Collection)modelParameter);
             final /*@Thrown*/ boolean hasFinalResult_1 = inner_0.hasFinalResult();
-            /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
+            /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_3;
             if (hasFinalResult_1) {
-                symbol_2 = inner_0;
+                symbol_3 = inner_0;
             }
             else {
-                final /*@Nullable*/ /*@Thrown*/ LookupEnvironment parentEnv_0 = this.parentEnv(element_20);
-                symbol_2 = parentEnv_0;
+                final /*@Nullable*/ /*@Thrown*/ List<ModuleImport> moduleImport_0 = element_20.getModuleImport();
+                assert moduleImport_0 != null;
+                final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_moduleImport_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModuleImport, moduleImport_0);
+                /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Module);
+                /*@Nullable*/ Iterator<?> ITERATOR__1_0 = BOXED_moduleImport_0.iterator();
+                /*@NonNull*/ /*@Thrown*/ SequenceValue elements_0;
+                while (true) {
+                    if (!ITERATOR__1_0.hasNext()) {
+                        elements_0 = accumulator_0;
+                        break;
+                    }
+                    /*@Nullable*/ /*@NonInvalid*/ ModuleImport _1_0 = (ModuleImport)ITERATOR__1_0.next();
+                    /**
+                     * _'null' : qvtoperational::Module[?]
+                     */
+                    if (_1_0 == null) {
+                        throw new InvalidValueException("Null source for \'qvtoperational::ModuleImport::module\'");
+                    }
+                    final /*@Nullable*/ /*@Thrown*/ Module module_0 = _1_0.getModule();
+                    //
+                    accumulator_0.add(module_0);
+                }
+                /*@NonNull*/ /*@NonInvalid*/ LookupEnvironment acc_0 = context;
+                /*@Nullable*/ Iterator<?> ITERATOR_element_26 = elements_0.iterator();
+                /*@Nullable*/ /*@Thrown*/ LookupEnvironment iterate_0;
+                while (true) {
+                    if (!ITERATOR_element_26.hasNext()) {
+                        iterate_0 = acc_0;
+                        break;
+                    }
+                    /*@Nullable*/ /*@NonInvalid*/ Object element_26 = (Object)ITERATOR_element_26.next();
+                    /**
+                     * _'null' : lookup::Environment[?]
+                     */
+                    final /*@Nullable*/ /*@Thrown*/ LookupEnvironment envForChild_0 = this.envForChild(element_26, null);
+                    //
+                    acc_0 = envForChild_0;
+                }
+                if (iterate_0 == null) {
+                    throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean\'");
+                }
+                final /*@Thrown*/ boolean hasFinalResult_2 = iterate_0.hasFinalResult();
+                /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
+                if (hasFinalResult_2) {
+                    symbol_2 = iterate_0;
+                }
+                else {
+                    final /*@Nullable*/ /*@Thrown*/ LookupEnvironment parentEnv_0 = this.parentEnv(element_20);
+                    symbol_2 = parentEnv_0;
+                }
+                symbol_3 = symbol_2;
             }
-            symbol_3 = symbol_2;
+            symbol_4 = symbol_3;
         }
-        return symbol_3;
+        return symbol_4;
     }
     
     /**
@@ -1198,7 +1250,7 @@ public class AbstractQVTOperationalLookupVisitor
      * if element.condition = child
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElement(element.target)
+     *     inner : lookup::Environment[1] = context.addElement(element.target)
      *   in
      *     if inner.hasFinalResult()
      *     then inner
@@ -1214,7 +1266,7 @@ public class AbstractQVTOperationalLookupVisitor
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ Variable target = element_21.getTarget();
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = visitorEnv.addElement((NamedElement)target);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = context.addElement((NamedElement)target);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;
             if (hasFinalResult) {

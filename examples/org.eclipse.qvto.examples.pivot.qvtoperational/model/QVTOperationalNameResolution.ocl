@@ -39,7 +39,7 @@ def : _env(child : pivot::Element) : lookup::Environment =
 			.addElements(self.ownedVariable)
 	else
 		parentEnv().nestedEnv()
-			-- FIXME CG Not Supported yet .addElementsOf(self.moduleImport.module)
+			.addElementsOf(self.moduleImport.module)
 			.nestedEnv()			
 			.addElements(self.ownedProperties)
 			-- .addElements(self.lookup::s->excluding(self.ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?

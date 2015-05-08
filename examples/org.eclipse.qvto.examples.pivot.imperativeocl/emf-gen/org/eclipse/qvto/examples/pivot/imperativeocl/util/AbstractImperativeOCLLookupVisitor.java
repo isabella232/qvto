@@ -77,7 +77,6 @@ public class AbstractImperativeOCLLookupVisitor
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvto_examples_pivot_imperativeocl_lookup = IdManager.getRootPackageId("java://org.eclipse.qvto.examples.pivot.imperativeocl.lookup");
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
-    public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_internal_lookup = IdManager.getRootPackageId("org.eclipse.ocl.pivot.internal.lookup");
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_AbstractImperativeOCLLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvto_examples_pivot_imperativeocl_lookup.getClassId("AbstractImperativeOCLLookupVisitor", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_AltExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("AltExp", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_AssertExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("AssertExp", 0);
@@ -102,7 +101,6 @@ public class AbstractImperativeOCLLookupVisitor
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_ListLiteralExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ListLiteralExp", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_ListType = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ListType", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_LogExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("LogExp", 0);
-    public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_LookupEnvironment = PACKid_org_eclipse_ocl_pivot_internal_lookup.getClassId("LookupEnvironment", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OCLExpression = PACKid_$metamodel$.getClassId("OCLExpression", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OrderedTupleLiteralExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("OrderedTupleLiteralExp", 0);
@@ -124,13 +122,11 @@ public class AbstractImperativeOCLLookupVisitor
     protected /*@Nullable*/ /*@Thrown*/ Object child;
     protected final /*@NonNull*/ /*@Thrown*/ Evaluator evaluator;
     protected final /*@NonNull*/ /*@Thrown*/ IdResolver idResolver;
-    protected final /*@NonNull*/ /*@Thrown*/ LookupEnvironment visitorEnv;
     
     public AbstractImperativeOCLLookupVisitor(/*@NonNull*/ LookupEnvironment context) {
         super(context);
         this.evaluator = context.getEvaluator();
         this.idResolver = evaluator.getIdResolver();
-        this.visitorEnv = context;
     }
     
     /**
@@ -281,7 +277,7 @@ public class AbstractImperativeOCLLookupVisitor
      * if element.condition = child
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedIterators)
+     *     inner : lookup::Environment[1] = context.addElements(element.ownedIterators)
      *   in
      *     if inner.hasFinalResult()
      *     then inner
@@ -291,7 +287,7 @@ public class AbstractImperativeOCLLookupVisitor
      *   if element.ownedBody = child
      *   then
      *     let
-     *       inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedIterators)
+     *       inner : lookup::Environment[1] = context.addElements(element.ownedIterators)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -301,7 +297,7 @@ public class AbstractImperativeOCLLookupVisitor
      *     if element.ownedIterators->includes(child)
      *     then
      *       let
-     *         inner : lookup::Environment[1] = visitorEnv.addElements(
+     *         inner : lookup::Environment[1] = context.addElements(
      *           element.ownedIterators->select(x |
      *             element.ownedIterators->indexOf(x) <
      *             element.ownedIterators->indexOf(child)))
@@ -322,7 +318,7 @@ public class AbstractImperativeOCLLookupVisitor
         final /*@Thrown*/ boolean eq = (condition != null) ? condition.equals(child) : (child == null);
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_5;
         if (eq) {
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = visitorEnv.addElements((Collection)ownedIterators);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = context.addElements((Collection)ownedIterators);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;
             if (hasFinalResult) {
@@ -339,7 +335,7 @@ public class AbstractImperativeOCLLookupVisitor
             final /*@Thrown*/ boolean eq_0 = (ownedBody != null) ? ownedBody.equals(child) : (child == null);
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (eq_0) {
-                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = visitorEnv.addElements((Collection)ownedIterators);
+                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)ownedIterators);
                 final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
                 if (hasFinalResult_0) {
@@ -378,7 +374,7 @@ public class AbstractImperativeOCLLookupVisitor
                     }
                     final List<Variable> UNBOXED_select = select.asEcoreObjects(idResolver, Variable.class);
                     assert UNBOXED_select != null;
-                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_1 = visitorEnv.addElements((Collection)UNBOXED_select);
+                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_1 = context.addElements((Collection)UNBOXED_select);
                     final /*@Thrown*/ boolean hasFinalResult_1 = inner_1.hasFinalResult();
                     /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
                     if (hasFinalResult_1) {
@@ -419,7 +415,7 @@ public class AbstractImperativeOCLLookupVisitor
      * if element.condition = child
      * then
      *   let
-     *     inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedIterators)
+     *     inner : lookup::Environment[1] = context.addElements(element.ownedIterators)
      *     .addElement(element.target)
      *   in
      *     if inner.hasFinalResult()
@@ -430,7 +426,7 @@ public class AbstractImperativeOCLLookupVisitor
      *   if element.ownedBody = child
      *   then
      *     let
-     *       inner : lookup::Environment[1] = visitorEnv.addElements(element.ownedIterators)
+     *       inner : lookup::Environment[1] = context.addElements(element.ownedIterators)
      *     in
      *       if inner.hasFinalResult()
      *       then inner
@@ -440,7 +436,7 @@ public class AbstractImperativeOCLLookupVisitor
      *     if element.ownedIterators->includes(child)
      *     then
      *       let
-     *         inner : lookup::Environment[1] = visitorEnv.addElements(
+     *         inner : lookup::Environment[1] = context.addElements(
      *           element.ownedIterators->select(x |
      *             element.ownedIterators->indexOf(x) <
      *             element.ownedIterators->indexOf(child)))
@@ -461,7 +457,7 @@ public class AbstractImperativeOCLLookupVisitor
         final /*@Thrown*/ boolean eq = (condition != null) ? condition.equals(child) : (child == null);
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_5;
         if (eq) {
-            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = visitorEnv.addElements((Collection)ownedIterators_1);
+            final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)ownedIterators_1);
             final /*@Nullable*/ /*@Thrown*/ Variable target = element_12.getTarget();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = addElements.addElement((NamedElement)target);
             final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
@@ -480,7 +476,7 @@ public class AbstractImperativeOCLLookupVisitor
             final /*@Thrown*/ boolean eq_0 = (ownedBody != null) ? ownedBody.equals(child) : (child == null);
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (eq_0) {
-                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = visitorEnv.addElements((Collection)ownedIterators_1);
+                final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)ownedIterators_1);
                 final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
                 if (hasFinalResult_0) {
@@ -519,7 +515,7 @@ public class AbstractImperativeOCLLookupVisitor
                     }
                     final List<Variable> UNBOXED_select = select.asEcoreObjects(idResolver, Variable.class);
                     assert UNBOXED_select != null;
-                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_1 = visitorEnv.addElements((Collection)UNBOXED_select);
+                    final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_1 = context.addElements((Collection)UNBOXED_select);
                     final /*@Thrown*/ boolean hasFinalResult_1 = inner_1.hasFinalResult();
                     /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
                     if (hasFinalResult_1) {
