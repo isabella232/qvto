@@ -15,7 +15,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS <em>Identifier CS</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getPackageRefs <em>Package Refs</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhereStatements <em>Where Statements</em>}</li>
@@ -26,32 +25,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @generated
  */
 public interface ModelTypeCS extends ClassCS, ElementWithBody {
-	/**
-	 * Returns the value of the '<em><b>Identifier CS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Identifier CS</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Identifier CS</em>' attribute.
-	 * @see #setIdentifierCS(String)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_IdentifierCS()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getIdentifierCS();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS <em>Identifier CS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Identifier CS</em>' attribute.
-	 * @see #getIdentifierCS()
-	 * @generated
-	 */
-	void setIdentifierCS(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Compliance Kind</b></em>' attribute.
 	 * The default value is <code>"strict"</code>.

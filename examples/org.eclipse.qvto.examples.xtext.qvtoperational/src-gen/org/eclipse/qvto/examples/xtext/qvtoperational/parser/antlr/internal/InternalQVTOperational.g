@@ -29,7 +29,6 @@ import org.eclipse.emf.common.util.Enumerator;
 import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import org.eclipse.qvto.examples.xtext.qvtoperational.services.QVTOperationalGrammarAccess;
 
@@ -149,104 +148,40 @@ ruleTopLevelCS returns [EObject current=null]
 
 // Entry rule entryRuleTransformationQualifier
 entryRuleTransformationQualifier returns [String current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getTransformationQualifierAccess().getUnorderedGroup()		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getTransformationQualifierRule()); } 
 	 iv_ruleTransformationQualifier=ruleTransformationQualifier 
 	 { $current=$iv_ruleTransformationQualifier.current.getText(); }  
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule TransformationQualifier
 ruleTransformationQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getTransformationQualifierAccess().getUnorderedGroup()
-		);
     }
     @after { leaveRule(); }:
 (
-
-(
-	{ 
-	  getUnorderedGroupHelper().enter(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup());
-	}
-	(
-		(
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 0)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 0);
-	 				}
-					({true}?=>(
 	kw='blackbox' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getTransformationQualifierAccess().getBlackboxKeyword_0()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 1)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 1);
-	 				}
-					({true}?=>(
+    |
 	kw='abstract' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getTransformationQualifierAccess().getAbstractKeyword_1()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 2)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), 2);
-	 				}
-					({true}?=>(
+    |
 	kw='static' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getTransformationQualifierAccess().getStaticKeyword_2()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  
-
-		)+
-	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup())}?	
-	)
-)
-	{ 
-	  getUnorderedGroupHelper().leave(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup());
-	}
-
 )
     ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 
@@ -281,140 +216,54 @@ ruleLibraryQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRu
 
 // Entry rule entryRuleFeatureQualifier
 entryRuleFeatureQualifier returns [String current=null] 
-	@init { 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getFeatureQualifierAccess().getUnorderedGroup()		);
-	}
 	:
 	{ newCompositeNode(grammarAccess.getFeatureQualifierRule()); } 
 	 iv_ruleFeatureQualifier=ruleFeatureQualifier 
 	 { $current=$iv_ruleFeatureQualifier.current.getText(); }  
 	 EOF 
 ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 // Rule FeatureQualifier
 ruleFeatureQualifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { enterRule(); 
-		UnorderedGroupState myUnorderedGroupState = getUnorderedGroupHelper().snapShot(
-			grammarAccess.getFeatureQualifierAccess().getUnorderedGroup()
-		);
     }
     @after { leaveRule(); }:
 (
-
-(
-	{ 
-	  getUnorderedGroupHelper().enter(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	}
-	(
-		(
-
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 0)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 0);
-	 				}
-					({true}?=>(
 	kw='composes' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getFeatureQualifierAccess().getComposesKeyword_0()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 1)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 1);
-	 				}
-					({true}?=>(
+    |
 	kw='references' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getFeatureQualifierAccess().getReferencesKeyword_1()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 2)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 2);
-	 				}
-					({true}?=>(
+    |
 	kw='readonly' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getFeatureQualifierAccess().getReadonlyKeyword_2()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 3)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 3);
-	 				}
-					({true}?=>(
+    |
 	kw='derived' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getFeatureQualifierAccess().getDerivedKeyword_3()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  |
 
-			( 
-				{getUnorderedGroupHelper().canSelect(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 4)}?=>(
-					{ 
-	 				  getUnorderedGroupHelper().select(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), 4);
-	 				}
-					({true}?=>(
+    |
 	kw='static' 
     {
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getFeatureQualifierAccess().getStaticKeyword_4()); 
     }
-))
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	 				}
- 				)
-			)  
-
-		)+
-	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup())}?	
-	)
-)
-	{ 
-	  getUnorderedGroupHelper().leave(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup());
-	}
-
 )
     ;
-finally {
-	myUnorderedGroupState.restore();
-}
 
 
 

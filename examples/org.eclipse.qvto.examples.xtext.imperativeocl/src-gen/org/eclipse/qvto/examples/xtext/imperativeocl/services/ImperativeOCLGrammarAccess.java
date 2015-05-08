@@ -124,14 +124,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpCSParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		////PrefixOperator:
-		////	EssentialOCLPrefixOperator | QVToPrefixOperator;
-		////
-		////InfixOperator:
+		// //	EssentialOCLPrefixOperator | QVToPrefixOperator;
+		// //
+		// //InfixOperator:
+		//
 		////	EssentialOCLInfixOperator | QVToInfixOperator;
-		////
-		////NavigationOperator:
+		// //
+		// //NavigationOperator:
+		//
 		////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-		//ImperativeOCLExpCS returns essentialocl::ExpCS:
+		// ImperativeOCLExpCS returns essentialocl::ExpCS:
 		//	ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -150,9 +152,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDictTypeCSParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//// ********* ImperativeOCL Types *********
-		//// TypeLiteralCS redefined to include the new List and Dict types
+		// // TypeLiteralCS redefined to include the new List and Dict types
+		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		//TypeLiteralCS returns base::TypedRefCS:
+		// TypeLiteralCS returns base::TypedRefCS:
 		//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -272,9 +275,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameExpCSParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
 		
 		//// ********* ImperativeOCL Expressions *********
+		//
 		//// PrimaryExpCS redefined to include the new List and Dict literal expressions
+		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		//// These rules are ordered most rejectable first
+		// // These rules are ordered most rejectable first
+		//
 		//PrimaryExpCS returns essentialocl::ExpCS:
 		//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 		//	CollectionLiteralExpCS | LambdaLiteralExpCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS |
@@ -622,7 +628,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal ADD_OP: '+' | '-';
-	//terminal ASSIGN_OP:
+	// terminal ASSIGN_OP:
 	//	":=" | "::=" | "+=" | "-=";
 	public TerminalRule getASSIGN_OPRule() {
 		return tASSIGN_OP;
@@ -647,7 +653,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal OR_OP: 'or' | 'xor';
-	//terminal RESOLVE_IN_KIND:
+	// terminal RESOLVE_IN_KIND:
 	//	"resolveIn" | "resolveoneIn" | "invresolveIn" | "invresolveoneIn";
 	public TerminalRule getRESOLVE_IN_KINDRule() {
 		return tRESOLVE_IN_KIND;
@@ -713,14 +719,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////PrefixOperator:
-	////	EssentialOCLPrefixOperator | QVToPrefixOperator;
-	////
-	////InfixOperator:
+	// //	EssentialOCLPrefixOperator | QVToPrefixOperator;
+	// //
+	// //InfixOperator:
+	//
 	////	EssentialOCLInfixOperator | QVToInfixOperator;
-	////
-	////NavigationOperator:
+	// //
+	// //NavigationOperator:
+	//
 	////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-	//ImperativeOCLExpCS returns essentialocl::ExpCS:
+	// ImperativeOCLExpCS returns essentialocl::ExpCS:
 	//	ExpCS;
 	public ImperativeOCLExpCSElements getImperativeOCLExpCSAccess() {
 		return pImperativeOCLExpCS;
@@ -731,9 +739,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Types *********
-	//// TypeLiteralCS redefined to include the new List and Dict types
+	// // TypeLiteralCS redefined to include the new List and Dict types
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//TypeLiteralCS returns base::TypedRefCS:
+	// TypeLiteralCS returns base::TypedRefCS:
 	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 	public TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return pTypeLiteralCS;
@@ -764,9 +773,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Expressions *********
+	//
 	//// PrimaryExpCS redefined to include the new List and Dict literal expressions
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//// These rules are ordered most rejectable first
+	// // These rules are ordered most rejectable first
+	//
 	//PrimaryExpCS returns essentialocl::ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 	//	CollectionLiteralExpCS | LambdaLiteralExpCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS |

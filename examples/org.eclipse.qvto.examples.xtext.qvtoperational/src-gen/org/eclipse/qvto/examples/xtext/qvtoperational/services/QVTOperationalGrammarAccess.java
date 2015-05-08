@@ -62,21 +62,18 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class TransformationQualifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransformationQualifier");
-		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
-		private final Keyword cBlackboxKeyword_0 = (Keyword)cUnorderedGroup.eContents().get(0);
-		private final Keyword cAbstractKeyword_1 = (Keyword)cUnorderedGroup.eContents().get(1);
-		private final Keyword cStaticKeyword_2 = (Keyword)cUnorderedGroup.eContents().get(2);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cBlackboxKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cAbstractKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cStaticKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
 		
 		////enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
-		//
-		////Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
-		// TransformationQualifier returns
-		//ecore::EString:
-		//	"blackbox" & "abstract" & "static";
+		// TransformationQualifier returns ecore::EString:
+		//	"blackbox" | "abstract" | "static";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"blackbox" & "abstract" & "static"
-		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		//"blackbox" | "abstract" | "static"
+		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"blackbox"
 		public Keyword getBlackboxKeyword_0() { return cBlackboxKeyword_0; }
@@ -102,19 +99,19 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class FeatureQualifierElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureQualifier");
-		private final UnorderedGroup cUnorderedGroup = (UnorderedGroup)rule.eContents().get(1);
-		private final Keyword cComposesKeyword_0 = (Keyword)cUnorderedGroup.eContents().get(0);
-		private final Keyword cReferencesKeyword_1 = (Keyword)cUnorderedGroup.eContents().get(1);
-		private final Keyword cReadonlyKeyword_2 = (Keyword)cUnorderedGroup.eContents().get(2);
-		private final Keyword cDerivedKeyword_3 = (Keyword)cUnorderedGroup.eContents().get(3);
-		private final Keyword cStaticKeyword_4 = (Keyword)cUnorderedGroup.eContents().get(4);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Keyword cComposesKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
+		private final Keyword cReferencesKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cReadonlyKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cDerivedKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cStaticKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		
 		//FeatureQualifier returns ecore::EString:
-		//	"composes" & "references" & "readonly" & "derived" & "static";
+		//	"composes" | "references" | "readonly" | "derived" | "static";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"composes" & "references" & "readonly" & "derived" & "static"
-		public UnorderedGroup getUnorderedGroup() { return cUnorderedGroup; }
+		//"composes" | "references" | "readonly" | "derived" | "static"
+		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"composes"
 		public Keyword getComposesKeyword_0() { return cComposesKeyword_0; }
@@ -2497,11 +2494,8 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
-	//
-	////Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
-	// TransformationQualifier returns
-	//ecore::EString:
-	//	"blackbox" & "abstract" & "static";
+	// TransformationQualifier returns ecore::EString:
+	//	"blackbox" | "abstract" | "static";
 	public TransformationQualifierElements getTransformationQualifierAccess() {
 		return pTransformationQualifier;
 	}
@@ -2521,7 +2515,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureQualifier returns ecore::EString:
-	//	"composes" & "references" & "readonly" & "derived" & "static";
+	//	"composes" | "references" | "readonly" | "derived" | "static";
 	public FeatureQualifierElements getFeatureQualifierAccess() {
 		return pFeatureQualifier;
 	}
@@ -3047,7 +3041,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal ADD_OP: '+' | '-';
-	//terminal ASSIGN_OP:
+	// terminal ASSIGN_OP:
 	//	":=" | "::=" | "+=" | "-=";
 	public TerminalRule getASSIGN_OPRule() {
 		return gaImperativeOCL.getASSIGN_OPRule();
@@ -3072,7 +3066,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal OR_OP: 'or' | 'xor';
-	//terminal RESOLVE_IN_KIND:
+	// terminal RESOLVE_IN_KIND:
 	//	"resolveIn" | "resolveoneIn" | "invresolveIn" | "invresolveoneIn";
 	public TerminalRule getRESOLVE_IN_KINDRule() {
 		return gaImperativeOCL.getRESOLVE_IN_KINDRule();
@@ -3138,14 +3132,16 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////PrefixOperator:
-	////	EssentialOCLPrefixOperator | QVToPrefixOperator;
-	////
-	////InfixOperator:
+	// //	EssentialOCLPrefixOperator | QVToPrefixOperator;
+	// //
+	// //InfixOperator:
+	//
 	////	EssentialOCLInfixOperator | QVToInfixOperator;
-	////
-	////NavigationOperator:
+	// //
+	// //NavigationOperator:
+	//
 	////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-	//ImperativeOCLExpCS returns essentialocl::ExpCS:
+	// ImperativeOCLExpCS returns essentialocl::ExpCS:
 	//	ExpCS;
 	public ImperativeOCLGrammarAccess.ImperativeOCLExpCSElements getImperativeOCLExpCSAccess() {
 		return gaImperativeOCL.getImperativeOCLExpCSAccess();
@@ -3156,9 +3152,10 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Types *********
-	//// TypeLiteralCS redefined to include the new List and Dict types
+	// // TypeLiteralCS redefined to include the new List and Dict types
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//TypeLiteralCS returns base::TypedRefCS:
+	// TypeLiteralCS returns base::TypedRefCS:
 	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 	public ImperativeOCLGrammarAccess.TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return gaImperativeOCL.getTypeLiteralCSAccess();
@@ -3189,9 +3186,12 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Expressions *********
+	//
 	//// PrimaryExpCS redefined to include the new List and Dict literal expressions
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//// These rules are ordered most rejectable first
+	// // These rules are ordered most rejectable first
+	//
 	//PrimaryExpCS returns essentialocl::ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 	//	CollectionLiteralExpCS | LambdaLiteralExpCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS |

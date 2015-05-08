@@ -4261,22 +4261,13 @@ public interface QVTOperationalCSPackage extends EPackage {
 	int MODEL_TYPE_CS__BODY_END_LOCATION = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Identifier CS</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MODEL_TYPE_CS__IDENTIFIER_CS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Compliance Kind</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_CS__COMPLIANCE_KIND = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
+	int MODEL_TYPE_CS__COMPLIANCE_KIND = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Package Refs</b></em>' containment reference list.
@@ -4285,7 +4276,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_CS__PACKAGE_REFS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
+	int MODEL_TYPE_CS__PACKAGE_REFS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Where Statements</b></em>' containment reference list.
@@ -4294,7 +4285,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_CS__WHERE_STATEMENTS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 5;
+	int MODEL_TYPE_CS__WHERE_STATEMENTS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Model Type CS</em>' class.
@@ -4303,7 +4294,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_TYPE_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 6;
+	int MODEL_TYPE_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl <em>Module Usage CS</em>}' class.
@@ -7162,17 +7153,6 @@ public interface QVTOperationalCSPackage extends EPackage {
 	EClass getModelTypeCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS <em>Identifier CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Identifier CS</em>'.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS()
-	 * @see #getModelTypeCS()
-	 * @generated
-	 */
-	EAttribute getModelTypeCS_IdentifierCS();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8884,14 +8864,6 @@ public interface QVTOperationalCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass MODEL_TYPE_CS = eINSTANCE.getModelTypeCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Identifier CS</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MODEL_TYPE_CS__IDENTIFIER_CS = eINSTANCE.getModelTypeCS_IdentifierCS();
 
 		/**
 		 * The meta object literal for the '<em><b>Compliance Kind</b></em>' attribute feature.

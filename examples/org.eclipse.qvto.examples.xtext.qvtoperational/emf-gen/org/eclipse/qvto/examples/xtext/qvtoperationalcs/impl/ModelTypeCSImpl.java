@@ -31,7 +31,6 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getBodyStartLocation <em>Body Start Location</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getBodyEndLocation <em>Body End Location</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getIdentifierCS <em>Identifier CS</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getComplianceKind <em>Compliance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getPackageRefs <em>Package Refs</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeCSImpl#getWhereStatements <em>Where Statements</em>}</li>
@@ -79,26 +78,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * @ordered
 	 */
 	protected int bodyEndLocation = BODY_END_LOCATION_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getIdentifierCS() <em>Identifier CS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdentifierCS()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String IDENTIFIER_CS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getIdentifierCS() <em>Identifier CS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getIdentifierCS()
-	 * @generated
-	 * @ordered
-	 */
-	protected String identifierCS = IDENTIFIER_CS_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComplianceKind() <em>Compliance Kind</em>}' attribute.
@@ -206,27 +185,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getIdentifierCS() {
-		return identifierCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIdentifierCS(String newIdentifierCS) {
-		String oldIdentifierCS = identifierCS;
-		identifierCS = newIdentifierCS;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS, oldIdentifierCS, identifierCS));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getComplianceKind() {
 		return complianceKind;
 	}
@@ -304,8 +262,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				return getBodyStartLocation();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__BODY_END_LOCATION:
 				return getBodyEndLocation();
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
-				return getIdentifierCS();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
 				return getComplianceKind();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:
@@ -330,9 +286,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__BODY_END_LOCATION:
 				setBodyEndLocation((Integer)newValue);
-				return;
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
-				setIdentifierCS((String)newValue);
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
 				setComplianceKind((String)newValue);
@@ -363,9 +316,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__BODY_END_LOCATION:
 				setBodyEndLocation(BODY_END_LOCATION_EDEFAULT);
 				return;
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
-				setIdentifierCS(IDENTIFIER_CS_EDEFAULT);
-				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
 				setComplianceKind(COMPLIANCE_KIND_EDEFAULT);
 				return;
@@ -391,8 +341,6 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				return bodyStartLocation != BODY_START_LOCATION_EDEFAULT;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__BODY_END_LOCATION:
 				return bodyEndLocation != BODY_END_LOCATION_EDEFAULT;
-			case QVTOperationalCSPackage.MODEL_TYPE_CS__IDENTIFIER_CS:
-				return IDENTIFIER_CS_EDEFAULT == null ? identifierCS != null : !IDENTIFIER_CS_EDEFAULT.equals(identifierCS);
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__COMPLIANCE_KIND:
 				return COMPLIANCE_KIND_EDEFAULT == null ? complianceKind != null : !COMPLIANCE_KIND_EDEFAULT.equals(complianceKind);
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__PACKAGE_REFS:

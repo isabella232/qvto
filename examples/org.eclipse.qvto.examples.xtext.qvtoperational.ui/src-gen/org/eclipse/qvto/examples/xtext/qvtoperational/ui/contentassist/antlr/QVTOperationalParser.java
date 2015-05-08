@@ -38,6 +38,8 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
+					put(grammarAccess.getTransformationQualifierAccess().getAlternatives(), "rule__TransformationQualifier__Alternatives");
+					put(grammarAccess.getFeatureQualifierAccess().getAlternatives(), "rule__FeatureQualifier__Alternatives");
 					put(grammarAccess.getImportCSAccess().getAlternatives(), "rule__ImportCS__Alternatives");
 					put(grammarAccess.getImportCSAccess().getAlternatives_1_3(), "rule__ImportCS__Alternatives_1_3");
 					put(grammarAccess.getUnitTypeCSAccess().getAlternatives(), "rule__UnitTypeCS__Alternatives");
@@ -486,8 +488,6 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_1");
 					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_2_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsAssignment_2_1(), "rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1");
-					put(grammarAccess.getTransformationQualifierAccess().getUnorderedGroup(), "rule__TransformationQualifier__UnorderedGroup");
-					put(grammarAccess.getFeatureQualifierAccess().getUnorderedGroup(), "rule__FeatureQualifier__UnorderedGroup");
 				}
 			};
 		}

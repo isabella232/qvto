@@ -48,7 +48,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 				"metamodel mm1 {\n"
 				+ "	datatype myDataType\n" 
 				+ "	class c1 {\n"
-				+ "		prop1 : String ;\n"
+				+ "		composes prop1 : String ;\n"
 				+ "	}\n"
 				+ "}";
 		doLoadFromString("simpleMetamodelDefinitionWithouOptionalSemicolon.qvto2", testFile);
@@ -80,14 +80,14 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	public void testSimpleLibraryDeclaration() throws Exception {
 		String testFile =
 				"modeltype MM1 uses \"m1URI\";\n"						
-						+ "transformation l1(in m1 : MM1);";
+						+ "library l1(in m1 : MM1);";
 		doLoadFromString("simpleLibraryDeclaration.qvto2", testFile);
 	}
 	
 	public void testSimpleBlackboxLibraryDeclaration() throws Exception {
 		String testFile =
 				"modeltype MM1 uses \"m1URI\";\n"						
-						+ "blackbox transformation l1(in m1 : MM1);";
+						+ "blackbox library l1(in m1 : MM1);";
 		doLoadFromString("simpleBlackboxLibraryDeclaration.qvto2", testFile);
 	}
 		

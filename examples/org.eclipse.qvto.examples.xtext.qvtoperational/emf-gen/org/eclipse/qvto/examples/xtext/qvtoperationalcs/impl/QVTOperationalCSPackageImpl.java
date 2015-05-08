@@ -1556,7 +1556,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getModelTypeCS_IdentifierCS() {
+	public EAttribute getModelTypeCS_ComplianceKind() {
 		return (EAttribute)modelTypeCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1565,17 +1565,8 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getModelTypeCS_ComplianceKind() {
-		return (EAttribute)modelTypeCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getModelTypeCS_PackageRefs() {
-		return (EReference)modelTypeCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)modelTypeCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1584,7 +1575,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * @generated
 	 */
 	public EReference getModelTypeCS_WhereStatements() {
-		return (EReference)modelTypeCSEClass.getEStructuralFeatures().get(3);
+		return (EReference)modelTypeCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2396,7 +2387,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		createEReference(moduleRefCSEClass, MODULE_REF_CS__PARAMETERS);
 
 		modelTypeCSEClass = createEClass(MODEL_TYPE_CS);
-		createEAttribute(modelTypeCSEClass, MODEL_TYPE_CS__IDENTIFIER_CS);
 		createEAttribute(modelTypeCSEClass, MODEL_TYPE_CS__COMPLIANCE_KIND);
 		createEReference(modelTypeCSEClass, MODEL_TYPE_CS__PACKAGE_REFS);
 		createEReference(modelTypeCSEClass, MODEL_TYPE_CS__WHERE_STATEMENTS);
@@ -2731,7 +2721,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEReference(getModuleRefCS_Parameters(), this.getParameterDeclarationCS(), null, "parameters", null, 0, -1, ModuleRefCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelTypeCSEClass, ModelTypeCS.class, "ModelTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getModelTypeCS_IdentifierCS(), ecorePackage.getEString(), "identifierCS", null, 1, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModelTypeCS_ComplianceKind(), theEcorePackage.getEString(), "complianceKind", "strict", 0, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelTypeCS_PackageRefs(), this.getPackageRefCS(), null, "packageRefs", null, 1, -1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelTypeCS_WhereStatements(), theEssentialOCLCSPackage.getExpCS(), null, "whereStatements", null, 0, -1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

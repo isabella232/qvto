@@ -41,11 +41,10 @@ enum ModuleKindEnum : library='library' | transformation = 'transformation';
 
 //enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
 
-//Qualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
-TransformationQualifier returns ecore::EString : 'blackbox' & 'abstract' & 'static';
+// FIXME use a CS element and unordered groups
+TransformationQualifier returns ecore::EString : 'blackbox' | 'abstract' |  'static';
 LibraryQualifier returns ecore::EString : 'blackbox';
-
-FeatureQualifier returns ecore::EString : 'composes' & 'references' & 'readonly' & 'derived' & 'static';
+FeatureQualifier returns ecore::EString : 'composes' | 'references' | 'readonly' | 'derived' | 'static';
 
 
 
@@ -266,8 +265,6 @@ LibraryDefCS returns QVToLibraryCS:
 	 LibraryHeaderCS '{'
 		(ownedProperties+= ModulePropertyCS
 		 | ownedOperations+= ModuleOperationCS)*
-
-		 
 	'}' ';'?
 ;
 
