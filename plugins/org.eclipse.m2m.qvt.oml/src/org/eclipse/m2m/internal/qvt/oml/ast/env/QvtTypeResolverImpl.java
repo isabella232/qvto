@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -175,7 +175,7 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 			return;
 		}
 		for (EClassifier ctx : fCtx2OperationMap.keySet()) {
-			if (TypeUtil.exactTypeMatch(fOwner, ctx, context)) {
+			if (TypeUtil.compatibleTypeMatch(fOwner, context, ctx)) {
 				operList = fCtx2OperationMap.get(ctx);
 				if(operList != null) {
 					result.addAll(operList);
@@ -220,10 +220,7 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 			result.addAll(getDelegate().getAdditionalOperations(fOwner.getOCLStandardLibrary().getOclAny()));
 		}
 		
-		if(owner == fOwner.getOCLStandardLibrary().getInteger()) {
-			EClassifier oclReal = fOwner.getOCLStandardLibrary().getReal();
-			this.getLocalAdditionalOperations(oclReal, result);
-		} else if(isCollectionTypeOwner) {
+		if(isCollectionTypeOwner) {
 			getLocalCollectionAdditionalOperations((org.eclipse.ocl.ecore.CollectionType)owner, result, false);
 		}		
 	}	

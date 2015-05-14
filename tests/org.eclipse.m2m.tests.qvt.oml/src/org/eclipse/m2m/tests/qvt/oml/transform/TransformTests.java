@@ -661,6 +661,7 @@ public class TransformTests {
         				blackboxRegistry.registerModule(SimpleJavaLibrary.class);
         			}
         		},
+        		new FilesToFilesData("bug467325"), //$NON-NLS-1$
         		};
     }
 

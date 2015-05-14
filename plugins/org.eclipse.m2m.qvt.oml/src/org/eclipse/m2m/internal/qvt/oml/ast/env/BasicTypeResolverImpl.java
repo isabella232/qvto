@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2011 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -281,22 +281,27 @@ class BasicTypeResolverImpl
     
 	@Override
 	protected EClassifier findShadowClass(EClassifier type) {
-        EPackage pkg = hasAdditionalFeatures()? getAdditionalFeaturesPackage() : null;
+		if (!hasAdditionalFeatures()) {
+			return null;
+		}
+		
+        EPackage pkg = getAdditionalFeaturesPackage();
         
-        if (pkg != null) {
-    		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(pkg)) {
-    			EClassifier shadowedClassifier = getShadowedClassifier(next);
-				if (shadowedClassifier == type) {
-    				return next;
-    			}
-    			
-    			if(type instanceof TupleType<?,?>) {
-    				if(TypeUtil.exactTypeMatch(getEnvironment(), type, shadowedClassifier)) {
-    					return next;
-    				}
-    			}
-    		}
-        }
+		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(pkg)) {
+			EClassifier shadowedClassifier = getShadowedClassifier(next);
+			if (shadowedClassifier == null) {
+				continue;
+			}
+			if (shadowedClassifier == type) {
+				return next;
+			}
+			
+			if (type instanceof TupleType<?,?>) {
+				if (TypeUtil.exactTypeMatch(getEnvironment(), type, shadowedClassifier)) {
+					return next;
+				}
+			}
+		}
         
 		return null;
 	}	
