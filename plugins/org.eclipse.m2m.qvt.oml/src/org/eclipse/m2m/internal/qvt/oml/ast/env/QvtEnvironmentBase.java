@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -57,13 +57,11 @@ import org.eclipse.ocl.ecore.EcoreEnvironment;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.Variable;
-import org.eclipse.ocl.internal.l10n.OCLMessages;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
 import org.eclipse.ocl.options.ParsingOptions;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.VoidType;
-import org.eclipse.ocl.util.OCLStandardLibraryUtil;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
@@ -120,18 +118,19 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	private List<QvtEnvironmentBase> fByExtension;
 	private List<QvtEnvironmentBase> fAllExtendedModuleEnvs;
 	private Map<URI, Set<String>> fImportedNativeLibs;
-	private Set<EOperation> fOperationsHolder;	
 
 	protected QvtEnvironmentBase(QvtEnvironmentBase parent) {
 		super(parent);
 		setOption(ParsingOptions.USE_BACKSLASH_ESCAPE_PROCESSING, true);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected QvtEnvironmentBase(EPackage.Registry reg, Resource resource) {
 		super(reg, resource);
 		setOption(ParsingOptions.USE_BACKSLASH_ESCAPE_PROCESSING, true);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected QvtEnvironmentBase(EPackage.Registry reg) {
 		super(reg);
 		setOption(ParsingOptions.USE_BACKSLASH_ESCAPE_PROCESSING, true);
@@ -408,17 +407,17 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 
 		thisResolver.getLocalCollectionAdditionalOperations(collectionType, result, true);
 		
-		Collection<EClassifier> allParents = OCLStandardLibraryUtil.getAllSupertypes(this, collectionType);
-		for (EClassifier general : allParents) {
-			org.eclipse.ocl.ecore.CollectionType generalCollection = (org.eclipse.ocl.ecore.CollectionType) general; 
-			thisResolver.getLocalCollectionAdditionalOperations(generalCollection, result, false);
-		}
-		
-		if(metaType == ImperativeOCLPackage.eINSTANCE.getListType()) {
-			// process the CollectionType super type
-			// TODO - better to have MDT OCL to support #getAllSupertypes(...) operation in TypeChecker
-			thisResolver.getLocalCollectionAdditionalOperations((CollectionType)oclstdlib.getCollection(), result, false);			
-		}
+//		Collection<EClassifier> allParents = OCLStandardLibraryUtil.getAllSupertypes(this, collectionType);
+//		for (EClassifier general : allParents) {
+//			org.eclipse.ocl.ecore.CollectionType generalCollection = (org.eclipse.ocl.ecore.CollectionType) general; 
+//			thisResolver.getLocalCollectionAdditionalOperations(generalCollection, result, false);
+//		}
+//		
+//		if(metaType == ImperativeOCLPackage.eINSTANCE.getListType()) {
+//			// process the CollectionType super type
+//			// TODO - better to have MDT OCL to support #getAllSupertypes(...) operation in TypeChecker
+//			thisResolver.getLocalCollectionAdditionalOperations((CollectionType)oclstdlib.getCollection(), result, false);			
+//		}
 	}
 	
 	@Override
@@ -433,7 +432,18 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 		}
 		
 		return fQVUMLReflection;
-	}	
+	}
+	
+	public void close() {
+        if (getInternalParent() == null) {
+        	if (fQVUMLReflection != null) {
+        		fQVUMLReflection.close();
+        	}
+        	if (this != QvtOperationalStdLibrary.INSTANCE.getEnvironment()) {
+        		QvtOperationalStdLibrary.INSTANCE.getEnvironment().close();
+        	}
+        }
+	}
 	
 	public final void addImport(ImportKind kind, QvtEnvironmentBase importedEnv) {
 		QvtEnvironmentBase rootEnv = getRootEnv();
@@ -544,13 +554,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	}
 		
 	protected final CollisionStatus findCollidingOperation(EClassifier ownerType, ImperativeOperation operation) {
-		try {
-			return doFindCollidingOperation(ownerType, operation);
-		} finally {
-			if(fOperationsHolder != null) {
-				fOperationsHolder.clear();
-			}
-		}
+		return doFindCollidingOperation(ownerType, operation);
 	}
 	
 	private EOperation findMatchingFromExtended(Module extending, EOperation operation) {
@@ -596,10 +600,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 		CollisionStatus result = null;
 		EClassifier definingModule = getModuleContextType();
         String operationName = getUMLReflection().getName(operation);
-        List<EOperation> ownedOperations = TypeUtil.getOperations(this, ownerType);        
-        
-        Set<EOperation> operations = operationHolder(); 
-        operations.addAll(ownedOperations);
+        Set<EOperation> operations = new LinkedHashSet<EOperation>(TypeUtil.getOperations(this, ownerType));
         
         boolean isContextual = !(ownerType == definingModule);
         if(!isContextual) {
@@ -608,10 +609,10 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
     			operations.add(overridden);
     		}
         } else {        
-        // collect fOperationsHolder additional fOperationsHolder defined for sub-types of the checked owner type,
-        // Note: those from super-types are included by MDT OCL TypeUtil.getOperations(...);
-        // => union forms the whole scope for potentially virtually called fOperationsHolder;
-        // all fOperationsHolder ever defined goes through this check, so all applicable get into VTABLEs
+	        // collect additional operations defined for sub-types of the checked owner type,
+	        // Note: those from super-types are included by MDT OCL TypeUtil.getOperations(...);
+	        // => union forms the whole scope for potentially virtually called operation;
+	        // all fAdditionalTypes ever defined goes through this check, so all applicable get into VTABLEs
 	        getQVTTypeResolver().collectAdditionalOperationsInTypeHierarchy(ownerType, true, operations);
 	    }
         
@@ -712,12 +713,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				EParameter aparm = aparms.get(i);
 				EParameter bparm = bparms.get(i);
 				
-				if (TypeUtil.getRelationship(
-								this,
-								getUMLReflection().getOCLType(aparm),
-								getUMLReflection().getOCLType(bparm))
-							!= UMLReflection.SAME_TYPE) {
-					
+				if (!TypeUtil.exactTypeMatch(this, getUMLReflection().getOCLType(aparm), getUMLReflection().getOCLType(bparm))) {
 					return false;
 				}
 			}
@@ -733,10 +729,9 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	 */
 	private boolean matchContext(ImperativeOperation a, ImperativeOperation b) {
 		
-		return getTypeChecker().getRelationship(
+		return getTypeChecker().exactTypeMatch(
 								getUMLReflection().getOCLType(a.getContext()),
-								getUMLReflection().getOCLType(b.getContext()))
-							== UMLReflection.SAME_TYPE;
+								getUMLReflection().getOCLType(b.getContext()));
 	}
 	
 	
@@ -750,26 +745,6 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 		return false;
 	}
 	
-	/*
-	private Collection<EOperation> collectImportedModuleOwnedOperations(Collection<EOperation> result) {
-		for (QvtEnvironmentBase nextEnv : getSiblings()) {
-			List<EOperation> nextModuleOpers = nextEnv.getModuleContextType().getEOperations();
-			if(nextModuleOpers != null) {
-				result.addAll(nextModuleOpers);
-			}
-		}
-		
-		return result;
-	}
-	*/
-	
-	private Set<EOperation> operationHolder() {
-		if(fOperationsHolder == null) {
-			fOperationsHolder  = new LinkedHashSet<EOperation>();
-		}
-		return fOperationsHolder;
-	}
-
 	protected QvtEnvironmentBase getRootEnv() {
 		QvtEnvironmentBase root = this;
 		while(root.getInternalParent() instanceof QvtEnvironmentBase) {
@@ -797,7 +772,8 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
         return TEMPORARY_NAME_GENERATOR_UNIQUE_PREFIX + myTemporaryNameGeneratorInt;
     }
 
-    @Override
+    @SuppressWarnings("restriction")
+	@Override
 	public void parserError(int errorCode, int leftToken, int rightToken, String tokenText) {
 		ProblemHandler problemHandler = getProblemHandler();
 		if (problemHandler == null) {
@@ -810,7 +786,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 		int line = leftTokenLoc >= 0 ? getParser().getIPrsStream().getLine(leftTokenLoc) : -1;
 		String message;
         if (line <= 0) {
-        	message = OCLMessages.InvalidOCL_ERROR_;
+        	message = org.eclipse.ocl.internal.l10n.OCLMessages.InvalidOCL_ERROR_;
 		} else {
 			String locInfo = ""; //$NON-NLS-1$
 			String messageTemplate = ProblemHandler.ERROR_MESSAGES[errorCode].substring(4);
@@ -820,7 +796,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				case ParseErrorCodes.MISPLACED_CODE:
 				case ParseErrorCodes.DELETION_CODE:
 				case ParseErrorCodes.INVALID_TOKEN_CODE:
-					message = OCLMessages.bind(
+					message = org.eclipse.ocl.internal.l10n.OCLMessages.bind(
 						messageTemplate,
 						locInfo,
 						inputText);
@@ -830,7 +806,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				case ParseErrorCodes.BEFORE_CODE:
 				case ParseErrorCodes.INSERTION_CODE:
 				case ParseErrorCodes.SUBSTITUTION_CODE: // includes SECONDARY_CODE
-					message = OCLMessages.bind(
+					message = org.eclipse.ocl.internal.l10n.OCLMessages.bind(
 						messageTemplate,
 						new Object[]{
 							locInfo,
@@ -841,13 +817,13 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 					
 				case ParseErrorCodes.SCOPE_CODE:
 					if (leftToken != rightToken) {
-						message = OCLMessages.bind(messageTemplate, locInfo, tokenText);
+						message = org.eclipse.ocl.internal.l10n.OCLMessages.bind(messageTemplate, locInfo, tokenText);
 						problemHandler.parserProblem(Severity.ERROR, message, null, startOffset, getParser().getIPrsStream().getEndOffset(leftTokenLoc));
 					}
 					startOffset = getParser().getIPrsStream().getStartOffset(rightTokenLoc);
 	
 				default:
-					message = OCLMessages.bind(messageTemplate, locInfo, tokenText);
+					message = org.eclipse.ocl.internal.l10n.OCLMessages.bind(messageTemplate, locInfo, tokenText);
 					break;
 			}
 		}

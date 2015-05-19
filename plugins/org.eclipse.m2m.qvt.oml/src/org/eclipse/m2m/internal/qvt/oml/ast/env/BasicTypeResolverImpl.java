@@ -13,8 +13,12 @@ package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -26,6 +30,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
@@ -97,11 +102,8 @@ class BasicTypeResolverImpl
 		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(getCollectionPackage())) {
 	        if (next instanceof ListType) {
 				ListType type = (ListType) next;
-				if (TypeUtil.getRelationship(
-							getEnvironment(),
-							type.getElementType(),
-							elementType) == UMLReflection.SAME_TYPE) {
-						return type;
+				if (TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), elementType)) {
+					return type;
 				}
 	        }
 		}
@@ -112,18 +114,9 @@ class BasicTypeResolverImpl
 	private DictionaryType findDictionaryType(EClassifier keyType, EClassifier valueType) {
 		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(getCollectionPackage())) {
 	        if (next instanceof DictionaryType) {
-	        	DictionaryType type = (DictionaryType) next;
-				
-	        	boolean isKeyMatch = TypeUtil.getRelationship(
-							getEnvironment(),
-							type.getKeyType(),
-							keyType) == UMLReflection.SAME_TYPE;
-								
-				if (isKeyMatch) {;
-					if(TypeUtil.getRelationship(
-							getEnvironment(),
-							type.getElementType(),
-							valueType) == UMLReflection.SAME_TYPE) { 
+	        	DictionaryType type = (DictionaryType) next;				
+				if (TypeUtil.exactTypeMatch(getEnvironment(), type.getKeyType(), keyType)) {
+					if (TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), valueType)) {
 						return type;
 					}
 				}
@@ -144,13 +137,9 @@ class BasicTypeResolverImpl
 	        	}
 	        
 				@SuppressWarnings("unchecked")
-				CollectionType<EClassifier, EOperation> type =(CollectionType<EClassifier, EOperation>) next;
+				CollectionType<EClassifier, EOperation> type = (CollectionType<EClassifier, EOperation>) next;
 				
-				if ((type.getKind() == kind) &&
-						(TypeUtil.getRelationship(
-							getEnvironment(),
-							type.getElementType(),
-							elementType) == UMLReflection.SAME_TYPE)) {
+				if ((type.getKind() == kind) && TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), elementType)) {
 					if (elementType instanceof AnyType<?> && type.getElementType() instanceof AnyType<?>) {
 						if (((AnyType<?>)elementType).getName().equals(((AnyType<?>)type.getElementType()).getName())) {
 							return type;
@@ -265,6 +254,10 @@ class BasicTypeResolverImpl
 		Typedef typeDef = ImperativeOCLFactory.eINSTANCE.createTypedef();
 		typeDef.setName(type.getName());
 		typeDef.setBase(type);
+		
+		EPackage pkg = getAdditionalFeaturesPackage();
+		ShadowClassAdapter.getShadowToBaseMap(pkg).put(type, typeDef);
+		
 		return typeDef;
 	}
     
@@ -286,23 +279,43 @@ class BasicTypeResolverImpl
 		}
 		
         EPackage pkg = getAdditionalFeaturesPackage();
-        
-		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(pkg)) {
-			EClassifier shadowedClassifier = getShadowedClassifier(next);
-			if (shadowedClassifier == null) {
-				continue;
-			}
-			if (shadowedClassifier == type) {
-				return next;
-			}
-			
-			if (type instanceof TupleType<?,?>) {
+		if (type instanceof TupleType) {
+			for (EClassifier shadowedClassifier : ShadowClassAdapter.getShadowToBaseMap(pkg).keySet()) {
 				if (TypeUtil.exactTypeMatch(getEnvironment(), type, shadowedClassifier)) {
-					return next;
+					return ShadowClassAdapter.getShadowToBaseMap(pkg).get(shadowedClassifier);
 				}
 			}
 		}
-        
-		return null;
-	}	
+        return ShadowClassAdapter.getShadowToBaseMap(pkg).get(type);
+	}
+	
+	
+	private static class ShadowClassAdapter extends AdapterImpl {
+		
+		final Map<EClassifier, EClassifier> fShadowToBase = new LinkedHashMap<EClassifier, EClassifier>();
+
+		Map<EClassifier, EClassifier> getShadowToBaseMap() {
+			return fShadowToBase;
+		}
+		
+		@Override
+		public boolean isAdapterForType(Object type) {
+			if(ShadowClassAdapter.class.equals(type)) {
+				return true;
+			}
+			return super.isAdapterForType(type);
+		}
+		
+		public static Map<EClassifier, EClassifier> getShadowToBaseMap(EPackage pkg) {
+			Adapter adapter = EcoreUtil.getAdapter(pkg.eAdapters(), ShadowClassAdapter.class);
+			if (adapter instanceof ShadowClassAdapter) {
+				return ((ShadowClassAdapter) adapter).getShadowToBaseMap();
+			}
+
+			ShadowClassAdapter shadowClassAdapter = new ShadowClassAdapter();
+			pkg.eAdapters().add(shadowClassAdapter);
+			return shadowClassAdapter.getShadowToBaseMap();
+		}
+	}
+	
 }

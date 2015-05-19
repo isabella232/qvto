@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,7 +14,10 @@ package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.IdentityHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -28,6 +31,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.HiddenElementAdapter;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
+import org.eclipse.m2m.internal.qvt.oml.common.project.Pair;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ContextualProperty;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
@@ -52,6 +56,9 @@ public class QVTUMLReflection
 	private UMLReflection<EPackage, EClassifier, EOperation, 
 					EStructuralFeature, EEnumLiteral, EParameter, EObject, 
 					CallOperationAction, SendSignalAction, Constraint> fUmlReflection;
+	
+	private final Map<Object, EClassifier> fTypeCache = new IdentityHashMap<Object, EClassifier>();
+	private final Map<Pair<EClassifier, EClassifier>, Integer> fRelationCache = new HashMap<Pair<EClassifier,EClassifier>, Integer>();
 			
 	public QVTUMLReflection(UMLReflection<EPackage, EClassifier, EOperation, 
 			EStructuralFeature, EEnumLiteral, EParameter, EObject, 
@@ -120,17 +127,26 @@ public class QVTUMLReflection
 	}
 	
 	public int getRelationship(EClassifier type1, EClassifier type2) {
+		Pair<EClassifier, EClassifier> pair = new Pair<EClassifier, EClassifier>(type1, type2);
+		Integer integer = fRelationCache.get(pair);
+		if (integer != null) {
+			return integer;
+		}
+
 		int result = fUmlReflection.getRelationship(type1, type2);
 		EClassifier element = getStdLibrary().getElementType();
 		if(type1 != type2) {
 			if(type1 == element && isUserModelElement(type2)) {
+				fRelationCache.put(pair, UMLReflection.STRICT_SUPERTYPE);
 				return UMLReflection.STRICT_SUPERTYPE;
 			}
 			if(type2 == element && isUserModelElement(type1)) {
+				fRelationCache.put(pair, UMLReflection.STRICT_SUBTYPE);
 				return UMLReflection.STRICT_SUBTYPE;
 			}			
 		}
 		
+		fRelationCache.put(pair, result);
 		return result; 
 	}
 	
@@ -151,8 +167,7 @@ public class QVTUMLReflection
 		
 		List<EOperation> result = fUmlReflection.getOperations(classifier);
 		if(isUserModelElement(classifier)) {
-			QvtOperationalStdLibrary stdlib = QvtOperationalStdLibrary.INSTANCE;
-			List<EOperation> elementOpers = getOperations(stdlib.getElementType());			
+			List<EOperation> elementOpers = fUmlReflection.getOperations(QvtOperationalStdLibrary.INSTANCE.getElementType());			
 			List<EOperation> tmp = result;
 			result = new ArrayList<EOperation>(result.size() + elementOpers.size());
 			result.addAll(tmp);
@@ -280,7 +295,13 @@ public class QVTUMLReflection
 	}
 
 	public EClassifier getOCLType(Object metaElement) {
-		return fUmlReflection.getOCLType(metaElement);
+		EClassifier eClassifier = fTypeCache.get(metaElement);
+		if (eClassifier != null) {
+			return eClassifier;
+		}
+		EClassifier oclType = fUmlReflection.getOCLType(metaElement);
+		fTypeCache.put(metaElement, oclType);
+		return oclType;
 	}
 
 	public EOperation getOperation(CallOperationAction callOperationAction) {
@@ -434,4 +455,18 @@ public class QVTUMLReflection
 	public boolean setIsStatic(Object feature, boolean isStatic) {
 		return fUmlReflection.setIsStatic(feature, isStatic);
 	}
+	
+	public Integer getCachedRelationship(EClassifier type1, EClassifier type2) {
+		return fRelationCache.get(new Pair<EClassifier, EClassifier>(type1, type2));
+	}
+	
+	public void putCachedRelationship(EClassifier type1, EClassifier type2, int relationship) {
+		fRelationCache.put(new Pair<EClassifier, EClassifier>(type1, type2), relationship);
+	}
+	
+	public void close() {
+		fRelationCache.clear();
+		fTypeCache.clear();
+	}
+	
 }

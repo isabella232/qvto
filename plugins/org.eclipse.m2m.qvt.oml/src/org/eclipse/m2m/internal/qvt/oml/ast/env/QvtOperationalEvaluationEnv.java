@@ -152,8 +152,28 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		internalEnv().addModelExtent(extent);
 	}
 	
+	@SuppressWarnings("restriction")
+	public QVTUMLReflection getUMLReflection() {
+		QvtOperationalEvaluationEnv parent = getParent();
+		if(parent != null) {
+			return parent.getUMLReflection();
+		}
+		
+		if (fQVUMLReflection == null) {
+			fQVUMLReflection = new QVTUMLReflection(org.eclipse.ocl.ecore.internal.UMLReflectionImpl.INSTANCE);
+		}		
+		return fQVUMLReflection;
+	}
+	
 	public void cleanup() {
 		internalEnv().cleanup();
+		clear();
+		if (getParent() == null) {
+			if (fQVUMLReflection != null) {
+				fQVUMLReflection.close();
+			}
+	   		QvtOperationalStdLibrary.INSTANCE.getEnvironment().close();
+		}
 	}
 		
 	@Override
@@ -189,7 +209,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	public Object navigateProperty(EStructuralFeature property, List<?> qualifiers, Object target) throws IllegalArgumentException {
 		if(target instanceof ModuleInstance) {
 			ModuleInstance moduleTarget = (ModuleInstance) target;
-			EClassifier owningClassifier = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOwningClassifier(property);			
+			EClassifier owningClassifier = getUMLReflection().getOwningClassifier(property);			
 			if (owningClassifier instanceof Module) {
 				target = moduleTarget.getThisInstanceOf((Module) owningClassifier);
 			}
@@ -471,7 +491,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		
 	@Override
 	protected Object coerceValue(ETypedElement element, Object value, boolean copy) {
-		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(element);
+		EClassifier oclType = getUMLReflection().getOCLType(element);
 		
 		if (value instanceof MutableList<?> || value instanceof Dictionary<?,?>) {
 			// avoid coercion of mutable collections
@@ -751,7 +771,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		}
 
 		final Object currentValue = owner.eGet(eStructuralFeature);
-		EClassifier oclType = QvtOperationalStdLibrary.INSTANCE.getEnvironment().getUMLReflection().getOCLType(eStructuralFeature);
+		EClassifier oclType = getUMLReflection().getOCLType(eStructuralFeature);
 		
 		Object newValue = assign(oclType, currentValue, exprValue, isReset);
 		
@@ -970,6 +990,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
     private final Map<String, Object> myBindings;
     private final int myStackDepth;
     private final List<ModelParameterExtent> myExtents;
+    private QVTUMLReflection fQVUMLReflection;
 	
 	private static class TypedBinding {
 		final Object value;

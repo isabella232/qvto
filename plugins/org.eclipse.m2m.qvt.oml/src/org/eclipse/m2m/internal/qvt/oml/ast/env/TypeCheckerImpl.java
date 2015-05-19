@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -18,7 +18,9 @@ import static org.eclipse.ocl.utilities.UMLReflection.STRICT_SUBTYPE;
 import static org.eclipse.ocl.utilities.UMLReflection.SUBTYPE;
 
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.UniqueEList;
@@ -31,6 +33,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.QVTUMLReflection;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
@@ -82,7 +85,7 @@ class TypeCheckerImpl extends AbstractTypeChecker<EClassifier, EOperation, EStru
 		}
 
 		UMLReflection<?, EClassifier, EOperation, EStructuralFeature, ?, EParameter, ?, ?, ?, ?> uml = getEnvironment().getUMLReflection();
-		List<EOperation> operations = getOperations(owner);
+		Set<EOperation> operations = new LinkedHashSet<EOperation>(getOperations(owner));
 		List<EOperation> matches = null;
 
 		for (EOperation oper : operations) {
@@ -143,11 +146,13 @@ class TypeCheckerImpl extends AbstractTypeChecker<EClassifier, EOperation, EStru
 	
 	@Override
 	public boolean isStandardLibraryFeature(EClassifier owner, Object feature) {
-		if(feature instanceof EOperation && isQVTOperation((EOperation) feature)) {
-			return false;
-		}
+		return false == feature instanceof ImperativeOperation;
 		
-		return super.isStandardLibraryFeature(owner, feature);
+//		if(feature instanceof EOperation && isQVTOperation((EOperation) feature)) {
+//			return false;
+//		}
+//		
+//		return super.isStandardLibraryFeature(owner, feature);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -216,6 +221,20 @@ class TypeCheckerImpl extends AbstractTypeChecker<EClassifier, EOperation, EStru
 		
 	@Override
 	public int getRelationship(EClassifier type1, EClassifier type2) {
+		QVTUMLReflection qvtUml = (QVTUMLReflection) getUMLReflection();
+		
+		Integer integer = qvtUml.getCachedRelationship(type1, type2);
+		if (integer != null) {
+			return integer;
+		}
+		
+		int result = getRelationshipImpl(type1, type2);
+		qvtUml.putCachedRelationship(type1, type2, result);
+		
+		return result;
+	}
+	
+	private int getRelationshipImpl(EClassifier type1, EClassifier type2) {
 		// check for identity before any further analysis
 		if(type1 == type2) {
 			return UMLReflection.SAME_TYPE;

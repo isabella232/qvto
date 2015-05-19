@@ -14,6 +14,7 @@ package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -24,11 +25,7 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EEnumLiteral;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.HiddenElementAdapter;
@@ -40,9 +37,6 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.TypeResolver;
-import org.eclipse.ocl.ecore.CallOperationAction;
-import org.eclipse.ocl.ecore.Constraint;
-import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.ecore.impl.CollectionTypeImpl;
 import org.eclipse.ocl.expressions.CollectionKind;
 import org.eclipse.ocl.types.CollectionType;
@@ -61,8 +55,8 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 
 	private BasicTypeResolverImpl fDelegate;
 	private QvtEnvironmentBase fOwner;
-    private boolean fdefinesOclAnyFeatures;
-    private Map<EClassifier, List<ImperativeOperation>> fCtx2OperationMap; 
+    private boolean fDefinesOclAnyFeatures;
+    private Map<EClassifier, List<ImperativeOperation>> fCtx2OperationMap = Collections.emptyMap(); 
     	
     private Set<EClassifier> fAdditionalTypes;
     private Resource fResource;
@@ -73,7 +67,7 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 		}
 
 		fOwner = owningEnv;
-		fdefinesOclAnyFeatures = false;
+		fDefinesOclAnyFeatures = false;
 		fResource = resource;
 	}
 
@@ -166,20 +160,19 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 	}
 	
 	private void extractContextualOperations(EClassifier context, Collection<EOperation> result) {
-		if(fCtx2OperationMap == null) {
-			return;
-		}
 		List<ImperativeOperation> operList = fCtx2OperationMap.get(context);
 		if(operList != null) {
 			result.addAll(operList);
 			return;
 		}
-		for (EClassifier ctx : fCtx2OperationMap.keySet()) {
-			if (TypeUtil.compatibleTypeMatch(fOwner, context, ctx)) {
-				operList = fCtx2OperationMap.get(ctx);
-				if(operList != null) {
-					result.addAll(operList);
-					return;
+		if (context instanceof TupleType) {
+			for (EClassifier ctx : fCtx2OperationMap.keySet()) {
+				if (TypeUtil.compatibleTypeMatch(fOwner, context, ctx)) {
+					operList = fCtx2OperationMap.get(ctx);
+					if(operList != null) {
+						result.addAll(operList);
+						return;
+					}
 				}
 			}
 		}
@@ -209,19 +202,20 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 		
 	protected void getLocalAdditionalOperations(EClassifier owner, Collection<EOperation> result) {
 		extractContextualOperations(owner, result);
-		final boolean isCollectionTypeOwner = owner instanceof CollectionType<?,?>;
-		
-		if(fdefinesOclAnyFeatures && (isCollectionTypeOwner == false) && (owner instanceof TupleType<?, ?> == false)) {
-			extractContextualOperations(fOwner.getOCLStandardLibrary().getOclAny(), result);
-		}
-		
 		result.addAll(getDelegate().getAdditionalOperations(owner));
-		if(fdefinesOclAnyFeatures && (isCollectionTypeOwner == false) && (owner instanceof TupleType<?, ?> == false)) {
-			result.addAll(getDelegate().getAdditionalOperations(fOwner.getOCLStandardLibrary().getOclAny()));
+
+		final boolean isCollectionTypeOwner = owner instanceof CollectionType;
+		
+		if(fDefinesOclAnyFeatures && !isCollectionTypeOwner && (owner instanceof TupleType == false)) {
+			EClassifier oclAny = fOwner.getOCLStandardLibrary().getOclAny();
+			if (owner != oclAny) {
+				extractContextualOperations(oclAny, result);
+				result.addAll(getDelegate().getAdditionalOperations(oclAny));
+			}
 		}
 		
 		if(isCollectionTypeOwner) {
-			getLocalCollectionAdditionalOperations((org.eclipse.ocl.ecore.CollectionType)owner, result, false);
+			getLocalCollectionAdditionalOperations((org.eclipse.ocl.ecore.CollectionType) owner, result, false);
 		}		
 	}	
 
@@ -241,13 +235,13 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 	}
 
 	public EOperation resolveAdditionalOperation(EClassifier owner, EOperation operation) {
-		if(!fdefinesOclAnyFeatures && owner == fOwner.getOCLStandardLibrary().getOclAny()) {
+		if(!fDefinesOclAnyFeatures && owner == fOwner.getOCLStandardLibrary().getOclAny()) {
 			// operations defined on OclAny;
-			fdefinesOclAnyFeatures = true;
+			fDefinesOclAnyFeatures = true;
 		}
 		
 		if(operation instanceof ImperativeOperation) {
-			if(fCtx2OperationMap == null) {
+			if(fCtx2OperationMap.isEmpty()) {
 				fCtx2OperationMap = new LinkedHashMap<EClassifier, List<ImperativeOperation>>();
 			}
 			List<ImperativeOperation> operList = fCtx2OperationMap.get(owner);
@@ -311,10 +305,6 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 		return getDelegate().resolveTypeType(type);
 	}
 		
-	UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> uml() {
-		return fOwner.getUMLReflection();
-	}
-	
 	private void addAdditionalType(EClassifier type) {
 		if(fAdditionalTypes == null) {
 			fAdditionalTypes = new LinkedHashSet<EClassifier>();
@@ -333,9 +323,11 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 				boolean isMatchingType = (includeSuperTypes) ?
 						TypeUtil.compatibleTypeMatch(fOwner, collectionType, nextType) :
 						TypeUtil.exactTypeMatch(fOwner, collectionType, nextType);
-				
 				if(isMatchingType) {
-					extractContextualOperations(nextType, result);
+					List<ImperativeOperation> operList = fCtx2OperationMap.get(nextType);
+					if(operList != null) {
+						result.addAll(operList);
+					}
 					result.addAll(fDelegate.getAllCompatibleAdditionalOperations(
 							(org.eclipse.ocl.ecore.CollectionType)nextType));
 				}

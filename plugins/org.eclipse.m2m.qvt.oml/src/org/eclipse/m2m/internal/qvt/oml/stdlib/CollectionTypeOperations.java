@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 S.Boyko and others.
+ * Copyright (c) 2014, 2015 S.Boyko and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -97,10 +97,10 @@ public class CollectionTypeOperations extends AbstractContextualOperations {
 	protected OperationProvider[] getOperations() {
 		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getEnvironment().getOCLStandardLibrary();
 		return new OperationProvider[] {
-				new OperationProvider(AS_SET, AS_SET_NAME, getStdlib().getOCLStdLib().getSet()),
-				new OperationProvider(AS_ORDERED_SET, AS_ORDERED_SET_NAME, getStdlib().getOCLStdLib().getOrderedSet()),
-				new OperationProvider(AS_SEQUENCE, AS_SEQUENCE_NAME, getStdlib().getOCLStdLib().getSequence()),
-				new OperationProvider(AS_BAG, AS_BAG_NAME, getStdlib().getOCLStdLib().getBag()),
+				new OperationProvider(AS_SET, AS_SET_NAME, oclStdlib.getSet()),
+				new OperationProvider(AS_ORDERED_SET, AS_ORDERED_SET_NAME, oclStdlib.getOrderedSet()),
+				new OperationProvider(AS_SEQUENCE, AS_SEQUENCE_NAME, oclStdlib.getSequence()),
+				new OperationProvider(AS_BAG, AS_BAG_NAME, oclStdlib.getBag()),
 				new OperationProvider(FLATTEN, FLATTEN_NAME, 
 						TypeUtil.resolveCollectionType(getStdlib().getEnvironment(), CollectionKind.COLLECTION_LITERAL, oclStdlib.getT2())),
 		};

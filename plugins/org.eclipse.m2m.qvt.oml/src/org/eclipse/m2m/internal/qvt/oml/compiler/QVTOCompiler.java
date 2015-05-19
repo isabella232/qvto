@@ -45,6 +45,7 @@ import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QVTParsingOptions;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalFileEnv;
@@ -285,14 +286,12 @@ public class QVTOCompiler {
 			env.reportError(e.getLocalizedMessage(), 0, 0);
 		}
 
-		if(result.moduleEnvs != null) {
+		if (options.isReportErrors()) {
 			for(QvtOperationalModuleEnv moduleEnv : result.moduleEnvs) {
-				if (options.isReportErrors()) {
-	                moduleEnv.setCheckForDuplicateErrors(true);
-					QvtOperationalValidationVisitor validation = new QvtOperationalValidationVisitor(moduleEnv);
-					validation.visitModule(moduleEnv.getModuleContextType());
-					moduleEnv.setCheckForDuplicateErrors(false);
-				}
+                moduleEnv.setCheckForDuplicateErrors(true);
+				QvtOperationalValidationVisitor validation = new QvtOperationalValidationVisitor(moduleEnv);
+				validation.visitModule(moduleEnv.getModuleContextType());
+				moduleEnv.setCheckForDuplicateErrors(false);
 			}
 		}
 		
@@ -452,7 +451,10 @@ public class QVTOCompiler {
 	    	checkForDupImports(allUnitImportsCS, env);
 	    	
 			// get rid of parser allocated data 
-	    	env.close(); // TODO - check whether we can use dispose()	    	
+	    	env.close(); // TODO - check whether we can use dispose()
+	    	for (QvtEnvironmentBase moduleEnv : analysisResult.moduleEnvs) {
+	    		moduleEnv.close();
+	    	}
 	    	// FIXME - construct proper qualified name
 	    	CompiledUnit result = createCompiledUnit(source, env);
 	    	// TODO - make this optional as we not always want to carry the whole CST
@@ -529,12 +531,9 @@ public class QVTOCompiler {
 	
 	private void addSourceLineNumberInfo(AbstractQVTParser parser, CSTAnalysisResult analysisResult, UnitProxy source) {
 		AbstractLexer lexer = parser.getLexer();
-		if (lexer != null) {
-			URI sourceURI = source.getURI();
-			if(sourceURI != null && analysisResult.moduleEnvs != null) {
-				for (QvtOperationalModuleEnv moduleEnv : analysisResult.moduleEnvs) {
-					ASTBindingHelper.createModuleSourceBinding(moduleEnv.getModuleContextType(), sourceURI, new BasicLineNumberProvider(lexer));					
-				}
+		if (lexer != null && source.getURI() != null) {
+			for (QvtOperationalModuleEnv moduleEnv : analysisResult.moduleEnvs) {
+				ASTBindingHelper.createModuleSourceBinding(moduleEnv.getModuleContextType(), source.getURI(), new BasicLineNumberProvider(lexer));					
 			}
 		}
 	}
@@ -697,7 +696,7 @@ public class QVTOCompiler {
     }
     
 	protected static class CSTAnalysisResult {
-		List<QvtOperationalModuleEnv> moduleEnvs;
+		List<QvtOperationalModuleEnv> moduleEnvs = Collections.emptyList();
 		List<ModelType> modelTypes;
 	}
 
