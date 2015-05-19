@@ -19,5 +19,4 @@
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.m2m.tests.qvt.oml.transform.StandaloneTests"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.m2m.tests.qvt.oml"/>
-<stringAttribute key="yk-options" value="&#13;&#10;additional-options2=onexit\=snapshot&#13;&#10;startup=12&#13;&#10;"/>
 </launchConfiguration>
