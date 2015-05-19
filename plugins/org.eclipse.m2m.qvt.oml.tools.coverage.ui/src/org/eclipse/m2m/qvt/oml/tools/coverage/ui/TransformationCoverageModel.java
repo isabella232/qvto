@@ -12,7 +12,6 @@
  *****************************************************************************/
 package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
 
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,12 +19,11 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Helper;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Library;
@@ -152,23 +150,7 @@ public class TransformationCoverageModel {
 
     public IFile getFile() {
         if (file == null) {
-
-            try {
-                // Expect both file and platform URIs
-                URI uri = getURI();
-                if (uri.isPlatform()) {
-                    String path = uri.trimFragment().toString().substring("platform:/resource/".length());
-                    IWorkspace workspace = ResourcesPlugin.getWorkspace();
-                    file = (IFile) workspace.getRoot().findMember(path);
-                } else {
-                    IFile[] files = ResourcesPlugin.getWorkspace().getRoot()
-                            .findFilesForLocationURI(new java.net.URI(getURI().toString()));
-                    // Assume exactly one
-                    file = files[0];
-                }
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
+        	file = URIUtils.getFile(getURI());
         }
         return file;
     }
