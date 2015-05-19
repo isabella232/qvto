@@ -214,6 +214,8 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
     
     private void rebuildAll(IProgressMonitor monitor) throws CoreException {
     	
+    	long startMs = System.currentTimeMillis();
+    	
 		SubMonitor progress = SubMonitor.convert(monitor, "Rebuild all", 10); //$NON-NLS-1$
 		
         IFile[] files = collectFiles(progress.newChild(1, SubMonitor.SUPPRESS_NONE));
@@ -265,6 +267,8 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
         }
         
         progress.worked(1);
+        
+        System.out.println("QVTO build '" + getProject().getName() + "' = " + (System.currentTimeMillis()-startMs));
     }
         
     private void createQvtMarker(IFile curFile, QvtMessage e) {
