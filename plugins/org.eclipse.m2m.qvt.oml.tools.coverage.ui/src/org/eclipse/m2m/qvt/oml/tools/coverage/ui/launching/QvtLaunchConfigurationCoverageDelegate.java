@@ -1,5 +1,5 @@
-/*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+/*****************************************************************************
+ * Copyright (c) 2014,2015 ASML Netherlands B.V. and others.
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -7,9 +7,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bug 431082
- *******************************************************************************/
+ *  ASML Netherlands B.V. - Initial API and implementation
+ *
+ *****************************************************************************/
 package org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching;
 
 import java.util.ArrayList;
@@ -85,6 +85,7 @@ public class QvtLaunchConfigurationCoverageDelegate extends QvtLaunchConfigurati
 
                     // Save the collected coverage data to disk and activate the coverage view
                     CoveragePlugin.getDefault().showCoverageView(QVTOCoverageDecorator.data);
+                    QVTOCoverageDecorator.data.clear();
                 }
             };
 
@@ -150,21 +151,5 @@ public class QvtLaunchConfigurationCoverageDelegate extends QvtLaunchConfigurati
             throw new CoreException(org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil.makeErrorStatus(e));
         }
     }
-
-    // FIXME - do we need such an annoying generic check ?
-    // Useless anyway without overriding
-    // org.eclipse.debug.core.model.LaunchConfigurationDelegate.getProjectsForProblemSearch(ILaunchConfiguration,
-    // String)
-    // @Override
-    // protected boolean existsProblems(IProject proj) throws CoreException {
-    // IMarker[] markers = proj.findMarkers(QVTOProjectPlugin.PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
-    // for (int i = 0; i < markers.length; i++) {
-    // if (isLaunchProblem(markers[i])) {
-    // return true;
-    // }
-    // }
-    //
-    // return false;
-    // }
 
 }

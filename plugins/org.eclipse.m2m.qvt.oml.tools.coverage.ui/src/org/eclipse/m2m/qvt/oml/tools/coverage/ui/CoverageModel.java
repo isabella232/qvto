@@ -39,11 +39,10 @@ public class CoverageModel {
      * @param data
      */
     private void inflate(CoverageData data) {
-        TransformationCoverageData[] transformationDatas = data.getData();
 
-        Map<URI, TransformationCoverageModel> uriToTransModels = new HashMap<URI, TransformationCoverageModel>();
+    	Map<URI, TransformationCoverageModel> uriToTransModels = new HashMap<URI, TransformationCoverageModel>();
 
-        for (TransformationCoverageData transformationData : transformationDatas) {
+        for (TransformationCoverageData transformationData : data.getData()) {
 
             TransformationCoverageModel transformationModel;
 

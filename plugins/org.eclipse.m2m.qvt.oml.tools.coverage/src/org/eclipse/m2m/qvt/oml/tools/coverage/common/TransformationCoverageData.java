@@ -36,29 +36,24 @@ public class TransformationCoverageData implements Serializable {
     }
 
     public static boolean isIncluded(ASTNode node) {
-
-        boolean included = false;
-        if (!(node instanceof InvalidLiteralExp)
-                && (node instanceof MappingOperation || node instanceof Helper || node instanceof Constructor || node instanceof OCLExpression
-                        && TransformationCoverageData.isIncluded((OCLExpression) node))) {
-            included = true;
-        }
-        return included;
+		if (!(node instanceof InvalidLiteralExp)
+				&& (node instanceof MappingOperation || node instanceof Helper || node instanceof Constructor || node instanceof OCLExpression
+						&& TransformationCoverageData.isIncluded((OCLExpression) node))) {
+			return true;
+		}
+		return false;
     }
 
-    private String URIString;
-    private HashSet<NodeData> touched = new HashSet<NodeData>();
+    private final URI transfUri;
+    private final HashSet<NodeData> touched;
 
     public TransformationCoverageData(URI uri) {
-        setURI(uri);
-    }
-
-    public void setURI(URI uri) {
-        URIString = uri.toString();
+        transfUri = uri;
+        touched = new HashSet<NodeData>();
     }
 
     public URI getURI() {
-        return URI.createURI(URIString);
+        return transfUri;
     }
 
     public boolean containsNode(ASTNode node) {

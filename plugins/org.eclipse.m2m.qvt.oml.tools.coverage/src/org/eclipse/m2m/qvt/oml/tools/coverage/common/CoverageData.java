@@ -14,26 +14,25 @@ package org.eclipse.m2m.qvt.oml.tools.coverage.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CoverageData implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    // private static CoverageData instance;
-
-    private List<TransformationCoverageData> transformations;
+    private final List<TransformationCoverageData> transformations;
 
     public CoverageData() {
-        transformations = new ArrayList<TransformationCoverageData>();
+        transformations = new ArrayList<TransformationCoverageData>(2);
     }
 
     public void add(TransformationCoverageData data) {
         transformations.add(data);
     }
 
-    public TransformationCoverageData[] getData() {
-        return transformations.toArray(new TransformationCoverageData[transformations.size()]);
+    public Collection<TransformationCoverageData> getData() {
+        return transformations;
     }
 
     public void clear() {

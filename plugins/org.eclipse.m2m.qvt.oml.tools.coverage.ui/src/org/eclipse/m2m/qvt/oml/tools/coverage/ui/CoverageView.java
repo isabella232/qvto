@@ -97,8 +97,7 @@ public class CoverageView extends ViewPart {
     }
 
     private void removeMarkers() {
-        ProjectCoverageModel[] projectModels = coverageModel.getProjectModels();
-        for (ProjectCoverageModel pcm : projectModels) {
+        for (ProjectCoverageModel pcm : coverageModel.getProjectModels()) {
             for (TransformationCoverageModel tcm : pcm.getTransformationModels()) {
                 IFile file = tcm.getFile();
                 CoverageAnnotator annotator = new CoverageAnnotator();

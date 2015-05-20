@@ -20,9 +20,9 @@ import java.io.ObjectOutputStream;
 
 public class CoverageDataPersistor {
 
-    public static String DIR_SEP = System.getProperty("file.separator");
-    public static String TMP_DIR = System.getProperty("java.io.tmpdir");
-    public static String DIR_PATH = TMP_DIR + DIR_SEP + "CoverageData" + DIR_SEP;
+    private static final String DIR_SEP = System.getProperty("file.separator");
+    private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
+    private static final String DIR_PATH = TMP_DIR + DIR_SEP + "CoverageData" + DIR_SEP;
 
     public CoverageData load() {
         try {

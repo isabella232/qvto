@@ -86,9 +86,8 @@ public class QVTOCoverageDecorator extends QvtGenericVisitorDecorator {
                 // later.
                 data.add(transformationData);
             }
-        } else {
-            System.out.println("no current module module :(");
         }
+
         return transformationData;
     }
 
