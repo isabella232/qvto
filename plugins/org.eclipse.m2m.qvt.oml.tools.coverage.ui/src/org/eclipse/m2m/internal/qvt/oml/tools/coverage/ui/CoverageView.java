@@ -124,14 +124,12 @@ public class CoverageView extends ViewPart {
             loadViewer();
         }
         
-        if (coverageModel != null) {
-        	removeMarkers();
-        }
+       	removeMarkers();
 
         coverageModel = model;
         viewer.setInput(coverageModel);
 
-        // viewer.expandAll();
+        viewer.expandAll();
     }
 
     class TransformationClickListener implements IDoubleClickListener {
@@ -415,7 +413,6 @@ public class CoverageView extends ViewPart {
 
     @Override
     public void setFocus() {
-        // TODO
     }
 
     @Override

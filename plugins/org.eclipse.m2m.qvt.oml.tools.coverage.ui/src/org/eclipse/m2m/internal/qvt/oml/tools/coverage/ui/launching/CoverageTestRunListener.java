@@ -25,13 +25,12 @@ public class CoverageTestRunListener extends TestRunListener {
 
     @Override
     public void sessionFinished(ITestRunSession session) {
-        CoverageDataPersistor persistor = new CoverageDataPersistor();
-        CoverageData data = persistor.load();
+    	JUnitCore.removeTestRunListener(INSTANCE);
 
         // Show view
+        CoverageData data = new CoverageDataPersistor().load();
         if (data != null) {
         	CoveragePlugin.getDefault().showCoverageView(data);
-        	JUnitCore.removeTestRunListener(INSTANCE);
         }
     }
 }
