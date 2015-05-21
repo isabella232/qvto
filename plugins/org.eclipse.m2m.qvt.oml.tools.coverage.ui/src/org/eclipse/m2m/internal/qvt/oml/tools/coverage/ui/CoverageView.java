@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -21,7 +21,8 @@ import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageData;
+import org.eclipse.m2m.qvt.oml.tools.coverage.Activator;
+import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
@@ -93,10 +94,14 @@ public class CoverageView extends ViewPart {
 
     public void clear() {
         removeMarkers();
-        update(new CoverageModel(new CoverageData()));
+        //update(new CoverageModel(new CoverageData()));
     }
 
     private void removeMarkers() {
+    	if (coverageModel == null) {
+    		return;
+    	}
+    	
         for (ProjectCoverageModel pcm : coverageModel.getProjectModels()) {
             for (TransformationCoverageModel tcm : pcm.getTransformationModels()) {
                 IFile file = tcm.getFile();
@@ -118,6 +123,10 @@ public class CoverageView extends ViewPart {
         if (viewer == null) {
             loadViewer();
         }
+        
+        if (coverageModel != null) {
+        	removeMarkers();
+        }
 
         coverageModel = model;
         viewer.setInput(coverageModel);
@@ -126,7 +135,7 @@ public class CoverageView extends ViewPart {
     }
 
     class TransformationClickListener implements IDoubleClickListener {
-        @Override
+		@Override
         public void doubleClick(DoubleClickEvent event) {
 
             IStructuredSelection thisSelection = (IStructuredSelection) event.getSelection();
@@ -147,7 +156,7 @@ public class CoverageView extends ViewPart {
                     IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
                     IDE.openEditor(page, file, true);
                 } catch (PartInitException e) {
-                    e.printStackTrace();
+                	Activator.error("Failed to activate coveraged file", e);
                 }
             }
 
@@ -411,6 +420,7 @@ public class CoverageView extends ViewPart {
 
     @Override
     public void dispose() {
+    	clear();
         myParent = null;
     }
 

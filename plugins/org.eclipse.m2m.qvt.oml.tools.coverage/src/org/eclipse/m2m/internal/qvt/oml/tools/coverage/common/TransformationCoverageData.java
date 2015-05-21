@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.common;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.common;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -44,16 +44,16 @@ public class TransformationCoverageData implements Serializable {
 		return false;
     }
 
-    private final URI transfUri;
+    private final String transfUri; // not an URI Object to allow serialize
     private final HashSet<NodeData> touched;
 
     public TransformationCoverageData(URI uri) {
-        transfUri = uri;
+        transfUri = uri.toString();
         touched = new HashSet<NodeData>();
     }
 
     public URI getURI() {
-        return transfUri;
+        return URI.createURI(transfUri);
     }
 
     public boolean containsNode(ASTNode node) {

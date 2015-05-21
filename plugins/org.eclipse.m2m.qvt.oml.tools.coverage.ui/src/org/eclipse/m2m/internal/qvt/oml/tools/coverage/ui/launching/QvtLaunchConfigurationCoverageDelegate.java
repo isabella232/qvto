@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching;
 
 import java.util.ArrayList;
 
@@ -35,7 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDel
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
-import org.eclipse.m2m.qvt.oml.tools.coverage.QVTOCoverageDecorator;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.QVTOCoverageDecorator;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 

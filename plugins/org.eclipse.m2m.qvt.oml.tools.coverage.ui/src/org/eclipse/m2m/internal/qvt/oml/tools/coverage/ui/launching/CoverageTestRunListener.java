@@ -10,13 +10,13 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching;
 
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jdt.junit.TestRunListener;
 import org.eclipse.jdt.junit.model.ITestRunSession;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageData;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageDataPersistor;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageData;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageDataPersistor;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 
 public class CoverageTestRunListener extends TestRunListener {
@@ -29,7 +29,9 @@ public class CoverageTestRunListener extends TestRunListener {
         CoverageData data = persistor.load();
 
         // Show view
-        CoveragePlugin.getDefault().showCoverageView(data);
-        JUnitCore.removeTestRunListener(INSTANCE);
+        if (data != null) {
+        	CoveragePlugin.getDefault().showCoverageView(data);
+        	JUnitCore.removeTestRunListener(INSTANCE);
+        }
     }
 }

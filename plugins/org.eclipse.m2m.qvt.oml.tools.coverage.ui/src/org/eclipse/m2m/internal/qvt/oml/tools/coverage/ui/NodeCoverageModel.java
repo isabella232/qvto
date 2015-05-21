@@ -10,25 +10,29 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.common;
-
-import java.io.Serializable;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui;
 
 import org.eclipse.ocl.utilities.ASTNode;
 
-public class NodeData implements Serializable {
+public class NodeCoverageModel {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
-
+    private boolean touched = false;
     private int start;
     private int end;
+    private ASTNode node;
 
-    public NodeData(ASTNode node) {
-        start = node.getStartPosition();
-        end = node.getEndPosition();
+    public NodeCoverageModel(ASTNode n) {
+        start = n.getStartPosition();
+        end = n.getEndPosition();
+        node = n;
+    }
+
+    public boolean getTouched() {
+        return touched;
+    }
+
+    public void setTouched(boolean b) {
+        touched = b;
     }
 
     public int getStart() {
@@ -37,6 +41,10 @@ public class NodeData implements Serializable {
 
     public int getEnd() {
         return end;
+    }
+
+    public ASTNode getNode() {
+        return node;
     }
 
     @Override
@@ -59,7 +67,7 @@ public class NodeData implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        NodeData other = (NodeData) obj;
+        NodeCoverageModel other = (NodeCoverageModel) obj;
         if (end != other.end) {
             return false;
         }
@@ -69,4 +77,8 @@ public class NodeData implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return node.getClass().getName() + ":" + start + "-" + end + " (parent: " + node.eContainer().getClass() + ")";
+    }
 }

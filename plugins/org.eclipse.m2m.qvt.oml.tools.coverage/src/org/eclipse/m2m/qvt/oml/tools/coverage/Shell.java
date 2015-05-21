@@ -20,6 +20,7 @@ import java.util.List;
 import org.eclipse.jdt.internal.junit.runner.RemoteTestRunner;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtGenericVisitorDecorator;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.QVTOCoverageDecorator;
 import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.m2m.qvt.oml.util.ISessionData.SimpleEntry;
 

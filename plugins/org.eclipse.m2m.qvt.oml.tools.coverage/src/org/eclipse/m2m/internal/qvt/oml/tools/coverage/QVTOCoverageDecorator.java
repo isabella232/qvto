@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
@@ -22,9 +22,9 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtGenericVisitorDecorator;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageData;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageDataPersistor;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.TransformationCoverageData;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageData;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageDataPersistor;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.TransformationCoverageData;
 import org.eclipse.ocl.utilities.ASTNode;
 
 @SuppressWarnings("restriction")

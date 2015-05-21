@@ -6,7 +6,7 @@
       point = "org.eclipse.ui.preferencePages">
       <page
          id="org.eclipse.m2m.qvt.oml.tools.coverage.preferences"
-         class="org.eclipse.m2m.qvt.oml.tools.coverage.ui.QVTOCoveragePreferencePage"
+         class="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.QVTOCoveragePreferencePage"
          name="%page.name"
          >
       </page>
@@ -16,7 +16,7 @@
   <launchDelegate
        id="org.eclipse.m2m.qvt.oml.tools.coverageLaunchDelegate"
        name="%launchDelegate.name"
-       delegate="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching.JUnitCoverageLaunchDelegate"
+       delegate="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching.JUnitCoverageLaunchDelegate"
        type="org.eclipse.jdt.junit.launchconfig"
        modes="run">
   </launchDelegate>
@@ -24,7 +24,7 @@
  
  <extension point="org.eclipse.ui.views">
         <view
-              class="org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoverageView"
+              class="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.CoverageView"
               icon="icons/pr-Model_to_model.gif"
               id="org.eclipse.m2m.qvt.oml.tools.coverage.ui.coverageView"
               name="%view.name"/>
@@ -111,7 +111,7 @@
 <extension
       point="org.eclipse.debug.core.launchDelegates">
    <launchDelegate
-         delegate="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching.QvtLaunchConfigurationCoverageDelegate"
+         delegate="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching.QvtLaunchConfigurationCoverageDelegate"
          delegateDescription="%launchDelegate.description"
          id="org.eclipse.m2m.qvt.oml.tools.coverage.ui.launchDelegate"
          modes="run"
@@ -136,7 +136,7 @@
 <extension
       point="org.eclipse.ui.handlers">
    <handler
-         class="org.eclipse.m2m.qvt.oml.tools.coverage.ui.handlers.ClearCoverageDataCommandHandler"
+         class="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.handlers.ClearCoverageDataCommandHandler"
          commandId="org.eclipse.m2m.qvt.oml.tools.coverage.ui.commands.clearCoverageDataCommand">
    </handler>
 </extension>

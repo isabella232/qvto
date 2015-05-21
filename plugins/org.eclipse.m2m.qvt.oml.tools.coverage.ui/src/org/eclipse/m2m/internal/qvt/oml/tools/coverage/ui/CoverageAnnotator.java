@@ -10,12 +10,13 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.m2m.qvt.oml.tools.coverage.Activator;
 
 import com.google.common.collect.Range;
 import com.google.common.collect.RangeSet;
@@ -27,7 +28,7 @@ public class CoverageAnnotator {
 
     public boolean BUSY = false;
 
-    public void annotate(IFile file, RangeSet<Integer> ranges, String markerType, String message) {
+	public void annotate(IFile file, RangeSet<Integer> ranges, String markerType, String message) {
 
         for (Range<Integer> range : ranges.asRanges()) {
 
@@ -43,7 +44,7 @@ public class CoverageAnnotator {
                 }
 
             } catch (Exception e) {
-                e.printStackTrace();
+            	Activator.error("Failed to setup coverage marker", e);
             }
         }
     }
@@ -58,12 +59,11 @@ public class CoverageAnnotator {
         annotate(file, ranges, UNTOUCHED_MARKER_TYPE, "");
     }
 
-    public void removeAnnotations(IFile file, String markerType) {
+	public void removeAnnotations(IFile file, String markerType) {
         try {
             file.deleteMarkers(markerType, true, IResource.DEPTH_INFINITE);
         } catch (CoreException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	Activator.error("Failed to clear coverage markers", e);
         }
     }
 

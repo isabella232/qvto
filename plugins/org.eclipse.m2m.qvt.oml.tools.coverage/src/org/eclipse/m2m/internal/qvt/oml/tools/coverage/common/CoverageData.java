@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.common;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;

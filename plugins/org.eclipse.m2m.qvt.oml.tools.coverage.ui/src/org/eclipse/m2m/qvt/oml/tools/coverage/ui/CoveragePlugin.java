@@ -13,7 +13,10 @@
 package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
 
 import org.eclipse.jface.preference.IPreferenceStore;
-import org.eclipse.m2m.qvt.oml.tools.coverage.common.CoverageData;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageData;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.CoverageModel;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.CoverageView;
+import org.eclipse.m2m.qvt.oml.tools.coverage.Activator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -25,7 +28,7 @@ import org.osgi.framework.BundleContext;
  */
 public class CoveragePlugin extends AbstractUIPlugin {
 
-    public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage";
+    public static final String PLUGIN_ID = Activator.PLUGIN_ID;
     public static final String UI_PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage.ui";
 
     private static CoveragePlugin plugin;
@@ -65,7 +68,7 @@ public class CoveragePlugin extends AbstractUIPlugin {
 
     public void showCoverageView(CoverageData data) {
         Display.getDefault().asyncExec(new Runnable() {
-            @Override
+			@Override
             public void run() {
                 try {
                     PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(CoverageView.VIEW_ID);
@@ -74,7 +77,7 @@ public class CoveragePlugin extends AbstractUIPlugin {
                     view.setLoading(true);
 
                 } catch (PartInitException e) {
-                    e.printStackTrace();
+                	Activator.error("Coverage View failed", e);
                 }
             }
         });

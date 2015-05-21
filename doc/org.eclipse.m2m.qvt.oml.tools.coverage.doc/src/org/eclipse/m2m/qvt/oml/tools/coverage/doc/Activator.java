@@ -12,14 +12,13 @@
  *****************************************************************************/
 package org.eclipse.m2m.qvt.oml.tools.coverage.doc;
 
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends Plugin {
 
     // The plug-in ID
     public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage.doc"; //$NON-NLS-1$
@@ -64,14 +63,4 @@ public class Activator extends AbstractUIPlugin {
         return plugin;
     }
 
-    /**
-     * Returns an image descriptor for the image file at the given plug-in relative path
-     *
-     * @param path
-     *            the path
-     * @return the image descriptor
-     */
-    public static ImageDescriptor getImageDescriptor(String path) {
-        return imageDescriptorFromPlugin(PLUGIN_ID, path);
-    }
 }

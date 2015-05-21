@@ -10,12 +10,13 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui.handlers;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.handlers;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoverageView;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.CoverageView;
+import org.eclipse.m2m.qvt.oml.tools.coverage.Activator;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 
@@ -30,7 +31,7 @@ public class ClearCoverageDataCommandHandler extends AbstractHandler {
     /**
      * the command has been executed, so extract extract the needed information from the application context.
      */
-    @Override
+	@Override
     public Object execute(ExecutionEvent event) throws ExecutionException {
         try {
             PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().showView(CoverageView.VIEW_ID);
@@ -39,8 +40,7 @@ public class ClearCoverageDataCommandHandler extends AbstractHandler {
             view.clear();
 
         } catch (PartInitException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        	Activator.error("Failed to cleanup coverage viewer", e);
         }
         return null;
     }

@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui.launching;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +26,7 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jdt.internal.junit.JUnitCorePlugin;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jdt.junit.launcher.JUnitLaunchConfigurationDelegate;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.osgi.framework.Bundle;
 
@@ -66,7 +67,7 @@ public class JUnitCoverageLaunchDelegate extends JUnitLaunchConfigurationDelegat
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+        	throw new CoreException(StatusUtil.makeErrorStatus(e.getMessage(), e));
         }
 
         return classList.toArray(new String[classList.size()]);

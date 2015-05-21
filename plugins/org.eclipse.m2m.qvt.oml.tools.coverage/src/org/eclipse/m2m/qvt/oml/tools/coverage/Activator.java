@@ -10,18 +10,18 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.common;
+package org.eclipse.m2m.qvt.oml.tools.coverage;
 
-import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.core.runtime.Plugin;
 import org.osgi.framework.BundleContext;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends Plugin {
 
     // The plug-in ID
-    public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage.common"; //$NON-NLS-1$
+    public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage"; //$NON-NLS-1$
 
     // The shared instance
     private static Activator plugin;
@@ -63,4 +63,8 @@ public class Activator extends AbstractUIPlugin {
         return plugin;
     }
 
+    @SuppressWarnings("restriction")
+	public static void error(String message, Throwable throwable) {
+    	org.eclipse.m2m.internal.qvt.oml.QvtPlugin.error(message, throwable);
+    }
 }

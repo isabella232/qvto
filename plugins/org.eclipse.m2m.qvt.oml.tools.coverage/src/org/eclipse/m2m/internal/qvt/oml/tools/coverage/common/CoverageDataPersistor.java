@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.common;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.common;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,13 +18,15 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import org.eclipse.m2m.qvt.oml.tools.coverage.Activator;
+
 public class CoverageDataPersistor {
 
     private static final String DIR_SEP = System.getProperty("file.separator");
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
     private static final String DIR_PATH = TMP_DIR + DIR_SEP + "CoverageData" + DIR_SEP;
 
-    public CoverageData load() {
+	public CoverageData load() {
         try {
 
             CoverageData data = new CoverageData();
@@ -39,13 +41,13 @@ public class CoverageDataPersistor {
             }
             return data;
         } catch (Exception e) {
-            e.printStackTrace();
+        	Activator.error("Failed to load coverage data", e);
         }
 
         return null;
     }
 
-    public void save(CoverageData data) {
+	public void save(CoverageData data) {
         try {
             prepareDirectories();
 
@@ -56,7 +58,7 @@ public class CoverageDataPersistor {
                 os.close();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+        	Activator.error("Failed to persist coverage data", e);
         }
     }
 
