@@ -171,7 +171,7 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 		String moduleName = null;
 		if (myTransformation != null) {
 			try {
-				if (traceUri == null || traceUri.toString().isEmpty()) {
+				if (traceUri == null || traceUri.toString().length() == 0) {
 					traceUri = myTransformation.getURI();
 				}
 				else {
@@ -181,7 +181,7 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 			}
 		}
 
-        if (traceUri == null || traceUri.toString().isEmpty()) {
+        if (traceUri == null || traceUri.toString().length() == 0) {
         	return null;
         }
 

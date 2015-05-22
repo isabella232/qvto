@@ -80,7 +80,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 			}
 			
 			String description = configurationElement.getAttribute(DESC_ATTR);		
-			String qualifiedName = namespace.isEmpty() ? name : namespace + CLASS_NAME_SEPARATOR + name;
+			String qualifiedName = namespace.length() == 0 ? name : namespace + CLASS_NAME_SEPARATOR + name;
 			return new BundleDescriptor(configurationElement, qualifiedName, description);
 		} else if(LIBRARY_ELEM.equals(configurationElement.getName())) {
 			return new BundleDescriptor(configurationElement, deriveQualifiedNameFromSimpleDefinition(configurationElement), null);

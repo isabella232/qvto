@@ -256,7 +256,7 @@ public class QvtLauncherTab extends MdaLaunchTab {
 
         try {
         	String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
-        	if (!traceFile.isEmpty()) {
+        	if (traceFile.length() > 0) {
         		if (!myTraceFile.getText().equals(traceFile)) {
         			myTraceFile.setText(traceFile);
         		}
