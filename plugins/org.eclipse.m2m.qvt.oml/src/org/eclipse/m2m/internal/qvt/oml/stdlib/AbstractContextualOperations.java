@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -114,6 +114,8 @@ public abstract class AbstractContextualOperations {
 			((EClass)fContextType).getEOperations().add(eOperation);
 			
 			CallHandlerAdapter.attach(eOperation, fDispatcher);
+			setupDeprecated(eOperation);
+			
 			return eOperation;
 		}		
 	}
@@ -181,8 +183,13 @@ public abstract class AbstractContextualOperations {
 			EOperation result = env.defineOperation(fContextType, fName, fReturnType, argList,
 						org.eclipse.ocl.ecore.EcoreFactory.eINSTANCE.createConstraint());
 
-			CallHandlerAdapter.attach(result, fDispatcher);
+			CallHandlerAdapter.attach(result, fDispatcher);			
+			setupDeprecated(result);
 			
+			return result;
+		}
+
+		void setupDeprecated(EOperation result) {
 			if(fIsDeprecated) {
 				if(fDeprecatedBy != null) {
 					QvtOperationalParserUtil.markAsDeprecated(result, fDeprecatedBy);
@@ -190,7 +197,6 @@ public abstract class AbstractContextualOperations {
 					QvtOperationalParserUtil.markAsDeprecated(result);					
 				}
 			}
-			return result;
 		}	
 	}
 }

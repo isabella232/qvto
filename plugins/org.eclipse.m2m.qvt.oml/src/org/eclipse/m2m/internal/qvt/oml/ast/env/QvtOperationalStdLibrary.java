@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,7 +12,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
@@ -37,7 +35,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractContextualOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CollectionOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CollectionTypeOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.DictionaryOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.ElementOperations;
@@ -57,14 +54,18 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLFactory;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.OrderedTupleType;
-import org.eclipse.ocl.util.TypeUtil;
+import org.eclipse.ocl.ecore.EcoreOCLStandardLibrary;
 
 
 public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOStandardLibrary {
 	
 	public static final String NS_URI = "http://www.eclipse.org/m2m/qvt/oml/1.0.0/Stdlib"; //$NON-NLS-1$
 
-	public static final String QVT_STDLIB_MODULE_NAME = "Stdlib"; //$NON-NLS-1$
+	private static final String QVT_STDLIB_MODULE_NAME = "Stdlib"; //$NON-NLS-1$
+	
+	private static final EPackage ECORE_OCL_LIB = new EcoreOCLStandardLibrary().getOCLStdLibPackage();
+	private static final String OCL_STDLIB_MODULE_NAME = ECORE_OCL_LIB.getName();
+
 	
 	public static final QvtOperationalStdLibrary INSTANCE = createLibrary();	
 	static {
@@ -139,7 +140,6 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		define(new DictionaryOperations(this));
 		define(new ExceptionOperations(this));		
 
-		define(CollectionOperations.getAllOperations(this));		
 		define(CollectionTypeOperations.getAllOperations(this));		
 		
 		((ModuleImpl)fStdlibModule).freeze();		
@@ -158,22 +158,10 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		return fFactory;
 	}
 		
-	/* (non-Javadoc)
-	 * @see org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOStandardLibrary#getOperations(org.eclipse.emf.ecore.EClassifier)
-	 */
-	public List<EOperation> getOperations(EClassifier classifier) {
-		List<EOperation> result = TypeUtil.getOperations(fEnv, classifier);
-		return (result != null) ? result : Collections.<EOperation>emptyList();
-	}
-
 	public void importTo(QvtOperationalEnv env) {
 		env.addImport(ImportKind.EXTENSION, fEnv);
 	}
 	    
-    public boolean isStdLibClassifier(EClassifier classifier) {
-    	return classifier == getElementType() || classifier == fStdlibModule.getEClassifier(classifier.getName());
-    }
-    
 	/* (non-Javadoc)
 	 * @see org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOStandardLibrary#getStdLibModule()
 	 */
@@ -303,23 +291,20 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 			return null;
 		}
 		
-		if(size == 2 && !QVT_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
-			return null;
+		if(size == 1 || QVT_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
+			String typeName = nameElements.get(size - 1);
+			EClassifier aliasedType = getTypeAlias(typeName);
+			return (aliasedType != null) ? aliasedType : fStdlibModule.getEClassifier(typeName);
 		}
 		
-		String typeName = nameElements.get(size - 1);
-		EClassifier aliasedType = getTypeAlias(typeName);
-		return (aliasedType != null) ? aliasedType : fStdlibModule.getEClassifier(typeName);
-	}
-	
-	public EClassifier lookupPackage(List<String> nameElements) {	 
-		if(nameElements.size() == 1 && QVT_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
-			return fStdlibModule;
+		if(size == 2 && OCL_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
+			String typeName = nameElements.get(size - 1);
+			return ECORE_OCL_LIB.getEClassifier(typeName);
 		}
+		
 		return null;
 	}
-					
-
+	
 		 
 	private void define(AbstractContextualOperations... typeOperations) {
 		for (AbstractContextualOperations nextOperations : typeOperations) {

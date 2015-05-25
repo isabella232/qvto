@@ -25,26 +25,6 @@ public abstract class AbstractQVTStdlib implements StdlibPackage {
 	public static final String NULL_NAME = "null"; //$NON-NLS-1$
 	
 	
-	/* FIXME -  */
-	static interface IFilter {
-    	boolean matches(Object obj, Object type);
-    }
-    
-    static final IFilter clsFilter = new IFilter() {
-		public boolean matches(Object obj, Object type) {
-	    	if (type instanceof EClassifier) {
-	    		EClassifier classifier = (EClassifier) type;
-	    		return classifier.isInstance(obj);
-	    	}
-	    	
-	    	return false;	    	
-		}			
-	};
-    
-	protected AbstractQVTStdlib() {
-		super();
-	}	
-	
 	public abstract StdlibFactory getStdlibFactory();
 	
 	public abstract Library getStdLibModule();

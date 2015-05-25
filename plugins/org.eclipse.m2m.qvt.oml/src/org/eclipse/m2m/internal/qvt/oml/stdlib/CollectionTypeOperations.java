@@ -30,6 +30,7 @@ public class CollectionTypeOperations extends AbstractContextualOperations {
 	public static final String AS_SEQUENCE_NAME = "asSequence"; //$NON-NLS-1$
 	public static final String AS_BAG_NAME = "asBag"; //$NON-NLS-1$
 	public static final String FLATTEN_NAME = "flatten"; //$NON-NLS-1$
+	public static final String AS_LIST_NAME = "asList"; //$NON-NLS-1$
 	
 	private static final CallHandler AS_SET = new CallHandler() {
 		
@@ -81,9 +82,20 @@ public class CollectionTypeOperations extends AbstractContextualOperations {
 		}
 	};	
 			
+	private static final CallHandler AS_LIST = new CallHandler() {
+		
+		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
+			if(source instanceof Collection<?>) {
+				@SuppressWarnings("unchecked")					
+				Collection<Object> collection = (Collection<Object>) source;
+				return new MutableListImpl<Object>(collection);
+			}
+			return CallHandlerAdapter.getInvalidResult(evalEnv);
+		}
+	};	
 
-	private CollectionTypeOperations(AbstractQVTStdlib library, EClassifier targetType) {
-		super(library, targetType);		
+	private CollectionTypeOperations(AbstractQVTStdlib library, EClassifier contextType) {
+		super(library, contextType);		
 	}
 
 	public static AbstractContextualOperations[] getAllOperations(AbstractQVTStdlib library) {
@@ -101,8 +113,14 @@ public class CollectionTypeOperations extends AbstractContextualOperations {
 				new OperationProvider(AS_ORDERED_SET, AS_ORDERED_SET_NAME, oclStdlib.getOrderedSet()),
 				new OperationProvider(AS_SEQUENCE, AS_SEQUENCE_NAME, oclStdlib.getSequence()),
 				new OperationProvider(AS_BAG, AS_BAG_NAME, oclStdlib.getBag()),
+				new OperationProvider(AS_LIST, AS_LIST_NAME, getStdlib().getList()),
 				new OperationProvider(FLATTEN, FLATTEN_NAME, 
 						TypeUtil.resolveCollectionType(getStdlib().getEnvironment(), CollectionKind.COLLECTION_LITERAL, oclStdlib.getT2())),
+				
+				new OperationProvider(ObjectOperations.REPR, ObjectOperations.REPR_NAME, oclStdlib.getString()),
+
+				new OperationProvider(StdlibModuleOperations.DUMP, StdlibModuleOperations.DUMP_NAME,
+						oclStdlib.getOclVoid()).deprecate(),
 		};
 	}
 }

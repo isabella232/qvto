@@ -324,9 +324,8 @@ public class InternalTransformationExecutor {
 			QvtOperationalEvaluationEnv evalEnv,
 			OperationalTransformation transformationModel, ModelExtent[] args) {
 
-		EList<ModelParameter> modelParameters = transformationModel
-				.getModelParameter();
-		if (modelParameters.size() != args.length) {
+		EList<ModelParameter> modelParameters = transformationModel.getModelParameter();
+		if (modelParameters.size() > args.length) {
 			return new ExecutionDiagnosticImpl(Diagnostic.ERROR,
 					ExecutionDiagnostic.MODEL_PARAMETER_MISMATCH, NLS.bind(
 							Messages.InvalidModelParameterCountError,
@@ -334,8 +333,7 @@ public class InternalTransformationExecutor {
 		}
 
 		ExecutionDiagnostic result = ExecutionDiagnostic.OK_INSTANCE;
-		List<ModelParameterExtent> extents = new ArrayList<ModelParameterExtent>(
-				args.length);
+		List<ModelParameterExtent> extents = new ArrayList<ModelParameterExtent>(modelParameters.size());
 
 		int argCount = 0;
 		for (ModelParameter modelParam : modelParameters) {

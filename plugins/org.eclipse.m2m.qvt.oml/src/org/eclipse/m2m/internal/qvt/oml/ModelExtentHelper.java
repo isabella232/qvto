@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2009, 2015 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -97,15 +97,15 @@ public class ModelExtentHelper {
 		//fResourceSet.getResources().clear();
 		
 		List<ModelParameter> params = fTransformation.getModelParameter();
-		if(params.size() != fModelExtentURIs.size()) {
+		if(params.size() > fModelExtentURIs.size()) {
 			throw new DiagnosticException(QvtPlugin.createErrorDiagnostic(NLS.bind(
 					Messages.InvalidModelParameterCountError, fModelExtentURIs
 							.size(), params.size()), null));
 		}
 
 		int i = 0;
-		for (URI uri : fModelExtentURIs) {
-			ModelParameter nextParam = params.get(i++);
+		for (ModelParameter nextParam : params) {
+			URI uri = fModelExtentURIs.get(i++);
 			DirectionKind kind = nextParam.getKind();
 			URI saveAsURI = (kind != DirectionKind.IN) ? uri : null;
 			URI loadURI = (kind != DirectionKind.OUT) ? uri : null; 

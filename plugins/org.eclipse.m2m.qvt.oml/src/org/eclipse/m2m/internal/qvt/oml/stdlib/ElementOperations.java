@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -56,7 +56,9 @@ public class ElementOperations extends AbstractContextualOperations {
 	
 	@Override
 	protected OperationProvider[] getOperations() {
+		OCLStandardLibrary<EClassifier> oclStdLibrary = getStdlib().getEnvironment().getOCLStandardLibrary();
 		EClassifier elementSet = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
+		EClassifier setOfT = TypeUtil.resolveSetType(getStdlib().getEnvironment(), oclStdLibrary.getT());
 		EClassifier oclType = getStdlib().getOCLStdLib().getOclType();
 		return new OwnedOperationProvider[] {
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "_localId", getOclStdlib().getString()), //$NON-NLS-1$
@@ -64,10 +66,10 @@ public class ElementOperations extends AbstractContextualOperations {
 			
 			new OwnedOperationProvider(ALL_SUBOBJECTS, ALL_SUBOBJECTS_NAME, elementSet),
 			new OwnedOperationProvider(ALL_SUBOBJECTS_OF_TYPE, ALL_SUBOBJECTS_OF_TYPE_NAME, 
-					new String[] { "type" }, elementSet, oclType), //$NON-NLS-1$
+					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
 					
 			new OwnedOperationProvider(ALL_SUBOBJECTS_OF_KIND, ALL_SUBOBJECTS_OF_KIND_NAME, 
-					new String[] { "type" }, elementSet, oclType), //$NON-NLS-1$
+					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
 			new OwnedOperationProvider(CLONE, CLONE_NAME, getStdlib().getElementType()),
 			new OwnedOperationProvider(CONTAINER, CONTAINER_NAME, getStdlib().getElementType()),				
 			new OwnedOperationProvider(DEEP_CLONE, DEEP_CLONE_NAME, getStdlib().getElementType()),
@@ -86,9 +88,9 @@ public class ElementOperations extends AbstractContextualOperations {
 			
 			new OwnedOperationProvider(SUBOBJECTS, SUBOBJECTS_NAME, elementSet),
 			new OwnedOperationProvider(SUBOBJECTS_OF_TYPE, SUBOBJECTS_OF_TYPE_NAME, 
-					new String[] { "type" }, elementSet, oclType), //$NON-NLS-1$
+					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
 			new OwnedOperationProvider(SUBOBJECTS_OF_KIND, SUBOBJECTS_OF_KIND_NAME, 
-					new String[] { "type" }, elementSet, oclType), //$NON-NLS-1$
+					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
 		};
 	}
 
@@ -360,7 +362,7 @@ public class ElementOperations extends AbstractContextualOperations {
 	};	
 
 	private static final String ALL_SUBOBJECTS_OF_KIND_NAME = "allSubobjectsOfKind"; //$NON-NLS-1$  
-	private static final CallHandler ALL_SUBOBJECTS_OF_KIND = new CallHandler() {
+	static final CallHandler ALL_SUBOBJECTS_OF_KIND = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -372,7 +374,7 @@ public class ElementOperations extends AbstractContextualOperations {
 	};	
 	
 	
-	private static EClassifier getTypeFilterArg(Object[] args) {
+	static EClassifier getTypeFilterArg(Object[] args) {
 		if(args.length != 1) {
 			throw new IllegalArgumentException();
 		}
@@ -391,7 +393,7 @@ public class ElementOperations extends AbstractContextualOperations {
 			if(FILTER_OF_KIND == filterFlag) {
 				accept = evalEnv.isKindOf(subObject, type);
 			} else if(FILTER_OF_TYPE == filterFlag) {
-				accept = subObject.eClass() == type;					
+				accept = evalEnv.isTypeOf(subObject, type);					
 			}
 			if(accept) {
 				result.add(subObject);
@@ -407,7 +409,7 @@ public class ElementOperations extends AbstractContextualOperations {
 			if(FILTER_OF_KIND == filterFlag) {
 				accept = evalEnv.isKindOf(subObject, type);
 			} else if(FILTER_OF_TYPE == filterFlag) {
-				accept = subObject.eClass() == type;					
+				accept = evalEnv.isTypeOf(subObject, type);					
 			}
 			if(accept) {
 				result.add(subObject);

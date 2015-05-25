@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,6 +18,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import lpg.runtime.IToken;
 
@@ -510,7 +511,7 @@ public class CompletionProposalUtil {
     
     // workaround for OclVoid
     public static final List<EOperation> getOperations(EClassifier owner, QvtOperationalEnv env) {
-        List<EOperation> rawOperations = getAllOperations(owner, env);
+        Collection<EOperation> rawOperations = getAllOperations(owner, env);
         List<EOperation> operations = new ArrayList<EOperation>();
         for (EOperation operation : rawOperations) {
             // removing unnecessary allInstances()
@@ -646,8 +647,8 @@ public class CompletionProposalUtil {
         return elementType;
     }
     
-    private static List<EOperation> getAllOperations(EClassifier owner, QvtOperationalEnv env) {
-        List<EOperation> result = new ArrayList<EOperation>(TypeUtil.getOperations(env, owner));
+    private static Collection<EOperation> getAllOperations(EClassifier owner, QvtOperationalEnv env) {
+        Set<EOperation> result = new LinkedHashSet<EOperation>(TypeUtil.getOperations(env, owner));
         if (owner instanceof CollectionType) {
             CollectionType collType = (CollectionType) owner;
             

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -230,8 +230,8 @@ public class InvocationTest extends TestCase {
 
 	public void testModelModelParams() throws Exception {
 		ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput, new BasicModelExtent());
-		assertEquals(Diagnostic.ERROR, diagnostic.getSeverity());
-		assertEquals(ExecutionDiagnostic.MODEL_PARAMETER_MISMATCH, diagnostic.getCode());
+		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
+		assertEquals(0, diagnostic.getCode());
 	}
 	
 	public void testNullModelParams() throws Exception {

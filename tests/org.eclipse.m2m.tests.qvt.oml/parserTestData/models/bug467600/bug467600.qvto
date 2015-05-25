@@ -1,0 +1,149 @@
+modeltype ecore "strict" uses "http://www.eclipse.org/emf/2002/Ecore";
+	
+
+transformation bug467600(in e : ecore);
+
+main() {
+
+	// test various Model.objects*()
+	//
+	do {
+		var v : Set(Element) := e.objects();
+		assert fatal (v->size() = 11);
+	};
+	do {
+		var v : Set(OclAny) := e.objects();
+		assert fatal (v->size() = 11);
+	};
+	
+	do {
+		var v : Set(ecore::EPackage) := e.objectsOfType(EPackage);
+		assert fatal (v->size() = 1); 
+	};
+	
+	do {
+		var v : Set(EModelElement) := e.objectsOfKind(EClassifier);
+		assert fatal (v->size() = 3);
+	};
+	
+	
+	var pack : EPackage := e.objectsOfType(EPackage)->any(true);
+	
+
+	// test various Element.subobjects*()
+	//
+	do {
+		var v : Set(Stdlib::Element) := pack.subobjects();
+		assert fatal (v->size() = 3);
+	};
+
+	do {
+		var v : Set(oclstdlib::OclAny) := pack.allSubobjects();
+		assert fatal (v->size() = 10);
+	};
+
+	do {
+		var v : Set(ecore::EClassifier) := pack.subobjectsOfKind(EClassifier);
+		assert fatal (v->size() = 3);
+	};
+
+	do {
+		var v : Set(EDataType) := pack.subobjectsOfType(EEnum);
+		assert fatal (v->size() = 1);
+	};
+
+	do {
+		var v : Set(EModelElement) := pack.allSubobjectsOfKind(ETypedElement);
+		assert fatal (v->size() = 3);
+	};
+
+	do {
+		var v : Set(ETypedElement) := pack.allSubobjectsOfType(EAttribute);
+		assert fatal (v->size() = 2);
+	};
+
+
+	// test various allInstances()
+	//
+	do {
+		var v : Set(EModelElement) := e.allInstances(ENamedElement);
+		assert fatal (v->size() = 9);
+	};
+	
+	do {
+		var v : Set(EModelElement) := ENamedElement.allInstances();
+		assert fatal (v->size() = 9);
+	};
+	
+	do {	
+		var v : Set(EModelElement) := pack.allInstances(ENamedElement);
+		assert fatal (v->size() = 8);
+	};
+
+
+	// test various dump() and repr()
+	//
+	do {
+		var o : Stdlib::Object := null; 
+		o.dump();
+		dump(o);
+		log(o.repr());
+	};
+	
+	do {	
+		var e : Stdlib::Element := pack;
+		e.dump();
+		dump(e);
+		log(e.repr());
+	};
+	
+	do {	
+		var u : ecore::ENamedElement := pack;
+		u.dump();
+		dump(u);
+		log(u.repr());
+	};
+	
+	do {	
+		var c : Collection(Element) := Sequence{pack, pack};
+		c->dump();
+		dump(c);
+		log(c->repr());
+	};	
+	
+	do {	
+		var c : Collection(String) := Dict{1="a", 2="b"};
+		c->dump();
+		dump(c);
+		log(c->repr());
+	};	
+	
+	do {	
+		var c : Dict(Integer, String) := Dict{1="a", 2="b"};
+		c->dump();
+		dump(c);
+		log(c->repr());
+	};	
+	
+	do {	
+		var c : List(String) := List{"a", "b"};
+		c->dump();
+		dump(c);
+		log(c->repr());
+	};	
+	
+	do {	
+		var c : Tuple(s:String) := Tuple{s="a"};
+		c.dump();
+		dump(c);
+		log(c.repr());
+	};	
+	
+	do {	
+		invalid.dump();
+		dump(null);
+		dump(invalid);
+		log(invalid.repr());
+	};	
+	
+}

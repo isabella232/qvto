@@ -1259,17 +1259,14 @@ public class QvtOperationalVisitorCS
     	    }
     	    
     	    OCLExpression<EClassifier> source = opCallExp.getSource();
-            if (source != null) {
+            if (source != null && opCallExp.getReferredOperation() != null) {
                 if (isArrowAccessToCollection(operationCallExpCS, source)) {
                 	// FIXME - use OCL TypeChecker::isStdLibOperation()
                     // Is it a standard operation like "select"?
                     // In other words, did lookupOperation() in genOperationCallExp() return something?
-                    List<EOperation> operations = TypeUtil.getOperations(env, source.getType());
-                    boolean isStdOperation = (operations != null) 
-                            && (opCallExp.getReferredOperation() != null) 
-                            && operations.contains(opCallExp.getReferredOperation());
-                    if (!isStdOperation) {
-                        result = createImplicitXCollect(source, opCallExp, env, operationCallExpCS);
+                    Set<EOperation> operations = new HashSet<EOperation>(TypeUtil.getOperations(env, source.getType()));
+                    if (!operations.contains(opCallExp.getReferredOperation())) {
+                       	result = createImplicitXCollect(source, opCallExp, env, operationCallExpCS);
                     }
                 }
     	    }

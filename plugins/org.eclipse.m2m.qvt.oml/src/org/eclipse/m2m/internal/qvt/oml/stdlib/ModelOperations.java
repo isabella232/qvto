@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2010 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,12 +12,10 @@
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.m2m.internal.qvt.oml.Messages;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
@@ -25,9 +23,9 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
-import org.eclipse.ocl.ecore.EcoreEnvironment;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.util.TypeUtil;
+import org.eclipse.ocl.utilities.PredefinedType;
 
 
 public class ModelOperations extends AbstractContextualOperations {
@@ -37,16 +35,12 @@ public class ModelOperations extends AbstractContextualOperations {
 	public static final String OBJECTS_NAME = "objects"; //$NON-NLS-1$
 	public static final String ROOT_OBJECTS_NAME = "rootObjects"; //$NON-NLS-1$
 	public static final String OBJECTS_OF_TYPE_NAME = "objectsOfType"; //$NON-NLS-1$
+	public static final String OBJECTS_OF_KIND_NAME = "objectsOfKind"; //$NON-NLS-1$
 	public static final String REMOVE_ELEMENT_NAME = "removeElement"; //$NON-NLS-1$
 	
 	public ModelOperations(AbstractQVTStdlib library) {
 		super(library, library.getModelClass());
 	}
-	
-	public EOperation defineGenericObjectsOfType(EcoreEnvironment env, EClassifier actualType) {		
-		return new OwnedOperationProvider(OBJECTS_OF_TYPE, OBJECTS_OF_TYPE_NAME,  
-				TypeUtil.resolveSetType(env, actualType), env.getOCLStandardLibrary().getOclType()).define(env);
-	}	
 	
 	@Override
 	protected OperationProvider[] getOperations() {
@@ -63,9 +57,16 @@ public class ModelOperations extends AbstractContextualOperations {
 			new OwnedOperationProvider(OBJECTS, OBJECTS_NAME, setOfElements),
 			new OwnedOperationProvider(OBJECTS_OF_TYPE, OBJECTS_OF_TYPE_NAME, new String[] { "type" }, //$NON-NLS-1$
 					setOfT, oclStdLibrary.getOclType()),
+			new OwnedOperationProvider(OBJECTS_OF_KIND, OBJECTS_OF_KIND_NAME, new String[] { "type" }, //$NON-NLS-1$
+					setOfT, oclStdLibrary.getOclType()),
 			new OwnedOperationProvider(REMOVE_ELEMENT, REMOVE_ELEMENT_NAME, new String[] { "element" }, //$NON-NLS-1$
 					oclStdLibrary.getOclVoid(), getStdlib().getElementType()),
-			new OwnedOperationProvider(ROOT_OBJECTS, ROOT_OBJECTS_NAME, setOfElements),					
+			new OwnedOperationProvider(ROOT_OBJECTS, ROOT_OBJECTS_NAME, setOfElements),
+			
+			new OperationProvider(OBJECTS_OF_KIND, PredefinedType.ALL_INSTANCES_NAME,
+					setOfT, TypeUtil.resolveType(getStdlib().getEnvironment(), oclStdLibrary.getOclType()))
+					.deprecateBy("Model::objectsOfKind(OclType)"), //$NON-NLS-1$
+			
 		};
 	}
 	
@@ -75,12 +76,7 @@ public class ModelOperations extends AbstractContextualOperations {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_NAME));
 			}
 
-			Set<Object> instances = new LinkedHashSet<Object>();			
-			ModelInstance model = (ModelInstance) source;
-			ModelParameterExtent modelParam = model.getExtent();
-			
-			instances.addAll(modelParam.getAllObjects());
-			return instances;
+			return getObjects((ModelInstance) source, null, ElementOperations.FILTER_ALL, evalEnv);
 		}
 	};
 
@@ -103,17 +99,20 @@ public class ModelOperations extends AbstractContextualOperations {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_OF_TYPE_NAME));
 			}
-			
-	        Set<Object> instances = new LinkedHashSet<Object>();	       
-			ModelInstance model = (ModelInstance) source;
-			ModelParameterExtent modelParam = model.getExtent();	        
-	        List<Object> objects = modelParam.getAllObjects();
-			for (Object obj : objects) {
-	            if (AbstractQVTStdlib.clsFilter.matches(obj, args[0])) {
-	                instances.add(obj);
-	            }
-	        }	        
-	        return instances;
+
+			EClassifier type = ElementOperations.getTypeFilterArg(args);
+			return getObjects((ModelInstance) source, type, ElementOperations.FILTER_OF_TYPE, evalEnv);
+		}
+	};
+	
+	private static final CallHandler OBJECTS_OF_KIND = new CallHandler() {
+		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
+			if(source instanceof ModelInstance == false) {
+				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_OF_KIND_NAME));
+			}
+
+			EClassifier type = ElementOperations.getTypeFilterArg(args);
+			return getObjects((ModelInstance) source, type, ElementOperations.FILTER_OF_KIND, evalEnv);
 		}
 	};
 	
@@ -157,5 +156,23 @@ public class ModelOperations extends AbstractContextualOperations {
 			assert modelObj instanceof ModelInstance : "model must implement ModelInstance interface"; //$NON-NLS-1$
 	        return modelObj;
 		}
-	};	
+	};
+	
+	static Object getObjects(ModelInstance model, EClassifier type, final int filterFlag, QvtOperationalEvaluationEnv evalEnv) {
+        Set<Object> instances = new LinkedHashSet<Object>();	       
+		ModelParameterExtent modelParam = model.getExtent();	        
+		for (Object obj : modelParam.getAllObjects()) {
+			boolean accept = filterFlag == ElementOperations.FILTER_ALL;
+			if(ElementOperations.FILTER_OF_KIND == filterFlag) {
+				accept = evalEnv.isKindOf(obj, type);
+			} else if(ElementOperations.FILTER_OF_TYPE == filterFlag) {
+				accept = evalEnv.isTypeOf(obj, type);					
+			}
+			if(accept) {
+				instances.add(obj);
+			}
+        }	        
+        return instances;
+	}
+
 }
