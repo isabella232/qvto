@@ -17,11 +17,11 @@
       %copyright
    </copyright>
 
-   <plugin
+   <!--plugin
          id="org.eclipse.m2m.qvt.oml.samples"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/>
+         unpack="false"/-->
 
 </feature>
