@@ -1,7 +1,7 @@
-modeltype ecore "strict" uses "http://www.eclipse.org/emf/2002/Ecore";
+modeltype ECORE "strict" uses "http://www.eclipse.org/emf/2002/Ecore";
 	
 
-transformation bug467600(in e : ecore);
+transformation bug467600(in e : ECORE);
 
 main() {
 
@@ -17,7 +17,7 @@ main() {
 	};
 	
 	do {
-		var v : Set(ecore::EPackage) := e.objectsOfType(EPackage);
+		var v : Set(ECORE::EPackage) := e.objectsOfType(EPackage);
 		assert fatal (v->size() = 1); 
 	};
 	
@@ -43,7 +43,7 @@ main() {
 	};
 
 	do {
-		var v : Set(ecore::EClassifier) := pack.subobjectsOfKind(EClassifier);
+		var v : Set(ECORE::EClassifier) := pack.subobjectsOfKind(EClassifier);
 		assert fatal (v->size() = 3);
 	};
 
@@ -60,6 +60,19 @@ main() {
 	do {
 		var v : Set(ETypedElement) := pack.allSubobjectsOfType(EAttribute);
 		assert fatal (v->size() = 2);
+		
+		var attr : ETypedElement := v->asSequence()->at(1);
+		var attr2 : ETypedElement := v->asSequence()->at(2);
+
+		assert fatal(pack.allSubobjectsOfType(EAttribute)->includes(attr));
+		assert fatal(not pack.allSubobjectsOfType(EAttribute)->excludes(attr));
+		assert fatal(pack.allSubobjectsOfType(EAttribute)->count(attr) = 1);
+
+		assert fatal(pack.allSubobjectsOfType(EAttribute)->includesAll(Sequence{attr, attr2}));
+		assert fatal(not pack.allSubobjectsOfType(EAttribute)->excludesAll(Sequence{attr, attr2}));
+
+		assert fatal(pack.allSubobjectsOfType(EAttribute) = Set{attr, attr2});
+		assert fatal(not (pack.allSubobjectsOfType(EAttribute) <> Set{attr, attr2}));
 	};
 
 
@@ -98,7 +111,7 @@ main() {
 	};
 	
 	do {	
-		var u : ecore::ENamedElement := pack;
+		var u : ECORE::ENamedElement := pack;
 		u.dump();
 		dump(u);
 		log(u.repr());
