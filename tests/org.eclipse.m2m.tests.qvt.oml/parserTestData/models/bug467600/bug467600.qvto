@@ -5,6 +5,11 @@ transformation bug467600(in e : ECORE);
 
 main() {
 
+	// test template version of Model::createEmptyModel()
+	//
+	var emptyModel : ECORE := ECORE.createEmptyModel();
+
+
 	// test various Model.objects*()
 	//
 	do {

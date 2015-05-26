@@ -52,7 +52,7 @@ public class ModelOperations extends AbstractContextualOperations {
 					getStdlib().getTransformationClass(), getStdlib().getModelClass()),
 			new OwnedOperationProvider(COPY, COPY_NAME, getStdlib().getModelClass()),
 			
-			createOwnedStaticOperationProvider(CREATE_EMPTY_MODEL, CREATE_EMPTY_MODEL_NAME, null, getStdlib().getModelClass()),
+			createOwnedStaticOperationProvider(CREATE_EMPTY_MODEL, CREATE_EMPTY_MODEL_NAME, null, oclStdLibrary.getT()),
 			
 			new OwnedOperationProvider(OBJECTS, OBJECTS_NAME, setOfElements),
 			new OwnedOperationProvider(OBJECTS_OF_TYPE, OBJECTS_OF_TYPE_NAME, new String[] { "type" }, //$NON-NLS-1$

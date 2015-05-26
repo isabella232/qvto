@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,10 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
 import org.eclipse.ocl.ecore.CollectionType;
@@ -27,7 +29,6 @@ import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.ocl.types.util.TypesSwitch;
 import org.eclipse.ocl.util.CollectionUtil;
-import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 
 
@@ -48,23 +49,16 @@ class GenericsResolver {
 		this.fBindSwitch = new BindSwitch();
 	}
 		
-	public boolean resolveGenericType(EClassifier owner, EClassifier formalType, EClassifier actualType) {
-		resolve(formalType, actualType);
-		EClassifier resolvedType = fBindSwitch.doSwitch(formalType);
-		return TypeUtil.compatibleTypeMatch(fEnv, actualType, resolvedType);
-	}
-	
-	
 	public EClassifier resolveOperationReturnType(EClassifier source, EOperation operation, List<? extends TypedElement<EClassifier>> args) {
 		EClassifier owner = fEnv.getUMLReflection().getOwningClassifier(operation);		
-		resolve(owner, source);
+		resolve(owner, source, QvtOperationalParserUtil.isStaticOperation(operation));
 		
 		int paramIndex = 0;
 		for (EParameter eParameter : operation.getEParameters()) {
 			EClassifier paramFormalType = eParameter.getEType();
 			if(paramFormalType != null) {
 				EClassifier actualArgType = args.get(paramIndex++).getType();
-				resolve(paramFormalType, actualArgType);
+				resolve(paramFormalType, actualArgType, false);
 			}
 		}
 
@@ -82,43 +76,47 @@ class GenericsResolver {
 	}
 		
 	@SuppressWarnings("unchecked")
-	private void resolve(EClassifier formalType, EClassifier actualType) {
+	private void resolve(EClassifier formalType, EClassifier actualType, boolean isStatic) {
 		if(formalType == null || actualType == null) {
 			return;
 		}
 			
-		if(formalType instanceof CollectionType && actualType instanceof CollectionType) {
-			resolveCollection((CollectionType) formalType, (CollectionType) actualType);
-		} else if(formalType instanceof TypeType && actualType instanceof TypeType) {
-			TypeType<EClassifier, EOperation> actualTypeType = (TypeType<EClassifier, EOperation>) actualType;			
-			if(formalType == fEnv.getOCLStandardLibrary().getOclType()) {
-				resolve(fOCLStdLib.getT(), actualTypeType.getReferredType());
+		if (formalType instanceof CollectionType && actualType instanceof CollectionType) {
+			resolveCollection((CollectionType) formalType, (CollectionType) actualType, isStatic);
+		} else if (formalType instanceof TypeType && actualType instanceof TypeType) {
+			TypeType<EClassifier, EOperation> actualTypeType = (TypeType<EClassifier, EOperation>) actualType;
+			if (formalType == fEnv.getOCLStandardLibrary().getOclType()) {
+				resolve(fOCLStdLib.getT(), actualTypeType.getReferredType(), isStatic);
 			}
+		} else if (isStatic
+				&& actualType instanceof TypeType
+				&& ((TypeType<EClassifier, EOperation>) actualType).getReferredType() instanceof EClass
+				&& ((EClass) ((TypeType<EClassifier, EOperation>) actualType).getReferredType()).getEAllSuperTypes().contains(formalType)) {
+			resolve(fOCLStdLib.getT(), ((TypeType<EClassifier, EOperation>) actualType).getReferredType(), isStatic);
 		} else {
-			if(isGeneric(formalType)) {
+			if (isGeneric(formalType)) {
 				bind(formalType, actualType);
 				if (!formal2ActualBinding.containsKey(fOCLStdLib.getT2())) {
 					if (actualType instanceof CollectionType) {
 						bind(fOCLStdLib.getT2(), CollectionUtil.getFlattenedElementType((CollectionType) actualType));
-					}
-					else {
+					} else {
 						bind(fOCLStdLib.getT2(), actualType);
 					}
 				}
-			}			
+			}
 		}
 	}
 	
-	void resolveCollection(CollectionType formal, CollectionType actual) {
+	void resolveCollection(CollectionType formal, CollectionType actual, boolean isStatic) {
 		EClassifier formalElementType = formal.getElementType();
 		EClassifier actualElementType = actual.getElementType();
 		
-		resolve(formalElementType, actualElementType);
+		resolve(formalElementType, actualElementType, isStatic);
 		
 		if(formal instanceof DictionaryType && actual instanceof DictionaryType) {
 			DictionaryType formalDict = (DictionaryType) formal;
 			DictionaryType actualDict = (DictionaryType) actual;
-			resolve(formalDict.getKeyType(), actualDict.getKeyType());
+			resolve(formalDict.getKeyType(), actualDict.getKeyType(), isStatic);
 		}
 	}
 	
