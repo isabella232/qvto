@@ -50,7 +50,7 @@ public class ModelOperations extends AbstractContextualOperations {
 		return new OperationProvider[] {
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "asTransformation", new String[] { "model" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getTransformationClass(), getStdlib().getModelClass()),
-			new OwnedOperationProvider(COPY, COPY_NAME, getStdlib().getModelClass()),
+			new OwnedOperationProvider(COPY, COPY_NAME, oclStdLibrary.getT()),
 			
 			createOwnedStaticOperationProvider(CREATE_EMPTY_MODEL, CREATE_EMPTY_MODEL_NAME, null, oclStdLibrary.getT()),
 			
@@ -145,6 +145,9 @@ public class ModelOperations extends AbstractContextualOperations {
 		
 	private static final CallHandler CREATE_EMPTY_MODEL = new CallHandler() {
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
+			if(source instanceof ModelInstance) {
+				source = ((ModelInstance) source).eClass();
+			}
 			if(source instanceof ModelType == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, CREATE_EMPTY_MODEL_NAME));
 			}
