@@ -2925,7 +2925,9 @@ public class QvtOperationalVisitorCS
 					Module nextImportedModule = nextModuleEnv.getModuleContextType();
 					ModuleUsageCS result = org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory.eINSTANCE.createModuleUsageCS();
 					result.setImportKind(ImportKindEnum.EXTENSION);
-
+					result.setStartOffset(nextImportedCS.getStartOffset());
+					result.setEndOffset(nextImportedCS.getEndOffset());
+										
 					PathNameCS pathNameCS = CSTFactory.eINSTANCE.createPathNameCS();
 					for (SimpleNameCS simpleNameCS : nextImportedCS.getPathNameCS().getSimpleNames()) {
 						SimpleNameCS copyCS = CSTFactory.eINSTANCE.createSimpleNameCS();
