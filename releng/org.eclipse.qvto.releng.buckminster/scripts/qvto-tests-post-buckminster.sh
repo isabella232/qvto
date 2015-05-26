@@ -19,3 +19,5 @@ then
   mv buildroot/buckminster.output/org.eclipse.qvto.releng.buckminster_*-buckminster/javadoc/MMT-QVTo-javadoc.zip MMT-QVTo.javadoc/MMT-QVTo-javadoc.zip
   rm -rf buildroot/buckminster.output/org.eclipse.qvto.releng.buckminster_*-buckminster/javadoc
 fi
+
+/opt/public/common/apache-ant-1.8.1/bin/ant -f publishroot/publisher.ant -Dbuild.archives=${WORKSPACE} 
