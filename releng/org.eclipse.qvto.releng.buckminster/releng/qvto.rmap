@@ -5,7 +5,9 @@
   <rm:property key="git.qvto.local.repository.location" value="C:\GIT\org.eclipse.qvto"/>
   <rm:property key="resolve.target.platform" value="false"/>
   <rm:property key="build.type" value="I"/>
-  <rm:property key="build.type" mutable="false" value="I"/>
+  <rm:locator pattern="^com\.google.*" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="orbit"/>
+  <rm:locator pattern="^org\.apache.*" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.m2m\.qvt\.oml.*$" searchPathRef="qvto-source-code"/>
   <rm:locator pattern="^org\.eclipse\.m2m\.tests\.qvt\.oml.*$" searchPathRef="qvto-source-code"/>
   <rm:locator pattern="^org\.eclipse\.m2m\.tests\.qvto.*$" searchPathRef="qvto-source-code"/>
@@ -125,7 +127,7 @@
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=N)(build.type=S)))" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/modeling/emf/emf/updates/2.11milestones">
+      <rm:uri format="{0}/modeling/emf/emf/updates/milestones">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
@@ -166,12 +168,19 @@
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(&amp;(resolve.target.platform=true)(|(build.type=I)(build.type=M)(build.type=N)(build.type=R)(build.type=S)))" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/eclipse/updates/4.4">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="orbit">
     <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
-      <rm:uri format="{0}/tools/orbit/downloads/drops/R20140525021250/repository/">
+      <rm:uri format="{0}/tools/orbit/downloads/drops/S20150316021154/repository/">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
