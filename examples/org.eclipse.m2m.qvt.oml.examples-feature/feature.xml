@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.m2m.qvt.oml.examples"
       label="%featureName"
-      version="3.4.0.qualifier"
+      version="3.5.0.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.m2m.qvt.oml.samples"
       image="eclipse_update_120.jpg"
@@ -17,11 +17,11 @@
       %copyright
    </copyright>
 
-   <!--plugin
+   <plugin
          id="org.eclipse.m2m.qvt.oml.samples"
          download-size="0"
          install-size="0"
          version="0.0.0"
-         unpack="false"/-->
+         unpack="false"/>
 
 </feature>
