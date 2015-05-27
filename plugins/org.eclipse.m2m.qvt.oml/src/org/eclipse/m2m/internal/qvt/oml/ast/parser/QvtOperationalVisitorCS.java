@@ -2825,7 +2825,7 @@ public class QvtOperationalVisitorCS
 		
 		return multiplicityDef;
 	}
-	
+		
 	private void importsCS(MappingModuleCS parsedModuleCS, UnitProxy unit, Module module, QvtOperationalModuleEnv env, ExternalUnitElementsProvider importResolver) {
 		
 		EMap<String, List<QvtOperationalModuleEnv>> importMap = new BasicEMap<String, List<QvtOperationalModuleEnv>>(5);
@@ -5311,7 +5311,7 @@ public class QvtOperationalVisitorCS
 			}
 			if (!isCorrespondanceFound) {
 				env.reportWarning(
-						NLS.bind(ValidationMessages.QvtOperationalVisitorCS_incompatibleTransfSignature, importedModule.getName()),
+						NLS.bind(ValidationMessages.QvtOperationalVisitorCS_incompatibleTransfSignature, importedModule.getName(), module.getName()),
 						astNode.getStartPosition(), astNode.getEndPosition());
 				return;
 			}
