@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -27,7 +27,6 @@ import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.ocl.types.util.TypesSwitch;
 import org.eclipse.ocl.util.CollectionUtil;
-import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 
 
@@ -48,14 +47,16 @@ class GenericsResolver {
 		this.fBindSwitch = new BindSwitch();
 	}
 		
-	public boolean resolveGenericType(EClassifier owner, EClassifier formalType, EClassifier actualType) {
-		resolve(formalType, actualType);
-		EClassifier resolvedType = fBindSwitch.doSwitch(formalType);
-		return TypeUtil.compatibleTypeMatch(fEnv, actualType, resolvedType);
-	}
-	
-	
+	@SuppressWarnings("unchecked")
 	public EClassifier resolveOperationReturnType(EClassifier source, EOperation operation, List<? extends TypedElement<EClassifier>> args) {
+		if (isGeneric(operation.getEType())) {
+			EClassifier actualType = source;
+			if (actualType instanceof TypeType) {
+				actualType = ((TypeType<EClassifier, EOperation>) actualType).getReferredType();
+			}
+			bind(operation.getEType(), actualType);
+		}
+		
 		EClassifier owner = fEnv.getUMLReflection().getOwningClassifier(operation);		
 		resolve(owner, source);
 		
@@ -87,25 +88,24 @@ class GenericsResolver {
 			return;
 		}
 			
-		if(formalType instanceof CollectionType && actualType instanceof CollectionType) {
+		if (formalType instanceof CollectionType && actualType instanceof CollectionType) {
 			resolveCollection((CollectionType) formalType, (CollectionType) actualType);
-		} else if(formalType instanceof TypeType && actualType instanceof TypeType) {
-			TypeType<EClassifier, EOperation> actualTypeType = (TypeType<EClassifier, EOperation>) actualType;			
-			if(formalType == fEnv.getOCLStandardLibrary().getOclType()) {
+		} else if (formalType instanceof TypeType && actualType instanceof TypeType) {
+			TypeType<EClassifier, EOperation> actualTypeType = (TypeType<EClassifier, EOperation>) actualType;
+			if (formalType == fEnv.getOCLStandardLibrary().getOclType()) {
 				resolve(fOCLStdLib.getT(), actualTypeType.getReferredType());
 			}
 		} else {
-			if(isGeneric(formalType)) {
+			if (isGeneric(formalType)) {
 				bind(formalType, actualType);
 				if (!formal2ActualBinding.containsKey(fOCLStdLib.getT2())) {
 					if (actualType instanceof CollectionType) {
 						bind(fOCLStdLib.getT2(), CollectionUtil.getFlattenedElementType((CollectionType) actualType));
-					}
-					else {
+					} else {
 						bind(fOCLStdLib.getT2(), actualType);
 					}
 				}
-			}			
+			}
 		}
 	}
 	

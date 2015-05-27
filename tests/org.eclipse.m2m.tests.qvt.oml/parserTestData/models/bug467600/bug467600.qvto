@@ -5,6 +5,23 @@ transformation bug467600(in e : ECORE);
 
 main() {
 
+	// test template version of Model::createEmptyModel()
+	//
+	do {
+		var e1 : ECORE := ECORE.createEmptyModel();
+		assert fatal (e1.oclIsTypeOf(ECORE));
+		assert fatal (e1.objects()->size() = 0);
+		 
+		var e2 : ECORE := e.createEmptyModel();
+		assert fatal (e2.oclIsTypeOf(ECORE));
+		assert fatal (e2.objects()->size() = 0);
+		 
+		var e3 : ECORE := e.copy();
+		assert fatal (e3.oclIsTypeOf(ECORE));
+		assert fatal (e3.objects()->size() = 11);
+	};
+
+
 	// test various Model.objects*()
 	//
 	do {
