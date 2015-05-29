@@ -5,7 +5,8 @@
 	
 	<topic label="Overview" href="references/overview.html"/>
 	<topic label="Blackbox support" href="references/blackboxing.html"/>
-	<topic href="references/breakingChangesInQVTOImplementation.html" label="Breaking Changes In QVTO Implementation"/>	
+	<topic label="Importing compilation units" href="references/importing.html"/>
+	<topic label="Breaking Changes In QVTO Implementation" href="references/breakingChangesInQVTOImplementation.html"/>	
 	<topic label="Ant tasks support" href="references/anttasks.html"/>
 	<topic label="Reference" href="references/reference.html"/>	
 </toc>

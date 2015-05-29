@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="This is" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="org.eclipse.m2m.qvt.oml.runtime" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="This is" id="qvtTransformationContainer" name="Deployed QVT transformation source container"/>
+         <meta.schema plugin="org.eclipse.m2m.qvt.oml.runtime" id="qvtTransformationContainer" name="Deployed QVT transformation source container"/>
       </appInfo>
       <documentation>
-         Specify source container for deployed QVT transformations
+         This extension point provides a mechanism to register the source container for deployed QVTo plugins.
       </documentation>
    </annotation>
 
@@ -48,14 +48,22 @@
    </element>
 
    <element name="sourceContainer">
+      <annotation>
+         <documentation>
+            The source container of the QVTo plugin
+         </documentation>
+      </annotation>
       <complexType>
          <sequence>
          </sequence>
-         <attribute name="path" type="string">
+         <attribute name="path" type="string" use="required">
             <annotation>
                <documentation>
-                  QVT source directory in form of path related to project root.
+                  The path to the source container directory, relative to the project root
                </documentation>
+               <appInfo>
+                  <meta.attribute kind="resource"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
@@ -75,28 +83,24 @@
          <meta.section type="examples"/>
       </appInfo>
       <documentation>
-         &lt;extension
-     point=&quot;org.eclipse.m2m.qvt.oml.runtime.qvtTransformationContainer&quot;&gt;
-   &lt;sourceContainer path=&quot;transforms&quot;/&gt;
+         &lt;p&gt;
+The following example registers the &quot;transforms&quot; directory as source container for a QVTo plugin.
+&lt;/p&gt;
+&lt;pre&gt;
+&lt;extension point=&quot;org.eclipse.m2m.qvt.oml.runtime.qvtTransformationContainer&quot;&gt;
+	&lt;sourceContainer path=&quot;transforms&quot;/&gt;
 &lt;/extension&gt;
+&lt;/pre&gt;
       </documentation>
    </annotation>
 
-   <annotation>
-      <appInfo>
-         <meta.section type="apiInfo"/>
-      </appInfo>
-      <documentation>
-         [Enter API information here.]
-      </documentation>
-   </annotation>
 
    <annotation>
       <appInfo>
          <meta.section type="implementation"/>
       </appInfo>
       <documentation>
-         It&apos;s substitution for &quot;QVT source container&quot; in &quot;Operational QVT Project&quot; intended for deployed transformations.
+         A substitution for the &quot;QVT source container&quot; of QVTo workspace projects, intended for deployed transformations
       </documentation>
    </annotation>
 
@@ -105,7 +109,7 @@
          <meta.section type="copyright"/>
       </appInfo>
       <documentation>
-         [Copyright]
+         Copyright (c) 2007, 2015 Borland Software Corporation and others
       </documentation>
    </annotation>
 
