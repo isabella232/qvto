@@ -53,12 +53,12 @@
 			<tag name="noextend" description="Interface is not intended to be extended by clients."></tag>
 
 			<sourcepath>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml\src"/>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml\_generated"/>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml.ecore.imperativeocl\src"/>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml.ocl\src"/>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml.runtime\src"/>
-				<pathelement location=".\..\org.eclipse.m2m.qvt.oml.runtime.ui\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml\_generated"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.ecore.imperativeocl\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.ocl\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.runtime\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.runtime.ui\src"/>
 			</sourcepath>
     
 			<package name="org.eclipse.m2m.qvt.oml"/>
