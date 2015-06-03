@@ -60,26 +60,26 @@ main() {
 	};
 
 	do {
-		var v : Set(ECORE::EClassifier) := pack.subobjectsOfKind(EClassifier);
+		var v : Set(Element) := pack.subobjectsOfKind(EClassifier);
 		assert fatal (v->size() = 3);
 	};
 
 	do {
-		var v : Set(EDataType) := pack.subobjectsOfType(EEnum);
+		var v : Set(Element) := pack.subobjectsOfType(EEnum);
 		assert fatal (v->size() = 1);
 	};
 
 	do {
-		var v : Set(EModelElement) := pack.allSubobjectsOfKind(ETypedElement);
+		var v : Set(Element) := pack.allSubobjectsOfKind(ETypedElement);
 		assert fatal (v->size() = 3);
 	};
 
 	do {
-		var v : Set(ETypedElement) := pack.allSubobjectsOfType(EAttribute);
+		var v : Set(Element) := pack.allSubobjectsOfType(EAttribute);
 		assert fatal (v->size() = 2);
 		
-		var attr : ETypedElement := v->asSequence()->at(1);
-		var attr2 : ETypedElement := v->asSequence()->at(2);
+		var attr : Element := v->asSequence()->at(1);
+		var attr2 : Element := v->asSequence()->at(2);
 
 		assert fatal(pack.allSubobjectsOfType(EAttribute)->includes(attr));
 		assert fatal(not pack.allSubobjectsOfType(EAttribute)->excludes(attr));
