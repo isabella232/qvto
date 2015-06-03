@@ -219,14 +219,14 @@ public class CollectionTypeOperations extends AbstractContextualOperations {
 
 				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=467600
 				//
-				new OperationProvider(INCLUDES, PredefinedType.INCLUDES_NAME, oclStdlib.getBoolean(), oclStdlib.getOclAny()),
-				new OperationProvider(EXCLUDES, PredefinedType.EXCLUDES_NAME, oclStdlib.getBoolean(), oclStdlib.getOclAny()),
-				new OperationProvider(COUNT, PredefinedType.COUNT_NAME, oclStdlib.getInteger(), oclStdlib.getOclAny()),
-
-				new OperationProvider(INCLUDES_ALL, PredefinedType.INCLUDES_ALL_NAME, oclStdlib.getBoolean(), collectionOfAny),
-				new OperationProvider(EXCLUDES_ALL, PredefinedType.EXCLUDES_ALL_NAME, oclStdlib.getBoolean(), collectionOfAny),
-				new OperationProvider(EQUAL, PredefinedType.EQUAL_NAME, oclStdlib.getBoolean(), collectionOfAny),
-				new OperationProvider(NOT_EQUAL, PredefinedType.NOT_EQUAL_NAME, oclStdlib.getBoolean(), collectionOfAny),
+//				new OperationProvider(INCLUDES, PredefinedType.INCLUDES_NAME, oclStdlib.getBoolean(), oclStdlib.getOclAny()),
+//				new OperationProvider(EXCLUDES, PredefinedType.EXCLUDES_NAME, oclStdlib.getBoolean(), oclStdlib.getOclAny()),
+//				new OperationProvider(COUNT, PredefinedType.COUNT_NAME, oclStdlib.getInteger(), oclStdlib.getOclAny()),
+//
+//				new OperationProvider(INCLUDES_ALL, PredefinedType.INCLUDES_ALL_NAME, oclStdlib.getBoolean(), collectionOfAny),
+//				new OperationProvider(EXCLUDES_ALL, PredefinedType.EXCLUDES_ALL_NAME, oclStdlib.getBoolean(), collectionOfAny),
+//				new OperationProvider(EQUAL, PredefinedType.EQUAL_NAME, oclStdlib.getBoolean(), collectionOfAny),
+//				new OperationProvider(NOT_EQUAL, PredefinedType.NOT_EQUAL_NAME, oclStdlib.getBoolean(), collectionOfAny),
 		};
 	}
 }

@@ -56,9 +56,9 @@ public class ElementOperations extends AbstractContextualOperations {
 	
 	@Override
 	protected OperationProvider[] getOperations() {
-		OCLStandardLibrary<EClassifier> oclStdLibrary = getStdlib().getEnvironment().getOCLStandardLibrary();
+		//OCLStandardLibrary<EClassifier> oclStdLibrary = getStdlib().getEnvironment().getOCLStandardLibrary();
 		EClassifier elementSet = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
-		EClassifier setOfT = TypeUtil.resolveSetType(getStdlib().getEnvironment(), oclStdLibrary.getT());
+		EClassifier setOfT = elementSet;//TypeUtil.resolveSetType(getStdlib().getEnvironment(), oclStdLibrary.getT());
 		EClassifier oclType = getStdlib().getOCLStdLib().getOclType();
 		return new OwnedOperationProvider[] {
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "_localId", getOclStdlib().getString()), //$NON-NLS-1$
