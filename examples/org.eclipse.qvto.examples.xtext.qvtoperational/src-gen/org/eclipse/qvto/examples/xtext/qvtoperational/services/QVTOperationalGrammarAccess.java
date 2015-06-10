@@ -891,23 +891,17 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class TypeRef2CSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef2CS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cTypedRefCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cWildcardTypeRefCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cTypedRefCSParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		//// FIXME deviation from OCLInEcore. No templates parameter, yet
 		// TypeRef2CS returns base::TypeRefCS:
-		//	TypedRefCS | WildcardTypeRefCS;
+		//// | WildcardTypeRefCS
+		// TypedRefCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//TypedRefCS | WildcardTypeRefCS
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//TypedRefCS
-		public RuleCall getTypedRefCSParserRuleCall_0() { return cTypedRefCSParserRuleCall_0; }
-
-		//WildcardTypeRefCS
-		public RuleCall getWildcardTypeRefCSParserRuleCall_1() { return cWildcardTypeRefCSParserRuleCall_1; }
+		//// | WildcardTypeRefCS
+		// TypedRefCS
+		public RuleCall getTypedRefCSParserRuleCall() { return cTypedRefCSParserRuleCall; }
 	}
 
 	public class TypedRef2CSElements extends AbstractParserRuleElementFinder {
@@ -928,6 +922,30 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 		//TypedTypeRefCS
 		public RuleCall getTypedTypeRefCSParserRuleCall_1() { return cTypedTypeRefCSParserRuleCall_1; }
+	}
+
+	public class TypedMultiplicityRef2CSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedMultiplicityRef2CS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cTypedRef2CSParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Assignment cOwnedMultiplicityAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0 = (RuleCall)cOwnedMultiplicityAssignment_1.eContents().get(0);
+		
+		//TypedMultiplicityRef2CS returns base::TypedRefCS:
+		//	TypedRef2CS ownedMultiplicity=MultiplicityCS?;
+		@Override public ParserRule getRule() { return rule; }
+
+		//TypedRef2CS ownedMultiplicity=MultiplicityCS?
+		public Group getGroup() { return cGroup; }
+
+		//TypedRef2CS
+		public RuleCall getTypedRef2CSParserRuleCall_0() { return cTypedRef2CSParserRuleCall_0; }
+
+		//ownedMultiplicity=MultiplicityCS?
+		public Assignment getOwnedMultiplicityAssignment_1() { return cOwnedMultiplicityAssignment_1; }
+
+		//MultiplicityCS
+		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0; }
 	}
 
 	public class TypedTypeRef2CSElements extends AbstractParserRuleElementFinder {
@@ -970,30 +988,6 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightParenthesisKeyword_1_2() { return cRightParenthesisKeyword_1_2; }
 	}
 
-	public class TypedMultiplicityRef2CSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedMultiplicityRef2CS");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cTypedRef2CSParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Assignment cOwnedMultiplicityAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0 = (RuleCall)cOwnedMultiplicityAssignment_1.eContents().get(0);
-		
-		//TypedMultiplicityRef2CS returns base::TypedRefCS:
-		//	TypedRef2CS ownedMultiplicity=MultiplicityCS?;
-		@Override public ParserRule getRule() { return rule; }
-
-		//TypedRef2CS ownedMultiplicity=MultiplicityCS?
-		public Group getGroup() { return cGroup; }
-
-		//TypedRef2CS
-		public RuleCall getTypedRef2CSParserRuleCall_0() { return cTypedRef2CSParserRuleCall_0; }
-
-		//ownedMultiplicity=MultiplicityCS?
-		public Assignment getOwnedMultiplicityAssignment_1() { return cOwnedMultiplicityAssignment_1; }
-
-		//MultiplicityCS
-		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0; }
-	}
-
 	public class ClassifierPropertyCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ClassifierPropertyCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1014,13 +1008,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOppositeAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
 		private final RuleCall cOppositeIdentifierParserRuleCall_6_2_0 = (RuleCall)cOppositeAssignment_6_2.eContents().get(0);
 		
-		////TypedTypeRefCS returns base::TypedTypeRefCS:
-		//
-		////	ownedPathName=PathName2CS	// (ownedTemplateBinding=TemplateBindingCS)?
-		//
-		////						// FIXME deviation from OCLInEcore. No templates parameter, yet
-		// //;
-		// ClassifierPropertyCS:
+		//ClassifierPropertyCS:
 		//	stereotypes=StereotypeQualifierCS? qualifiers+=FeatureQualifier* name=UnrestrictedName ":"
 		//	ownedType=TypedMultiplicityRef2CS default=SINGLE_QUOTED_STRING?
 		//	// FIXME QVTO syntax define a more complex InitPartCS	
@@ -2549,8 +2537,8 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	private final QVToClassCSElements pQVToClassCS;
 	private final TypeRef2CSElements pTypeRef2CS;
 	private final TypedRef2CSElements pTypedRef2CS;
-	private final TypedTypeRef2CSElements pTypedTypeRef2CS;
 	private final TypedMultiplicityRef2CSElements pTypedMultiplicityRef2CS;
+	private final TypedTypeRef2CSElements pTypedTypeRef2CS;
 	private final ClassifierPropertyCSElements pClassifierPropertyCS;
 	private final StereotypeQualifierCSElements pStereotypeQualifierCS;
 	private final MultiplicityCSElements pMultiplicityCS;
@@ -2613,8 +2601,8 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		this.pQVToClassCS = new QVToClassCSElements();
 		this.pTypeRef2CS = new TypeRef2CSElements();
 		this.pTypedRef2CS = new TypedRef2CSElements();
-		this.pTypedTypeRef2CS = new TypedTypeRef2CSElements();
 		this.pTypedMultiplicityRef2CS = new TypedMultiplicityRef2CSElements();
+		this.pTypedTypeRef2CS = new TypedTypeRef2CSElements();
 		this.pClassifierPropertyCS = new ClassifierPropertyCSElements();
 		this.pStereotypeQualifierCS = new StereotypeQualifierCSElements();
 		this.pMultiplicityCS = new MultiplicityCSElements();
@@ -2970,7 +2958,8 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// FIXME deviation from OCLInEcore. No templates parameter, yet
 	// TypeRef2CS returns base::TypeRefCS:
-	//	TypedRefCS | WildcardTypeRefCS;
+	//// | WildcardTypeRefCS
+	// TypedRefCS;
 	public TypeRef2CSElements getTypeRef2CSAccess() {
 		return pTypeRef2CS;
 	}
@@ -2989,16 +2978,6 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypedRef2CSAccess().getRule();
 	}
 
-	//TypedTypeRef2CS:
-	//	ownedPathName=PathName2CS ("(" ownedBinding=TemplateBindingCS ")")?;
-	public TypedTypeRef2CSElements getTypedTypeRef2CSAccess() {
-		return pTypedTypeRef2CS;
-	}
-	
-	public ParserRule getTypedTypeRef2CSRule() {
-		return getTypedTypeRef2CSAccess().getRule();
-	}
-
 	//TypedMultiplicityRef2CS returns base::TypedRefCS:
 	//	TypedRef2CS ownedMultiplicity=MultiplicityCS?;
 	public TypedMultiplicityRef2CSElements getTypedMultiplicityRef2CSAccess() {
@@ -3009,13 +2988,17 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		return getTypedMultiplicityRef2CSAccess().getRule();
 	}
 
-	////TypedTypeRefCS returns base::TypedTypeRefCS:
-	//
-	////	ownedPathName=PathName2CS	// (ownedTemplateBinding=TemplateBindingCS)?
-	//
-	////						// FIXME deviation from OCLInEcore. No templates parameter, yet
-	// //;
-	// ClassifierPropertyCS:
+	//TypedTypeRef2CS:
+	//	ownedPathName=PathName2CS ("(" ownedBinding=TemplateBindingCS ")")?;
+	public TypedTypeRef2CSElements getTypedTypeRef2CSAccess() {
+		return pTypedTypeRef2CS;
+	}
+	
+	public ParserRule getTypedTypeRef2CSRule() {
+		return getTypedTypeRef2CSAccess().getRule();
+	}
+
+	//ClassifierPropertyCS:
 	//	stereotypes=StereotypeQualifierCS? qualifiers+=FeatureQualifier* name=UnrestrictedName ":"
 	//	ownedType=TypedMultiplicityRef2CS default=SINGLE_QUOTED_STRING?
 	//	// FIXME QVTO syntax define a more complex InitPartCS	

@@ -625,8 +625,6 @@ finally {
 
 
 
-
-
 // Entry rule entryRuleTypedMultiplicityRef2CS
 entryRuleTypedMultiplicityRef2CS 
 :
@@ -652,6 +650,8 @@ ruleTypedMultiplicityRef2CS
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 
 
@@ -4146,7 +4146,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-
 rule__TypedRef2CS__Alternatives
     @init {
 		int stackSize = keepStackSize();
@@ -7638,8 +7637,6 @@ finally {
 
 
 
-
-
 rule__TypedMultiplicityRef2CS__Group__0
     @init {
 		int stackSize = keepStackSize();
@@ -7695,6 +7692,8 @@ rule__TypedMultiplicityRef2CS__Group__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 
 
@@ -22387,8 +22386,6 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-
-
 rule__TypedMultiplicityRef2CS__OwnedMultiplicityAssignment_1
     @init {
 		int stackSize = keepStackSize();
@@ -22403,6 +22400,8 @@ rule__TypedMultiplicityRef2CS__OwnedMultiplicityAssignment_1
 finally {
 	restoreStackSize(stackSize);
 }
+
+
 
 rule__ClassifierPropertyCS__StereotypesAssignment_0
     @init {

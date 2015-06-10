@@ -47,7 +47,6 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getClassCSAccess().getAlternatives_0(), "rule__ClassCS__Alternatives_0");
 					put(grammarAccess.getDataTypeCSAccess().getAlternatives_0(), "rule__DataTypeCS__Alternatives_0");
 					put(grammarAccess.getQVToClassCSAccess().getAlternatives_4_1_0(), "rule__QVToClassCS__Alternatives_4_1_0");
-					put(grammarAccess.getTypeRef2CSAccess().getAlternatives(), "rule__TypeRef2CS__Alternatives");
 					put(grammarAccess.getTypedRef2CSAccess().getAlternatives(), "rule__TypedRef2CS__Alternatives");
 					put(grammarAccess.getTagCSAccess().getNameAlternatives_1_0(), "rule__TagCS__NameAlternatives_1_0");
 					put(grammarAccess.getTransformationCSAccess().getAlternatives(), "rule__TransformationCS__Alternatives");
@@ -123,9 +122,9 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQVToClassCSAccess().getGroup_3_1_1(), "rule__QVToClassCS__Group_3_1_1__0");
 					put(grammarAccess.getQVToClassCSAccess().getGroup_4(), "rule__QVToClassCS__Group_4__0");
 					put(grammarAccess.getQVToClassCSAccess().getGroup_4_1(), "rule__QVToClassCS__Group_4_1__0");
+					put(grammarAccess.getTypedMultiplicityRef2CSAccess().getGroup(), "rule__TypedMultiplicityRef2CS__Group__0");
 					put(grammarAccess.getTypedTypeRef2CSAccess().getGroup(), "rule__TypedTypeRef2CS__Group__0");
 					put(grammarAccess.getTypedTypeRef2CSAccess().getGroup_1(), "rule__TypedTypeRef2CS__Group_1__0");
-					put(grammarAccess.getTypedMultiplicityRef2CSAccess().getGroup(), "rule__TypedMultiplicityRef2CS__Group__0");
 					put(grammarAccess.getClassifierPropertyCSAccess().getGroup(), "rule__ClassifierPropertyCS__Group__0");
 					put(grammarAccess.getClassifierPropertyCSAccess().getGroup_6(), "rule__ClassifierPropertyCS__Group_6__0");
 					put(grammarAccess.getStereotypeQualifierCSAccess().getGroup(), "rule__StereotypeQualifierCS__Group__0");
@@ -320,9 +319,9 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getQVToClassCSAccess().getOwnedPropertiesAssignment_4_1_0_0(), "rule__QVToClassCS__OwnedPropertiesAssignment_4_1_0_0");
 					put(grammarAccess.getQVToClassCSAccess().getOwnedOperationsAssignment_4_1_0_1(), "rule__QVToClassCS__OwnedOperationsAssignment_4_1_0_1");
 					put(grammarAccess.getQVToClassCSAccess().getOwnedAnnotationsAssignment_4_1_0_2(), "rule__QVToClassCS__OwnedAnnotationsAssignment_4_1_0_2");
+					put(grammarAccess.getTypedMultiplicityRef2CSAccess().getOwnedMultiplicityAssignment_1(), "rule__TypedMultiplicityRef2CS__OwnedMultiplicityAssignment_1");
 					put(grammarAccess.getTypedTypeRef2CSAccess().getOwnedPathNameAssignment_0(), "rule__TypedTypeRef2CS__OwnedPathNameAssignment_0");
 					put(grammarAccess.getTypedTypeRef2CSAccess().getOwnedBindingAssignment_1_1(), "rule__TypedTypeRef2CS__OwnedBindingAssignment_1_1");
-					put(grammarAccess.getTypedMultiplicityRef2CSAccess().getOwnedMultiplicityAssignment_1(), "rule__TypedMultiplicityRef2CS__OwnedMultiplicityAssignment_1");
 					put(grammarAccess.getClassifierPropertyCSAccess().getStereotypesAssignment_0(), "rule__ClassifierPropertyCS__StereotypesAssignment_0");
 					put(grammarAccess.getClassifierPropertyCSAccess().getQualifiersAssignment_1(), "rule__ClassifierPropertyCS__QualifiersAssignment_1");
 					put(grammarAccess.getClassifierPropertyCSAccess().getNameAssignment_2(), "rule__ClassifierPropertyCS__NameAssignment_2");

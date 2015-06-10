@@ -184,8 +184,10 @@ Workflow {
 	component = @org.eclipse.qvtd.cs2as.build.mwe.GenerateCGedQVTiTransformation { 
 		resourceSet = resourceSet
 		// oclFileURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
-		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"  
-		javaPackage = "${projectName}"
+		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
+		// FIXME the following only work if the output project are in the same FS folder. Better use a projectName and improve generator 
+		javaFolder = "../${projectName}/src-gen"
+		javaPackage = "${projectName}.cs2as"
 		environmentClassName = "${projectName}.cs2as.LookupEnvironment"
 		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
 		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"

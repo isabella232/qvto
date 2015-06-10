@@ -4301,7 +4301,7 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTypedMultiplicityRef2CS"
-    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1457:1: entryRuleTypedMultiplicityRef2CS returns [EObject current=null] : iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF ;
+    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1455:1: entryRuleTypedMultiplicityRef2CS returns [EObject current=null] : iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF ;
     public final EObject entryRuleTypedMultiplicityRef2CS() throws RecognitionException {
         EObject current = null;
 
@@ -4309,13 +4309,13 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1458:2: (iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1459:2: iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1456:2: (iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1457:2: iv_ruleTypedMultiplicityRef2CS= ruleTypedMultiplicityRef2CS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypedMultiplicityRef2CSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRef2CS_in_entryRuleTypedMultiplicityRef2CS3161);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedMultiplicityRef2CS_in_entryRuleTypedMultiplicityRef2CS3159);
             iv_ruleTypedMultiplicityRef2CS=ruleTypedMultiplicityRef2CS();
 
             state._fsp--;
@@ -4323,7 +4323,7 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypedMultiplicityRef2CS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedMultiplicityRef2CS3171); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedMultiplicityRef2CS3169); if (state.failed) return current;
 
             }
 
@@ -4341,7 +4341,7 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypedMultiplicityRef2CS"
-    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1466:1: ruleTypedMultiplicityRef2CS returns [EObject current=null] : (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? ) ;
+    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1464:1: ruleTypedMultiplicityRef2CS returns [EObject current=null] : (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? ) ;
     public final EObject ruleTypedMultiplicityRef2CS() throws RecognitionException {
         EObject current = null;
 
@@ -4353,11 +4353,11 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1469:28: ( (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1470:1: (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1467:28: ( (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1468:1: (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1470:1: (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1471:2: this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )?
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1468:1: (this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )? )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1469:2: this_TypedRef2CS_0= ruleTypedRef2CS ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )?
             {
             if ( state.backtracking==0 ) {
                
@@ -4369,7 +4369,7 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getTypedMultiplicityRef2CSAccess().getTypedRef2CSParserRuleCall_0()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRef2CS_in_ruleTypedMultiplicityRef2CS3221);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRef2CS_in_ruleTypedMultiplicityRef2CS3219);
             this_TypedRef2CS_0=ruleTypedRef2CS();
 
             state._fsp--;
@@ -4380,7 +4380,7 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
                       afterParserOrEnumRuleCall();
                   
             }
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1482:1: ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )?
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1480:1: ( (lv_ownedMultiplicity_1_0= ruleMultiplicityCS ) )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -4389,17 +4389,17 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
             }
             switch (alt29) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1483:1: (lv_ownedMultiplicity_1_0= ruleMultiplicityCS )
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1481:1: (lv_ownedMultiplicity_1_0= ruleMultiplicityCS )
                     {
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1483:1: (lv_ownedMultiplicity_1_0= ruleMultiplicityCS )
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1484:3: lv_ownedMultiplicity_1_0= ruleMultiplicityCS
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1481:1: (lv_ownedMultiplicity_1_0= ruleMultiplicityCS )
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:1482:3: lv_ownedMultiplicity_1_0= ruleMultiplicityCS
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getTypedMultiplicityRef2CSAccess().getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_ruleTypedMultiplicityRef2CS3241);
+                    pushFollow(FollowSets000.FOLLOW_ruleMultiplicityCS_in_ruleTypedMultiplicityRef2CS3239);
                     lv_ownedMultiplicity_1_0=ruleMultiplicityCS();
 
                     state._fsp--;
@@ -30081,10 +30081,10 @@ public class InternalQVTOperationalParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_EOF_in_entryRuleTypedRef2CS3044 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeLiteralCS_in_ruleTypedRef2CS3094 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRef2CS3124 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedMultiplicityRef2CS_in_entryRuleTypedMultiplicityRef2CS3161 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypedMultiplicityRef2CS3171 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRef2CS_in_ruleTypedMultiplicityRef2CS3221 = new BitSet(new long[]{0x0010000000000002L});
-        public static final BitSet FOLLOW_ruleMultiplicityCS_in_ruleTypedMultiplicityRef2CS3241 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedMultiplicityRef2CS_in_entryRuleTypedMultiplicityRef2CS3159 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypedMultiplicityRef2CS3169 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRef2CS_in_ruleTypedMultiplicityRef2CS3219 = new BitSet(new long[]{0x0010000000000002L});
+        public static final BitSet FOLLOW_ruleMultiplicityCS_in_ruleTypedMultiplicityRef2CS3239 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleClassifierPropertyCS_in_entryRuleClassifierPropertyCS3278 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleClassifierPropertyCS3288 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleStereotypeQualifierCS_in_ruleClassifierPropertyCS3334 = new BitSet(new long[]{0x00000000F80000C0L});

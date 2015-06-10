@@ -11,7 +11,6 @@ package org.eclipse.qvto.examples.xtext.qvtoperational.cs2as;
 
 import java.util.Iterator;
 import java.util.List;
-
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;

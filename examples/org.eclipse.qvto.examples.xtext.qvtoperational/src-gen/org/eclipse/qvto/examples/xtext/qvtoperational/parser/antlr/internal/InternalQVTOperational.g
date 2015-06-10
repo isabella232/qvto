@@ -1451,8 +1451,6 @@ ruleTypedRef2CS returns [EObject current=null]
 
 
 
-
-
 // Entry rule entryRuleTypedMultiplicityRef2CS
 entryRuleTypedMultiplicityRef2CS returns [EObject current=null] 
 	:
@@ -1499,6 +1497,8 @@ ruleTypedMultiplicityRef2CS returns [EObject current=null]
 )
 )?)
 ;
+
+
 
 
 

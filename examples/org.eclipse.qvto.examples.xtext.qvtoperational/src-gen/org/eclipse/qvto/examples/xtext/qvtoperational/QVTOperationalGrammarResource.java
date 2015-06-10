@@ -204,7 +204,7 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 			PR_TransformationDefCS.setAlternatives(createGroup(createRuleCall(PR_TransformationHeaderCS), createKeyword("{"), setCardinality("*", createAlternatives(createAssignment("ownedProperties", "+=", createRuleCall(PR_ModulePropertyCS)), createAssignment("ownedOperations", "+=", createRuleCall(PR_ModuleOperationCS)))), createKeyword("}"), setCardinality("?", createKeyword(";"))));
 			PR_TransformationHeaderCS.setAlternatives(createGroup(setCardinality("*", createAssignment("qualifiers", "+=", createRuleCall(PR_TransformationQualifier))), createKeyword("transformation"), createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword("("), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("parameters", "+=", createRuleCall(PR_ParameterDeclarationCS)))), createKeyword(")"), setCardinality("*", createAssignment("moduleUsages", "+=", createRuleCall(PR_ModuleUsageCS))), setCardinality("?", createGroup(createKeyword("refines"), createAssignment("refines", "=", createRuleCall(PR_ModuleRefCS))))));
 			PR_TransformationQualifier.setAlternatives(createAlternatives(createKeyword("blackbox"), createKeyword("abstract"), createKeyword("static")));
-			PR_TypeRef2CS.setAlternatives(createAlternatives(createRuleCall(_Base.PR_TypedRefCS), createRuleCall(_Base.PR_WildcardTypeRefCS)));
+			PR_TypeRef2CS.setAlternatives(createRuleCall(_Base.PR_TypedRefCS));
 			PR_TypeSpecCS.setAlternatives(createGroup(createAssignment("ownedType", "=", createRuleCall(_Base.PR_TypedRefCS)), setCardinality("?", createGroup(createKeyword("@"), createAssignment("extentLocation", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName))))));
 			PR_TypedMultiplicityRef2CS.setAlternatives(createGroup(createRuleCall(PR_TypedRef2CS), setCardinality("?", createAssignment("ownedMultiplicity", "=", createRuleCall(PR_MultiplicityCS)))));
 			PR_TypedRef2CS.setAlternatives(createAlternatives(createRuleCall(_ImperativeOCL.PR_TypeLiteralCS), createRuleCall(_Base.PR_TypedTypeRefCS)));
@@ -255,8 +255,8 @@ public class QVTOperationalGrammarResource extends AbstractGrammarResource
 				rules.add(PR_QVToClassCS);
 				rules.add(PR_TypeRef2CS);
 				rules.add(PR_TypedRef2CS);
-				rules.add(PR_TypedTypeRef2CS);
 				rules.add(PR_TypedMultiplicityRef2CS);
+				rules.add(PR_TypedTypeRef2CS);
 				rules.add(PR_ClassifierPropertyCS);
 				rules.add(PR_StereotypeQualifierCS);
 				rules.add(PR_MultiplicityCS);
