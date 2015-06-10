@@ -3,7 +3,7 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * @model
  * @generated
  */
-public interface PathName2CS extends PathNameCS {
+public interface PathName2CS extends PivotableElementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Path Elements2</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS}.

@@ -7,11 +7,11 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
@@ -23,32 +23,32 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getPathNameCS <em>Path Name CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getUriCS <em>Uri CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getPackagePath <em>Package Path</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getUri <em>Uri</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	/**
-	 * The cached value of the '{@link #getPathNameCS() <em>Path Name CS</em>}' containment reference.
+	 * The cached value of the '{@link #getPackagePath() <em>Package Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathNameCS()
+	 * @see #getPackagePath()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS pathNameCS;
+	protected PathName2CS packagePath;
 
 	/**
-	 * The cached value of the '{@link #getUriCS() <em>Uri CS</em>}' containment reference.
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getUriCS()
+	 * @see #getUri()
 	 * @generated
 	 * @ordered
 	 */
-	protected StringLiteralExpCS uriCS;
+	protected StringLiteralExpCS uri;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PathNameCS getPathNameCS() {
-		return pathNameCS;
+	public PathName2CS getPackagePath() {
+		return packagePath;
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPathNameCS(PathNameCS newPathNameCS, NotificationChain msgs) {
-		PathNameCS oldPathNameCS = pathNameCS;
-		pathNameCS = newPathNameCS;
+	public NotificationChain basicSetPackagePath(PathName2CS newPackagePath, NotificationChain msgs) {
+		PathName2CS oldPackagePath = packagePath;
+		packagePath = newPackagePath;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS, oldPathNameCS, newPathNameCS);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, oldPackagePath, newPackagePath);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +98,18 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPathNameCS(PathNameCS newPathNameCS) {
-		if (newPathNameCS != pathNameCS) {
+	public void setPackagePath(PathName2CS newPackagePath) {
+		if (newPackagePath != packagePath) {
 			NotificationChain msgs = null;
-			if (pathNameCS != null)
-				msgs = ((InternalEObject)pathNameCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS, null, msgs);
-			if (newPathNameCS != null)
-				msgs = ((InternalEObject)newPathNameCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS, null, msgs);
-			msgs = basicSetPathNameCS(newPathNameCS, msgs);
+			if (packagePath != null)
+				msgs = ((InternalEObject)packagePath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, null, msgs);
+			if (newPackagePath != null)
+				msgs = ((InternalEObject)newPackagePath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, null, msgs);
+			msgs = basicSetPackagePath(newPackagePath, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS, newPathNameCS, newPathNameCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, newPackagePath, newPackagePath));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringLiteralExpCS getUriCS() {
-		return uriCS;
+	public StringLiteralExpCS getUri() {
+		return uri;
 	}
 
 	/**
@@ -126,11 +126,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetUriCS(StringLiteralExpCS newUriCS, NotificationChain msgs) {
-		StringLiteralExpCS oldUriCS = uriCS;
-		uriCS = newUriCS;
+	public NotificationChain basicSetUri(StringLiteralExpCS newUri, NotificationChain msgs) {
+		StringLiteralExpCS oldUri = uri;
+		uri = newUri;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS, oldUriCS, newUriCS);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI, oldUri, newUri);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -141,18 +141,18 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUriCS(StringLiteralExpCS newUriCS) {
-		if (newUriCS != uriCS) {
+	public void setUri(StringLiteralExpCS newUri) {
+		if (newUri != uri) {
 			NotificationChain msgs = null;
-			if (uriCS != null)
-				msgs = ((InternalEObject)uriCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS, null, msgs);
-			if (newUriCS != null)
-				msgs = ((InternalEObject)newUriCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS, null, msgs);
-			msgs = basicSetUriCS(newUriCS, msgs);
+			if (uri != null)
+				msgs = ((InternalEObject)uri).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI, null, msgs);
+			if (newUri != null)
+				msgs = ((InternalEObject)newUri).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI, null, msgs);
+			msgs = basicSetUri(newUri, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS, newUriCS, newUriCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI, newUri, newUri));
 	}
 
 	/**
@@ -163,10 +163,10 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS:
-				return basicSetPathNameCS(null, msgs);
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS:
-				return basicSetUriCS(null, msgs);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
+				return basicSetPackagePath(null, msgs);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
+				return basicSetUri(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,10 +179,10 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS:
-				return getPathNameCS();
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS:
-				return getUriCS();
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
+				return getPackagePath();
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
+				return getUri();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,11 +195,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS:
-				setPathNameCS((PathNameCS)newValue);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
+				setPackagePath((PathName2CS)newValue);
 				return;
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS:
-				setUriCS((StringLiteralExpCS)newValue);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
+				setUri((StringLiteralExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,11 +213,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS:
-				setPathNameCS((PathNameCS)null);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
+				setPackagePath((PathName2CS)null);
 				return;
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS:
-				setUriCS((StringLiteralExpCS)null);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
+				setUri((StringLiteralExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -231,10 +231,10 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PATH_NAME_CS:
-				return pathNameCS != null;
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI_CS:
-				return uriCS != null;
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
+				return packagePath != null;
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
+				return uri != null;
 		}
 		return super.eIsSet(featureID);
 	}

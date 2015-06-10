@@ -11,6 +11,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperational.cs2as;
 
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
@@ -35,6 +36,7 @@ import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.messages.PivotMessages;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
@@ -47,7 +49,6 @@ import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 import org.eclipse.ocl.xtext.basecs.TypeCS;
-import org.eclipse.qvto.examples.xtext.imperativeocl.cs2as.CS2ASTransformationExecutor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.Library;
 import org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter;
@@ -55,10 +56,10 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalFactory;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
+import org.eclipse.qvto.examples.xtext.imperativeocl.cs2as.CS2ASTransformationExecutor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS;
@@ -99,7 +100,6 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Operation = PACKid_$metamodel$.getClassId("Operation", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OperationCS = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_2015_s_BaseCS.getClassId("OperationCS", 0);
-    public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OperationParameterDeclarationCS = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperationalCS.getClassId("OperationParameterDeclarationCS", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_OperationalTransformation = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_QVTOperational.getClassId("OperationalTransformation", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Package = PACKid_$metamodel$.getClassId("Package", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_PackageCS = PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_2015_s_BaseCS.getClassId("PackageCS", 0);
@@ -141,7 +141,6 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ClassifierPropertyCS = TypeId.SET.getSpecializedId(CLSSid_ClassifierPropertyCS);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_MappingOperationCS = TypeId.SET.getSpecializedId(CLSSid_MappingOperationCS);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_MetamodelCS = TypeId.SET.getSpecializedId(CLSSid_MetamodelCS);
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_OperationParameterDeclarationCS = TypeId.SET.getSpecializedId(CLSSid_OperationParameterDeclarationCS);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ParameterDeclarationCS = TypeId.SET.getSpecializedId(CLSSid_ParameterDeclarationCS);
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SET_CLSSid_QVToClassCS = TypeId.SET.getSpecializedId(CLSSid_QVToClassCS);
@@ -156,12 +155,11 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         CLSSid_ClassifierPropertyCS,    // 0 => ClassifierPropertyCS
         CLSSid_MappingOperationCS,      // 1 => MappingOperationCS
         CLSSid_MetamodelCS,             // 2 => MetamodelCS
-        CLSSid_OperationParameterDeclarationCS,// 3 => OperationParameterDeclarationCS
-        CLSSid_ParameterDeclarationCS,  // 4 => ParameterDeclarationCS
-        CLSSid_QVToClassCS,             // 5 => QVToClassCS
-        CLSSid_QVToLibraryCS,           // 6 => QVToLibraryCS
-        CLSSid_TopLevelCS,              // 7 => TopLevelCS
-        CLSSid_TransformationCS         // 8 => TransformationCS
+        CLSSid_ParameterDeclarationCS,  // 3 => ParameterDeclarationCS
+        CLSSid_QVToClassCS,             // 4 => QVToClassCS
+        CLSSid_QVToLibraryCS,           // 5 => QVToLibraryCS
+        CLSSid_TopLevelCS,              // 6 => TopLevelCS
+        CLSSid_TransformationCS         // 7 => TransformationCS
     };
     
     /*
@@ -174,12 +172,11 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         {0},                    // 0 : ClassifierPropertyCS -> {ClassifierPropertyCS}
         {1},                    // 1 : MappingOperationCS -> {MappingOperationCS}
         {2},                    // 2 : MetamodelCS -> {MetamodelCS}
-        {3},                    // 3 : OperationParameterDeclarationCS -> {OperationParameterDeclarationCS}
-        {4},                    // 4 : ParameterDeclarationCS -> {ParameterDeclarationCS}
-        {5},                    // 5 : QVToClassCS -> {QVToClassCS}
-        {6},                    // 6 : QVToLibraryCS -> {QVToLibraryCS}
-        {7},                    // 7 : TopLevelCS -> {TopLevelCS}
-        {8}                     // 8 : TransformationCS -> {TransformationCS}
+        {3},                    // 3 : ParameterDeclarationCS -> {ParameterDeclarationCS}
+        {4},                    // 4 : QVToClassCS -> {QVToClassCS}
+        {5},                    // 5 : QVToLibraryCS -> {QVToLibraryCS}
+        {6},                    // 6 : TopLevelCS -> {TopLevelCS}
+        {7}                     // 7 : TransformationCS -> {TransformationCS}
     };
     
     public QVTOperationalCS2AS_qvtp_qvtias(final /*@NonNull*/ Evaluator evaluator) {
@@ -273,33 +270,6 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
     
     /**
      * 
-     * map cOperationParameterDeclarationCS_2_VarParameter in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (operationParameterDeclarationCS : qvtoperationalcs::OperationParameterDeclarationCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * {realize varParameter : qvtoperational::VarParameter[1];
-     *  |}
-     * where ( |)
-     * { |
-     * operationParameterDeclarationCS.pivot := varParameter;
-     * }
-     * 
-     */
-    protected boolean cOperationParameterDeclarationCS_2_VarParameter(final /*@NonNull*/ /*@NonInvalid*/ OperationParameterDeclarationCS operationParameterDeclarationCS) {
-        // predicates
-        // creations
-        final /*@Thrown*/ VarParameter varParameter = QVTOperationalFactory.eINSTANCE.createVarParameter();
-        assert varParameter != null;
-        models[1/*rightAS*/].add(varParameter);
-        // assignments
-        operationParameterDeclarationCS.setPivot(varParameter);
-        // mapping statements
-        return true;
-    }
-    
-    /**
-     * 
      * map cParameterDeclarationCS_2_VarParameter in QVTOperationalCS2AS_qvtp_qvtias {
      * 
      *   leftCS (parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS[1];
@@ -320,7 +290,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModuleCS_0 = idResolver.getClass(CLSSid_ModuleCS, null);
-        final /*@Nullable*/ /*@Thrown*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS);
+        final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS);
         final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_qvtoperationalcs_c_c_ModuleCS_0).booleanValue();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
@@ -358,7 +328,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModuleCS_0 = idResolver.getClass(CLSSid_ModuleCS, null);
-        final /*@Nullable*/ /*@Thrown*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_0);
+        final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_0);
         final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_qvtoperationalcs_c_c_ModuleCS_0).booleanValue();
         if (!oclIsKindOf) {
             return false;
@@ -530,7 +500,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = classifierPropertyCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Property oclAsType = (Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Property_0);
+        final /*@NonNull*/ /*@Thrown*/ Property oclAsType = ClassUtil.nonNullState((Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Property_0));
         final /*@Nullable*/ /*@Thrown*/ String name = classifierPropertyCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -560,17 +530,17 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = classifierPropertyCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Property oclAsType = (Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Property_0);
-        final /*@Nullable*/ /*@Thrown*/ List<String> qualifiers = classifierPropertyCS_1.getQualifiers();
-        assert qualifiers != null;
+        final /*@NonNull*/ /*@Thrown*/ Property oclAsType = ClassUtil.nonNullState((Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Property_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<String> qualifiers = classifierPropertyCS_1.getQualifiers();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_qualifiers = idResolver.createOrderedSetOfAll(ORD_PRIMid_String, qualifiers);
-        /*@NonNull*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
+        /*@Nullable*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
         /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_qualifiers.iterator();
         /*@Thrown*/ boolean exists;
         while (true) {
             if (!ITERATOR_x.hasNext()) {
                 if (accumulator == ValueUtil.FALSE_VALUE) {
-                    exists = (Boolean)accumulator;
+                    exists = ValueUtil.FALSE_VALUE;
                 }
                 else {
                     throw (InvalidValueException)accumulator;
@@ -621,7 +591,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = mappingOperationCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ MappingOperation oclAsType = (MappingOperation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_MappingOperation_0);
+        final /*@NonNull*/ /*@Thrown*/ MappingOperation oclAsType = ClassUtil.nonNullState((MappingOperation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_MappingOperation_0));
         final /*@Nullable*/ /*@Thrown*/ String name = mappingOperationCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -651,9 +621,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = mappingOperationCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ MappingOperation oclAsType = (MappingOperation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_MappingOperation_0);
-        final /*@Nullable*/ /*@Thrown*/ List<ParameterCS> ownedParameters = mappingOperationCS_1.getOwnedParameters();
-        assert ownedParameters != null;
+        final /*@NonNull*/ /*@Thrown*/ MappingOperation oclAsType = ClassUtil.nonNullState((MappingOperation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_MappingOperation_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<ParameterCS> ownedParameters = mappingOperationCS_1.getOwnedParameters();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedParameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_ParameterCS, ownedParameters);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Parameter);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedParameters.iterator();
@@ -669,10 +639,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Parameter_0 = idResolver.getClass(CLSSid_Parameter, null);
             if (_1 == null) {
-                throwNull(mappingOperationCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(mappingOperationCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Parameter oclAsType_0 = (Parameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Parameter_0);
+            final /*@NonNull*/ /*@Thrown*/ Parameter oclAsType_0 = ClassUtil.nonNullState((Parameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Parameter_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -705,7 +675,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = metamodelCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -734,7 +704,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = metamodelCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_1.getName();
         oclAsType.setNsPrefix(name);
         // mapping statements
@@ -763,7 +733,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = metamodelCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_2.getName();
         oclAsType.setURI(name);
         // mapping statements
@@ -794,9 +764,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = metamodelCS_3.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
-        final /*@Nullable*/ /*@Thrown*/ List<ClassCS> ownedClasses = metamodelCS_3.getOwnedClasses();
-        assert ownedClasses != null;
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<ClassCS> ownedClasses = metamodelCS_3.getOwnedClasses();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_QVToClassCS);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
@@ -811,63 +781,31 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(qvtoperationalcs::QVToClassCS)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToClassCS_0 = idResolver.getClass(CLSSid_QVToClassCS, null);
-            final /*@Nullable*/ /*@Thrown*/ QVToClassCS oclAsType_0 = (QVToClassCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_qvtoperationalcs_c_c_QVToClassCS_0);
+            final /*@NonNull*/ /*@Thrown*/ QVToClassCS oclAsType_0 = ClassUtil.nonNullState((QVToClassCS)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_qvtoperationalcs_c_c_QVToClassCS_0));
             //
             accumulator.add(oclAsType_0);
         }
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-        /*@Nullable*/ Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+        /*@NonNull*/ Iterator<?> ITERATOR__1_0 = collect_0.iterator();
         /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
         while (true) {
             if (!ITERATOR__1_0.hasNext()) {
                 collect = accumulator_0;
                 break;
             }
-            /*@Nullable*/ /*@NonInvalid*/ QVToClassCS _1_0 = (QVToClassCS)ITERATOR__1_0.next();
+            /*@NonNull*/ /*@NonInvalid*/ QVToClassCS _1_0 = (QVToClassCS)ITERATOR__1_0.next();
             /**
              * pivot.oclAsType(Class)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            if (_1_0 == null) {
-                throwNull(metamodelCS_3, "Null source for \'basecs::PivotableElementCS::pivot\'");
-            }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1_0.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Class oclAsType_1 = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Class_0);
+            final /*@NonNull*/ /*@Thrown*/ Class oclAsType_1 = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Class_0));
             //
             accumulator_0.add(oclAsType_1);
         }
         final List<Class> UNBOXED_collect = collect.asEcoreObjects(idResolver, Class.class);
         assert UNBOXED_collect != null;
         oclAsType.getOwnedClasses().addAll(UNBOXED_collect);
-        // mapping statements
-        return true;
-    }
-    
-    /**
-     * 
-     * map uVarParameter_name in QVTOperationalCS2AS_qvtp_qvtias {
-     * 
-     *   leftCS (operationParameterDeclarationCS : qvtoperationalcs::OperationParameterDeclarationCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * { |}
-     * where ( |)
-     * { |
-     * operationParameterDeclarationCS.pivot.oclAsType(qvtoperational::VarParameter).name := name;
-     * }
-     * 
-     */
-    protected boolean uVarParameter_name(final /*@NonNull*/ /*@NonInvalid*/ OperationParameterDeclarationCS operationParameterDeclarationCS_0) {
-        // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperational_c_c_VarParameter_0 = idResolver.getClass(CLSSid_VarParameter, null);
-        // creations
-        // assignments
-        final /*@Nullable*/ /*@Thrown*/ Element pivot = operationParameterDeclarationCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ VarParameter oclAsType = (VarParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_VarParameter_0);
-        final /*@Nullable*/ /*@Thrown*/ String name = operationParameterDeclarationCS_0.getName();
-        oclAsType.setName(name);
         // mapping statements
         return true;
     }
@@ -894,7 +832,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModuleCS_0 = idResolver.getClass(CLSSid_ModuleCS, null);
-        final /*@Nullable*/ /*@Thrown*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_1);
+        final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_1);
         final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_qvtoperationalcs_c_c_ModuleCS_0).booleanValue();
         final /*@Nullable*/ /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
         if (not != ValueUtil.TRUE_VALUE) {
@@ -904,7 +842,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = parameterDeclarationCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ VarParameter oclAsType = (VarParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_VarParameter_0);
+        final /*@NonNull*/ /*@Thrown*/ VarParameter oclAsType = ClassUtil.nonNullState((VarParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_VarParameter_0));
         final /*@Nullable*/ /*@Thrown*/ String name = parameterDeclarationCS_1.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -933,7 +871,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModuleCS_0 = idResolver.getClass(CLSSid_ModuleCS, null);
-        final /*@Nullable*/ /*@Thrown*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_2);
+        final /*@Nullable*/ /*@NonInvalid*/ Object oclContainer = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, parameterDeclarationCS_2);
         final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, oclContainer, TYP_qvtoperationalcs_c_c_ModuleCS_0).booleanValue();
         if (!oclIsKindOf) {
             return false;
@@ -942,7 +880,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = parameterDeclarationCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ ModelParameter oclAsType = (ModelParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_ModelParameter_0);
+        final /*@NonNull*/ /*@Thrown*/ ModelParameter oclAsType = ClassUtil.nonNullState((ModelParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_ModelParameter_0));
         final /*@Nullable*/ /*@Thrown*/ String name = parameterDeclarationCS_2.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -971,7 +909,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToClassCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Class oclAsType = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0);
+        final /*@NonNull*/ /*@Thrown*/ Class oclAsType = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0));
         final /*@Nullable*/ /*@Thrown*/ String name = qVToClassCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -1002,9 +940,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToClassCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Class oclAsType = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0);
-        final /*@Nullable*/ /*@Thrown*/ List<StructuralFeatureCS> ownedProperties = qVToClassCS_1.getOwnedProperties();
-        assert ownedProperties != null;
+        final /*@NonNull*/ /*@Thrown*/ Class oclAsType = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<StructuralFeatureCS> ownedProperties = qVToClassCS_1.getOwnedProperties();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedProperties = idResolver.createOrderedSetOfAll(ORD_CLSSid_StructuralFeatureCS, ownedProperties);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Element);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedProperties.iterator();
@@ -1020,10 +958,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Element_0 = idResolver.getClass(CLSSid_Element, null);
             if (_1 == null) {
-                throwNull(qVToClassCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(qVToClassCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Element oclAsType_0 = (Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0);
+            final /*@NonNull*/ /*@Thrown*/ Element oclAsType_0 = ClassUtil.nonNullState((Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1040,7 +978,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(Property)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Property_0 = idResolver.getClass(CLSSid_Property, null);
-            final /*@Nullable*/ /*@Thrown*/ Property oclAsType_1 = (Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Property_0);
+            final /*@NonNull*/ /*@Thrown*/ Property oclAsType_1 = ClassUtil.nonNullState((Property)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Property_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -1074,9 +1012,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToClassCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Class oclAsType = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0);
-        final /*@Nullable*/ /*@Thrown*/ List<OperationCS> ownedOperations = qVToClassCS_2.getOwnedOperations();
-        assert ownedOperations != null;
+        final /*@NonNull*/ /*@Thrown*/ Class oclAsType = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Class_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OperationCS> ownedOperations = qVToClassCS_2.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedOperations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, ownedOperations);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedOperations.iterator();
@@ -1092,10 +1030,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Operation_0 = idResolver.getClass(CLSSid_Operation, null);
             if (_1 == null) {
-                throwNull(qVToClassCS_2, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(qVToClassCS_2, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Operation oclAsType_0 = (Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0);
+            final /*@NonNull*/ /*@Thrown*/ Operation oclAsType_0 = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1128,7 +1066,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToLibraryCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Library oclAsType = (Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0);
+        final /*@NonNull*/ /*@Thrown*/ Library oclAsType = ClassUtil.nonNullState((Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0));
         final /*@Nullable*/ /*@Thrown*/ String name = qVToLibraryCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -1158,9 +1096,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToLibraryCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Library oclAsType = (Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0);
-        final /*@Nullable*/ /*@Thrown*/ List<OperationCS> ownedOperations = qVToLibraryCS_1.getOwnedOperations();
-        assert ownedOperations != null;
+        final /*@NonNull*/ /*@Thrown*/ Library oclAsType = ClassUtil.nonNullState((Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OperationCS> ownedOperations = qVToLibraryCS_1.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedOperations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, ownedOperations);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedOperations.iterator();
@@ -1176,10 +1114,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Operation_0 = idResolver.getClass(CLSSid_Operation, null);
             if (_1 == null) {
-                throwNull(qVToLibraryCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(qVToLibraryCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Operation oclAsType_0 = (Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0);
+            final /*@NonNull*/ /*@Thrown*/ Operation oclAsType_0 = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1213,17 +1151,17 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = qVToLibraryCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Library oclAsType = (Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0);
-        final /*@Nullable*/ /*@Thrown*/ List<String> qualifiers = qVToLibraryCS_2.getQualifiers();
-        assert qualifiers != null;
+        final /*@NonNull*/ /*@Thrown*/ Library oclAsType = ClassUtil.nonNullState((Library)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_Library_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<String> qualifiers = qVToLibraryCS_2.getQualifiers();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_qualifiers = idResolver.createOrderedSetOfAll(ORD_PRIMid_String, qualifiers);
-        /*@NonNull*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
+        /*@Nullable*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
         /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_qualifiers.iterator();
         /*@Thrown*/ boolean exists;
         while (true) {
             if (!ITERATOR_x.hasNext()) {
                 if (accumulator == ValueUtil.FALSE_VALUE) {
-                    exists = (Boolean)accumulator;
+                    exists = ValueUtil.FALSE_VALUE;
                 }
                 else {
                     throw (InvalidValueException)accumulator;
@@ -1285,11 +1223,11 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = topLevelCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ org.eclipse.ocl.pivot.Model oclAsType = (org.eclipse.ocl.pivot.Model)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Model_0);
+        final /*@NonNull*/ /*@Thrown*/ org.eclipse.ocl.pivot.Model oclAsType = ClassUtil.nonNullState((org.eclipse.ocl.pivot.Model)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Model_0));
         final /*@NonNull*/ /*@Thrown*/ Package dummyPackage = (Package)TYP_Package_0.createInstance();
         CTORid_name.initValue(dummyPackage, STR_);
-        final /*@Nullable*/ /*@Thrown*/ List<TypeCS> ownedTypes = topLevelCS_1.getOwnedTypes();
-        assert ownedTypes != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<TypeCS> ownedTypes = topLevelCS_1.getOwnedTypes();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedTypes = idResolver.createOrderedSetOfAll(ORD_CLSSid_TypeCS, ownedTypes);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Element);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedTypes.iterator();
@@ -1305,10 +1243,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Element_0 = idResolver.getClass(CLSSid_Element, null);
             if (_1 == null) {
-                throwNull(topLevelCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(topLevelCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Element oclAsType_0 = (Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0);
+            final /*@NonNull*/ /*@Thrown*/ Element oclAsType_0 = ClassUtil.nonNullState((Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1325,7 +1263,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(Class)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            final /*@Nullable*/ /*@Thrown*/ Class oclAsType_1 = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Class_0);
+            final /*@NonNull*/ /*@Thrown*/ Class oclAsType_1 = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Class_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -1333,8 +1271,8 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         assert UNBOXED_collect != null;
         CTORid_ownedClasses.initValue(dummyPackage, UNBOXED_collect);
         final /*@NonNull*/ /*@Thrown*/ SetValue oclAsSet = OclAnyOclAsSetOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, dummyPackage);
-        final /*@Nullable*/ /*@Thrown*/ List<PackageCS> ownedPackages = topLevelCS_1.getOwnedPackages();
-        assert ownedPackages != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<PackageCS> ownedPackages = topLevelCS_1.getOwnedPackages();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_1 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
         /*@Nullable*/ Iterator<?> ITERATOR__1_1 = BOXED_ownedPackages.iterator();
@@ -1349,10 +1287,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * pivot.oclAsType(Package)
              */
             if (_1_1 == null) {
-                throwNull(topLevelCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(topLevelCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_1 = _1_1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Package oclAsType_2 = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_1, TYP_Package_0);
+            final /*@NonNull*/ /*@Thrown*/ Package oclAsType_2 = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_1, TYP_Package_0));
             //
             accumulator_1.add(oclAsType_2);
         }
@@ -1386,7 +1324,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = topLevelCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
         oclAsType.setName(STR_);
         // mapping statements
         return true;
@@ -1416,9 +1354,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = topLevelCS_3.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ Package oclAsType = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0);
-        final /*@Nullable*/ /*@Thrown*/ List<TypeCS> ownedTypes = topLevelCS_3.getOwnedTypes();
-        assert ownedTypes != null;
+        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_Package_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<TypeCS> ownedTypes = topLevelCS_3.getOwnedTypes();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedTypes = idResolver.createOrderedSetOfAll(ORD_CLSSid_TypeCS, ownedTypes);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Element);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedTypes.iterator();
@@ -1434,10 +1372,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Element_0 = idResolver.getClass(CLSSid_Element, null);
             if (_1 == null) {
-                throwNull(topLevelCS_3, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(topLevelCS_3, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Element oclAsType_0 = (Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0);
+            final /*@NonNull*/ /*@Thrown*/ Element oclAsType_0 = ClassUtil.nonNullState((Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Element_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1454,7 +1392,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(Class)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            final /*@Nullable*/ /*@Thrown*/ Class oclAsType_1 = (Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Class_0);
+            final /*@NonNull*/ /*@Thrown*/ Class oclAsType_1 = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_Class_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -1487,7 +1425,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = transformationCS_0.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ OperationalTransformation oclAsType = (OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0);
+        final /*@NonNull*/ /*@Thrown*/ OperationalTransformation oclAsType = ClassUtil.nonNullState((OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0));
         final /*@Nullable*/ /*@Thrown*/ String name = transformationCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
@@ -1518,9 +1456,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = transformationCS_1.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ OperationalTransformation oclAsType = (OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0);
-        final /*@Nullable*/ /*@Thrown*/ List<ParameterDeclarationCS> parameters = transformationCS_1.getParameters();
-        assert parameters != null;
+        final /*@NonNull*/ /*@Thrown*/ OperationalTransformation oclAsType = ClassUtil.nonNullState((OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<ParameterDeclarationCS> parameters = transformationCS_1.getParameters();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_parameters = idResolver.createOrderedSetOfAll(ORD_CLSSid_ParameterDeclarationCS, parameters);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_VarParameter);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_parameters.iterator();
@@ -1536,10 +1474,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperational_c_c_VarParameter_0 = idResolver.getClass(CLSSid_VarParameter, null);
             if (_1 == null) {
-                throwNull(transformationCS_1, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(transformationCS_1, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ VarParameter oclAsType_0 = (VarParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_qvtoperational_c_c_VarParameter_0);
+            final /*@NonNull*/ /*@Thrown*/ VarParameter oclAsType_0 = ClassUtil.nonNullState((VarParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_qvtoperational_c_c_VarParameter_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1556,7 +1494,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              * oclAsType(qvtoperational::ModelParameter)
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperational_c_c_ModelParameter_0 = idResolver.getClass(CLSSid_ModelParameter, null);
-            final /*@Nullable*/ /*@Thrown*/ ModelParameter oclAsType_1 = (ModelParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_qvtoperational_c_c_ModelParameter_0);
+            final /*@NonNull*/ /*@Thrown*/ ModelParameter oclAsType_1 = ClassUtil.nonNullState((ModelParameter)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1_0, TYP_qvtoperational_c_c_ModelParameter_0));
             //
             accumulator_0.add(oclAsType_1);
         }
@@ -1590,9 +1528,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = transformationCS_2.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ OperationalTransformation oclAsType = (OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0);
-        final /*@Nullable*/ /*@Thrown*/ List<OperationCS> ownedOperations = transformationCS_2.getOwnedOperations();
-        assert ownedOperations != null;
+        final /*@NonNull*/ /*@Thrown*/ OperationalTransformation oclAsType = ClassUtil.nonNullState((OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OperationCS> ownedOperations = transformationCS_2.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedOperations = idResolver.createOrderedSetOfAll(ORD_CLSSid_OperationCS, ownedOperations);
         /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Operation);
         /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedOperations.iterator();
@@ -1608,10 +1546,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Operation_0 = idResolver.getClass(CLSSid_Operation, null);
             if (_1 == null) {
-                throwNull(transformationCS_2, "Null source for \'basecs::PivotableElementCS::pivot\'");
+                throwNull(transformationCS_2, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
             }
             final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@Nullable*/ /*@Thrown*/ Operation oclAsType_0 = (Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0);
+            final /*@NonNull*/ /*@Thrown*/ Operation oclAsType_0 = ClassUtil.nonNullState((Operation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot_0, TYP_Operation_0));
             //
             accumulator.add(oclAsType_0);
         }
@@ -1645,17 +1583,17 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = transformationCS_3.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ OperationalTransformation oclAsType = (OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0);
-        final /*@Nullable*/ /*@Thrown*/ List<String> qualifiers = transformationCS_3.getQualifiers();
-        assert qualifiers != null;
+        final /*@NonNull*/ /*@Thrown*/ OperationalTransformation oclAsType = ClassUtil.nonNullState((OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<String> qualifiers = transformationCS_3.getQualifiers();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_qualifiers = idResolver.createOrderedSetOfAll(ORD_PRIMid_String, qualifiers);
-        /*@NonNull*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
+        /*@Nullable*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
         /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_qualifiers.iterator();
         /*@Thrown*/ boolean exists;
         while (true) {
             if (!ITERATOR_x.hasNext()) {
                 if (accumulator == ValueUtil.FALSE_VALUE) {
-                    exists = (Boolean)accumulator;
+                    exists = ValueUtil.FALSE_VALUE;
                 }
                 else {
                     throw (InvalidValueException)accumulator;
@@ -1707,17 +1645,17 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ Element pivot = transformationCS_4.getPivot();
-        final /*@Nullable*/ /*@Thrown*/ OperationalTransformation oclAsType = (OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0);
-        final /*@Nullable*/ /*@Thrown*/ List<String> qualifiers = transformationCS_4.getQualifiers();
-        assert qualifiers != null;
+        final /*@NonNull*/ /*@Thrown*/ OperationalTransformation oclAsType = ClassUtil.nonNullState((OperationalTransformation)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, pivot, TYP_qvtoperational_c_c_OperationalTransformation_0));
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<String> qualifiers = transformationCS_4.getQualifiers();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_qualifiers = idResolver.createOrderedSetOfAll(ORD_PRIMid_String, qualifiers);
-        /*@NonNull*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
+        /*@Nullable*/ /*@Thrown*/ Object accumulator = ValueUtil.FALSE_VALUE;
         /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_qualifiers.iterator();
         /*@Thrown*/ boolean exists;
         while (true) {
             if (!ITERATOR_x.hasNext()) {
                 if (accumulator == ValueUtil.FALSE_VALUE) {
-                    exists = (Boolean)accumulator;
+                    exists = ValueUtil.FALSE_VALUE;
                 }
                 else {
                     throw (InvalidValueException)accumulator;
@@ -1752,28 +1690,16 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      *   where ( |)
      * { |}
-     * for operationParameterDeclarationCS : qvtoperationalcs::OperationParameterDeclarationCS in qvtoperationalcs::OperationParameterDeclarationCS.allInstances()
+     * for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
      * 
-     *     map cOperationParameterDeclarationCS_2_VarParameter {
-     * operationParameterDeclarationCS := operationParameterDeclarationCS;
-     * }}
-     *   for operationParameterDeclarationCS : qvtoperationalcs::OperationParameterDeclarationCS in qvtoperationalcs::OperationParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map uVarParameter_name {
-     * operationParameterDeclarationCS := operationParameterDeclarationCS;
-     * }}
-     *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map cParameterDeclarationCS_2_ModelParameter {
+     *     map cParameterDeclarationCS_2_VarParameter {
      * parameterDeclarationCS := parameterDeclarationCS;
      * }}
      *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
      * 
-     *     map cParameterDeclarationCS_2_VarParameter {
+     *     map cParameterDeclarationCS_2_ModelParameter {
      * parameterDeclarationCS := parameterDeclarationCS;
      * }}
      *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
@@ -1955,292 +1881,274 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2 = idResolver.getClass(CLSSid_ClassifierPropertyCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MappingOperationCS_2 = idResolver.getClass(CLSSid_MappingOperationCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MetamodelCS_4 = idResolver.getClass(CLSSid_MetamodelCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_OperationParameterDeclarationCS_1 = idResolver.getClass(CLSSid_OperationParameterDeclarationCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_3 = idResolver.getClass(CLSSid_ParameterDeclarationCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToClassCS_3 = idResolver.getClass(CLSSid_QVToClassCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToLibraryCS_3 = idResolver.getClass(CLSSid_QVToLibraryCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TopLevelCS_4 = idResolver.getClass(CLSSid_TopLevelCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TransformationCS_5 = idResolver.getClass(CLSSid_TransformationCS, null);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_14 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassifierPropertyCS, TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_16 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_MappingOperationCS, TYP_qvtoperationalcs_c_c_MappingOperationCS_2);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_18 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_MetamodelCS, TYP_qvtoperationalcs_c_c_MetamodelCS_4);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_OperationParameterDeclarationCS, TYP_qvtoperationalcs_c_c_OperationParameterDeclarationCS_1);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ParameterDeclarationCS, TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_3);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_22 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_QVToClassCS, TYP_qvtoperationalcs_c_c_QVToClassCS_3);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_25 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_QVToLibraryCS, TYP_qvtoperationalcs_c_c_QVToLibraryCS_3);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_13 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_4);
-        final /*@NonNull*/ /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_TransformationCS, TYP_qvtoperationalcs_c_c_TransformationCS_5);
-        final List<ClassifierPropertyCS> UNBOXED_allInstances_14 = allInstances_14.asEcoreObjects(idResolver, ClassifierPropertyCS.class);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassifierPropertyCS, TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_14 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_MappingOperationCS, TYP_qvtoperationalcs_c_c_MappingOperationCS_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_16 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_MetamodelCS, TYP_qvtoperationalcs_c_c_MetamodelCS_4);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ParameterDeclarationCS, TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_3);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_20 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_QVToClassCS, TYP_qvtoperationalcs_c_c_QVToClassCS_3);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_23 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_QVToLibraryCS, TYP_qvtoperationalcs_c_c_QVToLibraryCS_3);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_4);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_4 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_TransformationCS, TYP_qvtoperationalcs_c_c_TransformationCS_5);
+        final List<ClassifierPropertyCS> UNBOXED_allInstances_12 = allInstances_12.asEcoreObjects(idResolver, ClassifierPropertyCS.class);
+        assert UNBOXED_allInstances_12 != null;
+        final List<MappingOperationCS> UNBOXED_allInstances_14 = allInstances_14.asEcoreObjects(idResolver, MappingOperationCS.class);
         assert UNBOXED_allInstances_14 != null;
-        final List<MappingOperationCS> UNBOXED_allInstances_16 = allInstances_16.asEcoreObjects(idResolver, MappingOperationCS.class);
+        final List<MetamodelCS> UNBOXED_allInstances_16 = allInstances_16.asEcoreObjects(idResolver, MetamodelCS.class);
         assert UNBOXED_allInstances_16 != null;
-        final List<MetamodelCS> UNBOXED_allInstances_18 = allInstances_18.asEcoreObjects(idResolver, MetamodelCS.class);
-        assert UNBOXED_allInstances_18 != null;
-        final List<OperationParameterDeclarationCS> UNBOXED_allInstances_0 = allInstances_0.asEcoreObjects(idResolver, OperationParameterDeclarationCS.class);
+        final List<ParameterDeclarationCS> UNBOXED_allInstances_0 = allInstances_0.asEcoreObjects(idResolver, ParameterDeclarationCS.class);
         assert UNBOXED_allInstances_0 != null;
-        final List<ParameterDeclarationCS> UNBOXED_allInstances_2 = allInstances_2.asEcoreObjects(idResolver, ParameterDeclarationCS.class);
-        assert UNBOXED_allInstances_2 != null;
-        final List<QVToClassCS> UNBOXED_allInstances_22 = allInstances_22.asEcoreObjects(idResolver, QVToClassCS.class);
-        assert UNBOXED_allInstances_22 != null;
-        final List<QVToLibraryCS> UNBOXED_allInstances_25 = allInstances_25.asEcoreObjects(idResolver, QVToLibraryCS.class);
-        assert UNBOXED_allInstances_25 != null;
-        final List<TopLevelCS> UNBOXED_allInstances_13 = allInstances_13.asEcoreObjects(idResolver, TopLevelCS.class);
-        assert UNBOXED_allInstances_13 != null;
-        final List<TransformationCS> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, TransformationCS.class);
-        assert UNBOXED_allInstances_6 != null;
+        final List<QVToClassCS> UNBOXED_allInstances_20 = allInstances_20.asEcoreObjects(idResolver, QVToClassCS.class);
+        assert UNBOXED_allInstances_20 != null;
+        final List<QVToLibraryCS> UNBOXED_allInstances_23 = allInstances_23.asEcoreObjects(idResolver, QVToLibraryCS.class);
+        assert UNBOXED_allInstances_23 != null;
+        final List<TopLevelCS> UNBOXED_allInstances_11 = allInstances_11.asEcoreObjects(idResolver, TopLevelCS.class);
+        assert UNBOXED_allInstances_11 != null;
+        final List<TransformationCS> UNBOXED_allInstances_4 = allInstances_4.asEcoreObjects(idResolver, TransformationCS.class);
+        assert UNBOXED_allInstances_4 != null;
         // creations
         // assignments
         // mapping statements
         ;
-        for (OperationParameterDeclarationCS operationParameterDeclarationCS_3 : UNBOXED_allInstances_0) {
-            if (operationParameterDeclarationCS_3 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ OperationParameterDeclarationCS symbol_1 = (OperationParameterDeclarationCS)operationParameterDeclarationCS_3;
-                cOperationParameterDeclarationCS_2_VarParameter(symbol_1);
-            }
-        }
-        ;
-        for (OperationParameterDeclarationCS operationParameterDeclarationCS_4 : UNBOXED_allInstances_0) {
-            if (operationParameterDeclarationCS_4 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ OperationParameterDeclarationCS symbol_5 = (OperationParameterDeclarationCS)operationParameterDeclarationCS_4;
-                uVarParameter_name(symbol_5);
-            }
-        }
-        ;
-        for (ParameterDeclarationCS parameterDeclarationCS_7 : UNBOXED_allInstances_2) {
+        for (ParameterDeclarationCS parameterDeclarationCS_7 : UNBOXED_allInstances_0) {
             if (parameterDeclarationCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_9 = (ParameterDeclarationCS)parameterDeclarationCS_7;
-                cParameterDeclarationCS_2_ModelParameter(symbol_9);
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_1 = (ParameterDeclarationCS)parameterDeclarationCS_7;
+                cParameterDeclarationCS_2_VarParameter(symbol_1);
             }
         }
         ;
-        for (ParameterDeclarationCS parameterDeclarationCS_8 : UNBOXED_allInstances_2) {
+        for (ParameterDeclarationCS parameterDeclarationCS_8 : UNBOXED_allInstances_0) {
             if (parameterDeclarationCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_13 = (ParameterDeclarationCS)parameterDeclarationCS_8;
-                cParameterDeclarationCS_2_VarParameter(symbol_13);
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_5 = (ParameterDeclarationCS)parameterDeclarationCS_8;
+                cParameterDeclarationCS_2_ModelParameter(symbol_5);
             }
         }
         ;
-        for (ParameterDeclarationCS parameterDeclarationCS_9 : UNBOXED_allInstances_2) {
+        for (ParameterDeclarationCS parameterDeclarationCS_9 : UNBOXED_allInstances_0) {
             if (parameterDeclarationCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_17 = (ParameterDeclarationCS)parameterDeclarationCS_9;
-                uVarParameter_name(symbol_17);
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_9 = (ParameterDeclarationCS)parameterDeclarationCS_9;
+                uVarParameter_name(symbol_9);
             }
         }
         ;
-        for (ParameterDeclarationCS parameterDeclarationCS_10 : UNBOXED_allInstances_2) {
+        for (ParameterDeclarationCS parameterDeclarationCS_10 : UNBOXED_allInstances_0) {
             if (parameterDeclarationCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_21 = (ParameterDeclarationCS)parameterDeclarationCS_10;
-                uModelParameter_name(symbol_21);
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_13 = (ParameterDeclarationCS)parameterDeclarationCS_10;
+                uModelParameter_name(symbol_13);
             }
         }
         ;
-        for (TransformationCS transformationCS_11 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_11 : UNBOXED_allInstances_4) {
             if (transformationCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_25 = (TransformationCS)transformationCS_11;
-                cTransformationCS_2_OperationalTransformation(symbol_25);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_17 = (TransformationCS)transformationCS_11;
+                cTransformationCS_2_OperationalTransformation(symbol_17);
             }
         }
         ;
-        for (TransformationCS transformationCS_12 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_12 : UNBOXED_allInstances_4) {
             if (transformationCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_29 = (TransformationCS)transformationCS_12;
-                uOperationalTransformation_modelParameter(symbol_29);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_21 = (TransformationCS)transformationCS_12;
+                uOperationalTransformation_modelParameter(symbol_21);
             }
         }
         ;
-        for (ClassifierPropertyCS classifierPropertyCS_5 : UNBOXED_allInstances_14) {
+        for (ClassifierPropertyCS classifierPropertyCS_5 : UNBOXED_allInstances_12) {
             if (classifierPropertyCS_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_33 = (ClassifierPropertyCS)classifierPropertyCS_5;
-                cClassifierPropertyCS_2_Property(symbol_33);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_25 = (ClassifierPropertyCS)classifierPropertyCS_5;
+                cClassifierPropertyCS_2_Property(symbol_25);
             }
         }
         ;
-        for (MappingOperationCS mappingOperationCS_5 : UNBOXED_allInstances_16) {
+        for (MappingOperationCS mappingOperationCS_5 : UNBOXED_allInstances_14) {
             if (mappingOperationCS_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_37 = (MappingOperationCS)mappingOperationCS_5;
-                cMappingOperationCS_2_MappingOperation(symbol_37);
+                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_29 = (MappingOperationCS)mappingOperationCS_5;
+                cMappingOperationCS_2_MappingOperation(symbol_29);
             }
         }
         ;
-        for (MetamodelCS metamodelCS_9 : UNBOXED_allInstances_18) {
+        for (MetamodelCS metamodelCS_9 : UNBOXED_allInstances_16) {
             if (metamodelCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_41 = (MetamodelCS)metamodelCS_9;
-                cMetamodelCS_2_Package(symbol_41);
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_33 = (MetamodelCS)metamodelCS_9;
+                cMetamodelCS_2_Package(symbol_33);
             }
         }
         ;
-        for (QVToClassCS qVToClassCS_7 : UNBOXED_allInstances_22) {
+        for (QVToClassCS qVToClassCS_7 : UNBOXED_allInstances_20) {
             if (qVToClassCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_45 = (QVToClassCS)qVToClassCS_7;
-                cQVToClassCS_2_Class(symbol_45);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_37 = (QVToClassCS)qVToClassCS_7;
+                cQVToClassCS_2_Class(symbol_37);
             }
         }
         ;
-        for (QVToLibraryCS qVToLibraryCS_7 : UNBOXED_allInstances_25) {
+        for (QVToLibraryCS qVToLibraryCS_7 : UNBOXED_allInstances_23) {
             if (qVToLibraryCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_49 = (QVToLibraryCS)qVToLibraryCS_7;
-                cQVToLibraryCS_2_Library(symbol_49);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_41 = (QVToLibraryCS)qVToLibraryCS_7;
+                cQVToLibraryCS_2_Library(symbol_41);
             }
         }
         ;
-        for (TopLevelCS topLevelCS_9 : UNBOXED_allInstances_13) {
+        for (TopLevelCS topLevelCS_9 : UNBOXED_allInstances_11) {
             if (topLevelCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_53 = (TopLevelCS)topLevelCS_9;
-                cTopLevelCS_2_Model(symbol_53);
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_45 = (TopLevelCS)topLevelCS_9;
+                cTopLevelCS_2_Model(symbol_45);
             }
         }
         ;
-        for (TopLevelCS topLevelCS_10 : UNBOXED_allInstances_13) {
+        for (TopLevelCS topLevelCS_10 : UNBOXED_allInstances_11) {
             if (topLevelCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_57 = (TopLevelCS)topLevelCS_10;
-                cTopLevelCS_2_Package(symbol_57);
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_49 = (TopLevelCS)topLevelCS_10;
+                cTopLevelCS_2_Package(symbol_49);
             }
         }
         ;
-        for (ClassifierPropertyCS classifierPropertyCS_6 : UNBOXED_allInstances_14) {
+        for (ClassifierPropertyCS classifierPropertyCS_6 : UNBOXED_allInstances_12) {
             if (classifierPropertyCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_61 = (ClassifierPropertyCS)classifierPropertyCS_6;
-                uProperty_name(symbol_61);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_53 = (ClassifierPropertyCS)classifierPropertyCS_6;
+                uProperty_name(symbol_53);
             }
         }
         ;
-        for (ClassifierPropertyCS classifierPropertyCS_7 : UNBOXED_allInstances_14) {
+        for (ClassifierPropertyCS classifierPropertyCS_7 : UNBOXED_allInstances_12) {
             if (classifierPropertyCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_65 = (ClassifierPropertyCS)classifierPropertyCS_7;
-                uProperty_isComposite(symbol_65);
+                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_57 = (ClassifierPropertyCS)classifierPropertyCS_7;
+                uProperty_isComposite(symbol_57);
             }
         }
         ;
-        for (MappingOperationCS mappingOperationCS_6 : UNBOXED_allInstances_16) {
+        for (MappingOperationCS mappingOperationCS_6 : UNBOXED_allInstances_14) {
             if (mappingOperationCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_69 = (MappingOperationCS)mappingOperationCS_6;
-                uMappingOperation_name(symbol_69);
+                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_61 = (MappingOperationCS)mappingOperationCS_6;
+                uMappingOperation_name(symbol_61);
             }
         }
         ;
-        for (MappingOperationCS mappingOperationCS_7 : UNBOXED_allInstances_16) {
+        for (MappingOperationCS mappingOperationCS_7 : UNBOXED_allInstances_14) {
             if (mappingOperationCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_73 = (MappingOperationCS)mappingOperationCS_7;
-                uMappingOperation_ownedParameters(symbol_73);
+                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_65 = (MappingOperationCS)mappingOperationCS_7;
+                uMappingOperation_ownedParameters(symbol_65);
             }
         }
         ;
-        for (MetamodelCS metamodelCS_10 : UNBOXED_allInstances_18) {
+        for (MetamodelCS metamodelCS_10 : UNBOXED_allInstances_16) {
             if (metamodelCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_77 = (MetamodelCS)metamodelCS_10;
-                uPackage_name(symbol_77);
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_69 = (MetamodelCS)metamodelCS_10;
+                uPackage_name(symbol_69);
             }
         }
         ;
-        for (MetamodelCS metamodelCS_11 : UNBOXED_allInstances_18) {
+        for (MetamodelCS metamodelCS_11 : UNBOXED_allInstances_16) {
             if (metamodelCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_81 = (MetamodelCS)metamodelCS_11;
-                uPackage_nsPrefix(symbol_81);
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_73 = (MetamodelCS)metamodelCS_11;
+                uPackage_nsPrefix(symbol_73);
             }
         }
         ;
-        for (MetamodelCS metamodelCS_12 : UNBOXED_allInstances_18) {
+        for (MetamodelCS metamodelCS_12 : UNBOXED_allInstances_16) {
             if (metamodelCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_85 = (MetamodelCS)metamodelCS_12;
-                uPackage_URI(symbol_85);
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_77 = (MetamodelCS)metamodelCS_12;
+                uPackage_URI(symbol_77);
             }
         }
         ;
-        for (MetamodelCS metamodelCS_13 : UNBOXED_allInstances_18) {
+        for (MetamodelCS metamodelCS_13 : UNBOXED_allInstances_16) {
             if (metamodelCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_89 = (MetamodelCS)metamodelCS_13;
-                uPackage_ownedClasses(symbol_89);
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_81 = (MetamodelCS)metamodelCS_13;
+                uPackage_ownedClasses(symbol_81);
             }
         }
         ;
-        for (QVToClassCS qVToClassCS_8 : UNBOXED_allInstances_22) {
+        for (QVToClassCS qVToClassCS_8 : UNBOXED_allInstances_20) {
             if (qVToClassCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_93 = (QVToClassCS)qVToClassCS_8;
-                uClass_name(symbol_93);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_85 = (QVToClassCS)qVToClassCS_8;
+                uClass_name(symbol_85);
             }
         }
         ;
-        for (QVToClassCS qVToClassCS_9 : UNBOXED_allInstances_22) {
+        for (QVToClassCS qVToClassCS_9 : UNBOXED_allInstances_20) {
             if (qVToClassCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_97 = (QVToClassCS)qVToClassCS_9;
-                uClass_ownedProperties(symbol_97);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_89 = (QVToClassCS)qVToClassCS_9;
+                uClass_ownedProperties(symbol_89);
             }
         }
         ;
-        for (QVToClassCS qVToClassCS_10 : UNBOXED_allInstances_22) {
+        for (QVToClassCS qVToClassCS_10 : UNBOXED_allInstances_20) {
             if (qVToClassCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_101 = (QVToClassCS)qVToClassCS_10;
-                uClass_ownedOperations(symbol_101);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_93 = (QVToClassCS)qVToClassCS_10;
+                uClass_ownedOperations(symbol_93);
             }
         }
         ;
-        for (QVToLibraryCS qVToLibraryCS_8 : UNBOXED_allInstances_25) {
+        for (QVToLibraryCS qVToLibraryCS_8 : UNBOXED_allInstances_23) {
             if (qVToLibraryCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_105 = (QVToLibraryCS)qVToLibraryCS_8;
-                uLibrary_name(symbol_105);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_97 = (QVToLibraryCS)qVToLibraryCS_8;
+                uLibrary_name(symbol_97);
             }
         }
         ;
-        for (QVToLibraryCS qVToLibraryCS_9 : UNBOXED_allInstances_25) {
+        for (QVToLibraryCS qVToLibraryCS_9 : UNBOXED_allInstances_23) {
             if (qVToLibraryCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_109 = (QVToLibraryCS)qVToLibraryCS_9;
-                uLibrary_ownedOperations(symbol_109);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_101 = (QVToLibraryCS)qVToLibraryCS_9;
+                uLibrary_ownedOperations(symbol_101);
             }
         }
         ;
-        for (QVToLibraryCS qVToLibraryCS_10 : UNBOXED_allInstances_25) {
+        for (QVToLibraryCS qVToLibraryCS_10 : UNBOXED_allInstances_23) {
             if (qVToLibraryCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_113 = (QVToLibraryCS)qVToLibraryCS_10;
-                uLibrary_isBlackbox(symbol_113);
+                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_105 = (QVToLibraryCS)qVToLibraryCS_10;
+                uLibrary_isBlackbox(symbol_105);
             }
         }
         ;
-        for (TopLevelCS topLevelCS_11 : UNBOXED_allInstances_13) {
+        for (TopLevelCS topLevelCS_11 : UNBOXED_allInstances_11) {
             if (topLevelCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_117 = (TopLevelCS)topLevelCS_11;
-                uModel_ownedPackages(symbol_117);
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_109 = (TopLevelCS)topLevelCS_11;
+                uModel_ownedPackages(symbol_109);
             }
         }
         ;
-        for (TopLevelCS topLevelCS_12 : UNBOXED_allInstances_13) {
+        for (TopLevelCS topLevelCS_12 : UNBOXED_allInstances_11) {
             if (topLevelCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_121 = (TopLevelCS)topLevelCS_12;
-                uPackage_name(symbol_121);
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_113 = (TopLevelCS)topLevelCS_12;
+                uPackage_name(symbol_113);
             }
         }
         ;
-        for (TopLevelCS topLevelCS_13 : UNBOXED_allInstances_13) {
+        for (TopLevelCS topLevelCS_13 : UNBOXED_allInstances_11) {
             if (topLevelCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_125 = (TopLevelCS)topLevelCS_13;
-                uPackage_ownedClasses(symbol_125);
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_117 = (TopLevelCS)topLevelCS_13;
+                uPackage_ownedClasses(symbol_117);
             }
         }
         ;
-        for (TransformationCS transformationCS_13 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_13 : UNBOXED_allInstances_4) {
             if (transformationCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_129 = (TransformationCS)transformationCS_13;
-                uOperationalTransformation_name(symbol_129);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_121 = (TransformationCS)transformationCS_13;
+                uOperationalTransformation_name(symbol_121);
             }
         }
         ;
-        for (TransformationCS transformationCS_14 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_14 : UNBOXED_allInstances_4) {
             if (transformationCS_14 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_133 = (TransformationCS)transformationCS_14;
-                uOperationalTransformation_ownedOperations(symbol_133);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_125 = (TransformationCS)transformationCS_14;
+                uOperationalTransformation_ownedOperations(symbol_125);
             }
         }
         ;
-        for (TransformationCS transformationCS_15 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_15 : UNBOXED_allInstances_4) {
             if (transformationCS_15 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_137 = (TransformationCS)transformationCS_15;
-                uOperationalTransformation_isBlackbox(symbol_137);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_129 = (TransformationCS)transformationCS_15;
+                uOperationalTransformation_isBlackbox(symbol_129);
             }
         }
         ;
-        for (TransformationCS transformationCS_16 : UNBOXED_allInstances_6) {
+        for (TransformationCS transformationCS_16 : UNBOXED_allInstances_4) {
             if (transformationCS_16 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_141 = (TransformationCS)transformationCS_16;
-                uOperationalTransformation_isAbstract(symbol_141);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_133 = (TransformationCS)transformationCS_16;
+                uOperationalTransformation_isAbstract(symbol_133);
             }
         }
         return true;

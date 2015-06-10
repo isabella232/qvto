@@ -58,6 +58,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeocl.services.ImperativeOCLGrammarAccess;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
@@ -82,11 +83,25 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == BaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BaseCSPackage.MULTIPLICITY_BOUNDS_CS:
-				sequence_MultiplicityBoundsCS(context, (MultiplicityBoundsCS) semanticObject); 
-				return; 
+				if(context == grammarAccess.getMultiplicityBoundsCSRule()) {
+					sequence_MultiplicityBoundsCS(context, (MultiplicityBoundsCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getMultiplicityCSRule()) {
+					sequence_MultiplicityBoundsCS_MultiplicityCS(context, (MultiplicityBoundsCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSPackage.MULTIPLICITY_STRING_CS:
-				sequence_MultiplicityStringCS(context, (MultiplicityStringCS) semanticObject); 
-				return; 
+				if(context == grammarAccess.getMultiplicityCSRule()) {
+					sequence_MultiplicityCS_MultiplicityStringCS(context, (MultiplicityStringCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getMultiplicityStringCSRule()) {
+					sequence_MultiplicityStringCS(context, (MultiplicityStringCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSPackage.PATH_ELEMENT_CS:
 				if(context == grammarAccess.getFirstPathElementCSRule()) {
 					sequence_FirstPathElementCS(context, (PathElementCS) semanticObject); 
@@ -339,6 +354,9 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == ImperativeOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS:
+				sequence_BlockExpCS(context, (BlockExpCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS:
 				sequence_DictLiteralExpCS(context, (DictLiteralExpCS) semanticObject); 
 				return; 
@@ -384,6 +402,15 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
+	
+	/**
+	 * Constraint:
+	 *     expressions+=ExpCS
+	 */
+	protected void sequence_BlockExpCS(EObject context, BlockExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
 	
 	/**
 	 * Constraint:

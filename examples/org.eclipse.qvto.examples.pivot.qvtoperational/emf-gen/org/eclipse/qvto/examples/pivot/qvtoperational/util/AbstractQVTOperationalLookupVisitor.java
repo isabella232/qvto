@@ -180,15 +180,15 @@ public class AbstractQVTOperationalLookupVisitor
      */
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitConstructorBody(final /*@NonNull*/ /*@NonInvalid*/ ConstructorBody element_0) {
-        final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> content = element_0.getContent();
-        assert content != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> content = element_0.getContent();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_content = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, content);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_content, child).booleanValue();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
         if (includes) {
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
-            final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_0.getVariable();
-            assert variable != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<Variable> variable = element_0.getVariable();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
@@ -212,21 +212,19 @@ public class AbstractQVTOperationalLookupVisitor
             }
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, select, TYP_imperativeocl_c_c_VariableInitExp_0);
             /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Variable);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
+            /*@NonNull*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
             /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
                     collect = accumulator_0;
                     break;
                 }
-                /*@Nullable*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
+                /*@NonNull*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
                 /**
                  * referredVariable
                  */
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'imperativeocl::VariableInitExp::referredVariable\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
                 //
                 accumulator_0.add(referredVariable);
             }
@@ -354,8 +352,8 @@ public class AbstractQVTOperationalLookupVisitor
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ VarParameter context_0 = element_8.getContext();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = context.addElement((NamedElement)context_0);
-            final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result = element_8.getResult();
-            assert result != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<VarParameter> result = element_8.getResult();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = addElement.addElements((Collection)result);
             final /*@NonNull*/ /*@Thrown*/ List<Parameter> ownedParameters = element_8.getOwnedParameters();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = addElements.addElements((Collection)ownedParameters);
@@ -443,15 +441,15 @@ public class AbstractQVTOperationalLookupVisitor
      */
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitMappingBody(final /*@NonNull*/ /*@NonInvalid*/ MappingBody element_10) {
-        final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> content = element_10.getContent();
-        assert content != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> content = element_10.getContent();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_content = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, content);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_content, child).booleanValue();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_5;
         if (includes) {
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
-            final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_10.getVariable();
-            assert variable != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<Variable> variable = element_10.getVariable();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
@@ -475,21 +473,19 @@ public class AbstractQVTOperationalLookupVisitor
             }
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, select, TYP_imperativeocl_c_c_VariableInitExp_0);
             /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Variable);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
+            /*@NonNull*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
             /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
                     collect = accumulator_0;
                     break;
                 }
-                /*@Nullable*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
+                /*@NonNull*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
                 /**
                  * referredVariable
                  */
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'imperativeocl::VariableInitExp::referredVariable\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
                 //
                 accumulator_0.add(referredVariable);
             }
@@ -508,15 +504,15 @@ public class AbstractQVTOperationalLookupVisitor
             symbol_5 = symbol_0;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> initSection = element_10.getInitSection();
-            assert initSection != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> initSection = element_10.getInitSection();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_initSection = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, initSection);
             final /*@Thrown*/ boolean includes_0 = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_initSection, child).booleanValue();
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (includes_0) {
                 final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_1 = idResolver.getClass(CLSSid_VariableInitExp, null);
-                final /*@Nullable*/ /*@Thrown*/ List<Variable> variable_0 = element_10.getVariable();
-                assert variable_0 != null;
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ List<Variable> variable_0 = element_10.getVariable();
                 final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = context.addElements((Collection)variable_0);
                 /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_1 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
                 /*@Nullable*/ Iterator<?> ITERATOR_x_0 = BOXED_content.iterator();
@@ -540,21 +536,19 @@ public class AbstractQVTOperationalLookupVisitor
                 }
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind_0 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, select_0, TYP_imperativeocl_c_c_VariableInitExp_1);
                 /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_2 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Variable);
-                /*@Nullable*/ Iterator<?> ITERATOR__1_0 = selectByKind_0.iterator();
+                /*@NonNull*/ Iterator<?> ITERATOR__1_0 = selectByKind_0.iterator();
                 /*@NonNull*/ /*@Thrown*/ SequenceValue collect_0;
                 while (true) {
                     if (!ITERATOR__1_0.hasNext()) {
                         collect_0 = accumulator_2;
                         break;
                     }
-                    /*@Nullable*/ /*@NonInvalid*/ VariableInitExp _1_0 = (VariableInitExp)ITERATOR__1_0.next();
+                    /*@NonNull*/ /*@NonInvalid*/ VariableInitExp _1_0 = (VariableInitExp)ITERATOR__1_0.next();
                     /**
                      * referredVariable
                      */
-                    if (_1_0 == null) {
-                        throw new InvalidValueException("Null source for \'imperativeocl::VariableInitExp::referredVariable\'");
-                    }
-                    final /*@Nullable*/ /*@Thrown*/ Variable referredVariable_0 = _1_0.getReferredVariable();
+                    @SuppressWarnings("null")
+                    final /*@NonNull*/ /*@Thrown*/ Variable referredVariable_0 = _1_0.getReferredVariable();
                     //
                     accumulator_2.add(referredVariable_0);
                 }
@@ -573,15 +567,15 @@ public class AbstractQVTOperationalLookupVisitor
                 symbol_4 = symbol_1;
             }
             else {
-                final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> endSection = element_10.getEndSection();
-                assert endSection != null;
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> endSection = element_10.getEndSection();
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_endSection = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, endSection);
                 final /*@Thrown*/ boolean includes_1 = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_endSection, child).booleanValue();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_3;
                 if (includes_1) {
                     final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_2 = idResolver.getClass(CLSSid_VariableInitExp, null);
-                    final /*@Nullable*/ /*@Thrown*/ List<Variable> variable_1 = element_10.getVariable();
-                    assert variable_1 != null;
+                    @SuppressWarnings("null")
+                    final /*@NonNull*/ /*@Thrown*/ List<Variable> variable_1 = element_10.getVariable();
                     final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_1 = context.addElements((Collection)variable_1);
                     /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_3 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
                     /*@Nullable*/ Iterator<?> ITERATOR_x_1 = BOXED_content.iterator();
@@ -605,21 +599,19 @@ public class AbstractQVTOperationalLookupVisitor
                     }
                     final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind_1 = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, select_1, TYP_imperativeocl_c_c_VariableInitExp_2);
                     /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_4 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Variable);
-                    /*@Nullable*/ Iterator<?> ITERATOR__1_1 = selectByKind_1.iterator();
+                    /*@NonNull*/ Iterator<?> ITERATOR__1_1 = selectByKind_1.iterator();
                     /*@NonNull*/ /*@Thrown*/ SequenceValue collect_1;
                     while (true) {
                         if (!ITERATOR__1_1.hasNext()) {
                             collect_1 = accumulator_4;
                             break;
                         }
-                        /*@Nullable*/ /*@NonInvalid*/ VariableInitExp _1_1 = (VariableInitExp)ITERATOR__1_1.next();
+                        /*@NonNull*/ /*@NonInvalid*/ VariableInitExp _1_1 = (VariableInitExp)ITERATOR__1_1.next();
                         /**
                          * referredVariable
                          */
-                        if (_1_1 == null) {
-                            throw new InvalidValueException("Null source for \'imperativeocl::VariableInitExp::referredVariable\'");
-                        }
-                        final /*@Nullable*/ /*@Thrown*/ Variable referredVariable_1 = _1_1.getReferredVariable();
+                        @SuppressWarnings("null")
+                        final /*@NonNull*/ /*@Thrown*/ Variable referredVariable_1 = _1_1.getReferredVariable();
                         //
                         accumulator_4.add(referredVariable_1);
                     }
@@ -710,8 +702,8 @@ public class AbstractQVTOperationalLookupVisitor
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ VarParameter context_0 = element_12.getContext();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = context.addElement((NamedElement)context_0);
-            final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result = element_12.getResult();
-            assert result != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<VarParameter> result = element_12.getResult();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = addElement.addElements((Collection)result);
             final /*@NonNull*/ /*@Thrown*/ List<Parameter> ownedParameters = element_12.getOwnedParameters();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = addElements.addElements((Collection)ownedParameters);
@@ -755,8 +747,8 @@ public class AbstractQVTOperationalLookupVisitor
                     final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement_1 = context.addElement((NamedElement)context_2);
                     final /*@NonNull*/ /*@Thrown*/ List<Parameter> ownedParameters_1 = element_12.getOwnedParameters();
                     final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElement_1.addElements((Collection)ownedParameters_1);
-                    final /*@Nullable*/ /*@Thrown*/ List<VarParameter> result_0 = element_12.getResult();
-                    assert result_0 != null;
+                    @SuppressWarnings("null")
+                    final /*@NonNull*/ /*@Thrown*/ List<VarParameter> result_0 = element_12.getResult();
                     final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_1 = addElements_0.addElements((Collection)result_0);
                     final /*@Thrown*/ boolean hasFinalResult_1 = inner_1.hasFinalResult();
                     /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
@@ -827,8 +819,8 @@ public class AbstractQVTOperationalLookupVisitor
      */
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitModelType(final /*@NonNull*/ /*@NonInvalid*/ ModelType element_15) {
-        final /*@Nullable*/ /*@Thrown*/ List<Package> metamodel_0 = element_15.getMetamodel();
-        assert metamodel_0 != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<Package> metamodel_0 = element_15.getMetamodel();
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)metamodel_0);
         final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
@@ -839,8 +831,8 @@ public class AbstractQVTOperationalLookupVisitor
             final /*@Nullable*/ /*@Thrown*/ LookupEnvironment parentEnv_0 = this.parentEnv(element_15);
             symbol_1 = parentEnv_0;
         }
-        final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> additionalCondition = element_15.getAdditionalCondition();
-        assert additionalCondition != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> additionalCondition = element_15.getAdditionalCondition();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_additionalCondition = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, additionalCondition);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_additionalCondition, child).booleanValue();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;
@@ -880,8 +872,8 @@ public class AbstractQVTOperationalLookupVisitor
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)ownedProperties);
         final /*@NonNull*/ /*@Thrown*/ List<Operation> ownedOperations = element_16.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElements.addElements((Collection)ownedOperations);
-        final /*@Nullable*/ /*@Thrown*/ List<Variable> ownedVariable = element_16.getOwnedVariable();
-        assert ownedVariable != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<Variable> ownedVariable = element_16.getOwnedVariable();
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner = addElements_0.addElements((Collection)ownedVariable);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
@@ -889,8 +881,8 @@ public class AbstractQVTOperationalLookupVisitor
             symbol_1 = inner;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ List<ModuleImport> moduleImport = element_16.getModuleImport();
-            assert moduleImport != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<ModuleImport> moduleImport = element_16.getModuleImport();
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_moduleImport = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModuleImport, moduleImport);
             /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Module);
             /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_moduleImport.iterator();
@@ -905,7 +897,7 @@ public class AbstractQVTOperationalLookupVisitor
                  * _'null' : qvtoperational::Module[?]
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'qvtoperational::ModuleImport::module\'");
+                    throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/pivot/1.0/QVTOperational\'::ModuleImport::module\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ Module module = _1.getModule();
                 //
@@ -928,7 +920,7 @@ public class AbstractQVTOperationalLookupVisitor
                 acc = envForChild;
             }
             if (iterate == null) {
-                throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean\'");
+                throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean[1]\'");
             }
             final /*@Thrown*/ boolean hasFinalResult_0 = iterate.hasFinalResult();
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;
@@ -989,15 +981,15 @@ public class AbstractQVTOperationalLookupVisitor
      */
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitOperationBody(final /*@NonNull*/ /*@NonInvalid*/ OperationBody element_19) {
-        final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> content = element_19.getContent();
-        assert content != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> content = element_19.getContent();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_content = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, content);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_content, child).booleanValue();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_1;
         if (includes) {
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_imperativeocl_c_c_VariableInitExp_0 = idResolver.getClass(CLSSid_VariableInitExp, null);
-            final /*@Nullable*/ /*@Thrown*/ List<Variable> variable = element_19.getVariable();
-            assert variable != null;
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ List<Variable> variable = element_19.getVariable();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)variable);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_OCLExpression);
             /*@Nullable*/ Iterator<?> ITERATOR_x = BOXED_content.iterator();
@@ -1021,21 +1013,19 @@ public class AbstractQVTOperationalLookupVisitor
             }
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, select, TYP_imperativeocl_c_c_VariableInitExp_0);
             /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Variable);
-            /*@Nullable*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
+            /*@NonNull*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
             /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
                     collect = accumulator_0;
                     break;
                 }
-                /*@Nullable*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
+                /*@NonNull*/ /*@NonInvalid*/ VariableInitExp _1 = (VariableInitExp)ITERATOR__1.next();
                 /**
                  * referredVariable
                  */
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'imperativeocl::VariableInitExp::referredVariable\'");
-                }
-                final /*@Nullable*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ Variable referredVariable = _1.getReferredVariable();
                 //
                 accumulator_0.add(referredVariable);
             }
@@ -1104,12 +1094,12 @@ public class AbstractQVTOperationalLookupVisitor
      */
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitOperationalTransformation(final /*@NonNull*/ /*@NonInvalid*/ OperationalTransformation element_20) {
-        final /*@Nullable*/ /*@Thrown*/ List<ModelParameter> modelParameter = element_20.getModelParameter();
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<ModelParameter> modelParameter = element_20.getModelParameter();
         final /*@NonNull*/ /*@Thrown*/ List<Operation> ownedOperations = element_20.getOwnedOperations();
         final /*@NonNull*/ /*@Thrown*/ List<Property> ownedProperties = element_20.getOwnedProperties();
-        final /*@Nullable*/ /*@Thrown*/ List<Variable> ownedVariable = element_20.getOwnedVariable();
-        assert modelParameter != null;
-        assert ownedVariable != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<Variable> ownedVariable = element_20.getOwnedVariable();
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements = context.addElements((Collection)ownedProperties);
         final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElements_0 = addElements.addElements((Collection)ownedOperations);
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_modelParameter = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModelParameter, modelParameter);
@@ -1123,8 +1113,8 @@ public class AbstractQVTOperationalLookupVisitor
                 symbol_1 = inner;
             }
             else {
-                final /*@Nullable*/ /*@Thrown*/ List<ModuleImport> moduleImport = element_20.getModuleImport();
-                assert moduleImport != null;
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ List<ModuleImport> moduleImport = element_20.getModuleImport();
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_moduleImport = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModuleImport, moduleImport);
                 /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Module);
                 /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_moduleImport.iterator();
@@ -1139,7 +1129,7 @@ public class AbstractQVTOperationalLookupVisitor
                      * _'null' : qvtoperational::Module[?]
                      */
                     if (_1 == null) {
-                        throw new InvalidValueException("Null source for \'qvtoperational::ModuleImport::module\'");
+                        throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/pivot/1.0/QVTOperational\'::ModuleImport::module\'");
                     }
                     final /*@Nullable*/ /*@Thrown*/ Module module = _1.getModule();
                     //
@@ -1162,7 +1152,7 @@ public class AbstractQVTOperationalLookupVisitor
                     acc = envForChild;
                 }
                 if (iterate == null) {
-                    throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean\'");
+                    throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean[1]\'");
                 }
                 final /*@Thrown*/ boolean hasFinalResult_0 = iterate.hasFinalResult();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;
@@ -1186,8 +1176,8 @@ public class AbstractQVTOperationalLookupVisitor
                 symbol_3 = inner_0;
             }
             else {
-                final /*@Nullable*/ /*@Thrown*/ List<ModuleImport> moduleImport_0 = element_20.getModuleImport();
-                assert moduleImport_0 != null;
+                @SuppressWarnings("null")
+                final /*@NonNull*/ /*@Thrown*/ List<ModuleImport> moduleImport_0 = element_20.getModuleImport();
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_moduleImport_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_ModuleImport, moduleImport_0);
                 /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Module);
                 /*@Nullable*/ Iterator<?> ITERATOR__1_0 = BOXED_moduleImport_0.iterator();
@@ -1202,7 +1192,7 @@ public class AbstractQVTOperationalLookupVisitor
                      * _'null' : qvtoperational::Module[?]
                      */
                     if (_1_0 == null) {
-                        throw new InvalidValueException("Null source for \'qvtoperational::ModuleImport::module\'");
+                        throw new InvalidValueException("Null source for \'\'http://www.eclipse.org/qvt/pivot/1.0/QVTOperational\'::ModuleImport::module\'");
                     }
                     final /*@Nullable*/ /*@Thrown*/ Module module_0 = _1_0.getModule();
                     //
@@ -1225,7 +1215,7 @@ public class AbstractQVTOperationalLookupVisitor
                     acc_0 = envForChild_0;
                 }
                 if (iterate_0 == null) {
-                    throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean\'");
+                    throw new InvalidValueException("Null source for \'lookup::Environment::hasFinalResult() : Boolean[1]\'");
                 }
                 final /*@Thrown*/ boolean hasFinalResult_2 = iterate_0.hasFinalResult();
                 /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_2;

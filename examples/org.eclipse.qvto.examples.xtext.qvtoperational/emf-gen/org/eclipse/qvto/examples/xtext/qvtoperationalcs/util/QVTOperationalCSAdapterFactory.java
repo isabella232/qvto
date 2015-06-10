@@ -23,7 +23,6 @@ import org.eclipse.ocl.xtext.basecs.OperationCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
 import org.eclipse.ocl.xtext.basecs.ParameterCS;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.RootCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
@@ -39,6 +38,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.CallExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.*;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
@@ -55,7 +55,6 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
@@ -72,8 +71,6 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
@@ -164,6 +161,10 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createPathElement2CSAdapter();
 			}
 			@Override
+			public Adapter caseTypedTypeRef2CS(TypedTypeRef2CS object) {
+				return createTypedTypeRef2CSAdapter();
+			}
+			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
 				return createTopLevelCSAdapter();
 			}
@@ -182,14 +183,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseQVToOperationCS(QVToOperationCS object) {
 				return createQVToOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationParameterDeclarationCS(OperationParameterDeclarationCS object) {
-				return createOperationParameterDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationSimpleSignatureCS(OperationSimpleSignatureCS object) {
-				return createOperationSimpleSignatureCSAdapter();
 			}
 			@Override
 			public Adapter caseInitPartCS(InitPartCS object) {
@@ -274,10 +267,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingEndCS(MappingEndCS object) {
 				return createMappingEndCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingExtensionCS(MappingExtensionCS object) {
-				return createMappingExtensionCSAdapter();
 			}
 			@Override
 			public Adapter caseMappingInitCS(MappingInitCS object) {
@@ -400,12 +389,20 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createPivotableAdapter();
 			}
 			@Override
-			public Adapter casePathNameCS(PathNameCS object) {
-				return createPathNameCSAdapter();
-			}
-			@Override
 			public Adapter casePivotableElementCS(PivotableElementCS object) {
 				return createPivotableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseElementRefCS(ElementRefCS object) {
+				return createElementRefCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeRefCS(TypeRefCS object) {
+				return createTypeRefCSAdapter();
+			}
+			@Override
+			public Adapter caseTypedRefCS(TypedRefCS object) {
+				return createTypedRefCSAdapter();
 			}
 			@Override
 			public Adapter caseModelElementCS(ModelElementCS object) {
@@ -468,10 +465,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createOperationCSAdapter();
 			}
 			@Override
-			public Adapter caseParameterCS(ParameterCS object) {
-				return createParameterCSAdapter();
-			}
-			@Override
 			public Adapter casePackageCS(PackageCS object) {
 				return createPackageCSAdapter();
 			}
@@ -504,20 +497,12 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createCallExpCSAdapter();
 			}
 			@Override
-			public Adapter caseElementRefCS(ElementRefCS object) {
-				return createElementRefCSAdapter();
-			}
-			@Override
 			public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
 				return createExpressionBlockCSAdapter();
 			}
 			@Override
-			public Adapter caseTypeRefCS(TypeRefCS object) {
-				return createTypeRefCSAdapter();
-			}
-			@Override
-			public Adapter caseTypedRefCS(TypedRefCS object) {
-				return createTypedRefCSAdapter();
+			public Adapter caseParameterCS(ParameterCS object) {
+				return createParameterCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -564,6 +549,20 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPathElement2CSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS <em>Typed Type Ref2 CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS
+	 * @generated
+	 */
+	public Adapter createTypedTypeRef2CSAdapter() {
 		return null;
 	}
 
@@ -634,34 +633,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createQVToOperationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS <em>Operation Parameter Declaration CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS
-	 * @generated
-	 */
-	public Adapter createOperationParameterDeclarationCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS <em>Operation Simple Signature CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS
-	 * @generated
-	 */
-	public Adapter createOperationSimpleSignatureCSAdapter() {
 		return null;
 	}
 
@@ -956,20 +927,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingEndCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS <em>Mapping Extension CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS
-	 * @generated
-	 */
-	public Adapter createMappingExtensionCSAdapter() {
 		return null;
 	}
 
@@ -1390,20 +1347,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPivotableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.PathNameCS <em>Path Name CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.xtext.basecs.PathNameCS
-	 * @generated
-	 */
-	public Adapter createPathNameCSAdapter() {
 		return null;
 	}
 

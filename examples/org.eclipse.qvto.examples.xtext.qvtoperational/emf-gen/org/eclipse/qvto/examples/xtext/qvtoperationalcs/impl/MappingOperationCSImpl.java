@@ -12,13 +12,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.impl.OperationCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
@@ -30,65 +30,50 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getContextType <em>Context Type</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getResult <em>Result</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getDirectionKindCS <em>Direction Kind CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getMappingExtension <em>Mapping Extension</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getResults <em>Results</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getDirection <em>Direction</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#isIsQuery <em>Is Query</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getWhen <em>When</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getWhere <em>Where</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getInherits <em>Inherits</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getDisjuncts <em>Disjuncts</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getMerges <em>Merges</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getRefines <em>Refines</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingOperationCSImpl#getScopedName <em>Scoped Name</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MappingOperationCSImpl extends OperationCSImpl implements MappingOperationCS {
 	/**
-	 * The cached value of the '{@link #getContextType() <em>Context Type</em>}' containment reference.
+	 * The cached value of the '{@link #getResults() <em>Results</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getContextType()
+	 * @see #getResults()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeCS contextType;
+	protected EList<ParameterDeclarationCS> results;
 
 	/**
-	 * The cached value of the '{@link #getResult() <em>Result</em>}' containment reference list.
+	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getResult()
+	 * @see #getDirection()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclarationCS> result;
+	protected static final DirectionKindCS DIRECTION_EDEFAULT = DirectionKindCS.IN;
 
 	/**
-	 * The default value of the '{@link #getDirectionKindCS() <em>Direction Kind CS</em>}' attribute.
+	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDirectionKindCS()
+	 * @see #getDirection()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DirectionKindCS DIRECTION_KIND_CS_EDEFAULT = DirectionKindCS.IN;
-
-	/**
-	 * The cached value of the '{@link #getDirectionKindCS() <em>Direction Kind CS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDirectionKindCS()
-	 * @generated
-	 * @ordered
-	 */
-	protected DirectionKindCS directionKindCS = DIRECTION_KIND_CS_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getMappingExtension() <em>Mapping Extension</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMappingExtension()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<MappingExtensionCS> mappingExtension;
+	protected DirectionKindCS direction = DIRECTION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isIsQuery() <em>Is Query</em>}' attribute.
@@ -109,6 +94,76 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * @ordered
 	 */
 	protected boolean isQuery = IS_QUERY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getWhen() <em>When</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWhen()
+	 * @generated
+	 * @ordered
+	 */
+	protected BlockExpCS when;
+
+	/**
+	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWhere()
+	 * @generated
+	 * @ordered
+	 */
+	protected BlockExpCS where;
+
+	/**
+	 * The cached value of the '{@link #getInherits() <em>Inherits</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInherits()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathName2CS> inherits;
+
+	/**
+	 * The cached value of the '{@link #getDisjuncts() <em>Disjuncts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDisjuncts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathName2CS> disjuncts;
+
+	/**
+	 * The cached value of the '{@link #getMerges() <em>Merges</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getMerges()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PathName2CS> merges;
+
+	/**
+	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRefines()
+	 * @generated
+	 * @ordered
+	 */
+	protected PathName2CS refines;
+
+	/**
+	 * The cached value of the '{@link #getScopedName() <em>Scoped Name</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getScopedName()
+	 * @generated
+	 * @ordered
+	 */
+	protected PathName2CS scopedName;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -134,23 +189,11 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeCS getContextType() {
-		return contextType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetContextType(TypeCS newContextType, NotificationChain msgs) {
-		TypeCS oldContextType = contextType;
-		contextType = newContextType;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE, oldContextType, newContextType);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<ParameterDeclarationCS> getResults() {
+		if (results == null) {
+			results = new EObjectContainmentEList<ParameterDeclarationCS>(ParameterDeclarationCS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS);
 		}
-		return msgs;
+		return results;
 	}
 
 	/**
@@ -158,18 +201,8 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setContextType(TypeCS newContextType) {
-		if (newContextType != contextType) {
-			NotificationChain msgs = null;
-			if (contextType != null)
-				msgs = ((InternalEObject)contextType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE, null, msgs);
-			if (newContextType != null)
-				msgs = ((InternalEObject)newContextType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE, null, msgs);
-			msgs = basicSetContextType(newContextType, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE, newContextType, newContextType));
+	public DirectionKindCS getDirection() {
+		return direction;
 	}
 
 	/**
@@ -177,44 +210,11 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclarationCS> getResult() {
-		if (result == null) {
-			result = new EObjectContainmentEList<ParameterDeclarationCS>(ParameterDeclarationCS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT);
-		}
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DirectionKindCS getDirectionKindCS() {
-		return directionKindCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDirectionKindCS(DirectionKindCS newDirectionKindCS) {
-		DirectionKindCS oldDirectionKindCS = directionKindCS;
-		directionKindCS = newDirectionKindCS == null ? DIRECTION_KIND_CS_EDEFAULT : newDirectionKindCS;
+	public void setDirection(DirectionKindCS newDirection) {
+		DirectionKindCS oldDirection = direction;
+		direction = newDirection == null ? DIRECTION_EDEFAULT : newDirection;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION_KIND_CS, oldDirectionKindCS, directionKindCS));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<MappingExtensionCS> getMappingExtension() {
-		if (mappingExtension == null) {
-			mappingExtension = new EObjectContainmentEList<MappingExtensionCS>(MappingExtensionCS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION);
-		}
-		return mappingExtension;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION, oldDirection, direction));
 	}
 
 	/**
@@ -243,6 +243,214 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BlockExpCS getWhen() {
+		return when;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetWhen(BlockExpCS newWhen, NotificationChain msgs) {
+		BlockExpCS oldWhen = when;
+		when = newWhen;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN, oldWhen, newWhen);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWhen(BlockExpCS newWhen) {
+		if (newWhen != when) {
+			NotificationChain msgs = null;
+			if (when != null)
+				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN, null, msgs);
+			if (newWhen != null)
+				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN, null, msgs);
+			msgs = basicSetWhen(newWhen, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN, newWhen, newWhen));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BlockExpCS getWhere() {
+		return where;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetWhere(BlockExpCS newWhere, NotificationChain msgs) {
+		BlockExpCS oldWhere = where;
+		where = newWhere;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE, oldWhere, newWhere);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWhere(BlockExpCS newWhere) {
+		if (newWhere != where) {
+			NotificationChain msgs = null;
+			if (where != null)
+				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE, null, msgs);
+			if (newWhere != null)
+				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE, null, msgs);
+			msgs = basicSetWhere(newWhere, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE, newWhere, newWhere));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PathName2CS> getInherits() {
+		if (inherits == null) {
+			inherits = new EObjectContainmentEList<PathName2CS>(PathName2CS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS);
+		}
+		return inherits;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PathName2CS> getDisjuncts() {
+		if (disjuncts == null) {
+			disjuncts = new EObjectContainmentEList<PathName2CS>(PathName2CS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS);
+		}
+		return disjuncts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<PathName2CS> getMerges() {
+		if (merges == null) {
+			merges = new EObjectContainmentEList<PathName2CS>(PathName2CS.class, this, QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES);
+		}
+		return merges;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PathName2CS getRefines() {
+		return refines;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetRefines(PathName2CS newRefines, NotificationChain msgs) {
+		PathName2CS oldRefines = refines;
+		refines = newRefines;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES, oldRefines, newRefines);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRefines(PathName2CS newRefines) {
+		if (newRefines != refines) {
+			NotificationChain msgs = null;
+			if (refines != null)
+				msgs = ((InternalEObject)refines).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES, null, msgs);
+			if (newRefines != null)
+				msgs = ((InternalEObject)newRefines).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES, null, msgs);
+			msgs = basicSetRefines(newRefines, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES, newRefines, newRefines));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PathName2CS getScopedName() {
+		return scopedName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetScopedName(PathName2CS newScopedName, NotificationChain msgs) {
+		PathName2CS oldScopedName = scopedName;
+		scopedName = newScopedName;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME, oldScopedName, newScopedName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setScopedName(PathName2CS newScopedName) {
+		if (newScopedName != scopedName) {
+			NotificationChain msgs = null;
+			if (scopedName != null)
+				msgs = ((InternalEObject)scopedName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME, null, msgs);
+			if (newScopedName != null)
+				msgs = ((InternalEObject)newScopedName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME, null, msgs);
+			msgs = basicSetScopedName(newScopedName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME, newScopedName, newScopedName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String toString() {
 		return super.toString();
 	}
@@ -255,12 +463,22 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE:
-				return basicSetContextType(null, msgs);
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT:
-				return ((InternalEList<?>)getResult()).basicRemove(otherEnd, msgs);
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION:
-				return ((InternalEList<?>)getMappingExtension()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS:
+				return ((InternalEList<?>)getResults()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
+				return basicSetWhen(null, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
+				return basicSetWhere(null, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
+				return ((InternalEList<?>)getInherits()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS:
+				return ((InternalEList<?>)getDisjuncts()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES:
+				return ((InternalEList<?>)getMerges()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES:
+				return basicSetRefines(null, msgs);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME:
+				return basicSetScopedName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -273,16 +491,26 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE:
-				return getContextType();
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT:
-				return getResult();
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION_KIND_CS:
-				return getDirectionKindCS();
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION:
-				return getMappingExtension();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS:
+				return getResults();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION:
+				return getDirection();
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__IS_QUERY:
 				return isIsQuery();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
+				return getWhen();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
+				return getWhere();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
+				return getInherits();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS:
+				return getDisjuncts();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES:
+				return getMerges();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES:
+				return getRefines();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME:
+				return getScopedName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -296,22 +524,39 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE:
-				setContextType((TypeCS)newValue);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS:
+				getResults().clear();
+				getResults().addAll((Collection<? extends ParameterDeclarationCS>)newValue);
 				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT:
-				getResult().clear();
-				getResult().addAll((Collection<? extends ParameterDeclarationCS>)newValue);
-				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION_KIND_CS:
-				setDirectionKindCS((DirectionKindCS)newValue);
-				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION:
-				getMappingExtension().clear();
-				getMappingExtension().addAll((Collection<? extends MappingExtensionCS>)newValue);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION:
+				setDirection((DirectionKindCS)newValue);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__IS_QUERY:
 				setIsQuery((Boolean)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
+				setWhen((BlockExpCS)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
+				setWhere((BlockExpCS)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
+				getInherits().clear();
+				getInherits().addAll((Collection<? extends PathName2CS>)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS:
+				getDisjuncts().clear();
+				getDisjuncts().addAll((Collection<? extends PathName2CS>)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES:
+				getMerges().clear();
+				getMerges().addAll((Collection<? extends PathName2CS>)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES:
+				setRefines((PathName2CS)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME:
+				setScopedName((PathName2CS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -325,20 +570,35 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE:
-				setContextType((TypeCS)null);
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS:
+				getResults().clear();
 				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT:
-				getResult().clear();
-				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION_KIND_CS:
-				setDirectionKindCS(DIRECTION_KIND_CS_EDEFAULT);
-				return;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION:
-				getMappingExtension().clear();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION:
+				setDirection(DIRECTION_EDEFAULT);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__IS_QUERY:
 				setIsQuery(IS_QUERY_EDEFAULT);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
+				setWhen((BlockExpCS)null);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
+				setWhere((BlockExpCS)null);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
+				getInherits().clear();
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS:
+				getDisjuncts().clear();
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES:
+				getMerges().clear();
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES:
+				setRefines((PathName2CS)null);
+				return;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME:
+				setScopedName((PathName2CS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -352,16 +612,26 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__CONTEXT_TYPE:
-				return contextType != null;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULT:
-				return result != null && !result.isEmpty();
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION_KIND_CS:
-				return directionKindCS != DIRECTION_KIND_CS_EDEFAULT;
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MAPPING_EXTENSION:
-				return mappingExtension != null && !mappingExtension.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__RESULTS:
+				return results != null && !results.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DIRECTION:
+				return direction != DIRECTION_EDEFAULT;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__IS_QUERY:
 				return isQuery != IS_QUERY_EDEFAULT;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
+				return when != null;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
+				return where != null;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
+				return inherits != null && !inherits.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__DISJUNCTS:
+				return disjuncts != null && !disjuncts.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__MERGES:
+				return merges != null && !merges.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__REFINES:
+				return refines != null;
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__SCOPED_NAME:
+				return scopedName != null;
 		}
 		return super.eIsSet(featureID);
 	}

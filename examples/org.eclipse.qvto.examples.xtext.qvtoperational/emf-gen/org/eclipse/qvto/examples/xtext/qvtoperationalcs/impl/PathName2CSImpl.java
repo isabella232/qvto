@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.xtext.basecs.impl.PathNameCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.PivotableElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
@@ -30,7 +30,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  *
  * @generated
  */
-public class PathName2CSImpl extends PathNameCSImpl implements PathName2CS {
+public class PathName2CSImpl extends PivotableElementCSImpl implements PathName2CS {
 	/**
 	 * The cached value of the '{@link #getOwnedPathElements2() <em>Owned Path Elements2</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -12,11 +12,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
@@ -28,7 +28,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleRefCSImpl#getPathNameCS <em>Path Name CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleRefCSImpl#getModulePath <em>Module Path</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleRefCSImpl#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
@@ -36,14 +36,14 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  */
 public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	/**
-	 * The cached value of the '{@link #getPathNameCS() <em>Path Name CS</em>}' containment reference.
+	 * The cached value of the '{@link #getModulePath() <em>Module Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathNameCS()
+	 * @see #getModulePath()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS pathNameCS;
+	protected PathName2CS modulePath;
 
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -79,8 +79,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PathNameCS getPathNameCS() {
-		return pathNameCS;
+	public PathName2CS getModulePath() {
+		return modulePath;
 	}
 
 	/**
@@ -88,11 +88,11 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPathNameCS(PathNameCS newPathNameCS, NotificationChain msgs) {
-		PathNameCS oldPathNameCS = pathNameCS;
-		pathNameCS = newPathNameCS;
+	public NotificationChain basicSetModulePath(PathName2CS newModulePath, NotificationChain msgs) {
+		PathName2CS oldModulePath = modulePath;
+		modulePath = newModulePath;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS, oldPathNameCS, newPathNameCS);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH, oldModulePath, newModulePath);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -103,18 +103,18 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPathNameCS(PathNameCS newPathNameCS) {
-		if (newPathNameCS != pathNameCS) {
+	public void setModulePath(PathName2CS newModulePath) {
+		if (newModulePath != modulePath) {
 			NotificationChain msgs = null;
-			if (pathNameCS != null)
-				msgs = ((InternalEObject)pathNameCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS, null, msgs);
-			if (newPathNameCS != null)
-				msgs = ((InternalEObject)newPathNameCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS, null, msgs);
-			msgs = basicSetPathNameCS(newPathNameCS, msgs);
+			if (modulePath != null)
+				msgs = ((InternalEObject)modulePath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH, null, msgs);
+			if (newModulePath != null)
+				msgs = ((InternalEObject)newModulePath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH, null, msgs);
+			msgs = basicSetModulePath(newModulePath, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS, newPathNameCS, newPathNameCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH, newModulePath, newModulePath));
 	}
 
 	/**
@@ -137,8 +137,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS:
-				return basicSetPathNameCS(null, msgs);
+			case QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH:
+				return basicSetModulePath(null, msgs);
 			case QVTOperationalCSPackage.MODULE_REF_CS__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -153,8 +153,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS:
-				return getPathNameCS();
+			case QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH:
+				return getModulePath();
 			case QVTOperationalCSPackage.MODULE_REF_CS__PARAMETERS:
 				return getParameters();
 		}
@@ -170,8 +170,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS:
-				setPathNameCS((PathNameCS)newValue);
+			case QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH:
+				setModulePath((PathName2CS)newValue);
 				return;
 			case QVTOperationalCSPackage.MODULE_REF_CS__PARAMETERS:
 				getParameters().clear();
@@ -189,8 +189,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS:
-				setPathNameCS((PathNameCS)null);
+			case QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH:
+				setModulePath((PathName2CS)null);
 				return;
 			case QVTOperationalCSPackage.MODULE_REF_CS__PARAMETERS:
 				getParameters().clear();
@@ -207,8 +207,8 @@ public class ModuleRefCSImpl extends ElementCSImpl implements ModuleRefCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_REF_CS__PATH_NAME_CS:
-				return pathNameCS != null;
+			case QVTOperationalCSPackage.MODULE_REF_CS__MODULE_PATH:
+				return modulePath != null;
 			case QVTOperationalCSPackage.MODULE_REF_CS__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 		}

@@ -503,6 +503,34 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getValueExpCSParserRuleCall_2_0() { return cValueExpCSParserRuleCall_2_0; }
 	}
 
+	public class BlockExpCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BlockExpCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionsExpCSParserRuleCall_1_0 = (RuleCall)cExpressionsAssignment_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//BlockExpCS:
+		//	"{" expressions+=ExpCS "}";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"{" expressions+=ExpCS "}"
+		public Group getGroup() { return cGroup; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+
+		//expressions+=ExpCS
+		public Assignment getExpressionsAssignment_1() { return cExpressionsAssignment_1; }
+
+		//ExpCS
+		public RuleCall getExpressionsExpCSParserRuleCall_1_0() { return cExpressionsExpCSParserRuleCall_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+	}
+
 	public class StringLiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -547,6 +575,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private final DictLiteralExpCSElements pDictLiteralExpCS;
 	private final DictLiteralPartCSElements pDictLiteralPartCS;
 	private final ReturnExpCSElements pReturnExpCS;
+	private final BlockExpCSElements pBlockExpCS;
 	private final StringLiteralElements pStringLiteral;
 	
 	private final Grammar grammar;
@@ -581,6 +610,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDictLiteralExpCS = new DictLiteralExpCSElements();
 		this.pDictLiteralPartCS = new DictLiteralPartCSElements();
 		this.pReturnExpCS = new ReturnExpCSElements();
+		this.pBlockExpCS = new BlockExpCSElements();
 		this.pStringLiteral = new StringLiteralElements();
 	}
 	
@@ -829,6 +859,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getReturnExpCSRule() {
 		return getReturnExpCSAccess().getRule();
+	}
+
+	//BlockExpCS:
+	//	"{" expressions+=ExpCS "}";
+	public BlockExpCSElements getBlockExpCSAccess() {
+		return pBlockExpCS;
+	}
+	
+	public ParserRule getBlockExpCSRule() {
+		return getBlockExpCSAccess().getRule();
 	}
 
 	//StringLiteral:
@@ -1544,7 +1584,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MultiplicityCS:
-	//	"[" (MultiplicityBoundsCS | MultiplicityStringCS) "]";
+	//	"[" (MultiplicityBoundsCS | MultiplicityStringCS) ("|?" | isNullFree?="|1")? "]";
 	public BaseGrammarAccess.MultiplicityCSElements getMultiplicityCSAccess() {
 		return gaEssentialOCL.getMultiplicityCSAccess();
 	}
@@ -1594,8 +1634,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TemplateBindingCS:
-	//	"(" ownedSubstitutions+=TemplateParameterSubstitutionCS ("," ownedSubstitutions+=TemplateParameterSubstitutionCS)*
-	//	")";
+	//	ownedSubstitutions+=TemplateParameterSubstitutionCS ("," ownedSubstitutions+=TemplateParameterSubstitutionCS)*
+	//	ownedMultiplicity=MultiplicityCS?;
 	public BaseGrammarAccess.TemplateBindingCSElements getTemplateBindingCSAccess() {
 		return gaEssentialOCL.getTemplateBindingCSAccess();
 	}
@@ -1655,7 +1695,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypedTypeRefCS:
-	//	ownedPathName=PathNameCS ownedBinding=TemplateBindingCS?;
+	//	ownedPathName=PathNameCS ("(" ownedBinding=TemplateBindingCS ")")?;
 	public BaseGrammarAccess.TypedTypeRefCSElements getTypedTypeRefCSAccess() {
 		return gaEssentialOCL.getTypedTypeRefCSAccess();
 	}

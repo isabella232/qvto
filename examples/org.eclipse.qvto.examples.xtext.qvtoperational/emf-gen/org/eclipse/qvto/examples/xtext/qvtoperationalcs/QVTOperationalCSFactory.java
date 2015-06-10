@@ -40,6 +40,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	PathElement2CS createPathElement2CS();
 
 	/**
+	 * Returns a new object of class '<em>Typed Type Ref2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Typed Type Ref2 CS</em>'.
+	 * @generated
+	 */
+	TypedTypeRef2CS createTypedTypeRef2CS();
+
+	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -83,24 +92,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	QVToOperationCS createQVToOperationCS();
-
-	/**
-	 * Returns a new object of class '<em>Operation Parameter Declaration CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Parameter Declaration CS</em>'.
-	 * @generated
-	 */
-	OperationParameterDeclarationCS createOperationParameterDeclarationCS();
-
-	/**
-	 * Returns a new object of class '<em>Operation Simple Signature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Simple Signature CS</em>'.
-	 * @generated
-	 */
-	OperationSimpleSignatureCS createOperationSimpleSignatureCS();
 
 	/**
 	 * Returns a new object of class '<em>Init Part CS</em>'.
@@ -281,15 +272,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	MappingEndCS createMappingEndCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Extension CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Extension CS</em>'.
-	 * @generated
-	 */
-	MappingExtensionCS createMappingExtensionCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Init CS</em>'.

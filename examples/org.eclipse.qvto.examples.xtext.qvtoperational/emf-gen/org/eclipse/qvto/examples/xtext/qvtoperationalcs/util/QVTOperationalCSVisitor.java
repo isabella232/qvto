@@ -33,7 +33,6 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitMappingBodyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS object);
 	@Nullable R visitMappingCallExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS object);
 	@Nullable R visitMappingEndCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS object);
-	@Nullable R visitMappingExtensionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS object);
 	@Nullable R visitMappingInitCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS object);
 	@Nullable R visitMappingMethodCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS object);
 	@Nullable R visitMappingOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS object);
@@ -50,8 +49,6 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitModuleUsageCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS object);
 	@Nullable R visitMultiplicityDefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS object);
 	@Nullable R visitObjectExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS object);
-	@Nullable R visitOperationParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS object);
-	@Nullable R visitOperationSimpleSignatureCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS object);
 	@Nullable R visitOppositePropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS object);
 	@Nullable R visitPackageRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS object);
 	@Nullable R visitParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS object);
@@ -74,5 +71,6 @@ public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xt
 	@Nullable R visitTransformationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS object);
 	@Nullable R visitTransformationRefineCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS object);
 	@Nullable R visitTypeSpecCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS object);
+	@Nullable R visitTypedTypeRef2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS object);
 	@Nullable R visitUnitCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS object);
 }

@@ -386,7 +386,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBlockExpCS_BodyExpressions() {
+	public EReference getBlockExpCS_Expressions() {
 		return (EReference)blockExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -942,7 +942,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		createEAttribute(assignStatementCSEClass, ASSIGN_STATEMENT_CS__INCREMENTAL);
 
 		blockExpCSEClass = createEClass(BLOCK_EXP_CS);
-		createEReference(blockExpCSEClass, BLOCK_EXP_CS__BODY_EXPRESSIONS);
+		createEReference(blockExpCSEClass, BLOCK_EXP_CS__EXPRESSIONS);
 
 		dictLiteralExpCSEClass = createEClass(DICT_LITERAL_EXP_CS);
 		createEReference(dictLiteralExpCSEClass, DICT_LITERAL_EXP_CS__OWNED_PARTS);
@@ -1100,7 +1100,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEAttribute(getAssignStatementCS_Incremental(), ecorePackage.getEBoolean(), "incremental", null, 0, 1, AssignStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(blockExpCSEClass, BlockExpCS.class, "BlockExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBlockExpCS_BodyExpressions(), theEssentialOCLCSPackage.getExpCS(), null, "bodyExpressions", null, 0, -1, BlockExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBlockExpCS_Expressions(), theEssentialOCLCSPackage.getExpCS(), null, "expressions", null, 0, -1, BlockExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictLiteralExpCSEClass, DictLiteralExpCS.class, "DictLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDictLiteralExpCS_OwnedParts(), this.getDictLiteralPartCS(), null, "ownedParts", null, 0, -1, DictLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

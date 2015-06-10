@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2015 E.D.Willink and others.
+ * Copyright (c) 2015 Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -117,6 +117,7 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 			TR_UNARY_OP.setAlternatives(createAlternatives(createKeyword("-"), createKeyword("not"), createKeyword("#"), createKeyword("##"), createKeyword("*")));
 		}
 		
+		private static final @NonNull ParserRule PR_BlockExpCS = createParserRule("BlockExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.BLOCK_EXP_CS));
 		private static final @NonNull ParserRule PR_DictLiteralExpCS = createParserRule("DictLiteralExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_EXP_CS));
 		private static final @NonNull ParserRule PR_DictLiteralPartCS = createParserRule("DictLiteralPartCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_PART_CS));
 		private static final @NonNull ParserRule PR_DictTypeCS = createParserRule("DictTypeCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_TYPE_CS));
@@ -134,6 +135,7 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ParserRule PR_TypeLiteralCS = createParserRule("TypeLiteralCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_REF_CS));
 		
 		private static void initParserRules() {
+			PR_BlockExpCS.setAlternatives(createGroup(createKeyword("{"), createAssignment("expressions", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword("}")));
 			PR_DictLiteralExpCS.setAlternatives(createGroup(createKeyword("Dict"), createKeyword("{"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_EXP_CS)), setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(PR_DictLiteralPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_DictLiteralPartCS)))))), createKeyword("}")));
 			PR_DictLiteralPartCS.setAlternatives(createGroup(createAssignment("key", "=", createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS)), createKeyword("="), createAssignment("value", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
 			PR_DictTypeCS.setAlternatives(createGroup(createKeyword("Dict"), createKeyword("("), createAssignment("keyType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(","), createAssignment("valueType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
@@ -187,6 +189,7 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 				rules.add(PR_DictLiteralExpCS);
 				rules.add(PR_DictLiteralPartCS);
 				rules.add(PR_ReturnExpCS);
+				rules.add(PR_BlockExpCS);
 				rules.add(PR_StringLiteral);
 			}
 			{
@@ -484,19 +487,19 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 			PR_Identifier.setAlternatives(createRuleCall(PR_ID));
 			PR_LOWER.setAlternatives(createRuleCall(TR_INT));
 			PR_MultiplicityBoundsCS.setAlternatives(createGroup(createAssignment("lowerBound", "=", createRuleCall(PR_LOWER)), setCardinality("?", createGroup(createKeyword(".."), createAssignment("upperBound", "=", createRuleCall(PR_UPPER))))));
-			PR_MultiplicityCS.setAlternatives(createGroup(createKeyword("["), createAlternatives(createRuleCall(PR_MultiplicityBoundsCS), createRuleCall(PR_MultiplicityStringCS)), createKeyword("]")));
+			PR_MultiplicityCS.setAlternatives(createGroup(createKeyword("["), createAlternatives(createRuleCall(PR_MultiplicityBoundsCS), createRuleCall(PR_MultiplicityStringCS)), setCardinality("?", createAlternatives(createKeyword("|?"), createAssignment("isNullFree", "?=", createKeyword("|1")))), createKeyword("]")));
 			PR_MultiplicityStringCS.setAlternatives(createAssignment("stringBounds", "=", createAlternatives(createKeyword("*"), createKeyword("+"), createKeyword("?"))));
 			PR_NUMBER_LITERAL.setAlternatives(createRuleCall(TR_INT));
 			PR_NextPathElementCS.setAlternatives(createAssignment("referredElement", "=", createCrossReference(createTypeRef(MM_pivot, org.eclipse.ocl.pivot.PivotPackage.Literals.NAMED_ELEMENT), createRuleCall(_EssentialOCL.PR_UnreservedName))));
 			PR_PathNameCS.setAlternatives(createGroup(createAssignment("ownedPathElements", "+=", createRuleCall(PR_FirstPathElementCS)), setCardinality("*", createGroup(createKeyword("::"), createAssignment("ownedPathElements", "+=", createRuleCall(PR_NextPathElementCS))))));
 			PR_StringLiteral.setAlternatives(createRuleCall(TR_SINGLE_QUOTED_STRING));
-			PR_TemplateBindingCS.setAlternatives(createGroup(createKeyword("("), createAssignment("ownedSubstitutions", "+=", createRuleCall(PR_TemplateParameterSubstitutionCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedSubstitutions", "+=", createRuleCall(PR_TemplateParameterSubstitutionCS)))), createKeyword(")")));
+			PR_TemplateBindingCS.setAlternatives(createGroup(createAssignment("ownedSubstitutions", "+=", createRuleCall(PR_TemplateParameterSubstitutionCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedSubstitutions", "+=", createRuleCall(PR_TemplateParameterSubstitutionCS)))), setCardinality("?", createAssignment("ownedMultiplicity", "=", createRuleCall(PR_MultiplicityCS)))));
 			PR_TemplateParameterSubstitutionCS.setAlternatives(createAssignment("ownedActualParameter", "=", createRuleCall(PR_TypeRefCS)));
 			PR_TemplateSignatureCS.setAlternatives(createGroup(createKeyword("("), createAssignment("ownedParameters", "+=", createRuleCall(PR_TypeParameterCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParameters", "+=", createRuleCall(PR_TypeParameterCS)))), createKeyword(")")));
 			PR_TypeParameterCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword("extends"), createAssignment("ownedExtends", "+=", createRuleCall(PR_TypedRefCS)), setCardinality("*", createGroup(createKeyword("&&"), createAssignment("ownedExtends", "+=", createRuleCall(PR_TypedRefCS))))))));
 			PR_TypeRefCS.setAlternatives(createAlternatives(createRuleCall(PR_TypedRefCS), createRuleCall(PR_WildcardTypeRefCS)));
 			PR_TypedRefCS.setAlternatives(createRuleCall(PR_TypedTypeRefCS));
-			PR_TypedTypeRefCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(PR_PathNameCS)), setCardinality("?", createAssignment("ownedBinding", "=", createRuleCall(PR_TemplateBindingCS)))));
+			PR_TypedTypeRefCS.setAlternatives(createGroup(createAssignment("ownedPathName", "=", createRuleCall(PR_PathNameCS)), setCardinality("?", createGroup(createKeyword("("), createAssignment("ownedBinding", "=", createRuleCall(PR_TemplateBindingCS)), createKeyword(")")))));
 			PR_UPPER.setAlternatives(createAlternatives(createRuleCall(TR_INT), createKeyword("*")));
 			PR_URI.setAlternatives(createRuleCall(TR_SINGLE_QUOTED_STRING));
 			PR_UnreservedName.setAlternatives(createRuleCall(_EssentialOCL.PR_UnrestrictedName));

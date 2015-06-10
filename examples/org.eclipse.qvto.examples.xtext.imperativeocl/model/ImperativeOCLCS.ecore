@@ -18,7 +18,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="incremental" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BlockExpCS" eSuperTypes="#//StatementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyExpressions" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>

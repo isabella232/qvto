@@ -209,14 +209,16 @@ public class AbstractImperativeOCLLookupVisitor
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitComputeExp(final /*@NonNull*/ /*@NonInvalid*/ ComputeExp element_5) {
         final /*@Nullable*/ /*@Thrown*/ LookupEnvironment parentEnv_0 = this.parentEnv(element_5);
-        final /*@Nullable*/ /*@Thrown*/ OCLExpression body = element_5.getBody();
-        final /*@Thrown*/ boolean eq = (body != null) ? body.equals(child) : (child == null);
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ OCLExpression body = element_5.getBody();
+        final /*@Thrown*/ boolean eq = body.equals(child);
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;
         if (eq) {
             if (parentEnv_0 == null) {
-                throw new InvalidValueException("Null source for \'lookup::Environment::addElement(NamedElement) : lookup::Environment\'");
+                throw new InvalidValueException("Null source for \'lookup::Environment::addElement(NamedElement[1]) : lookup::Environment[1]\'");
             }
-            final /*@Nullable*/ /*@Thrown*/ Variable returnedElement = element_5.getReturnedElement();
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ Variable returnedElement = element_5.getReturnedElement();
             final /*@NonNull*/ /*@Thrown*/ LookupEnvironment addElement = parentEnv_0.addElement((NamedElement)returnedElement);
             symbol_0 = addElement;
         }
@@ -331,8 +333,9 @@ public class AbstractImperativeOCLLookupVisitor
             symbol_5 = symbol_0;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ OCLExpression ownedBody = element_10.getOwnedBody();
-            final /*@Thrown*/ boolean eq_0 = (ownedBody != null) ? ownedBody.equals(child) : (child == null);
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ OCLExpression ownedBody = element_10.getOwnedBody();
+            final /*@Thrown*/ boolean eq_0 = ownedBody.equals(child);
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (eq_0) {
                 final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)ownedIterators);
@@ -472,8 +475,9 @@ public class AbstractImperativeOCLLookupVisitor
             symbol_5 = symbol_0;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ OCLExpression ownedBody = element_12.getOwnedBody();
-            final /*@Thrown*/ boolean eq_0 = (ownedBody != null) ? ownedBody.equals(child) : (child == null);
+            @SuppressWarnings("null")
+            final /*@NonNull*/ /*@Thrown*/ OCLExpression ownedBody = element_12.getOwnedBody();
+            final /*@Thrown*/ boolean eq_0 = ownedBody.equals(child);
             /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_4;
             if (eq_0) {
                 final /*@NonNull*/ /*@Thrown*/ LookupEnvironment inner_0 = context.addElements((Collection)ownedIterators_1);
@@ -671,8 +675,8 @@ public class AbstractImperativeOCLLookupVisitor
     @Override
     public /*@Nullable*/ /*@NonInvalid*/ LookupEnvironment visitTryExp(final /*@NonNull*/ /*@NonInvalid*/ TryExp element_24) {
         final /*@Nullable*/ /*@Thrown*/ LookupEnvironment parentEnv_0 = this.parentEnv(element_24);
-        final /*@Nullable*/ /*@Thrown*/ List<OCLExpression> tryBody = element_24.getTryBody();
-        assert tryBody != null;
+        @SuppressWarnings("null")
+        final /*@NonNull*/ /*@Thrown*/ List<OCLExpression> tryBody = element_24.getTryBody();
         final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_tryBody = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, tryBody);
         final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_tryBody, child).booleanValue();
         /*@Nullable*/ /*@Thrown*/ LookupEnvironment symbol_0;

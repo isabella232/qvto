@@ -4,7 +4,6 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +14,7 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS#getPathNameCS <em>Path Name CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS#getModulePath <em>Module Path</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS#getParameters <em>Parameters</em>}</li>
  * </ul>
  *
@@ -25,30 +24,30 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  */
 public interface ModuleRefCS extends ElementCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name CS</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Module Path</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path Name CS</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Module Path</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name CS</em>' containment reference.
-	 * @see #setPathNameCS(PathNameCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModuleRefCS_PathNameCS()
+	 * @return the value of the '<em>Module Path</em>' containment reference.
+	 * @see #setModulePath(PathName2CS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModuleRefCS_ModulePath()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	PathNameCS getPathNameCS();
+	PathName2CS getModulePath();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS#getPathNameCS <em>Path Name CS</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS#getModulePath <em>Module Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name CS</em>' containment reference.
-	 * @see #getPathNameCS()
+	 * @param value the new value of the '<em>Module Path</em>' containment reference.
+	 * @see #getModulePath()
 	 * @generated
 	 */
-	void setPathNameCS(PathNameCS value);
+	void setModulePath(PathName2CS value);
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

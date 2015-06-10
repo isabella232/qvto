@@ -4,7 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,7 +17,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getPackageRefs <em>Package Refs</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhereStatements <em>Where Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS()
@@ -69,19 +69,29 @@ public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	EList<PackageRefCS> getPackageRefs();
 
 	/**
-	 * Returns the value of the '<em><b>Where Statements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
+	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Where Statements</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Where</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where Statements</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_WhereStatements()
+	 * @return the value of the '<em>Where</em>' containment reference.
+	 * @see #setWhere(BlockExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ExpCS> getWhereStatements();
+	BlockExpCS getWhere();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Where</em>' containment reference.
+	 * @see #getWhere()
+	 * @generated
+	 */
+	void setWhere(BlockExpCS value);
 
 } // ModelTypeCS

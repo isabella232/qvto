@@ -24,13 +24,19 @@
     <eLiterals name="METAMODEL"/>
     <eLiterals name="PACKAGE" value="1"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PathName2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS">
+  <eClassifiers xsi:type="ecore:EClass" name="PathName2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PivotableElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathElements2" upperBound="-1"
         eType="#//PathElement2CS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PathElement2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PivotableElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningPathNameCS" eType="#//PathName2CS"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedTypeRef2CS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedRefCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="#//PathName2CS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBinding" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TemplateBindingCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//RootPackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedTypes" upperBound="-1"
@@ -52,16 +58,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="stereotypes" eType="#//StereotypeQualifierCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationParameterDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ParameterCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//DirectionKindCS"
-        unsettable="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="initPart" eType="#//InitPartCS"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationSimpleSignatureCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
-        eType="#//OperationParameterDeclarationCS" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InitPartCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="initOp" eType="#//InitOp"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -81,8 +77,8 @@
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TagCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//AnnotationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementPath" lowerBound="1"
+        eType="#//PathName2CS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
@@ -165,22 +161,26 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="strict" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingOperationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//OperationCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="contextType" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypeCS"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="result" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
         eType="#//ParameterDeclarationCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="directionKindCS" eType="#//DirectionKindCS"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingExtension" upperBound="-1"
-        eType="#//MappingExtensionCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//DirectionKindCS"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isQuery" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="when" eType="ecore:EClass ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#//BlockExpCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="ecore:EClass ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#//BlockExpCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inherits" upperBound="-1"
+        eType="#//PathName2CS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="disjuncts" upperBound="-1"
+        eType="#//PathName2CS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="merges" upperBound="-1"
+        eType="#//PathName2CS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refines" eType="#//PathName2CS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopedName" eType="#//PathName2CS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingEndCS" eSuperTypes="#//MappingSectionCS"/>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingExtensionCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementRefCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//MappingExtensionKindCS"
-        defaultValueLiteral="disjuncts"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingIdentifiers" lowerBound="1"
-        upperBound="-1" eType="#//ScopedNameCS" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="MappingExtensionKindCS">
     <eLiterals name="disjuncts" value="1"/>
     <eLiterals name="merges" value="2"/>
@@ -227,9 +227,8 @@
     <eLiterals name="library" value="1"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModuleRefCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modulePath" lowerBound="1"
+        eType="#//PathName2CS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//ParameterDeclarationCS" containment="true"/>
   </eClassifiers>
@@ -238,8 +237,7 @@
         defaultValueLiteral="strict"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packageRefs" lowerBound="1"
         upperBound="-1" eType="#//PackageRefCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="whereStatements" upperBound="-1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="ecore:EClass ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#//BlockExpCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ModuleCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
@@ -283,7 +281,7 @@
     <eLiterals name="blackbox" value="2"/>
     <eLiterals name="static" value="3"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ParameterCS">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//DirectionKindCS"
         unsettable="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initPart" eType="#//InitPartCS"
@@ -301,9 +299,9 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageRefCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="pathNameCS" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="packagePath" eType="#//PathName2CS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="uriCS" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//StringLiteralExpCS"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uri" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//StringLiteralExpCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedNameCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementCS">

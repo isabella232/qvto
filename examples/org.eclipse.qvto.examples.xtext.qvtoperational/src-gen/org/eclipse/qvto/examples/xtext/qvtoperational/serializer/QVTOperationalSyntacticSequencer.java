@@ -96,7 +96,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     default=SINGLE_QUOTED_STRING 'opposites' (ambiguity) opposite=Identifier
-	 *     ownedType=TypedMultiplicityRefCS 'opposites' (ambiguity) opposite=Identifier
+	 *     ownedType=TypedMultiplicityRef2CS 'opposites' (ambiguity) opposite=Identifier
 	 */
 	protected void emit_ClassifierPropertyCS_TildeKeyword_6_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

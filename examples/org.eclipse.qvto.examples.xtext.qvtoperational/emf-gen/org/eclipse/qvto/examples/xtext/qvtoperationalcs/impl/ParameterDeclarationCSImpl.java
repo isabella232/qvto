@@ -7,7 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.xtext.basecs.impl.TypedElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.ParameterCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
@@ -29,7 +29,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  *
  * @generated
  */
-public class ParameterDeclarationCSImpl extends TypedElementCSImpl implements ParameterDeclarationCS {
+public class ParameterDeclarationCSImpl extends ParameterCSImpl implements ParameterDeclarationCS {
 	/**
 	 * The default value of the '{@link #getDirection() <em>Direction</em>}' attribute.
 	 * <!-- begin-user-doc -->

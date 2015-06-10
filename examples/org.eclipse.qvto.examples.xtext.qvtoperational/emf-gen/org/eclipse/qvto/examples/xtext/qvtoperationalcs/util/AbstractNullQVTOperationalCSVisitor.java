@@ -93,10 +93,6 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitMappingExtensionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS object) {
-		return null;
-	}
-
 	public @Nullable R visitMappingInitCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS object) {
 		return null;
 	}
@@ -158,14 +154,6 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitObjectExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS object) {
-		return null;
-	}
-
-	public @Nullable R visitOperationParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS object) {
-		return null;
-	}
-
-	public @Nullable R visitOperationSimpleSignatureCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS object) {
 		return null;
 	}
 
@@ -254,6 +242,10 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitTypeSpecCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS object) {
+		return null;
+	}
+
+	public @Nullable R visitTypedTypeRef2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS object) {
 		return null;
 	}
 
