@@ -889,41 +889,6 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
 	}
 
-	public class TypeRef2CSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef2CS");
-		private final RuleCall cTypedRefCSParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//// FIXME deviation from OCLInEcore. No templates parameter, yet
-		// TypeRef2CS returns base::TypeRefCS:
-		//// | WildcardTypeRefCS
-		// TypedRefCS;
-		@Override public ParserRule getRule() { return rule; }
-
-		//// | WildcardTypeRefCS
-		// TypedRefCS
-		public RuleCall getTypedRefCSParserRuleCall() { return cTypedRefCSParserRuleCall; }
-	}
-
-	public class TypedRef2CSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedRef2CS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cTypeLiteralCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cTypedTypeRefCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//TypedRef2CS returns base::TypedRefCS:
-		//	TypeLiteralCS | TypedTypeRefCS;
-		@Override public ParserRule getRule() { return rule; }
-
-		//TypeLiteralCS | TypedTypeRefCS
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//TypeLiteralCS
-		public RuleCall getTypeLiteralCSParserRuleCall_0() { return cTypeLiteralCSParserRuleCall_0; }
-
-		//TypedTypeRefCS
-		public RuleCall getTypedTypeRefCSParserRuleCall_1() { return cTypedTypeRefCSParserRuleCall_1; }
-	}
-
 	public class TypedMultiplicityRef2CSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedMultiplicityRef2CS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -946,6 +911,41 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 		//MultiplicityCS
 		public RuleCall getOwnedMultiplicityMultiplicityCSParserRuleCall_1_0() { return cOwnedMultiplicityMultiplicityCSParserRuleCall_1_0; }
+	}
+
+	public class TypeRef2CSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef2CS");
+		private final RuleCall cTypedRef2CSParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//// FIXME deviation from OCLInEcore. No templates parameter, yet
+		// TypeRef2CS returns base::TypeRefCS:
+		//// | WildcardTypeRefCS
+		// TypedRef2CS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//// | WildcardTypeRefCS
+		// TypedRef2CS
+		public RuleCall getTypedRef2CSParserRuleCall() { return cTypedRef2CSParserRuleCall; }
+	}
+
+	public class TypedRef2CSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedRef2CS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cTypeLiteralCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cTypedTypeRef2CSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//TypedRef2CS returns base::TypedRefCS:
+		//	TypeLiteralCS | TypedTypeRef2CS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//TypeLiteralCS | TypedTypeRef2CS
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//TypeLiteralCS
+		public RuleCall getTypeLiteralCSParserRuleCall_0() { return cTypeLiteralCSParserRuleCall_0; }
+
+		//TypedTypeRef2CS
+		public RuleCall getTypedTypeRef2CSParserRuleCall_1() { return cTypedTypeRef2CSParserRuleCall_1; }
 	}
 
 	public class TypedTypeRef2CSElements extends AbstractParserRuleElementFinder {
@@ -2535,9 +2535,9 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	private final DataTypeCSElements pDataTypeCS;
 	private final ExceptionCSElements pExceptionCS;
 	private final QVToClassCSElements pQVToClassCS;
+	private final TypedMultiplicityRef2CSElements pTypedMultiplicityRef2CS;
 	private final TypeRef2CSElements pTypeRef2CS;
 	private final TypedRef2CSElements pTypedRef2CS;
-	private final TypedMultiplicityRef2CSElements pTypedMultiplicityRef2CS;
 	private final TypedTypeRef2CSElements pTypedTypeRef2CS;
 	private final ClassifierPropertyCSElements pClassifierPropertyCS;
 	private final StereotypeQualifierCSElements pStereotypeQualifierCS;
@@ -2599,9 +2599,9 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDataTypeCS = new DataTypeCSElements();
 		this.pExceptionCS = new ExceptionCSElements();
 		this.pQVToClassCS = new QVToClassCSElements();
+		this.pTypedMultiplicityRef2CS = new TypedMultiplicityRef2CSElements();
 		this.pTypeRef2CS = new TypeRef2CSElements();
 		this.pTypedRef2CS = new TypedRef2CSElements();
-		this.pTypedMultiplicityRef2CS = new TypedMultiplicityRef2CSElements();
 		this.pTypedTypeRef2CS = new TypedTypeRef2CSElements();
 		this.pClassifierPropertyCS = new ClassifierPropertyCSElements();
 		this.pStereotypeQualifierCS = new StereotypeQualifierCSElements();
@@ -2956,10 +2956,20 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		return getQVToClassCSAccess().getRule();
 	}
 
+	//TypedMultiplicityRef2CS returns base::TypedRefCS:
+	//	TypedRef2CS ownedMultiplicity=MultiplicityCS?;
+	public TypedMultiplicityRef2CSElements getTypedMultiplicityRef2CSAccess() {
+		return pTypedMultiplicityRef2CS;
+	}
+	
+	public ParserRule getTypedMultiplicityRef2CSRule() {
+		return getTypedMultiplicityRef2CSAccess().getRule();
+	}
+
 	//// FIXME deviation from OCLInEcore. No templates parameter, yet
 	// TypeRef2CS returns base::TypeRefCS:
 	//// | WildcardTypeRefCS
-	// TypedRefCS;
+	// TypedRef2CS;
 	public TypeRef2CSElements getTypeRef2CSAccess() {
 		return pTypeRef2CS;
 	}
@@ -2969,23 +2979,13 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypedRef2CS returns base::TypedRefCS:
-	//	TypeLiteralCS | TypedTypeRefCS;
+	//	TypeLiteralCS | TypedTypeRef2CS;
 	public TypedRef2CSElements getTypedRef2CSAccess() {
 		return pTypedRef2CS;
 	}
 	
 	public ParserRule getTypedRef2CSRule() {
 		return getTypedRef2CSAccess().getRule();
-	}
-
-	//TypedMultiplicityRef2CS returns base::TypedRefCS:
-	//	TypedRef2CS ownedMultiplicity=MultiplicityCS?;
-	public TypedMultiplicityRef2CSElements getTypedMultiplicityRef2CSAccess() {
-		return pTypedMultiplicityRef2CS;
-	}
-	
-	public ParserRule getTypedMultiplicityRef2CSRule() {
-		return getTypedMultiplicityRef2CSAccess().getRule();
 	}
 
 	//TypedTypeRef2CS:

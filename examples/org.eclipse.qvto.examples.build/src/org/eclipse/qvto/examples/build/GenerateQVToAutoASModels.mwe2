@@ -57,7 +57,7 @@ var imperativeOclModelName = "imperativeocl"
 var imperativeOclVisitorPackage = "${imperativeOclProjectName}.util"
 var imperativeOclVisitorName = "${imperativeOclProjectPrefix}Visitor"
 var imperativeOclVisitorQualifiedName = "${imperativeOclVisitorPackage}.${imperativeOclVisitorName}"
-var imperativeOclLookupFilePath = "model/ImperativeOCLNameResolution.ocl"
+var imperativeOclLookupFilePath = "model/ImperativeOCLLookup.ocl"
 
 /*
  * QVTOperational related configuration variables
@@ -74,7 +74,7 @@ var qvtOperationalModelName = "qvtoperational"
 var qvtOperationalVisitorPackage = "${qvtOperationalProjectName}.util"
 var qvtOperationalVisitorName = "${qvtOperationalProjectPrefix}Visitor"
 var qvtOperationalVisitorQualifiedName = "${qvtOperationalVisitorPackage}.${qvtOperationalVisitorName}"
-var qvtOperationalLookupFilePath = "model/QVTOperationalNameResolution.ocl"
+var qvtOperationalLookupFilePath = "model/QVTOperationalLookup.ocl"
 
 /**
  *	Generate the Concrete Syntax Models used by the Xtext editors.

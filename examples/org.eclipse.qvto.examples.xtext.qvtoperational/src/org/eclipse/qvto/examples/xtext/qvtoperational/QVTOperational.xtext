@@ -159,19 +159,20 @@ QVToClassCS returns QVToClassCS:
 ;
 
 
-TypeRef2CS returns base::TypeRefCS:
-	TypedRefCS	// | WildcardTypeRefCS
-				// FIXME deviation from OCLInEcore. No templates parameter, yet
-;
-
-TypedRef2CS returns base::TypedRefCS:
-	TypeLiteralCS | TypedTypeRefCS
-;
 
 TypedMultiplicityRef2CS returns base::TypedRefCS:
 	TypedRef2CS (ownedMultiplicity=MultiplicityCS)?
 ;
-	
+
+TypeRef2CS returns base::TypeRefCS:
+	TypedRef2CS	// | WildcardTypeRefCS
+				// FIXME deviation from OCLInEcore. No templates parameter, yet
+;
+
+TypedRef2CS returns base::TypedRefCS:
+	TypeLiteralCS | TypedTypeRef2CS
+;
+
 TypedTypeRef2CS returns TypedTypeRef2CS:
 	ownedPathName=PathName2CS ('(' ownedBinding=TemplateBindingCS ')')?
 ;

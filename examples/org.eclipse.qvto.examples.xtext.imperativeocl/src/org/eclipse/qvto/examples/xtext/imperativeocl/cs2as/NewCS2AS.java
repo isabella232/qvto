@@ -6,16 +6,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.evaluation.tx.TxHelper;
-import org.eclipse.ocl.pivot.evaluation.tx.TransformationEvaluator;
-import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASDiagnostic;
 import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASException;
-import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformationExecutor;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformationExecutor;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASTransformer;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -36,12 +33,10 @@ public class NewCS2AS extends CS2ASConversion {
 	public boolean update(@NonNull BaseCSResource csResource) {
 		
 		ResourceSet rSet = csResource.getResourceSet();
-		AbstractCS2ASTransformationExecutor tx = null;		
-		OCL qvt = OCL.newInstance(OCL.NO_PROJECTS, rSet);
-		TxHelper helper = new TxHelper(qvt);
+		CS2ASTransformer tx = null;		
 		try {
-			TransformationEvaluator evaluator = helper.createTxEvaluator(getCS2ASTxClass());
-			tx = (AbstractCS2ASTransformationExecutor) evaluator.getExecutor();
+			CS2ASTransformationExecutor txExecutor= createTransformationExecutor();
+			tx = txExecutor.getTransformer();
 			
 			tx.addRootObjects("leftCS", ClassUtil.nonNullState(csResource.getContents()));
 			if (tx.run()) {
@@ -74,9 +69,14 @@ public class NewCS2AS extends CS2ASConversion {
 		}
 	}
 
-	protected Class<? extends TransformationExecutor> getCS2ASTxClass() {
+	protected Class<? extends CS2ASTransformer> getCS2ASTxClass() {
 		return null; // TODO for ImperativeOCL
 	}
 	
-	
+	/**
+	 * Just getCS2ASTxClass() should be overridden
+	 */
+	protected final CS2ASTransformationExecutor createTransformationExecutor() throws ReflectiveOperationException {
+		return new CS2ASTransformationExecutor(environmentFactory, getCS2ASTxClass());
+	}
 }

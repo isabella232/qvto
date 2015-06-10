@@ -1403,54 +1403,6 @@ ruleQVToClassCS returns [EObject current=null]
 
 
 
-
-
-// Entry rule entryRuleTypedRef2CS
-entryRuleTypedRef2CS returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getTypedRef2CSRule()); }
-	 iv_ruleTypedRef2CS=ruleTypedRef2CS 
-	 { $current=$iv_ruleTypedRef2CS.current; } 
-	 EOF 
-;
-
-// Rule TypedRef2CS
-ruleTypedRef2CS returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(
-	{ 
-	  /* */ 
-	}
-    { 
-        newCompositeNode(grammarAccess.getTypedRef2CSAccess().getTypeLiteralCSParserRuleCall_0()); 
-    }
-    this_TypeLiteralCS_0=ruleTypeLiteralCS
-    { 
-        $current = $this_TypeLiteralCS_0.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-	{ 
-	  /* */ 
-	}
-    { 
-        newCompositeNode(grammarAccess.getTypedRef2CSAccess().getTypedTypeRefCSParserRuleCall_1()); 
-    }
-    this_TypedTypeRefCS_1=ruleTypedTypeRefCS
-    { 
-        $current = $this_TypedTypeRefCS_1.current; 
-        afterParserOrEnumRuleCall();
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRuleTypedMultiplicityRef2CS
 entryRuleTypedMultiplicityRef2CS returns [EObject current=null] 
 	:
@@ -1499,6 +1451,117 @@ ruleTypedMultiplicityRef2CS returns [EObject current=null]
 ;
 
 
+
+
+
+
+
+// Entry rule entryRuleTypedRef2CS
+entryRuleTypedRef2CS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTypedRef2CSRule()); }
+	 iv_ruleTypedRef2CS=ruleTypedRef2CS 
+	 { $current=$iv_ruleTypedRef2CS.current; } 
+	 EOF 
+;
+
+// Rule TypedRef2CS
+ruleTypedRef2CS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getTypedRef2CSAccess().getTypeLiteralCSParserRuleCall_0()); 
+    }
+    this_TypeLiteralCS_0=ruleTypeLiteralCS
+    { 
+        $current = $this_TypeLiteralCS_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+	{ 
+	  /* */ 
+	}
+    { 
+        newCompositeNode(grammarAccess.getTypedRef2CSAccess().getTypedTypeRef2CSParserRuleCall_1()); 
+    }
+    this_TypedTypeRef2CS_1=ruleTypedTypeRef2CS
+    { 
+        $current = $this_TypedTypeRef2CS_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleTypedTypeRef2CS
+entryRuleTypedTypeRef2CS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getTypedTypeRef2CSRule()); }
+	 iv_ruleTypedTypeRef2CS=ruleTypedTypeRef2CS 
+	 { $current=$iv_ruleTypedTypeRef2CS.current; } 
+	 EOF 
+;
+
+// Rule TypedTypeRef2CS
+ruleTypedTypeRef2CS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTypedTypeRef2CSAccess().getOwnedPathNamePathName2CSParserRuleCall_0_0()); 
+	    }
+		lv_ownedPathName_0_0=rulePathName2CS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTypedTypeRef2CSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedPathName",
+        		lv_ownedPathName_0_0, 
+        		"PathName2CS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getTypedTypeRef2CSAccess().getLeftParenthesisKeyword_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getTypedTypeRef2CSAccess().getOwnedBindingTemplateBindingCSParserRuleCall_1_1_0()); 
+	    }
+		lv_ownedBinding_2_0=ruleTemplateBindingCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getTypedTypeRef2CSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedBinding",
+        		lv_ownedBinding_2_0, 
+        		"TemplateBindingCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=')' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getTypedTypeRef2CSAccess().getRightParenthesisKeyword_1_2());
+    }
+)?)
+;
 
 
 

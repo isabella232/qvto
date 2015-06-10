@@ -1,6 +1,6 @@
 import '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'
 import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore'
-import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalNameResolution.ocl'
+import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalLookup.ocl'
 import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore'
 import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.ocl'
 import 'QVTOperationalCS.ecore'
@@ -23,23 +23,23 @@ def : ast() : ocl::Class =
 		ownedOperations = ownedOperations.ast()
 	}
 
-context OperationParameterDeclarationCS
-def : ast() : qvtoperational::VarParameter =
-	qvtoperational::VarParameter {
-		name = name
-		--kind = if direction = DirectionKindCS::inout then
-		--			qvtoperational::DirectionKind::inout
-		--	   else if direction = DirectionKindCS::out then
-		--	   		qvtoperational::DirectionKind::out
-		--	   else 
-		--	   		qvtoperational::DirectionKind::_in
-		--	   endif endif
-		--initExpression = if (initPart.oclIsUndefined()) then
-		--					null
-		--				else
-		--					initPart.expression -- FIXME todo .ast()
-		--				endif
-	}
+--context OperationParameterDeclarationCS
+--def : ast() : qvtoperational::VarParameter =
+--	qvtoperational::VarParameter {
+--		name = name
+--		--kind = if direction = DirectionKindCS::inout then
+--		--			qvtoperational::DirectionKind::inout
+--		--	   else if direction = DirectionKindCS::out then
+--		--	   		qvtoperational::DirectionKind::out
+--		--	   else 
+--		--	   		qvtoperational::DirectionKind::_in
+--		--	   endif endif
+--		--initExpression = if (initPart.oclIsUndefined()) then
+--		--					null
+--		--				else
+--		--					initPart.expression -- FIXME todo .ast()
+--		--				endif
+--	}
 	
 context MetamodelCS
 def : ast() : ocl::Package =
@@ -84,8 +84,8 @@ def : ast() : qvtoperational::VarParameter =
 	if (self.oclContainer().oclIsKindOf(ModuleCS)) 
 	then
 		qvtoperational::ModelParameter {
-			name = name
-			-- TODO
+			name = name,
+			type = ast().lookupModelType(ownedType.oclAsType(TypedTypeRef2CS))
 		}
 	else	
 		qvtoperational::VarParameter {

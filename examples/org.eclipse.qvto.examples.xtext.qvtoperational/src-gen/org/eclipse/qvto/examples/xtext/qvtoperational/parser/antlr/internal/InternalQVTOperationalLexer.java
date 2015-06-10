@@ -12,83 +12,10 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class InternalQVTOperationalLexer extends Lexer {
-    public static final int RULE_CMP_OP=11;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int RULE_ESCAPED_CHARACTER=18;
-    public static final int T__25=25;
-    public static final int RULE_ANY_OTHER=24;
-    public static final int RULE_ESCAPED_ID=7;
-    public static final int RULE_DOUBLE_QUOTED_STRING=5;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__90=90;
-    public static final int RULE_RESOLVE_KIND=15;
-    public static final int RULE_SIMPLE_ID=6;
-    public static final int T__99=99;
-    public static final int T__98=98;
-    public static final int T__97=97;
-    public static final int T__96=96;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_SINGLE_QUOTED_STRING=4;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_LETTER_CHARACTER=19;
-    public static final int RULE_ML_COMMENT=21;
-    public static final int T__126=126;
-    public static final int T__125=125;
-    public static final int T__128=128;
-    public static final int T__127=127;
-    public static final int T__71=71;
-    public static final int T__129=129;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__130=130;
-    public static final int T__74=74;
-    public static final int T__131=131;
-    public static final int T__73=73;
-    public static final int T__132=132;
-    public static final int T__79=79;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int RULE_UNARY_OP=17;
-    public static final int T__68=68;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
+    public static final int T__50=50;
     public static final int RULE_RESOLVE_IN_KIND=14;
-    public static final int T__118=118;
-    public static final int T__119=119;
-    public static final int T__116=116;
-    public static final int T__117=117;
-    public static final int T__114=114;
-    public static final int T__115=115;
-    public static final int T__124=124;
-    public static final int T__123=123;
-    public static final int T__122=122;
-    public static final int T__121=121;
-    public static final int T__120=120;
-    public static final int T__61=61;
-    public static final int T__60=60;
+    public static final int RULE_MULTI_ITERATOR_OP=13;
+    public static final int T__59=59;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
@@ -97,51 +24,124 @@ public class InternalQVTOperationalLexer extends Lexer {
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
-    public static final int T__107=107;
-    public static final int T__108=108;
-    public static final int T__109=109;
-    public static final int T__103=103;
-    public static final int T__59=59;
-    public static final int T__104=104;
-    public static final int T__105=105;
-    public static final int T__106=106;
-    public static final int T__111=111;
-    public static final int T__110=110;
-    public static final int T__113=113;
-    public static final int RULE_INT=8;
-    public static final int T__112=112;
-    public static final int RULE_SIMPLE_ITERATOR_OP=16;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int RULE_MULT_OP=12;
-    public static final int T__49=49;
+    public static final int T__132=132;
+    public static final int T__60=60;
+    public static final int T__61=61;
+    public static final int T__131=131;
+    public static final int T__130=130;
     public static final int RULE_ACCESS_OP=9;
-    public static final int T__102=102;
-    public static final int T__101=101;
-    public static final int T__100=100;
-    public static final int RULE_MULTI_ITERATOR_OP=13;
-    public static final int RULE_SL_COMMENT=22;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
+    public static final int RULE_INT=8;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=21;
+    public static final int T__67=67;
+    public static final int T__129=129;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__126=126;
+    public static final int T__63=63;
+    public static final int T__125=125;
+    public static final int T__64=64;
+    public static final int T__128=128;
+    public static final int T__65=65;
+    public static final int T__127=127;
+    public static final int RULE_MULT_OP=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_SINGLE_QUOTED_STRING=4;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_DOUBLE_QUOTED_STRING=5;
+    public static final int T__44=44;
+    public static final int RULE_UNARY_OP=17;
+    public static final int T__45=45;
+    public static final int T__46=46;
     public static final int RULE_ASSIGN_OP=10;
-    public static final int T__39=39;
+    public static final int T__47=47;
+    public static final int RULE_ESCAPED_ID=7;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__91=91;
+    public static final int T__100=100;
+    public static final int T__92=92;
+    public static final int T__93=93;
+    public static final int T__102=102;
+    public static final int T__94=94;
+    public static final int T__101=101;
+    public static final int T__90=90;
+    public static final int RULE_LETTER_CHARACTER=19;
+    public static final int RULE_SIMPLE_ITERATOR_OP=16;
+    public static final int T__99=99;
+    public static final int RULE_ESCAPED_CHARACTER=18;
+    public static final int T__95=95;
+    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
+    public static final int T__96=96;
+    public static final int T__97=97;
+    public static final int T__98=98;
+    public static final int RULE_RESOLVE_KIND=15;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
+    public static final int T__25=25;
+    public static final int T__122=122;
+    public static final int T__70=70;
+    public static final int T__121=121;
+    public static final int T__71=71;
+    public static final int T__124=124;
+    public static final int T__72=72;
+    public static final int T__123=123;
+    public static final int T__120=120;
+    public static final int RULE_SL_COMMENT=22;
+    public static final int T__77=77;
+    public static final int T__119=119;
+    public static final int T__78=78;
+    public static final int T__118=118;
+    public static final int T__79=79;
+    public static final int T__73=73;
+    public static final int T__115=115;
+    public static final int EOF=-1;
+    public static final int T__74=74;
+    public static final int T__114=114;
+    public static final int T__75=75;
+    public static final int T__117=117;
+    public static final int T__76=76;
+    public static final int T__116=116;
+    public static final int T__80=80;
+    public static final int T__111=111;
+    public static final int T__81=81;
+    public static final int T__110=110;
+    public static final int T__82=82;
+    public static final int T__113=113;
+    public static final int RULE_SIMPLE_ID=6;
+    public static final int T__83=83;
+    public static final int T__112=112;
     public static final int RULE_WS=23;
+    public static final int RULE_ANY_OTHER=24;
+    public static final int RULE_CMP_OP=11;
+    public static final int T__88=88;
+    public static final int T__108=108;
+    public static final int T__89=89;
+    public static final int T__107=107;
+    public static final int T__109=109;
+    public static final int T__84=84;
+    public static final int T__104=104;
+    public static final int T__85=85;
+    public static final int T__103=103;
+    public static final int T__86=86;
+    public static final int T__106=106;
+    public static final int T__87=87;
+    public static final int T__105=105;
 
     // delegates
     // delegators
@@ -637,11 +637,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:34:7: ( 'opposites' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:34:9: 'opposites'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:34:7: ( '(' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:34:9: '('
             {
-            match("opposites"); 
-
+            match('('); 
 
             }
 
@@ -658,10 +657,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:35:7: ( '~' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:35:9: '~'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:35:7: ( ')' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:35:9: ')'
             {
-            match('~'); 
+            match(')'); 
 
             }
 
@@ -678,10 +677,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:36:7: ( '<<' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:36:9: '<<'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:36:7: ( 'opposites' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:36:9: 'opposites'
             {
-            match("<<"); 
+            match("opposites"); 
 
 
             }
@@ -699,11 +698,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:37:7: ( '>>' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:37:9: '>>'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:37:7: ( '~' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:37:9: '~'
             {
-            match(">>"); 
-
+            match('~'); 
 
             }
 
@@ -720,10 +718,11 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:38:7: ( '[' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:38:9: '['
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:38:7: ( '<<' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:38:9: '<<'
             {
-            match('['); 
+            match("<<"); 
+
 
             }
 
@@ -740,10 +739,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:39:7: ( '...' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:39:9: '...'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:39:7: ( '>>' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:39:9: '>>'
             {
-            match("..."); 
+            match(">>"); 
 
 
             }
@@ -761,10 +760,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:40:7: ( ']' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:40:9: ']'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:40:7: ( '[' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:40:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -781,10 +780,11 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:41:7: ( '(' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:41:9: '('
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:41:7: ( '...' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:41:9: '...'
             {
-            match('('); 
+            match("..."); 
+
 
             }
 
@@ -801,10 +801,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:42:7: ( ')' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:42:9: ')'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:42:7: ( ']' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:42:9: ']'
             {
-            match(')'); 
+            match(']'); 
 
             }
 
@@ -2408,10 +2408,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ACCESS_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:16: ( ( '.' | '->' | '!->' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:18: ( '.' | '->' | '!->' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:16: ( ( '.' | '->' | '!->' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:18: ( '.' | '->' | '!->' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:18: ( '.' | '->' | '!->' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:18: ( '.' | '->' | '!->' )
             int alt1=3;
             switch ( input.LA(1) ) {
             case '.':
@@ -2438,14 +2438,14 @@ public class InternalQVTOperationalLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:19: '.'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:19: '.'
                     {
                     match('.'); 
 
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:23: '->'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:23: '->'
                     {
                     match("->"); 
 
@@ -2453,7 +2453,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9463:28: '!->'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9526:28: '!->'
                     {
                     match("!->"); 
 
@@ -2479,10 +2479,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ASSIGN_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:16: ( ( ':=' | '::=' | '+=' | '-=' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:18: ( ':=' | '::=' | '+=' | '-=' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:16: ( ( ':=' | '::=' | '+=' | '-=' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:18: ( ':=' | '::=' | '+=' | '-=' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:18: ( ':=' | '::=' | '+=' | '-=' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:18: ( ':=' | '::=' | '+=' | '-=' )
             int alt2=4;
             switch ( input.LA(1) ) {
             case ':':
@@ -2522,7 +2522,7 @@ public class InternalQVTOperationalLexer extends Lexer {
 
             switch (alt2) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:19: ':='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:19: ':='
                     {
                     match(":="); 
 
@@ -2530,7 +2530,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:24: '::='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:24: '::='
                     {
                     match("::="); 
 
@@ -2538,7 +2538,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:30: '+='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:30: '+='
                     {
                     match("+="); 
 
@@ -2546,7 +2546,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9465:35: '-='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9528:35: '-='
                     {
                     match("-="); 
 
@@ -2572,22 +2572,22 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_CMP_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:13: ( ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:13: ( ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )
             int alt3=7;
             alt3 = dfa3.predict(input);
             switch (alt3) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:16: '='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:16: '='
                     {
                     match('='); 
 
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:20: '=='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:20: '=='
                     {
                     match("=="); 
 
@@ -2595,7 +2595,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:25: '<>'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:25: '<>'
                     {
                     match("<>"); 
 
@@ -2603,21 +2603,21 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:30: '<'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:30: '<'
                     {
                     match('<'); 
 
                     }
                     break;
                 case 5 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:34: '>'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:34: '>'
                     {
                     match('>'); 
 
                     }
                     break;
                 case 6 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:38: '<='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:38: '<='
                     {
                     match("<="); 
 
@@ -2625,7 +2625,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9467:43: '>='
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9530:43: '>='
                     {
                     match(">="); 
 
@@ -2651,8 +2651,8 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_MULT_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9469:14: ( ( '*' | '/' | '%' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9469:16: ( '*' | '/' | '%' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9532:14: ( ( '*' | '/' | '%' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9532:16: ( '*' | '/' | '%' )
             {
             if ( input.LA(1)=='%'||input.LA(1)=='*'||input.LA(1)=='/' ) {
                 input.consume();
@@ -2679,8 +2679,8 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_MULTI_ITERATOR_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9471:24: ( 'forAll' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9471:26: 'forAll'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9534:24: ( 'forAll' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9534:26: 'forAll'
             {
             match("forAll"); 
 
@@ -2700,15 +2700,15 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_RESOLVE_IN_KIND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:22: ( ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:22: ( ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )
             int alt4=4;
             alt4 = dfa4.predict(input);
             switch (alt4) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:25: 'resolveIn'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:25: 'resolveIn'
                     {
                     match("resolveIn"); 
 
@@ -2716,7 +2716,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:37: 'resolveoneIn'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:37: 'resolveoneIn'
                     {
                     match("resolveoneIn"); 
 
@@ -2724,7 +2724,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:52: 'invresolveIn'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:52: 'invresolveIn'
                     {
                     match("invresolveIn"); 
 
@@ -2732,7 +2732,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9473:67: 'invresolveoneIn'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9536:67: 'invresolveoneIn'
                     {
                     match("invresolveoneIn"); 
 
@@ -2758,15 +2758,15 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_RESOLVE_KIND;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:19: ( ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:19: ( ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )
             int alt5=4;
             alt5 = dfa5.predict(input);
             switch (alt5) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:22: 'resolve'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:22: 'resolve'
                     {
                     match("resolve"); 
 
@@ -2774,7 +2774,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:32: 'resolveone'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:32: 'resolveone'
                     {
                     match("resolveone"); 
 
@@ -2782,7 +2782,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:45: 'invresolve'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:45: 'invresolve'
                     {
                     match("invresolve"); 
 
@@ -2790,7 +2790,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9475:58: 'invresolveone'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9538:58: 'invresolveone'
                     {
                     match("invresolveone"); 
 
@@ -2816,15 +2816,15 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_SIMPLE_ITERATOR_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:25: ( ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:25: ( ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )
             int alt6=15;
             alt6 = dfa6.predict(input);
             switch (alt6) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:28: 'reject'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:28: 'reject'
                     {
                     match("reject"); 
 
@@ -2832,7 +2832,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:37: 'select'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:37: 'select'
                     {
                     match("select"); 
 
@@ -2840,7 +2840,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:46: 'collect'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:46: 'collect'
                     {
                     match("collect"); 
 
@@ -2848,7 +2848,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:56: 'exists'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:56: 'exists'
                     {
                     match("exists"); 
 
@@ -2856,7 +2856,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:65: 'one'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:65: 'one'
                     {
                     match("one"); 
 
@@ -2864,7 +2864,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 6 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:71: 'any'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:71: 'any'
                     {
                     match("any"); 
 
@@ -2872,7 +2872,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 7 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:77: 'isUnique'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:77: 'isUnique'
                     {
                     match("isUnique"); 
 
@@ -2880,7 +2880,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 8 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:88: 'collectNested'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:88: 'collectNested'
                     {
                     match("collectNested"); 
 
@@ -2888,7 +2888,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 9 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:104: 'sortedBy'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:104: 'sortedBy'
                     {
                     match("sortedBy"); 
 
@@ -2896,7 +2896,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 10 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:115: 'xselect'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:115: 'xselect'
                     {
                     match("xselect"); 
 
@@ -2904,7 +2904,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 11 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:125: 'xcollect'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:125: 'xcollect'
                     {
                     match("xcollect"); 
 
@@ -2912,7 +2912,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 12 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:136: 'selectOne'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:136: 'selectOne'
                     {
                     match("selectOne"); 
 
@@ -2920,7 +2920,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 13 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:148: 'collectOne'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:148: 'collectOne'
                     {
                     match("collectOne"); 
 
@@ -2928,7 +2928,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 14 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:161: 'collectselect'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:161: 'collectselect'
                     {
                     match("collectselect"); 
 
@@ -2936,7 +2936,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 15 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9477:177: 'collectselectOne'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9540:177: 'collectselectOne'
                     {
                     match("collectselectOne"); 
 
@@ -2962,10 +2962,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_UNARY_OP;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:15: ( ( '-' | 'not' | '#' | '##' | '*' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:17: ( '-' | 'not' | '#' | '##' | '*' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:15: ( ( '-' | 'not' | '#' | '##' | '*' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:17: ( '-' | 'not' | '#' | '##' | '*' )
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:17: ( '-' | 'not' | '#' | '##' | '*' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:17: ( '-' | 'not' | '#' | '##' | '*' )
             int alt7=5;
             switch ( input.LA(1) ) {
             case '-':
@@ -3003,14 +3003,14 @@ public class InternalQVTOperationalLexer extends Lexer {
 
             switch (alt7) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:18: '-'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:18: '-'
                     {
                     match('-'); 
 
                     }
                     break;
                 case 2 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:22: 'not'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:22: 'not'
                     {
                     match("not"); 
 
@@ -3018,14 +3018,14 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:28: '#'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:28: '#'
                     {
                     match('#'); 
 
                     }
                     break;
                 case 4 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:32: '##'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:32: '##'
                     {
                     match("##"); 
 
@@ -3033,7 +3033,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     break;
                 case 5 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9479:37: '*'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9542:37: '*'
                     {
                     match('*'); 
 
@@ -3056,8 +3056,8 @@ public class InternalQVTOperationalLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPED_CHARACTER"
     public final void mRULE_ESCAPED_CHARACTER() throws RecognitionException {
         try {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9481:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9481:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9544:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9544:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
             {
             match('\\'); 
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -3081,8 +3081,8 @@ public class InternalQVTOperationalLexer extends Lexer {
     // $ANTLR start "RULE_LETTER_CHARACTER"
     public final void mRULE_LETTER_CHARACTER() throws RecognitionException {
         try {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9483:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9483:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9546:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9546:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -3107,11 +3107,11 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9485:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9485:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9548:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9548:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9485:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9548:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
             loop8:
             do {
                 int alt8=3;
@@ -3127,14 +3127,14 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9485:34: RULE_ESCAPED_CHARACTER
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9548:34: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9485:57: ~ ( ( '\\\\' | '\"' ) )
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9548:57: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3171,11 +3171,11 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9487:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9487:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9550:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9550:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9487:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9550:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop9:
             do {
                 int alt9=3;
@@ -3191,14 +3191,14 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9487:35: RULE_ESCAPED_CHARACTER
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9550:35: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9487:58: ~ ( ( '\\\\' | '\\'' ) )
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9550:58: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3235,12 +3235,12 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ML_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9489:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9489:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9552:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9552:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
             {
             match("/'"); 
 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9489:38: ( options {greedy=false; } : . )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9552:38: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -3265,7 +3265,7 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9489:66: .
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9552:66: .
             	    {
             	    matchAny(); 
 
@@ -3295,11 +3295,11 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_SIMPLE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9491:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9491:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9554:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9554:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             {
             mRULE_LETTER_CHARACTER(); 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9491:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9554:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             loop11:
             do {
                 int alt11=2;
@@ -3348,8 +3348,8 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ESCAPED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9493:17: ( '_' RULE_SINGLE_QUOTED_STRING )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9493:19: '_' RULE_SINGLE_QUOTED_STRING
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9556:17: ( '_' RULE_SINGLE_QUOTED_STRING )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9556:19: '_' RULE_SINGLE_QUOTED_STRING
             {
             match('_'); 
             mRULE_SINGLE_QUOTED_STRING(); 
@@ -3369,10 +3369,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9495:10: ( ( '0' .. '9' )+ )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9495:12: ( '0' .. '9' )+
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9558:10: ( ( '0' .. '9' )+ )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9558:12: ( '0' .. '9' )+
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9495:12: ( '0' .. '9' )+
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9558:12: ( '0' .. '9' )+
             int cnt12=0;
             loop12:
             do {
@@ -3386,7 +3386,7 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9495:13: '0' .. '9'
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9558:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -3418,12 +3418,12 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9497:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9497:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9560:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9560:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9497:24: ( options {greedy=false; } : . )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9560:24: ( options {greedy=false; } : . )*
             loop13:
             do {
                 int alt13=2;
@@ -3448,7 +3448,7 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt13) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9497:52: .
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9560:52: .
             	    {
             	    matchAny(); 
 
@@ -3478,12 +3478,12 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("--"); 
 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop14:
             do {
                 int alt14=2;
@@ -3496,7 +3496,7 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                 switch (alt14) {
             	case 1 :
-            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -3516,7 +3516,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:40: ( ( '\\r' )? '\\n' )?
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:40: ( ( '\\r' )? '\\n' )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -3525,9 +3525,9 @@ public class InternalQVTOperationalLexer extends Lexer {
             }
             switch (alt16) {
                 case 1 :
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:41: ( '\\r' )? '\\n'
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:41: ( '\\r' )? '\\n'
                     {
-                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:41: ( '\\r' )?
+                    // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:41: ( '\\r' )?
                     int alt15=2;
                     int LA15_0 = input.LA(1);
 
@@ -3536,7 +3536,7 @@ public class InternalQVTOperationalLexer extends Lexer {
                     }
                     switch (alt15) {
                         case 1 :
-                            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9499:41: '\\r'
+                            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9562:41: '\\r'
                             {
                             match('\r'); 
 
@@ -3568,10 +3568,10 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9501:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9501:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9564:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9564:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9501:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9564:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt17=0;
             loop17:
             do {
@@ -3625,8 +3625,8 @@ public class InternalQVTOperationalLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9503:16: ( . )
-            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9503:18: .
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9566:16: ( . )
+            // ../../examples/org.eclipse.qvto.examples.xtext.qvtoperational/src-gen/org/eclipse/qvto/examples/xtext/qvtoperational/parser/antlr/internal/InternalQVTOperational.g:9566:18: .
             {
             matchAny(); 
 
@@ -4601,7 +4601,7 @@ public class InternalQVTOperationalLexer extends Lexer {
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "9467:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )";
+            return "9530:15: ( '=' | '==' | '<>' | '<' | '>' | '<=' | '>=' )";
         }
     }
     static final String DFA4_eotS =
@@ -4673,7 +4673,7 @@ public class InternalQVTOperationalLexer extends Lexer {
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "9473:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )";
+            return "9536:24: ( 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn' )";
         }
     }
     static final String DFA5_eotS =
@@ -4745,7 +4745,7 @@ public class InternalQVTOperationalLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "9475:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )";
+            return "9538:21: ( 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone' )";
         }
     }
     static final String DFA6_eotS =
@@ -4836,185 +4836,186 @@ public class InternalQVTOperationalLexer extends Lexer {
             this.transition = DFA6_transition;
         }
         public String getDescription() {
-            return "9477:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )";
+            return "9540:27: ( 'reject' | 'select' | 'collect' | 'exists' | 'one' | 'any' | 'isUnique' | 'collectNested' | 'sortedBy' | 'xselect' | 'xcollect' | 'selectOne' | 'collectOne' | 'collectselect' | 'collectselectOne' )";
         }
     }
     static final String DFA18_eotS =
-        "\1\uffff\6\77\1\116\1\77\1\uffff\1\77\2\uffff\1\132\2\uffff\3\77"+
-        "\1\uffff\1\153\1\156\4\uffff\1\77\1\167\6\77\1\u0085\1\77\1\u008a"+
-        "\1\u008c\1\77\1\u0092\11\77\2\uffff\2\75\2\uffff\2\75\1\77\4\uffff"+
-        "\1\77\1\uffff\14\77\1\u00be\2\uffff\1\77\1\u00c5\1\u00c6\1\77\1"+
-        "\uffff\3\77\2\uffff\1\u00cc\3\uffff\6\77\1\u00d7\2\77\15\uffff\3"+
-        "\77\2\uffff\12\77\4\uffff\2\77\5\uffff\3\77\3\uffff\14\77\13\uffff"+
-        "\2\77\1\u0101\1\u0102\17\77\3\uffff\5\77\2\uffff\4\77\2\uffff\1"+
-        "\77\1\u0121\10\77\1\uffff\1\u012a\1\u0102\3\uffff\1\u012b\4\77\1"+
-        "\u0130\11\77\1\uffff\1\u013b\1\77\1\u013d\2\77\1\u0140\2\77\1\u0143"+
-        "\3\77\1\u0147\7\77\2\uffff\2\77\1\u0153\16\77\1\uffff\10\77\1\u016a"+
-        "\3\77\1\uffff\4\77\1\u0172\1\77\1\u0175\1\77\2\uffff\1\77\1\u0178"+
-        "\1\u0179\1\77\1\uffff\4\77\1\u017f\1\77\1\u0181\1\u0182\1\77\1\u0184"+
-        "\1\uffff\1\u0185\1\uffff\2\77\1\uffff\2\77\1\uffff\1\77\1\u018b"+
-        "\1\77\1\uffff\13\77\1\uffff\4\77\1\u019c\17\77\1\u01ac\1\77\1\uffff"+
-        "\1\u01ae\6\77\1\uffff\1\u01b5\1\77\1\uffff\2\77\2\uffff\5\77\1\uffff"+
-        "\1\u01be\2\uffff\1\77\2\uffff\2\77\1\u01c2\2\77\1\uffff\12\77\1"+
-        "\u01cf\1\u01d0\1\u0102\3\77\1\uffff\3\77\1\u01d8\1\77\1\u0102\3"+
-        "\77\1\u01dd\5\77\1\uffff\1\77\1\uffff\1\u01e4\4\77\1\u0102\1\uffff"+
-        "\1\u01e9\5\77\1\u01ef\1\77\1\uffff\1\u01f1\2\77\1\uffff\2\77\1\u01f6"+
-        "\2\77\1\u01f9\6\77\2\uffff\3\77\1\u0102\1\77\1\u0207\1\77\1\uffff"+
-        "\1\u020b\1\u020c\2\77\1\uffff\1\u020f\2\77\1\u0212\2\77\1\uffff"+
-        "\1\77\1\u0216\1\77\1\u0218\1\uffff\2\77\1\u021b\1\77\1\u021d\1\uffff"+
-        "\1\77\1\uffff\1\u0102\1\77\1\u0220\1\u0221\1\uffff\2\77\1\uffff"+
-        "\1\77\1\u0225\2\77\1\u0228\1\u0229\1\77\1\u0102\1\u022b\4\77\1\uffff"+
-        "\1\u0230\2\77\2\uffff\1\u0233\1\77\1\uffff\1\77\1\u0236\1\uffff"+
-        "\1\77\1\u0102\1\77\1\uffff\1\77\1\uffff\2\77\1\uffff\1\77\1\uffff"+
-        "\1\77\1\u0102\2\uffff\1\u023e\2\77\1\uffff\2\77\2\uffff\1\u0102"+
-        "\1\uffff\4\77\1\uffff\1\u0247\1\77\1\uffff\1\u0249\1\77\1\uffff"+
-        "\1\77\1\u024c\1\u024d\1\u024e\1\77\1\u0250\1\u0251\1\uffff\5\77"+
-        "\1\u0102\1\77\1\u0258\1\uffff\1\u020b\1\uffff\1\77\1\u020b\3\uffff"+
-        "\1\77\2\uffff\1\77\1\u025f\1\u0260\1\u0261\2\77\1\uffff\6\77\3\uffff"+
-        "\2\77\1\u0247\1\u026c\1\u0247\3\77\2\u0102\1\uffff\1\u020b\4\77"+
-        "\1\u0276\2\77\1\u0247\1\uffff\1\77\1\u0102\1\u027a\1\uffff";
+        "\1\uffff\6\77\1\116\1\77\1\uffff\1\77\2\uffff\1\132\2\uffff\2\77"+
+        "\2\uffff\1\77\1\uffff\1\155\1\160\2\uffff\1\77\1\167\6\77\1\u0085"+
+        "\1\77\1\u008a\1\u008c\1\77\1\u0092\11\77\2\uffff\2\75\2\uffff\2"+
+        "\75\1\77\4\uffff\1\77\1\uffff\14\77\1\u00be\2\uffff\1\77\1\u00c5"+
+        "\1\u00c6\1\77\1\uffff\3\77\2\uffff\1\u00cc\3\uffff\5\77\2\uffff"+
+        "\1\77\1\u00d7\2\77\13\uffff\3\77\2\uffff\12\77\4\uffff\2\77\5\uffff"+
+        "\3\77\3\uffff\14\77\13\uffff\2\77\1\u0101\1\u0102\17\77\3\uffff"+
+        "\5\77\2\uffff\4\77\2\uffff\1\77\1\u0121\10\77\1\uffff\1\u012a\1"+
+        "\u0102\3\uffff\1\u012b\4\77\1\u0130\11\77\1\uffff\1\u013b\1\77\1"+
+        "\u013d\2\77\1\u0140\2\77\1\u0143\3\77\1\u0147\7\77\2\uffff\2\77"+
+        "\1\u0153\16\77\1\uffff\10\77\1\u016a\3\77\1\uffff\4\77\1\u0172\1"+
+        "\77\1\u0175\1\77\2\uffff\1\77\1\u0178\1\u0179\1\77\1\uffff\4\77"+
+        "\1\u017f\1\77\1\u0181\1\u0182\1\77\1\u0184\1\uffff\1\u0185\1\uffff"+
+        "\2\77\1\uffff\2\77\1\uffff\1\77\1\u018b\1\77\1\uffff\13\77\1\uffff"+
+        "\4\77\1\u019c\17\77\1\u01ac\1\77\1\uffff\1\u01ae\6\77\1\uffff\1"+
+        "\u01b5\1\77\1\uffff\2\77\2\uffff\5\77\1\uffff\1\u01be\2\uffff\1"+
+        "\77\2\uffff\2\77\1\u01c2\2\77\1\uffff\12\77\1\u01cf\1\u01d0\1\u0102"+
+        "\3\77\1\uffff\3\77\1\u01d8\1\77\1\u0102\3\77\1\u01dd\5\77\1\uffff"+
+        "\1\77\1\uffff\1\u01e4\4\77\1\u0102\1\uffff\1\u01e9\5\77\1\u01ef"+
+        "\1\77\1\uffff\1\u01f1\2\77\1\uffff\2\77\1\u01f6\2\77\1\u01f9\6\77"+
+        "\2\uffff\3\77\1\u0102\1\77\1\u0207\1\77\1\uffff\1\u020b\1\u020c"+
+        "\2\77\1\uffff\1\u020f\2\77\1\u0212\2\77\1\uffff\1\77\1\u0216\1\77"+
+        "\1\u0218\1\uffff\2\77\1\u021b\1\77\1\u021d\1\uffff\1\77\1\uffff"+
+        "\1\u0102\1\77\1\u0220\1\u0221\1\uffff\2\77\1\uffff\1\77\1\u0225"+
+        "\2\77\1\u0228\1\u0229\1\77\1\u0102\1\u022b\4\77\1\uffff\1\u0230"+
+        "\2\77\2\uffff\1\u0233\1\77\1\uffff\1\77\1\u0236\1\uffff\1\77\1\u0102"+
+        "\1\77\1\uffff\1\77\1\uffff\2\77\1\uffff\1\77\1\uffff\1\77\1\u0102"+
+        "\2\uffff\1\u023e\2\77\1\uffff\2\77\2\uffff\1\u0102\1\uffff\4\77"+
+        "\1\uffff\1\u0247\1\77\1\uffff\1\u0249\1\77\1\uffff\1\77\1\u024c"+
+        "\1\u024d\1\u024e\1\77\1\u0250\1\u0251\1\uffff\5\77\1\u0102\1\77"+
+        "\1\u0258\1\uffff\1\u020b\1\uffff\1\77\1\u020b\3\uffff\1\77\2\uffff"+
+        "\1\77\1\u025f\1\u0260\1\u0261\2\77\1\uffff\6\77\3\uffff\2\77\1\u0247"+
+        "\1\u026c\1\u0247\3\77\2\u0102\1\uffff\1\u020b\4\77\1\u0276\2\77"+
+        "\1\u0247\1\uffff\1\77\1\u0102\1\u027a\1\uffff";
     static final String DFA18_eofS =
         "\u027b\uffff";
     static final String DFA18_minS =
         "\1\0\1\154\1\142\1\145\1\154\1\145\1\141\1\72\1\146\1\uffff\1\141"+
-        "\2\uffff\1\56\2\uffff\1\141\1\154\1\156\1\uffff\1\55\1\75\4\uffff"+
-        "\1\141\1\75\1\145\1\141\1\163\1\150\1\141\1\151\1\55\1\157\1\47"+
-        "\1\53\1\143\1\55\1\141\1\165\1\141\1\156\2\145\1\156\1\143\1\157"+
-        "\2\uffff\1\46\1\55\2\uffff\2\0\1\47\4\uffff\1\141\1\uffff\1\163"+
-        "\1\144\1\143\1\141\1\154\1\162\1\154\2\141\1\162\1\164\1\163\1\75"+
-        "\2\uffff\1\160\2\60\1\125\1\uffff\1\157\1\154\1\162\2\uffff\1\56"+
-        "\3\uffff\1\145\2\143\1\144\1\163\1\160\1\60\1\164\1\145\15\uffff"+
-        "\1\147\1\141\1\145\2\uffff\1\142\1\164\1\144\1\160\1\162\2\145\1"+
-        "\163\1\155\1\143\4\uffff\1\164\1\154\5\uffff\1\162\1\145\1\157\3"+
-        "\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\161\2\154\1\144\1\154"+
-        "\13\uffff\1\143\1\164\2\60\1\145\1\164\1\145\1\164\1\160\1\154\1"+
-        "\163\1\145\1\144\1\165\1\157\1\145\1\151\1\141\1\152\3\uffff\1\154"+
-        "\2\145\1\141\1\165\2\uffff\1\156\1\155\1\163\1\101\2\uffff\1\155"+
-        "\1\60\1\153\2\145\1\163\1\155\1\151\1\145\1\157\1\uffff\2\60\3\uffff"+
-        "\1\60\1\156\1\145\1\156\1\162\1\60\1\145\1\160\1\147\1\141\1\163"+
-        "\1\156\1\164\1\142\1\164\1\uffff\1\60\1\154\1\60\2\154\1\60\2\154"+
-        "\1\60\1\145\1\154\1\151\1\60\1\165\1\151\1\101\1\145\1\154\1\153"+
-        "\1\162\2\uffff\1\163\1\151\1\60\1\143\1\145\1\157\1\145\1\163\1"+
-        "\162\1\156\1\157\1\162\1\154\1\143\1\166\1\164\1\165\1\uffff\1\162"+
-        "\1\151\2\162\1\154\1\145\1\164\1\151\1\60\1\145\1\154\1\151\1\uffff"+
-        "\1\141\1\160\1\156\1\164\1\60\1\146\1\60\1\163\2\uffff\1\163\2\60"+
-        "\1\141\1\uffff\1\154\1\151\1\145\1\155\1\60\1\145\2\60\1\144\1\60"+
-        "\1\uffff\1\60\1\uffff\1\145\1\154\1\uffff\2\145\1\uffff\1\147\1"+
-        "\60\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\142\1\141"+
-        "\1\163\1\143\1\uffff\1\164\1\144\1\163\1\143\1\60\2\145\2\156\1"+
-        "\166\1\164\1\145\1\171\1\156\1\164\1\145\1\155\2\151\1\163\1\60"+
-        "\1\161\1\uffff\1\60\1\154\1\164\1\147\1\164\1\144\1\163\1\uffff"+
-        "\1\60\1\146\1\uffff\1\151\1\146\2\uffff\1\162\1\164\1\156\1\163"+
-        "\1\157\1\uffff\1\60\2\uffff\1\141\2\uffff\1\143\1\145\1\60\1\141"+
-        "\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1"+
-        "\157\1\143\3\60\1\102\1\145\1\164\1\uffff\1\156\1\163\1\154\1\60"+
-        "\1\145\1\60\1\144\1\160\1\143\1\60\1\163\1\145\1\164\1\144\1\157"+
-        "\1\uffff\1\165\1\uffff\1\60\1\151\1\145\1\151\1\163\1\60\1\uffff"+
-        "\1\60\1\164\1\157\2\171\1\147\1\60\1\144\1\uffff\1\60\1\164\1\143"+
-        "\1\uffff\1\156\1\162\1\60\1\143\1\164\1\60\1\141\2\144\1\164\1\170"+
-        "\1\164\2\uffff\1\156\1\171\1\163\1\60\1\143\1\60\1\171\1\uffff\2"+
-        "\60\1\145\1\164\1\uffff\1\60\1\144\1\163\1\60\1\154\1\145\1\uffff"+
-        "\1\166\1\60\1\157\1\60\1\uffff\1\145\1\162\1\60\1\160\1\60\1\uffff"+
-        "\1\145\1\uffff\1\60\1\164\2\60\1\uffff\2\145\1\uffff\1\154\1\60"+
-        "\1\123\1\151\2\60\1\145\2\60\1\145\1\156\2\145\1\uffff\1\60\2\156"+
-        "\2\uffff\1\60\1\163\1\uffff\1\151\1\60\1\uffff\1\166\1\60\1\145"+
-        "\1\uffff\1\156\1\uffff\1\163\1\155\1\uffff\1\145\1\uffff\1\154\1"+
-        "\60\2\uffff\1\60\1\144\1\151\1\uffff\1\145\1\157\2\uffff\1\60\1"+
-        "\uffff\1\163\1\145\1\154\1\163\1\uffff\1\60\1\145\1\uffff\1\60\1"+
-        "\141\1\uffff\1\145\3\60\1\141\2\60\1\uffff\1\116\1\144\1\164\1\156"+
-        "\1\164\1\60\1\145\1\60\1\uffff\1\60\1\uffff\1\164\1\60\3\uffff\1"+
-        "\164\2\uffff\1\141\3\60\1\145\1\143\1\uffff\1\156\1\145\2\156\1"+
-        "\151\1\164\3\uffff\1\144\1\164\3\60\1\145\1\157\1\165\2\60\1\uffff"+
-        "\1\60\1\156\1\162\2\156\1\60\1\141\1\145\1\60\1\uffff\1\154\2\60"+
-        "\1\uffff";
+        "\2\uffff\1\56\2\uffff\1\141\1\154\2\uffff\1\156\1\uffff\1\55\1\75"+
+        "\2\uffff\1\141\1\75\1\145\1\141\1\163\1\150\1\141\1\151\1\55\1\157"+
+        "\1\47\1\53\1\143\1\55\1\141\1\165\1\141\1\156\2\145\1\156\1\143"+
+        "\1\157\2\uffff\1\46\1\55\2\uffff\2\0\1\47\4\uffff\1\141\1\uffff"+
+        "\1\163\1\144\1\143\1\141\1\154\1\162\1\154\2\141\1\162\1\164\1\163"+
+        "\1\75\2\uffff\1\160\2\60\1\125\1\uffff\1\157\1\154\1\162\2\uffff"+
+        "\1\56\3\uffff\1\145\2\143\1\144\1\163\2\uffff\1\160\1\60\1\164\1"+
+        "\145\13\uffff\1\147\1\141\1\145\2\uffff\1\142\1\164\1\144\1\160"+
+        "\1\162\2\145\1\163\1\155\1\143\4\uffff\1\164\1\154\5\uffff\1\162"+
+        "\1\145\1\157\3\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\161\2"+
+        "\154\1\144\1\154\13\uffff\1\143\1\164\2\60\1\145\1\164\1\145\1\164"+
+        "\1\160\1\154\1\163\1\145\1\144\1\165\1\157\1\145\1\151\1\141\1\152"+
+        "\3\uffff\1\154\2\145\1\141\1\165\2\uffff\1\156\1\155\1\163\1\101"+
+        "\2\uffff\1\155\1\60\1\153\2\145\1\163\1\155\1\151\1\145\1\157\1"+
+        "\uffff\2\60\3\uffff\1\60\1\156\1\145\1\156\1\162\1\60\1\145\1\160"+
+        "\1\147\1\141\1\163\1\156\1\164\1\142\1\164\1\uffff\1\60\1\154\1"+
+        "\60\2\154\1\60\2\154\1\60\1\145\1\154\1\151\1\60\1\165\1\151\1\101"+
+        "\1\145\1\154\1\153\1\162\2\uffff\1\163\1\151\1\60\1\143\1\145\1"+
+        "\157\1\145\1\163\1\162\1\156\1\157\1\162\1\154\1\143\1\166\1\164"+
+        "\1\165\1\uffff\1\162\1\151\2\162\1\154\1\145\1\164\1\151\1\60\1"+
+        "\145\1\154\1\151\1\uffff\1\141\1\160\1\156\1\164\1\60\1\146\1\60"+
+        "\1\163\2\uffff\1\163\2\60\1\141\1\uffff\1\154\1\151\1\145\1\155"+
+        "\1\60\1\145\2\60\1\144\1\60\1\uffff\1\60\1\uffff\1\145\1\154\1\uffff"+
+        "\2\145\1\uffff\1\147\1\60\1\156\1\uffff\1\145\1\155\2\156\1\157"+
+        "\1\162\1\145\1\142\1\141\1\163\1\143\1\uffff\1\164\1\144\1\163\1"+
+        "\143\1\60\2\145\2\156\1\166\1\164\1\145\1\171\1\156\1\164\1\145"+
+        "\1\155\2\151\1\163\1\60\1\161\1\uffff\1\60\1\154\1\164\1\147\1\164"+
+        "\1\144\1\163\1\uffff\1\60\1\146\1\uffff\1\151\1\146\2\uffff\1\162"+
+        "\1\164\1\156\1\163\1\157\1\uffff\1\60\2\uffff\1\141\2\uffff\1\143"+
+        "\1\145\1\60\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1"+
+        "\151\1\145\1\143\1\157\1\143\3\60\1\102\1\145\1\164\1\uffff\1\156"+
+        "\1\163\1\154\1\60\1\145\1\60\1\144\1\160\1\143\1\60\1\163\1\145"+
+        "\1\164\1\144\1\157\1\uffff\1\165\1\uffff\1\60\1\151\1\145\1\151"+
+        "\1\163\1\60\1\uffff\1\60\1\164\1\157\2\171\1\147\1\60\1\144\1\uffff"+
+        "\1\60\1\164\1\143\1\uffff\1\156\1\162\1\60\1\143\1\164\1\60\1\141"+
+        "\2\144\1\164\1\170\1\164\2\uffff\1\156\1\171\1\163\1\60\1\143\1"+
+        "\60\1\171\1\uffff\2\60\1\145\1\164\1\uffff\1\60\1\144\1\163\1\60"+
+        "\1\154\1\145\1\uffff\1\166\1\60\1\157\1\60\1\uffff\1\145\1\162\1"+
+        "\60\1\160\1\60\1\uffff\1\145\1\uffff\1\60\1\164\2\60\1\uffff\2\145"+
+        "\1\uffff\1\154\1\60\1\123\1\151\2\60\1\145\2\60\1\145\1\156\2\145"+
+        "\1\uffff\1\60\2\156\2\uffff\1\60\1\163\1\uffff\1\151\1\60\1\uffff"+
+        "\1\166\1\60\1\145\1\uffff\1\156\1\uffff\1\163\1\155\1\uffff\1\145"+
+        "\1\uffff\1\154\1\60\2\uffff\1\60\1\144\1\151\1\uffff\1\145\1\157"+
+        "\2\uffff\1\60\1\uffff\1\163\1\145\1\154\1\163\1\uffff\1\60\1\145"+
+        "\1\uffff\1\60\1\141\1\uffff\1\145\3\60\1\141\2\60\1\uffff\1\116"+
+        "\1\144\1\164\1\156\1\164\1\60\1\145\1\60\1\uffff\1\60\1\uffff\1"+
+        "\164\1\60\3\uffff\1\164\2\uffff\1\141\3\60\1\145\1\143\1\uffff\1"+
+        "\156\1\145\2\156\1\151\1\164\3\uffff\1\144\1\164\3\60\1\145\1\157"+
+        "\1\165\2\60\1\uffff\1\60\1\156\1\162\2\156\1\60\1\141\1\145\1\60"+
+        "\1\uffff\1\154\2\60\1\uffff";
     static final String DFA18_maxS =
         "\1\uffff\1\154\1\156\1\164\1\157\1\145\1\151\1\75\1\163\1\uffff"+
-        "\1\162\2\uffff\1\56\2\uffff\1\162\1\170\1\165\1\uffff\2\76\4\uffff"+
-        "\1\162\1\75\1\151\1\157\1\163\1\150\2\151\1\76\1\165\1\52\1\75\1"+
-        "\163\1\56\1\141\1\165\1\157\1\156\1\145\1\164\1\156\1\162\1\157"+
-        "\2\uffff\1\46\1\55\2\uffff\2\uffff\1\47\4\uffff\1\141\1\uffff\1"+
-        "\163\1\171\1\143\1\141\1\154\1\162\1\155\1\141\1\164\1\162\1\164"+
-        "\1\163\1\75\2\uffff\1\160\2\172\1\125\1\uffff\1\157\1\154\1\162"+
-        "\2\uffff\1\56\3\uffff\1\151\1\143\1\164\1\165\1\163\1\160\1\172"+
-        "\1\164\1\145\15\uffff\1\147\1\165\1\145\2\uffff\1\142\1\164\1\144"+
-        "\1\160\1\164\2\145\1\163\1\155\1\143\4\uffff\1\164\1\154\5\uffff"+
-        "\1\162\1\145\1\157\3\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1"+
-        "\164\2\154\1\144\1\154\13\uffff\1\143\1\164\2\172\1\145\1\164\1"+
-        "\146\1\164\1\160\1\154\1\163\1\151\1\144\1\165\1\157\1\145\1\151"+
-        "\1\141\1\152\3\uffff\1\157\2\145\1\162\1\165\2\uffff\1\156\1\155"+
-        "\1\163\1\101\2\uffff\1\155\1\172\1\153\2\145\1\163\1\155\1\151\1"+
-        "\145\1\157\1\uffff\2\172\3\uffff\1\172\1\156\1\145\1\156\1\162\1"+
-        "\172\1\145\1\160\1\147\1\141\1\163\1\162\1\164\1\142\1\164\1\uffff"+
-        "\1\172\1\154\1\172\2\154\1\172\2\154\1\172\1\145\1\154\1\151\1\172"+
-        "\1\165\1\151\1\126\1\145\1\154\1\153\1\162\2\uffff\1\163\1\151\1"+
-        "\172\1\143\1\145\1\157\1\145\1\163\1\162\1\156\1\157\1\162\1\154"+
-        "\1\143\1\166\1\164\1\165\1\uffff\1\162\1\151\2\162\1\154\1\145\1"+
-        "\164\1\151\1\172\1\145\1\154\1\151\1\uffff\1\141\1\160\1\156\1\164"+
-        "\1\172\1\146\1\172\1\163\2\uffff\1\163\2\172\1\141\1\uffff\1\154"+
-        "\1\151\1\145\1\155\1\172\1\145\2\172\1\144\1\172\1\uffff\1\172\1"+
-        "\uffff\1\145\1\154\1\uffff\2\145\1\uffff\1\147\1\172\1\156\1\uffff"+
-        "\1\145\1\155\2\156\1\157\1\162\1\145\1\142\1\141\1\163\1\143\1\uffff"+
-        "\1\164\1\144\1\163\1\143\1\172\2\145\2\156\1\166\1\164\1\145\1\171"+
-        "\1\156\1\164\1\145\1\155\2\151\1\163\1\172\1\161\1\uffff\1\172\1"+
-        "\154\1\164\1\147\1\164\1\144\1\163\1\uffff\1\172\1\146\1\uffff\1"+
-        "\151\1\146\2\uffff\1\162\1\164\1\156\1\163\1\157\1\uffff\1\172\2"+
-        "\uffff\1\141\2\uffff\1\143\1\145\1\172\1\141\1\145\1\uffff\1\147"+
-        "\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1\157\1\143\3\172\1\102"+
-        "\1\145\1\164\1\uffff\1\156\1\163\1\154\1\172\1\145\1\172\1\144\1"+
-        "\160\1\143\1\172\1\163\1\145\1\164\1\144\1\157\1\uffff\1\165\1\uffff"+
-        "\1\172\1\151\1\145\1\151\1\163\1\172\1\uffff\1\172\1\164\1\157\2"+
-        "\171\1\147\1\172\1\144\1\uffff\1\172\1\164\1\143\1\uffff\1\156\1"+
-        "\162\1\172\1\143\1\164\1\172\1\141\2\144\1\164\1\170\1\164\2\uffff"+
-        "\1\156\1\171\1\163\1\172\1\143\1\172\1\171\1\uffff\2\172\1\145\1"+
-        "\164\1\uffff\1\172\1\144\1\163\1\172\1\154\1\145\1\uffff\1\166\1"+
-        "\172\1\157\1\172\1\uffff\1\145\1\162\1\172\1\160\1\172\1\uffff\1"+
-        "\145\1\uffff\1\172\1\164\2\172\1\uffff\2\145\1\uffff\1\154\1\172"+
-        "\1\123\1\151\2\172\1\145\2\172\1\145\1\156\2\145\1\uffff\1\172\2"+
-        "\156\2\uffff\1\172\1\163\1\uffff\1\151\1\172\1\uffff\1\166\1\172"+
-        "\1\145\1\uffff\1\156\1\uffff\1\163\1\155\1\uffff\1\145\1\uffff\1"+
-        "\154\1\172\2\uffff\1\172\1\144\1\151\1\uffff\1\145\1\157\2\uffff"+
-        "\1\172\1\uffff\1\163\1\145\1\154\1\163\1\uffff\1\172\1\145\1\uffff"+
-        "\1\172\1\141\1\uffff\1\145\3\172\1\141\2\172\1\uffff\1\116\1\144"+
-        "\1\164\1\156\1\164\1\172\1\145\1\172\1\uffff\1\172\1\uffff\1\164"+
-        "\1\172\3\uffff\1\164\2\uffff\1\141\3\172\1\145\1\143\1\uffff\1\156"+
-        "\1\145\2\156\1\151\1\164\3\uffff\1\144\1\164\3\172\1\145\1\157\1"+
-        "\165\2\172\1\uffff\1\172\1\156\1\162\2\156\1\172\1\141\1\145\1\172"+
-        "\1\uffff\1\154\2\172\1\uffff";
+        "\1\162\2\uffff\1\56\2\uffff\1\162\1\170\2\uffff\1\165\1\uffff\2"+
+        "\76\2\uffff\1\162\1\75\1\151\1\157\1\163\1\150\2\151\1\76\1\165"+
+        "\1\52\1\75\1\163\1\56\1\141\1\165\1\157\1\156\1\145\1\164\1\156"+
+        "\1\162\1\157\2\uffff\1\46\1\55\2\uffff\2\uffff\1\47\4\uffff\1\141"+
+        "\1\uffff\1\163\1\171\1\143\1\141\1\154\1\162\1\155\1\141\1\164\1"+
+        "\162\1\164\1\163\1\75\2\uffff\1\160\2\172\1\125\1\uffff\1\157\1"+
+        "\154\1\162\2\uffff\1\56\3\uffff\1\151\1\143\1\164\1\165\1\163\2"+
+        "\uffff\1\160\1\172\1\164\1\145\13\uffff\1\147\1\165\1\145\2\uffff"+
+        "\1\142\1\164\1\144\1\160\1\164\2\145\1\163\1\155\1\143\4\uffff\1"+
+        "\164\1\154\5\uffff\1\162\1\145\1\157\3\uffff\2\160\1\157\1\147\1"+
+        "\164\1\141\1\162\1\164\2\154\1\144\1\154\13\uffff\1\143\1\164\2"+
+        "\172\1\145\1\164\1\146\1\164\1\160\1\154\1\163\1\151\1\144\1\165"+
+        "\1\157\1\145\1\151\1\141\1\152\3\uffff\1\157\2\145\1\162\1\165\2"+
+        "\uffff\1\156\1\155\1\163\1\101\2\uffff\1\155\1\172\1\153\2\145\1"+
+        "\163\1\155\1\151\1\145\1\157\1\uffff\2\172\3\uffff\1\172\1\156\1"+
+        "\145\1\156\1\162\1\172\1\145\1\160\1\147\1\141\1\163\1\162\1\164"+
+        "\1\142\1\164\1\uffff\1\172\1\154\1\172\2\154\1\172\2\154\1\172\1"+
+        "\145\1\154\1\151\1\172\1\165\1\151\1\126\1\145\1\154\1\153\1\162"+
+        "\2\uffff\1\163\1\151\1\172\1\143\1\145\1\157\1\145\1\163\1\162\1"+
+        "\156\1\157\1\162\1\154\1\143\1\166\1\164\1\165\1\uffff\1\162\1\151"+
+        "\2\162\1\154\1\145\1\164\1\151\1\172\1\145\1\154\1\151\1\uffff\1"+
+        "\141\1\160\1\156\1\164\1\172\1\146\1\172\1\163\2\uffff\1\163\2\172"+
+        "\1\141\1\uffff\1\154\1\151\1\145\1\155\1\172\1\145\2\172\1\144\1"+
+        "\172\1\uffff\1\172\1\uffff\1\145\1\154\1\uffff\2\145\1\uffff\1\147"+
+        "\1\172\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\142\1"+
+        "\141\1\163\1\143\1\uffff\1\164\1\144\1\163\1\143\1\172\2\145\2\156"+
+        "\1\166\1\164\1\145\1\171\1\156\1\164\1\145\1\155\2\151\1\163\1\172"+
+        "\1\161\1\uffff\1\172\1\154\1\164\1\147\1\164\1\144\1\163\1\uffff"+
+        "\1\172\1\146\1\uffff\1\151\1\146\2\uffff\1\162\1\164\1\156\1\163"+
+        "\1\157\1\uffff\1\172\2\uffff\1\141\2\uffff\1\143\1\145\1\172\1\141"+
+        "\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1"+
+        "\157\1\143\3\172\1\102\1\145\1\164\1\uffff\1\156\1\163\1\154\1\172"+
+        "\1\145\1\172\1\144\1\160\1\143\1\172\1\163\1\145\1\164\1\144\1\157"+
+        "\1\uffff\1\165\1\uffff\1\172\1\151\1\145\1\151\1\163\1\172\1\uffff"+
+        "\1\172\1\164\1\157\2\171\1\147\1\172\1\144\1\uffff\1\172\1\164\1"+
+        "\143\1\uffff\1\156\1\162\1\172\1\143\1\164\1\172\1\141\2\144\1\164"+
+        "\1\170\1\164\2\uffff\1\156\1\171\1\163\1\172\1\143\1\172\1\171\1"+
+        "\uffff\2\172\1\145\1\164\1\uffff\1\172\1\144\1\163\1\172\1\154\1"+
+        "\145\1\uffff\1\166\1\172\1\157\1\172\1\uffff\1\145\1\162\1\172\1"+
+        "\160\1\172\1\uffff\1\145\1\uffff\1\172\1\164\2\172\1\uffff\2\145"+
+        "\1\uffff\1\154\1\172\1\123\1\151\2\172\1\145\2\172\1\145\1\156\2"+
+        "\145\1\uffff\1\172\2\156\2\uffff\1\172\1\163\1\uffff\1\151\1\172"+
+        "\1\uffff\1\166\1\172\1\145\1\uffff\1\156\1\uffff\1\163\1\155\1\uffff"+
+        "\1\145\1\uffff\1\154\1\172\2\uffff\1\172\1\144\1\151\1\uffff\1\145"+
+        "\1\157\2\uffff\1\172\1\uffff\1\163\1\145\1\154\1\163\1\uffff\1\172"+
+        "\1\145\1\uffff\1\172\1\141\1\uffff\1\145\3\172\1\141\2\172\1\uffff"+
+        "\1\116\1\144\1\164\1\156\1\164\1\172\1\145\1\172\1\uffff\1\172\1"+
+        "\uffff\1\164\1\172\3\uffff\1\164\2\uffff\1\141\3\172\1\145\1\143"+
+        "\1\uffff\1\156\1\145\2\156\1\151\1\164\3\uffff\1\144\1\164\3\172"+
+        "\1\145\1\157\1\165\2\172\1\uffff\1\172\1\156\1\162\2\156\1\172\1"+
+        "\141\1\145\1\172\1\uffff\1\154\2\172\1\uffff";
     static final String DFA18_acceptS =
-        "\11\uffff\1\12\1\uffff\1\14\1\15\1\uffff\1\20\1\21\3\uffff\1\31"+
-        "\2\uffff\1\34\1\36\1\37\1\40\27\uffff\1\131\1\134\2\uffff\1\160"+
-        "\1\165\3\uffff\1\171\1\173\1\176\1\177\1\uffff\1\171\15\uffff\1"+
-        "\146\1\17\4\uffff\1\12\3\uffff\1\14\1\15\1\uffff\1\16\1\20\1\21"+
-        "\11\uffff\1\31\1\32\1\71\1\72\1\124\1\67\1\33\1\70\1\66\1\34\1\36"+
-        "\1\37\1\40\3\uffff\1\157\1\43\12\uffff\1\77\1\156\1\175\1\62\2\uffff"+
-        "\1\170\1\174\1\64\1\122\1\65\3\uffff\1\100\1\101\1\145\14\uffff"+
-        "\1\131\1\134\1\144\1\155\1\160\1\165\1\166\1\167\1\172\1\173\1\176"+
-        "\23\uffff\1\147\1\10\1\146\5\uffff\1\133\1\135\4\uffff\1\35\1\121"+
-        "\12\uffff\1\74\2\uffff\1\71\1\72\1\70\17\uffff\1\77\24\uffff\1\73"+
-        "\1\164\21\uffff\1\147\14\uffff\1\132\10\uffff\1\152\1\42\4\uffff"+
-        "\1\142\12\uffff\1\63\1\uffff\1\75\2\uffff\1\102\2\uffff\1\115\3"+
-        "\uffff\1\114\13\uffff\1\143\26\uffff\1\13\7\uffff\1\41\2\uffff\1"+
-        "\137\2\uffff\1\125\1\136\5\uffff\1\50\1\uffff\1\56\1\57\1\uffff"+
-        "\1\60\1\130\5\uffff\1\106\20\uffff\1\27\17\uffff\1\153\1\uffff\1"+
-        "\126\6\uffff\1\140\10\uffff\1\51\3\uffff\1\103\14\uffff\1\154\1"+
-        "\3\7\uffff\1\61\4\uffff\1\11\6\uffff\1\161\4\uffff\1\141\5\uffff"+
-        "\1\54\1\uffff\1\123\4\uffff\1\107\2\uffff\1\111\15\uffff\1\45\3"+
-        "\uffff\1\163\1\7\2\uffff\1\76\2\uffff\1\127\3\uffff\1\151\1\uffff"+
-        "\1\25\2\uffff\1\46\1\uffff\1\52\2\uffff\1\104\1\105\3\uffff\1\113"+
-        "\2\uffff\1\1\1\2\1\uffff\1\4\4\uffff\1\6\2\uffff\1\22\2\uffff\1"+
-        "\53\7\uffff\1\116\10\uffff\1\162\1\uffff\1\55\2\uffff\1\23\1\24"+
-        "\1\30\1\uffff\1\47\1\150\6\uffff\1\5\6\uffff\1\112\1\120\1\117\12"+
-        "\uffff\1\26\11\uffff\1\44\3\uffff\1\110";
+        "\11\uffff\1\12\1\uffff\1\14\1\15\1\uffff\1\20\1\21\2\uffff\1\30"+
+        "\1\31\1\uffff\1\33\2\uffff\1\36\1\40\27\uffff\1\131\1\134\2\uffff"+
+        "\1\160\1\165\3\uffff\1\171\1\173\1\176\1\177\1\uffff\1\171\15\uffff"+
+        "\1\146\1\17\4\uffff\1\12\3\uffff\1\14\1\15\1\uffff\1\16\1\20\1\21"+
+        "\5\uffff\1\30\1\31\4\uffff\1\33\1\34\1\71\1\72\1\124\1\67\1\35\1"+
+        "\70\1\66\1\36\1\40\3\uffff\1\157\1\43\12\uffff\1\77\1\156\1\175"+
+        "\1\62\2\uffff\1\170\1\174\1\64\1\122\1\65\3\uffff\1\100\1\101\1"+
+        "\145\14\uffff\1\131\1\134\1\144\1\155\1\160\1\165\1\166\1\167\1"+
+        "\172\1\173\1\176\23\uffff\1\147\1\10\1\146\5\uffff\1\133\1\135\4"+
+        "\uffff\1\37\1\121\12\uffff\1\74\2\uffff\1\71\1\72\1\70\17\uffff"+
+        "\1\77\24\uffff\1\73\1\164\21\uffff\1\147\14\uffff\1\132\10\uffff"+
+        "\1\152\1\42\4\uffff\1\142\12\uffff\1\63\1\uffff\1\75\2\uffff\1\102"+
+        "\2\uffff\1\115\3\uffff\1\114\13\uffff\1\143\26\uffff\1\13\7\uffff"+
+        "\1\41\2\uffff\1\137\2\uffff\1\125\1\136\5\uffff\1\50\1\uffff\1\56"+
+        "\1\57\1\uffff\1\60\1\130\5\uffff\1\106\20\uffff\1\27\17\uffff\1"+
+        "\153\1\uffff\1\126\6\uffff\1\140\10\uffff\1\51\3\uffff\1\103\14"+
+        "\uffff\1\154\1\3\7\uffff\1\61\4\uffff\1\11\6\uffff\1\161\4\uffff"+
+        "\1\141\5\uffff\1\54\1\uffff\1\123\4\uffff\1\107\2\uffff\1\111\15"+
+        "\uffff\1\45\3\uffff\1\163\1\7\2\uffff\1\76\2\uffff\1\127\3\uffff"+
+        "\1\151\1\uffff\1\25\2\uffff\1\46\1\uffff\1\52\2\uffff\1\104\1\105"+
+        "\3\uffff\1\113\2\uffff\1\1\1\2\1\uffff\1\4\4\uffff\1\6\2\uffff\1"+
+        "\22\2\uffff\1\53\7\uffff\1\116\10\uffff\1\162\1\uffff\1\55\2\uffff"+
+        "\1\23\1\24\1\32\1\uffff\1\47\1\150\6\uffff\1\5\6\uffff\1\112\1\120"+
+        "\1\117\12\uffff\1\26\11\uffff\1\44\3\uffff\1\110";
     static final String DFA18_specialS =
-        "\1\1\66\uffff\1\0\1\2\u0242\uffff}>";
+        "\1\2\66\uffff\1\0\1\1\u0242\uffff}>";
     static final String[] DFA18_transitionS = {
             "\11\75\2\74\2\75\1\74\22\75\1\74\1\64\1\67\1\66\1\75\1\65\1"+
-            "\63\1\70\1\30\1\31\1\14\1\45\1\13\1\42\1\15\1\44\12\73\1\7\1"+
-            "\11\1\24\1\33\1\25\1\47\1\61\1\72\1\52\1\60\1\41\4\72\1\53\2"+
-            "\72\1\40\1\50\1\72\1\57\2\72\1\54\1\55\1\51\1\56\5\72\1\26\1"+
-            "\75\1\27\1\75\1\71\1\75\1\2\1\1\1\4\1\6\1\21\1\12\2\72\1\10"+
-            "\2\72\1\34\1\35\1\43\1\22\1\20\1\72\1\5\1\3\1\32\1\36\1\72\1"+
-            "\37\1\46\2\72\1\16\1\62\1\17\1\23\uff81\75",
+            "\63\1\70\1\22\1\23\1\14\1\45\1\13\1\42\1\15\1\44\12\73\1\7\1"+
+            "\11\1\26\1\33\1\27\1\47\1\61\1\72\1\52\1\60\1\41\4\72\1\53\2"+
+            "\72\1\40\1\50\1\72\1\57\2\72\1\54\1\55\1\51\1\56\5\72\1\30\1"+
+            "\75\1\31\1\75\1\71\1\75\1\2\1\1\1\4\1\6\1\21\1\12\2\72\1\10"+
+            "\2\72\1\34\1\35\1\43\1\24\1\20\1\72\1\5\1\3\1\32\1\36\1\72\1"+
+            "\37\1\46\2\72\1\16\1\62\1\17\1\25\uff81\75",
             "\1\76",
             "\1\100\1\102\12\uffff\1\101",
             "\1\104\11\uffff\1\105\4\uffff\1\103",
@@ -5032,12 +5033,12 @@ public class InternalQVTOperationalLexer extends Lexer {
             "",
             "\1\136\20\uffff\1\135",
             "\1\141\1\uffff\1\140\11\uffff\1\137",
-            "\1\145\1\uffff\1\142\1\uffff\1\143\2\uffff\1\144",
-            "",
-            "\1\152\16\uffff\1\147\1\150\1\151",
-            "\1\155\1\154",
             "",
             "",
+            "\1\147\1\uffff\1\144\1\uffff\1\145\2\uffff\1\146",
+            "",
+            "\1\154\16\uffff\1\151\1\152\1\153",
+            "\1\157\1\156",
             "",
             "",
             "\1\163\6\uffff\1\165\11\uffff\1\164",
@@ -5114,12 +5115,12 @@ public class InternalQVTOperationalLexer extends Lexer {
             "\1\u00d0\5\uffff\1\u00d2\12\uffff\1\u00d1",
             "\1\u00d4\20\uffff\1\u00d3",
             "\1\u00d5",
+            "",
+            "",
             "\1\u00d6",
             "\12\77\7\uffff\32\77\4\uffff\1\77\1\uffff\32\77",
             "\1\u00d8",
             "\1\u00d9",
-            "",
-            "",
             "",
             "",
             "",
@@ -5708,6 +5709,16 @@ public class InternalQVTOperationalLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
+                        int LA18_56 = input.LA(1);
+
+                        s = -1;
+                        if ( ((LA18_56>='\u0000' && LA18_56<='\uFFFF')) ) {s = 166;}
+
+                        else s = 61;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 2 : 
                         int LA18_0 = input.LA(1);
 
                         s = -1;
@@ -5745,21 +5756,21 @@ public class InternalQVTOperationalLexer extends Lexer {
 
                         else if ( (LA18_0=='e') ) {s = 17;}
 
-                        else if ( (LA18_0=='o') ) {s = 18;}
+                        else if ( (LA18_0=='(') ) {s = 18;}
 
-                        else if ( (LA18_0=='~') ) {s = 19;}
+                        else if ( (LA18_0==')') ) {s = 19;}
 
-                        else if ( (LA18_0=='<') ) {s = 20;}
+                        else if ( (LA18_0=='o') ) {s = 20;}
 
-                        else if ( (LA18_0=='>') ) {s = 21;}
+                        else if ( (LA18_0=='~') ) {s = 21;}
 
-                        else if ( (LA18_0=='[') ) {s = 22;}
+                        else if ( (LA18_0=='<') ) {s = 22;}
 
-                        else if ( (LA18_0==']') ) {s = 23;}
+                        else if ( (LA18_0=='>') ) {s = 23;}
 
-                        else if ( (LA18_0=='(') ) {s = 24;}
+                        else if ( (LA18_0=='[') ) {s = 24;}
 
-                        else if ( (LA18_0==')') ) {s = 25;}
+                        else if ( (LA18_0==']') ) {s = 25;}
 
                         else if ( (LA18_0=='t') ) {s = 26;}
 
@@ -5832,16 +5843,6 @@ public class InternalQVTOperationalLexer extends Lexer {
                         else if ( ((LA18_0>='\t' && LA18_0<='\n')||LA18_0=='\r'||LA18_0==' ') ) {s = 60;}
 
                         else if ( ((LA18_0>='\u0000' && LA18_0<='\b')||(LA18_0>='\u000B' && LA18_0<='\f')||(LA18_0>='\u000E' && LA18_0<='\u001F')||LA18_0=='$'||LA18_0=='\\'||LA18_0=='^'||LA18_0=='`'||(LA18_0>='\u007F' && LA18_0<='\uFFFF')) ) {s = 61;}
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA18_56 = input.LA(1);
-
-                        s = -1;
-                        if ( ((LA18_56>='\u0000' && LA18_56<='\uFFFF')) ) {s = 166;}
-
-                        else s = 61;
 
                         if ( s>=0 ) return s;
                         break;

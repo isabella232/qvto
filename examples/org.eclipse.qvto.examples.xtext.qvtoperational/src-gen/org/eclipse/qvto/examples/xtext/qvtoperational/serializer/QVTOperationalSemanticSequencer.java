@@ -166,6 +166,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
 				if(context == grammarAccess.getPrimitiveTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
@@ -201,6 +202,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case BaseCSPackage.TUPLE_TYPE_CS:
 				if(context == grammarAccess.getTupleTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_TupleTypeCS(context, (TupleTypeCS) semanticObject); 
 					return; 
@@ -222,19 +224,8 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 				sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject); 
 				return; 
 			case BaseCSPackage.TYPED_TYPE_REF_CS:
-				if(context == grammarAccess.getTypedMultiplicityRef2CSRule()) {
-					sequence_TypedMultiplicityRef2CS_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getTypeRef2CSRule() ||
-				   context == grammarAccess.getTypeRefCSRule() ||
-				   context == grammarAccess.getTypedRef2CSRule() ||
-				   context == grammarAccess.getTypedRefCSRule() ||
-				   context == grammarAccess.getTypedTypeRefCSRule()) {
-					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
-					return; 
-				}
-				else break;
+				sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+				return; 
 			case BaseCSPackage.WILDCARD_TYPE_REF_CS:
 				sequence_WildcardTypeRefCS(context, (WildcardTypeRefCS) semanticObject); 
 				return; 
@@ -262,6 +253,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
 				if(context == grammarAccess.getCollectionTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
@@ -315,6 +307,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case EssentialOCLCSPackage.MAP_TYPE_CS:
 				if(context == grammarAccess.getMapTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_MapTypeCS(context, (MapTypeCS) semanticObject); 
 					return; 
@@ -434,6 +427,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case ImperativeOCLCSPackage.DICT_TYPE_CS:
 				if(context == grammarAccess.getDictTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_DictTypeCS(context, (DictTypeCS) semanticObject); 
 					return; 
@@ -457,6 +451,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case ImperativeOCLCSPackage.LIST_TYPE_CS:
 				if(context == grammarAccess.getListTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
+				   context == grammarAccess.getTypeRef2CSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_ListTypeCS(context, (ListTypeCS) semanticObject); 
 					return; 
@@ -563,8 +558,17 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 				sequence_TypeSpecCS(context, (TypeSpecCS) semanticObject); 
 				return; 
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS:
-				sequence_TypedTypeRef2CS(context, (TypedTypeRef2CS) semanticObject); 
-				return; 
+				if(context == grammarAccess.getTypedMultiplicityRef2CSRule()) {
+					sequence_TypedMultiplicityRef2CS_TypedTypeRef2CS(context, (TypedTypeRef2CS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypedRef2CSRule() ||
+				   context == grammarAccess.getTypedTypeRef2CSRule()) {
+					sequence_TypedTypeRef2CS(context, (TypedTypeRef2CS) semanticObject); 
+					return; 
+				}
+				else break;
 			case QVTOperationalCSPackage.UNIT_CS:
 				sequence_UnitCS(context, (UnitCS) semanticObject); 
 				return; 
@@ -947,9 +951,9 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (ownedPathName=PathNameCS ownedBinding=TemplateBindingCS? ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedPathName=PathName2CS ownedBinding=TemplateBindingCS? ownedMultiplicity=MultiplicityCS?)
 	 */
-	protected void sequence_TypedMultiplicityRef2CS_TypedTypeRefCS(EObject context, TypedTypeRefCS semanticObject) {
+	protected void sequence_TypedMultiplicityRef2CS_TypedTypeRef2CS(EObject context, TypedTypeRef2CS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
