@@ -3,6 +3,7 @@ package org.eclipse.qvto.examples.xtext.imperativeocl.cs2as;
 import java.lang.reflect.InvocationTargetException;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.utilities.OCL;
 
 

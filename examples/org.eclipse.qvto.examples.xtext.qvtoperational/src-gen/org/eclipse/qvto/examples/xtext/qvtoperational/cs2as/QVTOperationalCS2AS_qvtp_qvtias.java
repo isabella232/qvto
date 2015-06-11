@@ -41,6 +41,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformationExecutor;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
@@ -55,7 +56,6 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalFactory;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
-import org.eclipse.qvto.examples.xtext.imperativeocl.cs2as.CS2ASTransformationExecutor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
@@ -78,7 +78,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class QVTOperationalCS2AS_qvtp_qvtias extends CS2ASTransformationExecutor
+public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformationExecutor
 {
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_2015_s_BaseCS = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/2015/BaseCS", null, BaseCSPackage.eINSTANCE);

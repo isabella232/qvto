@@ -6,10 +6,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.tx.TransformationEvaluator;
+import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASDiagnostic;
+import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASException;
+import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformationExecutor;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
@@ -29,12 +34,12 @@ public class NewCS2AS extends CS2ASConversion {
 	public boolean update(@NonNull BaseCSResource csResource) {
 		
 		ResourceSet rSet = csResource.getResourceSet();
-		CS2ASTransformationExecutor tx = null;		
+		AbstractCS2ASTransformationExecutor tx = null;		
 		OCL qvt = OCL.newInstance(OCL.NO_PROJECTS, rSet);
 		QVTiTxHelper helper = new QVTiTxHelper(qvt);
 		try {
 			TransformationEvaluator evaluator = helper.createTxEvaluator(getCS2ASTxClass());
-			tx = (CS2ASTransformationExecutor) evaluator.getExecutor();
+			tx = (AbstractCS2ASTransformationExecutor) evaluator.getExecutor();
 			
 			tx.addRootObjects("leftCS", ClassUtil.nonNullState(csResource.getContents()));
 			if (tx.run()) {
@@ -57,9 +62,9 @@ public class NewCS2AS extends CS2ASConversion {
 			return false;
 		} finally {
 			if (tx != null) {
-				List<CS2ASDiagnostic<ElementCS>> txErrors = tx.getErrors();
-				for (CS2ASDiagnostic<ElementCS> diagnostic : txErrors) {
-					addDiagnostic(diagnostic.getCSObject(), diagnostic.getMessage());				
+				List<CS2ASDiagnostic> txErrors = tx.getErrors();
+				for (CS2ASDiagnostic diagnostic : txErrors) {
+					addDiagnostic((ElementCS)diagnostic.getCSObject(), diagnostic.getMessage());				
 				}
 				txErrors.clear();
 			}
