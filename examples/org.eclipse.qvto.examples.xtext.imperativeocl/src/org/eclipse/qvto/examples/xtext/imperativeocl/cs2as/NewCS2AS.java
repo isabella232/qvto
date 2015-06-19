@@ -6,6 +6,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.evaluation.tx.TxHelper;
 import org.eclipse.ocl.pivot.evaluation.tx.TransformationEvaluator;
 import org.eclipse.ocl.pivot.evaluation.tx.TransformationExecutor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -17,6 +18,7 @@ import org.eclipse.ocl.xtext.base.cs2as.tx.CS2ASException;
 import org.eclipse.ocl.xtext.base.cs2as.tx.AbstractCS2ASTransformationExecutor;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 
@@ -36,7 +38,7 @@ public class NewCS2AS extends CS2ASConversion {
 		ResourceSet rSet = csResource.getResourceSet();
 		AbstractCS2ASTransformationExecutor tx = null;		
 		OCL qvt = OCL.newInstance(OCL.NO_PROJECTS, rSet);
-		QVTiTxHelper helper = new QVTiTxHelper(qvt);
+		TxHelper helper = new TxHelper(qvt);
 		try {
 			TransformationEvaluator evaluator = helper.createTxEvaluator(getCS2ASTxClass());
 			tx = (AbstractCS2ASTransformationExecutor) evaluator.getExecutor();
@@ -57,8 +59,8 @@ public class NewCS2AS extends CS2ASConversion {
 		catch (CS2ASException exception) {
 			addDiagnostic((ElementCS) exception.getCSObject(), exception.getMessage());
 			return false;
-		} catch(Exception exception) {
-			// TODO 
+		} catch(Exception exception) {			
+			csResource.getErrors().add(new ExceptionDiagnostic(exception));
 			return false;
 		} finally {
 			if (tx != null) {
@@ -75,4 +77,6 @@ public class NewCS2AS extends CS2ASConversion {
 	protected Class<? extends TransformationExecutor> getCS2ASTxClass() {
 		return null; // TODO for ImperativeOCL
 	}
+	
+	
 }
