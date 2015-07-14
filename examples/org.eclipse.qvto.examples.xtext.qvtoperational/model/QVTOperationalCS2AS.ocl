@@ -51,6 +51,14 @@ def : ast() : ocl::Package =
 		-- type = TODO
 	}
 		
+
+context ModelTypeCS
+def : ast() : qvtoperational::ModelType =
+	 qvtoperational::ModelType {
+	 	name = name	
+	 }
+	 
+	 
 context ClassifierPropertyCS
 def : ast() : ocl::Property = 
 	ocl::Property {
@@ -104,6 +112,7 @@ def : ast() : qvtoperational::VarParameter =
 			--				endif	
 		}
 	endif
+
 context QVToLibraryCS
 def : ast() : qvtoperational::Library =
 	qvtoperational::Library {
