@@ -120,7 +120,38 @@ main() {
 		
 		list->testCollectionContext();
 		coll->testCollectionContext();
-	}	
+	};
+
+	// test coersion on assignment
+	//
+	do {
+		var l1 := List{1};
+		var l2 := l1;
+		l1->add(2);
+		assert fatal (l2->size() = 2);
+	};
+	
+	do {
+		var l1 := List{1};
+		var l2 := l1->asSequence();
+		l1->add(2);
+		assert fatal (l2->size() = 1);
+	};
+	
+	do {
+		var l1 := List{1};
+		var l2 : Sequence(Integer) := l1;
+		l1->add(2);
+		assert fatal (l2->size() = 1);
+	};
+	
+	do {
+		var l1 := Sequence{1};
+		var l2 : List(Integer) := l1;
+		l2->add(2);
+		assert fatal (l1->size() = 1);
+	};
+
 }
 
 helper testListSequence(inout l : List(EClass), inout c : Sequence(EClass)) {

@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +100,7 @@ class BasicTypeResolverImpl
 		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(getCollectionPackage())) {
 	        if (next instanceof ListType) {
 				ListType type = (ListType) next;
-				if (TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), elementType)) {
+				if (exactCollectionTypeMatch(type.getElementType(), elementType)) {
 					return type;
 				}
 	        }
@@ -115,8 +113,8 @@ class BasicTypeResolverImpl
 		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(getCollectionPackage())) {
 	        if (next instanceof DictionaryType) {
 	        	DictionaryType type = (DictionaryType) next;				
-				if (TypeUtil.exactTypeMatch(getEnvironment(), type.getKeyType(), keyType)) {
-					if (TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), valueType)) {
+				if (exactCollectionTypeMatch(type.getKeyType(), keyType)) {
+					if (exactCollectionTypeMatch(type.getElementType(), valueType)) {
 						return type;
 					}
 				}
@@ -138,21 +136,31 @@ class BasicTypeResolverImpl
 	        
 				@SuppressWarnings("unchecked")
 				CollectionType<EClassifier, EOperation> type = (CollectionType<EClassifier, EOperation>) next;
+				if (type.getKind() != kind) {
+					continue;
+				}
 				
-				if ((type.getKind() == kind) && TypeUtil.exactTypeMatch(getEnvironment(), type.getElementType(), elementType)) {
-					if (elementType instanceof AnyType<?> && type.getElementType() instanceof AnyType<?>) {
-						if (((AnyType<?>)elementType).getName().equals(((AnyType<?>)type.getElementType()).getName())) {
-							return type;
-						}
-					}
-					else {
-						return type;
-					}
+				if (exactCollectionTypeMatch(type.getElementType(), elementType)) {
+					return type;
 				}
 	        }
 		}
 		
 		return null;
+	}
+	
+	private boolean exactCollectionTypeMatch(EClassifier type1, EClassifier type2) {
+		if (TypeUtil.exactTypeMatch(getEnvironment(), type1, type2)) {
+			if (type1 instanceof AnyType<?> && type2 instanceof AnyType<?>) {
+				if (((AnyType<?>) type1).getName().equals(((AnyType<?>) type2).getName())) {
+					return true;
+				}
+			}
+			else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	
@@ -225,28 +233,35 @@ class BasicTypeResolverImpl
     }
 	
 	List<EOperation> getAllCompatibleAdditionalOperations(org.eclipse.ocl.ecore.CollectionType type) {
-		List<EOperation> result = null;
-        if (hasAdditionalFeatures()) {
-            EPackage pkg = getAdditionalFeaturesPackage();            
-            if (pkg != null) {
-        		UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, ?, EParameter, ?, ?, ?, ?> uml = getEnvironment().getUMLReflection();
-				List<EClassifier> shadowOwners = uml.getClassifiers(pkg);
-				for (EClassifier next : shadowOwners) {
-        			EClassifier shadowedType = getShadowedClassifier(next);
+//		List<EOperation> result = null;
+//        if (hasAdditionalFeatures()) {
+//            EPackage pkg = getAdditionalFeaturesPackage();            
+//            if (pkg != null) {
+//        		UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, ?, EParameter, ?, ?, ?, ?> uml = getEnvironment().getUMLReflection();
+//				List<EClassifier> shadowOwners = uml.getClassifiers(pkg);
+//				for (EClassifier next : shadowOwners) {
+//        			EClassifier shadowedType = getShadowedClassifier(next);
+//
+//        			if (shadowedType instanceof org.eclipse.ocl.ecore.CollectionType &&
+//    					TypeUtil.compatibleTypeMatch(getEnvironment(), type, shadowedType)) {
+//    					
+//    					if(result == null) {
+//    						result = new ArrayList<EOperation>();
+//    					}
+//        				result.addAll(uml.getOperations(next));
+//        			}
+//        		}
+//            }
+//        }
+//        
+//		return (result != null) ? Collections.<EOperation>unmodifiableList(result) : ECollections.<EOperation>emptyEList();
 
-        			if (shadowedType instanceof org.eclipse.ocl.ecore.CollectionType &&
-    					TypeUtil.compatibleTypeMatch(getEnvironment(), type, shadowedType)) {
-    					
-    					if(result == null) {
-    						result = new ArrayList<EOperation>();
-    					}
-        				result.addAll(uml.getOperations(next));
-        			}
-        		}
-            }
+        if (hasAdditionalFeatures()) {
+        	UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, ?, EParameter, ?, ?, ?, ?> uml = getEnvironment().getUMLReflection();
+        	EClassifier eClassifier = ShadowClassAdapter.getShadowToBaseMap(getAdditionalFeaturesPackage()).get(type);
+        	return uml.getOperations(eClassifier);
         }
-        
-		return (result != null) ? Collections.<EOperation>unmodifiableList(result) : ECollections.<EOperation>emptyEList();
+        return ECollections.<EOperation>emptyEList();
 	}    
     
     @Override

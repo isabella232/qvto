@@ -15,6 +15,7 @@ package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
 import static org.eclipse.ocl.utilities.UMLReflection.SAME_TYPE;
 import static org.eclipse.ocl.utilities.UMLReflection.STRICT_SUBTYPE;
+import static org.eclipse.ocl.utilities.UMLReflection.STRICT_SUPERTYPE;
 import static org.eclipse.ocl.utilities.UMLReflection.SUBTYPE;
 
 import java.util.Collections;
@@ -43,6 +44,7 @@ import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.TemplateParameterType;
 import org.eclipse.ocl.expressions.CollectionKind;
+import org.eclipse.ocl.types.AnyType;
 import org.eclipse.ocl.types.CollectionType;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.TupleType;
@@ -241,6 +243,13 @@ class TypeCheckerImpl extends AbstractTypeChecker<EClassifier, EOperation, EStru
 		}
 		if (type1 == null) {
 			return UMLReflection.UNRELATED_TYPE;
+		}
+
+		if (type1 instanceof AnyType) {
+			return type2 instanceof AnyType
+				? SAME_TYPE : STRICT_SUPERTYPE;
+		} else if (type2 instanceof AnyType) {
+			return STRICT_SUBTYPE;
 		}
 		
 		boolean isList1 = type1 instanceof ListType;

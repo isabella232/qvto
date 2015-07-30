@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractContextualOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.BagTypeOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CollectionTypeOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.DictionaryOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.ElementOperations;
@@ -44,7 +45,10 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.ListOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.ModelOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.ObjectOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.OclAnyOperations;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.OrderedSetTypeOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.RealOperations;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.SequenceTypeOperations;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.SetTypeOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.StatusOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.StdlibModuleOperations;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.StringOperations;
@@ -85,6 +89,7 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 	private EClass ASSERTION_FAILED;
 	private EClassifier LIST;
 	private EClassifier KEY_T;
+	private EClassifier COMMON_T;
 	private DictionaryType DICTIONARY;
 	private OrderedTupleType ORDERED_TUPLE; 	
 	
@@ -110,7 +115,7 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		EXCEPTION = createClass("Exception", false); //$NON-NLS-1$
 		ASSERTION_FAILED = createClass("AssertionFailed", false); //$NON-NLS-1$
 		ASSERTION_FAILED.getESuperTypes().add(EXCEPTION);
-		MODEL = createClass("Model", true); //$NON-NLS-1$
+		MODEL = createModelClass("Model"); //$NON-NLS-1$
 		ORDERED_TUPLE = createOrderedTuple();		
 		OBJECT = createClass("Object", true); //$NON-NLS-1$		
 		STATUS = createClass("Status", false); //$NON-NLS-1$		
@@ -119,6 +124,8 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		LIST = createListType();
 		DICTIONARY = createDictionaryType();
 
+		COMMON_T = createTemplateParameter("CommonT"); //$NON-NLS-1$
+		
 		fTypeAliasMap = createTypeAliasMap(fEnv);		
 		
 		// register stdlib package  
@@ -141,6 +148,10 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		define(new ExceptionOperations(this));		
 
 		define(CollectionTypeOperations.getAllOperations(this));		
+		define(SetTypeOperations.getAllOperations(this));		
+		define(OrderedSetTypeOperations.getAllOperations(this));		
+		define(BagTypeOperations.getAllOperations(this));		
+		define(SequenceTypeOperations.getAllOperations(this));		
 		
 		((ModuleImpl)fStdlibModule).freeze();		
 	}
@@ -196,7 +207,14 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 	 */
 	public EClassifier getKeyT() {		
 		return KEY_T;
-	};
+	}
+		
+	/* (non-Javadoc)
+	 * @see org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOStandardLibrary#getKeyT()
+	 */
+	public EClassifier getCommonT() {		
+		return COMMON_T;
+	}
 		
 	/* (non-Javadoc)
 	 * @see org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOStandardLibrary#getModelClass()
@@ -312,6 +330,17 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		}		
 	}
 		
+	private EClassifier createTemplateParameter(String name) {
+		assert fStdlibModule != null;
+		assert name != null;
+		
+		EClassifier result = org.eclipse.ocl.ecore.EcoreFactory.eINSTANCE.createTemplateParameterType();
+		result.setName(name);
+		fStdlibModule.getEClassifiers().add(result);
+
+		return result;
+	}
+	
 	private EClass createClass(String name, boolean isAbstract) {
 		assert fStdlibModule != null;
 		assert name != null;
@@ -319,6 +348,18 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		EClass result = EcoreFactory.eINSTANCE.createEClass();
 		result.setName(name);
 		result.setAbstract(isAbstract);
+		fStdlibModule.getEClassifiers().add(result);
+
+		return result;
+	}
+	
+	private EClass createModelClass(String name) {
+		assert fStdlibModule != null;
+		assert name != null;
+		
+		EClass result = ExpressionsFactory.eINSTANCE.createModelType();
+		result.setName(name);
+		result.setAbstract(false);
 		fStdlibModule.getEClassifiers().add(result);
 
 		return result;
@@ -340,9 +381,7 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 	}
 	
 	private DictionaryType createDictionaryType() {
-		KEY_T = org.eclipse.ocl.ecore.EcoreFactory.eINSTANCE.createTemplateParameterType();
-		KEY_T.setName("KeyT"); //$NON-NLS-1$
-		fStdlibModule.getEClassifiers().add(KEY_T);
+		KEY_T = createTemplateParameter("KeyT"); //$NON-NLS-1$
 		
 		DictionaryType result = fFactory.createDictionary(KEY_T, getOCLStdLib().getT());
 		fStdlibModule.getEClassifiers().add(result);

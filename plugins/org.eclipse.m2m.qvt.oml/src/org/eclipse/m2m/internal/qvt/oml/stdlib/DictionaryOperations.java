@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,6 +15,7 @@ package org.eclipse.m2m.internal.qvt.oml.stdlib;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
 import org.eclipse.m2m.qvt.oml.util.Dictionary;
 import org.eclipse.ocl.types.OCLStandardLibrary;
 
@@ -29,7 +30,40 @@ public class DictionaryOperations extends AbstractContextualOperations {
 	static final String KEYS_NAME = "keys"; //$NON-NLS-1$	
 	static final String DEFAULTGET_NAME = "defaultget"; //$NON-NLS-1$	
 	
+	
+	public DictionaryOperations(AbstractQVTStdlib library) {
+		super(library, library.getDictionary());
+	}	
+	
+	@Override
+	protected OperationProvider[] getOperations() {
+		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getOCLStdLib();
+		ListType listOfKeyT = getStdlib().getEnvironment().getTypeResolver().resolveListType(getStdlib().getKeyT());
+		
+		return new OperationProvider[] {
+			new OperationProvider(GET, GET_NAME, new String[] { "key" }, //$NON-NLS-1$ 
+					oclStdlib.getT(), getStdlib().getKeyT()),
+					
+			new OperationProvider(PUT, PUT_NAME, new String[] { "key", "value" }, //$NON-NLS-1$ //$NON-NLS-2$
+					oclStdlib.getOclVoid(), getStdlib().getKeyT(), oclStdlib.getT()),
+					
+			new OperationProvider(HASKEY, HASKEY_NAME, new String[] { "key" }, //$NON-NLS-1$
+					oclStdlib.getBoolean(), getStdlib().getKeyT()),
+					
+			new OperationProvider(CLEAR, CLEAR_NAME, oclStdlib.getOclVoid()),
+			
+			new OperationProvider(KEYS, KEYS_NAME, listOfKeyT),
+					
+			new OperationProvider(VALUES, VALUES_NAME, getStdlib().getList()),
+			
+			new OperationProvider(DEFAULTGET, DEFAULTGET_NAME, new String[] { "key", "default" }, //$NON-NLS-1$ //$NON-NLS-2$
+					oclStdlib.getT(), getStdlib().getKeyT(), oclStdlib.getT()),			
+		};
+	}
+
+	
 	static CallHandler GET = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")			
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -38,6 +72,7 @@ public class DictionaryOperations extends AbstractContextualOperations {
 	};
 	
 	static CallHandler DEFAULTGET = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")			
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -45,7 +80,8 @@ public class DictionaryOperations extends AbstractContextualOperations {
 		}
 	};
 
-	static CallHandler PUT = new CallHandlerMutator() {		
+	static CallHandler PUT = new CallHandlerMutator() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")			
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -62,7 +98,8 @@ public class DictionaryOperations extends AbstractContextualOperations {
 		}
 	};
 	
-	static CallHandler CLEAR = new CallHandlerMutator() {		
+	static CallHandler CLEAR = new CallHandlerMutator() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")			
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -72,6 +109,7 @@ public class DictionaryOperations extends AbstractContextualOperations {
 	};	
 	
 	static CallHandler HASKEY = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")			
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -80,6 +118,7 @@ public class DictionaryOperations extends AbstractContextualOperations {
 	};
 	
 	static CallHandler VALUES = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -88,6 +127,7 @@ public class DictionaryOperations extends AbstractContextualOperations {
 	};
 
 	static CallHandler KEYS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			@SuppressWarnings("unchecked")
 			Dictionary<Object, Object> dict = (Dictionary<Object, Object>) source;
@@ -95,33 +135,4 @@ public class DictionaryOperations extends AbstractContextualOperations {
 		}
 	};	
 	
-	public DictionaryOperations(AbstractQVTStdlib library) {
-		super(library, library.getDictionary());
-	}	
-	
-	@Override
-	protected OperationProvider[] getOperations() {
-		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getEnvironment().getOCLStandardLibrary();
-		return new OperationProvider[] {
-			new OperationProvider(GET, GET_NAME, new String[] { "key" }, //$NON-NLS-1$ 
-					oclStdlib.getT(), getStdlib().getKeyT()),
-					
-			new OperationProvider(PUT, PUT_NAME, new String[] { "key", "value" }, //$NON-NLS-1$ //$NON-NLS-2$
-					oclStdlib.getOclVoid(), getStdlib().getKeyT(), oclStdlib.getT()),
-					
-			new OperationProvider(HASKEY, HASKEY_NAME, new String[] { "key" }, //$NON-NLS-1$
-					oclStdlib.getBoolean(), getStdlib().getKeyT()),
-					
-			new OperationProvider(CLEAR, CLEAR_NAME, oclStdlib.getOclVoid()),
-			
-			new OperationProvider(KEYS, KEYS_NAME, getStdlib().getEnvironment().getTypeResolver()
-					.resolveListType(getStdlib().getKeyT())),
-					
-			new OperationProvider(VALUES, VALUES_NAME, getStdlib().getEnvironment().getTypeResolver()
-					.resolveListType(getStdlib().getOCLStdLib().getT())),
-			
-			new OperationProvider(DEFAULTGET, DEFAULTGET_NAME, new String[] { "key", "default" }, //$NON-NLS-1$ //$NON-NLS-2$
-					oclStdlib.getT(), getStdlib().getKeyT(), oclStdlib.getT()),			
-		};
-	}
 }

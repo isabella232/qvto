@@ -266,6 +266,13 @@ public class EvaluationUtil {
 		return result;
 	}
 	
+    public static <E> List<E> asList(Collection<E> self) {
+        if (self instanceof MutableList) {
+            return (List<E>) self;
+        }
+        return Utils.createList(self);
+    }
+    
 	public static Object createInitialValue(EClassifier classifier, OCLStandardLibrary<EClassifier> oclstdlib,
 			EvaluationEnvironment<EClassifier, EOperation, EStructuralFeature, EClass, EObject> evaluationEnv) {
 		

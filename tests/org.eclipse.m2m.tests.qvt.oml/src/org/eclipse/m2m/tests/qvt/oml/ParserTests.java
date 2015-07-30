@@ -102,7 +102,7 @@ public class ParserTests {
     	TestData.createSourceChecked("deprecated_rename", 0, 1), //$NON-NLS-1$    	
     	TestData.createSourceChecked("varInitExpWithResult_261623", 1, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("_while_261024", 4, 0), //$NON-NLS-1$
-    	TestData.createSourceChecked("listtype", 8, 0), //$NON-NLS-1$   	
+    	TestData.createSourceChecked("listtype", 7, 0), //$NON-NLS-1$   	
     	TestData.createSourceChecked("listtype2", 7, 0), //$NON-NLS-1$   	
         //new TestData("orderedsetdoesnotconformtoset", 1), //$NON-NLS-1$
         TestData.createSourceChecked("computeExp_252269", 3, 1), //$NON-NLS-1$       
@@ -206,7 +206,7 @@ public class ParserTests {
     	TestData.createSourceChecked("bug413130", 0, 1), //$NON-NLS-1$
     	TestData.createSourceChecked("bug404647_2", 1, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug414363", 0, 28), //$NON-NLS-1$
-    	TestData.createSourceChecked("bug401521", 1, 0), //$NON-NLS-1$
+    	TestData.createSourceChecked("bug401521", 2, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug414616", 2, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug419299", 8, 0), //$NON-NLS-1$
     	TestData.createSourceChecked("bug414619", 0, 5), //$NON-NLS-1$

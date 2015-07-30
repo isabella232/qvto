@@ -72,5 +72,5 @@ mapping inout EClass :: mlist(out outParam : List(String), in prefix:String) : E
 	}
 	/*<error>*/outParam/*</error>*/ := new List(String)(); 
 	outParam += "out_name";
-	outParam->append(prefix + "out_name / " + self.name);
+	outParam->add(prefix + "out_name / " + self.name);
 }

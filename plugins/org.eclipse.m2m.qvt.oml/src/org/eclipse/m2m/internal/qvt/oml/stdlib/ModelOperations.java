@@ -30,13 +30,14 @@ import org.eclipse.ocl.utilities.PredefinedType;
 
 public class ModelOperations extends AbstractContextualOperations {
 
-	public static final String CREATE_EMPTY_MODEL_NAME = "createEmptyModel"; //$NON-NLS-1$	
-	public static final String COPY_NAME = "copy"; //$NON-NLS-1$	
-	public static final String OBJECTS_NAME = "objects"; //$NON-NLS-1$
-	public static final String ROOT_OBJECTS_NAME = "rootObjects"; //$NON-NLS-1$
-	public static final String OBJECTS_OF_TYPE_NAME = "objectsOfType"; //$NON-NLS-1$
-	public static final String OBJECTS_OF_KIND_NAME = "objectsOfKind"; //$NON-NLS-1$
-	public static final String REMOVE_ELEMENT_NAME = "removeElement"; //$NON-NLS-1$
+	static final String CREATE_EMPTY_MODEL_NAME = "createEmptyModel"; //$NON-NLS-1$	
+	static final String COPY_NAME = "copy"; //$NON-NLS-1$	
+	static final String OBJECTS_NAME = "objects"; //$NON-NLS-1$
+	static final String ROOT_OBJECTS_NAME = "rootObjects"; //$NON-NLS-1$
+	static final String OBJECTS_OF_TYPE_NAME = "objectsOfType"; //$NON-NLS-1$
+	static final String OBJECTS_OF_KIND_NAME = "objectsOfKind"; //$NON-NLS-1$
+	static final String REMOVE_ELEMENT_NAME = "removeElement"; //$NON-NLS-1$
+	
 	
 	public ModelOperations(AbstractQVTStdlib library) {
 		super(library, library.getModelClass());
@@ -44,33 +45,35 @@ public class ModelOperations extends AbstractContextualOperations {
 	
 	@Override
 	protected OperationProvider[] getOperations() {
-		OCLStandardLibrary<EClassifier> oclStdLibrary = getStdlib().getEnvironment().getOCLStandardLibrary();		
-		EClassifier setOfElements = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
-		EClassifier setOfT = TypeUtil.resolveSetType(getStdlib().getEnvironment(), oclStdLibrary.getT());
+		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getOCLStdLib();		
+		EClassifier setOfElement = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
+		
 		return new OperationProvider[] {
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "asTransformation", new String[] { "model" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getTransformationClass(), getStdlib().getModelClass()),
-			new OwnedOperationProvider(COPY, COPY_NAME, oclStdLibrary.getT()),
+			new OwnedOperationProvider(COPY, COPY_NAME, oclStdlib.getT()),
 			
-			createOwnedStaticOperationProvider(CREATE_EMPTY_MODEL, CREATE_EMPTY_MODEL_NAME, null, oclStdLibrary.getT()),
+			createOwnedStaticOperationProvider(CREATE_EMPTY_MODEL, CREATE_EMPTY_MODEL_NAME, null, oclStdlib.getT()),
 			
-			new OwnedOperationProvider(OBJECTS, OBJECTS_NAME, setOfElements),
+			new OwnedOperationProvider(OBJECTS, OBJECTS_NAME, setOfElement),
 			new OwnedOperationProvider(OBJECTS_OF_TYPE, OBJECTS_OF_TYPE_NAME, new String[] { "type" }, //$NON-NLS-1$
-					setOfT, oclStdLibrary.getOclType()),
+					oclStdlib.getSet(), oclStdlib.getOclType()),
 			new OwnedOperationProvider(OBJECTS_OF_KIND, OBJECTS_OF_KIND_NAME, new String[] { "type" }, //$NON-NLS-1$
-					setOfT, oclStdLibrary.getOclType()),
+					oclStdlib.getSet(), oclStdlib.getOclType()),
 			new OwnedOperationProvider(REMOVE_ELEMENT, REMOVE_ELEMENT_NAME, new String[] { "element" }, //$NON-NLS-1$
-					oclStdLibrary.getOclVoid(), getStdlib().getElementType()),
-			new OwnedOperationProvider(ROOT_OBJECTS, ROOT_OBJECTS_NAME, setOfElements),
+					oclStdlib.getOclVoid(), getStdlib().getElementType()),
+			new OwnedOperationProvider(ROOT_OBJECTS, ROOT_OBJECTS_NAME, setOfElement),
 			
-			new OperationProvider(OBJECTS_OF_KIND, PredefinedType.ALL_INSTANCES_NAME,
-					setOfT, TypeUtil.resolveType(getStdlib().getEnvironment(), oclStdLibrary.getOclType()))
+			new OwnedOperationProvider(OBJECTS_OF_KIND, PredefinedType.ALL_INSTANCES_NAME,
+					oclStdlib.getSet(), oclStdlib.getOclType())
 					.deprecateBy("Model::objectsOfKind(OclType)"), //$NON-NLS-1$
 			
 		};
 	}
 	
+	
 	private static final  CallHandler OBJECTS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_NAME));
@@ -81,6 +84,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 
 	private static final CallHandler ROOT_OBJECTS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, ROOT_OBJECTS_NAME));
@@ -95,6 +99,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 
 	private static final CallHandler OBJECTS_OF_TYPE = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_OF_TYPE_NAME));
@@ -106,6 +111,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 	
 	private static final CallHandler OBJECTS_OF_KIND = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, OBJECTS_OF_KIND_NAME));
@@ -117,6 +123,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 	
 	private static final CallHandler REMOVE_ELEMENT = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, REMOVE_ELEMENT_NAME));
@@ -132,6 +139,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 
 	private static final CallHandler COPY = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance == false) {
 				throw new IllegalArgumentException(NLS.bind(Messages.InvalidSourceForOperationCall, COPY_NAME));
@@ -144,6 +152,7 @@ public class ModelOperations extends AbstractContextualOperations {
 	};
 		
 	private static final CallHandler CREATE_EMPTY_MODEL = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof ModelInstance) {
 				source = ((ModelInstance) source).eClass();
@@ -161,7 +170,7 @@ public class ModelOperations extends AbstractContextualOperations {
 		}
 	};
 	
-	static Object getObjects(ModelInstance model, EClassifier type, final int filterFlag, QvtOperationalEvaluationEnv evalEnv) {
+	private static Object getObjects(ModelInstance model, EClassifier type, final int filterFlag, QvtOperationalEvaluationEnv evalEnv) {
         Set<Object> instances = new LinkedHashSet<Object>();	       
 		ModelParameterExtent modelParam = model.getExtent();	        
 		for (Object obj : modelParam.getAllObjects()) {

@@ -12,7 +12,9 @@
 package org.eclipse.m2m.internal.qvt.oml.editor.ui.completion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -322,12 +324,38 @@ public class CompletionProposalUtil {
     }
 
     public static final void addOperationsInternal(List<EOperation> operations, Collection<ICompletionProposal> proposals, QvtCompletionData data) {
+    	SKIP:
         for (EOperation operation : operations) {
+        	if (isGenericCommonT(operation.getEType(), data.getEnvironment())) {
+        		continue;
+        	}
+        	if (!KNOW_FUNCTIONS_WITH_T2_PARAM.contains(operation.getName())) {
+	        	for (EParameter param : operation.getEParameters()) {
+	            	if (isGenericT2(param.getEType(), data.getEnvironment())) {
+	            		continue SKIP;
+	            	}
+	        	}
+        	}
+        	
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(operation, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);
         }
     }
 
+	private static boolean isGenericT2(EClassifier eType, QvtOperationalEnv env) {
+		if (eType instanceof CollectionType) {
+			return isGenericT2(((CollectionType) eType).getElementType(), env);
+		}
+		return eType == env.getOCLStandardLibrary().getT2();
+	}
+    
+	private static boolean isGenericCommonT(EClassifier eType, QvtOperationalEnv env) {
+		if (eType instanceof CollectionType) {
+			return isGenericCommonT(((CollectionType) eType).getElementType(), env);
+		}
+		return eType == env.getQVTStandardLibrary().getCommonT();
+	}
+    
     public static final QvtCompletionProposal createCompletionProposal(EStructuralFeature structuralFeature, QvtCompletionData data) {
         IToken currentToken = data.getCurrentToken();
 		int offset = data.getOffset();
@@ -703,4 +731,7 @@ public class CompletionProposalUtil {
     	}
     	return true;
     }
+    
+    private static final Set<String> KNOW_FUNCTIONS_WITH_T2_PARAM = new HashSet<String>(Arrays.asList(PredefinedType.PRODUCT_NAME));
+
 }

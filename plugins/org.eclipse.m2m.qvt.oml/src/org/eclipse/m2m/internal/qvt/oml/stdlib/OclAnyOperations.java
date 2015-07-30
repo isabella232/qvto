@@ -12,9 +12,7 @@
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOEnvironment;
 import org.eclipse.ocl.types.OCLStandardLibrary;
-import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.PredefinedType;
 
 
@@ -26,8 +24,7 @@ public class OclAnyOperations extends AbstractContextualOperations {
 		
 	@Override
 	protected OperationProvider[] getOperations() {
-		QVTOEnvironment env = getStdlib().getEnvironment();
-		OCLStandardLibrary<EClassifier> oclStdlib = env.getOCLStandardLibrary();
+		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getOCLStdLib();
 		
 		return new OperationProvider[] {
 			new OperationProvider(ObjectOperations.REPR, ObjectOperations.REPR_NAME,
@@ -37,8 +34,7 @@ public class OclAnyOperations extends AbstractContextualOperations {
 					oclStdlib.getOclVoid()).deprecate(),
 					
 			new OperationProvider(ElementOperations.ALL_SUBOBJECTS_OF_KIND, PredefinedType.ALL_INSTANCES_NAME,
-					TypeUtil.resolveSetType(env, oclStdlib.getT()), 
-					TypeUtil.resolveType(env, oclStdlib.getOclType()))
+					oclStdlib.getSet(),	oclStdlib.getOclType())
 					.deprecateBy("Element::allSubobjectsOfKind(OclType)"), //$NON-NLS-1$
 		};
 	}

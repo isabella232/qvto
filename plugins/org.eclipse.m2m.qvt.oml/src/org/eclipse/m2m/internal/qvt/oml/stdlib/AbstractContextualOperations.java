@@ -13,6 +13,7 @@
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -62,7 +63,9 @@ public abstract class AbstractContextualOperations {
 			}
 			
 			if(CallHandlerAdapter.getDispatcher(defOper) == UNSUPPORTED_OPER) {
-				QvtOperationalParserUtil.markAsUnsupported(defOper);
+				QvtOperationalParserUtil.markAsUnsupported(defOper,
+						(operation.fParamNames != null && operation.fParamNames.length > operation.fParamTypes.length) 
+							? operation.fParamNames[operation.fParamTypes.length] : null);
 			}
 		}
 	}
@@ -73,7 +76,7 @@ public abstract class AbstractContextualOperations {
 		return provider;
 	}
 	
-	protected OperationProvider createAdditionalStaticOperationProvider(CallHandler dispatcher, String name, String[] parameterNames, EClassifier returnType, EClassifier... paramTypes) {
+	protected OperationProvider createStaticOperationProvider(CallHandler dispatcher, String name, String[] parameterNames, EClassifier returnType, EClassifier... paramTypes) {
 		OperationProvider provider = new OperationProvider(dispatcher, name, parameterNames, returnType, paramTypes);
 		provider.fIsStatic = true;		
 		return provider;
@@ -137,7 +140,7 @@ public abstract class AbstractContextualOperations {
 			this.fDispatcher = dispatcher;
 			this.fIsStatic = false;
 			
-			if(paramNames != null && paramNames.length != paramTypes.length) {
+			if(paramNames != null && paramNames.length < paramTypes.length) {
 				throw new IllegalArgumentException("Invalid number of parameter names"); //$NON-NLS-1$
 			}
 			this.fParamNames = paramNames; 
@@ -197,6 +200,11 @@ public abstract class AbstractContextualOperations {
 					QvtOperationalParserUtil.markAsDeprecated(result);					
 				}
 			}
-		}	
+		}
+		
+		@Override
+		public String toString() {
+			return fName + (fParamNames != null ? Arrays.toString(fParamNames) : "");
+		}
 	}
 }

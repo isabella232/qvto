@@ -28,7 +28,7 @@ helper testCase() : Boolean {
 	
 	-- test all List operations
 	listElements->add('x');
-	listElements->prepend('y');	
+	listElements->insertAt(1, 'y');	
 	var element : String :=listElements->genericListElementAt(1);
 	element :=listElements->genericListElementAt(listElements->size());	
 

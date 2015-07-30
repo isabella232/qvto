@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -639,10 +639,10 @@ public class QvtOperationalParserUtil {
 		return result;
 	}
 
-	public static void markAsUnsupported(EModelElement element) {
+	public static void markAsUnsupported(EModelElement element, String reason) {
 		EAnnotation annotation = EcoreFactory.eINSTANCE.createEAnnotation();
 		annotation.setSource(QVT_NAMESPACE_URI);
-		annotation.getDetails().put(QVT_UNSUPPORTED, null);
+		annotation.getDetails().put(QVT_UNSUPPORTED, reason);
 		element.getEAnnotations().add(annotation);
 	}
 
@@ -653,6 +653,14 @@ public class QvtOperationalParserUtil {
 		}
 		
 		return false;		
+	}
+	
+	public static String getUnsupportedReason(EModelElement element) {
+		EAnnotation annotation = element.getEAnnotation(QVT_NAMESPACE_URI);
+		if(annotation != null) {
+			return annotation.getDetails().get(QVT_UNSUPPORTED);
+		}
+		return null;		
 	}
 	
 	public static void markAsDeprecated(EModelElement element) {

@@ -4,6 +4,9 @@ transformation bug401521;
 
 main() {
 	var resList := List{1.0,2.0,3.0,4.0}->map m(2);
+
+	var i : Integer := 1;
+	/*<error>*/i.range(1,2)/*</error>*/;
 }
 
 

@@ -5,20 +5,80 @@ transformation bug467600(in e : ECORE);
 
 main() {
 
-	// test template version of Model::createEmptyModel()
+	// test template versions of Model::createEmptyModel() and Model::copy()
 	//
 	do {
-		var e1 : ECORE := ECORE.createEmptyModel();
-		assert fatal (e1.oclIsTypeOf(ECORE));
-		assert fatal (e1.objects()->size() = 0);
-		 
-		var e2 : ECORE := e.createEmptyModel();
-		assert fatal (e2.oclIsTypeOf(ECORE));
-		assert fatal (e2.objects()->size() = 0);
-		 
-		var e3 : ECORE := e.copy();
-		assert fatal (e3.oclIsTypeOf(ECORE));
-		assert fatal (e3.objects()->size() = 11);
+		var newModel : ECORE := ECORE.createEmptyModel();
+		assert fatal (newModel.oclIsTypeOf(ECORE));
+		assert fatal (newModel.objects()->size() = 0);
+	};
+	
+	do {
+		var newModel : ECORE := e.createEmptyModel();
+		assert fatal (newModel.oclIsTypeOf(ECORE));
+		assert fatal (newModel.objects()->size() = 0);
+	};
+	
+	do {
+		var newModel : ECORE := e.copy();
+		assert fatal (newModel.oclIsTypeOf(ECORE));
+		assert fatal (newModel.objects()->size() = 11);
+	};
+	
+	do {
+		var newModel : Model := e;
+		var copyModel : Model := newModel.copy();
+		assert fatal (copyModel.oclIsTypeOf(ECORE));
+		assert fatal (copyModel.objects()->size() = 11);
+	};
+	
+	do {
+		var newModel : Model := Model.createEmptyModel();
+		assert fatal (newModel.oclIsTypeOf(Model));
+		assert fatal (newModel.objects()->size() = 0);
+	};
+
+
+	var pack : EPackage := e.objectsOfType(EPackage)->any(true);
+	
+
+	// test templates version of Element::clone() and Element::deepclone()
+	//
+	do {
+		var shallowCopy : EPackage := pack.clone();
+		assert fatal (shallowCopy.oclIsTypeOf(EPackage));
+		assert fatal (shallowCopy.oclIsKindOf(ENamedElement));
+		assert fatal (shallowCopy.name = pack.name);
+
+		var deepCopy : EPackage := pack.deepclone();
+		assert fatal (deepCopy.oclIsTypeOf(EPackage));
+		assert fatal (deepCopy.oclIsKindOf(ENamedElement));
+		assert fatal (deepCopy.name = pack.name);
+		assert fatal (deepCopy.allSubobjects()->size() = pack.allSubobjects()->size());
+	};
+
+	do {
+		var shallowCopy : EModelElement := pack.clone();
+		assert fatal (shallowCopy.oclIsTypeOf(EPackage));
+		assert fatal (shallowCopy.oclIsKindOf(ENamedElement));
+
+		var deepCopy : EModelElement := pack.deepclone();
+		assert fatal (deepCopy.oclIsTypeOf(EPackage));
+		assert fatal (deepCopy.oclIsKindOf(ENamedElement));
+		assert fatal (deepCopy.allSubobjects()->size() = pack.allSubobjects()->size());
+	};
+
+	do {
+		var genElem : Element := pack;
+
+		var shallowCopy : Element := genElem.clone();
+		assert fatal (shallowCopy.oclIsTypeOf(EPackage));
+		assert fatal (shallowCopy.oclIsKindOf(ENamedElement));
+
+		var deepCopy : Element := genElem.deepclone();
+		assert fatal (deepCopy.oclIsTypeOf(EPackage));
+		assert fatal (deepCopy.oclIsKindOf(ENamedElement));
+		assert fatal (deepCopy.allSubobjects()->size() = pack.allSubobjects()->size());
 	};
 
 
@@ -44,9 +104,6 @@ main() {
 	};
 	
 	
-	var pack : EPackage := e.objectsOfType(EPackage)->any(true);
-	
-
 	// test various Element.subobjects*()
 	//
 	do {
@@ -60,26 +117,26 @@ main() {
 	};
 
 	do {
-		var v : Set(Element) := pack.subobjectsOfKind(EClassifier);
+		var v : Set(ECORE::EClassifier) := pack.subobjectsOfKind(EClassifier);
 		assert fatal (v->size() = 3);
 	};
 
 	do {
-		var v : Set(Element) := pack.subobjectsOfType(EEnum);
+		var v : Set(EDataType) := pack.subobjectsOfType(EEnum);
 		assert fatal (v->size() = 1);
 	};
 
 	do {
-		var v : Set(Element) := pack.allSubobjectsOfKind(ETypedElement);
+		var v : Set(EModelElement) := pack.allSubobjectsOfKind(ETypedElement);
 		assert fatal (v->size() = 3);
 	};
 
 	do {
-		var v : Set(Element) := pack.allSubobjectsOfType(EAttribute);
+		var v : Set(ETypedElement) := pack.allSubobjectsOfType(EAttribute);
 		assert fatal (v->size() = 2);
 		
-		var attr : Element := v->asSequence()->at(1);
-		var attr2 : Element := v->asSequence()->at(2);
+		var attr : ETypedElement := v->asSequence()->at(1);
+		var attr2 : ETypedElement := v->asSequence()->at(2);
 
 		assert fatal(pack.allSubobjectsOfType(EAttribute)->includes(attr));
 		assert fatal(not pack.allSubobjectsOfType(EAttribute)->excludes(attr));
@@ -102,7 +159,7 @@ main() {
 	
 	do {
 		var v : Set(EModelElement) := ENamedElement.allInstances();
-		assert fatal (v->size() = 9);
+		assert fatal (v->size() = 39);
 	};
 	
 	do {	

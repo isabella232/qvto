@@ -663,6 +663,12 @@ public class TransformTests {
         		},
         		new FilesToFilesData("bug467325"), //$NON-NLS-1$
         		new FilesToFilesData("bug467600", Arrays.asList("in.ecore"), Collections.<String>emptyList()), //$NON-NLS-1$ //$NON-NLS-2$
+        		new FilesToFilesData("bug467600_Bag"), //$NON-NLS-1$
+        		new FilesToFilesData("bug467600_Collection"), //$NON-NLS-1$
+        		new FilesToFilesData("bug467600_List"), //$NON-NLS-1$
+        		new FilesToFilesData("bug467600_OrderedSet"), //$NON-NLS-1$
+        		new FilesToFilesData("bug467600_Sequence"), //$NON-NLS-1$
+        		new FilesToFilesData("bug467600_Set"), //$NON-NLS-1$
         		};
     }
 

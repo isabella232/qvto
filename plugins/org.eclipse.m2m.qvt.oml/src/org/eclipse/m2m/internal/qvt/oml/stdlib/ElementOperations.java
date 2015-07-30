@@ -40,65 +40,70 @@ import org.eclipse.ocl.util.Tuple;
 import org.eclipse.ocl.util.TypeUtil;
 
 
-
 public class ElementOperations extends AbstractContextualOperations {
 	
+	static final String CONTAINER_NAME = "container"; //$NON-NLS-1$  
 	static final String DEEP_CLONE_NAME = "deepclone"; //$NON-NLS-1$	
 	static final String CLONE_NAME = "clone"; //$NON-NLS-1$
+	static final String METACLASS_NAME = "metaClassName"; //$NON-NLS-1$  
+	static final String SUBOBJECTS_NAME = "subobjects"; //$NON-NLS-1$  
+	static final String ALL_SUBOBJECTS_NAME = "allSubobjects"; //$NON-NLS-1$  
+	static final String SUBOBJECTS_OF_KIND_NAME = "subobjectsOfKind"; //$NON-NLS-1$  
+	static final String ALL_SUBOBJECTS_OF_KIND_NAME = "allSubobjectsOfKind"; //$NON-NLS-1$  
+	static final String SUBOBJECTS_OF_TYPE_NAME = "subobjectsOfType"; //$NON-NLS-1$  
+	static final String ALL_SUBOBJECTS_OF_TYPE_NAME = "allSubobjectsOfType"; //$NON-NLS-1$  
 	
-	static final int FILTER_ALL = 0;
-	static final int FILTER_OF_TYPE = 1;
-	static final int FILTER_OF_KIND = 2;	
-	
+
 	public ElementOperations(AbstractQVTStdlib library) {
 		super(library, library.getElementType());
 	}
 	
 	@Override
 	protected OperationProvider[] getOperations() {
-		//OCLStandardLibrary<EClassifier> oclStdLibrary = getStdlib().getEnvironment().getOCLStandardLibrary();
-		EClassifier elementSet = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
-		EClassifier setOfT = elementSet;//TypeUtil.resolveSetType(getStdlib().getEnvironment(), oclStdLibrary.getT());
-		EClassifier oclType = getStdlib().getOCLStdLib().getOclType();
+		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getOCLStdLib();
+		EClassifier setOfElement = TypeUtil.resolveSetType(getStdlib().getEnvironment(), getStdlib().getElementType());
+		
 		return new OwnedOperationProvider[] {
-			new OwnedOperationProvider(UNSUPPORTED_OPER, "_localId", getOclStdlib().getString()), //$NON-NLS-1$
-			new OwnedOperationProvider(UNSUPPORTED_OPER, "_globalId", getOclStdlib().getString()), //$NON-NLS-1$
+			new OwnedOperationProvider(UNSUPPORTED_OPER, "_localId", oclStdlib.getString()), //$NON-NLS-1$
+			new OwnedOperationProvider(UNSUPPORTED_OPER, "_globalId", oclStdlib.getString()), //$NON-NLS-1$
 			
-			new OwnedOperationProvider(ALL_SUBOBJECTS, ALL_SUBOBJECTS_NAME, elementSet),
+			new OwnedOperationProvider(ALL_SUBOBJECTS, ALL_SUBOBJECTS_NAME, setOfElement),
 			new OwnedOperationProvider(ALL_SUBOBJECTS_OF_TYPE, ALL_SUBOBJECTS_OF_TYPE_NAME, 
-					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
+					new String[] { "type" }, oclStdlib.getSet(), oclStdlib.getOclType()), //$NON-NLS-1$
 					
 			new OwnedOperationProvider(ALL_SUBOBJECTS_OF_KIND, ALL_SUBOBJECTS_OF_KIND_NAME, 
-					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
-			new OwnedOperationProvider(CLONE, CLONE_NAME, getStdlib().getElementType()),
+					new String[] { "type" }, oclStdlib.getSet(), oclStdlib.getOclType()), //$NON-NLS-1$
+			new OwnedOperationProvider(CLONE, CLONE_NAME, oclStdlib.getT()),
 			new OwnedOperationProvider(CONTAINER, CONTAINER_NAME, getStdlib().getElementType()),				
-			new OwnedOperationProvider(DEEP_CLONE, DEEP_CLONE_NAME, getStdlib().getElementType()),
+			new OwnedOperationProvider(DEEP_CLONE, DEEP_CLONE_NAME, oclStdlib.getT()),
 			
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "markedAs", //$NON-NLS-1$
-					new String[] { "value" }, getOclStdlib().getBoolean(), getOclStdlib().getString()), //$NON-NLS-1$			
+					new String[] { "value" }, oclStdlib.getBoolean(), oclStdlib.getString()), //$NON-NLS-1$
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "markValue", getStdlib().getObject()), //$NON-NLS-1$			
 					
-			new OwnedOperationProvider(METACLASS, METACLASS_NAME, getOclStdlib().getString()),
+			new OwnedOperationProvider(METACLASS, METACLASS_NAME, oclStdlib.getString()),
 			
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "stereotypedBy", //$NON-NLS-1$
-					new String[] { "value" }, getOclStdlib().getBoolean(), getOclStdlib().getString()), //$NON-NLS-1$
+					new String[] { "value" }, oclStdlib.getBoolean(), oclStdlib.getString()), //$NON-NLS-1$
 			
 			new OwnedOperationProvider(UNSUPPORTED_OPER, "stereotypedStrictBy", //$NON-NLS-1$
-							new String[] { "value" }, getOclStdlib().getBoolean(), getOclStdlib().getString()), //$NON-NLS-1$			
+					new String[] { "value" }, oclStdlib.getBoolean(), oclStdlib.getString()), //$NON-NLS-1$
 			
-			new OwnedOperationProvider(SUBOBJECTS, SUBOBJECTS_NAME, elementSet),
+			new OwnedOperationProvider(SUBOBJECTS, SUBOBJECTS_NAME, setOfElement),
 			new OwnedOperationProvider(SUBOBJECTS_OF_TYPE, SUBOBJECTS_OF_TYPE_NAME, 
-					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
+					new String[] { "type" }, oclStdlib.getSet(), oclStdlib.getOclType()), //$NON-NLS-1$
 			new OwnedOperationProvider(SUBOBJECTS_OF_KIND, SUBOBJECTS_OF_KIND_NAME, 
-					new String[] { "type" }, setOfT, oclType), //$NON-NLS-1$
+					new String[] { "type" }, oclStdlib.getSet(), oclStdlib.getOclType()), //$NON-NLS-1$
 		};
 	}
 
-	private OCLStandardLibrary<EClassifier> getOclStdlib() {
-		return getStdlib().getEnvironment().getOCLStandardLibrary();
-	}
 
+	static final int FILTER_ALL = 0;
+	static final int FILTER_OF_TYPE = 1;
+	static final int FILTER_OF_KIND = 2;	
+	
 	private static final CallHandler DEEP_CLONE = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, final QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -122,6 +127,7 @@ public class ElementOperations extends AbstractContextualOperations {
 	};
 		
 	private static final CallHandler CLONE = new CallHandler() {
+		
 		@SuppressWarnings("serial")
 		public Object invoke(ModuleInstance module, Object source, Object[] args, final QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
@@ -282,8 +288,8 @@ public class ElementOperations extends AbstractContextualOperations {
 
 	}
 
-	private static final String CONTAINER_NAME = "container"; //$NON-NLS-1$  
 	private static final CallHandler CONTAINER = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -293,8 +299,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};
 
-	private static final String METACLASS_NAME = "metaClassName"; //$NON-NLS-1$  
 	private static final CallHandler METACLASS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -304,8 +310,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};
 
-	private static final String SUBOBJECTS_NAME = "subobjects"; //$NON-NLS-1$  
 	private static final CallHandler SUBOBJECTS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -315,8 +321,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};
 	
-	private static final String SUBOBJECTS_OF_TYPE_NAME = "subobjectsOfType"; //$NON-NLS-1$  
 	private static final CallHandler SUBOBJECTS_OF_TYPE = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -326,8 +332,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};	
 
-	private static final String SUBOBJECTS_OF_KIND_NAME = "subobjectsOfKind"; //$NON-NLS-1$  
 	private static final CallHandler SUBOBJECTS_OF_KIND = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -338,8 +344,8 @@ public class ElementOperations extends AbstractContextualOperations {
 	};	
 
 	
-	private static final String ALL_SUBOBJECTS_NAME = "allSubobjects"; //$NON-NLS-1$  
 	private static final CallHandler ALL_SUBOBJECTS = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;				
@@ -349,8 +355,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};
 	
-	private static final String ALL_SUBOBJECTS_OF_TYPE_NAME = "allSubobjectsOfType"; //$NON-NLS-1$  
 	private static final CallHandler ALL_SUBOBJECTS_OF_TYPE = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
@@ -361,8 +367,8 @@ public class ElementOperations extends AbstractContextualOperations {
 		}
 	};	
 
-	private static final String ALL_SUBOBJECTS_OF_KIND_NAME = "allSubobjectsOfKind"; //$NON-NLS-1$  
 	static final CallHandler ALL_SUBOBJECTS_OF_KIND = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;

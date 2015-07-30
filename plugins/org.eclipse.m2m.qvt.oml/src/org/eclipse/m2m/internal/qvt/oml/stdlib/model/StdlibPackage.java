@@ -38,5 +38,7 @@ public interface StdlibPackage {
 	
 	EClassifier getKeyT();
 	
+	EClassifier getCommonT();
+	
 	EClassifier getOrderedTupleType();	
 }

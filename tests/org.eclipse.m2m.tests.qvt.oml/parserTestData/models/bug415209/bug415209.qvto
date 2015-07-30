@@ -78,7 +78,7 @@ main() {
 	assert fatal (c38->size() = 3);
 	
 	list->add(object EClass{});
-	list->prepend(object EClass{});
+	list := list->prepend(object EClass{});
 	list->insertAt( object EClass{}, 1);
 	var c50 : String := list->joinfields("",",","");
 

@@ -43,7 +43,7 @@ helper testCase() : Boolean {
 	var aStr : String := listOfVoids->genericListElementAt(1);
 	listOfVoids->append(null);
 	-- can other element but 'null' into a list
-	/*<error>*/listOfVoids->append('')/*</error>*/;
+	listOfVoids->append('');
 
 
 	-- test String collection specific operation

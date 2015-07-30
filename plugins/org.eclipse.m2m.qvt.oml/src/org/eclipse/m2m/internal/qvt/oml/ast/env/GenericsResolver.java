@@ -27,6 +27,7 @@ import org.eclipse.ocl.types.TupleType;
 import org.eclipse.ocl.types.TypeType;
 import org.eclipse.ocl.types.util.TypesSwitch;
 import org.eclipse.ocl.util.CollectionUtil;
+import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 
 
@@ -34,7 +35,6 @@ class GenericsResolver {
 
 	final private QVTOEnvironment fEnv;
 	final private OCLStandardLibrary<EClassifier> fOCLStdLib;
-	final private BindSwitch fBindSwitch;	
 	final private Map<EClassifier, EClassifier> formal2ActualBinding = new HashMap<EClassifier, EClassifier>(3);
 
 	GenericsResolver(QVTOEnvironment env) {
@@ -42,9 +42,8 @@ class GenericsResolver {
 			throw new IllegalArgumentException();
 		}
 		
-		this.fEnv = env;
-		this.fOCLStdLib = env.getOCLStandardLibrary();
-		this.fBindSwitch = new BindSwitch();
+		fEnv = env;
+		fOCLStdLib = env.getOCLStandardLibrary();
 	}
 		
 	@SuppressWarnings("unchecked")
@@ -54,7 +53,9 @@ class GenericsResolver {
 			if (actualType instanceof TypeType) {
 				actualType = ((TypeType<EClassifier, EOperation>) actualType).getReferredType();
 			}
-			bind(operation.getEType(), actualType);
+			if (actualType != null) {
+				bind(operation.getEType(), actualType);
+			}
 		}
 		
 		EClassifier owner = fEnv.getUMLReflection().getOwningClassifier(operation);		
@@ -75,7 +76,7 @@ class GenericsResolver {
 		}
 		
 		if(returnType != null) {
-			returnType = fBindSwitch.doSwitch(returnType);
+			returnType = new BindSwitch(operation).doSwitch(returnType);
 			formal2ActualBinding.clear();
 		}
 		
@@ -92,7 +93,7 @@ class GenericsResolver {
 			resolveCollection((CollectionType) formalType, (CollectionType) actualType);
 		} else if (formalType instanceof TypeType && actualType instanceof TypeType) {
 			TypeType<EClassifier, EOperation> actualTypeType = (TypeType<EClassifier, EOperation>) actualType;
-			if (formalType == fEnv.getOCLStandardLibrary().getOclType()) {
+			if (formalType == fOCLStdLib.getOclType()) {
 				resolve(fOCLStdLib.getT(), actualTypeType.getReferredType());
 			}
 		} else {
@@ -132,9 +133,22 @@ class GenericsResolver {
 	}
 	
 	private class BindSwitch extends TypesSwitch<EClassifier> {
-		private QVTOTypeResolver typeResolver = fEnv.getTypeResolver();
+		private final QVTOTypeResolver typeResolver = fEnv.getTypeResolver();
+		private final Object fProblemObject;
+		
+		BindSwitch(Object problemObject) {
+			fProblemObject = problemObject;
+		}
 		
 		private EClassifier getBoundType(EClassifier type) {
+			if (type == fEnv.getQVTStandardLibrary().getCommonT()) {
+				EClassifier typeT = formal2ActualBinding.get(fOCLStdLib.getT());
+				EClassifier typeT2 = formal2ActualBinding.get(fOCLStdLib.getT2());
+				if (typeT != null && typeT2 != null) {
+					EClassifier bound = TypeUtil.commonSuperType(fProblemObject, fEnv, typeT, typeT2);
+					return (bound != null) ? bound : fOCLStdLib.getOclAny();
+				}
+			}
 			EClassifier bound = formal2ActualBinding.get(type);
 			return (bound != null) ? bound : type;
 		}
@@ -148,7 +162,7 @@ class GenericsResolver {
 				DictionaryType dictionaryType = (DictionaryType) object;
 				EClassifier boundKeyType = getBoundType(dictionaryType.getKeyType());
 				QvtTypeResolverImpl qvtTypeResolve = (QvtTypeResolverImpl) typeResolver;
-				qvtTypeResolve.resolveDictionaryType(boundKeyType, boundElementType);
+				return qvtTypeResolve.resolveDictionaryType(boundKeyType, boundElementType);
 			}
 			
 			return (EClassifier) typeResolver.resolveCollectionType(object.getKind(), boundElementType);

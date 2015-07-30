@@ -48,19 +48,15 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.QVTUMLReflection;
-import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.ecore.CallOperationAction;
-import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEnvironment;
-import org.eclipse.ocl.ecore.EcorePackage;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.Variable;
 import org.eclipse.ocl.lpg.ProblemHandler;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
 import org.eclipse.ocl.options.ParsingOptions;
-import org.eclipse.ocl.types.OCLStandardLibrary;
 import org.eclipse.ocl.types.VoidType;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
@@ -377,33 +373,33 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	}
 	
 	private void getLocalAdditionalCollectionOperations(org.eclipse.ocl.ecore.CollectionType collectionType, List<EOperation> result) {
-		OCLStandardLibrary<EClassifier> oclstdlib = getOCLStandardLibrary();
-		
-		EcorePackage typePackage = EcorePackage.eINSTANCE;
-
-		EClass metaType = collectionType.eClass();
-		EClassifier genericBaseType = null;
-		
-		if(metaType == typePackage.getCollectionType() && collectionType != oclstdlib.getCollection()) {
-			genericBaseType = oclstdlib.getCollection();
-		} else if(metaType == typePackage.getBagType() && collectionType != oclstdlib.getBag()) {
-			genericBaseType = oclstdlib.getBag();
-		} else if(metaType == typePackage.getSequenceType() && collectionType != oclstdlib.getSequence()) {
-			genericBaseType = oclstdlib.getSequence();
-		} else if(metaType == typePackage.getSetType() && collectionType != oclstdlib.getSet()) {
-			genericBaseType = oclstdlib.getSet();
-		} else if(metaType == typePackage.getOrderedSetType() && collectionType != oclstdlib.getOrderedSet()) {
-			genericBaseType = oclstdlib.getOrderedSet();
-		} else if(metaType == ImperativeOCLPackage.eINSTANCE.getListType() && collectionType != getQVTStandardLibrary().getList()) {
-			genericBaseType = getQVTStandardLibrary().getList();
-		} else if(metaType == ImperativeOCLPackage.eINSTANCE.getDictionaryType() && collectionType != getQVTStandardLibrary().getDictionary()) {
-			genericBaseType = getQVTStandardLibrary().getDictionary();
-		}
+//		OCLStandardLibrary<EClassifier> oclstdlib = getOCLStandardLibrary();
+//		
+//		EcorePackage typePackage = EcorePackage.eINSTANCE;
+//
+//		EClass metaType = collectionType.eClass();
+//		EClassifier genericBaseType = null;
+//		
+//		if(metaType == typePackage.getCollectionType() && collectionType != oclstdlib.getCollection()) {
+//			genericBaseType = oclstdlib.getCollection();
+//		} else if(metaType == typePackage.getBagType() && collectionType != oclstdlib.getBag()) {
+//			genericBaseType = oclstdlib.getBag();
+//		} else if(metaType == typePackage.getSequenceType() && collectionType != oclstdlib.getSequence()) {
+//			genericBaseType = oclstdlib.getSequence();
+//		} else if(metaType == typePackage.getSetType() && collectionType != oclstdlib.getSet()) {
+//			genericBaseType = oclstdlib.getSet();
+//		} else if(metaType == typePackage.getOrderedSetType() && collectionType != oclstdlib.getOrderedSet()) {
+//			genericBaseType = oclstdlib.getOrderedSet();
+//		} else if(metaType == ImperativeOCLPackage.eINSTANCE.getListType() && collectionType != getQVTStandardLibrary().getList()) {
+//			genericBaseType = getQVTStandardLibrary().getList();
+//		} else if(metaType == ImperativeOCLPackage.eINSTANCE.getDictionaryType() && collectionType != getQVTStandardLibrary().getDictionary()) {
+//			genericBaseType = getQVTStandardLibrary().getDictionary();
+//		}
 		
 		QvtTypeResolverImpl thisResolver = getQVTTypeResolver();
-		if(genericBaseType != null) {
-			thisResolver.getLocalCollectionAdditionalOperations((CollectionType)genericBaseType, result, false);
-		}
+//		if(genericBaseType != null) {
+//			thisResolver.getLocalCollectionAdditionalOperations((CollectionType)genericBaseType, result, false);
+//		}
 
 		thisResolver.getLocalCollectionAdditionalOperations(collectionType, result, true);
 		

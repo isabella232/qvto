@@ -15,6 +15,7 @@ main() {
 	assert fatal(List{1}->foo2() = "fooInt"); 
 	assert fatal(List{1.0}->foo2() = "fooReal");
 	assert fatal(Sequence{1}->foo2() = "fooReal");
+	assert fatal(Sequence{1.0}->foo2() = "fooReal");
 	
 	assert fatal(List{object EPackage{}}->foo2() = "fooObj");
 }

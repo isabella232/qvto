@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,7 +13,6 @@
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.m2m.internal.qvt.oml.ast.env.QVTOEnvironment;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
@@ -27,9 +26,9 @@ import org.eclipse.ocl.types.OCLStandardLibrary;
 
 public class TransformationOperations extends AbstractContextualOperations {
 
-	static final String TRANSFORM_NAME = "transform"; //$NON-NLS-1$	
-	static final String PARALLEL_TRANSFORM_NAME = "parallelTransform"; //$NON-NLS-1$	
-	static final String WAIT_NAME = "wait"; //$NON-NLS-1$	
+	private static final String TRANSFORM_NAME = "transform"; //$NON-NLS-1$	
+	private static final String PARALLEL_TRANSFORM_NAME = "parallelTransform"; //$NON-NLS-1$	
+	private static final String WAIT_NAME = "wait"; //$NON-NLS-1$	
 	
 	
     public TransformationOperations(AbstractQVTStdlib library) {
@@ -38,18 +37,18 @@ public class TransformationOperations extends AbstractContextualOperations {
 	
 	@Override
 	protected OperationProvider[] getOperations() {
-		QVTOEnvironment environment = getStdlib().getEnvironment();
-		OCLStandardLibrary<EClassifier> oclStdLibrary = environment.getOCLStandardLibrary();
-		EClassifier statusList = environment.getTypeResolver().resolveListType(oclStdLibrary.getT());
+		OCLStandardLibrary<EClassifier> oclStdlib = getStdlib().getOCLStdLib();
+		EClassifier listOfStatus = getStdlib().getEnvironment().getTypeResolver().resolveListType(getStdlib().getStatusClass());
 		
 		return new OwnedOperationProvider[] {				
 			new OwnedOperationProvider(createTransformHandler(getStdlib()), TRANSFORM_NAME, getStdlib().getStatusClass()),
 			
 			new OwnedOperationProvider(UNSUPPORTED_OPER, PARALLEL_TRANSFORM_NAME, getStdlib().getStatusClass()),
 			new OwnedOperationProvider(UNSUPPORTED_OPER, WAIT_NAME, new String[] { "statusList" }, //$NON-NLS-1$
-					oclStdLibrary.getOclVoid(), statusList)
+					oclStdlib.getOclVoid(), listOfStatus)
 		};
 	}
+	
 	
 	private static CallHandler createTransformHandler(final AbstractQVTStdlib stdlib) {
 		return new CallHandler() {

@@ -20,6 +20,7 @@ public class ObjectOperations extends AbstractContextualOperations {
 
 	static final String REPR_NAME = "repr"; //$NON-NLS-1$
 	
+	
 	public ObjectOperations(AbstractQVTStdlib library) {
 		super(library, library.getObject());
 	}
@@ -30,7 +31,9 @@ public class ObjectOperations extends AbstractContextualOperations {
 		};
 	}
 	
+	
 	static final CallHandler REPR = new CallHandler() {
+		
 		public Object invoke(ModuleInstance module, Object source, Object[] args, QvtOperationalEvaluationEnv evalEnv) {			
 			try {
 				Object toPrint = source;

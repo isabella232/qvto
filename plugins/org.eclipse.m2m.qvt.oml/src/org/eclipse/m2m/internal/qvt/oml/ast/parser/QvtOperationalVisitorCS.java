@@ -548,11 +548,39 @@ public class QvtOperationalVisitorCS
 	private Object handleOperationLookupException(
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env, 
 			CSTNode problemNode, List<?> matches) {
+
+		List<Object> filteredMatches = new ArrayList<Object>(matches.size());
+		try {
+			NEXT_MATCH:
+			for (Object nextMatchObj : matches) {
+				if(nextMatchObj instanceof EOperation) {
+					EOperation operation = (EOperation) nextMatchObj;
+					if (isGenericT2(operation.getEType(), env)) {
+						continue NEXT_MATCH;
+					}
+					for (EParameter eParameter : operation.getEParameters()) {
+						if (isGenericT2(eParameter.getEType(), env)) {
+							continue NEXT_MATCH;
+						}
+					}
+				}
+
+				filteredMatches.add(nextMatchObj);
+			}
+		} catch (RuntimeException e) {
+		}
 		
+		if (filteredMatches.isEmpty()) {
+			return matches.isEmpty() ? null : matches.get(0);
+		}
+		if (filteredMatches.size() == 1) {
+			return filteredMatches.get(0);
+		}
+			
 		StringBuffer buf = new StringBuffer();		
 		try {
 			int i = 0;			
-			for (Object nextMatchObj : matches) {
+			for (Object nextMatchObj : filteredMatches) {
 				if(i++ > 0) {
 					buf.append(", "); //$NON-NLS-1$
 				}
@@ -571,7 +599,16 @@ public class QvtOperationalVisitorCS
 		
 		String message = NLS.bind(ValidationMessages.AmbiguousOperationReference, buf.toString());
 		getEnvironment().analyzerWarning(message, "lookupOperation", problemNode); //$NON-NLS-1$" 
-		return (matches != null && !matches.isEmpty()) ? matches.get(0) : null;
+		return filteredMatches.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	private boolean isGenericT2(EClassifier eType,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+		if (eType instanceof CollectionType) {
+			return isGenericT2(((CollectionType<EClassifier, EOperation>) eType).getElementType(), env);
+		}
+		return eType == env.getOCLStandardLibrary().getT2();
 	}
 
 	@Override
@@ -1254,7 +1291,11 @@ public class QvtOperationalVisitorCS
     	    	}
 
     	    	if(QvtOperationalParserUtil.isUnsupported(referredOperation)) {
-    	    		QvtOperationalUtil.reportError(env, NLS.bind(ValidationMessages.UnsupportedElement, getFormatter().formatName(referredOperation)), operationCallExpCS);    	    		
+    	    		String msg = QvtOperationalParserUtil.getUnsupportedReason(referredOperation);
+    	    		if (msg == null) {
+    	    			msg = ValidationMessages.UnsupportedElement;
+    	    		}
+    	    		QvtOperationalUtil.reportError(env, NLS.bind(msg, getFormatter().formatName(referredOperation)), operationCallExpCS);    	    		
     	    	}
     	    }
     	    
@@ -1367,7 +1408,7 @@ public class QvtOperationalVisitorCS
 
 			result.setOperationCode(opcode);
 			resultType = TypeUtil.getResultType(operationCallExpCS, env,
-				ownerType, oper, args);
+					operationSourceType, oper, args);
 			if (resultType == null) {
 				resultType = getOCLType(env, oper);
 			}

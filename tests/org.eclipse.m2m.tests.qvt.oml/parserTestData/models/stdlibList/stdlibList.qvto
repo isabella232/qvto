@@ -12,12 +12,12 @@ main() {
 	assert fatal ('c' = list->genericListElementAt(list->size()));
 	
 	-- test append(...)	
-	list->append('d');	
+	list := list->append('d');	
 	assert fatal ('d' = list->genericListElementAt(list->size()));
 	assert fatal (list->size() = 4);
 		
 	-- test prepend(...)		
-	list->prepend('0');
+	list := list->prepend('0');
 	assert fatal ('0' = list->genericListElementAt(1));	
 
 	-- test insertAt(...)
