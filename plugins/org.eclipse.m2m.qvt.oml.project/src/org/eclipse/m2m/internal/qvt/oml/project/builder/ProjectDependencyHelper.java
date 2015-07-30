@@ -93,7 +93,11 @@ class ProjectDependencyHelper {
 		return false;
 	}
 
-	public static Set<IProject> collectQvtProjectWorkspaceDependencies(IProject project, Set<IProject> qvtDependencies, boolean recursive) {  	
+	public static Set<IProject> collectQvtProjectWorkspaceDependencies(IProject project, Set<IProject> qvtDependencies, boolean recursive) {
+		if (project == null || !project.isAccessible()) {
+			return Collections.emptySet();
+		}
+		
 	    try { 
 	    	IProject[] projects = project.getReferencedProjects();
 	    	for (int i = 0; i < projects.length; i++) {

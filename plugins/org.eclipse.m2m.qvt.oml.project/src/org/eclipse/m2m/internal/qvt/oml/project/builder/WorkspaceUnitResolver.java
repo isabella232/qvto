@@ -104,7 +104,7 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 					continue;
 				}
 				
-				if (referenced == null || !referenced.exists()) {
+				if (referenced == null || !referenced.isAccessible()) {
 					continue;
 				}
 
