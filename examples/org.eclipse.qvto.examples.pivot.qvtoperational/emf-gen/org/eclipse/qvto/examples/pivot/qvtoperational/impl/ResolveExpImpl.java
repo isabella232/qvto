@@ -407,24 +407,9 @@ public class ResolveExpImpl extends CallExpImpl implements ResolveExp {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isDeferred: ");
-		result.append(isDeferred);
-		result.append(", isInverse: ");
-		result.append(isInverse);
-		result.append(", one: ");
-		result.append(one);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

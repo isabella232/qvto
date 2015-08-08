@@ -153,20 +153,9 @@ public class HelperImpl extends ImperativeOperationImpl implements Helper {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isQuery: ");
-		result.append(isQuery);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

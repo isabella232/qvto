@@ -342,20 +342,9 @@ public class AssignExpImpl extends ImperativeExpressionImpl implements AssignExp
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isReset: ");
-		result.append(isReset);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

@@ -1,5 +1,6 @@
 package org.eclipse.qvto.examples.xtext.qvtoperational.tests;
 
+import org.eclipse.qvto.examples.pivot.qvtoperational.utilities.QVTOperationalToStringVisitor;
 
 public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 
@@ -64,6 +65,7 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	}
 	
 	public void testSimpleTransformationDeclaration() throws Exception {
+		QVTOperationalToStringVisitor.FACTORY.getClass();
 		String testFile =
 				"modeltype MM1 uses \"m1URI\";\n"
 				+ "transformation t1(inout m1 : MM1);";

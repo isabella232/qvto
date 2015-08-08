@@ -246,20 +246,9 @@ public class ModelTypeImpl extends ClassImpl implements ModelType {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (conformanceKind: ");
-		result.append(conformanceKind);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

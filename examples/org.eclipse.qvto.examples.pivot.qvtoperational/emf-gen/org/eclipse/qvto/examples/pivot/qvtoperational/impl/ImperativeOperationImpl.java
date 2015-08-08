@@ -427,20 +427,9 @@ public class ImperativeOperationImpl extends OperationImpl implements Imperative
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isBlackbox: ");
-		result.append(isBlackbox);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

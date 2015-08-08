@@ -246,22 +246,9 @@ public class TagImpl extends ElementImpl implements Tag {
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(", value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**
