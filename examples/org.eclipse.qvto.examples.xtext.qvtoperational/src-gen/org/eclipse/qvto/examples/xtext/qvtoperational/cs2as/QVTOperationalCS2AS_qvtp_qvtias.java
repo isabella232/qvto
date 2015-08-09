@@ -1449,109 +1449,6 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
     
     /**
      * 
-     * map uPackage_name in QVTOperationalCS2AS_qvtp_qvtias {
-     * 
-     *   leftCS (topLevelCS : qvtoperationalcs::TopLevelCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * { |}
-     * where ( |)
-     * {_0 : Package[1];
-     *  |
-     * _0 := topLevelCS.pivot.oclAsType(Package);
-     * _0.name := '';
-     * }
-     * 
-     */
-    protected boolean MAP_uPackage_name(final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS topLevelCS_1) throws ReflectiveOperationException {
-        // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        // variable assignments
-        final /*@Nullable*/ /*@Thrown*/ Element pivot = topLevelCS_1.getPivot();
-        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, pivot, TYP_Package_0));
-        // property assignments
-        oclAsType.setName(STR_);
-        return true;
-    }
-    
-    /**
-     * 
-     * map uPackage_ownedClasses in QVTOperationalCS2AS_qvtp_qvtias {
-     * 
-     *   leftCS (topLevelCS : qvtoperationalcs::TopLevelCS[1];
-     *  |)
-     * { |}
-     * rightAS ( |)
-     * { |}
-     * where ( |)
-     * {_0 : Package[1];
-     * _1 : Sequence(Class[*|1]);
-     *  |
-     * _0 := topLevelCS.pivot.oclAsType(Package)
-     *   ;
-     * _1 := ownedTypes.pivot.oclAsType(Element)
-     *   .oclAsType(Class);
-     * _0.ownedClasses := _1;
-     * }
-     * 
-     */
-    protected boolean MAP_uPackage_ownedClasses(final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS topLevelCS_2) throws ReflectiveOperationException {
-        // predicates
-        final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        // variable assignments
-        final /*@Nullable*/ /*@Thrown*/ Element pivot = topLevelCS_2.getPivot();
-        final /*@NonNull*/ /*@Thrown*/ Package oclAsType = ClassUtil.nonNullState((Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, pivot, TYP_Package_0));
-        final /*@NonNull*/ /*@Thrown*/ List<TypeCS> ownedTypes = topLevelCS_2.getOwnedTypes();
-        final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_ownedTypes = idResolver.createOrderedSetOfAll(ORD_CLSSid_TypeCS, ownedTypes);
-        /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Element);
-        /*@Nullable*/ Iterator<?> ITERATOR__1 = BOXED_ownedTypes.iterator();
-        /*@NonNull*/ /*@Thrown*/ SequenceValue collect_0;
-        while (true) {
-            if (!ITERATOR__1.hasNext()) {
-                collect_0 = accumulator;
-                break;
-            }
-            /*@Nullable*/ /*@NonInvalid*/ TypeCS _1 = (TypeCS)ITERATOR__1.next();
-            /**
-             * pivot.oclAsType(Element)
-             */
-            final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Element_0 = idResolver.getClass(CLSSid_Element, null);
-            if (_1 == null) {
-                throwNull(topLevelCS_2, "Null source for \'\'http://www.eclipse.org/ocl/2015/BaseCS\'::PivotableElementCS::pivot\'");
-            }
-            final /*@Nullable*/ /*@Thrown*/ Element pivot_0 = _1.getPivot();
-            final /*@NonNull*/ /*@Thrown*/ Element oclAsType_0 = ClassUtil.nonNullState((Element)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, pivot_0, TYP_Element_0));
-            //
-            accumulator.add(oclAsType_0);
-        }
-        /*@NonNull*/ /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
-        /*@Nullable*/ Iterator<?> ITERATOR__1_0 = collect_0.iterator();
-        /*@NonNull*/ /*@Thrown*/ SequenceValue collect;
-        while (true) {
-            if (!ITERATOR__1_0.hasNext()) {
-                collect = accumulator_0;
-                break;
-            }
-            /*@Nullable*/ /*@NonInvalid*/ Element _1_0 = (Element)ITERATOR__1_0.next();
-            /**
-             * oclAsType(Class)
-             */
-            final /*@NonNull*/ /*@NonInvalid*/ Class TYP_Class_0 = idResolver.getClass(CLSSid_Class, null);
-            final /*@NonNull*/ /*@Thrown*/ Class oclAsType_1 = ClassUtil.nonNullState((Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(executor, _1_0, TYP_Class_0));
-            //
-            accumulator_0.add(oclAsType_1);
-        }
-        // property assignments
-        final /*@NonNull*/ /*@NonInvalid*/ List<Class> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Class.class, collect);
-        oclAsType.getOwnedClasses().addAll(ECORE_collect);
-        return true;
-    }
-    
-    /**
-     * 
      * map uOperationalTransformation_name in QVTOperationalCS2AS_qvtp_qvtias {
      * 
      *   leftCS (transformationCS : qvtoperationalcs::TransformationCS[1];
@@ -2007,16 +1904,6 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * map uModel_ownedPackages {
      * topLevelCS := topLevelCS;
      * }}
-     *   for topLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
-     *    {
-     * map uPackage_name {
-     * topLevelCS := topLevelCS;
-     * }}
-     *   for topLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
-     *    {
-     * map uPackage_ownedClasses {
-     * topLevelCS := topLevelCS;
-     * }}
      *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
      *    {
      * 
@@ -2052,7 +1939,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_4 = idResolver.getClass(CLSSid_ParameterDeclarationCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToClassCS_3 = idResolver.getClass(CLSSid_QVToClassCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToLibraryCS_3 = idResolver.getClass(CLSSid_QVToLibraryCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TopLevelCS_3 = idResolver.getClass(CLSSid_TopLevelCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TopLevelCS_1 = idResolver.getClass(CLSSid_TopLevelCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TransformationCS_5 = idResolver.getClass(CLSSid_TransformationCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_14 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassifierPropertyCS, TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_16 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_MappingOperationCS, TYP_qvtoperationalcs_c_c_MappingOperationCS_2);
@@ -2061,7 +1948,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ParameterDeclarationCS, TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_4);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_22 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToClassCS, TYP_qvtoperationalcs_c_c_QVToClassCS_3);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_25 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToLibraryCS, TYP_qvtoperationalcs_c_c_QVToLibraryCS_3);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_28 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_3);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_28 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_1);
         final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TransformationCS, TYP_qvtoperationalcs_c_c_TransformationCS_5);
         // mapping statements
         for (ParameterDeclarationCS parameterDeclarationCS_9 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
@@ -2148,9 +2035,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
                 MAP_cQVToLibraryCS_2_Library(symbol_39);
             }
         }
-        for (TopLevelCS topLevelCS_7 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_42 = (TopLevelCS)topLevelCS_7;
+        for (TopLevelCS topLevelCS_3 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
+            if (topLevelCS_3 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_42 = (TopLevelCS)topLevelCS_3;
                 MAP_cTopLevelCS_2_Model(symbol_42);
             }
         }
@@ -2238,46 +2125,34 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
                 MAP_uLibrary_isBlackbox(symbol_84);
             }
         }
-        for (TopLevelCS topLevelCS_8 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_87 = (TopLevelCS)topLevelCS_8;
+        for (TopLevelCS topLevelCS_4 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
+            if (topLevelCS_4 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_87 = (TopLevelCS)topLevelCS_4;
                 MAP_uModel_ownedPackages(symbol_87);
-            }
-        }
-        for (TopLevelCS topLevelCS_9 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_90 = (TopLevelCS)topLevelCS_9;
-                MAP_uPackage_name(symbol_90);
-            }
-        }
-        for (TopLevelCS topLevelCS_10 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_93 = (TopLevelCS)topLevelCS_10;
-                MAP_uPackage_ownedClasses(symbol_93);
             }
         }
         for (TransformationCS transformationCS_13 : ValueUtil.typedIterable(TransformationCS.class, allInstances_7)) {
             if (transformationCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_96 = (TransformationCS)transformationCS_13;
-                MAP_uOperationalTransformation_name(symbol_96);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_90 = (TransformationCS)transformationCS_13;
+                MAP_uOperationalTransformation_name(symbol_90);
             }
         }
         for (TransformationCS transformationCS_14 : ValueUtil.typedIterable(TransformationCS.class, allInstances_7)) {
             if (transformationCS_14 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_99 = (TransformationCS)transformationCS_14;
-                MAP_uOperationalTransformation_ownedOperations(symbol_99);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_93 = (TransformationCS)transformationCS_14;
+                MAP_uOperationalTransformation_ownedOperations(symbol_93);
             }
         }
         for (TransformationCS transformationCS_15 : ValueUtil.typedIterable(TransformationCS.class, allInstances_7)) {
             if (transformationCS_15 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_102 = (TransformationCS)transformationCS_15;
-                MAP_uOperationalTransformation_isBlackbox(symbol_102);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_96 = (TransformationCS)transformationCS_15;
+                MAP_uOperationalTransformation_isBlackbox(symbol_96);
             }
         }
         for (TransformationCS transformationCS_16 : ValueUtil.typedIterable(TransformationCS.class, allInstances_7)) {
             if (transformationCS_16 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_105 = (TransformationCS)transformationCS_16;
-                MAP_uOperationalTransformation_isAbstract(symbol_105);
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_99 = (TransformationCS)transformationCS_16;
+                MAP_uOperationalTransformation_isAbstract(symbol_99);
             }
         }
         return true;
