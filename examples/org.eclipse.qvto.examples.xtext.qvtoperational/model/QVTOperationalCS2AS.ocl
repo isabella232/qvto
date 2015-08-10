@@ -47,7 +47,7 @@ def : ast() : ocl::Package =
 		name = name,
 		nsPrefix = name,	-- QVTo spec doesn't provide concrete syntax for nsPrefix
 		URI = name,			-- QVTo spec doesn't provide concrete syntax for nsURI. Build an internal protocol
-		ownedClasses = ownedClasses.oclAsType(QVToClassCS).ast() -- FIXME Why do I need the cast ?
+		ownedClasses = ownedClasses.ast() 
 		-- type = TODO
 	}
 		
