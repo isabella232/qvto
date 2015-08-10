@@ -157,6 +157,9 @@ Workflow {
 			// Support Markup in Hover text 
 			fragment = fragments.MarkupHoverFragment auto-inject{}
 			
+			// *.xtextbin support on Xtext 2.3		
+			fragment = fragments.CompatibilityFragment auto-inject{}
+			
 			// provides a preference page for template proposals
 			fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
 			

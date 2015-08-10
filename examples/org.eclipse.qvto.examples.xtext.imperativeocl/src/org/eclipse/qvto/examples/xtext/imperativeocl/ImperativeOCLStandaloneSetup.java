@@ -3,6 +3,7 @@
 */
 package org.eclipse.qvto.examples.xtext.imperativeocl;
 
+import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLASResourceFactory;
 
 /**
  * Initialization support for running Xtext languages 
@@ -16,7 +17,7 @@ public class ImperativeOCLStandaloneSetup extends ImperativeOCLStandaloneSetupGe
 	}
 	
 	public static void init() {
-		// ImperativeCS2MonikerVisitor.FACTORY.getClass(); // To registry moniker factory
+		ImperativeOCLASResourceFactory.getInstance();
 	}
 }
 

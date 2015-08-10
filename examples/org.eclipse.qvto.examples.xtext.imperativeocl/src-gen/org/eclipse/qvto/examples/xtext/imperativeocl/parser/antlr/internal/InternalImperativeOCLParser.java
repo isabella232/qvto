@@ -24,60 +24,10 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SINGLE_QUOTED_STRING", "RULE_DOUBLE_QUOTED_STRING", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_INT", "RULE_ACCESS_OP", "RULE_ASSIGN_OP", "RULE_CMP_OP", "RULE_MULT_OP", "RULE_MULTI_ITERATOR_OP", "RULE_RESOLVE_IN_KIND", "RULE_RESOLVE_KIND", "RULE_SIMPLE_ITERATOR_OP", "RULE_UNARY_OP", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'List'", "'('", "')'", "'Dict'", "','", "'{'", "'}'", "'='", "'return'", "'-'", "'not'", "'*'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "':'", "'..'", "'++'", "'Lambda'", "'<-'", "'true'", "'false'", "'invalid'", "'null'", "'@'", "'pre'", "'['", "']'", "'in'", "'|'", "';'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'|?'", "'|1'", "'?'", "'::'", "'extends'", "'&&'"
     };
-    public static final int RULE_CMP_OP=11;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int RULE_ESCAPED_CHARACTER=18;
-    public static final int RULE_ANY_OTHER=24;
-    public static final int RULE_ESCAPED_ID=7;
-    public static final int RULE_DOUBLE_QUOTED_STRING=5;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__90=90;
-    public static final int RULE_RESOLVE_KIND=15;
-    public static final int RULE_SIMPLE_ID=6;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_SINGLE_QUOTED_STRING=4;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=21;
-    public static final int RULE_LETTER_CHARACTER=19;
-    public static final int T__71=71;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int RULE_UNARY_OP=17;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
+    public static final int T__50=50;
     public static final int RULE_RESOLVE_IN_KIND=14;
-    public static final int T__61=61;
-    public static final int T__60=60;
+    public static final int RULE_MULTI_ITERATOR_OP=13;
+    public static final int T__59=59;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
@@ -86,37 +36,87 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
-    public static final int T__59=59;
-    public static final int RULE_INT=8;
-    public static final int RULE_SIMPLE_ITERATOR_OP=16;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int RULE_MULT_OP=12;
-    public static final int T__49=49;
+    public static final int T__60=60;
+    public static final int T__61=61;
     public static final int RULE_ACCESS_OP=9;
-    public static final int RULE_MULTI_ITERATOR_OP=13;
-    public static final int RULE_SL_COMMENT=22;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
+    public static final int RULE_INT=8;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=21;
+    public static final int T__67=67;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__64=64;
+    public static final int T__65=65;
+    public static final int RULE_MULT_OP=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_SINGLE_QUOTED_STRING=4;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_DOUBLE_QUOTED_STRING=5;
+    public static final int T__44=44;
+    public static final int RULE_UNARY_OP=17;
+    public static final int T__45=45;
+    public static final int T__46=46;
     public static final int RULE_ASSIGN_OP=10;
-    public static final int T__39=39;
+    public static final int T__47=47;
+    public static final int RULE_ESCAPED_ID=7;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__91=91;
+    public static final int T__92=92;
+    public static final int T__93=93;
+    public static final int T__94=94;
+    public static final int T__90=90;
+    public static final int RULE_LETTER_CHARACTER=19;
+    public static final int RULE_SIMPLE_ITERATOR_OP=16;
+    public static final int RULE_ESCAPED_CHARACTER=18;
+    public static final int T__95=95;
+    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
+    public static final int RULE_RESOLVE_KIND=15;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
+    public static final int T__25=25;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_SL_COMMENT=22;
+    public static final int T__77=77;
+    public static final int T__78=78;
+    public static final int T__79=79;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__74=74;
+    public static final int T__75=75;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int RULE_SIMPLE_ID=6;
+    public static final int T__83=83;
     public static final int RULE_WS=23;
+    public static final int RULE_ANY_OTHER=24;
+    public static final int RULE_CMP_OP=11;
+    public static final int T__88=88;
+    public static final int T__89=89;
+    public static final int T__84=84;
+    public static final int T__85=85;
+    public static final int T__86=86;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -5790,11 +5790,11 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                 {
                 int LA25_3 = input.LA(2);
 
-                if ( (LA25_3==EOF||LA25_3==26||(LA25_3>=29 && LA25_3<=32)||LA25_3==34||(LA25_3>=36 && LA25_3<=51)||LA25_3==68||LA25_3==76||LA25_3==78||LA25_3==93) ) {
-                    alt25=1;
-                }
-                else if ( (LA25_3==67) ) {
+                if ( (LA25_3==67) ) {
                     alt25=2;
+                }
+                else if ( (LA25_3==EOF||LA25_3==26||(LA25_3>=29 && LA25_3<=32)||LA25_3==34||(LA25_3>=36 && LA25_3<=51)||LA25_3==68||LA25_3==76||LA25_3==78||LA25_3==93) ) {
+                    alt25=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -6461,11 +6461,11 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                 {
                 int LA28_3 = input.LA(2);
 
-                if ( (LA28_3==EOF||LA28_3==26||(LA28_3>=29 && LA28_3<=32)||LA28_3==34||(LA28_3>=36 && LA28_3<=51)||LA28_3==76||LA28_3==78||LA28_3==93) ) {
-                    alt28=1;
-                }
-                else if ( (LA28_3==67) ) {
+                if ( (LA28_3==67) ) {
                     alt28=2;
+                }
+                else if ( (LA28_3==EOF||LA28_3==26||(LA28_3>=29 && LA28_3<=32)||LA28_3==34||(LA28_3>=36 && LA28_3<=51)||LA28_3==76||LA28_3==78||LA28_3==93) ) {
+                    alt28=1;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -12830,11 +12830,11 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                 {
                 int LA69_2 = input.LA(2);
 
-                if ( (LA69_2==67) ) {
-                    alt69=2;
-                }
-                else if ( (LA69_2==26||LA69_2==30||LA69_2==32||LA69_2==34||(LA69_2>=36 && LA69_2<=51)||LA69_2==76||LA69_2==78||LA69_2==84||LA69_2==93) ) {
+                if ( (LA69_2==26||LA69_2==30||LA69_2==32||LA69_2==34||(LA69_2>=36 && LA69_2<=51)||LA69_2==76||LA69_2==78||LA69_2==84||LA69_2==93) ) {
                     alt69=1;
+                }
+                else if ( (LA69_2==67) ) {
+                    alt69=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return current;}
@@ -17114,11 +17114,11 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
 
     // Delegated rules
 
-    public final boolean synpred89_InternalImperativeOCL() {
+    public final boolean synpred11_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred89_InternalImperativeOCL_fragment(); // can never throw exception
+            synpred11_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -17133,6 +17133,34 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
         int start = input.mark();
         try {
             synpred12_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred14_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred14_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred15_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred15_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -17170,6 +17198,34 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
         state.failed=false;
         return success;
     }
+    public final boolean synpred89_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred89_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred86_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred86_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred10_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
@@ -17189,62 +17245,6 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
         int start = input.mark();
         try {
             synpred16_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred11_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred11_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred15_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred15_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred14_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred14_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred86_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred86_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -17947,8 +17947,8 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
     static final String DFA42_acceptS =
         "\23\uffff\1\2\1\1";
     static final String DFA42_specialS =
-        "\1\uffff\1\5\1\0\1\7\1\6\1\10\1\4\1\1\1\3\1\14\1\11\1\17\1\20\1"+
-        "\2\1\16\1\15\1\13\1\12\1\21\2\uffff}>";
+        "\1\uffff\1\13\1\7\1\3\1\0\1\20\1\17\1\16\1\15\1\14\1\10\1\4\1\1"+
+        "\1\21\1\5\1\11\1\6\1\2\1\12\2\uffff}>";
     static final String[] DFA42_transitionS = {
             "\1\23\1\uffff\1\23\1\uffff\1\23\1\11\1\uffff\1\4\1\uffff\1"+
             "\1\1\2\1\3\1\5\1\6\1\7\1\10\1\12\1\13\1\14\1\15\1\16\1\17\1"+
@@ -18013,96 +18013,6 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA42_2 = input.LA(1);
-
-                         
-                        int index42_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA42_7 = input.LA(1);
-
-                         
-                        int index42_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA42_13 = input.LA(1);
-
-                         
-                        int index42_13 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_13);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA42_8 = input.LA(1);
-
-                         
-                        int index42_8 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_8);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA42_6 = input.LA(1);
-
-                         
-                        int index42_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
-                        int LA42_1 = input.LA(1);
-
-                         
-                        int index42_1 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_1);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 6 : 
                         int LA42_4 = input.LA(1);
 
                          
@@ -18117,11 +18027,11 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         input.seek(index42_4);
                         if ( s>=0 ) return s;
                         break;
-                    case 7 : 
-                        int LA42_3 = input.LA(1);
+                    case 1 : 
+                        int LA42_12 = input.LA(1);
 
                          
-                        int index42_3 = input.index();
+                        int index42_12 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18129,40 +18039,10 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_3);
+                        input.seek(index42_12);
                         if ( s>=0 ) return s;
                         break;
-                    case 8 : 
-                        int LA42_5 = input.LA(1);
-
-                         
-                        int index42_5 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_5);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA42_10 = input.LA(1);
-
-                         
-                        int index42_10 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index42_10);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
+                    case 2 : 
                         int LA42_17 = input.LA(1);
 
                          
@@ -18177,7 +18057,52 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         input.seek(index42_17);
                         if ( s>=0 ) return s;
                         break;
-                    case 11 : 
+                    case 3 : 
+                        int LA42_3 = input.LA(1);
+
+                         
+                        int index42_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA42_11 = input.LA(1);
+
+                         
+                        int index42_11 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_11);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA42_14 = input.LA(1);
+
+                         
+                        int index42_14 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_14);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
                         int LA42_16 = input.LA(1);
 
                          
@@ -18190,6 +18115,81 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
 
                          
                         input.seek(index42_16);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA42_2 = input.LA(1);
+
+                         
+                        int index42_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA42_10 = input.LA(1);
+
+                         
+                        int index42_10 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_10);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
+                        int LA42_15 = input.LA(1);
+
+                         
+                        int index42_15 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_15);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA42_18 = input.LA(1);
+
+                         
+                        int index42_18 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_18);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 11 : 
+                        int LA42_1 = input.LA(1);
+
+                         
+                        int index42_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index42_1);
                         if ( s>=0 ) return s;
                         break;
                     case 12 : 
@@ -18208,10 +18208,10 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         if ( s>=0 ) return s;
                         break;
                     case 13 : 
-                        int LA42_15 = input.LA(1);
+                        int LA42_8 = input.LA(1);
 
                          
-                        int index42_15 = input.index();
+                        int index42_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18219,14 +18219,14 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_15);
+                        input.seek(index42_8);
                         if ( s>=0 ) return s;
                         break;
                     case 14 : 
-                        int LA42_14 = input.LA(1);
+                        int LA42_7 = input.LA(1);
 
                          
-                        int index42_14 = input.index();
+                        int index42_7 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18234,14 +18234,14 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_14);
+                        input.seek(index42_7);
                         if ( s>=0 ) return s;
                         break;
                     case 15 : 
-                        int LA42_11 = input.LA(1);
+                        int LA42_6 = input.LA(1);
 
                          
-                        int index42_11 = input.index();
+                        int index42_6 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18249,14 +18249,14 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_11);
+                        input.seek(index42_6);
                         if ( s>=0 ) return s;
                         break;
                     case 16 : 
-                        int LA42_12 = input.LA(1);
+                        int LA42_5 = input.LA(1);
 
                          
-                        int index42_12 = input.index();
+                        int index42_5 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18264,14 +18264,14 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_12);
+                        input.seek(index42_5);
                         if ( s>=0 ) return s;
                         break;
                     case 17 : 
-                        int LA42_18 = input.LA(1);
+                        int LA42_13 = input.LA(1);
 
                          
-                        int index42_18 = input.index();
+                        int index42_13 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred88_InternalImperativeOCL()) ) {s = 20;}
@@ -18279,7 +18279,7 @@ public class InternalImperativeOCLParser extends AbstractInternalAntlrParser {
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index42_18);
+                        input.seek(index42_13);
                         if ( s>=0 ) return s;
                         break;
             }

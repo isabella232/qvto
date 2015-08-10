@@ -25,60 +25,10 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_INT", "RULE_SINGLE_QUOTED_STRING", "RULE_DOUBLE_QUOTED_STRING", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_ACCESS_OP", "RULE_ASSIGN_OP", "RULE_CMP_OP", "RULE_MULT_OP", "RULE_MULTI_ITERATOR_OP", "RULE_RESOLVE_IN_KIND", "RULE_RESOLVE_KIND", "RULE_SIMPLE_ITERATOR_OP", "RULE_UNARY_OP", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'-'", "'not'", "'*'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'|?'", "'?'", "'List'", "'('", "')'", "'Dict'", "','", "'{'", "'}'", "'return'", "':'", "'..'", "'++'", "'Lambda'", "'<-'", "'invalid'", "'null'", "'pre'", "'['", "']'", "'in'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'::'", "'extends'", "'&&'", "'true'", "'false'", "'@'", "'|'", "';'", "'|1'"
     };
-    public static final int RULE_CMP_OP=11;
-    public static final int T__29=29;
-    public static final int T__28=28;
-    public static final int T__27=27;
-    public static final int T__26=26;
-    public static final int T__25=25;
-    public static final int RULE_ESCAPED_CHARACTER=18;
-    public static final int RULE_ANY_OTHER=24;
-    public static final int RULE_ESCAPED_ID=8;
-    public static final int RULE_DOUBLE_QUOTED_STRING=6;
-    public static final int EOF=-1;
-    public static final int T__93=93;
-    public static final int T__94=94;
-    public static final int T__91=91;
-    public static final int T__92=92;
-    public static final int T__90=90;
-    public static final int RULE_RESOLVE_KIND=15;
-    public static final int RULE_SIMPLE_ID=7;
-    public static final int T__95=95;
-    public static final int T__80=80;
-    public static final int T__81=81;
-    public static final int T__82=82;
-    public static final int T__83=83;
-    public static final int RULE_SINGLE_QUOTED_STRING=5;
-    public static final int T__85=85;
-    public static final int T__84=84;
-    public static final int T__87=87;
-    public static final int T__86=86;
-    public static final int T__89=89;
-    public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=21;
-    public static final int RULE_LETTER_CHARACTER=19;
-    public static final int T__71=71;
-    public static final int T__72=72;
-    public static final int T__70=70;
-    public static final int T__76=76;
-    public static final int T__75=75;
-    public static final int T__74=74;
-    public static final int T__73=73;
-    public static final int T__79=79;
-    public static final int T__78=78;
-    public static final int T__77=77;
-    public static final int T__68=68;
-    public static final int RULE_UNARY_OP=17;
-    public static final int T__69=69;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
-    public static final int T__65=65;
-    public static final int T__62=62;
-    public static final int T__63=63;
+    public static final int T__50=50;
     public static final int RULE_RESOLVE_IN_KIND=14;
-    public static final int T__61=61;
-    public static final int T__60=60;
+    public static final int RULE_MULTI_ITERATOR_OP=13;
+    public static final int T__59=59;
     public static final int T__55=55;
     public static final int T__56=56;
     public static final int T__57=57;
@@ -87,37 +37,87 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
     public static final int T__52=52;
     public static final int T__53=53;
     public static final int T__54=54;
-    public static final int T__59=59;
-    public static final int RULE_INT=4;
-    public static final int RULE_SIMPLE_ITERATOR_OP=16;
-    public static final int T__50=50;
-    public static final int T__42=42;
-    public static final int T__43=43;
-    public static final int T__40=40;
-    public static final int T__41=41;
-    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
-    public static final int T__46=46;
-    public static final int T__47=47;
-    public static final int T__44=44;
-    public static final int T__45=45;
-    public static final int T__48=48;
-    public static final int RULE_MULT_OP=12;
-    public static final int T__49=49;
+    public static final int T__60=60;
+    public static final int T__61=61;
     public static final int RULE_ACCESS_OP=9;
-    public static final int RULE_MULTI_ITERATOR_OP=13;
-    public static final int RULE_SL_COMMENT=22;
-    public static final int T__30=30;
-    public static final int T__31=31;
-    public static final int T__32=32;
+    public static final int RULE_INT=4;
+    public static final int T__66=66;
+    public static final int RULE_ML_COMMENT=21;
+    public static final int T__67=67;
+    public static final int T__68=68;
+    public static final int T__69=69;
+    public static final int T__62=62;
+    public static final int T__63=63;
+    public static final int T__64=64;
+    public static final int T__65=65;
+    public static final int RULE_MULT_OP=12;
+    public static final int T__37=37;
+    public static final int T__38=38;
+    public static final int T__39=39;
     public static final int T__33=33;
     public static final int T__34=34;
     public static final int T__35=35;
     public static final int T__36=36;
-    public static final int T__37=37;
-    public static final int T__38=38;
+    public static final int T__30=30;
+    public static final int T__31=31;
+    public static final int T__32=32;
+    public static final int RULE_SINGLE_QUOTED_STRING=5;
+    public static final int T__48=48;
+    public static final int T__49=49;
+    public static final int RULE_DOUBLE_QUOTED_STRING=6;
+    public static final int T__44=44;
+    public static final int RULE_UNARY_OP=17;
+    public static final int T__45=45;
+    public static final int T__46=46;
     public static final int RULE_ASSIGN_OP=10;
-    public static final int T__39=39;
+    public static final int T__47=47;
+    public static final int RULE_ESCAPED_ID=8;
+    public static final int T__40=40;
+    public static final int T__41=41;
+    public static final int T__42=42;
+    public static final int T__43=43;
+    public static final int T__91=91;
+    public static final int T__92=92;
+    public static final int T__93=93;
+    public static final int T__94=94;
+    public static final int T__90=90;
+    public static final int RULE_LETTER_CHARACTER=19;
+    public static final int RULE_SIMPLE_ITERATOR_OP=16;
+    public static final int RULE_ESCAPED_CHARACTER=18;
+    public static final int T__95=95;
+    public static final int RULE_ML_SINGLE_QUOTED_STRING=20;
+    public static final int RULE_RESOLVE_KIND=15;
+    public static final int T__26=26;
+    public static final int T__27=27;
+    public static final int T__28=28;
+    public static final int T__29=29;
+    public static final int T__25=25;
+    public static final int T__70=70;
+    public static final int T__71=71;
+    public static final int T__72=72;
+    public static final int RULE_SL_COMMENT=22;
+    public static final int T__77=77;
+    public static final int T__78=78;
+    public static final int T__79=79;
+    public static final int T__73=73;
+    public static final int EOF=-1;
+    public static final int T__74=74;
+    public static final int T__75=75;
+    public static final int T__76=76;
+    public static final int T__80=80;
+    public static final int T__81=81;
+    public static final int T__82=82;
+    public static final int RULE_SIMPLE_ID=7;
+    public static final int T__83=83;
     public static final int RULE_WS=23;
+    public static final int RULE_ANY_OTHER=24;
+    public static final int RULE_CMP_OP=11;
+    public static final int T__88=88;
+    public static final int T__89=89;
+    public static final int T__84=84;
+    public static final int T__85=85;
+    public static final int T__86=86;
+    public static final int T__87=87;
 
     // delegates
     // delegators
@@ -9770,11 +9770,11 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                 {
                 int LA14_2 = input.LA(2);
 
-                if ( (LA14_2==69) ) {
-                    alt14=2;
-                }
-                else if ( (LA14_2==EOF||LA14_2==25||(LA14_2>=27 && LA14_2<=43)||LA14_2==62||(LA14_2>=65 && LA14_2<=67)||LA14_2==77||LA14_2==87||LA14_2==92) ) {
+                if ( (LA14_2==EOF||LA14_2==25||(LA14_2>=27 && LA14_2<=43)||LA14_2==62||(LA14_2>=65 && LA14_2<=67)||LA14_2==77||LA14_2==87||LA14_2==92) ) {
                     alt14=1;
+                }
+                else if ( (LA14_2==69) ) {
+                    alt14=2;
                 }
                 else {
                     if (state.backtracking>0) {state.failed=true; return ;}
@@ -41929,39 +41929,25 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
 
     // Delegated rules
 
+    public final boolean synpred11_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred11_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
     public final boolean synpred12_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
             synpred12_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred64_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred64_InternalImperativeOCL_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !state.failed;
-        input.rewind(start);
-        state.backtracking--;
-        state.failed=false;
-        return success;
-    }
-    public final boolean synpred84_InternalImperativeOCL() {
-        state.backtracking++;
-        int start = input.mark();
-        try {
-            synpred84_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -41985,11 +41971,11 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred16_InternalImperativeOCL() {
+    public final boolean synpred15_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred16_InternalImperativeOCL_fragment(); // can never throw exception
+            synpred15_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42013,11 +41999,11 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred17_InternalImperativeOCL() {
+    public final boolean synpred64_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred17_InternalImperativeOCL_fragment(); // can never throw exception
+            synpred64_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42041,11 +42027,11 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred11_InternalImperativeOCL() {
+    public final boolean synpred17_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred11_InternalImperativeOCL_fragment(); // can never throw exception
+            synpred17_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42055,11 +42041,25 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
         state.failed=false;
         return success;
     }
-    public final boolean synpred15_InternalImperativeOCL() {
+    public final boolean synpred84_InternalImperativeOCL() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred15_InternalImperativeOCL_fragment(); // can never throw exception
+            synpred84_InternalImperativeOCL_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !state.failed;
+        input.rewind(start);
+        state.backtracking--;
+        state.failed=false;
+        return success;
+    }
+    public final boolean synpred16_InternalImperativeOCL() {
+        state.backtracking++;
+        int start = input.mark();
+        try {
+            synpred16_InternalImperativeOCL_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -42763,8 +42763,8 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
     static final String DFA57_acceptS =
         "\23\uffff\1\2\1\1";
     static final String DFA57_specialS =
-        "\1\uffff\1\15\1\3\1\4\1\5\1\17\1\1\1\0\1\13\1\2\1\21\1\16\1\7\1"+
-        "\11\1\12\1\6\1\10\1\20\1\14\2\uffff}>";
+        "\1\uffff\1\13\1\5\1\7\1\0\1\3\1\16\1\21\1\12\1\14\1\6\1\10\1\1"+
+        "\1\4\1\2\1\15\1\17\1\11\1\20\2\uffff}>";
     static final String[] DFA57_transitionS = {
             "\1\4\1\uffff\1\1\1\2\1\3\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
             "\14\1\15\1\16\1\17\1\20\1\21\1\22\23\uffff\1\23\1\uffff\1\23"+
@@ -42829,81 +42829,6 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA57_7 = input.LA(1);
-
-                         
-                        int index57_7 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_7);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 1 : 
-                        int LA57_6 = input.LA(1);
-
-                         
-                        int index57_6 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_6);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 2 : 
-                        int LA57_9 = input.LA(1);
-
-                         
-                        int index57_9 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_9);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 3 : 
-                        int LA57_2 = input.LA(1);
-
-                         
-                        int index57_2 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_2);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
-                        int LA57_3 = input.LA(1);
-
-                         
-                        int index57_3 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_3);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 5 : 
                         int LA57_4 = input.LA(1);
 
                          
@@ -42918,22 +42843,7 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         input.seek(index57_4);
                         if ( s>=0 ) return s;
                         break;
-                    case 6 : 
-                        int LA57_15 = input.LA(1);
-
-                         
-                        int index57_15 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_15);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 7 : 
+                    case 1 : 
                         int LA57_12 = input.LA(1);
 
                          
@@ -42948,37 +42858,7 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         input.seek(index57_12);
                         if ( s>=0 ) return s;
                         break;
-                    case 8 : 
-                        int LA57_16 = input.LA(1);
-
-                         
-                        int index57_16 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_16);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA57_13 = input.LA(1);
-
-                         
-                        int index57_13 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_13);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
+                    case 2 : 
                         int LA57_14 = input.LA(1);
 
                          
@@ -42993,67 +42873,7 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         input.seek(index57_14);
                         if ( s>=0 ) return s;
                         break;
-                    case 11 : 
-                        int LA57_8 = input.LA(1);
-
-                         
-                        int index57_8 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_8);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 12 : 
-                        int LA57_18 = input.LA(1);
-
-                         
-                        int index57_18 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_18);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 13 : 
-                        int LA57_1 = input.LA(1);
-
-                         
-                        int index57_1 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_1);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 14 : 
-                        int LA57_11 = input.LA(1);
-
-                         
-                        int index57_11 = input.index();
-                        input.rewind();
-                        s = -1;
-                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
-
-                        else if ( (true) ) {s = 19;}
-
-                         
-                        input.seek(index57_11);
-                        if ( s>=0 ) return s;
-                        break;
-                    case 15 : 
+                    case 3 : 
                         int LA57_5 = input.LA(1);
 
                          
@@ -43068,7 +42888,82 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         input.seek(index57_5);
                         if ( s>=0 ) return s;
                         break;
-                    case 16 : 
+                    case 4 : 
+                        int LA57_13 = input.LA(1);
+
+                         
+                        int index57_13 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_13);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 5 : 
+                        int LA57_2 = input.LA(1);
+
+                         
+                        int index57_2 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_2);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 6 : 
+                        int LA57_10 = input.LA(1);
+
+                         
+                        int index57_10 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_10);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 7 : 
+                        int LA57_3 = input.LA(1);
+
+                         
+                        int index57_3 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_3);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 8 : 
+                        int LA57_11 = input.LA(1);
+
+                         
+                        int index57_11 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_11);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 9 : 
                         int LA57_17 = input.LA(1);
 
                          
@@ -43083,11 +42978,11 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         input.seek(index57_17);
                         if ( s>=0 ) return s;
                         break;
-                    case 17 : 
-                        int LA57_10 = input.LA(1);
+                    case 10 : 
+                        int LA57_8 = input.LA(1);
 
                          
-                        int index57_10 = input.index();
+                        int index57_8 = input.index();
                         input.rewind();
                         s = -1;
                         if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
@@ -43095,7 +42990,112 @@ public class InternalImperativeOCLParser extends AbstractInternalContentAssistPa
                         else if ( (true) ) {s = 19;}
 
                          
-                        input.seek(index57_10);
+                        input.seek(index57_8);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 11 : 
+                        int LA57_1 = input.LA(1);
+
+                         
+                        int index57_1 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_1);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 12 : 
+                        int LA57_9 = input.LA(1);
+
+                         
+                        int index57_9 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_9);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 13 : 
+                        int LA57_15 = input.LA(1);
+
+                         
+                        int index57_15 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_15);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 14 : 
+                        int LA57_6 = input.LA(1);
+
+                         
+                        int index57_6 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_6);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 15 : 
+                        int LA57_16 = input.LA(1);
+
+                         
+                        int index57_16 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_16);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 16 : 
+                        int LA57_18 = input.LA(1);
+
+                         
+                        int index57_18 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_18);
+                        if ( s>=0 ) return s;
+                        break;
+                    case 17 : 
+                        int LA57_7 = input.LA(1);
+
+                         
+                        int index57_7 = input.index();
+                        input.rewind();
+                        s = -1;
+                        if ( (synpred104_InternalImperativeOCL()) ) {s = 20;}
+
+                        else if ( (true) ) {s = 19;}
+
+                         
+                        input.seek(index57_7);
                         if ( s>=0 ) return s;
                         break;
             }
