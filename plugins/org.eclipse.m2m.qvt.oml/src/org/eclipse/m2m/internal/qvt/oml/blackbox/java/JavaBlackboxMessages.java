@@ -31,6 +31,7 @@ public class JavaBlackboxMessages extends NLS {
 	public static String MethodInvocationError;
 
 	public static String ModuleJavaClassNotFound;
+	public static String ModuleJavaClassNotLoadable;
 
 	public static String UnitAlreadyRegisteredContributionIgnored;
 

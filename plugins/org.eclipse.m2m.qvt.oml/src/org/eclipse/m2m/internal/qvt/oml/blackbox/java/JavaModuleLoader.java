@@ -88,28 +88,38 @@ abstract class JavaModuleLoader {
 				resolvePackages(usedPackages, fDiagnostics));
 		
 		fOperBuilder = new OperationBuilder(typeResolver);
-		for (Method method : javaClass.getDeclaredMethods()) {
-			if(!isLibraryOperation(method)) {
-				continue;
-			}
-			
-			EOperation operation = fOperBuilder.buildOperation(method);
-			Diagnostic operationStatus = fOperBuilder.getDiagnostics();
-			if(DiagnosticUtil.isSuccess(operationStatus)) {
-				loadOperation(operation, method);
-				
-				List<EOperation> listOp = definedOperations.get(operation.getName());
-				if (listOp == null) {
-					listOp = new LinkedList<EOperation>();
-					definedOperations.put(operation.getName(), listOp);
+		
+		try {
+			Method[] methods = javaClass.getDeclaredMethods();
+		
+			for (Method method : methods) {
+				if(!isLibraryOperation(method)) {
+					continue;
 				}
-				listOp.add(operation);
-			}
-
-			if(operationStatus.getSeverity() != Diagnostic.OK) {
-				fDiagnostics.add(operationStatus);
-			}
- 		}
+				
+				EOperation operation = fOperBuilder.buildOperation(method);
+				Diagnostic operationStatus = fOperBuilder.getDiagnostics();
+				if(DiagnosticUtil.isSuccess(operationStatus)) {
+					loadOperation(operation, method);
+					
+					List<EOperation> listOp = definedOperations.get(operation.getName());
+					if (listOp == null) {
+						listOp = new LinkedList<EOperation>();
+						definedOperations.put(operation.getName(), listOp);
+					}
+					listOp.add(operation);
+				}
+	
+				if(operationStatus.getSeverity() != Diagnostic.OK) {
+					fDiagnostics.add(operationStatus);
+				}
+	 		}
+		} catch (NoClassDefFoundError e) {
+			fDiagnostics.add(DiagnosticUtil.createErrorDiagnostic(NLS.bind(
+					JavaBlackboxMessages.ModuleJavaClassNotLoadable, moduleHandle.getModuleName()), new Exception(e)));
+			// no sense to continue
+			return fDiagnostics;
+		}
 
 		return fDiagnostics;
 	}
