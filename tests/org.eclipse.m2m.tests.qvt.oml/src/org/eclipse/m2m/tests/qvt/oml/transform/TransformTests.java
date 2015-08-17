@@ -667,6 +667,7 @@ public class TransformTests {
         		new FilesToFilesData("bug467600_OrderedSet"), //$NON-NLS-1$
         		new FilesToFilesData("bug467600_Sequence"), //$NON-NLS-1$
         		new FilesToFilesData("bug467600_Set"), //$NON-NLS-1$
+        		new FilesToFilesData("bug475123"), //$NON-NLS-1$
         		};
     }
 
@@ -681,36 +682,31 @@ public class TransformTests {
             "importedInstances", "fqn_noncontextual", "fqnOperationCalls_271789", "fqnMainCalls_271987", "fqnMainCalls_272937", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
             "transf_inheritance", //$NON-NLS-1$
             
-            // reference not in required format: eSuperTypes = "#//NEW_Class1" instead of "//@eClassifiers.0" 
-            "assigntonullowner", "resolveall", //$NON-NLS-1$ //$NON-NLS-2$
+            // input models use reference that is not in required format: eSuperTypes = "#//NEW_Class1" instead of "//@eClassifiers.0" 
+            "assigntonullowner", //$NON-NLS-1$
+            "resolveall", //$NON-NLS-1$
+            "bug420970", //$NON-NLS-1$
+          	"bug467600", //$NON-NLS-1$
             
             // uses getEClassifier() defined on ecore 
             "bug2787", "bug2839", "bug2437_4", "bug2437_5", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
     		
-            // imports java lib oper requiring generated ecore metamodel
+            // invoking ecore-specific blackbox operations, which cause mismatching param types in javaless mode
             "blackboxlib_237781", //$NON-NLS-1$
-            
-            // generated ECORE models -> not applicable to dynamic models  
+            "uml2_stereotypeApplication", //$NON-NLS-1$
+            "bug289982_importless", //$NON-NLS-1$
+          	"bug289982", //$NON-NLS-1$
+          	"bug326871", //$NON-NLS-1$
+          	"bug326871a", //$NON-NLS-1$
+          	"bug466705", //$NON-NLS-1$ 
             "blackboxlib_annotation_java", //$NON-NLS-1$
 
     		// EObjects are created inside blackbox transformation and later merged with javaless objects 
             "bug427237a", //$NON-NLS-1$
             
             // EObjects for incremental update are loaded from original 'in.ecore' so they don't match with those from 'in.ecore.javaless' 
-            "bug463572", //$NON-NLS-1$
-            
-            // invoking ecore-specific blackbox operations, which cause a mismatching param type in javaless mode
-            "uml2_stereotypeApplication", //$NON-NLS-1$
-            "bug289982_importless", //$NON-NLS-1$
-          	"bug289982", //$NON-NLS-1$
-          	"bug326871", //$NON-NLS-1$
-          	"bug326871a", //$NON-NLS-1$
-          	"bug466705", //$NON-NLS-1$
-          	
-          	// input model uses a custom data type for structural features (the #//... notation cannot be processed in javaless mode) 
-          	"bug420970", //$NON-NLS-1$
-          	"bug467600", //$NON-NLS-1$
-          	
+            "bug463572", //$NON-NLS-1$ 
+                  	
             // use of Eclipse project references requires patching across multiple projects
           	"bug433937", //$NON-NLS-1$
           	
