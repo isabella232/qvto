@@ -1,9 +1,9 @@
-import LateResolveBase;
+import models.bug463416.LateResolveBase;
 
-modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 
-transformation LateResolveExtends(out outModel:ecore)
-extends transformation LateResolveBase(out ecore);
+transformation LateResolveExtends(out outModel:ECORE)
+extends transformation LateResolveBase(out ECORE);
 
 main() {
 	map p();

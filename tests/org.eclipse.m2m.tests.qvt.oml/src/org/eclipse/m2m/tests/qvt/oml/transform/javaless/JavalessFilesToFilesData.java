@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -26,20 +26,20 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
-import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
+import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 
-// 1 qvt and 2 ecores
-public class JavalessFileToFileData extends ModelTestData {
-	public JavalessFileToFileData(ModelTestData data) {
+public class JavalessFilesToFilesData extends ModelTestData {
+	public JavalessFilesToFilesData(ModelTestData data) {
         super(data.getName(), data.getContext());
         if(!JavalessUtil.isValidJavalessData(data)) {
         	throw new IllegalArgumentException("Non-javaless data: " + data); //$NON-NLS-1$
         }
         
-        myFileData = (FileToFileData) data;
+        myFileData = (FilesToFilesData) data;
         myPatchedData = null;
         
+        ecoreFileMetamodels.addAll(data.getEcoreMetamodels());
         ecoreFileMetamodels.add(URI.createURI(JavalessUtil.JAVALESS_METAMODEL));
     }
     
@@ -51,14 +51,24 @@ public class JavalessFileToFileData extends ModelTestData {
 	
     @Override
 	public List<URI> getIn(IProject project) {
-    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(getPatchedData(project).getFromFile());
-        return Collections.singletonList(URI.createPlatformResourceURI(filePath.toString(), true));
+    	List<URI> in = new ArrayList<URI>(getPatchedData(project).getFromFiles().size());
+    	for (String fromFile : getPatchedData(project).getFromFiles()) {
+	    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(fromFile);
+	    	URI uri = URI.createPlatformResourceURI(filePath.toString(), true);
+	    	in.add(uri);
+    	}
+    	return in;
     }
     
     @Override
 	public List<URI> getExpected(IProject project) {
-    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(getPatchedData(project).getExpectedFile());
-        return Collections.singletonList(URI.createPlatformResourceURI(filePath.toString(), true)); 
+    	List<URI> expected = new ArrayList<URI>(getPatchedData(project).getExpectedFiles().size());
+    	for (String expectedFile : getPatchedData(project).getExpectedFiles()) {
+	    	IPath filePath = project.getProject().getFullPath().append(MODEL_FOLDER).append(getName()).append(expectedFile);
+	    	URI uri = URI.createPlatformResourceURI(filePath.toString(), true);
+	    	expected.add(uri);
+    	}
+	    return expected;
     }
     
     @Override
@@ -73,7 +83,7 @@ public class JavalessFileToFileData extends ModelTestData {
         return getFile(destFolder, getPatchedData(project).getName() + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT); 
     }
     
-    private FileToFileData getPatchedData(IProject project) {
+    private FilesToFilesData getPatchedData(IProject project) {
     	if(myPatchedData == null) {
     		try {
 				myPatchedData = createPatchedData(project);
@@ -87,7 +97,7 @@ public class JavalessFileToFileData extends ModelTestData {
     	return myPatchedData;
     }
     
-    private FileToFileData createPatchedData(IProject project) throws IOException {
+    private FilesToFilesData createPatchedData(IProject project) throws IOException {
 		File destFolder = getDestFolder(project);
 		
 		String patchedName = myFileData.getName() + "_javaless"; //$NON-NLS-1$
@@ -112,26 +122,39 @@ public class JavalessFileToFileData extends ModelTestData {
 			}
 		}
 		
-		String patchedFromFileName = myFileData.getFromFile() + ".javaless"; //$NON-NLS-1$
-		{
-			File fromEcore = getFile(destFolder, myFileData.getFromFile());
-    		String contents = FileUtil.getStreamContents(new FileInputStream(fromEcore), ENCODING);
-    		contents = JavalessUtil.patchContents(contents);
-    		createFile(destFolder, patchedFromFileName, contents);
+		List<String> patchedFromFiles = new ArrayList<String>(myFileData.getFromFiles().size());
+		for (String fromFile : myFileData.getFromFiles()) {
+			String patchedFromFileName = fromFile + ".javaless"; //$NON-NLS-1$
+			{
+				File fromEcore = getFile(destFolder, fromFile);
+	    		String contents = FileUtil.getStreamContents(new FileInputStream(fromEcore), ENCODING);
+	    		contents = JavalessUtil.patchContents(contents);
+	    		createFile(destFolder, patchedFromFileName, contents);
+			}
+			patchedFromFiles.add(patchedFromFileName);
 		}
 		
-		String patchedExpectedFileName = myFileData.getExpectedFile() + ".javaless"; //$NON-NLS-1$;
-		{
-			File expectedEcore = getFile(destFolder, myFileData.getExpectedFile());
-    		String contents = FileUtil.getStreamContents(new FileInputStream(expectedEcore), ENCODING);
-    		contents = JavalessUtil.patchContents(contents);
-    		createFile(destFolder, patchedExpectedFileName, contents);
+		List<String> patchedExpectedFiles = new ArrayList<String>(myFileData.getExpectedFiles().size());
+		for (String expectedFile : myFileData.getExpectedFiles()) {
+			String patchedExpectedFileName = expectedFile + ".javaless"; //$NON-NLS-1$;
+			{
+				File expectedEcore = getFile(destFolder, expectedFile);
+	    		String contents = FileUtil.getStreamContents(new FileInputStream(expectedEcore), ENCODING);
+	    		contents = JavalessUtil.patchContents(contents);
+	    		createFile(destFolder, patchedExpectedFileName, contents);
+			}
+			patchedExpectedFiles.add(patchedExpectedFileName);
 		}
 		
-		FileToFileData patchedData = new FileToFileData(patchedName, patchedFromFileName, patchedExpectedFileName, myFileData.getContext());
+		FilesToFilesData patchedData = new FilesToFilesData(patchedName, patchedFromFiles, patchedExpectedFiles, myFileData.getContext());
+		
+		for (URI metamodelURI : ecoreFileMetamodels) {
+			patchedData.includeMetamodelFile(metamodelURI.toString());
+		}
+		
 		return patchedData;
     }
     
-    private final FileToFileData myFileData;
-    private FileToFileData myPatchedData;
+    private final FilesToFilesData myFileData;
+    private FilesToFilesData myPatchedData;
 }

@@ -1,4 +1,4 @@
-import Lib;
+import models.bug463410.Lib;
 
 transformation bug463410();
 

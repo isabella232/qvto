@@ -21,9 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IPath;
@@ -32,7 +29,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -51,6 +47,9 @@ import org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.TreeComparator;
 import org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.edit.TreeEdit;
 import org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.emf.EmfObjectComparatorTreeNode;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.AssertionFailedError;
+import junit.framework.TestCase;
 
 public abstract class ModelTestData {
 	
@@ -127,11 +126,8 @@ public abstract class ModelTestData {
     public EPackage.Registry getMetamodelResolutionRegistry(IProject project, ResourceSet resSet) {
     	EPackage.Registry packageRegistry = null;
     	if(!ecoreFileMetamodels.isEmpty()) {
-    		EPackage.Registry reg = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project.getProject(),resSet);
-    		TestCase.assertNotNull("EPackage registry for workspace ecore file must be ready", reg); //$NON-NLS-1$
-
-    		packageRegistry = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
-			packageRegistry.putAll(reg);			
+    		packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project.getProject(),resSet);
+    		TestCase.assertNotNull("EPackage registry for workspace ecore file must be ready", packageRegistry); //$NON-NLS-1$			
     	}
     	return packageRegistry;
     }

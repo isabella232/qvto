@@ -11,16 +11,11 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -36,20 +31,22 @@ public class TestQvtInterpreter extends TestTransformation {
 	
 	static final String PREFIX = "interpret_"; //$NON-NLS-1$
 	
+	//private ResourceSet resourceSet = CompiledUnit.createResourceSet();
+	
     public TestQvtInterpreter(ModelTestData data) {
         super(data);        
 		setName(PREFIX + data.getName());
     }
     
     protected ITransformer getTransformer() {
-		return new DefaultTransformer(getData().isUseCompiledXmi(), getMetamodelRegistry());
+		return new DefaultTransformer(getData().isUseCompiledXmi(), getResourceSet());
     }
 
-	protected Registry getMetamodelRegistry() {
-		final ResourceSetImpl resSet = new ResourceSetImpl();
+	protected ResourceSet getResourceSet() {
+		final ResourceSetImpl resSet = CompiledUnit.createResourceSet();
 		Registry metamodelRegistry = getData().getMetamodelResolutionRegistry(getProject(), resSet);
 		resSet.setPackageRegistry(metamodelRegistry);
-		return metamodelRegistry;
+		return resSet;
 	}
        
 	@Override
@@ -81,15 +78,19 @@ public class TestQvtInterpreter extends TestTransformation {
 	public static class DefaultTransformer implements ITransformer {
 		
 		private final boolean fExecuteCompiledAST;
-		private final EPackage.Registry fRegistry;
+		private final ResourceSet fResourceSet;
 		
 		public DefaultTransformer(ModelTestData data) {
-			this(data.isUseCompiledXmi(), null);
+			this(data.isUseCompiledXmi());
 		}
 		
-		public DefaultTransformer(boolean executeCompiledAST, EPackage.Registry registry) {
+		public DefaultTransformer(boolean executeCompiledAST) {
+			this(executeCompiledAST, CompiledUnit.createResourceSet());
+		}
+		
+		public DefaultTransformer(boolean executeCompiledAST, ResourceSet resourceSet) {
 			fExecuteCompiledAST = executeCompiledAST;
-			fRegistry = registry;
+			fResourceSet = resourceSet;
 		}
 		
 		protected QvtInterpretedTransformation getTransformation(IFile transformation) {
@@ -109,41 +110,18 @@ public class TestQvtInterpreter extends TestTransformation {
 													        
 			        URI binURI = ExeXMISerializer.toXMIUnitURI(resourceURI);		
 			        assertTrue("Requires serialized AST for execution", URIConverter.INSTANCE.exists(binURI, null)); //$NON-NLS-1$
-			    		
-			        myResourceSet = CompiledUnit.createResourceSet();     			
-			        if(fRegistry != null) {
-				        EPackageRegistryImpl root = new EPackageRegistryImpl(EPackage.Registry.INSTANCE);
-						root.putAll(fRegistry);
-						myResourceSet.setPackageRegistry(root);
-
-						Map<URI, Resource> uriResourceMap = new HashMap<URI, Resource>();
-						for(Object nextEntry : fRegistry.values()) {				
-							if(nextEntry instanceof EPackage) {
-								EPackage ePackage = (EPackage) nextEntry;
-								Resource resource = ePackage.eResource();
-								if(resource != null) {
-									uriResourceMap.put(resource.getURI(), resource);
-								}
-							}				
-						}						
-						if(!uriResourceMap.isEmpty()) {
-							((ResourceSetImpl) myResourceSet).setURIResourceMap(uriResourceMap);
-						}
-			        }
-			        
-        			return new CompiledUnit(binURI, myResourceSet);       			
+			    	
+			        return new CompiledUnit(binURI, fResourceSet);       			
 				}
 				
 				@Override
 				protected ResourceSet getResourceSetImpl() {
-					return myResourceSet;
+					return fResourceSet;
 				}
 				
 				@Override
 				public void cleanup() {
 				}
-				
-				private ResourceSet myResourceSet;
 			};
 
 			return new QvtInterpretedTransformation(qvtModule); 

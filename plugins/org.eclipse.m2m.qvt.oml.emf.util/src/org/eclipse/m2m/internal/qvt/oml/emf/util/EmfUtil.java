@@ -14,10 +14,13 @@ package org.eclipse.m2m.internal.qvt.oml.emf.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -157,6 +160,25 @@ public class EmfUtil {
         return in;
     }
 	
+	public static Set<EObject> getResolvedContent(Collection<EObject> content, EObject metamodel) {
+		ResourceSet rs = (metamodel != null && metamodel.eResource() != null ? metamodel.eResource().getResourceSet() : null);
+		return getResolvedContent(content, rs);
+	}
+	
+	public static Set<EObject> getResolvedContent(Collection<EObject> content, ResourceSet rs) {
+		Set<EObject> resolvedObjs = new LinkedHashSet<EObject>(content.size());
+		for (EObject obj : content) {
+			EObject resolved = null;
+			try {
+				resolved = resolveSource(obj, rs);
+			}
+			catch (Exception ex) {				
+			}
+			resolvedObjs.add(resolved != null ? resolved : obj);
+		}
+		return resolvedObjs;
+	}
+		
 	public static boolean isUriExistsAsEObject(URI uri, ResourceSet rs, boolean validateNonEmpty) {
     	ModelContent loadModel = null;
     	try {

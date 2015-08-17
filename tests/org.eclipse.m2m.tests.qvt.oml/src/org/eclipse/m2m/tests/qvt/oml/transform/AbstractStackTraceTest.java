@@ -23,7 +23,6 @@ import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
@@ -119,7 +118,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	}
 
 	private ITransformer createTransformer() {
-		return new TestQvtInterpreter.DefaultTransformer(getData().isUseCompiledXmi(), EPackage.Registry.INSTANCE) {
+		return new TestQvtInterpreter.DefaultTransformer(getData()) {
 			
 	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception {
 	        	QvtInterpretedTransformation transf;

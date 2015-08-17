@@ -210,6 +210,8 @@ public abstract class TestTransformation extends TestCase {
         	int i = 0;
         	for (URI actualResultURI : transfResult) {
         		URI uri = expectedResultURIs.get(i++);
+        		
+        		
         		Resource expectedResource = rs.getResource(uri, true);
         		
         		List<EObject> actualExtentObjects = rs.getResource(actualResultURI, true).getContents();
@@ -312,7 +314,7 @@ public abstract class TestTransformation extends TestCase {
 		
 		URI outTraceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
 		QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
-		
+				
 		assertTrue(
 				NLS.bind("Unexpected number of resources. Expected ({0}), got ({1}).", inoutExtentCount + outExtentCount, //$NON-NLS-1$
 						 transf.getResourceSet().getResources().size()), 

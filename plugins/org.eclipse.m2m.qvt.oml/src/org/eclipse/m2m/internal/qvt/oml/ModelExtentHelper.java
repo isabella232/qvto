@@ -11,7 +11,6 @@
 package org.eclipse.m2m.internal.qvt.oml;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -181,7 +180,7 @@ public class ModelExtentHelper {
 		while (allContents.hasNext()) {
 			EObject eObject = allContents.next();
 			Resource eResource = eObject.eResource();
-			if (eResource != null && eResource != outExtent && resSet.getResources().contains(eResource)) {
+			if (eResource != null && eResource != outExtent) {
 				List<EObject> content = linkedExtents.get(eResource);
 				if (content == null) {
 					content = new ArrayList<EObject>();
@@ -211,7 +210,7 @@ public class ModelExtentHelper {
 			addAllContents(outExtent.getContents(), essentialRootElements);
 		}
 		else {
-			Set<EObject> resolvedRootElements = getResolvedContent(essentialRootElements, outExtent.getContents().get(0));
+			Set<EObject> resolvedRootElements = EmfUtil.getResolvedContent(essentialRootElements, outExtent.getContents().get(0));
 			
 			for (TreeIterator<EObject> it = outExtent.getAllContents(); it.hasNext();) {
 				EObject eObject = it.next();
@@ -224,21 +223,6 @@ public class ModelExtentHelper {
 			resolvedRootElements.removeAll(outExtent.getContents());
 			addAllContents(outExtent.getContents(), resolvedRootElements);
 		}
-	}
-
-	private static Set<EObject> getResolvedContent(Collection<EObject> content, EObject metamodel) {
-		ResourceSet rs = (metamodel != null && metamodel.eResource() != null ? metamodel.eResource().getResourceSet() : null);
-		Set<EObject> resolvedObjs = new LinkedHashSet<EObject>(content.size());
-		for (EObject obj : content) {
-			EObject resolved = null;
-			try {
-				resolved = EmfUtil.resolveSource(obj, rs);
-			}
-			catch (Exception ex) {				
-			}
-			resolvedObjs.add(resolved != null ? resolved : obj);
-		}
-		return resolvedObjs;
 	}
     
     private static Set<EObject> getEssentialRootElements(List<? extends EObject> allRootElements) {

@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
+import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 
 
@@ -25,18 +25,23 @@ public class JavalessUtil {
 	private JavalessUtil() {}
 	
     public static boolean isValidJavalessData(ModelTestData data) {
-    	if(data instanceof FileToFileData == false) {
+    	if(data instanceof FilesToFilesData == false) {
     		return false;
     	}
     	
-    	FileToFileData fileData = (FileToFileData) data;
-    	if(!isEcoreFile(fileData.getFromFile())) {
-    		return false;
-    	}
+    	FilesToFilesData filesData = (FilesToFilesData) data;
+    	    	
+    	for (String fromFile : filesData.getFromFiles()) {
+	    	if(!isEcoreFile(fromFile)) {
+	    		return false;
+	    	}
+    	};
     	
-    	if(!isEcoreFile(fileData.getExpectedFile())) {
-    		return false;
-    	}
+    	for (String expectedFile : filesData.getExpectedFiles()) {
+    		if(!isEcoreFile(expectedFile)) {
+    			return false;
+    		}
+		}
     	
     	return true;
     }
@@ -50,8 +55,8 @@ public class JavalessUtil {
     }
     
     public static String changeTransformationName(String content, String oldName, String newName) {
+    	
     	// update local imports
-    	//
 		Pattern p = Pattern.compile("(import\\s*models\\." + oldName + "\\..*);"); //$NON-NLS-1$ //$NON-NLS-2$
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
@@ -60,12 +65,18 @@ public class JavalessUtil {
 		}
 		m.appendTail(sb);
 		content = sb.toString();
-
+				
 		// update transformation name
-		//
-    	return content.replaceFirst(
-    			"\\s*transformation\\s+" + oldName,  //$NON-NLS-1$
-    			"\ntransformation " + newName); //$NON-NLS-1$ 
+		p = Pattern.compile("(\\s*transformation\\s+)" + oldName + "(\\(|;)"); //$NON-NLS-1$ //$NON-NLS-2$
+		m = p.matcher(content);
+		sb = new StringBuffer();
+		while (m.find()) {
+			m.appendReplacement(sb, "\ntransformation " + newName + m.group(2)); //$NON-NLS-1$
+		}
+		m.appendTail(sb);
+		content = sb.toString();
+		
+    	return content;
     }
     
     private static boolean isEcoreFile(String fname) {
@@ -81,5 +92,6 @@ public class JavalessUtil {
     	REPLACEMENTS.put("ecore\\(", "javaless("); //$NON-NLS-1$ //$NON-NLS-2$
     	REPLACEMENTS.put("ecore:", "javaless:"); //$NON-NLS-1$ //$NON-NLS-2$
     	REPLACEMENTS.put(":ecore", ":javaless"); //$NON-NLS-1$ //$NON-NLS-2$
+    	REPLACEMENTS.put(".ecore#/", ".ecore.javaless#/"); //$NON-NLS-1$ //$NON-NLS-2$
     }
 }

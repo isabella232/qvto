@@ -75,7 +75,7 @@ public class FilesToFilesData extends ModelTestData {
     public List<String> getExpectedFiles() {
 		return myExpectedFiles;
 	}
-    
+        
     private final List<String> myFromFiles;
     private final List<String> myExpectedFiles;
 }

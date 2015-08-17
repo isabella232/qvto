@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestQvtInterpreter;
@@ -35,21 +36,21 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 		isPatchOutput = patchOutput;
 	}
 	
-	public static JavalessFileToFileData createJavalessData(ModelTestData testData) {
-		if(testData instanceof JavalessFileToFileData) {
-			return (JavalessFileToFileData) testData;
+	public static JavalessFilesToFilesData createJavalessData(ModelTestData testData) {
+		if(testData instanceof JavalessFilesToFilesData) {
+			return (JavalessFilesToFilesData) testData;
 		}
 		
 		if(!JavalessUtil.isValidJavalessData(testData)) {
 			throw new IllegalArgumentException("Not a valid javaless test"); //$NON-NLS-1$
 		}
 		
-		return new JavalessFileToFileData(testData);
+		return new JavalessFilesToFilesData(testData);
 	}
 	
 	@Override
 	protected ITransformer getTransformer() {
-		return new DefaultTransformer(getData().isUseCompiledXmi(), getMetamodelRegistry()) {
+		return new DefaultTransformer(getData().isUseCompiledXmi(), getResourceSet()) {
 			@Override
 			public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
 				List<URI> outUris = super.transform(transformation, inUris, traceUri, qvtContext);
@@ -64,8 +65,7 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 			return;
 		}
 		for (URI uri : outUris) {
-			String filePath = uri.toFileString();
-			File file = new File(filePath);
+			File file = URIUtils.getResource(uri).getLocation().toFile();
 			String contents = FileUtil.getStreamContents(new FileInputStream(file), ModelTestData.ENCODING);
 			contents = JavalessUtil.patchContents(contents);
 			FileUtil.setContents(file, new ByteArrayInputStream(contents.getBytes(ModelTestData.ENCODING)));

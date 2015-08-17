@@ -16,17 +16,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
-import generics.GenericsPackage;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
@@ -45,6 +40,9 @@ import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtExecutor;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessQvtTest;
 import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessUtil;
 
+import generics.GenericsPackage;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 import simpleuml.SimpleumlPackage;
 import testqvt.TestqvtPackage;
 
@@ -700,6 +698,22 @@ public class TransformTests {
             
             // EObjects for incremental update are loaded from original 'in.ecore' so they don't match with those from 'in.ecore.javaless' 
             "bug463572", //$NON-NLS-1$
+            
+            // invoking ecore-specific blackbox operations, which cause a mismatching param type in javaless mode
+            "uml2_stereotypeApplication", //$NON-NLS-1$
+            "bug289982_importless", //$NON-NLS-1$
+          	"bug289982", //$NON-NLS-1$
+          	"bug326871", //$NON-NLS-1$
+          	"bug326871a", //$NON-NLS-1$
+          	"bug466705", //$NON-NLS-1$
+          	
+          	// input model uses a custom data type for structural features (the #//... notation cannot be processed in javaless mode) 
+          	"bug420970", //$NON-NLS-1$
+          	"bug467600", //$NON-NLS-1$
+          	
+            // use of Eclipse project references requires patching across multiple projects
+          	"bug433937", //$NON-NLS-1$
+          	
     }));
 
     private static final Set<String> JAVALESS_PATCH_OUTPUT = new HashSet<String>(Arrays.asList(new String[] {

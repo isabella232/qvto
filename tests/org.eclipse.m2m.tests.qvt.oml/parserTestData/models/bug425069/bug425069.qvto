@@ -1,4 +1,4 @@
-import bug425069a;
+import models.bug425069.bug425069a;
 
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
 transformation bug425069() extends bug425069a;
