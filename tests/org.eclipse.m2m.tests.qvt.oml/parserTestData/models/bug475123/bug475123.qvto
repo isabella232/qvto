@@ -10,5 +10,11 @@ main() {
 	var e2 = e1.testB();
 	
 	assert fatal (e2.name = nameA);
+	
+	
+	var e3 = object EClass{};
+	var e4 = e3.testC();
+	
+	assert fatal (e4.name = nameA);
 
 }

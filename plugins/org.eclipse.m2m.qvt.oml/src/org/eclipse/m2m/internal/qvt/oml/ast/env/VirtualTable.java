@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,6 +8,7 @@
  *   
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 475123
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
@@ -26,6 +27,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ThisInstanceResolver;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.ocl.Environment;
@@ -63,7 +65,7 @@ public abstract class VirtualTable implements IVirtualOperationTable {
 		if(fOperations == null) {
 			fOperations = new LinkedList<EOperation>();
 		}
-		
+
 		if(!fOperations.contains(operation)) {
 			fOperations.add(operation);
 		}
@@ -95,7 +97,7 @@ public abstract class VirtualTable implements IVirtualOperationTable {
 		}
 		
 		// check we can lookup operation directly for the actual type
-		if(scope == null) {
+		if(scope != null) {
 			for (EOperation nextOperation : getModuleScopeOperations(scope)) {
 				if(env.getUMLReflection().getOwningClassifier(nextOperation) == actualContextType) {
 					if(isOperationInScope(nextOperation, evalEnv)) {
@@ -105,7 +107,8 @@ public abstract class VirtualTable implements IVirtualOperationTable {
 			}
 		}
 		
-		for (EOperation nextOperation : getOperations()) {
+		Collection<EOperation> candidateOperations = QvtOperationalUtil.filterOverriddenOperations(getOperations());	
+		for (EOperation nextOperation : candidateOperations) {
 			if(env.getUMLReflection().getOwningClassifier(nextOperation) == actualContextType) {
 				if(isOperationInScope(nextOperation, evalEnv)) {
 					return nextOperation;

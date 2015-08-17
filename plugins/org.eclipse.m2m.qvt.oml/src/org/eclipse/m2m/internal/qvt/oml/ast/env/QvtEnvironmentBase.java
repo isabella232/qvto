@@ -612,15 +612,8 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	        getQVTTypeResolver().collectAdditionalOperationsInTypeHierarchy(ownerType, true, operations);
 	    }
         
-        // filter out overridden operations
-        for (EOperation next : new LinkedHashSet<EOperation>(operations)) {
-        	if (QvtOperationalUtil.isImperativeOperation(next)) {
-        		EOperation overridden = ((ImperativeOperation) next).getOverridden();
-        		if (overridden != null) {
-        			operations.remove(overridden);
-        		}
-        	}
-        }
+        // filter overridden operations
+        Collection<EOperation> overrideCandidates = QvtOperationalUtil.filterOverriddenOperations(operations);
         
 		for (EOperation next : operations) {
 			if ((next != operation) && 
@@ -651,7 +644,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 						if(QvtOperationalUtil.isImperativeOperation(operation) && QvtOperationalUtil.isImperativeOperation(next)) {
 							VirtualTable sourceOperVtable = getVirtualTable(operation);
 							sourceOperVtable.addOperation(next);
-							// do not virtualize operation from the importing module in the imported module for import by access1
+							// do not virtualize operation from the importing module in the imported module for import by access
 							if(!isImportedByAccess(next)) {
 								VirtualTable targetOperVtable = getVirtualTable(next);
 								targetOperVtable.addOperation(operation);
@@ -664,7 +657,7 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				if(ownerType == nextOwner || !isContextual) {
 					if(definingModule != next.getEContainingClass()) {
 						// we try to override operation only from extended modules
-						if(isImportedByExtends(next)) {
+						if(isImportedByExtends(next) && overrideCandidates.contains(next)) {
 							result = new CollisionStatus(next, CollisionStatus.OVERRIDES);
 						}
 					} else {

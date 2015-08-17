@@ -12,6 +12,8 @@
 package org.eclipse.m2m.internal.qvt.oml.ast.parser;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
@@ -212,5 +214,21 @@ public class QvtOperationalUtil {
 	
 	public static boolean isMutableCollectionType(EClassifier classifier) {
 		return classifier instanceof ListType || classifier instanceof DictionaryType;
+	}
+	
+	public static ImperativeOperation getOverriddenOperation(EOperation operation) {
+		return operation instanceof ImperativeOperation ? ((ImperativeOperation) operation).getOverridden() : null;
+	}
+	
+	public static Collection<EOperation> filterOverriddenOperations(Collection<EOperation> operations) {
+		Collection<EOperation> filtered = new LinkedHashSet<EOperation>(operations);
+        for (EOperation next : operations) {
+    		EOperation overridden = getOverriddenOperation(next);
+    		if (overridden != null) {
+    			filtered.remove(overridden);
+    		}
+        }
+        
+        return filtered;
 	}
 }

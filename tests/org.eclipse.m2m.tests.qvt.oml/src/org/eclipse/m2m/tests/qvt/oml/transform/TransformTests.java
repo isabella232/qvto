@@ -163,7 +163,7 @@ public class TransformTests {
 
     
     public static ModelTestData[] createTestData() {
-        return new ModelTestData[] {        		
+        return new ModelTestData[] {     		
         		new FilesToFilesData("dicttype"), //$NON-NLS-1$
         		new FileToFileData("transf_inheritance") { //$NON-NLS-1$
         			@Override
@@ -668,7 +668,7 @@ public class TransformTests {
         		new FilesToFilesData("bug467600_Sequence"), //$NON-NLS-1$
         		new FilesToFilesData("bug467600_Set"), //$NON-NLS-1$
         		new FilesToFilesData("bug475123"), //$NON-NLS-1$ 
-        		};
+        	};
     }
 
     private static final Set<String> JAVALESS_EXCLUDES = new HashSet<String>(Arrays.asList(new String[] {
