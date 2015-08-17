@@ -8,7 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 302594, 310991, 397959, 425069
+ *     Christopher Gerking - bugs 302594, 310991, 397959, 425069, 475123
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
@@ -23,8 +23,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import lpg.runtime.ParseErrorCodes;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -61,6 +59,8 @@ import org.eclipse.ocl.types.VoidType;
 import org.eclipse.ocl.util.TypeUtil;
 import org.eclipse.ocl.utilities.TypedElement;
 import org.eclipse.ocl.utilities.UMLReflection;
+
+import lpg.runtime.ParseErrorCodes;
 
 
 /**
@@ -611,6 +611,16 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	        // all fAdditionalTypes ever defined goes through this check, so all applicable get into VTABLEs
 	        getQVTTypeResolver().collectAdditionalOperationsInTypeHierarchy(ownerType, true, operations);
 	    }
+        
+        // filter out overridden operations
+        for (EOperation next : new LinkedHashSet<EOperation>(operations)) {
+        	if (QvtOperationalUtil.isImperativeOperation(next)) {
+        		EOperation overridden = ((ImperativeOperation) next).getOverridden();
+        		if (overridden != null) {
+        			operations.remove(overridden);
+        		}
+        	}
+        }
         
 		for (EOperation next : operations) {
 			if ((next != operation) && 
