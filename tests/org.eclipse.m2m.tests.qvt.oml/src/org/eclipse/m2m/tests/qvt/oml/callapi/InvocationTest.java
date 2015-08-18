@@ -18,8 +18,6 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -40,6 +38,8 @@ import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.m2m.qvt.oml.util.StringBufferLog;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
+
+import junit.framework.TestCase;
 
 /**
  * @author dvorak

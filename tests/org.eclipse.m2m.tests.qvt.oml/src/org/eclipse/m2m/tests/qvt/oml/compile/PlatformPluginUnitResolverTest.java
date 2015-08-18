@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.compile;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -25,6 +23,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
+
+import junit.framework.TestCase;
 
 /**
  * @author dvorak

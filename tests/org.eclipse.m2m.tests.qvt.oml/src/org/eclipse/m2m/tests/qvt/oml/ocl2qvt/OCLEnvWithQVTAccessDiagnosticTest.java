@@ -14,11 +14,11 @@ package org.eclipse.m2m.tests.qvt.oml.ocl2qvt;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.OCLEnvironmentWithQVTAccessFactory;
+
+import junit.framework.TestCase;
 
 public class OCLEnvWithQVTAccessDiagnosticTest extends TestCase {
 

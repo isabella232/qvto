@@ -27,9 +27,9 @@ import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationHelper;
-import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationValidator;
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationHelper.ModelExtent;
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationHelper.TransfExecutionResult;
+import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationValidator;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 
 /**

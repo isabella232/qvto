@@ -11,11 +11,11 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
+import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtStandaloneExecutor;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
-
-import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtStandaloneExecutor;
 
 public class StandaloneTests extends TestCase {
 

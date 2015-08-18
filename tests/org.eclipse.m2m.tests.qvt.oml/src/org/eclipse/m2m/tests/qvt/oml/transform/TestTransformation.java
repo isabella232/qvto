@@ -18,8 +18,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -36,7 +34,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
@@ -60,6 +58,8 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.TestCase;
 
 
 public abstract class TestTransformation extends TestCase {
@@ -205,12 +205,10 @@ public abstract class TestTransformation extends TestCase {
             List<URI> transfResult = myTransformer.transform(transformation, data.getIn(project), data.getTrace(project), data.getContext());
         	List<URI> expectedResultURIs = data.getExpected(project);
         	
-        	ResourceSetImpl rs = new ResourceSetImpl();
-        	rs.setPackageRegistry(data.getMetamodelResolutionRegistry(project, rs));
+        	ResourceSet rs = data.getResourceSet(project);
         	int i = 0;
         	for (URI actualResultURI : transfResult) {
         		URI uri = expectedResultURIs.get(i++);
-        		
         		
         		Resource expectedResource = rs.getResource(uri, true);
         		

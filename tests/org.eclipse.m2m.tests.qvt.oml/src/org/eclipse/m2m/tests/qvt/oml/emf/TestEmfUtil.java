@@ -11,12 +11,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.emf;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+
+import junit.framework.TestCase;
 
 public class TestEmfUtil extends TestCase {
 

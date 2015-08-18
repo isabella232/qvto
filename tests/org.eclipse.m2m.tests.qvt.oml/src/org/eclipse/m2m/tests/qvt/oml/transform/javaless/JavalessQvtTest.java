@@ -50,7 +50,7 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 	
 	@Override
 	protected ITransformer getTransformer() {
-		return new DefaultTransformer(getData().isUseCompiledXmi(), getResourceSet()) {
+		return new DefaultTransformer(getData(), getProject()) {
 			@Override
 			public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
 				List<URI> outUris = super.transform(transformation, inUris, traceUri, qvtContext);

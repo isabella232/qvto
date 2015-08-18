@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -34,6 +32,8 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.HelperOperationCall;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.NonTransformationExecutionContext;
 import org.eclipse.m2m.tests.qvt.oml.util.TestModuleResolver;
+
+import junit.framework.TestCase;
 
 
 public class TestExternHelperCall extends TestCase {

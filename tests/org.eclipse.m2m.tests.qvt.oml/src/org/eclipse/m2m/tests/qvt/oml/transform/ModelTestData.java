@@ -28,12 +28,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
+import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MModelURIMapFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
@@ -126,7 +128,7 @@ public abstract class ModelTestData {
     public EPackage.Registry getMetamodelResolutionRegistry(IProject project, ResourceSet resSet) {
     	EPackage.Registry packageRegistry = null;
     	if(!ecoreFileMetamodels.isEmpty()) {
-    		packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project.getProject(),resSet);
+    		packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(project, resSet);
     		TestCase.assertNotNull("EPackage registry for workspace ecore file must be ready", packageRegistry); //$NON-NLS-1$			
     	}
     	return packageRegistry;
@@ -248,6 +250,17 @@ public abstract class ModelTestData {
     
     public void prepare(BlackboxRegistry blackboxRegistry) {
     }
+    
+    protected ResourceSet getResourceSet(IProject project) {
+		final ResourceSet resSet = isUseCompiledXmi() ? CompiledUnit.createResourceSet() : new ResourceSetImpl();
+		
+		if (project != null) {
+			Registry metamodelRegistry = getMetamodelResolutionRegistry(project, resSet);
+			resSet.setPackageRegistry(metamodelRegistry);
+		}
+		
+		return resSet;
+	}
     
     
     private final String myName;

@@ -15,8 +15,6 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -40,9 +38,11 @@ import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEvaluationEnvironment;
 import org.eclipse.ocl.ecore.OCL;
-import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.ecore.OCL.Query;
+import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
+
+import junit.framework.TestCase;
 
 public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 

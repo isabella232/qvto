@@ -14,8 +14,6 @@ package org.eclipse.m2m.tests.qvt.oml.compile;
 
 import java.io.File;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
@@ -29,6 +27,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.TestCase;
 
 public class UnitResolverFactoryTest extends TestCase {
 	

@@ -13,8 +13,6 @@ package org.eclipse.m2m.tests.qvt.oml.compile;
 import java.io.BufferedReader;
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
@@ -26,6 +24,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.URIUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
+
+import junit.framework.TestCase;
 
 /**
  * @author yblanken

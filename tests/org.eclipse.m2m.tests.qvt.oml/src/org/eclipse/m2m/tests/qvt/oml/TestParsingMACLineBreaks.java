@@ -13,12 +13,12 @@ package org.eclipse.m2m.tests.qvt.oml;
 
 import java.io.StringReader;
 
-import junit.framework.TestCase;
-
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParser;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.QVTOLexer;
 import org.eclipse.ocl.ParserException;
+
+import junit.framework.TestCase;
 
 public class TestParsingMACLineBreaks extends TestCase {
 

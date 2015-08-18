@@ -13,8 +13,6 @@ package org.eclipse.m2m.tests.qvt.oml;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -23,6 +21,8 @@ import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+
+import junit.framework.TestCase;
 
 /**
  * https://bugs.eclipse.org/bugs/show_bug.cgi?id=279251  

@@ -118,22 +118,32 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	}
 
 	private ITransformer createTransformer() {
-		return new TestQvtInterpreter.DefaultTransformer(getData()) {
+		
+		boolean useCompiledXMI = fUseCompiledXMI && getData().isUseCompiledXmi();
+		
+		return new TestQvtInterpreter.DefaultTransformer(useCompiledXMI, getData().getResourceSet(null)) {
 			
-	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception {
-	        	QvtInterpretedTransformation transf;
-	        	if(fUseCompiledXMI) {
-	        		transf = getTransformation(transformation);
-	        	} else {
-	        		transf = new QvtInterpretedTransformation(transformation);
-		        	QvtCompilerOptions options = new QvtCompilerOptions();
+			@Override
+			protected QvtInterpretedTransformation getTransformation(IFile transformation) {
+				QvtInterpretedTransformation transf = super.getTransformation(transformation);
+				
+				if (!fUseCompiledXMI) {
+					QvtCompilerOptions options = new QvtCompilerOptions();
 		        	options.setGenerateCompletionData(false);
 		        	options.setSourceLineNumbersEnabled(fEnableLineNumbers);	        	
 		        	transf.setQvtCompilerOptions(options);
-	        		
-	        		TestUtil.assertAllPersistableAST(transf.getModule().getUnit());
-	        	}
+				}
+				
+				return transf;	
+			}
+			
+			@Override
+	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception {
+	        	QvtInterpretedTransformation transf = getTransformation(transformation);
 	        	
+	        	if(!fUseCompiledXMI) {
+	        		TestUtil.assertAllPersistableAST(transf.getModule().getUnit());
+	        	}	        	
 	        	
 	        	Context qvtContext = QvtLaunchUtil.createContext(context.getConfigProperties());
 	        	qvtContext.setLog(new WriterLog(fLogger));

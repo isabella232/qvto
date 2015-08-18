@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
@@ -47,6 +45,8 @@ import org.eclipse.m2m.qvt.oml.debug.core.launch.TransformationRunnerFactory;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.TestCase;
 
 
 public class DebugExecutorTest extends TestCase {

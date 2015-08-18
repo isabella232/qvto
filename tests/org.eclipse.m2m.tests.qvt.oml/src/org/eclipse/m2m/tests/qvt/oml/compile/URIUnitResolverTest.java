@@ -15,8 +15,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.util.Collections;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -26,6 +24,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
+
+import junit.framework.TestCase;
 
 /**
  * @author dvorak

@@ -15,8 +15,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
@@ -31,6 +29,8 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.qvt.oml.util.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+
+import junit.framework.TestCase;
 
 public class IncrementalUpdateExecutorTest extends TransformationExecutorTest {
 	

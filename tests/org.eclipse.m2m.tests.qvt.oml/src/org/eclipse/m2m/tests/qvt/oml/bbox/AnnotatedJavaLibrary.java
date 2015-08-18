@@ -12,9 +12,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.bbox;
 
-import generics.GenericCls;
-import generics.GenericsFactory;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -46,6 +43,8 @@ import org.eclipse.m2m.qvt.oml.util.Utils;
 import org.eclipse.ocl.util.Bag;
 import org.eclipse.ocl.util.CollectionUtil;
 
+import generics.GenericCls;
+import generics.GenericsFactory;
 import simpleuml.Model;
 
 @Module(packageURIs={

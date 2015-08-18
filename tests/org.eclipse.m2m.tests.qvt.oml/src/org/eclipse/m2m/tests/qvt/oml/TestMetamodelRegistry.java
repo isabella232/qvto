@@ -14,8 +14,6 @@ package org.eclipse.m2m.tests.qvt.oml;
 
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -42,6 +40,8 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
+
+import junit.framework.TestCase;
 
 
 public class TestMetamodelRegistry extends TestCase {

@@ -13,8 +13,6 @@ package org.eclipse.m2m.tests.qvt.oml;
 
 import java.util.Arrays;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +22,8 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.OCLAnnotationSupport;
+
+import junit.framework.TestCase;
 
 public class TestOCLAnnotationSupport extends TestCase {
 	

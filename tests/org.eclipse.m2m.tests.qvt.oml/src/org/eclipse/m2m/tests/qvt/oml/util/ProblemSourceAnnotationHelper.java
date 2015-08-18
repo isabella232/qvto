@@ -18,9 +18,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.AssertionFailedError;
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
@@ -30,6 +27,9 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.tests.qvt.oml.util.SourceAnnotationReader.AnnotationData;
 import org.eclipse.m2m.tests.qvt.oml.util.SourceAnnotationReader.Position;
 import org.eclipse.m2m.tests.qvt.oml.util.SourceAnnotationReader.RegionInfo;
+
+import junit.framework.AssertionFailedError;
+import junit.framework.TestCase;
 
 
 public class ProblemSourceAnnotationHelper {

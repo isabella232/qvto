@@ -13,8 +13,6 @@ package org.eclipse.m2m.tests.qvt.oml;
 
 import java.io.ByteArrayInputStream;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -24,6 +22,8 @@ import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.TestCase;
 
 
 /**

@@ -14,11 +14,10 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMISerializer;
@@ -31,23 +30,14 @@ public class TestQvtInterpreter extends TestTransformation {
 	
 	static final String PREFIX = "interpret_"; //$NON-NLS-1$
 	
-	//private ResourceSet resourceSet = CompiledUnit.createResourceSet();
-	
     public TestQvtInterpreter(ModelTestData data) {
         super(data);        
 		setName(PREFIX + data.getName());
     }
     
     protected ITransformer getTransformer() {
-		return new DefaultTransformer(getData().isUseCompiledXmi(), getResourceSet());
+		return new DefaultTransformer(getData(), getProject());
     }
-
-	protected ResourceSet getResourceSet() {
-		final ResourceSetImpl resSet = CompiledUnit.createResourceSet();
-		Registry metamodelRegistry = getData().getMetamodelResolutionRegistry(getProject(), resSet);
-		resSet.setPackageRegistry(metamodelRegistry);
-		return resSet;
-	}
        
 	@Override
     public void setUp() throws Exception {   
@@ -81,19 +71,20 @@ public class TestQvtInterpreter extends TestTransformation {
 		private final ResourceSet fResourceSet;
 		
 		public DefaultTransformer(ModelTestData data) {
-			this(data.isUseCompiledXmi());
+			this(data, null);
 		}
 		
-		public DefaultTransformer(boolean executeCompiledAST) {
-			this(executeCompiledAST, CompiledUnit.createResourceSet());
+		public DefaultTransformer(ModelTestData data, IProject project) {
+			this(data.isUseCompiledXmi(), data.getResourceSet(project));
 		}
-		
-		public DefaultTransformer(boolean executeCompiledAST, ResourceSet resourceSet) {
+				
+		protected DefaultTransformer(boolean executeCompiledAST, ResourceSet resourceSet) {
 			fExecuteCompiledAST = executeCompiledAST;
 			fResourceSet = resourceSet;
 		}
-		
-		protected QvtInterpretedTransformation getTransformation(IFile transformation) {
+				
+			    
+	    protected QvtInterpretedTransformation getTransformation(IFile transformation) {
 			if(!fExecuteCompiledAST) {
 				return new QvtInterpretedTransformation(transformation);
 			}

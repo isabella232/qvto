@@ -11,14 +11,14 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.perf;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+
+import junit.framework.TestCase;
 
 /**
  * @author dvorak

@@ -14,8 +14,6 @@ package org.eclipse.m2m.tests.qvt.oml.env;
 import java.util.ArrayList;
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -38,6 +36,8 @@ import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+
+import junit.framework.TestCase;
 
 public class QVTOperationalEnvTest extends TestCase {
 

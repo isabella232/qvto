@@ -28,10 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Assert;
-
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
@@ -62,7 +58,10 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.RuntimeWorkspaceSetup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.junit.Assert;
 import org.osgi.framework.Bundle;
+
+import junit.framework.TestCase;
 
 /**
  * @author vrepeshko

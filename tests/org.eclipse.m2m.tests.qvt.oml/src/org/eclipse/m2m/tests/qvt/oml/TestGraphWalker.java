@@ -11,10 +11,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 
-import junit.framework.TestCase;
-
 import org.eclipse.m2m.internal.qvt.oml.evaluator.GraphWalker;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.GraphWalker.NodeProvider;
+
+import junit.framework.TestCase;
 
 public class TestGraphWalker extends TestCase {
     Node A = new Node("A"); //$NON-NLS-1$

@@ -11,10 +11,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
+import org.eclipse.m2m.tests.qvt.oml.traces.TestTraceFile;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
-
-import org.eclipse.m2m.tests.qvt.oml.traces.TestTraceFile;
 
 /**
  * @author aigdalov

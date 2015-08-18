@@ -17,9 +17,6 @@
  */
 package org.eclipse.m2m.tests.qvt.oml;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
-
 import org.eclipse.m2m.tests.qvt.oml.ant.QvtAntScriptTests;
 import org.eclipse.m2m.tests.qvt.oml.callapi.AllCallAPITests;
 import org.eclipse.m2m.tests.qvt.oml.callapi.SourceContainerTests;
@@ -33,6 +30,9 @@ import org.eclipse.m2m.tests.qvt.oml.transform.TransformManyModelTests;
 import org.eclipse.m2m.tests.qvt.oml.transform.TransformTests;
 import org.eclipse.m2m.tests.qvt.oml.transform.api.QvtoTransfHelperTests;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
 
 /**

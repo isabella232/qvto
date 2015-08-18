@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -21,6 +19,8 @@ import org.eclipse.m2m.internal.qvt.oml.samples.ui.SampleProjectsCreationOperati
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+
+import junit.framework.TestCase;
 
 
 public class TestSamples extends TestCase {
