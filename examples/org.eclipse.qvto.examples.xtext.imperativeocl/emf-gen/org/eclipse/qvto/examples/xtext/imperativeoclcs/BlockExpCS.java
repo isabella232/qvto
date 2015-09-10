@@ -15,7 +15,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getBodyExpressions <em>Body Expressions</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getExpressions <em>Expressions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getBlockExpCS()
@@ -24,19 +24,19 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface BlockExpCS extends StatementCS {
 	/**
-	 * Returns the value of the '<em><b>Body Expressions</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Body Expressions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Expressions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Body Expressions</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getBlockExpCS_BodyExpressions()
+	 * @return the value of the '<em>Expressions</em>' containment reference list.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getBlockExpCS_Expressions()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ExpCS> getBodyExpressions();
+	EList<ExpCS> getExpressions();
 
 } // BlockExpCS

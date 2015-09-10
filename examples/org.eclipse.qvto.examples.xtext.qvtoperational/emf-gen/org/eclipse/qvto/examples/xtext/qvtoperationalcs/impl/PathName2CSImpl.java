@@ -10,43 +10,43 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.PivotableElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Operation Simple Signature CS</b></em>'.
+ * An implementation of the model object '<em><b>Path Name2 CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.OperationSimpleSignatureCSImpl#getParameter <em>Parameter</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PathName2CSImpl#getOwnedPathElements2 <em>Owned Path Elements2</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements OperationSimpleSignatureCS {
+public class PathName2CSImpl extends PivotableElementCSImpl implements PathName2CS {
 	/**
-	 * The cached value of the '{@link #getParameter() <em>Parameter</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPathElements2() <em>Owned Path Elements2</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameter()
+	 * @see #getOwnedPathElements2()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<OperationParameterDeclarationCS> parameter;
+	protected EList<PathElement2CS> ownedPathElements2;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OperationSimpleSignatureCSImpl() {
+	protected PathName2CSImpl() {
 		super();
 	}
 
@@ -57,7 +57,7 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTOperationalCSPackage.Literals.OPERATION_SIMPLE_SIGNATURE_CS;
+		return QVTOperationalCSPackage.Literals.PATH_NAME2_CS;
 	}
 
 	/**
@@ -65,11 +65,11 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<OperationParameterDeclarationCS> getParameter() {
-		if (parameter == null) {
-			parameter = new EObjectContainmentEList<OperationParameterDeclarationCS>(OperationParameterDeclarationCS.class, this, QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER);
+	public EList<PathElement2CS> getOwnedPathElements2() {
+		if (ownedPathElements2 == null) {
+			ownedPathElements2 = new EObjectContainmentEList<PathElement2CS>(PathElement2CS.class, this, QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2);
 		}
-		return parameter;
+		return ownedPathElements2;
 	}
 
 	/**
@@ -80,8 +80,8 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER:
-				return ((InternalEList<?>)getParameter()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2:
+				return ((InternalEList<?>)getOwnedPathElements2()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -94,8 +94,8 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER:
-				return getParameter();
+			case QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2:
+				return getOwnedPathElements2();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,9 +109,9 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER:
-				getParameter().clear();
-				getParameter().addAll((Collection<? extends OperationParameterDeclarationCS>)newValue);
+			case QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2:
+				getOwnedPathElements2().clear();
+				getOwnedPathElements2().addAll((Collection<? extends PathElement2CS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +125,8 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER:
-				getParameter().clear();
+			case QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2:
+				getOwnedPathElements2().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +140,8 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS__PARAMETER:
-				return parameter != null && !parameter.isEmpty();
+			case QVTOperationalCSPackage.PATH_NAME2_CS__OWNED_PATH_ELEMENTS2:
+				return ownedPathElements2 != null && !ownedPathElements2.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -153,7 +153,7 @@ public class OperationSimpleSignatureCSImpl extends ElementCSImpl implements Ope
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) ((QVTOperationalCSVisitor<?>)visitor).visitOperationSimpleSignatureCS(this);
+		return (R) ((QVTOperationalCSVisitor<?>)visitor).visitPathName2CS(this);
 	}
 
-} //OperationSimpleSignatureCSImpl
+} //PathName2CSImpl

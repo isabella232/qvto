@@ -34,17 +34,25 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
  */
 public class ImperativeOCLASResourceFactory extends AbstractASResourceFactory
 {
-	public static final @NonNull String FILE_EXTENSION = "imperativeoclas";
-	public static final @NonNull ImperativeOCLASResourceFactory INSTANCE = new ImperativeOCLASResourceFactory();
+	private static final @NonNull String AS_FILE_EXTENSION = "imperativeoclas";
+	private static final @NonNull String CS_FILE_EXTENSION = "iocl";
+	private static ImperativeOCLASResourceFactory INSTANCE;
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		ImperativeOCLPackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
+		ImperativeOCLPackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, ImperativeOCLPackage.eNS_URI, null);
 	
 	static {
 		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, CONTENT_HANDLER);
 	}
 	
+	public static synchronized @NonNull ImperativeOCLASResourceFactory getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new ImperativeOCLASResourceFactory();	// Create our own singleton
+			INSTANCE.install(CS_FILE_EXTENSION, null);
+		}
+		return INSTANCE;
+	}
 	/**
 	 * Creates an instance of the resource factory.
 	 */
@@ -85,6 +93,6 @@ public class ImperativeOCLASResourceFactory extends AbstractASResourceFactory
 	@Override
 	@NonNull
 	public ASResourceFactory getASResourceFactory() {
-		return INSTANCE;
+		return getInstance();
 	}
 }

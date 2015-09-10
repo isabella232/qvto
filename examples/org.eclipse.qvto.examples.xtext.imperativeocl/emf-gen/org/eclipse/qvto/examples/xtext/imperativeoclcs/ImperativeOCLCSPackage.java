@@ -613,13 +613,13 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	int BLOCK_EXP_CS__PRECEDENCE = STATEMENT_CS__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Body Expressions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Expressions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BLOCK_EXP_CS__BODY_EXPRESSIONS = STATEMENT_CS_FEATURE_COUNT + 0;
+	int BLOCK_EXP_CS__EXPRESSIONS = STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Block Exp CS</em>' class.
@@ -4000,15 +4000,15 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	EClass getBlockExpCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getBodyExpressions <em>Body Expressions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getExpressions <em>Expressions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Body Expressions</em>'.
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getBodyExpressions()
+	 * @return the meta object for the containment reference list '<em>Expressions</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS#getExpressions()
 	 * @see #getBlockExpCS()
 	 * @generated
 	 */
-	EReference getBlockExpCS_BodyExpressions();
+	EReference getBlockExpCS_Expressions();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS <em>Dict Literal Exp CS</em>}'.
@@ -4714,12 +4714,12 @@ public interface ImperativeOCLCSPackage extends EPackage {
 		EClass BLOCK_EXP_CS = eINSTANCE.getBlockExpCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Body Expressions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Expressions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BLOCK_EXP_CS__BODY_EXPRESSIONS = eINSTANCE.getBlockExpCS_BodyExpressions();
+		EReference BLOCK_EXP_CS__EXPRESSIONS = eINSTANCE.getBlockExpCS_Expressions();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DictLiteralExpCSImpl <em>Dict Literal Exp CS</em>}' class.

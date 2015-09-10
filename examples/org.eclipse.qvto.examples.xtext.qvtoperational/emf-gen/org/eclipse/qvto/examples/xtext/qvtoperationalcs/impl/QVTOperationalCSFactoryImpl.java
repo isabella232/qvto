@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.*;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierKind;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS;
@@ -28,10 +29,8 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS;
@@ -39,17 +38,18 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PrimitiveTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSFactory;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
@@ -116,13 +116,14 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTOperationalCSPackage.PATH_NAME2_CS: return createPathName2CS();
+			case QVTOperationalCSPackage.PATH_ELEMENT2_CS: return createPathElement2CS();
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS: return createTypedTypeRef2CS();
 			case QVTOperationalCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			case QVTOperationalCSPackage.QV_TO_CLASS_CS: return createQVToClassCS();
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS: return createQVToImportCS();
 			case QVTOperationalCSPackage.QV_TO_LIBRARY_CS: return createQVToLibraryCS();
 			case QVTOperationalCSPackage.QV_TO_OPERATION_CS: return createQVToOperationCS();
-			case QVTOperationalCSPackage.OPERATION_PARAMETER_DECLARATION_CS: return createOperationParameterDeclarationCS();
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS: return createOperationSimpleSignatureCS();
 			case QVTOperationalCSPackage.INIT_PART_CS: return createInitPartCS();
 			case QVTOperationalCSPackage.METAMODEL_CS: return createMetamodelCS();
 			case QVTOperationalCSPackage.PRIMITIVE_TYPE_CS: return createPrimitiveTypeCS();
@@ -143,15 +144,14 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS: return createMappingCallExpCS();
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS: return createMappingOperationCS();
 			case QVTOperationalCSPackage.MAPPING_END_CS: return createMappingEndCS();
-			case QVTOperationalCSPackage.MAPPING_EXTENSION_CS: return createMappingExtensionCS();
 			case QVTOperationalCSPackage.MAPPING_INIT_CS: return createMappingInitCS();
-			case QVTOperationalCSPackage.MAPPING_MODULE_CS: return createMappingModuleCS();
 			case QVTOperationalCSPackage.MAPPING_QUERY_CS: return createMappingQueryCS();
 			case QVTOperationalCSPackage.MAPPING_RULE_CS: return createMappingRuleCS();
 			case QVTOperationalCSPackage.MAPPING_SECTIONS_CS: return createMappingSectionsCS();
 			case QVTOperationalCSPackage.MODULE_KIND_CS: return createModuleKindCS();
 			case QVTOperationalCSPackage.MODULE_REF_CS: return createModuleRefCS();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS: return createModelTypeCS();
+			case QVTOperationalCSPackage.MODULE_CS: return createModuleCS();
 			case QVTOperationalCSPackage.MODULE_USAGE_CS: return createModuleUsageCS();
 			case QVTOperationalCSPackage.MULTIPLICITY_DEF_CS: return createMultiplicityDefCS();
 			case QVTOperationalCSPackage.OBJECT_EXP_CS: return createObjectExpCS();
@@ -240,6 +240,36 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public PathName2CS createPathName2CS() {
+		PathName2CSImpl pathName2CS = new PathName2CSImpl();
+		return pathName2CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PathElement2CS createPathElement2CS() {
+		PathElement2CSImpl pathElement2CS = new PathElement2CSImpl();
+		return pathElement2CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedTypeRef2CS createTypedTypeRef2CS() {
+		TypedTypeRef2CSImpl typedTypeRef2CS = new TypedTypeRef2CSImpl();
+		return typedTypeRef2CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TopLevelCS createTopLevelCS() {
 		TopLevelCSImpl topLevelCS = new TopLevelCSImpl();
 		return topLevelCS;
@@ -283,26 +313,6 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	public QVToOperationCS createQVToOperationCS() {
 		QVToOperationCSImpl qvToOperationCS = new QVToOperationCSImpl();
 		return qvToOperationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationParameterDeclarationCS createOperationParameterDeclarationCS() {
-		OperationParameterDeclarationCSImpl operationParameterDeclarationCS = new OperationParameterDeclarationCSImpl();
-		return operationParameterDeclarationCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OperationSimpleSignatureCS createOperationSimpleSignatureCS() {
-		OperationSimpleSignatureCSImpl operationSimpleSignatureCS = new OperationSimpleSignatureCSImpl();
-		return operationSimpleSignatureCS;
 	}
 
 	/**
@@ -510,29 +520,9 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MappingExtensionCS createMappingExtensionCS() {
-		MappingExtensionCSImpl mappingExtensionCS = new MappingExtensionCSImpl();
-		return mappingExtensionCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public MappingInitCS createMappingInitCS() {
 		MappingInitCSImpl mappingInitCS = new MappingInitCSImpl();
 		return mappingInitCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public MappingModuleCS createMappingModuleCS() {
-		MappingModuleCSImpl mappingModuleCS = new MappingModuleCSImpl();
-		return mappingModuleCS;
 	}
 
 	/**
@@ -593,6 +583,16 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	public ModelTypeCS createModelTypeCS() {
 		ModelTypeCSImpl modelTypeCS = new ModelTypeCSImpl();
 		return modelTypeCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModuleCS createModuleCS() {
+		ModuleCSImpl moduleCS = new ModuleCSImpl();
+		return moduleCS;
 	}
 
 	/**

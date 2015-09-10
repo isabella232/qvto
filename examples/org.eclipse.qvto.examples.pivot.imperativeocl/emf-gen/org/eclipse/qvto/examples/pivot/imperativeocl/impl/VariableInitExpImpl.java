@@ -234,20 +234,9 @@ public class VariableInitExpImpl extends ImperativeExpressionImpl implements Var
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (withResult: ");
-		result.append(withResult);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 
 	/**

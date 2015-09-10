@@ -35,17 +35,25 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
  */
 public class QVTOperationalASResourceFactory extends AbstractASResourceFactory
 {
-	public static final @NonNull String FILE_EXTENSION = "qvtoas";
-	public static final @NonNull QVTOperationalASResourceFactory INSTANCE = new QVTOperationalASResourceFactory();
+	private static final @NonNull String CS_FILE_EXTENSION = "qvto2";
+	private static final @NonNull String AS_FILE_EXTENSION = "qvtoas";
+	private static QVTOperationalASResourceFactory INSTANCE;
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
-		QVTOperationalPackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
+		QVTOperationalPackage.eCONTENT_TYPE, new String[]{AS_FILE_EXTENSION},
 		RootXMLContentHandlerImpl.XMI_KIND, QVTOperationalPackage.eNS_URI, null);
 	
 	static {
 		installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, CONTENT_HANDLER);
 	}
-	
+		
+	public static synchronized @NonNull QVTOperationalASResourceFactory getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new QVTOperationalASResourceFactory();	// Create our own singleton
+			INSTANCE.install(CS_FILE_EXTENSION, null);
+		}
+		return INSTANCE;
+	}
 	/**
 	 * Creates an instance of the resource factory.
 	 */
@@ -86,6 +94,6 @@ public class QVTOperationalASResourceFactory extends AbstractASResourceFactory
 	@Override
 	@NonNull
 	public ASResourceFactory getASResourceFactory() {
-		return INSTANCE;
+		return getInstance();
 	}
 }

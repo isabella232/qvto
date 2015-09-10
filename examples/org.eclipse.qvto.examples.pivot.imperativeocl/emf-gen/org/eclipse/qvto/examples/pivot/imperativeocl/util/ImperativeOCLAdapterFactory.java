@@ -34,7 +34,6 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
-import org.eclipse.qvto.examples.pivot.imperativeocl.*;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;

@@ -29,7 +29,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 /*
  * OCL related configuration variables
  */
-var oclProjectName = "org.eclipse.ocl.examples.pivot"
+var oclProjectName = "org.eclipse.ocl.pivot"
 var oclProjectURI = "platform:/resource/${oclProjectName}"
 var oclProjectPrefix = "Pivot"
 var oclEcoreProjectPath = "model/Pivot.ecore"
@@ -57,7 +57,7 @@ var imperativeOclModelName = "imperativeocl"
 var imperativeOclVisitorPackage = "${imperativeOclProjectName}.util"
 var imperativeOclVisitorName = "${imperativeOclProjectPrefix}Visitor"
 var imperativeOclVisitorQualifiedName = "${imperativeOclVisitorPackage}.${imperativeOclVisitorName}"
-var imperativeOclLookupFilePath = "model/ImperativeOCLNameResolution.ocl"
+var imperativeOclLookupFilePath = "model/ImperativeOCLLookup.ocl"
 
 /*
  * QVTOperational related configuration variables
@@ -74,7 +74,7 @@ var qvtOperationalModelName = "qvtoperational"
 var qvtOperationalVisitorPackage = "${qvtOperationalProjectName}.util"
 var qvtOperationalVisitorName = "${qvtOperationalProjectPrefix}Visitor"
 var qvtOperationalVisitorQualifiedName = "${qvtOperationalVisitorPackage}.${qvtOperationalVisitorName}"
-var qvtOperationalLookupFilePath = "model/Imperative"
+var qvtOperationalLookupFilePath = "model/QVTOperationalLookup.ocl"
 
 /**
  *	Generate the Concrete Syntax Models used by the Xtext editors.
@@ -85,15 +85,16 @@ Workflow {
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
-/*    
+    
      component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = imperativeOclProjectName
     	projectPrefix = imperativeOclProjectPrefix 
     	superProjectName = oclProjectName
     	superProjectPrefix = oclProjectPrefix
-//    	baseProjectPrefix = oclProjectPrefix
+    	baseProjectPrefix = oclProjectPrefix
+    	baseVisitorPackage = oclVisitorPackage
     	genModelFile = imperativeOclGenModelProjectPath
     	lookupFilePath = imperativeOclLookupFilePath
     	modelPackageName = imperativeOclModelPackage
@@ -105,15 +106,16 @@ Workflow {
     	superVisitorClassName = oclVisitorName
     	visitablePackageName = oclVisitablePackage
     	visitableClassName = oclVisitableName
-    }*/
+    }
           
    
-    component = @SubGenerateAutoASModel {	resourceSet = resourceSet
+   component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = qvtOperationalProjectName
     	projectPrefix =  qvtOperationalProjectPrefix
     	superProjectName = imperativeOclProjectName
     	superProjectPrefix = imperativeOclProjectPrefix
-//    	baseProjectPrefix = oclProjectPrefix
+    	baseProjectPrefix = oclProjectPrefix
+    	baseVisitorPackage = oclVisitorPackage
     	genModelFile = qvtOperationalGenModelProjectPath
     	lookupFilePath = qvtOperationalLookupFilePath
     	modelPackageName = qvtOperationalModelPackage

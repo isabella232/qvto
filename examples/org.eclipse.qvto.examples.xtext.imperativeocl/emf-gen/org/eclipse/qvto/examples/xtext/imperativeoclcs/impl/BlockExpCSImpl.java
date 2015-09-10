@@ -24,22 +24,21 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.BlockExpCSImpl#getBodyExpressions <em>Body Expressions</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.BlockExpCSImpl#getExpressions <em>Expressions</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	/**
-	 * The cached value of the '{@link #getBodyExpressions() <em>Body Expressions</em>}' containment reference list.
+	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBodyExpressions()
+	 * @see #getExpressions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> bodyExpressions;
-
+	protected EList<ExpCS> expressions;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,11 +63,11 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getBodyExpressions() {
-		if (bodyExpressions == null) {
-			bodyExpressions = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS);
+	public EList<ExpCS> getExpressions() {
+		if (expressions == null) {
+			expressions = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS);
 		}
-		return bodyExpressions;
+		return expressions;
 	}
 
 	/**
@@ -79,8 +78,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS:
-				return ((InternalEList<?>)getBodyExpressions()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
+				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -93,8 +92,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS:
-				return getBodyExpressions();
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
+				return getExpressions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,9 +107,9 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS:
-				getBodyExpressions().clear();
-				getBodyExpressions().addAll((Collection<? extends ExpCS>)newValue);
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
+				getExpressions().clear();
+				getExpressions().addAll((Collection<? extends ExpCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +123,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS:
-				getBodyExpressions().clear();
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
+				getExpressions().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,8 +138,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__BODY_EXPRESSIONS:
-				return bodyExpressions != null && !bodyExpressions.isEmpty();
+			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
+				return expressions != null && !expressions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

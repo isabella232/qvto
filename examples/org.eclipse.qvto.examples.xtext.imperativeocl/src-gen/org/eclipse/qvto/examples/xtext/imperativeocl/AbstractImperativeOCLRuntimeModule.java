@@ -208,4 +208,9 @@ public abstract class AbstractImperativeOCLRuntimeModule extends org.eclipse.xte
 		return org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource.class;
 	}
 
+	// contributed by org.eclipse.ocl.examples.build.fragments.CompatibilityFragment
+	public Class<? extends org.eclipse.xtext.service.GrammarProvider> bindGrammarProvider() {
+		return org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCLGrammarResource.GrammarProvider.class;
+	}
+
 }

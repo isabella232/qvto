@@ -10,8 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.impl.RootPackageCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
@@ -26,43 +25,21 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TopLevelCSImpl#getImport <em>Import</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TopLevelCSImpl#getUnit <em>Unit</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TopLevelCSImpl#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TopLevelCSImpl#getOwnedTypes <em>Owned Types</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	/**
-	 * The cached value of the '{@link #getImport() <em>Import</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedTypes() <em>Owned Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImport()
+	 * @see #getOwnedTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ElementCS> import_;
-
-	/**
-	 * The cached value of the '{@link #getUnit() <em>Unit</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getUnit()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ElementCS> unit;
-
-	/**
-	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getOwnedType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Type> ownedType;
+	protected EList<TypeCS> ownedTypes;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,35 +65,11 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ElementCS> getImport() {
-		if (import_ == null) {
-			import_ = new EObjectContainmentEList<ElementCS>(ElementCS.class, this, QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT);
+	public EList<TypeCS> getOwnedTypes() {
+		if (ownedTypes == null) {
+			ownedTypes = new EObjectContainmentEList<TypeCS>(TypeCS.class, this, QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES);
 		}
-		return import_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ElementCS> getUnit() {
-		if (unit == null) {
-			unit = new EObjectContainmentEList<ElementCS>(ElementCS.class, this, QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT);
-		}
-		return unit;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<Type> getOwnedType() {
-		if (ownedType == null) {
-			ownedType = new EObjectContainmentEList<Type>(Type.class, this, QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE);
-		}
-		return ownedType;
+		return ownedTypes;
 	}
 
 	/**
@@ -127,12 +80,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT:
-				return ((InternalEList<?>)getImport()).basicRemove(otherEnd, msgs);
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT:
-				return ((InternalEList<?>)getUnit()).basicRemove(otherEnd, msgs);
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE:
-				return ((InternalEList<?>)getOwnedType()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES:
+				return ((InternalEList<?>)getOwnedTypes()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -145,12 +94,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT:
-				return getImport();
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT:
-				return getUnit();
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE:
-				return getOwnedType();
+			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES:
+				return getOwnedTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -164,17 +109,9 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT:
-				getImport().clear();
-				getImport().addAll((Collection<? extends ElementCS>)newValue);
-				return;
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT:
-				getUnit().clear();
-				getUnit().addAll((Collection<? extends ElementCS>)newValue);
-				return;
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE:
-				getOwnedType().clear();
-				getOwnedType().addAll((Collection<? extends Type>)newValue);
+			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES:
+				getOwnedTypes().clear();
+				getOwnedTypes().addAll((Collection<? extends TypeCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -188,14 +125,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT:
-				getImport().clear();
-				return;
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT:
-				getUnit().clear();
-				return;
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE:
-				getOwnedType().clear();
+			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES:
+				getOwnedTypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -209,12 +140,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__IMPORT:
-				return import_ != null && !import_.isEmpty();
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__UNIT:
-				return unit != null && !unit.isEmpty();
-			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPE:
-				return ownedType != null && !ownedType.isEmpty();
+			case QVTOperationalCSPackage.TOP_LEVEL_CS__OWNED_TYPES:
+				return ownedTypes != null && !ownedTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

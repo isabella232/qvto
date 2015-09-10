@@ -56,6 +56,7 @@ Workflow {
     	projectNameRt = projectName
     	projectNameUi = "${projectName}.ui"
     	mergeManifest = false
+    	
     	language = auto-inject {
     		uri = grammarURI
     
@@ -110,7 +111,10 @@ Workflow {
     		fragment = labeling.LabelProviderFragment auto-inject {}
     
     		// outline API
-    		fragment = outline.OutlineTreeProviderFragment auto-inject {}
+    		// fragment = outline.OutlineTreeProviderFragment auto-inject {}
+    		// To show AS in the outline view
+    		fragment = org.eclipse.qvtd.cs2as.xtext.generator.CS2ASOutlineTreeProviderFragment auto-inject {} 
+    		
     		fragment = outline.QuickOutlineFragment auto-inject {}
     
     		// quickfix API
@@ -147,6 +151,9 @@ Workflow {
 			// Support Markup in Hover text 
 			fragment = fragments.MarkupHoverFragment auto-inject{}
     
+		    // *.xtextbin support on Xtext 2.3		
+			fragment = fragments.CompatibilityFragment auto-inject{}
+			
     		// provides a preference page for template proposals
     		fragment = templates.CodetemplatesGeneratorFragment auto-inject {}
     
@@ -174,17 +181,20 @@ Workflow {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 	
-	/*
+		
 	// CS2AS Components
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : resourceSet {}
-	
-	component = @org.eclipse.qvtd.build.cs2as.mwe.GenerateCGedQVTiTransformation { 
+	// bean = utilities.EcoreGenModelSetup { resourceSet = resourceSet }
+	component = @GenerateCGedQVTiTransformation { 
 		resourceSet = resourceSet
 		// oclFileURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
-		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"  
-		javaPackage = "${projectName}"
-		environmentClassName = "${projectName}.cs2as.LookupEnvironment"
-		lookupVisitorClassName = "${projectName}.cs2as.TargetLookupVisitor"
+		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
+		// FIXME the following only work if the output project are in the same FS folder. Better use a projectName and improve generator 
+		javaFolder = "../${projectName}/src-gen"
+		javaPackage = "${projectName}.cs2as"
+		environmentClassName = "${projectName}.cs2as.SingleResultLookupEnvironment"
+		lookupVisitorClassName = "org.eclipse.qvto.examples.pivot.qvtoperational.lookup.QVTOperationalLookupVisitor"
 		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
-	}*/
+		tracePropertyName = "pivot"
+	}
 }

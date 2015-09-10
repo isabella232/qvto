@@ -3,6 +3,7 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperational;
 
+import org.eclipse.qvto.examples.pivot.qvtoperational.utilities.QVTOperationalASResourceFactory;
 
 /**
  * Initialization support for running Xtext languages without equinox extension
@@ -11,9 +12,15 @@ package org.eclipse.qvto.examples.xtext.qvtoperational;
 public class QVTOperationalStandaloneSetup
 		extends QVTOperationalStandaloneSetupGenerated {
 
+	
 	public static void doSetup() {
+		
 		new QVTOperationalStandaloneSetup()
 			.createInjectorAndDoEMFRegistration();
-		
+		init();
+	}
+	
+	private static void init() {
+		QVTOperationalASResourceFactory.getInstance();		
 	}
 }

@@ -464,22 +464,9 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isTypeof: ");
-		result.append(isTypeof);
-		result.append(", kind: ");
-		result.append(kind);
-		result.append(')');
-		return result.toString();
+		return super.toString();
 	}
 	
 	/**

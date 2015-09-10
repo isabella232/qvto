@@ -15,7 +15,7 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getImportKind <em>Import Kind</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getModuleKindCS <em>Module Kind CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getModuleKind <em>Module Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getModuleRefs <em>Module Refs</em>}</li>
  * </ul>
  *
@@ -54,30 +54,33 @@ public interface ModuleUsageCS extends ElementCS {
 	void setImportKind(ImportKindEnum value);
 
 	/**
-	 * Returns the value of the '<em><b>Module Kind CS</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Module Kind</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Module Kind CS</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Module Kind</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Module Kind CS</em>' containment reference.
-	 * @see #setModuleKindCS(ModuleKindCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModuleUsageCS_ModuleKindCS()
-	 * @model containment="true"
+	 * @return the value of the '<em>Module Kind</em>' attribute.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum
+	 * @see #setModuleKind(ModuleKindEnum)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModuleUsageCS_ModuleKind()
+	 * @model
 	 * @generated
 	 */
-	ModuleKindCS getModuleKindCS();
+	ModuleKindEnum getModuleKind();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getModuleKindCS <em>Module Kind CS</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS#getModuleKind <em>Module Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Module Kind CS</em>' containment reference.
-	 * @see #getModuleKindCS()
+	 * @param value the new value of the '<em>Module Kind</em>' attribute.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum
+	 * @see #getModuleKind()
 	 * @generated
 	 */
-	void setModuleKindCS(ModuleKindCS value);
+	void setModuleKind(ModuleKindEnum value);
 
 	/**
 	 * Returns the value of the '<em><b>Module Refs</b></em>' containment reference list.

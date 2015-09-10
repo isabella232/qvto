@@ -124,14 +124,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpCSParserRuleCall = (RuleCall)rule.eContents().get(1);
 		
 		////PrefixOperator:
-		////	EssentialOCLPrefixOperator | QVToPrefixOperator;
-		////
-		////InfixOperator:
+		// //	EssentialOCLPrefixOperator | QVToPrefixOperator;
+		// //
+		// //InfixOperator:
+		//
 		////	EssentialOCLInfixOperator | QVToInfixOperator;
-		////
-		////NavigationOperator:
+		// //
+		// //NavigationOperator:
+		//
 		////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-		//ImperativeOCLExpCS returns essentialocl::ExpCS:
+		// ImperativeOCLExpCS returns essentialocl::ExpCS:
 		//	ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -150,9 +152,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDictTypeCSParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//// ********* ImperativeOCL Types *********
-		//// TypeLiteralCS redefined to include the new List and Dict types
+		// // TypeLiteralCS redefined to include the new List and Dict types
+		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		//TypeLiteralCS returns base::TypedRefCS:
+		// TypeLiteralCS returns base::TypedRefCS:
 		//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -272,9 +275,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameExpCSParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
 		
 		//// ********* ImperativeOCL Expressions *********
+		//
 		//// PrimaryExpCS redefined to include the new List and Dict literal expressions
+		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		//// These rules are ordered most rejectable first
+		// // These rules are ordered most rejectable first
+		//
 		//PrimaryExpCS returns essentialocl::ExpCS:
 		//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 		//	CollectionLiteralExpCS | LambdaLiteralExpCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS |
@@ -496,6 +502,54 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getValueExpCSParserRuleCall_2_0() { return cValueExpCSParserRuleCall_2_0; }
 	}
+
+	public class BlockExpCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BlockExpCS");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cExpressionsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionsExpCSParserRuleCall_1_0 = (RuleCall)cExpressionsAssignment_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//BlockExpCS:
+		//	"{" expressions+=ExpCS "}";
+		@Override public ParserRule getRule() { return rule; }
+
+		//"{" expressions+=ExpCS "}"
+		public Group getGroup() { return cGroup; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_0() { return cLeftCurlyBracketKeyword_0; }
+
+		//expressions+=ExpCS
+		public Assignment getExpressionsAssignment_1() { return cExpressionsAssignment_1; }
+
+		//ExpCS
+		public RuleCall getExpressionsExpCSParserRuleCall_1_0() { return cExpressionsExpCSParserRuleCall_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+	}
+
+	public class StringLiteralElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cSINGLE_QUOTED_STRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cDOUBLE_QUOTED_STRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//StringLiteral:
+		//	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING;
+		@Override public ParserRule getRule() { return rule; }
+
+		//SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//SINGLE_QUOTED_STRING
+		public RuleCall getSINGLE_QUOTED_STRINGTerminalRuleCall_0() { return cSINGLE_QUOTED_STRINGTerminalRuleCall_0; }
+
+		//DOUBLE_QUOTED_STRING
+		public RuleCall getDOUBLE_QUOTED_STRINGTerminalRuleCall_1() { return cDOUBLE_QUOTED_STRINGTerminalRuleCall_1; }
+	}
 	
 	
 	private final GrammmarCSElements pGrammmarCS;
@@ -521,6 +575,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private final DictLiteralExpCSElements pDictLiteralExpCS;
 	private final DictLiteralPartCSElements pDictLiteralPartCS;
 	private final ReturnExpCSElements pReturnExpCS;
+	private final BlockExpCSElements pBlockExpCS;
+	private final StringLiteralElements pStringLiteral;
 	
 	private final Grammar grammar;
 
@@ -554,6 +610,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDictLiteralExpCS = new DictLiteralExpCSElements();
 		this.pDictLiteralPartCS = new DictLiteralPartCSElements();
 		this.pReturnExpCS = new ReturnExpCSElements();
+		this.pBlockExpCS = new BlockExpCSElements();
+		this.pStringLiteral = new StringLiteralElements();
 	}
 	
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
@@ -600,7 +658,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal ADD_OP: '+' | '-';
-	//terminal ASSIGN_OP:
+	// terminal ASSIGN_OP:
 	//	":=" | "::=" | "+=" | "-=";
 	public TerminalRule getASSIGN_OPRule() {
 		return tASSIGN_OP;
@@ -625,7 +683,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// terminal OR_OP: 'or' | 'xor';
-	//terminal RESOLVE_IN_KIND:
+	// terminal RESOLVE_IN_KIND:
 	//	"resolveIn" | "resolveoneIn" | "invresolveIn" | "invresolveoneIn";
 	public TerminalRule getRESOLVE_IN_KINDRule() {
 		return tRESOLVE_IN_KIND;
@@ -691,14 +749,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////PrefixOperator:
-	////	EssentialOCLPrefixOperator | QVToPrefixOperator;
-	////
-	////InfixOperator:
+	// //	EssentialOCLPrefixOperator | QVToPrefixOperator;
+	// //
+	// //InfixOperator:
+	//
 	////	EssentialOCLInfixOperator | QVToInfixOperator;
-	////
-	////NavigationOperator:
+	// //
+	// //NavigationOperator:
+	//
 	////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-	//ImperativeOCLExpCS returns essentialocl::ExpCS:
+	// ImperativeOCLExpCS returns essentialocl::ExpCS:
 	//	ExpCS;
 	public ImperativeOCLExpCSElements getImperativeOCLExpCSAccess() {
 		return pImperativeOCLExpCS;
@@ -709,9 +769,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Types *********
-	//// TypeLiteralCS redefined to include the new List and Dict types
+	// // TypeLiteralCS redefined to include the new List and Dict types
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//TypeLiteralCS returns base::TypedRefCS:
+	// TypeLiteralCS returns base::TypedRefCS:
 	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 	public TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return pTypeLiteralCS;
@@ -742,9 +803,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// ********* ImperativeOCL Expressions *********
+	//
 	//// PrimaryExpCS redefined to include the new List and Dict literal expressions
+	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	//// These rules are ordered most rejectable first
+	// // These rules are ordered most rejectable first
+	//
 	//PrimaryExpCS returns essentialocl::ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 	//	CollectionLiteralExpCS | LambdaLiteralExpCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS |
@@ -795,6 +859,26 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getReturnExpCSRule() {
 		return getReturnExpCSAccess().getRule();
+	}
+
+	//BlockExpCS:
+	//	"{" expressions+=ExpCS "}";
+	public BlockExpCSElements getBlockExpCSAccess() {
+		return pBlockExpCS;
+	}
+	
+	public ParserRule getBlockExpCSRule() {
+		return getBlockExpCSAccess().getRule();
+	}
+
+	//StringLiteral:
+	//	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING;
+	public StringLiteralElements getStringLiteralAccess() {
+		return pStringLiteral;
+	}
+	
+	public ParserRule getStringLiteralRule() {
+		return getStringLiteralAccess().getRule();
 	}
 
 	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
@@ -1500,7 +1584,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MultiplicityCS:
-	//	"[" (MultiplicityBoundsCS | MultiplicityStringCS) "]";
+	//	"[" (MultiplicityBoundsCS | MultiplicityStringCS) ("|?" | isNullFree?="|1")? "]";
 	public BaseGrammarAccess.MultiplicityCSElements getMultiplicityCSAccess() {
 		return gaEssentialOCL.getMultiplicityCSAccess();
 	}
@@ -1550,8 +1634,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TemplateBindingCS:
-	//	"(" ownedSubstitutions+=TemplateParameterSubstitutionCS ("," ownedSubstitutions+=TemplateParameterSubstitutionCS)*
-	//	")";
+	//	ownedSubstitutions+=TemplateParameterSubstitutionCS ("," ownedSubstitutions+=TemplateParameterSubstitutionCS)*
+	//	ownedMultiplicity=MultiplicityCS?;
 	public BaseGrammarAccess.TemplateBindingCSElements getTemplateBindingCSAccess() {
 		return gaEssentialOCL.getTemplateBindingCSAccess();
 	}
@@ -1611,7 +1695,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypedTypeRefCS:
-	//	ownedPathName=PathNameCS ownedBinding=TemplateBindingCS?;
+	//	ownedPathName=PathNameCS ("(" ownedBinding=TemplateBindingCS ")")?;
 	public BaseGrammarAccess.TypedTypeRefCSElements getTypedTypeRefCSAccess() {
 		return gaEssentialOCL.getTypedTypeRefCSAccess();
 	}
@@ -1678,16 +1762,6 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getNUMBER_LITERALRule() {
 		return getNUMBER_LITERALAccess().getRule();
-	}
-
-	//StringLiteral:
-	//	SINGLE_QUOTED_STRING;
-	public BaseGrammarAccess.StringLiteralElements getStringLiteralAccess() {
-		return gaEssentialOCL.getStringLiteralAccess();
-	}
-	
-	public ParserRule getStringLiteralRule() {
-		return getStringLiteralAccess().getRule();
 	}
 
 	/// * An upperbounded integer is used to define the upperbound of a collection multiplicity. The value may be the unlimited value. * /

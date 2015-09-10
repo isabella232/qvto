@@ -2,7 +2,7 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
-import org.eclipse.ocl.xtext.basecs.TypedElementCS;
+import org.eclipse.ocl.xtext.basecs.ParameterCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,7 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
  * @model
  * @generated
  */
-public interface ParameterDeclarationCS extends TypedElementCS {
+public interface ParameterDeclarationCS extends ParameterCS {
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS}.

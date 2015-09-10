@@ -14,6 +14,7 @@ import org.eclipse.ocl.xtext.basecs.DataTypeCS;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ElementRefCS;
 import org.eclipse.ocl.xtext.basecs.FeatureCS;
+import org.eclipse.ocl.xtext.basecs.ImportCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.NamespaceCS;
@@ -36,6 +37,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.CallExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.*;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
@@ -52,10 +54,8 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS;
@@ -63,17 +63,18 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationParameterDeclarationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationSimpleSignatureCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PrimitiveTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS;
@@ -151,6 +152,39 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTOperationalCSPackage.PATH_NAME2_CS: {
+				PathName2CS pathName2CS = (PathName2CS)theEObject;
+				T result = casePathName2CS(pathName2CS);
+				if (result == null) result = casePivotableElementCS(pathName2CS);
+				if (result == null) result = caseElementCS(pathName2CS);
+				if (result == null) result = casePivotable(pathName2CS);
+				if (result == null) result = caseVisitableCS(pathName2CS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTOperationalCSPackage.PATH_ELEMENT2_CS: {
+				PathElement2CS pathElement2CS = (PathElement2CS)theEObject;
+				T result = casePathElement2CS(pathElement2CS);
+				if (result == null) result = casePivotableElementCS(pathElement2CS);
+				if (result == null) result = caseElementCS(pathElement2CS);
+				if (result == null) result = casePivotable(pathElement2CS);
+				if (result == null) result = caseVisitableCS(pathElement2CS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS: {
+				TypedTypeRef2CS typedTypeRef2CS = (TypedTypeRef2CS)theEObject;
+				T result = caseTypedTypeRef2CS(typedTypeRef2CS);
+				if (result == null) result = caseTypedRefCS(typedTypeRef2CS);
+				if (result == null) result = caseTypeRefCS(typedTypeRef2CS);
+				if (result == null) result = caseElementRefCS(typedTypeRef2CS);
+				if (result == null) result = casePivotableElementCS(typedTypeRef2CS);
+				if (result == null) result = caseElementCS(typedTypeRef2CS);
+				if (result == null) result = casePivotable(typedTypeRef2CS);
+				if (result == null) result = caseVisitableCS(typedTypeRef2CS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTOperationalCSPackage.TOP_LEVEL_CS: {
 				TopLevelCS topLevelCS = (TopLevelCS)theEObject;
 				T result = caseTopLevelCS(topLevelCS);
@@ -186,7 +220,14 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS: {
 				QVToImportCS qvToImportCS = (QVToImportCS)theEObject;
 				T result = caseQVToImportCS(qvToImportCS);
+				if (result == null) result = caseImportCS(qvToImportCS);
+				if (result == null) result = caseNamespaceCS(qvToImportCS);
+				if (result == null) result = caseNamedElementCS(qvToImportCS);
+				if (result == null) result = caseModelElementCS(qvToImportCS);
+				if (result == null) result = caseNameable(qvToImportCS);
+				if (result == null) result = casePivotableElementCS(qvToImportCS);
 				if (result == null) result = caseElementCS(qvToImportCS);
+				if (result == null) result = casePivotable(qvToImportCS);
 				if (result == null) result = caseVisitableCS(qvToImportCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -194,8 +235,18 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 			case QVTOperationalCSPackage.QV_TO_LIBRARY_CS: {
 				QVToLibraryCS qvToLibraryCS = (QVToLibraryCS)theEObject;
 				T result = caseQVToLibraryCS(qvToLibraryCS);
-				if (result == null) result = caseMappingModuleCS(qvToLibraryCS);
+				if (result == null) result = caseModuleCS(qvToLibraryCS);
+				if (result == null) result = caseStructuredClassCS(qvToLibraryCS);
+				if (result == null) result = caseClassCS(qvToLibraryCS);
+				if (result == null) result = caseNamespaceCS(qvToLibraryCS);
+				if (result == null) result = caseNamedElementCS(qvToLibraryCS);
+				if (result == null) result = caseTypeCS(qvToLibraryCS);
+				if (result == null) result = caseTemplateableElementCS(qvToLibraryCS);
+				if (result == null) result = caseModelElementCS(qvToLibraryCS);
+				if (result == null) result = caseNameable(qvToLibraryCS);
+				if (result == null) result = casePivotableElementCS(qvToLibraryCS);
 				if (result == null) result = caseElementCS(qvToLibraryCS);
+				if (result == null) result = casePivotable(qvToLibraryCS);
 				if (result == null) result = caseVisitableCS(qvToLibraryCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -214,29 +265,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(qvToOperationCS);
 				if (result == null) result = casePivotable(qvToOperationCS);
 				if (result == null) result = caseVisitableCS(qvToOperationCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTOperationalCSPackage.OPERATION_PARAMETER_DECLARATION_CS: {
-				OperationParameterDeclarationCS operationParameterDeclarationCS = (OperationParameterDeclarationCS)theEObject;
-				T result = caseOperationParameterDeclarationCS(operationParameterDeclarationCS);
-				if (result == null) result = caseParameterCS(operationParameterDeclarationCS);
-				if (result == null) result = caseTypedElementCS(operationParameterDeclarationCS);
-				if (result == null) result = caseNamedElementCS(operationParameterDeclarationCS);
-				if (result == null) result = caseModelElementCS(operationParameterDeclarationCS);
-				if (result == null) result = caseNameable(operationParameterDeclarationCS);
-				if (result == null) result = casePivotableElementCS(operationParameterDeclarationCS);
-				if (result == null) result = caseElementCS(operationParameterDeclarationCS);
-				if (result == null) result = casePivotable(operationParameterDeclarationCS);
-				if (result == null) result = caseVisitableCS(operationParameterDeclarationCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTOperationalCSPackage.OPERATION_SIMPLE_SIGNATURE_CS: {
-				OperationSimpleSignatureCS operationSimpleSignatureCS = (OperationSimpleSignatureCS)theEObject;
-				T result = caseOperationSimpleSignatureCS(operationSimpleSignatureCS);
-				if (result == null) result = caseElementCS(operationSimpleSignatureCS);
-				if (result == null) result = caseVisitableCS(operationSimpleSignatureCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -416,7 +444,14 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				LibraryImportCS libraryImportCS = (LibraryImportCS)theEObject;
 				T result = caseLibraryImportCS(libraryImportCS);
 				if (result == null) result = caseQVToImportCS(libraryImportCS);
+				if (result == null) result = caseImportCS(libraryImportCS);
+				if (result == null) result = caseNamespaceCS(libraryImportCS);
+				if (result == null) result = caseNamedElementCS(libraryImportCS);
+				if (result == null) result = caseModelElementCS(libraryImportCS);
+				if (result == null) result = caseNameable(libraryImportCS);
+				if (result == null) result = casePivotableElementCS(libraryImportCS);
 				if (result == null) result = caseElementCS(libraryImportCS);
+				if (result == null) result = casePivotable(libraryImportCS);
 				if (result == null) result = caseVisitableCS(libraryImportCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -482,17 +517,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTOperationalCSPackage.MAPPING_EXTENSION_CS: {
-				MappingExtensionCS mappingExtensionCS = (MappingExtensionCS)theEObject;
-				T result = caseMappingExtensionCS(mappingExtensionCS);
-				if (result == null) result = caseElementRefCS(mappingExtensionCS);
-				if (result == null) result = casePivotableElementCS(mappingExtensionCS);
-				if (result == null) result = caseElementCS(mappingExtensionCS);
-				if (result == null) result = casePivotable(mappingExtensionCS);
-				if (result == null) result = caseVisitableCS(mappingExtensionCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case QVTOperationalCSPackage.MAPPING_INIT_CS: {
 				MappingInitCS mappingInitCS = (MappingInitCS)theEObject;
 				T result = caseMappingInitCS(mappingInitCS);
@@ -508,14 +532,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				T result = caseMappingMethodCS(mappingMethodCS);
 				if (result == null) result = caseElementCS(mappingMethodCS);
 				if (result == null) result = caseVisitableCS(mappingMethodCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTOperationalCSPackage.MAPPING_MODULE_CS: {
-				MappingModuleCS mappingModuleCS = (MappingModuleCS)theEObject;
-				T result = caseMappingModuleCS(mappingModuleCS);
-				if (result == null) result = caseElementCS(mappingModuleCS);
-				if (result == null) result = caseVisitableCS(mappingModuleCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -587,6 +603,24 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTOperationalCSPackage.MODULE_CS: {
+				ModuleCS moduleCS = (ModuleCS)theEObject;
+				T result = caseModuleCS(moduleCS);
+				if (result == null) result = caseStructuredClassCS(moduleCS);
+				if (result == null) result = caseClassCS(moduleCS);
+				if (result == null) result = caseNamespaceCS(moduleCS);
+				if (result == null) result = caseNamedElementCS(moduleCS);
+				if (result == null) result = caseTypeCS(moduleCS);
+				if (result == null) result = caseTemplateableElementCS(moduleCS);
+				if (result == null) result = caseModelElementCS(moduleCS);
+				if (result == null) result = caseNameable(moduleCS);
+				if (result == null) result = casePivotableElementCS(moduleCS);
+				if (result == null) result = caseElementCS(moduleCS);
+				if (result == null) result = casePivotable(moduleCS);
+				if (result == null) result = caseVisitableCS(moduleCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTOperationalCSPackage.MODULE_PROPERTY_CS: {
 				ModulePropertyCS modulePropertyCS = (ModulePropertyCS)theEObject;
 				T result = caseModulePropertyCS(modulePropertyCS);
@@ -635,6 +669,7 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS: {
 				ParameterDeclarationCS parameterDeclarationCS = (ParameterDeclarationCS)theEObject;
 				T result = caseParameterDeclarationCS(parameterDeclarationCS);
+				if (result == null) result = caseParameterCS(parameterDeclarationCS);
 				if (result == null) result = caseTypedElementCS(parameterDeclarationCS);
 				if (result == null) result = caseNamedElementCS(parameterDeclarationCS);
 				if (result == null) result = caseModelElementCS(parameterDeclarationCS);
@@ -689,6 +724,7 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 			case QVTOperationalCSPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
+				if (result == null) result = caseModuleCS(transformationCS);
 				if (result == null) result = caseStructuredClassCS(transformationCS);
 				if (result == null) result = caseClassCS(transformationCS);
 				if (result == null) result = caseNamespaceCS(transformationCS);
@@ -767,6 +803,51 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Name2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Name2 CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathName2CS(PathName2CS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Element2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Element2 CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathElement2CS(PathElement2CS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Type Ref2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Type Ref2 CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedTypeRef2CS(TypedTypeRef2CS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -838,36 +919,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseQVToOperationCS(QVToOperationCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Parameter Declaration CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Parameter Declaration CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOperationParameterDeclarationCS(OperationParameterDeclarationCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation Simple Signature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation Simple Signature CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOperationSimpleSignatureCS(OperationSimpleSignatureCS object) {
 		return null;
 	}
 
@@ -1187,21 +1238,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Extension CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Extension CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingExtensionCS(MappingExtensionCS object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Mapping Init CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1228,21 +1264,6 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingMethodCS(MappingMethodCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mapping Module CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mapping Module CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMappingModuleCS(MappingModuleCS object) {
 		return null;
 	}
 
@@ -1348,6 +1369,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelTypeCS(ModelTypeCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModuleCS(ModuleCS object) {
 		return null;
 	}
 
@@ -1888,6 +1924,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStructuredClassCS(StructuredClassCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Import CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImportCS(ImportCS object) {
 		return null;
 	}
 

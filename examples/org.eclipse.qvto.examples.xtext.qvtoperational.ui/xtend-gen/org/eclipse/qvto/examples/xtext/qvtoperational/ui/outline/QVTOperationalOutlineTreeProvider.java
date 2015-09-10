@@ -3,13 +3,13 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperational.ui.outline;
 
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
+import org.eclipse.qvto.examples.xtext.qvtoperational.ui.outline.CS2ASOutlineTreeProvider;
 
 /**
  * Customization of the default outline structure.
  * 
- * see http://www.eclipse.org/Xtext/documentation.html#outline
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
 @SuppressWarnings("all")
-public class QVTOperationalOutlineTreeProvider extends DefaultOutlineTreeProvider {
+public class QVTOperationalOutlineTreeProvider extends CS2ASOutlineTreeProvider {
 }

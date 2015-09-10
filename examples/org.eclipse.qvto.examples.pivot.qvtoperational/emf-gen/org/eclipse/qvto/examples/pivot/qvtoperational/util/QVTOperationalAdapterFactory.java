@@ -38,8 +38,6 @@ import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
 import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
-import org.eclipse.qvto.examples.pivot.qvtoperational.*;
 import org.eclipse.qvto.examples.pivot.qvtoperational.Constructor;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody;
 import org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty;

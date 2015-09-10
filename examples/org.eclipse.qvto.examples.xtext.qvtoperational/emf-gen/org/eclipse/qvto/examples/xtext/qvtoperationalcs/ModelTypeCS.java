@@ -4,8 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,10 +15,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS <em>Identifier CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKindCS <em>Compliance Kind CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getPackageRefs <em>Package Refs</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhereStatements <em>Where Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS()
@@ -28,56 +26,31 @@ import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
  */
 public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	/**
-	 * Returns the value of the '<em><b>Identifier CS</b></em>' attribute.
+	 * Returns the value of the '<em><b>Compliance Kind</b></em>' attribute.
+	 * The default value is <code>"strict"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Identifier CS</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Compliance Kind</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Identifier CS</em>' attribute.
-	 * @see #setIdentifierCS(String)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_IdentifierCS()
-	 * @model required="true"
+	 * @return the value of the '<em>Compliance Kind</em>' attribute.
+	 * @see #setComplianceKind(String)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_ComplianceKind()
+	 * @model default="strict"
 	 * @generated
 	 */
-	String getIdentifierCS();
+	String getComplianceKind();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getIdentifierCS <em>Identifier CS</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Identifier CS</em>' attribute.
-	 * @see #getIdentifierCS()
+	 * @param value the new value of the '<em>Compliance Kind</em>' attribute.
+	 * @see #getComplianceKind()
 	 * @generated
 	 */
-	void setIdentifierCS(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Compliance Kind CS</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Compliance Kind CS</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Compliance Kind CS</em>' containment reference.
-	 * @see #setComplianceKindCS(StringLiteralExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_ComplianceKindCS()
-	 * @model containment="true"
-	 * @generated
-	 */
-	StringLiteralExpCS getComplianceKindCS();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKindCS <em>Compliance Kind CS</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Compliance Kind CS</em>' containment reference.
-	 * @see #getComplianceKindCS()
-	 * @generated
-	 */
-	void setComplianceKindCS(StringLiteralExpCS value);
+	void setComplianceKind(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Package Refs</b></em>' containment reference list.
@@ -96,19 +69,29 @@ public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	EList<PackageRefCS> getPackageRefs();
 
 	/**
-	 * Returns the value of the '<em><b>Where Statements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
+	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Where Statements</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Where</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where Statements</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_WhereStatements()
+	 * @return the value of the '<em>Where</em>' containment reference.
+	 * @see #setWhere(BlockExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ExpCS> getWhereStatements();
+	BlockExpCS getWhere();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Where</em>' containment reference.
+	 * @see #getWhere()
+	 * @generated
+	 */
+	void setWhere(BlockExpCS value);
 
 } // ModelTypeCS

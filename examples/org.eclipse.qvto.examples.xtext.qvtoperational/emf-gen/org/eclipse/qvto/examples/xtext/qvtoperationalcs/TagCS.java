@@ -3,7 +3,6 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.ocl.xtext.basecs.AnnotationCS;
-import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
@@ -15,7 +14,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getElementPath <em>Element Path</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getExpression <em>Expression</em>}</li>
  * </ul>
  *
@@ -25,30 +24,30 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface TagCS extends AnnotationCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Element Path</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Element Path</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name</em>' containment reference.
-	 * @see #setPathName(PathNameCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_PathName()
-	 * @model containment="true"
+	 * @return the value of the '<em>Element Path</em>' containment reference.
+	 * @see #setElementPath(PathName2CS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_ElementPath()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	PathNameCS getPathName();
+	PathName2CS getElementPath();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getPathName <em>Path Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getElementPath <em>Element Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name</em>' containment reference.
-	 * @see #getPathName()
+	 * @param value the new value of the '<em>Element Path</em>' containment reference.
+	 * @see #getElementPath()
 	 * @generated
 	 */
-	void setPathName(PathNameCS value);
+	void setElementPath(PathName2CS value);
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.

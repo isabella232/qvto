@@ -24,7 +24,10 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected AbstractElementAlias match_ClassCS_SemicolonKeyword_1_q;
 	protected AbstractElementAlias match_ClassifierPropertyCS_TildeKeyword_6_1_q;
 	protected AbstractElementAlias match_EnumerationCS_SemicolonKeyword_3_q;
+	protected AbstractElementAlias match_LibraryDefCS_SemicolonKeyword_4_q;
 	protected AbstractElementAlias match_MetamodelCS_SemicolonKeyword_5_q;
+	protected AbstractElementAlias match_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_2__q;
+	protected AbstractElementAlias match_TransformationDefCS_SemicolonKeyword_4_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
 	
 	@Inject
@@ -33,7 +36,10 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 		match_ClassCS_SemicolonKeyword_1_q = new TokenAlias(false, true, grammarAccess.getClassCSAccess().getSemicolonKeyword_1());
 		match_ClassifierPropertyCS_TildeKeyword_6_1_q = new TokenAlias(false, true, grammarAccess.getClassifierPropertyCSAccess().getTildeKeyword_6_1());
 		match_EnumerationCS_SemicolonKeyword_3_q = new TokenAlias(false, true, grammarAccess.getEnumerationCSAccess().getSemicolonKeyword_3());
+		match_LibraryDefCS_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getLibraryDefCSAccess().getSemicolonKeyword_4());
 		match_MetamodelCS_SemicolonKeyword_5_q = new TokenAlias(false, true, grammarAccess.getMetamodelCSAccess().getSemicolonKeyword_5());
+		match_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getModelTypeCSAccess().getWhereKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getModelTypeCSAccess().getLeftCurlyBracketKeyword_6_1()), new TokenAlias(false, false, grammarAccess.getModelTypeCSAccess().getRightCurlyBracketKeyword_6_2()));
+		match_TransformationDefCS_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getTransformationDefCSAccess().getSemicolonKeyword_4());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
 	
@@ -55,8 +61,14 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 				emit_ClassifierPropertyCS_TildeKeyword_6_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_EnumerationCS_SemicolonKeyword_3_q.equals(syntax))
 				emit_EnumerationCS_SemicolonKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_LibraryDefCS_SemicolonKeyword_4_q.equals(syntax))
+				emit_LibraryDefCS_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_MetamodelCS_SemicolonKeyword_5_q.equals(syntax))
 				emit_MetamodelCS_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_2__q.equals(syntax))
+				emit_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_TransformationDefCS_SemicolonKeyword_4_q.equals(syntax))
+				emit_TransformationDefCS_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
@@ -84,7 +96,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     default=SINGLE_QUOTED_STRING 'opposites' (ambiguity) opposite=Identifier
-	 *     ownedType=TypedMultiplicityRefCS 'opposites' (ambiguity) opposite=Identifier
+	 *     ownedType=TypedMultiplicityRef2CS 'opposites' (ambiguity) opposite=Identifier
 	 */
 	protected void emit_ClassifierPropertyCS_TildeKeyword_6_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
@@ -106,12 +118,52 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     ';'?
 	 *
 	 * This ambiguous syntax occurs at:
+	 *     moduleUsages+=ModuleUsageCS '{' '}' (ambiguity) (rule end)
+	 *     ownedOperations+=ModuleOperationCS '}' (ambiguity) (rule end)
+	 *     ownedProperties+=ModulePropertyCS '}' (ambiguity) (rule end)
+	 *     parameters+=ParameterDeclarationCS ')' '{' '}' (ambiguity) (rule end)
+	 */
+	protected void emit_LibraryDefCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
 	 *     name=UnrestrictedName '{' '}' (ambiguity) (rule end)
 	 *     ownedAnnotations+=TagCS '}' (ambiguity) (rule end)
 	 *     ownedClasses+=ClassCS '}' (ambiguity) (rule end)
 	 *     ownedClasses+=EnumerationCS '}' (ambiguity) (rule end)
 	 */
 	protected void emit_MetamodelCS_SemicolonKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('where' '{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     packageRefs+=PackageRefCS (ambiguity) ';' (rule end)
+	 */
+	protected void emit_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ';'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     moduleUsages+=ModuleUsageCS '{' '}' (ambiguity) (rule end)
+	 *     ownedOperations+=ModuleOperationCS '}' (ambiguity) (rule end)
+	 *     ownedProperties+=ModulePropertyCS '}' (ambiguity) (rule end)
+	 *     parameters+=ParameterDeclarationCS ')' '{' '}' (ambiguity) (rule end)
+	 *     refines=ModuleRefCS '{' '}' (ambiguity) (rule end)
+	 */
+	protected void emit_TransformationDefCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

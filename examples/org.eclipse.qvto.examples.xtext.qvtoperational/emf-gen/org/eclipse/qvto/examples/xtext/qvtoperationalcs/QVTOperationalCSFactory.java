@@ -22,6 +22,33 @@ public interface QVTOperationalCSFactory extends EFactory {
 	QVTOperationalCSFactory eINSTANCE = org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Path Name2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Name2 CS</em>'.
+	 * @generated
+	 */
+	PathName2CS createPathName2CS();
+
+	/**
+	 * Returns a new object of class '<em>Path Element2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Element2 CS</em>'.
+	 * @generated
+	 */
+	PathElement2CS createPathElement2CS();
+
+	/**
+	 * Returns a new object of class '<em>Typed Type Ref2 CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Typed Type Ref2 CS</em>'.
+	 * @generated
+	 */
+	TypedTypeRef2CS createTypedTypeRef2CS();
+
+	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,24 +92,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	QVToOperationCS createQVToOperationCS();
-
-	/**
-	 * Returns a new object of class '<em>Operation Parameter Declaration CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Parameter Declaration CS</em>'.
-	 * @generated
-	 */
-	OperationParameterDeclarationCS createOperationParameterDeclarationCS();
-
-	/**
-	 * Returns a new object of class '<em>Operation Simple Signature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation Simple Signature CS</em>'.
-	 * @generated
-	 */
-	OperationSimpleSignatureCS createOperationSimpleSignatureCS();
 
 	/**
 	 * Returns a new object of class '<em>Init Part CS</em>'.
@@ -265,15 +274,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	MappingEndCS createMappingEndCS();
 
 	/**
-	 * Returns a new object of class '<em>Mapping Extension CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Extension CS</em>'.
-	 * @generated
-	 */
-	MappingExtensionCS createMappingExtensionCS();
-
-	/**
 	 * Returns a new object of class '<em>Mapping Init CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -281,15 +281,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	MappingInitCS createMappingInitCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Module CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Module CS</em>'.
-	 * @generated
-	 */
-	MappingModuleCS createMappingModuleCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Query CS</em>'.
@@ -344,6 +335,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	ModelTypeCS createModelTypeCS();
+
+	/**
+	 * Returns a new object of class '<em>Module CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Module CS</em>'.
+	 * @generated
+	 */
+	ModuleCS createModuleCS();
 
 	/**
 	 * Returns a new object of class '<em>Module Usage CS</em>'.
