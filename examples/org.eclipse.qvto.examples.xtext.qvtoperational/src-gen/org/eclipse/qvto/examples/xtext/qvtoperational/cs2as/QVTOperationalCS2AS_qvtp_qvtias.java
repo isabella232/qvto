@@ -212,7 +212,8 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
     /**
      * 
      * map cClassifierPropertyCS_2_Property in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (classifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS[1];
+     * 
+     *   leftCS (classifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -222,7 +223,12 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * classifierPropertyCS.pivot := property;
      * }
-     * 
+     * map uProperty_isComposite {
+     * classifierPropertyCS := classifierPropertyCS;
+     * }
+     *   map uProperty_name {
+     * classifierPropertyCS := classifierPropertyCS;
+     * }
      */
     protected boolean MAP_cClassifierPropertyCS_2_Property(final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS classifierPropertyCS) throws ReflectiveOperationException {
         // predicates
@@ -232,13 +238,17 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(property);
         // property assignments
         classifierPropertyCS.setPivot(property);
+        // mapping statements
+        MAP_uProperty_isComposite(classifierPropertyCS);
+        MAP_uProperty_name(classifierPropertyCS);
         return true;
     }
     
     /**
      * 
      * map cMappingOperationCS_2_MappingOperation in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (mappingOperationCS : qvtoperationalcs::MappingOperationCS[1];
+     * 
+     *   leftCS (mappingOperationCS : qvtoperationalcs::MappingOperationCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -248,7 +258,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * mappingOperationCS.pivot := mappingOperation;
      * }
-     * 
+     * map uMappingOperation_name {
+     * mappingOperationCS := mappingOperationCS;
+     * }
      */
     protected boolean MAP_cMappingOperationCS_2_MappingOperation(final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS mappingOperationCS) throws ReflectiveOperationException {
         // predicates
@@ -258,13 +270,16 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(mappingOperation);
         // property assignments
         mappingOperationCS.setPivot(mappingOperation);
+        // mapping statements
+        MAP_uMappingOperation_name(mappingOperationCS);
         return true;
     }
     
     /**
      * 
      * map cMetamodelCS_2_Package in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (metamodelCS : qvtoperationalcs::MetamodelCS[1];
+     * 
+     *   leftCS (metamodelCS : qvtoperationalcs::MetamodelCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -274,7 +289,15 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * metamodelCS.pivot := package;
      * }
-     * 
+     * map uPackage_nsPrefix {
+     * metamodelCS := metamodelCS;
+     * }
+     *   map uPackage_name {
+     * metamodelCS := metamodelCS;
+     * }
+     *   map uPackage_URI {
+     * metamodelCS := metamodelCS;
+     * }
      */
     protected boolean MAP_cMetamodelCS_2_Package(final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS metamodelCS) throws ReflectiveOperationException {
         // predicates
@@ -284,13 +307,18 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(symbol_0);
         // property assignments
         metamodelCS.setPivot(symbol_0);
+        // mapping statements
+        MAP_uPackage_nsPrefix(metamodelCS);
+        MAP_uPackage_name(metamodelCS);
+        MAP_uPackage_URI(metamodelCS);
         return true;
     }
     
     /**
      * 
      * map cModelTypeCS_2_ModelType in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (modelTypeCS : qvtoperationalcs::ModelTypeCS[1];
+     * 
+     *   leftCS (modelTypeCS : qvtoperationalcs::ModelTypeCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -300,7 +328,9 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * modelTypeCS.pivot := modelType;
      * }
-     * 
+     * map uModelType_name {
+     * modelTypeCS := modelTypeCS;
+     * }
      */
     protected boolean MAP_cModelTypeCS_2_ModelType(final /*@NonNull*/ /*@NonInvalid*/ ModelTypeCS modelTypeCS) throws ReflectiveOperationException {
         // predicates
@@ -310,6 +340,8 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(modelType);
         // property assignments
         modelTypeCS.setPivot(modelType);
+        // mapping statements
+        MAP_uModelType_name(modelTypeCS);
         return true;
     }
     
@@ -325,11 +357,14 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      *  |}
      * where ( |
      * not parameterDeclarationCS.oclContainer()
-     *   .oclIsKindOf(qvtoperationalcs::ModuleCS))
+     *   .oclIsKindOf(qvtoperationalcs::ModuleCS)
+     *   )
      * { |
      * parameterDeclarationCS.pivot := varParameter;
      * }
-     * 
+     * map uVarParameter_name {
+     * parameterDeclarationCS := parameterDeclarationCS;
+     * }
      */
     protected boolean MAP_cParameterDeclarationCS_2_VarParameter(final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS parameterDeclarationCS) throws ReflectiveOperationException {
         // predicates
@@ -347,6 +382,8 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(varParameter);
         // property assignments
         parameterDeclarationCS.setPivot(varParameter);
+        // mapping statements
+        MAP_uVarParameter_name(parameterDeclarationCS);
         return true;
     }
     
@@ -362,11 +399,14 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      *  |}
      * where ( |
      * parameterDeclarationCS.oclContainer()
-     *   .oclIsKindOf(qvtoperationalcs::ModuleCS))
+     *   .oclIsKindOf(qvtoperationalcs::ModuleCS)
+     *   )
      * { |
      * parameterDeclarationCS.pivot := modelParameter;
      * }
-     * 
+     * map uModelParameter_name {
+     * parameterDeclarationCS := parameterDeclarationCS;
+     * }
      */
     protected boolean MAP_cParameterDeclarationCS_2_ModelParameter(final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS parameterDeclarationCS_0) throws ReflectiveOperationException {
         // predicates
@@ -383,13 +423,16 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(modelParameter);
         // property assignments
         parameterDeclarationCS_0.setPivot(modelParameter);
+        // mapping statements
+        MAP_uModelParameter_name(parameterDeclarationCS_0);
         return true;
     }
     
     /**
      * 
      * map cQVToClassCS_2_Class in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (qVToClassCS : qvtoperationalcs::QVToClassCS[1];
+     * 
+     *   leftCS (qVToClassCS : qvtoperationalcs::QVToClassCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -399,7 +442,15 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * qVToClassCS.pivot := class;
      * }
-     * 
+     * map uClass_name {
+     * qVToClassCS := qVToClassCS;
+     * }
+     *   map uClass_ownedProperties {
+     * qVToClassCS := qVToClassCS;
+     * }
+     *   map uClass_ownedOperations {
+     * qVToClassCS := qVToClassCS;
+     * }
      */
     protected boolean MAP_cQVToClassCS_2_Class(final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS qVToClassCS) throws ReflectiveOperationException {
         // predicates
@@ -409,13 +460,18 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(symbol_0);
         // property assignments
         qVToClassCS.setPivot(symbol_0);
+        // mapping statements
+        MAP_uClass_name(qVToClassCS);
+        MAP_uClass_ownedProperties(qVToClassCS);
+        MAP_uClass_ownedOperations(qVToClassCS);
         return true;
     }
     
     /**
      * 
      * map cQVToLibraryCS_2_Library in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (qVToLibraryCS : qvtoperationalcs::QVToLibraryCS[1];
+     * 
+     *   leftCS (qVToLibraryCS : qvtoperationalcs::QVToLibraryCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -425,7 +481,15 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * qVToLibraryCS.pivot := library;
      * }
-     * 
+     * map uLibrary_ownedOperations {
+     * qVToLibraryCS := qVToLibraryCS;
+     * }
+     *   map uLibrary_name {
+     * qVToLibraryCS := qVToLibraryCS;
+     * }
+     *   map uLibrary_isBlackbox {
+     * qVToLibraryCS := qVToLibraryCS;
+     * }
      */
     protected boolean MAP_cQVToLibraryCS_2_Library(final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS qVToLibraryCS) throws ReflectiveOperationException {
         // predicates
@@ -435,6 +499,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(library);
         // property assignments
         qVToLibraryCS.setPivot(library);
+        // mapping statements
+        MAP_uLibrary_ownedOperations(qVToLibraryCS);
+        MAP_uLibrary_name(qVToLibraryCS);
+        MAP_uLibrary_isBlackbox(qVToLibraryCS);
         return true;
     }
     
@@ -461,13 +529,15 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(model);
         // property assignments
         topLevelCS.setPivot(model);
+        // mapping statements
         return true;
     }
     
     /**
      * 
      * map cTransformationCS_2_OperationalTransformation in QVTOperationalCS2AS_qvtp_qvtias {
-     * leftCS (transformationCS : qvtoperationalcs::TransformationCS[1];
+     * 
+     *   leftCS (transformationCS : qvtoperationalcs::TransformationCS[1];
      *  |)
      * { |}
      * rightAS ( |)
@@ -477,7 +547,21 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * transformationCS.pivot := operationalTransformation;
      * }
-     * 
+     * map uOperationalTransformation_ownedOperations {
+     * transformationCS := transformationCS;
+     * }
+     *   map uOperationalTransformation_name {
+     * transformationCS := transformationCS;
+     * }
+     *   map uOperationalTransformation_modelParameter {
+     * transformationCS := transformationCS;
+     * }
+     *   map uOperationalTransformation_isAbstract {
+     * transformationCS := transformationCS;
+     * }
+     *   map uOperationalTransformation_isBlackbox {
+     * transformationCS := transformationCS;
+     * }
      */
     protected boolean MAP_cTransformationCS_2_OperationalTransformation(final /*@NonNull*/ /*@NonInvalid*/ TransformationCS transformationCS) throws ReflectiveOperationException {
         // predicates
@@ -487,6 +571,12 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         models[1/*rightAS*/].add(operationalTransformation);
         // property assignments
         transformationCS.setPivot(operationalTransformation);
+        // mapping statements
+        MAP_uOperationalTransformation_ownedOperations(transformationCS);
+        MAP_uOperationalTransformation_name(transformationCS);
+        MAP_uOperationalTransformation_modelParameter(transformationCS);
+        MAP_uOperationalTransformation_isAbstract(transformationCS);
+        MAP_uOperationalTransformation_isBlackbox(transformationCS);
         return true;
     }
     
@@ -519,6 +609,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = classifierPropertyCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -583,6 +674,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         // property assignments
         oclAsType.setIsComposite(exists);
+        // mapping statements
         return true;
     }
     
@@ -615,6 +707,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = mappingOperationCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -671,6 +764,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Parameter> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Parameter.class, collect);
         oclAsType.getOwnedParameters().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -703,6 +797,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -735,6 +830,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_1.getName();
         // property assignments
         oclAsType.setNsPrefix(name);
+        // mapping statements
         return true;
     }
     
@@ -767,6 +863,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = metamodelCS_2.getName();
         // property assignments
         oclAsType.setURI(name);
+        // mapping statements
         return true;
     }
     
@@ -823,6 +920,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Class> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Class.class, collect);
         oclAsType.getOwnedClasses().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -855,6 +953,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = modelTypeCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -897,6 +996,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = parameterDeclarationCS_1.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -938,6 +1038,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = parameterDeclarationCS_2.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -1002,6 +1103,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         };
         // property assignments
         oclAsType.setType(_lookupModelType);
+        // mapping statements
         return true;
     }
     
@@ -1034,6 +1136,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = qVToClassCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -1108,6 +1211,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Property> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Property.class, collect);
         oclAsType.getOwnedProperties().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -1164,6 +1268,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
         oclAsType.getOwnedOperations().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -1196,6 +1301,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = qVToLibraryCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -1252,6 +1358,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
         oclAsType.getOwnedOperations().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -1316,6 +1423,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         // property assignments
         oclAsType.setIsBlackbox(exists);
+        // mapping statements
         return true;
     }
     
@@ -1428,6 +1536,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Package> ECORE_includingAll = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Package.class, includingAll);
         oclAsType.getOwnedPackages().addAll(ECORE_includingAll);
+        // mapping statements
         return true;
     }
     
@@ -1460,6 +1569,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         final /*@Nullable*/ /*@Thrown*/ String name = transformationCS_0.getName();
         // property assignments
         oclAsType.setName(name);
+        // mapping statements
         return true;
     }
     
@@ -1534,6 +1644,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<ModelParameter> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(ModelParameter.class, collect);
         oclAsType.getModelParameter().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -1590,6 +1701,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         final /*@NonNull*/ /*@NonInvalid*/ List<Operation> ECORE_collect = ((IdResolver.IdResolverExtension)idResolver).ecoreValueOfAll(Operation.class, collect);
         oclAsType.getOwnedOperations().addAll(ECORE_collect);
+        // mapping statements
         return true;
     }
     
@@ -1654,6 +1766,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         // property assignments
         oclAsType.setIsBlackbox(exists);
+        // mapping statements
         return true;
     }
     
@@ -1718,6 +1831,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         }
         // property assignments
         oclAsType.setIsAbstract(exists);
+        // mapping statements
         return true;
     }
     
@@ -1727,416 +1841,190 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * 
      *   where ( |)
      * { |}
-     * for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map cParameterDeclarationCS_2_VarParameter {
-     * parameterDeclarationCS := parameterDeclarationCS;
-     * }}
-     *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map cParameterDeclarationCS_2_ModelParameter {
-     * parameterDeclarationCS := parameterDeclarationCS;
-     * }}
-     *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map uVarParameter_name {
-     * parameterDeclarationCS := parameterDeclarationCS;
-     * }}
-     *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map uModelParameter_name {
-     * parameterDeclarationCS := parameterDeclarationCS;
-     * }}
-     *   for modelTypeCS : qvtoperationalcs::ModelTypeCS in qvtoperationalcs::ModelTypeCS.allInstances()
-     *    {
-     * map cModelTypeCS_2_ModelType {
-     * modelTypeCS := modelTypeCS;
-     * }}
-     *   for modelTypeCS : qvtoperationalcs::ModelTypeCS in qvtoperationalcs::ModelTypeCS.allInstances()
-     *    {
-     * map uModelType_name {
-     * modelTypeCS := modelTypeCS;
-     * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
-     *    {
-     * 
-     *     map cTransformationCS_2_OperationalTransformation {
-     * transformationCS := transformationCS;
-     * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
-     *    {
-     * 
-     *     map uOperationalTransformation_modelParameter {
-     * transformationCS := transformationCS;
-     * }}
-     *   for parameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
-     *    {
-     * 
-     *     map uModelParameter_type {
-     * parameterDeclarationCS := parameterDeclarationCS;
-     * }}
-     *   for classifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS in qvtoperationalcs::ClassifierPropertyCS.allInstances()
+     * for _classifierPropertyCS_ClassifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS in qvtoperationalcs::ClassifierPropertyCS.allInstances()
      *    {
      * 
      *     map cClassifierPropertyCS_2_Property {
-     * classifierPropertyCS := classifierPropertyCS;
+     * classifierPropertyCS := _classifierPropertyCS_ClassifierPropertyCS;
      * }}
-     *   for mappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
+     *   for _mappingOperationCS_MappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
      *    {
      * 
      *     map cMappingOperationCS_2_MappingOperation {
-     * mappingOperationCS := mappingOperationCS;
+     * mappingOperationCS := _mappingOperationCS_MappingOperationCS;
      * }}
-     *   for metamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *   for _metamodelCS_MetamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
      *    {
      * map cMetamodelCS_2_Package {
-     * metamodelCS := metamodelCS;
+     * metamodelCS := _metamodelCS_MetamodelCS;
      * }}
-     *   for qVToClassCS : qvtoperationalcs::QVToClassCS in qvtoperationalcs::QVToClassCS.allInstances()
-     *    {
-     * map cQVToClassCS_2_Class {
-     * qVToClassCS := qVToClassCS;
-     * }}
-     *   for qVToLibraryCS : qvtoperationalcs::QVToLibraryCS in qvtoperationalcs::QVToLibraryCS.allInstances()
-     *    {
-     * map cQVToLibraryCS_2_Library {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }}
-     *   for topLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
-     *    {
-     * map cTopLevelCS_2_Model {
-     * topLevelCS := topLevelCS;
-     * }}
-     *   for classifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS in qvtoperationalcs::ClassifierPropertyCS.allInstances()
-     *    {
-     * map uProperty_name {
-     * classifierPropertyCS := classifierPropertyCS;
-     * }}
-     *   for classifierPropertyCS : qvtoperationalcs::ClassifierPropertyCS in qvtoperationalcs::ClassifierPropertyCS.allInstances()
+     *   for _modelTypeCS_ModelTypeCS : qvtoperationalcs::ModelTypeCS in qvtoperationalcs::ModelTypeCS.allInstances()
      *    {
      * 
-     *     map uProperty_isComposite {
-     * classifierPropertyCS := classifierPropertyCS;
+     *     map cModelTypeCS_2_ModelType {
+     * modelTypeCS := _modelTypeCS_ModelTypeCS;
      * }}
-     *   for mappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
+     *   for _parameterDeclarationCS_ParameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
-     * map uMappingOperation_name {
-     * mappingOperationCS := mappingOperationCS;
+     * 
+     *     map cParameterDeclarationCS_2_VarParameter {
+     * parameterDeclarationCS := _parameterDeclarationCS_ParameterDeclarationCS;
      * }}
-     *   for mappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
+     *   for _parameterDeclarationCS_ParameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
+     *    {
+     * 
+     *     map cParameterDeclarationCS_2_ModelParameter {
+     * parameterDeclarationCS := _parameterDeclarationCS_ParameterDeclarationCS;
+     * }}
+     *   for _mappingOperationCS_MappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
      *    {
      * 
      *     map uMappingOperation_ownedParameters {
-     * mappingOperationCS := mappingOperationCS;
+     * mappingOperationCS := _mappingOperationCS_MappingOperationCS;
      * }}
-     *   for metamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *   for _qVToClassCS_QVToClassCS : qvtoperationalcs::QVToClassCS in qvtoperationalcs::QVToClassCS.allInstances()
      *    {
-     * map uPackage_name {
-     * metamodelCS := metamodelCS;
+     * map cQVToClassCS_2_Class {
+     * qVToClassCS := _qVToClassCS_QVToClassCS;
      * }}
-     *   for metamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *   for _qVToLibraryCS_QVToLibraryCS : qvtoperationalcs::QVToLibraryCS in qvtoperationalcs::QVToLibraryCS.allInstances()
      *    {
-     * map uPackage_nsPrefix {
-     * metamodelCS := metamodelCS;
+     * 
+     *     map cQVToLibraryCS_2_Library {
+     * qVToLibraryCS := _qVToLibraryCS_QVToLibraryCS;
      * }}
-     *   for metamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *   for _topLevelCS_TopLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
      *    {
-     * map uPackage_URI {
-     * metamodelCS := metamodelCS;
+     * map cTopLevelCS_2_Model {
+     * topLevelCS := _topLevelCS_TopLevelCS;
      * }}
-     *   for metamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *   for _transformationCS_TransformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
      *    {
-     * map uPackage_ownedClasses {
-     * metamodelCS := metamodelCS;
+     * 
+     *     map cTransformationCS_2_OperationalTransformation {
+     * transformationCS := _transformationCS_TransformationCS;
      * }}
-     *   for qVToClassCS : qvtoperationalcs::QVToClassCS in qvtoperationalcs::QVToClassCS.allInstances()
-     *    {
-     * map uClass_name {
-     * qVToClassCS := qVToClassCS;
-     * }}
-     *   for qVToClassCS : qvtoperationalcs::QVToClassCS in qvtoperationalcs::QVToClassCS.allInstances()
-     *    {
-     * map uClass_ownedProperties {
-     * qVToClassCS := qVToClassCS;
-     * }}
-     *   for qVToClassCS : qvtoperationalcs::QVToClassCS in qvtoperationalcs::QVToClassCS.allInstances()
-     *    {
-     * map uClass_ownedOperations {
-     * qVToClassCS := qVToClassCS;
-     * }}
-     *   for qVToLibraryCS : qvtoperationalcs::QVToLibraryCS in qvtoperationalcs::QVToLibraryCS.allInstances()
-     *    {
-     * map uLibrary_name {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }}
-     *   for qVToLibraryCS : qvtoperationalcs::QVToLibraryCS in qvtoperationalcs::QVToLibraryCS.allInstances()
-     *    {
-     * map uLibrary_ownedOperations {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }}
-     *   for qVToLibraryCS : qvtoperationalcs::QVToLibraryCS in qvtoperationalcs::QVToLibraryCS.allInstances()
-     *    {
-     * map uLibrary_isBlackbox {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }}
-     *   for topLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
+     *   for _topLevelCS_TopLevelCS : qvtoperationalcs::TopLevelCS in qvtoperationalcs::TopLevelCS.allInstances()
      *    {
      * map uModel_ownedPackages {
-     * topLevelCS := topLevelCS;
+     * topLevelCS := _topLevelCS_TopLevelCS;
      * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
+     *   for _metamodelCS_MetamodelCS : qvtoperationalcs::MetamodelCS in qvtoperationalcs::MetamodelCS.allInstances()
+     *    {
+     * map uPackage_ownedClasses {
+     * metamodelCS := _metamodelCS_MetamodelCS;
+     * }}
+     *   for _parameterDeclarationCS_ParameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
      * 
-     *     map uOperationalTransformation_name {
-     * transformationCS := transformationCS;
-     * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
-     *    {
-     * 
-     *     map uOperationalTransformation_ownedOperations {
-     * transformationCS := transformationCS;
-     * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
-     *    {
-     * 
-     *     map uOperationalTransformation_isBlackbox {
-     * transformationCS := transformationCS;
-     * }}
-     *   for transformationCS : qvtoperationalcs::TransformationCS in qvtoperationalcs::TransformationCS.allInstances()
-     *    {
-     * 
-     *     map uOperationalTransformation_isAbstract {
-     * transformationCS := transformationCS;
+     *     map uModelParameter_type {
+     * parameterDeclarationCS := _parameterDeclarationCS_ParameterDeclarationCS;
      * }}
      */
     protected boolean MAP___root__() throws ReflectiveOperationException {
         // predicates
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = executor.getIdResolver();
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2 = idResolver.getClass(CLSSid_ClassifierPropertyCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MappingOperationCS_2 = idResolver.getClass(CLSSid_MappingOperationCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MetamodelCS_4 = idResolver.getClass(CLSSid_MetamodelCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModelTypeCS_1 = idResolver.getClass(CLSSid_ModelTypeCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_4 = idResolver.getClass(CLSSid_ParameterDeclarationCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToClassCS_3 = idResolver.getClass(CLSSid_QVToClassCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToLibraryCS_3 = idResolver.getClass(CLSSid_QVToLibraryCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_0 = idResolver.getClass(CLSSid_ClassifierPropertyCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MappingOperationCS_1 = idResolver.getClass(CLSSid_MappingOperationCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_MetamodelCS_1 = idResolver.getClass(CLSSid_MetamodelCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ModelTypeCS_0 = idResolver.getClass(CLSSid_ModelTypeCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_2 = idResolver.getClass(CLSSid_ParameterDeclarationCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToClassCS_0 = idResolver.getClass(CLSSid_QVToClassCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_QVToLibraryCS_0 = idResolver.getClass(CLSSid_QVToLibraryCS, null);
         final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TopLevelCS_1 = idResolver.getClass(CLSSid_TopLevelCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TransformationCS_5 = idResolver.getClass(CLSSid_TransformationCS, null);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_14 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassifierPropertyCS, TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_2);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_16 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_MappingOperationCS, TYP_qvtoperationalcs_c_c_MappingOperationCS_2);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_18 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_MetamodelCS, TYP_qvtoperationalcs_c_c_MetamodelCS_4);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_4 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ModelTypeCS, TYP_qvtoperationalcs_c_c_ModelTypeCS_1);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ParameterDeclarationCS, TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_4);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_22 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToClassCS, TYP_qvtoperationalcs_c_c_QVToClassCS_3);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_25 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToLibraryCS, TYP_qvtoperationalcs_c_c_QVToLibraryCS_3);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_28 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_1);
-        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TransformationCS, TYP_qvtoperationalcs_c_c_TransformationCS_5);
+        final /*@NonNull*/ /*@NonInvalid*/ Class TYP_qvtoperationalcs_c_c_TransformationCS_0 = idResolver.getClass(CLSSid_TransformationCS, null);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_MappingOperationCS, TYP_qvtoperationalcs_c_c_MappingOperationCS_1);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_MetamodelCS, TYP_qvtoperationalcs_c_c_MetamodelCS_1);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_4 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ParameterDeclarationCS, TYP_qvtoperationalcs_c_c_ParameterDeclarationCS_2);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TopLevelCS, TYP_qvtoperationalcs_c_c_TopLevelCS_1);
         // mapping statements
-        for (ParameterDeclarationCS parameterDeclarationCS_9 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
-            if (parameterDeclarationCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_0 = (ParameterDeclarationCS)parameterDeclarationCS_9;
-                MAP_cParameterDeclarationCS_2_VarParameter(symbol_0);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ClassifierPropertyCS, TYP_qvtoperationalcs_c_c_ClassifierPropertyCS_0);
+        for (ClassifierPropertyCS _classifierPropertyCS_ClassifierPropertyCS : ValueUtil.typedIterable(ClassifierPropertyCS.class, allInstances)) {
+            if (_classifierPropertyCS_ClassifierPropertyCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_0 = (ClassifierPropertyCS)_classifierPropertyCS_ClassifierPropertyCS;
+                MAP_cClassifierPropertyCS_2_Property(symbol_0);
             }
         }
-        for (ParameterDeclarationCS parameterDeclarationCS_10 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
-            if (parameterDeclarationCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_3 = (ParameterDeclarationCS)parameterDeclarationCS_10;
-                MAP_cParameterDeclarationCS_2_ModelParameter(symbol_3);
+        for (MappingOperationCS _mappingOperationCS_MappingOperationCS : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_5)) {
+            if (_mappingOperationCS_MappingOperationCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_2 = (MappingOperationCS)_mappingOperationCS_MappingOperationCS;
+                MAP_cMappingOperationCS_2_MappingOperation(symbol_2);
             }
         }
-        for (ParameterDeclarationCS parameterDeclarationCS_11 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
-            if (parameterDeclarationCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_6 = (ParameterDeclarationCS)parameterDeclarationCS_11;
-                MAP_uVarParameter_name(symbol_6);
+        for (MetamodelCS _metamodelCS_MetamodelCS : ValueUtil.typedIterable(MetamodelCS.class, allInstances_11)) {
+            if (_metamodelCS_MetamodelCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_4 = (MetamodelCS)_metamodelCS_MetamodelCS;
+                MAP_cMetamodelCS_2_Package(symbol_4);
             }
         }
-        for (ParameterDeclarationCS parameterDeclarationCS_12 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
-            if (parameterDeclarationCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_9 = (ParameterDeclarationCS)parameterDeclarationCS_12;
-                MAP_uModelParameter_name(symbol_9);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_ModelTypeCS, TYP_qvtoperationalcs_c_c_ModelTypeCS_0);
+        for (ModelTypeCS _modelTypeCS_ModelTypeCS : ValueUtil.typedIterable(ModelTypeCS.class, allInstances_2)) {
+            if (_modelTypeCS_ModelTypeCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ ModelTypeCS symbol_6 = (ModelTypeCS)_modelTypeCS_ModelTypeCS;
+                MAP_cModelTypeCS_2_ModelType(symbol_6);
             }
         }
-        for (ModelTypeCS modelTypeCS_3 : ValueUtil.typedIterable(ModelTypeCS.class, allInstances_4)) {
-            if (modelTypeCS_3 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ModelTypeCS symbol_12 = (ModelTypeCS)modelTypeCS_3;
-                MAP_cModelTypeCS_2_ModelType(symbol_12);
+        for (ParameterDeclarationCS _parameterDeclarationCS_ParameterDeclarationCS : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_4)) {
+            if (_parameterDeclarationCS_ParameterDeclarationCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_8 = (ParameterDeclarationCS)_parameterDeclarationCS_ParameterDeclarationCS;
+                MAP_cParameterDeclarationCS_2_VarParameter(symbol_8);
             }
         }
-        for (ModelTypeCS modelTypeCS_4 : ValueUtil.typedIterable(ModelTypeCS.class, allInstances_4)) {
-            if (modelTypeCS_4 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ModelTypeCS symbol_15 = (ModelTypeCS)modelTypeCS_4;
-                MAP_uModelType_name(symbol_15);
+        for (ParameterDeclarationCS _parameterDeclarationCS_ParameterDeclarationCS_0 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_4)) {
+            if (_parameterDeclarationCS_ParameterDeclarationCS_0 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_10 = (ParameterDeclarationCS)_parameterDeclarationCS_ParameterDeclarationCS_0;
+                MAP_cParameterDeclarationCS_2_ModelParameter(symbol_10);
             }
         }
-        for (TransformationCS transformationCS_11 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_18 = (TransformationCS)transformationCS_11;
-                MAP_cTransformationCS_2_OperationalTransformation(symbol_18);
+        for (MappingOperationCS _mappingOperationCS_MappingOperationCS_0 : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_5)) {
+            if (_mappingOperationCS_MappingOperationCS_0 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_12 = (MappingOperationCS)_mappingOperationCS_MappingOperationCS_0;
+                MAP_uMappingOperation_ownedParameters(symbol_12);
             }
         }
-        for (TransformationCS transformationCS_12 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_21 = (TransformationCS)transformationCS_12;
-                MAP_uOperationalTransformation_modelParameter(symbol_21);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToClassCS, TYP_qvtoperationalcs_c_c_QVToClassCS_0);
+        for (QVToClassCS _qVToClassCS_QVToClassCS : ValueUtil.typedIterable(QVToClassCS.class, allInstances_6)) {
+            if (_qVToClassCS_QVToClassCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_14 = (QVToClassCS)_qVToClassCS_QVToClassCS;
+                MAP_cQVToClassCS_2_Class(symbol_14);
             }
         }
-        for (ParameterDeclarationCS parameterDeclarationCS_13 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_0)) {
-            if (parameterDeclarationCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_24 = (ParameterDeclarationCS)parameterDeclarationCS_13;
-                MAP_uModelParameter_type(symbol_24);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_QVToLibraryCS, TYP_qvtoperationalcs_c_c_QVToLibraryCS_0);
+        for (QVToLibraryCS _qVToLibraryCS_QVToLibraryCS : ValueUtil.typedIterable(QVToLibraryCS.class, allInstances_7)) {
+            if (_qVToLibraryCS_QVToLibraryCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_16 = (QVToLibraryCS)_qVToLibraryCS_QVToLibraryCS;
+                MAP_cQVToLibraryCS_2_Library(symbol_16);
             }
         }
-        for (ClassifierPropertyCS classifierPropertyCS_5 : ValueUtil.typedIterable(ClassifierPropertyCS.class, allInstances_14)) {
-            if (classifierPropertyCS_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_27 = (ClassifierPropertyCS)classifierPropertyCS_5;
-                MAP_cClassifierPropertyCS_2_Property(symbol_27);
+        for (TopLevelCS _topLevelCS_TopLevelCS : ValueUtil.typedIterable(TopLevelCS.class, allInstances_10)) {
+            if (_topLevelCS_TopLevelCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_18 = (TopLevelCS)_topLevelCS_TopLevelCS;
+                MAP_cTopLevelCS_2_Model(symbol_18);
             }
         }
-        for (MappingOperationCS mappingOperationCS_5 : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_16)) {
-            if (mappingOperationCS_5 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_30 = (MappingOperationCS)mappingOperationCS_5;
-                MAP_cMappingOperationCS_2_MappingOperation(symbol_30);
+        final /*@NonNull*/ /*@NonInvalid*/ SetValue allInstances_9 = ClassifierAllInstancesOperation.INSTANCE.evaluate(executor, SET_CLSSid_TransformationCS, TYP_qvtoperationalcs_c_c_TransformationCS_0);
+        for (TransformationCS _transformationCS_TransformationCS : ValueUtil.typedIterable(TransformationCS.class, allInstances_9)) {
+            if (_transformationCS_TransformationCS != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_20 = (TransformationCS)_transformationCS_TransformationCS;
+                MAP_cTransformationCS_2_OperationalTransformation(symbol_20);
             }
         }
-        for (MetamodelCS metamodelCS_9 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_18)) {
-            if (metamodelCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_33 = (MetamodelCS)metamodelCS_9;
-                MAP_cMetamodelCS_2_Package(symbol_33);
+        for (TopLevelCS _topLevelCS_TopLevelCS_0 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_10)) {
+            if (_topLevelCS_TopLevelCS_0 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_22 = (TopLevelCS)_topLevelCS_TopLevelCS_0;
+                MAP_uModel_ownedPackages(symbol_22);
             }
         }
-        for (QVToClassCS qVToClassCS_7 : ValueUtil.typedIterable(QVToClassCS.class, allInstances_22)) {
-            if (qVToClassCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_36 = (QVToClassCS)qVToClassCS_7;
-                MAP_cQVToClassCS_2_Class(symbol_36);
+        for (MetamodelCS _metamodelCS_MetamodelCS_0 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_11)) {
+            if (_metamodelCS_MetamodelCS_0 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_24 = (MetamodelCS)_metamodelCS_MetamodelCS_0;
+                MAP_uPackage_ownedClasses(symbol_24);
             }
         }
-        for (QVToLibraryCS qVToLibraryCS_7 : ValueUtil.typedIterable(QVToLibraryCS.class, allInstances_25)) {
-            if (qVToLibraryCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_39 = (QVToLibraryCS)qVToLibraryCS_7;
-                MAP_cQVToLibraryCS_2_Library(symbol_39);
-            }
-        }
-        for (TopLevelCS topLevelCS_3 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_3 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_42 = (TopLevelCS)topLevelCS_3;
-                MAP_cTopLevelCS_2_Model(symbol_42);
-            }
-        }
-        for (ClassifierPropertyCS classifierPropertyCS_6 : ValueUtil.typedIterable(ClassifierPropertyCS.class, allInstances_14)) {
-            if (classifierPropertyCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_45 = (ClassifierPropertyCS)classifierPropertyCS_6;
-                MAP_uProperty_name(symbol_45);
-            }
-        }
-        for (ClassifierPropertyCS classifierPropertyCS_7 : ValueUtil.typedIterable(ClassifierPropertyCS.class, allInstances_14)) {
-            if (classifierPropertyCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ ClassifierPropertyCS symbol_48 = (ClassifierPropertyCS)classifierPropertyCS_7;
-                MAP_uProperty_isComposite(symbol_48);
-            }
-        }
-        for (MappingOperationCS mappingOperationCS_6 : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_16)) {
-            if (mappingOperationCS_6 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_51 = (MappingOperationCS)mappingOperationCS_6;
-                MAP_uMappingOperation_name(symbol_51);
-            }
-        }
-        for (MappingOperationCS mappingOperationCS_7 : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_16)) {
-            if (mappingOperationCS_7 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MappingOperationCS symbol_54 = (MappingOperationCS)mappingOperationCS_7;
-                MAP_uMappingOperation_ownedParameters(symbol_54);
-            }
-        }
-        for (MetamodelCS metamodelCS_10 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_18)) {
-            if (metamodelCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_57 = (MetamodelCS)metamodelCS_10;
-                MAP_uPackage_name(symbol_57);
-            }
-        }
-        for (MetamodelCS metamodelCS_11 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_18)) {
-            if (metamodelCS_11 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_60 = (MetamodelCS)metamodelCS_11;
-                MAP_uPackage_nsPrefix(symbol_60);
-            }
-        }
-        for (MetamodelCS metamodelCS_12 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_18)) {
-            if (metamodelCS_12 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_63 = (MetamodelCS)metamodelCS_12;
-                MAP_uPackage_URI(symbol_63);
-            }
-        }
-        for (MetamodelCS metamodelCS_13 : ValueUtil.typedIterable(MetamodelCS.class, allInstances_18)) {
-            if (metamodelCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ MetamodelCS symbol_66 = (MetamodelCS)metamodelCS_13;
-                MAP_uPackage_ownedClasses(symbol_66);
-            }
-        }
-        for (QVToClassCS qVToClassCS_8 : ValueUtil.typedIterable(QVToClassCS.class, allInstances_22)) {
-            if (qVToClassCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_69 = (QVToClassCS)qVToClassCS_8;
-                MAP_uClass_name(symbol_69);
-            }
-        }
-        for (QVToClassCS qVToClassCS_9 : ValueUtil.typedIterable(QVToClassCS.class, allInstances_22)) {
-            if (qVToClassCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_72 = (QVToClassCS)qVToClassCS_9;
-                MAP_uClass_ownedProperties(symbol_72);
-            }
-        }
-        for (QVToClassCS qVToClassCS_10 : ValueUtil.typedIterable(QVToClassCS.class, allInstances_22)) {
-            if (qVToClassCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToClassCS symbol_75 = (QVToClassCS)qVToClassCS_10;
-                MAP_uClass_ownedOperations(symbol_75);
-            }
-        }
-        for (QVToLibraryCS qVToLibraryCS_8 : ValueUtil.typedIterable(QVToLibraryCS.class, allInstances_25)) {
-            if (qVToLibraryCS_8 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_78 = (QVToLibraryCS)qVToLibraryCS_8;
-                MAP_uLibrary_name(symbol_78);
-            }
-        }
-        for (QVToLibraryCS qVToLibraryCS_9 : ValueUtil.typedIterable(QVToLibraryCS.class, allInstances_25)) {
-            if (qVToLibraryCS_9 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_81 = (QVToLibraryCS)qVToLibraryCS_9;
-                MAP_uLibrary_ownedOperations(symbol_81);
-            }
-        }
-        for (QVToLibraryCS qVToLibraryCS_10 : ValueUtil.typedIterable(QVToLibraryCS.class, allInstances_25)) {
-            if (qVToLibraryCS_10 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ QVToLibraryCS symbol_84 = (QVToLibraryCS)qVToLibraryCS_10;
-                MAP_uLibrary_isBlackbox(symbol_84);
-            }
-        }
-        for (TopLevelCS topLevelCS_4 : ValueUtil.typedIterable(TopLevelCS.class, allInstances_28)) {
-            if (topLevelCS_4 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TopLevelCS symbol_87 = (TopLevelCS)topLevelCS_4;
-                MAP_uModel_ownedPackages(symbol_87);
-            }
-        }
-        for (TransformationCS transformationCS_13 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_13 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_90 = (TransformationCS)transformationCS_13;
-                MAP_uOperationalTransformation_name(symbol_90);
-            }
-        }
-        for (TransformationCS transformationCS_14 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_14 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_93 = (TransformationCS)transformationCS_14;
-                MAP_uOperationalTransformation_ownedOperations(symbol_93);
-            }
-        }
-        for (TransformationCS transformationCS_15 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_15 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_96 = (TransformationCS)transformationCS_15;
-                MAP_uOperationalTransformation_isBlackbox(symbol_96);
-            }
-        }
-        for (TransformationCS transformationCS_16 : ValueUtil.typedIterable(TransformationCS.class, allInstances_6)) {
-            if (transformationCS_16 != null) {
-                final /*@NonNull*/ /*@NonInvalid*/ TransformationCS symbol_99 = (TransformationCS)transformationCS_16;
-                MAP_uOperationalTransformation_isAbstract(symbol_99);
+        for (ParameterDeclarationCS _parameterDeclarationCS_ParameterDeclarationCS_1 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_4)) {
+            if (_parameterDeclarationCS_ParameterDeclarationCS_1 != null) {
+                final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_26 = (ParameterDeclarationCS)_parameterDeclarationCS_ParameterDeclarationCS_1;
+                MAP_uModelParameter_type(symbol_26);
             }
         }
         return true;

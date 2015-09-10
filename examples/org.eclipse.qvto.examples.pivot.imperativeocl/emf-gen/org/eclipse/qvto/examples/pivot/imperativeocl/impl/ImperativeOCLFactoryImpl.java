@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.qvto.examples.pivot.imperativeocl.*;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;

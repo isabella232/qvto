@@ -85,7 +85,7 @@ Workflow {
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
 
     
      component = @SubGenerateAutoASModel {	resourceSet = resourceSet

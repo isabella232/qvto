@@ -1889,6 +1889,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int DICTIONARY_TYPE__ELEMENT_TYPE = PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Null Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DICTIONARY_TYPE__IS_NULL_FREE = PivotPackage.COLLECTION_TYPE__IS_NULL_FREE;
+
+	/**
 	 * The feature id for the '<em><b>Lower</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2187,6 +2196,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_LOOP_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.LOOP_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2402,6 +2420,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int FOR_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FOR_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = IMPERATIVE_LOOP_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
@@ -2628,6 +2655,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_ITERATE_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = IMPERATIVE_LOOP_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
+
+	/**
+	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_ITERATE_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = IMPERATIVE_LOOP_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The operation id for the '<em>Validate No Initializers</em>' operation.
@@ -3182,6 +3218,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LIST_TYPE__ELEMENT_TYPE = PivotPackage.COLLECTION_TYPE__ELEMENT_TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Is Null Free</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIST_TYPE__IS_NULL_FREE = PivotPackage.COLLECTION_TYPE__IS_NULL_FREE;
+
+	/**
 	 * The feature id for the '<em><b>Lower</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3471,6 +3516,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP___COMPATIBLE_BODY__VALUESPECIFICATION = PivotPackage.OPERATION_CALL_EXP___COMPATIBLE_BODY__VALUESPECIFICATION;
 
 	/**
+	 * The operation id for the '<em>Validate Type Is Not Invalid</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_CALL_EXP___VALIDATE_TYPE_IS_NOT_INVALID__DIAGNOSTICCHAIN_MAP;
+
+	/**
 	 * The operation id for the '<em>Get Referred Element</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3496,6 +3550,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	 * @ordered
 	 */
 	int LOG_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_CALL_EXP___VALIDATE_ARGUMENT_TYPE_IS_CONFORMANT__DIAGNOSTICCHAIN_MAP;
+
+	/**
+	 * The operation id for the '<em>Validate Safe Source Can Be Null</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP___VALIDATE_SAFE_SOURCE_CAN_BE_NULL__DIAGNOSTICCHAIN_MAP = PivotPackage.OPERATION_CALL_EXP___VALIDATE_SAFE_SOURCE_CAN_BE_NULL__DIAGNOSTICCHAIN_MAP;
 
 	/**
 	 * The number of operations of the '<em>Log Exp</em>' class.

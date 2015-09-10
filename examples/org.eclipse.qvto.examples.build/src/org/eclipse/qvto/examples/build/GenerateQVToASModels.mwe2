@@ -87,8 +87,7 @@ Workflow {
     		to = "platform:/resource/org.eclipse.ocl.examples.build/"
     	}
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
-    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
     
 	/*
 	FIXME: We can't weave the visitor pattern into the model because OCL doesn't do it.
