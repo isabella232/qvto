@@ -240,9 +240,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="ecore:EClass ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore#//BlockExpCS"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelTypeRefCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ParameterCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="ModuleCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//StructuredClassCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//ParameterDeclarationCS" containment="true"/>
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ParameterCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="moduleUsages" upperBound="-1"
         eType="#//ModuleUsageCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tags" upperBound="-1" eType="#//TagCS"

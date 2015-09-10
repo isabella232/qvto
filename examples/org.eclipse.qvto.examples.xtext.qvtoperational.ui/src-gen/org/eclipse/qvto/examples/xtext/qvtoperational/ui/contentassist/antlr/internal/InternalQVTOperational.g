@@ -1185,6 +1185,34 @@ finally {
 
 
 
+// Entry rule entryRuleModelTypeRefCS
+entryRuleModelTypeRefCS 
+:
+{ before(grammarAccess.getModelTypeRefCSRule()); }
+	 ruleModelTypeRefCS
+{ after(grammarAccess.getModelTypeRefCSRule()); } 
+	 EOF 
+;
+
+// Rule ModelTypeRefCS
+ruleModelTypeRefCS
+    @init {
+		int stackSize = keepStackSize();
+    }
+	:
+(
+{ before(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeAssignment()); }
+(rule__ModelTypeRefCS__OwnedTypeAssignment)
+{ after(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeAssignment()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+
 // Entry rule entryRulePackageRefCS
 entryRulePackageRefCS 
 :
@@ -23249,8 +23277,8 @@ rule__LibraryHeaderCS__ParametersAssignment_4
     }
 :
 (
-{ before(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_4_0()); }
-	ruleParameterDeclarationCS{ after(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_4_0()); }
+{ before(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_4_0()); }
+	ruleModelTypeRefCS{ after(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_4_0()); }
 )
 
 ;
@@ -23264,8 +23292,8 @@ rule__LibraryHeaderCS__ParametersAssignment_5_1
     }
 :
 (
-{ before(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_5_1_0()); }
-	ruleParameterDeclarationCS{ after(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_5_1_0()); }
+{ before(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_5_1_0()); }
+	ruleModelTypeRefCS{ after(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_5_1_0()); }
 )
 
 ;
@@ -23341,6 +23369,21 @@ rule__ModelTypeCS__PackageRefsAssignment_5_1
 (
 { before(grammarAccess.getModelTypeCSAccess().getPackageRefsPackageRefCSParserRuleCall_5_1_0()); }
 	rulePackageRefCS{ after(grammarAccess.getModelTypeCSAccess().getPackageRefsPackageRefCSParserRuleCall_5_1_0()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ModelTypeRefCS__OwnedTypeAssignment
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeTypedTypeRef2CSParserRuleCall_0()); }
+	ruleTypedTypeRef2CS{ after(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeTypedTypeRef2CSParserRuleCall_0()); }
 )
 
 ;

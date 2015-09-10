@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.impl.StructuredClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
@@ -45,7 +46,7 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclarationCS> parameters;
+	protected EList<ParameterCS> parameters;
 
 	/**
 	 * The cached value of the '{@link #getModuleUsages() <em>Module Usages</em>}' containment reference list.
@@ -101,9 +102,9 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclarationCS> getParameters() {
+	public EList<ParameterCS> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<ParameterDeclarationCS>(ParameterDeclarationCS.class, this, QVTOperationalCSPackage.MODULE_CS__PARAMETERS);
+			parameters = new EObjectContainmentEList<ParameterCS>(ParameterCS.class, this, QVTOperationalCSPackage.MODULE_CS__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -202,7 +203,7 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 		switch (featureID) {
 			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends ParameterDeclarationCS>)newValue);
+				getParameters().addAll((Collection<? extends ParameterCS>)newValue);
 				return;
 			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
 				getModuleUsages().clear();

@@ -121,7 +121,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	 *     moduleUsages+=ModuleUsageCS '{' '}' (ambiguity) (rule end)
 	 *     ownedOperations+=ModuleOperationCS '}' (ambiguity) (rule end)
 	 *     ownedProperties+=ModulePropertyCS '}' (ambiguity) (rule end)
-	 *     parameters+=ParameterDeclarationCS ')' '{' '}' (ambiguity) (rule end)
+	 *     parameters+=ModelTypeRefCS ')' '{' '}' (ambiguity) (rule end)
 	 */
 	protected void emit_LibraryDefCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

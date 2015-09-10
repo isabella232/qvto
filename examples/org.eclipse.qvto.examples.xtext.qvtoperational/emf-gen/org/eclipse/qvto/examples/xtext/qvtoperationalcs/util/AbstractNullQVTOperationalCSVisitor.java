@@ -129,6 +129,10 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitModelTypeRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS object) {
+		return null;
+	}
+
 	public @Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object) {
 		return null;
 	}

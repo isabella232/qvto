@@ -371,6 +371,7 @@ public class QVTOperationalParser extends AbstractContentAssistParser {
 					put(grammarAccess.getModelTypeCSAccess().getComplianceKindAssignment_2(), "rule__ModelTypeCS__ComplianceKindAssignment_2");
 					put(grammarAccess.getModelTypeCSAccess().getPackageRefsAssignment_4(), "rule__ModelTypeCS__PackageRefsAssignment_4");
 					put(grammarAccess.getModelTypeCSAccess().getPackageRefsAssignment_5_1(), "rule__ModelTypeCS__PackageRefsAssignment_5_1");
+					put(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeAssignment(), "rule__ModelTypeRefCS__OwnedTypeAssignment");
 					put(grammarAccess.getPackageRefCSAccess().getUriAssignment_0(), "rule__PackageRefCS__UriAssignment_0");
 					put(grammarAccess.getPackageRefCSAccess().getPackagePathAssignment_1_0(), "rule__PackageRefCS__PackagePathAssignment_1_0");
 					put(grammarAccess.getPackageRefCSAccess().getUriAssignment_1_2(), "rule__PackageRefCS__UriAssignment_1_2");

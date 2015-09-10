@@ -151,6 +151,7 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 			case QVTOperationalCSPackage.MODULE_KIND_CS: return createModuleKindCS();
 			case QVTOperationalCSPackage.MODULE_REF_CS: return createModuleRefCS();
 			case QVTOperationalCSPackage.MODEL_TYPE_CS: return createModelTypeCS();
+			case QVTOperationalCSPackage.MODEL_TYPE_REF_CS: return createModelTypeRefCS();
 			case QVTOperationalCSPackage.MODULE_CS: return createModuleCS();
 			case QVTOperationalCSPackage.MODULE_USAGE_CS: return createModuleUsageCS();
 			case QVTOperationalCSPackage.MULTIPLICITY_DEF_CS: return createMultiplicityDefCS();
@@ -583,6 +584,16 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	public ModelTypeCS createModelTypeCS() {
 		ModelTypeCSImpl modelTypeCS = new ModelTypeCSImpl();
 		return modelTypeCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ModelTypeRefCS createModelTypeRefCS() {
+		ModelTypeRefCSImpl modelTypeRefCS = new ModelTypeRefCSImpl();
+		return modelTypeRefCS;
 	}
 
 	/**

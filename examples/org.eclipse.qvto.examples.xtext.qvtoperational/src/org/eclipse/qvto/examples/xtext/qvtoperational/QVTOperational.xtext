@@ -276,7 +276,7 @@ LibraryDefCS returns QVToLibraryCS:
 LibraryHeaderCS returns QVToLibraryCS:
 	qualifiers+=LibraryQualifier*
 	'library' name=UnrestrictedName
-		'(' parameters+= ParameterDeclarationCS (',' parameters+= ParameterDeclarationCS)* ')'
+		'(' parameters+= ModelTypeRefCS (',' parameters+= ModelTypeRefCS)* ')'
 		(moduleUsages+= ModuleUsageCS)* 
 ;
 
@@ -285,6 +285,10 @@ ModelTypeCS:
 		packageRefs+= PackageRefCS (',' packageRefs+=PackageRefCS)*
 		('where' '{' /*TODO (whereStatements+=ExpCS (';' whereStatements+=ExpCS)* ';'?))? */'}' )?
 		';'
+;
+
+ModelTypeRefCS :
+	ownedType = TypedTypeRef2CS
 ;
 
 PackageRefCS:

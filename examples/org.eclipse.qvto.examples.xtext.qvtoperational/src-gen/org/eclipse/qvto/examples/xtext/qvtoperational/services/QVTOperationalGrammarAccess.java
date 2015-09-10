@@ -1797,22 +1797,22 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Assignment cParametersAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cParametersParameterDeclarationCSParserRuleCall_4_0 = (RuleCall)cParametersAssignment_4.eContents().get(0);
+		private final RuleCall cParametersModelTypeRefCSParserRuleCall_4_0 = (RuleCall)cParametersAssignment_4.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cCommaKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Assignment cParametersAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
-		private final RuleCall cParametersParameterDeclarationCSParserRuleCall_5_1_0 = (RuleCall)cParametersAssignment_5_1.eContents().get(0);
+		private final RuleCall cParametersModelTypeRefCSParserRuleCall_5_1_0 = (RuleCall)cParametersAssignment_5_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		private final Assignment cModuleUsagesAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cModuleUsagesModuleUsageCSParserRuleCall_7_0 = (RuleCall)cModuleUsagesAssignment_7.eContents().get(0);
 		
 		//LibraryHeaderCS returns QVToLibraryCS:
-		//	qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ParameterDeclarationCS (","
-		//	parameters+=ParameterDeclarationCS)* ")" moduleUsages+=ModuleUsageCS*;
+		//	qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ModelTypeRefCS (","
+		//	parameters+=ModelTypeRefCS)* ")" moduleUsages+=ModuleUsageCS*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ParameterDeclarationCS (","
-		//parameters+=ParameterDeclarationCS)* ")" moduleUsages+=ModuleUsageCS*
+		//qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ModelTypeRefCS (","
+		//parameters+=ModelTypeRefCS)* ")" moduleUsages+=ModuleUsageCS*
 		public Group getGroup() { return cGroup; }
 
 		//qualifiers+=LibraryQualifier*
@@ -1833,23 +1833,23 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//parameters+=ParameterDeclarationCS
+		//parameters+=ModelTypeRefCS
 		public Assignment getParametersAssignment_4() { return cParametersAssignment_4; }
 
-		//ParameterDeclarationCS
-		public RuleCall getParametersParameterDeclarationCSParserRuleCall_4_0() { return cParametersParameterDeclarationCSParserRuleCall_4_0; }
+		//ModelTypeRefCS
+		public RuleCall getParametersModelTypeRefCSParserRuleCall_4_0() { return cParametersModelTypeRefCSParserRuleCall_4_0; }
 
-		//("," parameters+=ParameterDeclarationCS)*
+		//("," parameters+=ModelTypeRefCS)*
 		public Group getGroup_5() { return cGroup_5; }
 
 		//","
 		public Keyword getCommaKeyword_5_0() { return cCommaKeyword_5_0; }
 
-		//parameters+=ParameterDeclarationCS
+		//parameters+=ModelTypeRefCS
 		public Assignment getParametersAssignment_5_1() { return cParametersAssignment_5_1; }
 
-		//ParameterDeclarationCS
-		public RuleCall getParametersParameterDeclarationCSParserRuleCall_5_1_0() { return cParametersParameterDeclarationCSParserRuleCall_5_1_0; }
+		//ModelTypeRefCS
+		public RuleCall getParametersModelTypeRefCSParserRuleCall_5_1_0() { return cParametersModelTypeRefCSParserRuleCall_5_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_6() { return cRightParenthesisKeyword_6; }
@@ -1943,6 +1943,22 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 
 		//";"
 		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
+	}
+
+	public class ModelTypeRefCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ModelTypeRefCS");
+		private final Assignment cOwnedTypeAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cOwnedTypeTypedTypeRef2CSParserRuleCall_0 = (RuleCall)cOwnedTypeAssignment.eContents().get(0);
+		
+		//ModelTypeRefCS:
+		//	ownedType=TypedTypeRef2CS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//ownedType=TypedTypeRef2CS
+		public Assignment getOwnedTypeAssignment() { return cOwnedTypeAssignment; }
+
+		//TypedTypeRef2CS
+		public RuleCall getOwnedTypeTypedTypeRef2CSParserRuleCall_0() { return cOwnedTypeTypedTypeRef2CSParserRuleCall_0; }
 	}
 
 	public class PackageRefCSElements extends AbstractParserRuleElementFinder {
@@ -2557,6 +2573,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	private final LibraryDefCSElements pLibraryDefCS;
 	private final LibraryHeaderCSElements pLibraryHeaderCS;
 	private final ModelTypeCSElements pModelTypeCS;
+	private final ModelTypeRefCSElements pModelTypeRefCS;
 	private final PackageRefCSElements pPackageRefCS;
 	private final ModulePropertyCSElements pModulePropertyCS;
 	private final ModuleOperationCSElements pModuleOperationCS;
@@ -2621,6 +2638,7 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 		this.pLibraryDefCS = new LibraryDefCSElements();
 		this.pLibraryHeaderCS = new LibraryHeaderCSElements();
 		this.pModelTypeCS = new ModelTypeCSElements();
+		this.pModelTypeRefCS = new ModelTypeRefCSElements();
 		this.pPackageRefCS = new PackageRefCSElements();
 		this.pModulePropertyCS = new ModulePropertyCSElements();
 		this.pModuleOperationCS = new ModuleOperationCSElements();
@@ -3175,8 +3193,8 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//LibraryHeaderCS returns QVToLibraryCS:
-	//	qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ParameterDeclarationCS (","
-	//	parameters+=ParameterDeclarationCS)* ")" moduleUsages+=ModuleUsageCS*;
+	//	qualifiers+=LibraryQualifier* "library" name=UnrestrictedName "(" parameters+=ModelTypeRefCS (","
+	//	parameters+=ModelTypeRefCS)* ")" moduleUsages+=ModuleUsageCS*;
 	public LibraryHeaderCSElements getLibraryHeaderCSAccess() {
 		return pLibraryHeaderCS;
 	}
@@ -3195,6 +3213,16 @@ public class QVTOperationalGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getModelTypeCSRule() {
 		return getModelTypeCSAccess().getRule();
+	}
+
+	//ModelTypeRefCS:
+	//	ownedType=TypedTypeRef2CS;
+	public ModelTypeRefCSElements getModelTypeRefCSAccess() {
+		return pModelTypeRefCS;
+	}
+	
+	public ParserRule getModelTypeRefCSRule() {
+		return getModelTypeRefCSAccess().getRule();
 	}
 
 	//PackageRefCS:

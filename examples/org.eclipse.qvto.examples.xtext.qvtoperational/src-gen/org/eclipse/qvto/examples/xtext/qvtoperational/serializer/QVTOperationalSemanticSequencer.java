@@ -76,6 +76,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
@@ -489,6 +490,9 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case QVTOperationalCSPackage.MODEL_TYPE_CS:
 				sequence_ModelTypeCS(context, (ModelTypeCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.MODEL_TYPE_REF_CS:
+				sequence_ModelTypeRefCS(context, (ModelTypeRefCS) semanticObject); 
+				return; 
 			case QVTOperationalCSPackage.MODULE_REF_CS:
 				sequence_ModuleRefCS(context, (ModuleRefCS) semanticObject); 
 				return; 
@@ -693,8 +697,8 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 *     (
 	 *         qualifiers+=LibraryQualifier* 
 	 *         name=UnrestrictedName 
-	 *         parameters+=ParameterDeclarationCS 
-	 *         parameters+=ParameterDeclarationCS* 
+	 *         parameters+=ModelTypeRefCS 
+	 *         parameters+=ModelTypeRefCS* 
 	 *         moduleUsages+=ModuleUsageCS* 
 	 *         (ownedProperties+=ModulePropertyCS | ownedOperations+=ModuleOperationCS)*
 	 *     )
@@ -706,13 +710,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         qualifiers+=LibraryQualifier* 
-	 *         name=UnrestrictedName 
-	 *         parameters+=ParameterDeclarationCS 
-	 *         parameters+=ParameterDeclarationCS* 
-	 *         moduleUsages+=ModuleUsageCS*
-	 *     )
+	 *     (qualifiers+=LibraryQualifier* name=UnrestrictedName parameters+=ModelTypeRefCS parameters+=ModelTypeRefCS* moduleUsages+=ModuleUsageCS*)
 	 */
 	protected void sequence_LibraryHeaderCS(EObject context, QVToLibraryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -772,6 +770,15 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 *     (name=UnrestrictedName complianceKind=StringLiteral? packageRefs+=PackageRefCS packageRefs+=PackageRefCS*)
 	 */
 	protected void sequence_ModelTypeCS(EObject context, ModelTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ownedType=TypedTypeRef2CS
+	 */
+	protected void sequence_ModelTypeRefCS(EObject context, ModelTypeRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

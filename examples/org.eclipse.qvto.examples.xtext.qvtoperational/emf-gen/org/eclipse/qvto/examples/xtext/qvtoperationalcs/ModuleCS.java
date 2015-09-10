@@ -3,6 +3,7 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.StructuredClassCS;
 
 /**
@@ -27,7 +28,7 @@ import org.eclipse.ocl.xtext.basecs.StructuredClassCS;
 public interface ModuleCS extends StructuredClassCS {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS}.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.ParameterCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -39,7 +40,7 @@ public interface ModuleCS extends StructuredClassCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParameterDeclarationCS> getParameters();
+	EList<ParameterCS> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Module Usages</b></em>' containment reference list.

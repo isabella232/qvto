@@ -640,7 +640,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModuleCS()
 	 * @generated
 	 */
-	int MODULE_CS = 38;
+	int MODULE_CS = 39;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2001,7 +2001,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModulePropertyCS()
 	 * @generated
 	 */
-	int MODULE_PROPERTY_CS = 39;
+	int MODULE_PROPERTY_CS = 40;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4150,6 +4150,115 @@ public interface QVTOperationalCSPackage extends EPackage {
 	int MODEL_TYPE_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeRefCSImpl <em>Model Type Ref CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeRefCSImpl
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModelTypeRefCS()
+	 * @generated
+	 */
+	int MODEL_TYPE_REF_CS = 38;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__CSI = BaseCSPackage.PARAMETER_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__PARENT = BaseCSPackage.PARAMETER_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__PIVOT = BaseCSPackage.PARAMETER_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__ORIGINAL_XMI_ID = BaseCSPackage.PARAMETER_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__OWNED_ANNOTATIONS = BaseCSPackage.PARAMETER_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__NAME = BaseCSPackage.PARAMETER_CS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Optional</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__IS_OPTIONAL = BaseCSPackage.PARAMETER_CS__IS_OPTIONAL;
+
+	/**
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__OWNED_TYPE = BaseCSPackage.PARAMETER_CS__OWNED_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Qualifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__QUALIFIERS = BaseCSPackage.PARAMETER_CS__QUALIFIERS;
+
+	/**
+	 * The feature id for the '<em><b>Owning Operation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS__OWNING_OPERATION = BaseCSPackage.PARAMETER_CS__OWNING_OPERATION;
+
+	/**
+	 * The number of structural features of the '<em>Model Type Ref CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MODEL_TYPE_REF_CS_FEATURE_COUNT = BaseCSPackage.PARAMETER_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl <em>Module Usage CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4157,7 +4266,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModuleUsageCS()
 	 * @generated
 	 */
-	int MODULE_USAGE_CS = 40;
+	int MODULE_USAGE_CS = 41;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4221,7 +4330,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getMultiplicityDefCS()
 	 * @generated
 	 */
-	int MULTIPLICITY_DEF_CS = 41;
+	int MULTIPLICITY_DEF_CS = 42;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4276,7 +4385,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getObjectExpCS()
 	 * @generated
 	 */
-	int OBJECT_EXP_CS = 42;
+	int OBJECT_EXP_CS = 43;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4430,7 +4539,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getOppositePropertyCS()
 	 * @generated
 	 */
-	int OPPOSITE_PROPERTY_CS = 43;
+	int OPPOSITE_PROPERTY_CS = 44;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4494,7 +4603,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getParameterDeclarationCS()
 	 * @generated
 	 */
-	int PARAMETER_DECLARATION_CS = 44;
+	int PARAMETER_DECLARATION_CS = 45;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4621,7 +4730,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getRenameCS()
 	 * @generated
 	 */
-	int RENAME_CS = 45;
+	int RENAME_CS = 46;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4685,7 +4794,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getResolveOpArgsExpCS()
 	 * @generated
 	 */
-	int RESOLVE_OP_ARGS_EXP_CS = 46;
+	int RESOLVE_OP_ARGS_EXP_CS = 47;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4740,7 +4849,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getPackageRefCS()
 	 * @generated
 	 */
-	int PACKAGE_REF_CS = 47;
+	int PACKAGE_REF_CS = 48;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4795,7 +4904,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getScopedNameCS()
 	 * @generated
 	 */
-	int SCOPED_NAME_CS = 48;
+	int SCOPED_NAME_CS = 49;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4850,7 +4959,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getSimpleSignatureCS()
 	 * @generated
 	 */
-	int SIMPLE_SIGNATURE_CS = 49;
+	int SIMPLE_SIGNATURE_CS = 50;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -4896,7 +5005,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 50;
+	int TRANSFORMATION_CS = 51;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5104,7 +5213,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getTransformationRefineCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_REFINE_CS = 51;
+	int TRANSFORMATION_REFINE_CS = 52;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5159,7 +5268,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getTypeSpecCS()
 	 * @generated
 	 */
-	int TYPE_SPEC_CS = 52;
+	int TYPE_SPEC_CS = 53;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5232,7 +5341,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getUnitCS()
 	 * @generated
 	 */
-	int UNIT_CS = 53;
+	int UNIT_CS = 54;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5314,7 +5423,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getResolveExpCS()
 	 * @generated
 	 */
-	int RESOLVE_EXP_CS = 54;
+	int RESOLVE_EXP_CS = 55;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5567,7 +5676,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getResolveInExpCS()
 	 * @generated
 	 */
-	int RESOLVE_IN_EXP_CS = 55;
+	int RESOLVE_IN_EXP_CS = 56;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -5838,7 +5947,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getClassifierKind()
 	 * @generated
 	 */
-	int CLASSIFIER_KIND = 56;
+	int CLASSIFIER_KIND = 57;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.FeatureKey <em>Feature Key</em>}' enum.
@@ -5848,7 +5957,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getFeatureKey()
 	 * @generated
 	 */
-	int FEATURE_KEY = 57;
+	int FEATURE_KEY = 58;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitOp <em>Init Op</em>}' enum.
@@ -5858,7 +5967,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getInitOp()
 	 * @generated
 	 */
-	int INIT_OP = 58;
+	int INIT_OP = 59;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind <em>Metamodel Kind</em>}' enum.
@@ -5868,7 +5977,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getMetamodelKind()
 	 * @generated
 	 */
-	int METAMODEL_KIND = 59;
+	int METAMODEL_KIND = 60;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS <em>Direction Kind CS</em>}' enum.
@@ -5878,7 +5987,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getDirectionKindCS()
 	 * @generated
 	 */
-	int DIRECTION_KIND_CS = 60;
+	int DIRECTION_KIND_CS = 61;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImportKindEnum <em>Import Kind Enum</em>}' enum.
@@ -5888,7 +5997,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getImportKindEnum()
 	 * @generated
 	 */
-	int IMPORT_KIND_ENUM = 61;
+	int IMPORT_KIND_ENUM = 62;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingExtensionKindCS <em>Mapping Extension Kind CS</em>}' enum.
@@ -5898,7 +6007,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getMappingExtensionKindCS()
 	 * @generated
 	 */
-	int MAPPING_EXTENSION_KIND_CS = 62;
+	int MAPPING_EXTENSION_KIND_CS = 63;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum <em>Module Kind Enum</em>}' enum.
@@ -5908,7 +6017,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModuleKindEnum()
 	 * @generated
 	 */
-	int MODULE_KIND_ENUM = 63;
+	int MODULE_KIND_ENUM = 64;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QualifierKindCS <em>Qualifier Kind CS</em>}' enum.
@@ -5918,7 +6027,7 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getQualifierKindCS()
 	 * @generated
 	 */
-	int QUALIFIER_KIND_CS = 64;
+	int QUALIFIER_KIND_CS = 65;
 
 
 	/**
@@ -7048,6 +7157,16 @@ public interface QVTOperationalCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getModelTypeCS_Where();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS <em>Model Type Ref CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Model Type Ref CS</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS
+	 * @generated
+	 */
+	EClass getModelTypeRefCS();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS <em>Module CS</em>}'.
@@ -8748,6 +8867,16 @@ public interface QVTOperationalCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MODEL_TYPE_CS__WHERE = eINSTANCE.getModelTypeCS_Where();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeRefCSImpl <em>Model Type Ref CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModelTypeRefCSImpl
+		 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVTOperationalCSPackageImpl#getModelTypeRefCS()
+		 * @generated
+		 */
+		EClass MODEL_TYPE_REF_CS = eINSTANCE.getModelTypeRefCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl <em>Module CS</em>}' class.

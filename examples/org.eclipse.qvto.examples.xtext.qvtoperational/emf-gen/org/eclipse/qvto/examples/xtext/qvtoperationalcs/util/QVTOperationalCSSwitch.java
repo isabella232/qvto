@@ -603,6 +603,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTOperationalCSPackage.MODEL_TYPE_REF_CS: {
+				ModelTypeRefCS modelTypeRefCS = (ModelTypeRefCS)theEObject;
+				T result = caseModelTypeRefCS(modelTypeRefCS);
+				if (result == null) result = caseParameterCS(modelTypeRefCS);
+				if (result == null) result = caseTypedElementCS(modelTypeRefCS);
+				if (result == null) result = caseNamedElementCS(modelTypeRefCS);
+				if (result == null) result = caseModelElementCS(modelTypeRefCS);
+				if (result == null) result = caseNameable(modelTypeRefCS);
+				if (result == null) result = casePivotableElementCS(modelTypeRefCS);
+				if (result == null) result = caseElementCS(modelTypeRefCS);
+				if (result == null) result = casePivotable(modelTypeRefCS);
+				if (result == null) result = caseVisitableCS(modelTypeRefCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTOperationalCSPackage.MODULE_CS: {
 				ModuleCS moduleCS = (ModuleCS)theEObject;
 				T result = caseModuleCS(moduleCS);
@@ -1369,6 +1384,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseModelTypeCS(ModelTypeCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Model Type Ref CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Model Type Ref CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModelTypeRefCS(ModelTypeRefCS object) {
 		return null;
 	}
 

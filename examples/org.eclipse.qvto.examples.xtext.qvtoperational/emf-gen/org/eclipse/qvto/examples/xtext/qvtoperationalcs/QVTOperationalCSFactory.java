@@ -337,6 +337,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ModelTypeCS createModelTypeCS();
 
 	/**
+	 * Returns a new object of class '<em>Model Type Ref CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Model Type Ref CS</em>'.
+	 * @generated
+	 */
+	ModelTypeRefCS createModelTypeRefCS();
+
+	/**
 	 * Returns a new object of class '<em>Module CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

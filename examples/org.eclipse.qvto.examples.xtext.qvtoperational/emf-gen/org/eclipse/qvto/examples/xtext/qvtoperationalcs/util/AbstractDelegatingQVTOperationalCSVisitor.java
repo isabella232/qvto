@@ -129,6 +129,10 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 		return delegate.visitModelTypeCS(object);
 	}
 
+	public @Nullable R visitModelTypeRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS object) {
+		return delegate.visitModelTypeRefCS(object);
+	}
+
 	public @Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object) {
 		return delegate.visitModuleCS(object);
 	}

@@ -2954,9 +2954,9 @@ ruleLibraryHeaderCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_4_0()); 
 	    }
-		lv_parameters_4_0=ruleParameterDeclarationCS		{
+		lv_parameters_4_0=ruleModelTypeRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibraryHeaderCSRule());
 	        }
@@ -2964,7 +2964,7 @@ ruleLibraryHeaderCS returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_4_0, 
-        		"ParameterDeclarationCS");
+        		"ModelTypeRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -2976,9 +2976,9 @@ ruleLibraryHeaderCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getLibraryHeaderCSAccess().getParametersParameterDeclarationCSParserRuleCall_5_1_0()); 
+	        newCompositeNode(grammarAccess.getLibraryHeaderCSAccess().getParametersModelTypeRefCSParserRuleCall_5_1_0()); 
 	    }
-		lv_parameters_6_0=ruleParameterDeclarationCS		{
+		lv_parameters_6_0=ruleModelTypeRefCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getLibraryHeaderCSRule());
 	        }
@@ -2986,7 +2986,7 @@ ruleLibraryHeaderCS returns [EObject current=null]
        			$current, 
        			"parameters",
         		lv_parameters_6_0, 
-        		"ParameterDeclarationCS");
+        		"ModelTypeRefCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -3134,6 +3134,45 @@ ruleModelTypeCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_10, grammarAccess.getModelTypeCSAccess().getSemicolonKeyword_7());
     }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleModelTypeRefCS
+entryRuleModelTypeRefCS returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getModelTypeRefCSRule()); }
+	 iv_ruleModelTypeRefCS=ruleModelTypeRefCS 
+	 { $current=$iv_ruleModelTypeRefCS.current; } 
+	 EOF 
+;
+
+// Rule ModelTypeRefCS
+ruleModelTypeRefCS returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelTypeRefCSAccess().getOwnedTypeTypedTypeRef2CSParserRuleCall_0()); 
+	    }
+		lv_ownedType_0_0=ruleTypedTypeRef2CS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelTypeRefCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedType",
+        		lv_ownedType_0_0, 
+        		"TypedTypeRef2CS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 )
 ;
 

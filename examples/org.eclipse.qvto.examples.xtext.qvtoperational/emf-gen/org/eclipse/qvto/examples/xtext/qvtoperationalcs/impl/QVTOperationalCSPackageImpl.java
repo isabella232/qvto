@@ -45,6 +45,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum;
@@ -353,6 +354,13 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * @generated
 	 */
 	private EClass modelTypeCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass modelTypeRefCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1567,6 +1575,15 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getModelTypeRefCS() {
+		return modelTypeRefCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getModuleCS() {
 		return moduleCSEClass;
 	}
@@ -2373,6 +2390,8 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		createEReference(modelTypeCSEClass, MODEL_TYPE_CS__PACKAGE_REFS);
 		createEReference(modelTypeCSEClass, MODEL_TYPE_CS__WHERE);
 
+		modelTypeRefCSEClass = createEClass(MODEL_TYPE_REF_CS);
+
 		moduleCSEClass = createEClass(MODULE_CS);
 		createEReference(moduleCSEClass, MODULE_CS__PARAMETERS);
 		createEReference(moduleCSEClass, MODULE_CS__MODULE_USAGES);
@@ -2539,6 +2558,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		moduleRefCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		modelTypeCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
 		modelTypeCSEClass.getESuperTypes().add(this.getElementWithBody());
+		modelTypeRefCSEClass.getESuperTypes().add(theBaseCSPackage.getParameterCS());
 		moduleCSEClass.getESuperTypes().add(theBaseCSPackage.getStructuredClassCS());
 		modulePropertyCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		moduleUsageCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
@@ -2703,8 +2723,10 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEReference(getModelTypeCS_PackageRefs(), this.getPackageRefCS(), null, "packageRefs", null, 1, -1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelTypeCS_Where(), theImperativeOCLCSPackage.getBlockExpCS(), null, "where", null, 0, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(modelTypeRefCSEClass, ModelTypeRefCS.class, "ModelTypeRefCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(moduleCSEClass, ModuleCS.class, "ModuleCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModuleCS_Parameters(), this.getParameterDeclarationCS(), null, "parameters", null, 0, -1, ModuleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModuleCS_Parameters(), theBaseCSPackage.getParameterCS(), null, "parameters", null, 0, -1, ModuleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModuleCS_ModuleUsages(), this.getModuleUsageCS(), null, "moduleUsages", null, 0, -1, ModuleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModuleCS_Tags(), this.getTagCS(), null, "tags", null, 0, -1, ModuleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getModuleCS_Qualifiers(), theEcorePackage.getEString(), "qualifiers", null, 0, -1, ModuleCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

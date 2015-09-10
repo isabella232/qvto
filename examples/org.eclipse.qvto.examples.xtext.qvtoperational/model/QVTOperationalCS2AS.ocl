@@ -50,7 +50,7 @@ def : ast() : ocl::Package =
 		ownedClasses = ownedClasses.ast() 
 		-- type = TODO
 	}
-		
+	
 
 context ModelTypeCS
 def : ast() : qvtoperational::ModelType =
@@ -118,6 +118,7 @@ def : ast() : qvtoperational::Library =
 	qvtoperational::Library {
 		name = name,
 		ownedOperations = ownedOperations.ast(),
+		usedModelType = parameters->collect(x | self.ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS))),
 		-- ownedParameters = ownedParameters.ast(), FIXME specification is wrong.
 		isBlackbox = qualifiers->exists(x | x = 'blackbox')
 	}
