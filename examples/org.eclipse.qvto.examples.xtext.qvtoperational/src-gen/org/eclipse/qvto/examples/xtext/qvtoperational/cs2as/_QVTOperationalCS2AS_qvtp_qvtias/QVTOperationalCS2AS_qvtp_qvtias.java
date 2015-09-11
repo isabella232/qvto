@@ -7,7 +7,7 @@
  * Do not edit it.
  ********************************************************************************/
 
-package org.eclipse.qvto.examples.xtext.qvtoperational.cs2as;
+package org.eclipse.qvto.examples.xtext.qvtoperational.cs2as._QVTOperationalCS2AS_qvtp_qvtias;
 
 import java.util.Iterator;
 import java.util.List;
@@ -445,10 +445,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * map uClass_name {
      * qVToClassCS := qVToClassCS;
      * }
-     *   map uClass_ownedProperties {
+     *   map uClass_ownedOperations {
      * qVToClassCS := qVToClassCS;
      * }
-     *   map uClass_ownedOperations {
+     *   map uClass_ownedProperties {
      * qVToClassCS := qVToClassCS;
      * }
      */
@@ -462,8 +462,8 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         qVToClassCS.setPivot(symbol_0);
         // mapping statements
         MAP_uClass_name(qVToClassCS);
-        MAP_uClass_ownedProperties(qVToClassCS);
         MAP_uClass_ownedOperations(qVToClassCS);
+        MAP_uClass_ownedProperties(qVToClassCS);
         return true;
     }
     
@@ -481,16 +481,16 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * qVToLibraryCS.pivot := library;
      * }
-     * map uLibrary_ownedOperations {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }
-     *   map uLibrary_name {
-     * qVToLibraryCS := qVToLibraryCS;
-     * }
-     *   map uLibrary_usedModelType {
+     * map uLibrary_name {
      * qVToLibraryCS := qVToLibraryCS;
      * }
      *   map uLibrary_isBlackbox {
+     * qVToLibraryCS := qVToLibraryCS;
+     * }
+     *   map uLibrary_ownedOperations {
+     * qVToLibraryCS := qVToLibraryCS;
+     * }
+     *   map uLibrary_usedModelType {
      * qVToLibraryCS := qVToLibraryCS;
      * }
      */
@@ -503,10 +503,10 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         qVToLibraryCS.setPivot(library);
         // mapping statements
-        MAP_uLibrary_ownedOperations(qVToLibraryCS);
         MAP_uLibrary_name(qVToLibraryCS);
-        MAP_uLibrary_usedModelType(qVToLibraryCS);
         MAP_uLibrary_isBlackbox(qVToLibraryCS);
+        MAP_uLibrary_ownedOperations(qVToLibraryCS);
+        MAP_uLibrary_usedModelType(qVToLibraryCS);
         return true;
     }
     
@@ -551,19 +551,19 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      * { |
      * transformationCS.pivot := operationalTransformation;
      * }
-     * map uOperationalTransformation_name {
+     * map uOperationalTransformation_isBlackbox {
      * transformationCS := transformationCS;
      * }
-     *   map uOperationalTransformation_isAbstract {
-     * transformationCS := transformationCS;
-     * }
-     *   map uOperationalTransformation_isBlackbox {
+     *   map uOperationalTransformation_name {
      * transformationCS := transformationCS;
      * }
      *   map uOperationalTransformation_modelParameter {
      * transformationCS := transformationCS;
      * }
      *   map uOperationalTransformation_ownedOperations {
+     * transformationCS := transformationCS;
+     * }
+     *   map uOperationalTransformation_isAbstract {
      * transformationCS := transformationCS;
      * }
      */
@@ -576,11 +576,11 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         // property assignments
         transformationCS.setPivot(operationalTransformation);
         // mapping statements
-        MAP_uOperationalTransformation_name(transformationCS);
-        MAP_uOperationalTransformation_isAbstract(transformationCS);
         MAP_uOperationalTransformation_isBlackbox(transformationCS);
+        MAP_uOperationalTransformation_name(transformationCS);
         MAP_uOperationalTransformation_modelParameter(transformationCS);
         MAP_uOperationalTransformation_ownedOperations(transformationCS);
+        MAP_uOperationalTransformation_isAbstract(transformationCS);
         return true;
     }
     
@@ -1948,13 +1948,13 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
      *   for _parameterDeclarationCS_ParameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
      * 
-     *     map cParameterDeclarationCS_2_ModelParameter {
+     *     map cParameterDeclarationCS_2_VarParameter {
      * parameterDeclarationCS := _parameterDeclarationCS_ParameterDeclarationCS;
      * }}
      *   for _parameterDeclarationCS_ParameterDeclarationCS : qvtoperationalcs::ParameterDeclarationCS in qvtoperationalcs::ParameterDeclarationCS.allInstances()
      *    {
      * 
-     *     map cParameterDeclarationCS_2_VarParameter {
+     *     map cParameterDeclarationCS_2_ModelParameter {
      * parameterDeclarationCS := _parameterDeclarationCS_ParameterDeclarationCS;
      * }}
      *   for _mappingOperationCS_MappingOperationCS : qvtoperationalcs::MappingOperationCS in qvtoperationalcs::MappingOperationCS.allInstances()
@@ -2048,13 +2048,13 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         for (ParameterDeclarationCS _parameterDeclarationCS_ParameterDeclarationCS : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_4)) {
             if (_parameterDeclarationCS_ParameterDeclarationCS != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_8 = (ParameterDeclarationCS)_parameterDeclarationCS_ParameterDeclarationCS;
-                MAP_cParameterDeclarationCS_2_ModelParameter(symbol_8);
+                MAP_cParameterDeclarationCS_2_VarParameter(symbol_8);
             }
         }
         for (ParameterDeclarationCS _parameterDeclarationCS_ParameterDeclarationCS_0 : ValueUtil.typedIterable(ParameterDeclarationCS.class, allInstances_4)) {
             if (_parameterDeclarationCS_ParameterDeclarationCS_0 != null) {
                 final /*@NonNull*/ /*@NonInvalid*/ ParameterDeclarationCS symbol_10 = (ParameterDeclarationCS)_parameterDeclarationCS_ParameterDeclarationCS_0;
-                MAP_cParameterDeclarationCS_2_VarParameter(symbol_10);
+                MAP_cParameterDeclarationCS_2_ModelParameter(symbol_10);
             }
         }
         for (MappingOperationCS _mappingOperationCS_MappingOperationCS_0 : ValueUtil.typedIterable(MappingOperationCS.class, allInstances_5)) {
