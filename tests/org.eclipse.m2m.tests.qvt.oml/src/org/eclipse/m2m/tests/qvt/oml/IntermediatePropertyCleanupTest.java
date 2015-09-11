@@ -21,6 +21,8 @@ import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -42,6 +44,7 @@ public class IntermediatePropertyCleanupTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -59,7 +62,8 @@ public class IntermediatePropertyCleanupTest extends TestCase {
 		assertFalse(fInput.getContents().isEmpty());
 		assertTrue(fOutput.getContents().isEmpty());		
 	}
-		
+	
+	@Test
 	public void testIntermPropCleanup() throws Exception {
 		final ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput);		
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());

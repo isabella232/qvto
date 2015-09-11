@@ -72,6 +72,11 @@ public abstract class ModelTestData {
         return myName;
     }
     
+    @Override
+    public String toString() {
+    	return getName();
+    }
+    
     public static void compareWithExpected(String name, List<EObject> expected, List<EObject> out) {
     	TestCase.assertEquals("transf output differs in size to expected result", //$NON-NLS-1$ 
     			expected.size(), out.size());

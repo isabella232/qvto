@@ -2,18 +2,17 @@
  */
 package generics.impl;
 
-import generics.GenericCls;
-import generics.GenericsFactory;
-import generics.GenericsPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.ETypeParameter;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import generics.GenericCls;
+import generics.GenericsFactory;
+import generics.GenericsPackage;
 
 /**
  * <!-- begin-user-doc -->

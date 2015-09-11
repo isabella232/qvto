@@ -20,6 +20,9 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -36,27 +39,33 @@ public class TestLaunchConfiguration extends TestCase {
     }
     
     @Override
+    @Before
     protected void setUp() throws Exception {
         super.setUp();
     }
     
     @Override
+    @After
     protected void tearDown() throws Exception {
         super.tearDown();
     }
     
+    @Test
     public void testEmptyEmpty() throws Throwable {
         performTest("", "", TargetType.NEW_MODEL);  //$NON-NLS-1$//$NON-NLS-2$
     }
 
+    @Test
     public void testEcoreNew() throws Throwable {
         performTest(IN_ECORE, OUT_ECORE_NEW, TargetType.NEW_MODEL);
     }
 
+    @Test
     public void testEcoreInplace() throws CoreException {
         performTest(INOUT_ECORE, "", TargetType.NEW_MODEL); //$NON-NLS-1$
     }
-
+    
+    @Test
     public void testEcoreExsisting() throws CoreException {
         performTest(IN_ECORE, OUT_ECORE_EXISTING, TargetType.NEW_MODEL);
     }

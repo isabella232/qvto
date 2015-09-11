@@ -10,6 +10,8 @@ import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -23,6 +25,7 @@ public class Bug431055 extends TestCase {
 	TransformationExecutor executor;
 
 	@Override
+	@Before
 	protected void setUp() {
 		URI modelUri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/deployed/callapi/Bug431055.ecore", //$NON-NLS-1$
 				true);
@@ -49,6 +52,7 @@ public class Bug431055 extends TestCase {
 	 * ModelParameterExtent's constructor)
 	 * 
 	 */
+	@Test
 	public void testInoutWithResource() {
 		assertEquals(resource, object.eResource());
 		ExecutionDiagnostic diagnostic = executor.execute(new ExecutionContextImpl(), modelExtent);

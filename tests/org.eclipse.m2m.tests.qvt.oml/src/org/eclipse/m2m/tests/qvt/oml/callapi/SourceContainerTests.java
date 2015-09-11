@@ -11,56 +11,51 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.callapi;
 
+import java.util.Arrays;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 /**
  * @author sboyko
  */
-public class SourceContainerTests {
+@RunWith(Parameterized.class)
+public class SourceContainerTests extends TestCase {
 
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Source container in deployed plugins"); //$NON-NLS-1$
-		
-		suite.addTest(new DeployedPluginText("TransformationProjectRelPath",
-				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.transformationProject/root/RootTransformation.qvto", true)));
-
-		suite.addTest(new DeployedPluginText("TransformationProjectFullPath",
-				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.transformationProject/transforms/root/RootTransformation.qvto", true)));
-		
-		suite.addTest(new DeployedPluginText("PlainProject",
-				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.pluginProject/transforms/root/RootTransformation.qvto", true)));
-		
-		// test transformation deployed with 'org.eclipse.m2m.tests.qvto.deployedTransfProject' plug-in
-		suite.addTest(new DeployedPluginText("DeployedTransfProject",
-				URI.createURI("deployedTransformationId", true)));
-		
-		return suite;
+	private final URI myUri;
+	
+	public SourceContainerTests(String name, URI uri) {
+		super(name);
+		myUri = uri;
 	}
-
-
-	private static class DeployedPluginText extends TestCase {
-		private final URI myUri;
-		
-		DeployedPluginText(String name, URI uri) {
-			super(name);
-			myUri = uri;
-		}
-		
-		@Override
-		protected void runTest() throws Throwable {
-			TransformationExecutor executor = new TransformationExecutor(myUri);
-			ExecutionDiagnostic diagnostic = executor.execute(new ExecutionContextImpl());
-					
-			assertEquals(Diagnostic.OK, diagnostic.getSeverity());
-		}
-		
+	
+	@Parameters(name="{0}")
+	public static Iterable<Object[]> data() {
+		return Arrays.asList(
+			new Object[] {"TransformationProjectRelPath", URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.transformationProject/root/RootTransformation.qvto", true)},
+			new Object[] {"TransformationProjectFullPath", URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.transformationProject/transforms/root/RootTransformation.qvto", true)},
+			new Object[] {"PlainProject", URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvto.pluginProject/transforms/root/RootTransformation.qvto", true)},
+			
+			// test transformation deployed with 'org.eclipse.m2m.tests.qvto.deployedTransfProject' plug-in
+			new Object[] {"DeployedTransfProject", URI.createURI("deployedTransformationId", true)}
+		);
+	}
+	
+	@Override
+	@Test
+	public void runTest() throws Throwable {
+		TransformationExecutor executor = new TransformationExecutor(myUri);
+		ExecutionDiagnostic diagnostic = executor.execute(new ExecutionContextImpl());
+				
+		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
 	}
 }

@@ -41,7 +41,7 @@ public class FilesToFilesData extends ModelTestData {
         myFromFiles = fromFiles;
         myExpectedFiles = expectedFiles;
     }
-    
+        
     @Override
 	public List<URI> getIn(IProject project) { 
         List<URI> inUris = new ArrayList<URI>(myFromFiles.size());

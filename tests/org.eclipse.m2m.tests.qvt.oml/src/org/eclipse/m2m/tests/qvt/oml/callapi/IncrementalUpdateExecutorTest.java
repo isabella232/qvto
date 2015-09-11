@@ -13,6 +13,7 @@ package org.eclipse.m2m.tests.qvt.oml.callapi;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -29,23 +30,40 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.qvt.oml.util.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import junit.framework.TestCase;
 
+@RunWith(Parameterized.class)
 public class IncrementalUpdateExecutorTest extends TransformationExecutorTest {
 	
-	public IncrementalUpdateExecutorTest() {
-		super("bug463572", Arrays.asList("in.ecore"), Arrays.asList("expected.ecore")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	public IncrementalUpdateExecutorTest(String name, List<String> inModels, List<String> outModels) {
+		super(name, inModels, outModels); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+	}
+	
+	@Parameters(name="{0}")
+	public static Iterable<Object[]> data() {
+		return Collections.singletonList(
+			new Object[] {
+				"bug463572", Arrays.asList("in.ecore"), Arrays.asList("expected.ecore") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+		);
 	}
 	
 	@Override
-	protected void setUp() {
+	@Before
+	public void setUp() {
 		super.setUp();
 		executionContext.getSessionData().setValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE, Trace.createEmptyTrace());
 	}
 	
 	@Override
-	protected void runTest() throws Throwable {
+	@Test
+	public void runTest() throws Throwable {
 		// 1. pass - create output model and appropriate trace
 		super.runTest();
 		

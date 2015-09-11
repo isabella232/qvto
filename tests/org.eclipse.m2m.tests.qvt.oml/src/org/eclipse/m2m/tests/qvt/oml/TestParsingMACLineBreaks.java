@@ -17,6 +17,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParser;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.QVTOLexer;
 import org.eclipse.ocl.ParserException;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -25,7 +26,8 @@ public class TestParsingMACLineBreaks extends TestCase {
 	public TestParsingMACLineBreaks(String name) {
 		super(name);
 	}
-
+	
+	@Test
 	public void testBreakLastChar() throws Exception {
 		String contents = "abc;\r"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -34,6 +36,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 1);
 	}
 	
+	@Test
 	public void testBreakWinLastBreak() throws Exception {
 		String contents = "abc;\r\n"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -42,6 +45,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 1);
 	}
 	
+	@Test
 	public void testBreakUnixLastBreak() throws Exception {
 		String contents = "abc;\n"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -50,6 +54,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 1);
 	}
 	
+	@Test
 	public void testMixed() throws Exception {
 		String contents = "a\n \r \r\n"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -58,6 +63,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 3);
 	}
 	
+	@Test
 	public void testBreakFirstChar() throws Exception {
 		String contents = "\rabc;"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -66,6 +72,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 1);
 	}
 	
+	@Test
 	public void testBreakWinFirstBreak() throws Exception {
 		String contents = "\r\nabc;"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);
@@ -74,6 +81,7 @@ public class TestParsingMACLineBreaks extends TestCase {
 		assertEquals(lineCount, 1);
 	}
 	
+	@Test
 	public void testBreakUnixFirstBreak() throws Exception {
 		String contents = "\nabc;"; //$NON-NLS-1$
 		QVTOLexer lexer = createLexer(contents);

@@ -27,6 +27,8 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -47,6 +49,7 @@ public class ChildInTreeInputInvocationTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -83,6 +86,7 @@ public class ChildInTreeInputInvocationTest extends TestCase {
 	}
 	
 	
+	@Test
 	public void testInvokeSuccess() throws Exception {
 		final ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput);		
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());

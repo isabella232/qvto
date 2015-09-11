@@ -11,30 +11,39 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform.api;
 
+import java.util.Collections;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.api.QvtoTransfHelperTests.ApiTestData;
 import org.eclipse.m2m.tests.qvt.oml.util.CustomEmfResourceFactory;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author sboyko
  */
+@RunWith(Parameterized.class)
 public class InoutValidationTestCase extends ApiTestCase {
 
 	public InoutValidationTestCase(ModelTestData data) {
 		super(data);
 	}
 	
-	@Override
-	protected void runTest() throws Throwable {
-		testEmptyModel();
-		testNonEmptyModel();
-		testInvalidModel();
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Collections.<ModelTestData>singletonList(
+				new ApiTestData("inoutModels", Collections.<String>emptyList(), Collections.<String>emptyList()) //$NON-NLS-1$
+		);
 	}
-	
+		
+	@Test
 	public void testEmptyModel() {
 		{
 			URI uri = createWorkspaceUri("empty.ecore"); //$NON-NLS-1$
@@ -61,7 +70,8 @@ public class InoutValidationTestCase extends ApiTestCase {
 			assertTrue(EmfUtil.isUriExistsAsEObject(uri, new ResourceSetImpl(), false));
 		}
 	}
-
+	
+	@Test
 	public void testNonEmptyModel() {
 		{
 			URI uri = createWorkspaceUri("nonEmpty.ecore"); //$NON-NLS-1$
@@ -89,6 +99,7 @@ public class InoutValidationTestCase extends ApiTestCase {
 		}
 	}
 	
+	@Test
 	public void testInvalidModel() {
 		{
 			URI uri = createWorkspaceUri("invalid.ecore"); //$NON-NLS-1$

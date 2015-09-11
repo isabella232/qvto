@@ -12,6 +12,7 @@
 package org.eclipse.m2m.tests.qvt.oml;
 
 import java.io.File;
+import java.util.Collections;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -20,31 +21,25 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Library;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.tests.qvt.oml.ParserTests.TestData;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
-
+@RunWith(Parameterized.class)
 public class QvtLibraryASTTest extends TestQvtParser {
 	
-	private static final String TEST_NAME = "blackboxlibASTmodel"; //$NON-NLS-N$
-
-	private static TestData createTestData() {
-		return new TestData(TEST_NAME, 0, 0);
+	public QvtLibraryASTTest(TestData data) {
+		super(data);
 	}
 	
-	public QvtLibraryASTTest(String testName) {		
-		super(createTestData());
-		assertEquals(TEST_NAME, testName);
+	@Parameters
+	public static Iterable<TestData> data() {
+		return Collections.singletonList(new TestData("blackboxlibASTmodel", 0, 0)); //$NON-NLS-N$
 	}
-		
-	public QvtLibraryASTTest() {
-		super(createTestData()); //$NON-NLS-1$
-	}
-	
+			    
 	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-	}
-		    
-	@Override
+	@Test
 	public void runTest() throws Exception {
 		super.runTest();
 				

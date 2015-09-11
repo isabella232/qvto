@@ -16,10 +16,10 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
-import testqvt.*;
 import testqvt.BooleanElement;
 import testqvt.Element;
 import testqvt.Model;
+import testqvt.Numbers;
 import testqvt.TestqvtPackage;
 
 /**

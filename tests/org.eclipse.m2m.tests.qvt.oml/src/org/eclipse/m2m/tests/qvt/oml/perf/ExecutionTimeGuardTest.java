@@ -17,6 +17,8 @@ import org.eclipse.m2m.qvt.oml.BasicModelExtent;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -32,6 +34,7 @@ public class ExecutionTimeGuardTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {	
 		super.setUp();
 		
@@ -41,6 +44,7 @@ public class ExecutionTimeGuardTest extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testTraceLookup_287589() throws Exception {
 		assertSuccessExecutionTime("traceLookup_287589.qvto", 5000); //$NON-NLS-1$
 	}

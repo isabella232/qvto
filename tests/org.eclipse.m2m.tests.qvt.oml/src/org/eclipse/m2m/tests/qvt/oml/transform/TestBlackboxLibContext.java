@@ -13,21 +13,35 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Collections;
 
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtInterruptedExecutionException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestBlackboxLibContext extends AbstractStackTraceTest {
 	
-	public TestBlackboxLibContext() {
-		super(new FileToFileData("blackboxlib_context", //$NON-NLS-1$
+	public TestBlackboxLibContext(ModelTestData data) {
+		super(data);
+	}
+	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Collections.<ModelTestData>singletonList(
+			new FileToFileData("blackboxlib_context", //$NON-NLS-1$
 				new String[][] {
 				{"strTest", "test"},  //$NON-NLS-1$ //$NON-NLS-2$
 				{"strTest2", "test2"},  //$NON-NLS-1$ //$NON-NLS-2$
 				}
-			));
+			)
+		);
 	}
 	
+	@Test
 	public void testInvalidConfigProp() throws Exception {
 		String testcase = "executionTerminated"; //$NON-NLS-1$
 		QvtRuntimeException e = runQvtModuleTestCase(testcase, getData().getContext().getConfigProperties());						

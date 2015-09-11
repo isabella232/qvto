@@ -41,6 +41,9 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.ecore.Variable;
 import org.eclipse.ocl.helper.OCLHelper;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -76,6 +79,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 	}	
 	
 	@Override
+	@Before
 	protected void setUp() {
 		fEnvFactory = createOCLEnvFactory();
 		assertTrue(fEnvFactory.getDiagnostic().getSeverity() == Diagnostic.OK);
@@ -113,12 +117,14 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 	}
 	
 	@Override
+	@After
 	protected void tearDown() throws Exception {	
 		this.fEnvFactory = null;
 		this.fOCL = null;
 	}
 			
 	@SuppressWarnings("unchecked")
+	@Test
 	public void testUserDefinedVariables() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -149,7 +155,8 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 			fail("Additional operation should come from super type"); //$NON-NLS-1$
 		}		
 	}
-		
+	
+	@Test
 	public void testImportedOperationAccessingModuleProperty() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -168,7 +175,8 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 			fail("Additional operation should come from super type"); //$NON-NLS-1$
 		}		
 	}
-
+	
+	@Test
 	public void testStdlibOperationAccess() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -192,7 +200,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 	
-
+	@Test
 	public void testQVTStdlibOperationAccess() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -216,7 +224,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 		
-	
+	@Test
 	public void testImportedModulePropertyAccess() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -236,7 +244,8 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 			fail("Additional operation should come from super type"); //$NON-NLS-1$
 		}
 	}
-		
+	
+	@Test
 	public void testImportedOperations() throws ParserException {		
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -257,7 +266,8 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 			fail(e.getLocalizedMessage());
 		}
 	}
-		
+	
+	@Test
 	public void testComplextTypeInSignatures() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -279,7 +289,8 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 			fail(e.getLocalizedMessage());
 		}		
 	}
-
+	
+	@Test
 	public void testImportedContextualOperation() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -309,7 +320,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 	
-	
+	@Test
 	public void testImportedOperationOnCollection() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -331,6 +342,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testCallImportedQvtFileWhichCallsJavaLibrary() throws ParserException {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		helper.setContext(EcorePackage.eINSTANCE.getENamedElement());
@@ -351,6 +363,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testValidationProblems() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		try {		
@@ -364,6 +377,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testParsingProblems() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		try {					

@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
+import java.util.Arrays;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalAstWalker;
@@ -22,7 +24,12 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.project.QvtEngine;
 import org.eclipse.ocl.utilities.Visitable;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestQvtWalker extends TestTransformation {
 	
 	private static final String PREFIX = "walker_"; //$NON-NLS-1$
@@ -31,8 +38,14 @@ public class TestQvtWalker extends TestTransformation {
         super(data);        
 		setName(PREFIX + data.getName());
     }
-
+	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Arrays.asList(TransformTests.createTestData());
+    }
+	
     @Override
+    @Test
 	public void runTest() throws Exception {
 		checkTransformation(new IChecker() {
             public void check(ModelTestData data, IProject project) throws Exception {

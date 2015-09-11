@@ -19,30 +19,24 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor.BlackboxRegistry;
 import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.EmfToolsLibrary;
 import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.StringLibrary;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestBlackboxLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.AnnotatedJavaLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug289982_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug427237_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary;
-import org.eclipse.m2m.tests.qvt.oml.callapi.DebugExecutorTest;
-import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtExecutor;
-import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessQvtTest;
-import org.eclipse.m2m.tests.qvt.oml.transform.javaless.JavalessUtil;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 import generics.GenericsPackage;
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import junit.framework.TestCase;
 import simpleuml.SimpleumlPackage;
 import testqvt.TestqvtPackage;
 
@@ -50,118 +44,10 @@ import testqvt.TestqvtPackage;
 /**
  * @author pkobiakov
  */
-public class TransformTests {
-    public static Test suite() {
-        return interpreterSuite();
-    }
-
-    public static TestSuite interpreterSuite() {
-        TestSuite suite = new TestSuite("QVT interpreter"); //$NON-NLS-1$
-
-        ModelTestData[] datas = createTestData();
-
-        suite.addTest(new TestFailedTransformation(new FileToFileData("scr878") { //$NON-NLS-1$
-        	@Override
-        	public IContext getContext() {
-	    		IContext ctx = super.getContext();
-	    		ctx.getSessionData().setValue(QVTEvaluationOptions.FLAG_READONLY_GUARD_ENABLED, Boolean.TRUE);
-	    		return ctx;
-        	}
-        }));
-        suite.addTest(new TestFailedTransformation(new FilesToFilesData("bug301134"))); //$NON-NLS-1$
-        suite.addTest(new TestFailedTransformation(new FilesToFilesData("bug323915"))); //$NON-NLS-1$
-        suite.addTest(new TestFailedTransformation(new FilesToFilesData("bug370098") { //$NON-NLS-1$
-        	@Override
-        	public IContext getContext() {
-        		IContext ctx = super.getContext();
-        		ctx.getSessionData().setValue(QVTEvaluationOptions.EVALUATION_MAX_STACK_DEPTH, 10);
-        		return ctx;
-        	}
-        }));
-        suite.addTest(new TestFailedTransformation(new FilesToFilesData("bug289982_failed"))); //$NON-NLS-1$
-
-        for (ModelTestData data : datas) {
-            suite.addTest(new TestQvtInterpreter(data));
-        }
+@RunWith(Suite.class)
+@SuiteClasses({TestFailedTransformation.class, TestQvtInterpreter.class, TestIncorrectTransformation.class, TestStackTrace.class, TestInvalidConfigProperty.class, TestBlackboxLibContext.class})
+public class TransformTests extends TestCase {
         
-		suite.addTest(new TestIncorrectTransformation(
-				new ReferencedProjectData("bug433937_wrongImport", "bug433937_referenced", false) { //$NON-NLS-1$ //$NON-NLS-2$
-					@Override
-					public boolean isUseCompiledXmi() {
-						// TODO it should be possible to run this test with the
-						// using of compiled XMI
-						return false;
-					}
-				}));
-		suite.addTest(new TestIncorrectTransformation(
-				new ReferencedProjectData("bug433937_wrongImport", "bug433937_referenced", true) { //$NON-NLS-1$ //$NON-NLS-2$
-					@Override
-					public boolean isUseCompiledXmi() {
-						// TODO it should be possible to run this test with the
-						// using of compiled XMI
-						return false;
-					}
-				}));
-
-        suite.addTestSuite(TestStackTrace.class);
-        suite.addTestSuite(TestInvalidConfigProperty.class);
-        suite.addTestSuite(TestBlackboxLibContext.class);
-
-        return suite;
-    }
-
-    public static TestSuite javalessSuite() {
-        TestSuite suite = new TestSuite("QVT javaless"); //$NON-NLS-1$
-
-        ModelTestData[] datas = createTestData();
-
-        for (ModelTestData data : datas) {
-            if(!JAVALESS_EXCLUDES.contains(data.getName()) && JavalessUtil.isValidJavalessData(data)) {
-                JavalessQvtTest test = new JavalessQvtTest(data, JAVALESS_PATCH_OUTPUT.contains(data.getName()));                
-                suite.addTest(test);
-            }
-        }
-
-        return suite;
-    }
-
-    public static TestSuite walkerSuite() {
-        TestSuite suite = new TestSuite("QVT walker"); //$NON-NLS-1$
-
-        ModelTestData[] datas = createTestData();
-
-        for (ModelTestData data : datas) {
-            suite.addTest(new TestQvtWalker(data));
-        }
-
-        return suite;
-    }
-
-    public static TestSuite executorSuite() {
-        TestSuite suite = new TestSuite("QVT executor"); //$NON-NLS-1$
-
-        ModelTestData[] datas = createTestData();
-
-        for (ModelTestData data : datas) {
-            suite.addTest(new TestQvtExecutor(data));
-        }
-        
-        return suite;
-    }
-
-    public static TestSuite debugExecutorSuite() {
-        TestSuite suite = new TestSuite("QVT debug executor"); //$NON-NLS-1$
-
-        ModelTestData[] datas = createTestData();
-
-        for (ModelTestData data : datas) {
-            suite.addTest(new DebugExecutorTest(data));
-        }
-        
-        return suite;
-    }
-
-    
     public static ModelTestData[] createTestData() {
         return new ModelTestData[] {     		
         		new FilesToFilesData("dicttype"), //$NON-NLS-1$
@@ -189,7 +75,7 @@ public class TransformTests {
         		new FilesToFilesData("subobjects", Arrays.asList("in.ecore"), Collections.<String>emptyList()), //$NON-NLS-1$ //$NON-NLS-2$
         		new FileToFileData("virtual_contextVsOverride"), //$NON-NLS-1$
                 new FileToFileData("numconversion", "in.xmi", "expected.pack").includeMetamodelFile("mm.ecore"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-                new FilesToFilesData("bug329971", Arrays.asList("Class1.xmi"), Collections.<String>emptyList()).includeMetamodelFile("test1.ecore"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                //new FilesToFilesData("bug329971", Arrays.asList("Class1.xmi"), Collections.<String>emptyList()).includeMetamodelFile("test1.ecore"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
         		new FileToFileData("overload_205062"), //$NON-NLS-1$
         		new FileToFileData("overload_singleParam"), //$NON-NLS-1$   
         		new FileToFileData("overload_multipleParams"), //$NON-NLS-1$        		        		
@@ -671,49 +557,5 @@ public class TransformTests {
         	};
     }
 
-    private static final Set<String> JAVALESS_EXCLUDES = new HashSet<String>(Arrays.asList(new String[] {
-    		// uses getDataTypeInstance() defined on ecore 
-            "primtypesecore", //$NON-NLS-1$
-            
-            // failed to save compiled XMI (ocl problems) 
-            "operation_override", "import_access_extends", "import_access_extends_cfgprop", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-            
-            // fqn access are not correctly patched 
-            "importedInstances", "fqn_noncontextual", "fqnOperationCalls_271789", "fqnMainCalls_271987", "fqnMainCalls_272937", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
-            "transf_inheritance", //$NON-NLS-1$
-            
-            // input models use reference that is not in required format: eSuperTypes = "#//NEW_Class1" instead of "//@eClassifiers.0" 
-            "assigntonullowner", //$NON-NLS-1$
-            "resolveall", //$NON-NLS-1$
-            "bug420970", //$NON-NLS-1$
-          	"bug467600", //$NON-NLS-1$
-            
-            // uses getEClassifier() defined on ecore 
-            "bug2787", "bug2839", "bug2437_4", "bug2437_5", //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
-    		
-            // invoking ecore-specific blackbox operations, which cause mismatching param types in javaless mode
-            "blackboxlib_237781", //$NON-NLS-1$
-            "uml2_stereotypeApplication", //$NON-NLS-1$
-            "bug289982_importless", //$NON-NLS-1$
-          	"bug289982", //$NON-NLS-1$
-          	"bug326871", //$NON-NLS-1$
-          	"bug326871a", //$NON-NLS-1$
-          	"bug466705", //$NON-NLS-1$ 
-            "blackboxlib_annotation_java", //$NON-NLS-1$
-
-    		// EObjects are created inside blackbox transformation and later merged with javaless objects 
-            "bug427237a", //$NON-NLS-1$
-            
-            // EObjects for incremental update are loaded from original 'in.ecore' so they don't match with those from 'in.ecore.javaless' 
-            "bug463572", //$NON-NLS-1$ 
-                  	
-            // use of Eclipse project references requires patching across multiple projects
-          	"bug433937", //$NON-NLS-1$
-          	
-    }));
-
-    private static final Set<String> JAVALESS_PATCH_OUTPUT = new HashSet<String>(Arrays.asList(new String[] {
-    		// EObjects are created inside blackbox transformation thus don't belong to javaless package 
-            "bug427237", //$NON-NLS-1$
-    }));
+    
 }

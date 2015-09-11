@@ -17,6 +17,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.OCLEnvironmentWithQVTAccessFactory;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -26,6 +27,7 @@ public class OCLEnvWithQVTAccessDiagnosticTest extends TestCase {
 		super();
 	}
 	
+	@Test
 	public void testCSTAndBlackboxSuccess() throws Exception {
 		Diagnostic diagnostic = createFactoryDiagnostic(
 			"qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary",
@@ -34,6 +36,7 @@ public class OCLEnvWithQVTAccessDiagnosticTest extends TestCase {
 		assertTrue(diagnostic.getSeverity() == Diagnostic.OK);
 	}
 	
+	@Test
 	public void testCompilationErrors() throws Exception {
 		String uri = "platform:/plugin/org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/errorsLib.qvto";
 		Diagnostic diagnostic = createFactoryDiagnostic(uri);
@@ -42,7 +45,8 @@ public class OCLEnvWithQVTAccessDiagnosticTest extends TestCase {
 		assertFalse(children.isEmpty());
 		assertEquals(uri, children.get(0).getSource());
 	}
-
+	
+	@Test
 	public void testUnresolved() throws Exception {
 		String badURI = "platform:/plugin/never.exist";
 		String okURI = "qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary";

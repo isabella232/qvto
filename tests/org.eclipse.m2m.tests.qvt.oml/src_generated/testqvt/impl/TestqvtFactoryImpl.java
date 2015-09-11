@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import testqvt.*;
 import testqvt.BooleanElement;
 import testqvt.Element;
 import testqvt.Model;
+import testqvt.Numbers;
 import testqvt.TestqvtFactory;
 import testqvt.TestqvtPackage;
 

@@ -36,6 +36,8 @@ import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.SendSignalAction;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -48,12 +50,14 @@ public class QVTOperationalEnvTest extends TestCase {
 	}
 
 	@Override
+	@Before
 	protected void setUp() throws Exception {	
 		super.setUp();
 		
 		factory = QvtOperationalEnvFactory.INSTANCE;
 	}
 	
+	@Test
 	public void testImportedEnvironments() throws Exception {
 		QvtOperationalModuleEnv parentEnv = factory.createModuleEnvironment(QvtOperationalStdLibrary.createLibrary("Foo"));
 		QvtOperationalModuleEnv importedEnv = factory.createModuleEnvironment(QvtOperationalStdLibrary.createLibrary("Imported"));		
@@ -82,7 +86,8 @@ public class QVTOperationalEnvTest extends TestCase {
 			super(qvtExtVisitor);
 		}
 	}
-
+	
+	@Test
 	public void testVisitorDecorators() throws Exception {
 		// Specify a decorator class to be used
 		List<Class<? extends QvtGenericVisitorDecorator>> decorators = new ArrayList<Class<? extends QvtGenericVisitorDecorator>>();

@@ -11,20 +11,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.compile;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+@RunWith(Suite.class)
+@SuiteClasses({PlatformPluginUnitResolverTest.class, UnitResolverFactoryTest.class, QVTOCompilerTest.class, URIUnitResolverTest.class})
 public class AllCompileTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite(
-				"Tests for org.eclipse.m2m.tests.qvt.oml.compile");
-		//$JUnit-BEGIN$
-		suite.addTestSuite(PlatformPluginUnitResolverTest.class);
-		suite.addTestSuite(UnitResolverFactoryTest.class);
-		suite.addTestSuite(QVTOCompilerTest.class);
-		//$JUnit-END$
-		return suite;
-	}
 	
 }

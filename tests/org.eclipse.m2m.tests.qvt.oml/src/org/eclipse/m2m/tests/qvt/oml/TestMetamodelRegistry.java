@@ -40,6 +40,9 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -54,6 +57,7 @@ public class TestMetamodelRegistry extends TestCase {
     private MetamodelRegistry metamodelRegistry;
 	
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		myProject = new TestProject("MModelREgistryTest", new String[] {QVTOProjectPlugin.NATURE_ID}); //$NON-NLS-1$
         
@@ -97,10 +101,12 @@ public class TestMetamodelRegistry extends TestCase {
 	}
 	
 	@Override
+	@After
 	public void tearDown() throws Exception {
         myProject.delete();
 	}
-		
+	
+	@Test
 	public void testProjectContextRegistration() throws Exception {
         IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 
@@ -111,7 +117,8 @@ public class TestMetamodelRegistry extends TestCase {
         EPackage ePackage = metamodelDesc.getModel();
         assertEquals(ePackage.eResource().getURI(), testEcoreFileURI);
     }
-
+	
+	@Test
 	public void testGlobalContextRegistration() throws Exception {
 		String knownID = EcorePackage.eINSTANCE.getNsURI();
         IMetamodelDesc metamodelDesc = metamodelRegistry.getMetamodelDesc(knownID);
@@ -119,6 +126,7 @@ public class TestMetamodelRegistry extends TestCase {
         assertSame(EcorePackage.eINSTANCE, metamodelDesc.getModel());
     }
 	
+	@Test
 	public void testNestedPackageRegistration() throws Exception {
 		IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 		
@@ -131,6 +139,7 @@ public class TestMetamodelRegistry extends TestCase {
         assertEquals(ePackage.getName(), NESTED_PACKAGE_NAME);
     }
 	
+	@Test
 	public void testBug376644PackageRegistryFallback() throws Exception {
 		IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 
@@ -143,6 +152,7 @@ public class TestMetamodelRegistry extends TestCase {
         assertSame(EcorePackage.eINSTANCE, ePackage);
 	}
 	
+	@Test
 	public void testBug441094DelegatePackageRegistry() {
 		EPackage myEPackage = EcoreFactory.eINSTANCE.createEPackage();
 		
@@ -159,6 +169,7 @@ public class TestMetamodelRegistry extends TestCase {
 		assertSame(myEPackage, result);
 	}
 	
+	@Test
 	public void testBug326651UpdateMetamodel() throws Exception {
 		
 		final String ID = "myPackageID";
@@ -180,6 +191,7 @@ public class TestMetamodelRegistry extends TestCase {
 		
 	}
 	
+	@Test
 	public void testBug435699IllegalRegistration() throws Exception {
 		
 		final String ID = "myPackageID";

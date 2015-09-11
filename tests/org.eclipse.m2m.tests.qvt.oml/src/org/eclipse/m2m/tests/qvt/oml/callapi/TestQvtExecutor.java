@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.callapi;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,15 +23,26 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.TransformTests;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestQvtExecutor extends TransformationExecutorTest {
 	
 	private final List<URI> ecoreMetamodels;
-
+	
 	public TestQvtExecutor(ModelTestData data) {
 		super(data.getName(), getInModels(data), getOutModels(data), data.getContext().getConfigProperties());
 		ecoreMetamodels = data.getEcoreMetamodels();
 	}
+	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Arrays.asList(TransformTests.createTestData());
+    }
 
 	static List<String> getInModels(ModelTestData data) {
 		if (data instanceof FilesToFilesData) {
@@ -50,14 +62,10 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 	protected List<URI> getEcoreMetamodels() {
 		return ecoreMetamodels;
 	}
-
-	@Override
-	protected void setUp() {
-		super.setUp();
-	}
 	
 	@Override
-	protected void runTest() throws Throwable {
+	@Test
+	public void runTest() throws Throwable {
 		super.runTest();
 		
 		ResourceSet checkingRs = CompilerUtils.cloneResourceSet(uriCreator.getTransformationUri(), resSet);

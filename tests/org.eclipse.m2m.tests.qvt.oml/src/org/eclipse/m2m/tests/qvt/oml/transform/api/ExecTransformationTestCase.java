@@ -12,6 +12,7 @@
 package org.eclipse.m2m.tests.qvt.oml.transform.api;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -31,23 +32,35 @@ import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationHelper.ModelExtent
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationHelper.TransfExecutionResult;
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationValidator;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.api.QvtoTransfHelperTests.ApiTestData;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author sboyko
  */
 @SuppressWarnings("deprecation")
+@RunWith(Parameterized.class)
 public class ExecTransformationTestCase extends ApiTestCase {
-
-	public ExecTransformationTestCase(String testName) {
-		super(testName);
-	}
 
 	public ExecTransformationTestCase(ModelTestData data) {
 		super(data);
 		setName("workspace: " + data.getName()); //$NON-NLS-1$
 	}
+	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Arrays.<ModelTestData>asList(
+			new ApiTestData("exec1", Arrays.asList("in1.ecore", "in2.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			new ApiTestData("exec2", Arrays.asList("in1.ecore", "in2.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
+			new ApiTestData("exec3", Collections.<String>emptyList(), Collections.<String>emptyList()) //$NON-NLS-1$
+		);
+	}
 
 	@Override
+	@Test
 	public void runTest() throws Exception {
 		URI scriptUri = createScriptUri(getData().getName());
 		validateScript(scriptUri);

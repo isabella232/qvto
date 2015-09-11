@@ -17,6 +17,7 @@ import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -44,28 +45,181 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.tests.qvt.oml.ParserTests.TestData;
 import org.eclipse.m2m.tests.qvt.oml.util.ProblemSourceAnnotationHelper;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import junit.framework.TestCase;
 
 /**
  * @author pkobiakov
  */
+@RunWith(Parameterized.class)
 public class TestQvtParser extends TestCase {
-	
-	public TestQvtParser(String testName) {
-		this(ParserTests.getTestData(testName));
-	}
-	
+		
 	public TestQvtParser(TestData data) {
         super(data.getDir());
         myData = data;        
     }
+	
+	@Parameters(name="{0}")
+	public static Iterable<TestData> data() {
+		return Arrays.asList(
+			new TestData[] {
+		    	TestData.createSourceChecked("abstractout", 3, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("collectionAssignment", 4, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("overload_multipleParams", 0, 19), //$NON-NLS-1$
+		    	TestData.createSourceChecked("overload_singleParam", 0, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("mainInLibrary", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("dynamicpackage", 0, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("importedInstances", 1, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("moduleElementErrorRecovery_265452", 7, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("unitElementErrorRecovery_264517_1", 1, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("unitElementErrorRecovery_264517_2", 3, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("unitElementErrorRecovery_264675", 3, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("nestedPropertiesAssignment_262757", 7, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("collectionOperationNotFound_224093", 3, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("deprecated_importLocation", 0, 1), //$NON-NLS-1$
+		    	TestData.createSourceChecked("misplacedTopElements", 0, 4), //$NON-NLS-1$
+		    	TestData.createSourceChecked("escape_sequences_250630", 4, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("multiline_strings_262733", 1, 0), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("deprecated_rename", 0, 1), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("varInitExpWithResult_261623", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("_while_261024", 4, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("listtype", 7, 0), //$NON-NLS-1$   	
+		    	TestData.createSourceChecked("listtype2", 7, 0), //$NON-NLS-1$   	
+		        //new TestData("orderedsetdoesnotconformtoset", 1), //$NON-NLS-1$
+		        TestData.createSourceChecked("computeExp_252269", 3, 1), //$NON-NLS-1$       
+		    	new TestData("implicitsource_ocl_234354", 7, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("duplicateModelTypeDef", 1, 0),    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("blackboxlib_annotation_java", 1, 2), //$NON-NLS-1$
+		    	TestData.createSourceChecked("dupImportFileUnit", 0, 1),    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("dupImportLibrary", 0, 1),    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("testmodelparamtype", 3, 0),    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("resolvecond", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("intermPropClash", 9, 0),    	    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("noClassInImplicitPopulate", 3, 1),    	 //$NON-NLS-1$
+		    	TestData.createSourceChecked("parmnamesclash", 22, 1), //$NON-NLS-1$
+		    	TestData.createSourceChecked("stdlibElementAsOut", 7, 0),    	 //$NON-NLS-1$
+		        TestData.createSourceChecked("bug2732_wrongcondition", 1, 1), //$NON-NLS-1$      
+		        TestData.createSourceChecked("varscope", 10, 0), //$NON-NLS-1$      
+		    	TestData.createSourceChecked("_while", 12, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("implicitCallSrc", 16, 6), //$NON-NLS-1$    	
+		    	TestData.createSourceChecked("libraryWithModuleElements", 2, 0), //$NON-NLS-1$    	
+		    	new TestData("assert_log", 0), //$NON-NLS-1$    	
+		        new TestData("opersignatureparamclash", 1), //$NON-NLS-1$    	
+		        new TestData("collectreturntype", 0), //$NON-NLS-1$
+		        new TestData("nocollectoncollection", 0), //$NON-NLS-1$
+		        	///Commented out, due to migration to OCL 1.2, TODO - clarify the current error reporting with MDT, seems to be incorrect
+		        	// new TestData("nonstaticcallinstaticcontext", 1), //$NON-NLS-1$ 
+		        new TestData("virtrettypemismatch", 1), //$NON-NLS-1$
+		        new TestData("missinglibmmimport", 1), //$NON-NLS-1$
+		        new TestData("noglobalallinstances", 0), //$NON-NLS-1$ 
+		        new TestData("imp", 0), //$NON-NLS-1$ // TODO: independent parsing for imports
+		        new TestData("imp2", 0), //$NON-NLS-1$
+		        new TestData("imp3", 0), //$NON-NLS-1$
+		        TestData.createSourceChecked("impError", 3, 0), //$NON-NLS-1$        
+		        new TestData("assignereadonlyprop", 1), //$NON-NLS-1$
+		        new TestData("nonbooleanguard", 1), //$NON-NLS-1$
+		        TestData.createSourceChecked("sameparamname", 2, 0), //$NON-NLS-1$
+		        new TestData("badtype", 1), //$NON-NLS-1$
+		        new TestData("simple", 0),   //$NON-NLS-1$
+		        new TestData("selfimport", 1), //$NON-NLS-1$
+		        new TestData("normalimport", 0), //$NON-NLS-1$
+		        new TestData("missingmappingcall", 1), //$NON-NLS-1$
+		        new TestData("missingfeature", 1), //$NON-NLS-1$
+		        new TestData("featuretypemismatch", 1), //$NON-NLS-1$
+		        new TestData("initvariable", 1), //$NON-NLS-1$
+		        new TestData("missingvariablereference", 1), //$NON-NLS-1$
+		        new TestData("optionalout", 0), //$NON-NLS-1$
+		        new TestData("nonassignableout", 1), //$NON-NLS-1$
+		        TestData.createSourceChecked("wrongout", 3, 0), //$NON-NLS-1$
+		        new TestData("outininitvar", 0), //$NON-NLS-1$
+		        new TestData("modifyfeature", 0), //$NON-NLS-1$
+		        new TestData("missingout", 2), //$NON-NLS-1$
+		        new TestData("modifyfeatureerror", 2), //$NON-NLS-1$
+		        new TestData("bodywithsemicolon", 0), //$NON-NLS-1$
+		        new TestData("modifyparam", 0), //$NON-NLS-1$
+		        TestData.createSourceChecked("wrongparamnameinout", 2, 0), //$NON-NLS-1$
+		        new TestData("modifyfeatureininiterror", 2), //$NON-NLS-1$
+		        TestData.createSourceChecked("voidout", 2, 0), //$NON-NLS-1$
+		        new TestData("modifyinparam", 1), //$NON-NLS-1$
+		        new TestData("modifyresult", 0), //$NON-NLS-1$
+		        new TestData("wrongorderininit", 1), //$NON-NLS-1$
+		        new TestData("duplicateinitvariable", 1), //$NON-NLS-1$
+		        TestData.createSourceChecked("missingObjectType", 1, 0), // replaced former 'nestedouterror' //$NON-NLS-1$
+		        new TestData("emptyinit", 0), //$NON-NLS-1$
+		        new TestData("assignresultininit", 0), //$NON-NLS-1$
+		        new TestData("assign_inoutParam", 2), //$NON-NLS-1$
+		        new TestData("assign_inParam", 2), //$NON-NLS-1$
+		        new TestData("assign_varThis", 1), //$NON-NLS-1$                        
+		        
+		        new TestData("errorinexpressionlist", 1), //$NON-NLS-1$
+		        new TestData("largefile", 0), //$NON-NLS-1$
+		        new TestData("calldump", 0), //$NON-NLS-1$
+		        new TestData("missingparamname", 2), //$NON-NLS-1$
+		        new TestData("nameclash", 1), //$NON-NLS-1$
+		        new TestData("emptymodule", 0), //$NON-NLS-1$
+		        new TestData("props", 0), //$NON-NLS-1$
+		        new TestData("duplicatelocalproperty", 1), //$NON-NLS-1$
+		        new TestData("wrongorderinproperty", 1), //$NON-NLS-1$
+		        new TestData("implicitpopulation", 0), //$NON-NLS-1$
+		        new TestData("implicitpopulationwithinit", 0), //$NON-NLS-1$
+		        new TestData("mapkeyword", 0), //$NON-NLS-1$
+		        new TestData("endsectfull", 0), //$NON-NLS-1$
+		        new TestData("endsectimplicitpopulation", 0), //$NON-NLS-1$
+		        new TestData("endsectimplicitpopulationnoinit", 0), //$NON-NLS-1$
+		        new TestData("endsectinitnopopulation", 0), //$NON-NLS-1$
+		        new TestData("endsectonly", 0), //$NON-NLS-1$
+		        new TestData("endsectpopulationnoinit", 0), //$NON-NLS-1$
+		        new TestData("configpropstype", 0), //$NON-NLS-1$
+	
+		        new TestData("mm_header1", 1), //$NON-NLS-1$
+		        new TestData("mm_header2", 1), //$NON-NLS-1$
+		        new TestData("mm_header3", 1), //$NON-NLS-1$
+		        new TestData("mm_header4", 1), //$NON-NLS-1$
+		        new TestData("mm_header5", 2), //$NON-NLS-1$
+		        new TestData("mm_header6", 1), //$NON-NLS-1$
+		        new TestData("mm_header7", 1), //$NON-NLS-1$
+		        new TestData("entryOpDupl", 1), //$NON-NLS-1$
+		        new TestData("resolveIn_ambiguity", 1), //$NON-NLS-1$
+		        new TestData("bug205303_2", 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug325192", 8, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug268636", 5, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug272869", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug413130", 0, 1), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug404647_2", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug414363", 0, 28), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug401521", 2, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug414616", 2, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug419299", 8, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug414619", 0, 5), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug415024", 1, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug413391", 10, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug424912", 0, 6), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug289982_ambiguousLib", 0, 1), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug289982_undefinedLib", 0, 1), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug289982_validation", 7, 7), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug424584", 11, 0), //$NON-NLS-1$
+		    	new TestData("bug428028", 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug425634", 0, 6), //$NON-NLS-1$
+		    	new TestData("bug433585", 0), //$NON-NLS-1$
+		    	new TestData("bug438038", 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug446375", 2, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug468303", 0, 1), //$NON-NLS-1$
+			}
+		);
+	}
 	
 	protected CompiledUnit[] getCompiledResults() {
 		return myCompiled;
 	}
 	    
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		TestUtil.turnOffAutoBuilding();		
 		
@@ -77,6 +231,7 @@ public class TestQvtParser extends TestCase {
 	}
 	
 	@Override
+	@After
 	public void tearDown() throws Exception {
 		myCompiled = null;
         File destinationFolder = getDestinationFolder();
@@ -90,6 +245,7 @@ public class TestQvtParser extends TestCase {
     }
     
 	@Override
+	@Test
 	public void runTest() throws Exception {
 		copyData("sources/" + myData.getDir(), "parserTestData/sources/" + myData.getDir()); //$NON-NLS-1$ //$NON-NLS-2$
 		

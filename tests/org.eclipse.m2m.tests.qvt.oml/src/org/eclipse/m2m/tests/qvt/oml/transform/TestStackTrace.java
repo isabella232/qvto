@@ -18,6 +18,8 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtAssertionFailed;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtStackOverFlowError;
+import org.junit.Before;
+import org.junit.Test;
 
 public class TestStackTrace extends AbstractStackTraceTest {
 	
@@ -26,6 +28,7 @@ public class TestStackTrace extends AbstractStackTraceTest {
 	}
 
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		if("testUknownSourceStackTrace".equals(getName())) { //$NON-NLS-1$
 			// we need to compile concrete syntax which is instructed to skip line number info
@@ -35,6 +38,7 @@ public class TestStackTrace extends AbstractStackTraceTest {
 		super.setUp();
 	}
 	
+	@Test
 	public void testMappingCallInProperty() throws Exception {
 		String testCase = "mappingCallInProperty"; //$NON-NLS-1$
 		QvtRuntimeException e = runQvtModuleTestCase(testCase);
@@ -48,13 +52,14 @@ public class TestStackTrace extends AbstractStackTraceTest {
 		assertEqualContents(dumpedContents.toString(), strWriter.getBuffer().toString());
 	}
 	
-	
+	@Test
 	public void testLogExpUsage() throws Exception {
 		String testcase = "testLogExpUsage"; //$NON-NLS-1$
 		runQvtModuleTestCase(testcase);
 		assertLogMatch(testcase);
 	}
 	
+	@Test
 	public void testAssertionFailed() throws Exception {
 		String testcase = "assertionFailed"; //$NON-NLS-1$
 		QvtRuntimeException e = runQvtModuleTestCase(testcase);						
@@ -70,6 +75,7 @@ public class TestStackTrace extends AbstractStackTraceTest {
 		assertLogMatch(testcase);		
 	}	
 	
+	@Test
 	public void testStackOverFlow() throws Exception {
 		QvtRuntimeException e = runQvtModuleTestCase("stackOverFlow"); //$NON-NLS-1$
 		
@@ -97,6 +103,7 @@ public class TestStackTrace extends AbstractStackTraceTest {
 	/*
 	 * Just verifies a complete regular stack trace 
 	 */
+	@Test
 	public void testCreateInstaceFailure() throws Exception {
 		String testCase = "createInstaceFailure"; //$NON-NLS-1$
 		QvtRuntimeException e = runQvtModuleTestCase(testCase);
@@ -109,7 +116,8 @@ public class TestStackTrace extends AbstractStackTraceTest {
 		String dumpedContents = loadExpectedStackDump(testCase);
 		assertEqualContents(dumpedContents.toString(), strWriter.getBuffer().toString());		
 	}
-
+	
+	@Test
 	public void testUknownSourceStackTrace() throws Exception {
 		String testCase = "createInstaceFailure"; //$NON-NLS-1$
 		

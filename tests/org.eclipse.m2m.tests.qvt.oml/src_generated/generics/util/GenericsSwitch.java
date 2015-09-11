@@ -2,12 +2,12 @@
  */
 package generics.util;
 
-import generics.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import generics.GenericCls;
+import generics.GenericsPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -45,11 +45,14 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
 
-public class TransformationExecutorTest extends TestCase {
+public abstract class TransformationExecutorTest extends TestCase {
 
 	final String name;
 	final List<String> inModels;
@@ -111,7 +114,8 @@ public class TransformationExecutorTest extends TestCase {
 	}
 
 	@Override
-	protected void setUp() {
+	@Before
+	public void setUp() {
 		resSet = getMetamodelResolutionRS();
 		paramKinds = getParamKinds();
 		extents = new ArrayList<BasicModelExtent>(paramKinds.size());
@@ -143,7 +147,8 @@ public class TransformationExecutorTest extends TestCase {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
 		executor.cleanup();
 		BlackboxRegistry.INSTANCE.cleanup();
 	}
@@ -152,7 +157,8 @@ public class TransformationExecutorTest extends TestCase {
 	 * Test if blackbox transformations can be successfully executed when running via TransformationExecutor.
 	 */
 	@Override
-	protected void runTest() throws Throwable {
+	@Test
+	public void runTest() throws Throwable {
 		ExecutionDiagnostic diagnostic = executor.execute(executionContext, extents.toArray(new ModelExtent[extents.size()]));
 		if (Diagnostic.OK != diagnostic.getSeverity()
 				|| 0 != diagnostic.getCode()

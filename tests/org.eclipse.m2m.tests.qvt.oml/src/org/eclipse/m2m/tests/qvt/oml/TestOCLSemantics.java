@@ -35,6 +35,7 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ocl.ecore.OCLExpression;
 import org.eclipse.ocl.ecore.SendSignalAction;
 import org.eclipse.ocl.expressions.IntegerLiteralExp;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -49,7 +50,8 @@ public class TestOCLSemantics extends TestCase {
 	public TestOCLSemantics(String name) {
 		super(name);
 	}
-
+	
+	@Test
 	public void testImpliesRightPartCalled() throws Exception {
 		OCLExpression expression = createExpression("true implies 1 <> 1", EcorePackage.eINSTANCE.getEString());
 		Object result = checkedEvaluate(null, expression);
@@ -58,6 +60,7 @@ public class TestOCLSemantics extends TestCase {
 		assertTrue(Boolean.FALSE.equals(result));
 	}	
 	
+	@Test
 	public void testImpliesRightPartSkipped() throws Exception {
 		OCLExpression expression = createExpression("false implies 1 <> 1", EcorePackage.eINSTANCE.getEString());
 		Object result = checkedEvaluate(null, expression);

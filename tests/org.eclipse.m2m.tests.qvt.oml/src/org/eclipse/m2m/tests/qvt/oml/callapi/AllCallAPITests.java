@@ -11,28 +11,23 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.callapi;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+@RunWith(Suite.class)
+@SuiteClasses({
+	BasicModelExtentTest.class,
+	InvocationTest.class,
+	InvocationExtTest.class,
+	DynamicModelInvocationTest.class,
+	DynamicRegisteredModelInvocationTest.class,
+	ChildInTreeInputInvocationTest.class,
+	Bug431055.class,
+	TransformationExecutorWithVisitorDecoratorTest.class,
+	IncrementalUpdateExecutorTest.class,
+	BlackboxModuleStandaloneSetupTest.class	
+})
 public class AllCallAPITests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for org.eclipse.m2m.tests.qvt.oml.callapi"); //$NON-NLS-1$
-		//$JUnit-BEGIN$
-		suite.addTestSuite(BasicModelExtentTest.class);
-		suite.addTestSuite(InvocationTest.class);
-		suite.addTestSuite(InvocationExtTest.class);
-		suite.addTestSuite(DynamicModelInvocationTest.class);
-		suite.addTestSuite(DynamicRegisteredModelInvocationTest.class);
-		suite.addTestSuite(ChildInTreeInputInvocationTest.class);
-		suite.addTestSuite(Bug431055.class);
-		suite.addTest(new TransformationExecutorWithVisitorDecoratorTest());
-		suite.addTest(new IncrementalUpdateExecutorTest());
-		suite.addTest(new BlackboxModuleStandaloneSetupTest("bug326871_standalone")); //$NON-NLS-1$
-		suite.addTest(new BlackboxModuleStandaloneSetupTest("bug326871a_standalone")); //$NON-NLS-1$
-		
-		//$JUnit-END$
-		return suite;
-	}
 
 }

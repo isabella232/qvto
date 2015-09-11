@@ -22,6 +22,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
+import org.junit.Before;
+import org.junit.Test;
 import org.osgi.framework.Bundle;
 
 import junit.framework.TestCase;
@@ -38,13 +40,15 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
 		fBundle = Platform.getBundle(AllTests.BUNDLE_ID);
 		assertNotNull(fBundle);
 	}
-
+	
+	@Test
 	public void testInRootUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle);
 		UnitProxy unit = resolver.resolveUnit("deployed.org.eclipse.Foo");
@@ -57,6 +61,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		assertNotNull(unit);
 	}
 	
+	@Test
 	public void testInContainerUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo");
@@ -69,12 +74,14 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		assertNotNull(unit);
 	}
 
+	@Test
 	public void testUnresolvedUnit() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo_xxxxxxx");
 		assertNull(unit);
 	}	
 	
+	@Test
 	public void testDefaultNSUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed/org/eclipse"));
 		UnitProxy unit = resolver.resolveUnit("Foo"); //$NON-NLS-1$
@@ -87,6 +94,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		assertNotNull(unit);
 	}
 	
+	@Test
 	public void testCrossNSUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("/deployed"));
 		PlatformPluginUnitResolver.setupResolver(resolver, true, true);
@@ -101,6 +109,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		assertNotNull(unit);
 	}
 	
+	@Test
 	public void testUnitAccessByURI() throws Exception {
 		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/T1.qvto", false);
 		

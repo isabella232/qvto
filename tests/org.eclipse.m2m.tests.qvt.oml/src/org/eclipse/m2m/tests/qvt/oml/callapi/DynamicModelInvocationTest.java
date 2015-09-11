@@ -25,6 +25,8 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -46,6 +48,7 @@ public class DynamicModelInvocationTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -84,7 +87,8 @@ public class DynamicModelInvocationTest extends TestCase {
 		
 		fExecutor = new TransformationExecutor(transfURI, registry);		
 	}
-		
+	
+	@Test
 	public void testDynamicModelInput() throws Exception {
 		final ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput);		
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
@@ -99,6 +103,7 @@ public class DynamicModelInvocationTest extends TestCase {
 		assertEquals(3, fInput.getContents().size());
 	}	
 	
+	@Test
 	public void testDynamicModelInputInMemoryOnly() throws Exception {
 		ModelExtent input = fInMemoryOnlyInput;
 		

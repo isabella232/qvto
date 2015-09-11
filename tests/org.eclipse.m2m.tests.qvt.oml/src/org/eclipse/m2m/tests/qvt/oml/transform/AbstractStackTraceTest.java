@@ -31,6 +31,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransforma
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.Before;
 
 public abstract class AbstractStackTraceTest extends TestTransformation {
 
@@ -43,6 +44,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	}
 	
 	@Override
+	@Before
 	public void setUp() throws Exception {
 		super.setUp();
 		

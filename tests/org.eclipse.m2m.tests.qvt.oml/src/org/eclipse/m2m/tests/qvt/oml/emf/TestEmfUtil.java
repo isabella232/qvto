@@ -15,6 +15,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -32,6 +34,7 @@ public class TestEmfUtil extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -43,13 +46,15 @@ public class TestEmfUtil extends TestCase {
 		typeC1InPackage12 = createEClass(package12, "C12"); //$NON-NLS-1$		
 		typeC1InPackage1 = createEClass(package1, "C1"); //$NON-NLS-1$		
 	}
-
+	
+	@Test
 	public void testPackageQualifiedName() throws Exception {
 		assertEquals("p1::p2::p3", EmfUtil.getFullName(package123)); //$NON-NLS-1$
 		assertEquals("p1::p2", EmfUtil.getFullName(package12)); //$NON-NLS-1$
 		assertEquals("p1", EmfUtil.getFullName(package1)); //$NON-NLS-1$
 	}
-
+	
+	@Test
 	public void testPackageRelativeQualifiedName() throws Exception {
 		assertEquals("p2::p3", EmfUtil.getFullNameRelativeToPackage(package123, package1)); //$NON-NLS-1$		
 		assertEquals("p3", EmfUtil.getFullNameRelativeToPackage(package123, package12)); //$NON-NLS-1$		
@@ -57,6 +62,7 @@ public class TestEmfUtil extends TestCase {
 		assertEquals("p1", EmfUtil.getFullNameRelativeToPackage(package1, package1)); //$NON-NLS-1$
 	}		
 	
+	@Test
 	public void testPackageRelativeQualifiedTypeName() throws Exception {
 		assertEquals("p1::p2::p3::C123", EmfUtil.getFullName(typeC1InPackage123)); //$NON-NLS-1$
 		
@@ -67,6 +73,7 @@ public class TestEmfUtil extends TestCase {
 		assertEquals("C12", EmfUtil.getFullNameRelativeToPackage(typeC1InPackage12, package12)); //$NON-NLS-1$		
 	}
 	
+	@Test
 	public void testTypeQualifiedName() throws Exception {
 		assertEquals("p1::p2::p3::C123", EmfUtil.getFullName(typeC1InPackage123)); //$NON-NLS-1$
 		assertEquals("p1::p2::C12", EmfUtil.getFullName(typeC1InPackage12)); //$NON-NLS-1$		

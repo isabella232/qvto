@@ -14,6 +14,10 @@ package org.eclipse.m2m.tests.qvt.oml.ant;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.ant.core.AntRunner;
 import org.eclipse.core.resources.IFile;
@@ -32,14 +36,22 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
+import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import junit.framework.TestCase;
 
 /**
  * @author sboyko
  */
+@RunWith(Parameterized.class)
 public class TestQvtAntScript extends TestCase {
 	
 	public static final String ROOT_DIR_NAME = "antTestData"; //$NON-NLS-1$
@@ -50,7 +62,17 @@ public class TestQvtAntScript extends TestCase {
         myData = data;
     }
     
+    @Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+    	return Arrays.<ModelTestData>asList(
+    		new AntModelTestData("simple", Collections.<String>emptyList(), Arrays.asList("expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
+    	    new AntModelTestData("twomodels", Collections.<String>emptyList(), Arrays.asList("expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
+    	    new AntModelTestData("twomodels_new", Collections.<String>emptyList(), Arrays.asList("expected.rdb")) //$NON-NLS-1$ //$NON-NLS-2$
+    	);
+    }
+    
     @Override
+    @Test
     public void runTest() throws Exception {
     	IFile script = getIFile("composite.xml"); //$NON-NLS-1$
     	
@@ -80,6 +102,7 @@ public class TestQvtAntScript extends TestCase {
     }
     
     @Override
+    @Before
 	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();     
         
@@ -94,6 +117,7 @@ public class TestQvtAntScript extends TestCase {
     }
     
     @Override
+    @After
 	public void tearDown() throws Exception {
         //+myProject.delete();
     }
@@ -136,6 +160,38 @@ public class TestQvtAntScript extends TestCase {
     }
     
 	private final ModelTestData myData;
-    private TestProject myProject;    
+    private TestProject myProject;
+    
+    private static class AntModelTestData extends FilesToFilesData {
+    	public AntModelTestData(String name, List<String> fromFiles, List<String> expectedFiles) {
+            super(name, fromFiles, expectedFiles);
+        }
+
+        @Override
+		protected File getDestFolder(IProject project) {
+            try {
+                return AntModelTestData.getDestFolder(getName(), project);
+            }
+            catch(IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        
+        private static File getDestFolder(String name, IProject project) throws IOException {
+            File srcRootFolder = TestUtil.getPluginRelativeFile(AllTests.BUNDLE_ID, TestQvtAntScript.ROOT_DIR_NAME);
+            File srcFolder = AntModelTestData.getFolder(srcRootFolder, name);
+            File destFolder = AntModelTestData.getFolder(new File(project.getLocation().toString() + "/models/"), srcFolder.getName()); //$NON-NLS-1$
+            return destFolder;
+        }
+        
+        private static File getFolder(File folder, final String expectedName) {
+            File dir = new File(folder, expectedName);
+            if(!dir.exists() || !dir.isDirectory()) {
+                throw new IllegalArgumentException("Invalid directory: " + dir); //$NON-NLS-1$
+            }
+            
+            return dir;
+        }
+    }
 
 }

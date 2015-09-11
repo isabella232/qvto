@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -25,7 +26,13 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.WorkspaceQvtModule;
 import org.eclipse.m2m.qvt.oml.util.IContext;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestQvtInterpreter extends TestTransformation {
 	
 	static final String PREFIX = "interpret_"; //$NON-NLS-1$
@@ -35,11 +42,17 @@ public class TestQvtInterpreter extends TestTransformation {
 		setName(PREFIX + data.getName());
     }
     
+	@Parameters(name="{0}")
+	public static Iterable<? extends ModelTestData> data() {
+		return Arrays.asList(TransformTests.createTestData());
+    }
+    
     protected ITransformer getTransformer() {
 		return new DefaultTransformer(getData(), getProject());
     }
        
 	@Override
+	@Before
     public void setUp() throws Exception {   
     	super.setUp();
     	
@@ -57,6 +70,7 @@ public class TestQvtInterpreter extends TestTransformation {
 	}
     
     @Override
+    @Test
 	public void runTest() throws Exception {
         checkTransformation(new TransformationChecker(getTransformer()));
     }

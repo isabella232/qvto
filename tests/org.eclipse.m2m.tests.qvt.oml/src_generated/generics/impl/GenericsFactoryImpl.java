@@ -2,16 +2,16 @@
  */
 package generics.impl;
 
-import generics.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import generics.GenericCls;
+import generics.GenericsFactory;
+import generics.GenericsPackage;
 
 /**
  * <!-- begin-user-doc -->

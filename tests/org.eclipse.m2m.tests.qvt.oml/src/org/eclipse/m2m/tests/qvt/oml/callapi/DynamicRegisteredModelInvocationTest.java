@@ -25,6 +25,8 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -45,6 +47,7 @@ public class DynamicRegisteredModelInvocationTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -81,7 +84,8 @@ public class DynamicRegisteredModelInvocationTest extends TestCase {
 		fDynamicPackageRegistry = new EPackageRegistryImpl();	
 		fDynamicPackageRegistry.put(dynPackage.getNsURI(), dynPackage);	
 	}
-		
+	
+	@Test
 	public void testDynamicRegisteredModelInput() throws Exception {
 		TransformationExecutor executor = new TransformationExecutor(fTransfURI);
 		final ExecutionDiagnostic  diagnostic = executor.execute(fContext, fRegistryModelInput);		
@@ -97,6 +101,7 @@ public class DynamicRegisteredModelInvocationTest extends TestCase {
 		assertEquals(3, fRegistryModelInput.getContents().size());
 	}	
 	
+	@Test
 	public void testDynamicModelInputOverRegistered() throws Exception {
 		ModelExtent input = fNonRegistryModelInput;
 		TransformationExecutor executor = new TransformationExecutor(fTransfURI, fDynamicPackageRegistry);

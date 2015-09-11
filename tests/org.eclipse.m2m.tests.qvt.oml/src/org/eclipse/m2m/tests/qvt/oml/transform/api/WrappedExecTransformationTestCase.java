@@ -11,28 +11,38 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.transform.api;
 
+import java.util.Collections;
+
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.qvt.oml.runtime.util.QvtoTransformationValidator;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.api.QvtoTransfHelperTests.ApiTestData;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 /**
  * @author sboyko
  */
-
+@RunWith(Parameterized.class)
 public class WrappedExecTransformationTestCase extends ExecDeployedTransformationTestCase {
 	
-    public WrappedExecTransformationTestCase(String testName) {
-		super(testName);
-		myUseFilename = true;		
-	}
-
 	public WrappedExecTransformationTestCase(ModelTestData data) {
         super(data);
         myUseFilename = true;
     }
+	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Collections.<ModelTestData>singletonList(
+			new ApiTestData("exec_erroneous", Collections.<String>emptyList(), Collections.<String>emptyList()) //$NON-NLS-1$
+		);
+	}
     
     @Override
+    @Test
     public void runTest() throws Exception {
     	boolean isFailed = false;
     	try {

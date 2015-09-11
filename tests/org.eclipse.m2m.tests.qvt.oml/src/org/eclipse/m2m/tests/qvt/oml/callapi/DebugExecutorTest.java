@@ -13,6 +13,7 @@ package org.eclipse.m2m.tests.qvt.oml.callapi;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,11 +45,18 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.debug.core.launch.TransformationRunnerFactory;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.TransformTests;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 import junit.framework.TestCase;
 
-
+@RunWith(Parameterized.class)
 public class DebugExecutorTest extends TestCase {
 
 	private ModelTestData myData;
@@ -66,8 +74,14 @@ public class DebugExecutorTest extends TestCase {
 		myData = data;
 	}
 	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Arrays.asList(TransformTests.createTestData());
+    }
+	
 	@Override
-	protected void setUp() throws Exception {
+	@Before
+	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();     
         
         String name = DebugExecutorTest.class.getSimpleName();
@@ -117,7 +131,8 @@ public class DebugExecutorTest extends TestCase {
 	}
 	
 	@Override
-	protected void tearDown() throws Exception {
+	@After
+	public void tearDown() throws Exception {
     	if (myData == null) {
     		return;
     	}
@@ -134,7 +149,8 @@ public class DebugExecutorTest extends TestCase {
 	 * Test if transformation can be successfully executed when running via TransformationRunner.
 	 */
 	@Override
-	protected void runTest() throws Throwable {
+	@Test
+	public void runTest() throws Throwable {
 		TransformationRunner runner = factory.createRunner();
 
 		URI traceUri = getTraceUri();

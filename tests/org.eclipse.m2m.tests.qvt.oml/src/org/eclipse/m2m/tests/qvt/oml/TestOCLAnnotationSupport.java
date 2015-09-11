@@ -22,6 +22,8 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.OCLAnnotationSupport;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -40,6 +42,7 @@ public class TestOCLAnnotationSupport extends TestCase {
 	}
 
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 
@@ -53,6 +56,7 @@ public class TestOCLAnnotationSupport extends TestCase {
 		subFooClass = createClass("SubFoo", new EClass[] { fooClass });
 	}
 	
+	@Test
 	public void testDirectlyInherited() throws Exception {
 		EOperation superOperation = createOperation(fooClass, "oper", new EClassifier[0]); //$NON-NLS-1$
 				
@@ -75,6 +79,7 @@ public class TestOCLAnnotationSupport extends TestCase {
 		assertSame(siblingSuperOperation, resolvedSiblingSuperOperation);
 	}
 	
+	@Test
 	public void testIndirectlyInherited() throws Exception {
 		EOperation operation = createOperation(superFooClass, "oper", new EClassifier[0]); //$NON-NLS-1$
 		
@@ -100,6 +105,7 @@ public class TestOCLAnnotationSupport extends TestCase {
 		assertSame(siblingSuperOperation, resolvedSiblingSuperOperation);
 	}
 	
+	@Test
 	public void testOverrideInherited() throws Exception {  
 		EOperation referencedSuperFooOperation = createOperation(superFooClass, "oper", new EClassifier[0]); //$NON-NLS-1$
 		// override operation from Foo in SubFoo
@@ -131,6 +137,7 @@ public class TestOCLAnnotationSupport extends TestCase {
 		}
 	}
 	
+	@Test
 	public void testOperationMatch() throws Exception {
 		// add confusing similar signature operations
 		String sharedName = "oper"; //$NON-NLS-1$

@@ -11,22 +11,18 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.ocl2qvt;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+@RunWith(Suite.class)
+@SuiteClasses({
+	ExtOCLEnvironmentWithQVTAccessTest.class,
+	OCLEnvironmentWithQVTAccessTest.class,
+	OCLEnvironmentWithQVTAccessByURITest.class,
+	OCLEnvironmentWithQVTAccessByURITest.DynamicPackageTest.class,
+	OCLEnvWithQVTAccessDiagnosticTest.class,
+})
 public class OCLEnvWithQVTTests {
-
-	public static Test suite() {
-		TestSuite suite = new TestSuite("Test for OCL environments with QVT access"); //$NON-NLS-1$
-		
-		//$JUnit-BEGIN$
-		suite.addTestSuite(ExtOCLEnvironmentWithQVTAccessTest.class);
-		suite.addTestSuite(OCLEnvironmentWithQVTAccessTest.class);
-		suite.addTestSuite(OCLEnvironmentWithQVTAccessByURITest.class);
-		suite.addTestSuite(OCLEnvironmentWithQVTAccessByURITest.DynamicPackageTest.class);
-		suite.addTestSuite(OCLEnvWithQVTAccessDiagnosticTest.class);
-		//$JUnit-END$
-		return suite;
-	}
 
 }

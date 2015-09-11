@@ -26,6 +26,8 @@ import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -49,6 +51,7 @@ public class InvocationExtTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -93,7 +96,8 @@ public class InvocationExtTest extends TestCase {
 		// check the input was not changed
 		assertEquals(fInitialInputContents, fInput.getContents());
 	}
-		
+	
+	@Test
 	public void testInvokeIn_InOut_Out1_Out2() throws Exception {
 		BasicModelExtent output1 = new BasicModelExtent();
 		BasicModelExtent output2 = new BasicModelExtent();
@@ -107,7 +111,8 @@ public class InvocationExtTest extends TestCase {
 		
 		assertInOutObject();
 	}
-
+	
+	@Test
 	public void testInOut() throws Exception {
 		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/deployed/callapi/InplaceEcore.qvto", false); //$NON-NLS-1$
 		fExecutor = new TransformationExecutor(uri);

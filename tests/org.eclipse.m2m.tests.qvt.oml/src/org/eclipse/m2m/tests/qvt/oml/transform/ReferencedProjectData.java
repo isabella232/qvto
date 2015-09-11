@@ -42,6 +42,11 @@ public class ReferencedProjectData extends FilesToFilesData {
 	}
 	
 	@Override
+	public String toString() {
+		return getName() + " cycle: " + isUseCycleReferences;
+	}
+	
+	@Override
 	public void prepare(TestProject project) throws Exception {
 		referencedProjectTestCase.setUp();
 		

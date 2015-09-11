@@ -18,6 +18,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.m2m.qvt.oml.BasicModelExtent;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -39,6 +41,7 @@ public class BasicModelExtentTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {	
 		super.setUp();
 		
@@ -49,6 +52,7 @@ public class BasicModelExtentTest extends TestCase {
 		fInContents.add(fP2);
 	}
 	
+	@Test
 	public void testAddition() throws Exception {
 		BasicModelExtent in = new BasicModelExtent();
 		assertTrue(in.getContents().isEmpty());		
@@ -57,6 +61,7 @@ public class BasicModelExtentTest extends TestCase {
 		assertFalse(in.getContents().isEmpty());
 	}
 	
+	@Test
 	public void testSet() throws Exception {
 		BasicModelExtent in = new BasicModelExtent(fInContents);
 		assertEquals(2, in.getContents().size());		

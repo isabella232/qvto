@@ -25,6 +25,8 @@ import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
 
 import junit.framework.TestCase;
 
@@ -39,16 +41,13 @@ public class ApiTestCase extends TestCase {
         super(data.getName());
         myData = data;
     }
-    
-    public ApiTestCase(String testName) {
-    	this(QvtoTransfHelperTests.getTestData(testName));
-    }
-    
+        
 	protected static String extractTestDataName(String testName, String prefix) {
 		return testName.startsWith(prefix) ? testName.substring(prefix.length()) : testName; 
 	}
 	    
     @Override
+    @Before
 	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();     
         
@@ -63,6 +62,7 @@ public class ApiTestCase extends TestCase {
     }
     
     @Override
+    @After
 	public void tearDown() throws Exception {
         //+myProject.delete();
     }

@@ -23,6 +23,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.OCLEnvironmentWithQVTAccessFactory;
+import org.junit.Before;
+import org.junit.Test;
 
 public class OCLEnvironmentWithQVTAccessByURITest extends OCLEnvironmentWithQVTAccessTest {
 
@@ -35,6 +37,7 @@ public class OCLEnvironmentWithQVTAccessByURITest extends OCLEnvironmentWithQVTA
 		}
 		
 		@Override
+		@Before
 		protected void setUp() {
 			super.setUp();
 			assertNotNull(fMetamodeModel);
@@ -51,6 +54,7 @@ public class OCLEnvironmentWithQVTAccessByURITest extends OCLEnvironmentWithQVTA
 			assertTrue(usesOurPackageInstance);		
 		}
 		
+		@Test
 		public void testImportedContextualOperation() throws org.eclipse.ocl.ParserException {
 			// make this pass as it imported from a black-box library
 			// in which case it's forced to reference the Java generated metamodel package

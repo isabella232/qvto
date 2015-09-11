@@ -11,13 +11,20 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.traces;
 
+import java.util.Arrays;
+
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestQvtInterpreter;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestTransformation;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 
-
+@RunWith(Parameterized.class)
 public class TestTraceFile extends TestTransformation {
 	private final int myExpectedTraceSize;
 
@@ -26,12 +33,22 @@ public class TestTraceFile extends TestTransformation {
 		myExpectedTraceSize = expectedTraceSize;
 	}
 	
+	@Parameters(name="{0}")
+	public static Iterable<Object[]> data() {
+		return Arrays.asList(
+			new Object[] {"multipletracerecords", 5}, //$NON-NLS-1$
+			new Object[] {"mappingWithNoResultTrace_266854", 1} //$NON-NLS-1$
+		);
+	}
+	
     @Override
+    @Test
 	public void runTest() throws Exception {
 		check(TestQvtInterpreter.getDefaultTransformer(getData()));
     }
     
     @Override
+    @Before
     public void setUp() throws Exception {   
     	super.setUp();
     	buildTestProject();

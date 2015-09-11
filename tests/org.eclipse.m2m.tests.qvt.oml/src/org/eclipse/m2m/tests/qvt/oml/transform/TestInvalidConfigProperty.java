@@ -13,17 +13,31 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestInvalidConfigProperty extends AbstractStackTraceTest {
 	
-	public TestInvalidConfigProperty() {
-		super(new FileToFileData("invalidConfigProp")); //$NON-NLS-1$
+	public TestInvalidConfigProperty(ModelTestData data) {
+		super(data);
 	}
 	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Collections.<ModelTestData>singletonList(
+			new FileToFileData("invalidConfigProp") //$NON-NLS-1$
+		);
+	}
+	
+	@Test
 	public void testInvalidConfigProp() throws Exception {
 		String testCase = "invalidConfigProp"; //$NON-NLS-1$
 		
@@ -41,6 +55,7 @@ public class TestInvalidConfigProperty extends AbstractStackTraceTest {
 		assertEqualContents(dumpedContents.toString(), strWriter.getBuffer().toString());
 	}
 	
+	@Test
 	public void testInvalidRealConfigProp() throws Exception {
 		String testCase = "invalidConfigProp"; //$NON-NLS-1$
 		
@@ -58,6 +73,7 @@ public class TestInvalidConfigProperty extends AbstractStackTraceTest {
 		assertEqualContents(dumpedContents.toString(), strWriter.getBuffer().toString());
 	}
 	
+	@Test
 	public void testUndefinedConfigProp() throws Exception {
 		String testCase = "invalidConfigProp"; //$NON-NLS-1$
 		

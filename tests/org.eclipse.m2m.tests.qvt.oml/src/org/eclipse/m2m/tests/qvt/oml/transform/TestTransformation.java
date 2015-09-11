@@ -58,6 +58,8 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
 
 import junit.framework.TestCase;
 
@@ -95,6 +97,7 @@ public abstract class TestTransformation extends TestCase {
     }
     
     @Override
+    @Before
 	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();     
         
@@ -177,6 +180,7 @@ public abstract class TestTransformation extends TestCase {
 	}
     
     @Override
+    @After
 	public void tearDown() throws Exception {
     	if (myData == null) {
     		return;

@@ -23,6 +23,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
+import org.junit.Test;
 import org.osgi.framework.Bundle;
 
 import junit.framework.TestCase;
@@ -40,6 +41,7 @@ public class URIUnitResolverTest extends TestCase {
 		super(name);
 	}
 	
+	@Test
 	public void testBaseAndNamespace() throws Exception {
 		URI baseURI = URI.createPlatformPluginURI(AllTests.BUNDLE_ID, true);
 		
@@ -54,6 +56,7 @@ public class URIUnitResolverTest extends TestCase {
 				unit.getURI());		
 	}
 	
+	@Test
 	public void testNamespace() throws Exception {
 		URI baseURI = URI.createPlatformPluginURI(AllTests.BUNDLE_ID + "/deployed", true);
 		
@@ -66,7 +69,8 @@ public class URIUnitResolverTest extends TestCase {
 				unit.getURI());
 		assertContents(unit);		
 	}
-
+	
+	@Test
 	public void testDefaultNamespace() throws Exception {
 		URI baseURI = URI.createPlatformPluginURI(AllTests.BUNDLE_ID + "/deployed/org/eclipse", true);
 		
@@ -80,6 +84,7 @@ public class URIUnitResolverTest extends TestCase {
 		assertContents(unit);		
 	}
 	
+	@Test
 	public void testTrailPathSepBaseAndNamespace() throws Exception {
 		URI baseURI = URI.createURI(URI.createPlatformPluginURI(AllTests.BUNDLE_ID, true).toString() + "/");
 		
@@ -94,6 +99,7 @@ public class URIUnitResolverTest extends TestCase {
 		
 	}
 	
+	@Test
 	public void testUnresolvedByURI() throws Exception {
 		URI baseURI = URI.createURI(URI.createPlatformPluginURI(AllTests.BUNDLE_ID, true).toString());		
 		URIUnitResolver resolver = new URIUnitResolver(Collections.singletonList(baseURI));
@@ -103,6 +109,7 @@ public class URIUnitResolverTest extends TestCase {
 		assertNull(UnitResolverFactory.Registry.INSTANCE.getUnit(URI.createURI(notExisting)));		
 	}	
 	
+	@Test
 	public void testFileURI() throws Exception {
 		Bundle testBundle = Platform.getBundle(AllTests.BUNDLE_ID);
 		File bundleFile = FileLocator.getBundleFile(testBundle);

@@ -24,6 +24,8 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.URIUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -41,11 +43,13 @@ public class QVTOCompilerTest extends TestCase {
 	}
 
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		URI baseURI = URI.createPlatformPluginURI(AllTests.BUNDLE_ID, true);
 		fResolver = new URIUnitResolver(Collections.singletonList(baseURI));
 	}
 
+	@Test
 	public void testCreateCompiler() throws Exception {
 		UnitProxy fooUnit = fResolver.resolveUnit("deployed.org.eclipse.Foo");
 		assertNotNull(fooUnit);
@@ -72,7 +76,8 @@ public class QVTOCompilerTest extends TestCase {
 			compiler.cleanup();
 		}
 	}
-
+	
+	@Test
 	public void testCreateCompilerWithHistory() throws Exception {
 		UnitProxy fooUnit = fResolver.resolveUnit("deployed.org.eclipse.Foo");
 		assertNotNull(fooUnit);

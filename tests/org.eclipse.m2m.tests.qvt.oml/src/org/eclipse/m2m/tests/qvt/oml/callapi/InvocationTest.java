@@ -37,6 +37,8 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.m2m.qvt.oml.util.StringBufferLog;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
+import org.junit.Before;
+import org.junit.Test;
 import org.osgi.framework.Bundle;
 
 import junit.framework.TestCase;
@@ -58,6 +60,7 @@ public class InvocationTest extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -91,6 +94,7 @@ public class InvocationTest extends TestCase {
 		assertEquals(fInitialInputContents, fInput.getContents());		
 	}
 	
+	@Test
 	public void testAssertFailed() throws Exception {
 		fContext.setConfigProperty("assertFail", Boolean.TRUE); //$NON-NLS-1$		
 		ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput);		
@@ -101,6 +105,7 @@ public class InvocationTest extends TestCase {
 		assertTrue(fOutput.getContents().isEmpty());
 	}
 	
+	@Test
 	public void testStackTrace() throws Exception {
 		// provoke an exception
 		fContext.setConfigProperty("assertFail", Boolean.TRUE); //$NON-NLS-1$		
@@ -119,7 +124,8 @@ public class InvocationTest extends TestCase {
 		
 		assertEquals(expected.toString(), strWr.toString());
 	}
-
+	
+	@Test
 	public void testMutlipleOutObjects() throws Exception {
 		fContext.setConfigProperty("createTwoObjects", true);
 		ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput);		
@@ -128,6 +134,7 @@ public class InvocationTest extends TestCase {
 		assertEquals(2, fOutput.getContents().size());
 	}	
 	
+	@Test
 	public void testInvokeSuccess() throws Exception {
 		final ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput);		
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
@@ -146,6 +153,7 @@ public class InvocationTest extends TestCase {
 		assertEquals(Diagnostic.OK, nextDiagnostic.getSeverity());
 	}
 	
+	@Test
 	public void testLogging() throws Exception {
 		StringBufferLog log = new StringBufferLog();
 		fContext.setLog(log);
@@ -154,7 +162,8 @@ public class InvocationTest extends TestCase {
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
 		assertTrue(log.getContents().contains("Hello")); //$NON-NLS-1$
 	}
-
+	
+	@Test
 	public void testInterruption() throws Exception {
 		final IProgressMonitor monitor = new NullProgressMonitor();
 		
@@ -184,7 +193,8 @@ public class InvocationTest extends TestCase {
 		assertEquals(ExecutionDiagnostic.USER_INTERRUPTED, diagnostic.getCode());		
 		assertEquals(1, diagnostic.getStackTrace().size());
 	}
-
+	
+	@Test
 	public void testTransformationLoadFailure() throws Exception {
 		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/deployed/callapi/NotExisting.qvto", false); //$NON-NLS-1$
 		fExecutor = new TransformationExecutor(uri);
@@ -196,6 +206,7 @@ public class InvocationTest extends TestCase {
 		assertTrue(fOutput.getContents().isEmpty());		
 	}
 	
+	@Test
 	public void testCompilationErrors() throws Exception {
 		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/deployed/callapi/CompilationErrors.qvto", false); //$NON-NLS-1$
 		fExecutor = new TransformationExecutor(uri);
@@ -210,6 +221,7 @@ public class InvocationTest extends TestCase {
 		assertTrue(fOutput.getContents().isEmpty());
 	}
 	
+	@Test
 	public void testNonExecutable() throws Exception {
 		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/deployed/callapi/NonExecutable.qvto", false); //$NON-NLS-1$
 		fExecutor = new TransformationExecutor(uri);
@@ -221,19 +233,22 @@ public class InvocationTest extends TestCase {
 		assertUnchangedInput();
 		assertTrue(fOutput.getContents().isEmpty());
 	}
-
+	
+	@Test
 	public void testLessModelParams() throws Exception {
 		ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput);
 		assertEquals(Diagnostic.ERROR, diagnostic.getSeverity());
 		assertEquals(ExecutionDiagnostic.MODEL_PARAMETER_MISMATCH, diagnostic.getCode());
 	}
-
+	
+	@Test
 	public void testModelModelParams() throws Exception {
 		ExecutionDiagnostic  diagnostic = fExecutor.execute(fContext, fInput, fOutput, new BasicModelExtent());
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
 		assertEquals(0, diagnostic.getCode());
 	}
 	
+	@Test
 	public void testNullModelParams() throws Exception {
 		try {
 			fExecutor.execute(fContext, (ModelExtent) null);
@@ -244,6 +259,7 @@ public class InvocationTest extends TestCase {
 		fail("Must have thrown exception"); //$NON-NLS-1$
 	}
 	
+	@Test
 	public void testNullOneOfModelParams() throws Exception {
 		try {
 			fExecutor.execute(fContext, new ModelExtent[] { fInput, null });
@@ -254,6 +270,7 @@ public class InvocationTest extends TestCase {
 		fail("Must have thrown exception"); //$NON-NLS-1$
 	}
 
+	@Test
 	public void testNullContext() throws Exception {
 		try {
 			fExecutor.execute(null, fInput, fOutput);
@@ -264,6 +281,7 @@ public class InvocationTest extends TestCase {
 		fail("Must have thrown exception"); //$NON-NLS-1$
 	}
 	
+	@Test
 	public void testInvokeOnGenericURIs() throws Exception {
 		Bundle testBundle = Platform.getBundle(AllTests.BUNDLE_ID);
 		File bundleFile = FileLocator.getBundleFile(testBundle);
@@ -276,7 +294,8 @@ public class InvocationTest extends TestCase {
 		assertEquals(Diagnostic.OK, diagnostic.getSeverity());
 		assertEquals(0, diagnostic.getCode());
 	}	
-
+	
+	@Test
 	public void testConfigProperties() throws Exception {
 		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/models/bug267917/bug267917.qvto", false); //$NON-NLS-1$
 		fExecutor = new TransformationExecutor(uri);

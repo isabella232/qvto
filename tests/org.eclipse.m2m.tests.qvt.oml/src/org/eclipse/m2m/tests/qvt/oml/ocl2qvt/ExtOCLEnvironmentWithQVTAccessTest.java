@@ -31,6 +31,7 @@ import org.eclipse.ocl.ecore.Constraint;
 import org.eclipse.ocl.ecore.EcoreEvaluationEnvironment;
 import org.eclipse.ocl.ecore.OCL.Query;
 import org.eclipse.ocl.helper.OCLHelper;
+import org.junit.Test;
 
 public class ExtOCLEnvironmentWithQVTAccessTest extends OCLEnvironmentWithQVTAccessTest {
 
@@ -62,6 +63,7 @@ public class ExtOCLEnvironmentWithQVTAccessTest extends OCLEnvironmentWithQVTAcc
 		return evaluate(evalEnv, query);
 	}
 	
+	@Test
 	public void testcallQueryThrowingException() throws Exception {
 		OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = fOCL.createOCLHelper();		
 		try {					

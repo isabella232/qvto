@@ -22,6 +22,9 @@ import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -32,6 +35,7 @@ import junit.framework.TestCase;
 public class TestQvtBuilder extends TestCase {
 	
 	@Override
+	@Before
 	public void setUp() throws Exception {
         TestUtil.turnOffAutoBuilding();
         
@@ -43,11 +47,12 @@ public class TestQvtBuilder extends TestCase {
 	}
     
 	@Override
+	@After
 	public void tearDown() throws Exception {
         myProject.delete();
 	}
 	
-	
+	@Test
 	public void testFullBuild() throws Exception {
         TestUtil.buildProject(myProject.project);
         IFile qvtFile = myProject.project.getFile("/Simpleuml_To_Rdb" + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT); //$NON-NLS-1$
@@ -65,6 +70,7 @@ public class TestQvtBuilder extends TestCase {
         		qvtFile.findMarkers(QVTOProjectPlugin.PROBLEM_MARKER, true, IResource.DEPTH_INFINITE).length > 0);        
     }
     
+	@Test
     public void testClean() throws Exception {
         TestUtil.buildProject(myProject.project);
         TestUtil.buildProject(myProject.project, IncrementalProjectBuilder.CLEAN_BUILD);

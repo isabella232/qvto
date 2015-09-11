@@ -32,6 +32,9 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.HelperOperationCall;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.NonTransformationExecutionContext;
 import org.eclipse.m2m.tests.qvt.oml.util.TestModuleResolver;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -49,6 +52,7 @@ public class TestExternHelperCall extends TestCase {
 	}
 	
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
 		
@@ -77,10 +81,12 @@ public class TestExternHelperCall extends TestCase {
 	}
 	
 	@Override
+	@After
 	protected void tearDown() throws Exception {
 		fExecContext.dispose();
 	}
-
+	
+	@Test
 	public void testEchoContextual() throws Exception {		
 		Object callResult = fCall.invoke("self", new Object[] { "aStringArg", true });
 		assertEquals("self" + "ASTRINGARG" + "_suffix", callResult);
@@ -89,6 +95,7 @@ public class TestExternHelperCall extends TestCase {
 		assertEquals("self" + "aStringArg" + "_suffix", callResult);		
 	}
 	
+	@Test
 	public void testEchoContextless() throws Exception {
 		Object callResult = fCall.invoke(new Object[] { "aStringArg", true });		
 		assertEquals("ASTRINGARG" + "_suffix", callResult);
@@ -98,6 +105,7 @@ public class TestExternHelperCall extends TestCase {
 		
 	}	
 	
+	@Test
 	public void testHelperWithAssertFailed() throws Exception {
 		try {
 			Object callResult = fCall.invoke(null);		
@@ -110,18 +118,20 @@ public class TestExternHelperCall extends TestCase {
 		}
 	}
 	
-	
+	@Test
 	public void testNoArgsHelper() throws Exception {
 		final String expectedResult = "testNoArgsHelper";
 		assertEquals(expectedResult, fCall.invoke(null));
 		assertEquals(expectedResult, fCall.invoke(new Object[0]));
 	}
 	
+	@Test
 	public void testHelperWithResolve() throws Exception {
 		final String expectedResult = "testHelperWithResolve";
 		assertEquals(expectedResult, fCall.invoke(EcoreFactory.eINSTANCE.createEClass(), new Object[0]));		
 	}
 	
+	@Test
 	public void testImportedVirtualCall() throws Exception {
 		// test imported operation call
 		Module mainModule = fCall.getLibrary();
@@ -134,7 +144,7 @@ public class TestExternHelperCall extends TestCase {
 		assertEquals("EClassifier", call.invoke(EcoreFactory.eINSTANCE.createEDataType(), new Object[0]));		
 	}
 	
-	
+	@Test
 	public void testQueryNonContextual() throws Exception {
 		assertNotNull("Call must refer to operation", fCall.getOperation());
 		assertNotNull("Call must be imported from a library", fCall.getLibrary());
@@ -143,6 +153,7 @@ public class TestExternHelperCall extends TestCase {
 		assertNull("Non-contextual operation must not have context type", fCall.getContextType());		
 	}
 	
+	@Test
 	public void testQueryContextual()  throws Exception {
 		assertNotNull("Call must refer to operation", fCall.getOperation());
 		assertNotNull("Call must be imported from a library", fCall.getLibrary());
@@ -154,6 +165,7 @@ public class TestExternHelperCall extends TestCase {
 	/*
 	 * Tests the Collection type as the context type
 	 */	
+	@Test
 	public void testToUpperStrings() throws Exception {
 		ArrayList<String> self = new ArrayList<String>();
 		self.add("aaa");
@@ -172,6 +184,7 @@ public class TestExternHelperCall extends TestCase {
 	 * to proper collection at evaluation time - different code location, though
 	 * same TypeResolver trouble, perhaps)
 	 */
+	@Test
 	public void testCollectionTypeInImportsMatch() throws Exception {
 		assertTrue(fCall.isContextual());
 		Object result = fCall.invoke("anything", new Object[0]);

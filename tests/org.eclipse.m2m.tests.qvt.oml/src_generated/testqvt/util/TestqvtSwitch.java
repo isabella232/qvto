@@ -16,10 +16,10 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import testqvt.*;
 import testqvt.BooleanElement;
 import testqvt.Element;
 import testqvt.Model;
+import testqvt.Numbers;
 import testqvt.TestqvtPackage;
 
 /**

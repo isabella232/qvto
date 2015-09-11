@@ -12,6 +12,7 @@
 package org.eclipse.m2m.tests.qvt.oml.callapi;
 
 import java.io.File;
+import java.util.Arrays;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -21,7 +22,13 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.transform.TransformTests;
+import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
+@RunWith(Parameterized.class)
 public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 	
 	private ModelTestData data;
@@ -32,8 +39,14 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 		uriCreator = new FileUriCreator(data.getName());
 	}
 	
+	@Parameters(name="{0}")
+	public static Iterable<ModelTestData> data() {
+		return Arrays.asList(TransformTests.createTestData());
+	}
+	
 	@Override
-	protected void setUp() {
+	@Before
+	public void setUp() {
 		data.prepare(TransformationExecutor.BlackboxRegistry.INSTANCE);	
 		super.setUp();
 	}

@@ -19,22 +19,17 @@ import org.eclipse.m2m.internal.qvt.oml.samples.ui.SampleProjectsCreationOperati
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
 
 public class TestSamples extends TestCase {
+	
 	public TestSamples() {
 	}
 	
-	@Override
-	public void setUp() throws Exception {
-	}
-	
-	@Override
-	public void tearDown() throws Exception {
-	}
-	    
+	@Test
     public void testUml2Rdb() throws Exception {
         checkSample("org.eclipse.m2m.qvt.oml.samples.simpleuml2rdb", "samples/simpleuml2rdb.zip", OML_SAMPLES_PLUGIN); //$NON-NLS-1$ //$NON-NLS-2$
     }

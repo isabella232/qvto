@@ -27,6 +27,9 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import junit.framework.TestCase;
 
@@ -39,6 +42,7 @@ public class UnitResolverFactoryTest extends TestCase {
 	}
 			    
 	@Override
+	@Before
 	protected void setUp() throws Exception {
 		String srcFolder = "deployed"; //$NON-NLS-1$
         myProject = TestProject.getExistingProject(srcFolder);
@@ -50,6 +54,7 @@ public class UnitResolverFactoryTest extends TestCase {
 	}
 	
 	@Override
+	@After
 	protected void tearDown() throws Exception {
         File destinationFolder = getDestinationFolder();
         if (destinationFolder.exists()) {
@@ -57,6 +62,7 @@ public class UnitResolverFactoryTest extends TestCase {
         }
 	}	
 	
+	@Test
 	public void testAccessByWSPath() throws Exception {
 		String unitPath = myProject.getProject().getFullPath().append(new Path("/transformations/a/T1.qvto")).toString();
 		URI uri = URI.createURI(unitPath, false);		 
@@ -69,7 +75,8 @@ public class UnitResolverFactoryTest extends TestCase {
 				unit.getURI());
 		assertNotNull(unit);
 	}		
-
+	
+	@Test
 	public void testAccessByPlatformResourceURI() throws Exception {
 		String unitPath = myProject.getProject().getFullPath().append(new Path("/transformations/a/T1.qvto")).toString();
 		URI uri = URI.createPlatformResourceURI(unitPath, false);		 
@@ -83,6 +90,7 @@ public class UnitResolverFactoryTest extends TestCase {
 		assertNotNull(unit);
 	}		
 	
+	@Test
 	public void testAccessByPlatformPluginURI() throws Exception {
 		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/T1.qvto", false);
 		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
@@ -94,13 +102,15 @@ public class UnitResolverFactoryTest extends TestCase {
 		assertEquals(uri, unit.getURI());
 		assertNotNull(unit);
 	}
-
+	
+	@Test
 	public void testAccessByDeployedIDURI() throws Exception {
 		URI uri = URI.createURI("apiTestData.exec3_withImport.exec3_withImport", false); //$NON-NLS-1$
 		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
 		assertResolvedCompiledUnit(unit, true);
 	}
 	
+	@Test
 	public void testAccessToUnresolvedURI() throws Exception {
 		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/T1_NeverFindMe.qvto", false);
 		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);

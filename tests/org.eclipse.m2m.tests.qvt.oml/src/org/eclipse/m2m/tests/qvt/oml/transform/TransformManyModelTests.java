@@ -14,40 +14,31 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 import java.util.Arrays;
 import java.util.Collections;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameters;
 
 
 /**
  * @author sboyko
  */
-public class TransformManyModelTests {
-	public static Test suite() {
-		return interpreterSuite();
-	}
+@RunWith(Parameterized.class)
+public class TransformManyModelTests extends TestQvtInterpreter {
 	
-    public static TestSuite interpreterSuite() {
-    	TestSuite suite = new TestSuite("QVT interpreter (many files)"); //$NON-NLS-1$
-
-    	ModelTestData[] datas = createTestData();
-    	
-    	for (ModelTestData data : datas) {
-            suite.addTest(new TestQvtInterpreter(data));
-        }
-
-        return suite;
-    }
-    
-    public static ModelTestData[] createTestData() {
-    	return new ModelTestData[] {
-    	new FilesToFilesData("mm_modifyvar", Arrays.asList("in.ecore", "in2.ecore"), Arrays.asList("expected.ecore")), //$NON-NLS-1$
-    	new FilesToFilesData("mm_header1", Arrays.asList("in.ecore"), Arrays.asList("expected.simpleuml", "expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
-    	new FilesToFilesData("mm_header2", Arrays.asList("in.ecore"), Arrays.asList("expected.uml", "expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
-    	new FilesToFilesData("mm_header3", Arrays.asList("in.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
-    	new FilesToFilesData("mm_header4", Arrays.asList("in1.ecore", "in2.ecore", "in3.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
-    	new FilesToFilesData("entryOp", Arrays.asList("in1.ecore", "in2.ecore", "in3.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
-    	new FilesToFilesData("importedExtents", Collections.<String>emptyList(), Arrays.asList("expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
-    	};
-    }
-    
+	public TransformManyModelTests(ModelTestData data) {
+		super(data);
+	}
+		
+	@Parameters(name="{0}")
+	public static Iterable<? extends ModelTestData> data() {
+		return Arrays.asList(
+			new FilesToFilesData("mm_modifyvar", Arrays.asList("in.ecore", "in2.ecore"), Arrays.asList("expected.ecore")), //$NON-NLS-1$
+	    	new FilesToFilesData("mm_header1", Arrays.asList("in.ecore"), Arrays.asList("expected.simpleuml", "expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
+	    	new FilesToFilesData("mm_header2", Arrays.asList("in.ecore"), Arrays.asList("expected.uml", "expected.ecore")), //$NON-NLS-1$ //$NON-NLS-2$
+	    	new FilesToFilesData("mm_header3", Arrays.asList("in.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
+	    	new FilesToFilesData("mm_header4", Arrays.asList("in1.ecore", "in2.ecore", "in3.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
+	    	new FilesToFilesData("entryOp", Arrays.asList("in1.ecore", "in2.ecore", "in3.ecore"), Arrays.asList("expected.simpleuml", "expected.rdb")), //$NON-NLS-1$ //$NON-NLS-2$
+	    	new FilesToFilesData("importedExtents", Collections.<String>emptyList(), Arrays.asList("expected.ecore")) //$NON-NLS-1$ //$NON-NLS-2$
+		);
+    }    
 }

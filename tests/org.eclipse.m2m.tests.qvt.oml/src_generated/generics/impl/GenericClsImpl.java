@@ -2,18 +2,15 @@
  */
 package generics.impl;
 
-import generics.GenericCls;
-import generics.GenericsPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+
+import generics.GenericCls;
+import generics.GenericsPackage;
 
 /**
  * <!-- begin-user-doc -->
