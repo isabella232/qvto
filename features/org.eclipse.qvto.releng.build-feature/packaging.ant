@@ -3,7 +3,7 @@
 	<target name="create.target.platform.metadata">
 		<buckminster.targetPlatformLocation property="target.platform.location" />
 		<property name="target.platform.repository" value="file:/${sp:output}" />
-		<p2.publish.featuresAndBundles metadataRepository="${target.platform.repository}" source="${target.platform.location}" publishArtifacts="false" />
+		<p2.publish.featuresAndBundles metadataRepository="${target.platform.repository}" source="${targetPlatformPath}" publishArtifacts="false" />
 		<buckminster.publishJRE metadataRepository="${target.platform.repository}" publishArtifacts="false" />
 	</target>
 
@@ -88,7 +88,7 @@
 
 	<target name="-define.common.properties" depends="-locate.launcher.jar">
 		<buckminster.targetPlatformLocation property="target.platform.location" />
-		<property name="target.platform.bundle.pool" value="file:/${target.platform.location}" />
+		<property name="target.platform.bundle.pool" value="file:/${targetPlatformPath}" />
 
 		<condition property="wildcard" value="&quot;*&quot;" else="*">
 			<os family="windows" />
