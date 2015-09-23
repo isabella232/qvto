@@ -51,7 +51,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "# Override default locations (added by Hudson job definition)"
 	echo "buckminster.output.root=${WORKSPACE}/buildroot/buckminster.output"
 	echo "buckminster.temp.root=${WORKSPACE}/buildroot/buckminster.temp"
-	echo "eclipse.staging.area=/shared/download-staging.priv/modeling/mmt"
+	echo "eclipse.staging.area=/shared/download-staging.priv/modeling/mmt/qvto"
 	echo "git.qvto.local.repository.location=${WORKSPACE}/org.eclipse.qvto.git"
 	echo "reference.repository=${REFERENCE_REPOSITORY}"
 
