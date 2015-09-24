@@ -21,7 +21,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({QvtLibraryASTTest.class, TestQvtParser.class})
 public class ParserTests {
     
-    public static class TestData {
+    static class TestData {
         public TestData(String dir, int errCount) { 
         	this(dir, errCount, -1);
         }

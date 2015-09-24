@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2013 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -85,8 +85,8 @@ public class TestOCLSemantics extends TestCase {
 		return null; // make compiler happy, never reached
 	}
 
-	public Object checkedEvaluate(Object context, OCLExpression expression) {
-		this.checkPointVisitor = null;
+	private Object checkedEvaluate(Object context, OCLExpression expression) {
+		checkPointVisitor = null;
 		
 		EcoreEnvironmentFactory environmentFactory = new EcoreEnvironmentFactory() {
 			@Override
@@ -113,7 +113,7 @@ public class TestOCLSemantics extends TestCase {
 		if(checkPointVisitor == null) {
 			throw new IllegalStateException("no last evaluation visitor is evailable"); //$NON-NLS-1$
 		}
-		return this.checkPointVisitor;
+		return checkPointVisitor;
 	}
 	
 	private static class CheckPointVisitor extends EvaluationVisitorDecorator<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> {
