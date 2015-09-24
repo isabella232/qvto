@@ -18,21 +18,21 @@ main() {
 	srcModel.objects()[EPackage].subobjects()[EClass][name != "Fam1"][name != "Pers1"]->sortedBy(name) -> map m10();
 	srcModel.objects()[EPackage].subobjects()[EClass]![name = "Fam1"]->sortedBy(name) -> map m11();
 	
-	srcModel.objects()->xselect(EPackage)->name[e | e != "aaa"] -> map m12();
-	srcModel.objects()->xselect(EPackage)->name![e | e = "aaa"] -> map m13()->sortedBy(name);
-	srcModel.objects()->xselect(EPackage)->collectselect(i; res= i.name | res != "aaa") -> map m14();
-	srcModel.objects()->xselect(EPackage)->collectselectOne(i; res= i.name | res = "aaa") -> map m15()->sortedBy(name);
+	srcModel.objects()->xselect(EPackage)->sortedBy(name)->name[e | e != "aaa"] -> map m12();
+	srcModel.objects()->xselect(EPackage)->sortedBy(name)->name![e | e = "aaa"] -> map m13();
+	srcModel.objects()->xselect(EPackage)->sortedBy(name)->collectselect(i; res= i.name | res != "aaa") -> map m14();
+	srcModel.objects()->xselect(EPackage)->sortedBy(name)->collectselectOne(i; res= i.name | res = "aaa") -> map m15();
 	
-	srcModel.objects()[EPackage]->name[e | e != "aaa"] -> map m16()->sortedBy(name);
-	srcModel.objects()[EPackage]->name![e | e = "aaa"] -> map m17()->sortedBy(name);
-	srcModel.objects()[EPackage]->collectselect(i; res= i.name | res != "aaa") -> map m18()->sortedBy(name);
-	srcModel.objects()[EPackage]->collectselectOne(i; res= i.name | res = "aaa") -> map m19()->sortedBy(name);
+	srcModel.objects()[EPackage]->sortedBy(name)->name[e | e != "aaa"] -> map m16();
+	srcModel.objects()[EPackage]->sortedBy(name)->name![e | e = "aaa"] -> map m17();
+	srcModel.objects()[EPackage]->sortedBy(name)->collectselect(i; res= i.name | res != "aaa") -> map m18();
+	srcModel.objects()[EPackage]->sortedBy(name)->collectselectOne(i; res= i.name | res = "aaa") -> map m19();
 
-	srcModel.objects()[EPackage]->metaClassName()[oclAsType(String).indexOf("aaa") < 10] -> map m20()->sortedBy(name);
-	srcModel.objects()[EPackage]->metaClassName()[e | e.oclAsType(String).indexOf("aaa") < 10] -> map m21()->sortedBy(name);
-	srcModel.objects()[EPackage]->metaClassName()![e | e.oclAsType(String).indexOf("aaa") < 10] -> map m22()->sortedBy(name);
-	srcModel.objects()[EPackage]->collectselect(i; res= i.metaClassName() | res.oclAsType(String).indexOf("aaa") < 10) -> map m23()->sortedBy(name);
-	srcModel.objects()[EPackage]->collectselectOne(i; res= i.metaClassName() | res.oclAsType(String).indexOf("aaa") < 10) -> map m24()->sortedBy(name);
+	srcModel.objects()[EPackage]->sortedBy(name)->metaClassName()[indexOf("aaa") < 10] -> map m20();
+	srcModel.objects()[EPackage]->sortedBy(name)->metaClassName()[e | e.indexOf("aaa") < 10] -> map m21();
+	srcModel.objects()[EPackage]->sortedBy(name)->metaClassName()![e | e.indexOf("aaa") < 10] -> map m22();
+	srcModel.objects()[EPackage]->sortedBy(name)->collectselect(i; res= i.metaClassName() | res.indexOf("aaa") < 10) -> map m23();
+	srcModel.objects()[EPackage]->sortedBy(name)->collectselectOne(i; res= i.metaClassName() | res.indexOf("aaa") < 10) -> map m24();
 }     
 
 mapping EPackage::m01() : EClass {name := "01_" + self.name;}
