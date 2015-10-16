@@ -3,9 +3,8 @@
 package org.eclipse.qvto.examples.xtext.imperativeoclcs;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.ocl.xtext.essentialoclcs.CollectionLiteralPartCS;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.LiteralExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +22,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @model
  * @generated
  */
-public interface ListLiteralExpCS extends ExpCS {
+public interface ListLiteralExpCS extends LiteralExpCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Parts</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.CollectionLiteralPartCS}.

@@ -25,22 +25,21 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExpressionBlockCSImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExpressionBlockCSImpl#getOwnedExps <em>Owned Exps</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockCS {
 	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedExps() <em>Owned Exps</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBody()
+	 * @see #getOwnedExps()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> body;
-
+	protected EList<ExpCS> ownedExps;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,11 +64,11 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getBody() {
-		if (body == null) {
-			body = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY);
+	public EList<ExpCS> getOwnedExps() {
+		if (ownedExps == null) {
+			ownedExps = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS);
 		}
-		return body;
+		return ownedExps;
 	}
 
 	/**
@@ -80,8 +79,8 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY:
-				return ((InternalEList<?>)getBody()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS:
+				return ((InternalEList<?>)getOwnedExps()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -94,8 +93,8 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY:
-				return getBody();
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS:
+				return getOwnedExps();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,9 +108,9 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY:
-				getBody().clear();
-				getBody().addAll((Collection<? extends ExpCS>)newValue);
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS:
+				getOwnedExps().clear();
+				getOwnedExps().addAll((Collection<? extends ExpCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +124,8 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY:
-				getBody().clear();
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS:
+				getOwnedExps().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +139,8 @@ public class ExpressionBlockCSImpl extends ExpCSImpl implements ExpressionBlockC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__BODY:
-				return body != null && !body.isEmpty();
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS__OWNED_EXPS:
+				return ownedExps != null && !ownedExps.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

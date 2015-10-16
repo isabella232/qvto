@@ -61,6 +61,10 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitEntryOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS object) {
+		return null;
+	}
+
 	public @Nullable R visitExceptionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS object) {
 		return null;
 	}
@@ -158,6 +162,10 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	}
 
 	public @Nullable R visitObjectExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS object) {
+		return null;
+	}
+
+	public @Nullable R visitOperationBodyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS object) {
 		return null;
 	}
 

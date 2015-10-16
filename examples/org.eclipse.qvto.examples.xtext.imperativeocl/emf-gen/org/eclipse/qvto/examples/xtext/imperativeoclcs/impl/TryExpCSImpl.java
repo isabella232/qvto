@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExceptCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
@@ -24,22 +24,21 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.TryExpCSImpl#getCatch <em>Catch</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.TryExpCSImpl#getOwnedCatchs <em>Owned Catchs</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	/**
-	 * The cached value of the '{@link #getCatch() <em>Catch</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedCatchs() <em>Owned Catchs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCatch()
+	 * @see #getOwnedCatchs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExceptCS> catch_;
-
+	protected EList<CatchExpCS> ownedCatchs;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -64,11 +63,11 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExceptCS> getCatch() {
-		if (catch_ == null) {
-			catch_ = new EObjectContainmentEList<ExceptCS>(ExceptCS.class, this, ImperativeOCLCSPackage.TRY_EXP_CS__CATCH);
+	public EList<CatchExpCS> getOwnedCatchs() {
+		if (ownedCatchs == null) {
+			ownedCatchs = new EObjectContainmentEList<CatchExpCS>(CatchExpCS.class, this, ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS);
 		}
-		return catch_;
+		return ownedCatchs;
 	}
 
 	/**
@@ -79,8 +78,8 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.TRY_EXP_CS__CATCH:
-				return ((InternalEList<?>)getCatch()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS:
+				return ((InternalEList<?>)getOwnedCatchs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -93,8 +92,8 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.TRY_EXP_CS__CATCH:
-				return getCatch();
+			case ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS:
+				return getOwnedCatchs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -108,9 +107,9 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.TRY_EXP_CS__CATCH:
-				getCatch().clear();
-				getCatch().addAll((Collection<? extends ExceptCS>)newValue);
+			case ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS:
+				getOwnedCatchs().clear();
+				getOwnedCatchs().addAll((Collection<? extends CatchExpCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -124,8 +123,8 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.TRY_EXP_CS__CATCH:
-				getCatch().clear();
+			case ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS:
+				getOwnedCatchs().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -139,8 +138,8 @@ public class TryExpCSImpl extends ExpressionBlockCSImpl implements TryExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.TRY_EXP_CS__CATCH:
-				return catch_ != null && !catch_.isEmpty();
+			case ImperativeOCLCSPackage.TRY_EXP_CS__OWNED_CATCHS:
+				return ownedCatchs != null && !ownedCatchs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -31,22 +31,22 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	AssertExpCS createAssertExpCS();
 
 	/**
-	 * Returns a new object of class '<em>Assign Statement CS</em>'.
+	 * Returns a new object of class '<em>Assign Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assign Statement CS</em>'.
+	 * @return a new object of class '<em>Assign Exp CS</em>'.
 	 * @generated
 	 */
-	AssignStatementCS createAssignStatementCS();
+	AssignExpCS createAssignExpCS();
 
 	/**
-	 * Returns a new object of class '<em>Block Exp CS</em>'.
+	 * Returns a new object of class '<em>Break Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block Exp CS</em>'.
+	 * @return a new object of class '<em>Break Exp CS</em>'.
 	 * @generated
 	 */
-	BlockExpCS createBlockExpCS();
+	BreakExpCS createBreakExpCS();
 
 	/**
 	 * Returns a new object of class '<em>Dict Literal Exp CS</em>'.
@@ -85,6 +85,15 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	ComputeExpCS createComputeExpCS();
 
 	/**
+	 * Returns a new object of class '<em>Continue Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Continue Exp CS</em>'.
+	 * @generated
+	 */
+	ContinueExpCS createContinueExpCS();
+
+	/**
 	 * Returns a new object of class '<em>Imperative Iterate Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -112,22 +121,13 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	InstantiationExpCS createInstantiationExpCS();
 
 	/**
-	 * Returns a new object of class '<em>Do Exp CS</em>'.
+	 * Returns a new object of class '<em>Catch Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Do Exp CS</em>'.
+	 * @return a new object of class '<em>Catch Exp CS</em>'.
 	 * @generated
 	 */
-	DoExpCS createDoExpCS();
-
-	/**
-	 * Returns a new object of class '<em>Except CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Except CS</em>'.
-	 * @generated
-	 */
-	ExceptCS createExceptCS();
+	CatchExpCS createCatchExpCS();
 
 	/**
 	 * Returns a new object of class '<em>Expression Block CS</em>'.
@@ -137,15 +137,6 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	 * @generated
 	 */
 	ExpressionBlockCS createExpressionBlockCS();
-
-	/**
-	 * Returns a new object of class '<em>Expression Statement CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression Statement CS</em>'.
-	 * @generated
-	 */
-	ExpressionStatementCS createExpressionStatementCS();
 
 	/**
 	 * Returns a new object of class '<em>For Exp CS</em>'.
@@ -182,15 +173,6 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	 * @generated
 	 */
 	LogExpCS createLogExpCS();
-
-	/**
-	 * Returns a new object of class '<em>Quit Exp CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Quit Exp CS</em>'.
-	 * @generated
-	 */
-	QuitExpCS createQuitExpCS();
 
 	/**
 	 * Returns a new object of class '<em>Raise Exp CS</em>'.
@@ -238,13 +220,22 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	TryExpCS createTryExpCS();
 
 	/**
-	 * Returns a new object of class '<em>Variable Initialization CS</em>'.
+	 * Returns a new object of class '<em>Var Declaration CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Initialization CS</em>'.
+	 * @return a new object of class '<em>Var Declaration CS</em>'.
 	 * @generated
 	 */
-	VariableInitializationCS createVariableInitializationCS();
+	VarDeclarationCS createVarDeclarationCS();
+
+	/**
+	 * Returns a new object of class '<em>Vars Initialization CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Vars Initialization CS</em>'.
+	 * @generated
+	 */
+	VarsInitializationCS createVarsInitializationCS();
 
 	/**
 	 * Returns a new object of class '<em>While Exp CS</em>'.

@@ -4,7 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.OperationCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -112,12 +112,12 @@ public interface MappingOperationCS extends OperationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>When</em>' containment reference.
-	 * @see #setWhen(BlockExpCS)
+	 * @see #setWhen(ExpressionBlockCS)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getMappingOperationCS_When()
 	 * @model containment="true"
 	 * @generated
 	 */
-	BlockExpCS getWhen();
+	ExpressionBlockCS getWhen();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS#getWhen <em>When</em>}' containment reference.
@@ -127,7 +127,7 @@ public interface MappingOperationCS extends OperationCS {
 	 * @see #getWhen()
 	 * @generated
 	 */
-	void setWhen(BlockExpCS value);
+	void setWhen(ExpressionBlockCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
@@ -138,12 +138,12 @@ public interface MappingOperationCS extends OperationCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(BlockExpCS)
+	 * @see #setWhere(ExpressionBlockCS)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getMappingOperationCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	BlockExpCS getWhere();
+	ExpressionBlockCS getWhere();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS#getWhere <em>Where</em>}' containment reference.
@@ -153,7 +153,7 @@ public interface MappingOperationCS extends OperationCS {
 	 * @see #getWhere()
 	 * @generated
 	 */
-	void setWhere(BlockExpCS value);
+	void setWhere(ExpressionBlockCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Inherits</b></em>' containment reference list.

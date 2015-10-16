@@ -6,21 +6,20 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignStatementCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.DoExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExceptCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionStatementCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
@@ -30,14 +29,14 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.QuitExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.VariableInitializationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 
 /**
@@ -59,14 +58,14 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass assignStatementCSEClass = null;
+	private EClass assignExpCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass blockExpCSEClass = null;
+	private EClass breakExpCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,6 +100,13 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass continueExpCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass imperativeIterateExpCSEClass = null;
 
 	/**
@@ -122,14 +128,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass doExpCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass exceptCSEClass = null;
+	private EClass catchExpCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,13 +136,6 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * @generated
 	 */
 	private EClass expressionBlockCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass expressionStatementCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -172,13 +164,6 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * @generated
 	 */
 	private EClass logExpCSEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass quitExpCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -227,7 +212,14 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass variableInitializationCSEClass = null;
+	private EClass varDeclarationCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass varsInitializationCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -314,7 +306,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssertExpCS_Assertion() {
+	public EReference getAssertExpCS_OwnedAssertion() {
 		return (EReference)assertExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -323,7 +315,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssertExpCS_Log() {
+	public EReference getAssertExpCS_OwnedLog() {
 		return (EReference)assertExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -341,8 +333,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getAssignStatementCS() {
-		return assignStatementCSEClass;
+	public EClass getAssignExpCS() {
+		return assignExpCSEClass;
 	}
 
 	/**
@@ -350,8 +342,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssignStatementCS_LValueCS() {
-		return (EReference)assignStatementCSEClass.getEStructuralFeatures().get(0);
+	public EReference getAssignExpCS_OwnedLeft() {
+		return (EReference)assignExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -359,8 +351,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAssignStatementCS_OclExpressionCS() {
-		return (EReference)assignStatementCSEClass.getEStructuralFeatures().get(1);
+	public EReference getAssignExpCS_OwnedValue() {
+		return (EReference)assignExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -368,8 +360,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getAssignStatementCS_Incremental() {
-		return (EAttribute)assignStatementCSEClass.getEStructuralFeatures().get(2);
+	public EAttribute getAssignExpCS_AssignOp() {
+		return (EAttribute)assignExpCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -377,8 +369,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBlockExpCS() {
-		return blockExpCSEClass;
+	public EReference getAssignExpCS_OwnedDefault() {
+		return (EReference)assignExpCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -386,8 +378,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBlockExpCS_Expressions() {
-		return (EReference)blockExpCSEClass.getEStructuralFeatures().get(0);
+	public EClass getBreakExpCS() {
+		return breakExpCSEClass;
 	}
 
 	/**
@@ -422,7 +414,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictLiteralPartCS_Key() {
+	public EReference getDictLiteralPartCS_OwnedKey() {
 		return (EReference)dictLiteralPartCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -431,7 +423,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictLiteralPartCS_Value() {
+	public EReference getDictLiteralPartCS_OwnedValue() {
 		return (EReference)dictLiteralPartCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -449,7 +441,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictTypeCS_KeyType() {
+	public EReference getDictTypeCS_OwnedKeyTypeRef() {
 		return (EReference)dictTypeCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -458,7 +450,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDictTypeCS_ValueType() {
+	public EReference getDictTypeCS_OwnedValueTypeRef() {
 		return (EReference)dictTypeCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -476,8 +468,17 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getComputeExpCS_ReturnedElement() {
+	public EReference getComputeExpCS_OwnedResultVar() {
 		return (EReference)computeExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getContinueExpCS() {
+		return continueExpCSEClass;
 	}
 
 	/**
@@ -494,15 +495,6 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeIterateExpCS_Target() {
-		return (EReference)imperativeIterateExpCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getImperativeLoopExpCS() {
 		return imperativeLoopExpCSEClass;
 	}
@@ -512,8 +504,44 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getImperativeLoopExpCS_Condition() {
+	public EReference getImperativeLoopExpCS_OwnedCondition() {
 		return (EReference)imperativeLoopExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImperativeLoopExpCS_OwnedTarget() {
+		return (EReference)imperativeLoopExpCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImperativeLoopExpCS_OwnedIterator() {
+		return (EReference)imperativeLoopExpCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImperativeLoopExpCS_OwnedBody() {
+		return (EReference)imperativeLoopExpCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getImperativeLoopExpCS_Name() {
+		return (EAttribute)imperativeLoopExpCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -530,7 +558,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInstantiationExpCS_TypeSpecCS() {
+	public EReference getInstantiationExpCS_OwnedClassRef() {
 		return (EReference)instantiationExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -539,7 +567,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getInstantiationExpCS_Arguments() {
+	public EReference getInstantiationExpCS_OwnedArguments() {
 		return (EReference)instantiationExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -548,8 +576,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getDoExpCS() {
-		return doExpCSEClass;
+	public EReference getInstantiationExpCS_OwnedExtentRef() {
+		return (EReference)instantiationExpCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -557,8 +585,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDoExpCS_Condition() {
-		return (EReference)doExpCSEClass.getEStructuralFeatures().get(0);
+	public EClass getCatchExpCS() {
+		return catchExpCSEClass;
 	}
 
 	/**
@@ -566,8 +594,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getExceptCS() {
-		return exceptCSEClass;
+	public EReference getCatchExpCS_OwnedExceptionRefs() {
+		return (EReference)catchExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -575,17 +603,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExceptCS_Except() {
-		return (EReference)exceptCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExceptCS_Body() {
-		return (EReference)exceptCSEClass.getEStructuralFeatures().get(1);
+	public EAttribute getCatchExpCS_VarName() {
+		return (EAttribute)catchExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -602,26 +621,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExpressionBlockCS_Body() {
+	public EReference getExpressionBlockCS_OwnedExps() {
 		return (EReference)expressionBlockCSEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getExpressionStatementCS() {
-		return expressionStatementCSEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExpressionStatementCS_OclExpressionCS() {
-		return (EReference)expressionStatementCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -638,6 +639,15 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getForExpCS_IsOne() {
+		return (EAttribute)forExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getListTypeCS() {
 		return listTypeCSEClass;
 	}
@@ -647,7 +657,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getListTypeCS_Type() {
+	public EReference getListTypeCS_OwnedTypeRef() {
 		return (EReference)listTypeCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -683,7 +693,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getLogExpCS_Condition() {
+	public EReference getLogExpCS_OwnedMessage() {
 		return (EReference)logExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -692,8 +702,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getQuitExpCS() {
-		return quitExpCSEClass;
+	public EReference getLogExpCS_OwnedElement() {
+		return (EReference)logExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -701,8 +711,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getQuitExpCS_Keyword() {
-		return (EAttribute)quitExpCSEClass.getEStructuralFeatures().get(0);
+	public EAttribute getLogExpCS_Severity() {
+		return (EAttribute)logExpCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -710,8 +720,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getQuitExpCS_Value() {
-		return (EReference)quitExpCSEClass.getEStructuralFeatures().get(1);
+	public EReference getLogExpCS_OwnedCondition() {
+		return (EReference)logExpCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -728,6 +738,24 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getRaiseExpCS_OwnedExceptionRef() {
+		return (EReference)raiseExpCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getRaiseExpCS_OwnedArguments() {
+		return (EReference)raiseExpCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getReturnExpCS() {
 		return returnExpCSEClass;
 	}
@@ -737,7 +765,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReturnExpCS_Value() {
+	public EReference getReturnExpCS_OwnedValue() {
 		return (EReference)returnExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -764,7 +792,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitchAltCS_Condition() {
+	public EReference getSwitchAltCS_OwnedCondition() {
 		return (EReference)switchAltCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -773,17 +801,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitchAltCS_Body() {
+	public EReference getSwitchAltCS_OwnedBody() {
 		return (EReference)switchAltCSEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getSwitchAltCS_Keyword() {
-		return (EAttribute)switchAltCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -800,7 +819,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitchExpCS_AlternativePart() {
+	public EReference getSwitchExpCS_OwnedAltParts() {
 		return (EReference)switchExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -809,7 +828,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSwitchExpCS_ElsePart() {
+	public EReference getSwitchExpCS_OwnedElsePart() {
 		return (EReference)switchExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -827,7 +846,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTryExpCS_Catch() {
+	public EReference getTryExpCS_OwnedCatchs() {
 		return (EReference)tryExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -836,8 +855,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getVariableInitializationCS() {
-		return variableInitializationCSEClass;
+	public EClass getVarDeclarationCS() {
+		return varDeclarationCSEClass;
 	}
 
 	/**
@@ -845,8 +864,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVariableInitializationCS_OclExpressionCS() {
-		return (EReference)variableInitializationCSEClass.getEStructuralFeatures().get(0);
+	public EAttribute getVarDeclarationCS_InitOp() {
+		return (EAttribute)varDeclarationCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -854,8 +873,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariableInitializationCS_SimpleNameCS() {
-		return (EAttribute)variableInitializationCSEClass.getEStructuralFeatures().get(1);
+	public EClass getVarsInitializationCS() {
+		return varsInitializationCSEClass;
 	}
 
 	/**
@@ -863,17 +882,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getVariableInitializationCS_TypeCS() {
-		return (EReference)variableInitializationCSEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getVariableInitializationCS_WithResult() {
-		return (EAttribute)variableInitializationCSEClass.getEStructuralFeatures().get(3);
+	public EReference getVarsInitializationCS_OwnedVarDeclarations() {
+		return (EReference)varsInitializationCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -890,7 +900,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWhileExpCS_Condition() {
+	public EReference getWhileExpCS_OwnedCondition() {
 		return (EReference)whileExpCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -899,7 +909,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWhileExpCS_ResultVar() {
+	public EReference getWhileExpCS_OwnedResultVar() {
 		return (EReference)whileExpCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -932,98 +942,99 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 
 		// Create classes and their features
 		assertExpCSEClass = createEClass(ASSERT_EXP_CS);
-		createEReference(assertExpCSEClass, ASSERT_EXP_CS__ASSERTION);
-		createEReference(assertExpCSEClass, ASSERT_EXP_CS__LOG);
+		createEReference(assertExpCSEClass, ASSERT_EXP_CS__OWNED_ASSERTION);
+		createEReference(assertExpCSEClass, ASSERT_EXP_CS__OWNED_LOG);
 		createEAttribute(assertExpCSEClass, ASSERT_EXP_CS__SEVERITY);
 
-		assignStatementCSEClass = createEClass(ASSIGN_STATEMENT_CS);
-		createEReference(assignStatementCSEClass, ASSIGN_STATEMENT_CS__LVALUE_CS);
-		createEReference(assignStatementCSEClass, ASSIGN_STATEMENT_CS__OCL_EXPRESSION_CS);
-		createEAttribute(assignStatementCSEClass, ASSIGN_STATEMENT_CS__INCREMENTAL);
+		assignExpCSEClass = createEClass(ASSIGN_EXP_CS);
+		createEReference(assignExpCSEClass, ASSIGN_EXP_CS__OWNED_LEFT);
+		createEReference(assignExpCSEClass, ASSIGN_EXP_CS__OWNED_VALUE);
+		createEAttribute(assignExpCSEClass, ASSIGN_EXP_CS__ASSIGN_OP);
+		createEReference(assignExpCSEClass, ASSIGN_EXP_CS__OWNED_DEFAULT);
 
-		blockExpCSEClass = createEClass(BLOCK_EXP_CS);
-		createEReference(blockExpCSEClass, BLOCK_EXP_CS__EXPRESSIONS);
+		breakExpCSEClass = createEClass(BREAK_EXP_CS);
 
 		dictLiteralExpCSEClass = createEClass(DICT_LITERAL_EXP_CS);
 		createEReference(dictLiteralExpCSEClass, DICT_LITERAL_EXP_CS__OWNED_PARTS);
 
 		dictLiteralPartCSEClass = createEClass(DICT_LITERAL_PART_CS);
-		createEReference(dictLiteralPartCSEClass, DICT_LITERAL_PART_CS__KEY);
-		createEReference(dictLiteralPartCSEClass, DICT_LITERAL_PART_CS__VALUE);
+		createEReference(dictLiteralPartCSEClass, DICT_LITERAL_PART_CS__OWNED_KEY);
+		createEReference(dictLiteralPartCSEClass, DICT_LITERAL_PART_CS__OWNED_VALUE);
 
 		dictTypeCSEClass = createEClass(DICT_TYPE_CS);
-		createEReference(dictTypeCSEClass, DICT_TYPE_CS__KEY_TYPE);
-		createEReference(dictTypeCSEClass, DICT_TYPE_CS__VALUE_TYPE);
+		createEReference(dictTypeCSEClass, DICT_TYPE_CS__OWNED_KEY_TYPE_REF);
+		createEReference(dictTypeCSEClass, DICT_TYPE_CS__OWNED_VALUE_TYPE_REF);
 
 		computeExpCSEClass = createEClass(COMPUTE_EXP_CS);
-		createEReference(computeExpCSEClass, COMPUTE_EXP_CS__RETURNED_ELEMENT);
+		createEReference(computeExpCSEClass, COMPUTE_EXP_CS__OWNED_RESULT_VAR);
+
+		continueExpCSEClass = createEClass(CONTINUE_EXP_CS);
 
 		imperativeIterateExpCSEClass = createEClass(IMPERATIVE_ITERATE_EXP_CS);
-		createEReference(imperativeIterateExpCSEClass, IMPERATIVE_ITERATE_EXP_CS__TARGET);
 
 		imperativeLoopExpCSEClass = createEClass(IMPERATIVE_LOOP_EXP_CS);
-		createEReference(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__CONDITION);
+		createEReference(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__OWNED_CONDITION);
+		createEReference(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__OWNED_TARGET);
+		createEReference(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__OWNED_ITERATOR);
+		createEReference(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__OWNED_BODY);
+		createEAttribute(imperativeLoopExpCSEClass, IMPERATIVE_LOOP_EXP_CS__NAME);
 
 		instantiationExpCSEClass = createEClass(INSTANTIATION_EXP_CS);
-		createEReference(instantiationExpCSEClass, INSTANTIATION_EXP_CS__TYPE_SPEC_CS);
-		createEReference(instantiationExpCSEClass, INSTANTIATION_EXP_CS__ARGUMENTS);
+		createEReference(instantiationExpCSEClass, INSTANTIATION_EXP_CS__OWNED_CLASS_REF);
+		createEReference(instantiationExpCSEClass, INSTANTIATION_EXP_CS__OWNED_ARGUMENTS);
+		createEReference(instantiationExpCSEClass, INSTANTIATION_EXP_CS__OWNED_EXTENT_REF);
 
-		doExpCSEClass = createEClass(DO_EXP_CS);
-		createEReference(doExpCSEClass, DO_EXP_CS__CONDITION);
-
-		exceptCSEClass = createEClass(EXCEPT_CS);
-		createEReference(exceptCSEClass, EXCEPT_CS__EXCEPT);
-		createEReference(exceptCSEClass, EXCEPT_CS__BODY);
+		catchExpCSEClass = createEClass(CATCH_EXP_CS);
+		createEReference(catchExpCSEClass, CATCH_EXP_CS__OWNED_EXCEPTION_REFS);
+		createEAttribute(catchExpCSEClass, CATCH_EXP_CS__VAR_NAME);
 
 		expressionBlockCSEClass = createEClass(EXPRESSION_BLOCK_CS);
-		createEReference(expressionBlockCSEClass, EXPRESSION_BLOCK_CS__BODY);
-
-		expressionStatementCSEClass = createEClass(EXPRESSION_STATEMENT_CS);
-		createEReference(expressionStatementCSEClass, EXPRESSION_STATEMENT_CS__OCL_EXPRESSION_CS);
+		createEReference(expressionBlockCSEClass, EXPRESSION_BLOCK_CS__OWNED_EXPS);
 
 		forExpCSEClass = createEClass(FOR_EXP_CS);
+		createEAttribute(forExpCSEClass, FOR_EXP_CS__IS_ONE);
 
 		listTypeCSEClass = createEClass(LIST_TYPE_CS);
-		createEReference(listTypeCSEClass, LIST_TYPE_CS__TYPE);
+		createEReference(listTypeCSEClass, LIST_TYPE_CS__OWNED_TYPE_REF);
 
 		listLiteralExpCSEClass = createEClass(LIST_LITERAL_EXP_CS);
 		createEReference(listLiteralExpCSEClass, LIST_LITERAL_EXP_CS__OWNED_PARTS);
 
 		logExpCSEClass = createEClass(LOG_EXP_CS);
-		createEReference(logExpCSEClass, LOG_EXP_CS__CONDITION);
-
-		quitExpCSEClass = createEClass(QUIT_EXP_CS);
-		createEAttribute(quitExpCSEClass, QUIT_EXP_CS__KEYWORD);
-		createEReference(quitExpCSEClass, QUIT_EXP_CS__VALUE);
+		createEReference(logExpCSEClass, LOG_EXP_CS__OWNED_MESSAGE);
+		createEReference(logExpCSEClass, LOG_EXP_CS__OWNED_ELEMENT);
+		createEAttribute(logExpCSEClass, LOG_EXP_CS__SEVERITY);
+		createEReference(logExpCSEClass, LOG_EXP_CS__OWNED_CONDITION);
 
 		raiseExpCSEClass = createEClass(RAISE_EXP_CS);
+		createEReference(raiseExpCSEClass, RAISE_EXP_CS__OWNED_EXCEPTION_REF);
+		createEReference(raiseExpCSEClass, RAISE_EXP_CS__OWNED_ARGUMENTS);
 
 		returnExpCSEClass = createEClass(RETURN_EXP_CS);
-		createEReference(returnExpCSEClass, RETURN_EXP_CS__VALUE);
+		createEReference(returnExpCSEClass, RETURN_EXP_CS__OWNED_VALUE);
 
 		statementCSEClass = createEClass(STATEMENT_CS);
 
 		switchAltCSEClass = createEClass(SWITCH_ALT_CS);
-		createEReference(switchAltCSEClass, SWITCH_ALT_CS__CONDITION);
-		createEReference(switchAltCSEClass, SWITCH_ALT_CS__BODY);
-		createEAttribute(switchAltCSEClass, SWITCH_ALT_CS__KEYWORD);
+		createEReference(switchAltCSEClass, SWITCH_ALT_CS__OWNED_CONDITION);
+		createEReference(switchAltCSEClass, SWITCH_ALT_CS__OWNED_BODY);
 
 		switchExpCSEClass = createEClass(SWITCH_EXP_CS);
-		createEReference(switchExpCSEClass, SWITCH_EXP_CS__ALTERNATIVE_PART);
-		createEReference(switchExpCSEClass, SWITCH_EXP_CS__ELSE_PART);
+		createEReference(switchExpCSEClass, SWITCH_EXP_CS__OWNED_ALT_PARTS);
+		createEReference(switchExpCSEClass, SWITCH_EXP_CS__OWNED_ELSE_PART);
 
 		tryExpCSEClass = createEClass(TRY_EXP_CS);
-		createEReference(tryExpCSEClass, TRY_EXP_CS__CATCH);
+		createEReference(tryExpCSEClass, TRY_EXP_CS__OWNED_CATCHS);
 
-		variableInitializationCSEClass = createEClass(VARIABLE_INITIALIZATION_CS);
-		createEReference(variableInitializationCSEClass, VARIABLE_INITIALIZATION_CS__OCL_EXPRESSION_CS);
-		createEAttribute(variableInitializationCSEClass, VARIABLE_INITIALIZATION_CS__SIMPLE_NAME_CS);
-		createEReference(variableInitializationCSEClass, VARIABLE_INITIALIZATION_CS__TYPE_CS);
-		createEAttribute(variableInitializationCSEClass, VARIABLE_INITIALIZATION_CS__WITH_RESULT);
+		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
+		createEAttribute(varDeclarationCSEClass, VAR_DECLARATION_CS__INIT_OP);
+
+		varsInitializationCSEClass = createEClass(VARS_INITIALIZATION_CS);
+		createEReference(varsInitializationCSEClass, VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS);
 
 		whileExpCSEClass = createEClass(WHILE_EXP_CS);
-		createEReference(whileExpCSEClass, WHILE_EXP_CS__CONDITION);
-		createEReference(whileExpCSEClass, WHILE_EXP_CS__RESULT_VAR);
+		createEReference(whileExpCSEClass, WHILE_EXP_CS__OWNED_CONDITION);
+		createEReference(whileExpCSEClass, WHILE_EXP_CS__OWNED_RESULT_VAR);
 	}
 
 	/**
@@ -1051,8 +1062,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 
 		// Obtain other dependent packages
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
-		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1060,128 +1071,128 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 
 		// Add supertypes to classes
 		assertExpCSEClass.getESuperTypes().add(this.getStatementCS());
-		assignStatementCSEClass.getESuperTypes().add(this.getStatementCS());
-		blockExpCSEClass.getESuperTypes().add(this.getStatementCS());
-		dictLiteralExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
-		dictLiteralPartCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
+		assignExpCSEClass.getESuperTypes().add(this.getStatementCS());
+		breakExpCSEClass.getESuperTypes().add(this.getStatementCS());
+		dictLiteralExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getLiteralExpCS());
+		dictLiteralPartCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		dictTypeCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedRefCS());
 		computeExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
+		continueExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		imperativeIterateExpCSEClass.getESuperTypes().add(this.getImperativeLoopExpCS());
 		imperativeLoopExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getCallExpCS());
 		imperativeLoopExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		instantiationExpCSEClass.getESuperTypes().add(this.getStatementCS());
-		doExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
-		exceptCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
+		catchExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
 		expressionBlockCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
-		expressionStatementCSEClass.getESuperTypes().add(this.getStatementCS());
 		forExpCSEClass.getESuperTypes().add(this.getImperativeLoopExpCS());
 		listTypeCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedRefCS());
-		listLiteralExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
+		listLiteralExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getLiteralExpCS());
 		logExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getCallExpCS());
-		quitExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		raiseExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		returnExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		statementCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		switchAltCSEClass.getESuperTypes().add(this.getStatementCS());
 		switchExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		tryExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
-		variableInitializationCSEClass.getESuperTypes().add(this.getStatementCS());
+		varDeclarationCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getVariableCS());
+		varsInitializationCSEClass.getESuperTypes().add(this.getStatementCS());
 		whileExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(assertExpCSEClass, AssertExpCS.class, "AssertExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssertExpCS_Assertion(), theEssentialOCLCSPackage.getExpCS(), null, "assertion", null, 1, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssertExpCS_Log(), this.getLogExpCS(), null, "log", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssertExpCS_OwnedAssertion(), theEssentialOCLCSPackage.getExpCS(), null, "ownedAssertion", null, 1, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssertExpCS_OwnedLog(), this.getLogExpCS(), null, "ownedLog", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAssertExpCS_Severity(), ecorePackage.getEString(), "severity", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(assignStatementCSEClass, AssignStatementCS.class, "AssignStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssignStatementCS_LValueCS(), theEssentialOCLCSPackage.getExpCS(), null, "lValueCS", null, 0, 1, AssignStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAssignStatementCS_OclExpressionCS(), theEssentialOCLCSPackage.getExpCS(), null, "oclExpressionCS", null, 0, 1, AssignStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignStatementCS_Incremental(), ecorePackage.getEBoolean(), "incremental", null, 0, 1, AssignStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(assignExpCSEClass, AssignExpCS.class, "AssignExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAssignExpCS_OwnedLeft(), theEssentialOCLCSPackage.getExpCS(), null, "ownedLeft", null, 1, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignExpCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignExpCS_AssignOp(), theEcorePackage.getEString(), "assignOp", null, 0, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssignExpCS_OwnedDefault(), theEssentialOCLCSPackage.getExpCS(), null, "ownedDefault", null, 0, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(blockExpCSEClass, BlockExpCS.class, "BlockExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBlockExpCS_Expressions(), theEssentialOCLCSPackage.getExpCS(), null, "expressions", null, 0, -1, BlockExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(breakExpCSEClass, BreakExpCS.class, "BreakExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(dictLiteralExpCSEClass, DictLiteralExpCS.class, "DictLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDictLiteralExpCS_OwnedParts(), this.getDictLiteralPartCS(), null, "ownedParts", null, 0, -1, DictLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictLiteralPartCSEClass, DictLiteralPartCS.class, "DictLiteralPartCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDictLiteralPartCS_Key(), theEssentialOCLCSPackage.getPrimitiveLiteralExpCS(), null, "key", null, 0, 1, DictLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDictLiteralPartCS_Value(), theEssentialOCLCSPackage.getExpCS(), null, "value", null, 0, 1, DictLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictLiteralPartCS_OwnedKey(), theEssentialOCLCSPackage.getPrimitiveLiteralExpCS(), null, "ownedKey", null, 1, 1, DictLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictLiteralPartCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, DictLiteralPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dictTypeCSEClass, DictTypeCS.class, "DictTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDictTypeCS_KeyType(), theBaseCSPackage.getTypedRefCS(), null, "keyType", null, 0, 1, DictTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDictTypeCS_ValueType(), theBaseCSPackage.getTypedRefCS(), null, "valueType", null, 0, 1, DictTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictTypeCS_OwnedKeyTypeRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedKeyTypeRef", null, 0, 1, DictTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDictTypeCS_OwnedValueTypeRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedValueTypeRef", null, 0, 1, DictTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(computeExpCSEClass, ComputeExpCS.class, "ComputeExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComputeExpCS_ReturnedElement(), theEssentialOCLCSPackage.getVariableCS(), null, "returnedElement", null, 1, 1, ComputeExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComputeExpCS_OwnedResultVar(), this.getVarDeclarationCS(), null, "ownedResultVar", null, 1, 1, ComputeExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(continueExpCSEClass, ContinueExpCS.class, "ContinueExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(imperativeIterateExpCSEClass, ImperativeIterateExpCS.class, "ImperativeIterateExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeIterateExpCS_Target(), theEssentialOCLCSPackage.getVariableCS(), null, "target", null, 0, 1, ImperativeIterateExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeLoopExpCSEClass, ImperativeLoopExpCS.class, "ImperativeLoopExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImperativeLoopExpCS_Condition(), theEssentialOCLCSPackage.getExpCS(), null, "condition", null, 1, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeLoopExpCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeLoopExpCS_OwnedTarget(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedTarget", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeLoopExpCS_OwnedIterator(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedIterator", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImperativeLoopExpCS_OwnedBody(), theEssentialOCLCSPackage.getExpCS(), null, "ownedBody", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getImperativeLoopExpCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instantiationExpCSEClass, InstantiationExpCS.class, "InstantiationExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstantiationExpCS_TypeSpecCS(), theBaseCSPackage.getTypeCS(), null, "typeSpecCS", null, 1, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getInstantiationExpCS_Arguments(), theEssentialOCLCSPackage.getExpCS(), null, "arguments", null, 0, -1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstantiationExpCS_OwnedClassRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedClassRef", null, 1, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstantiationExpCS_OwnedArguments(), theEssentialOCLCSPackage.getExpCS(), null, "ownedArguments", null, 0, -1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstantiationExpCS_OwnedExtentRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedExtentRef", null, 0, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(doExpCSEClass, DoExpCS.class, "DoExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDoExpCS_Condition(), theEssentialOCLCSPackage.getExpCS(), null, "condition", null, 0, 1, DoExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(exceptCSEClass, ExceptCS.class, "ExceptCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExceptCS_Except(), thePivotPackage.getType(), null, "except", null, 0, -1, ExceptCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExceptCS_Body(), theEssentialOCLCSPackage.getExpCS(), null, "body", null, 0, 1, ExceptCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(catchExpCSEClass, CatchExpCS.class, "CatchExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCatchExpCS_OwnedExceptionRefs(), theBaseCSPackage.getTypedRefCS(), null, "ownedExceptionRefs", null, 0, -1, CatchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getCatchExpCS_VarName(), theEcorePackage.getEString(), "varName", null, 0, 1, CatchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionBlockCSEClass, ExpressionBlockCS.class, "ExpressionBlockCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpressionBlockCS_Body(), theEssentialOCLCSPackage.getExpCS(), null, "body", null, 0, -1, ExpressionBlockCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(expressionStatementCSEClass, ExpressionStatementCS.class, "ExpressionStatementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExpressionStatementCS_OclExpressionCS(), theEssentialOCLCSPackage.getExpCS(), null, "oclExpressionCS", null, 0, 1, ExpressionStatementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExpressionBlockCS_OwnedExps(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExps", null, 0, -1, ExpressionBlockCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forExpCSEClass, ForExpCS.class, "ForExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getForExpCS_IsOne(), theEcorePackage.getEBooleanObject(), "isOne", null, 0, 1, ForExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(listTypeCSEClass, ListTypeCS.class, "ListTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getListTypeCS_Type(), theBaseCSPackage.getTypedRefCS(), null, "type", null, 0, 1, ListTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getListTypeCS_OwnedTypeRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedTypeRef", null, 0, 1, ListTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(listLiteralExpCSEClass, ListLiteralExpCS.class, "ListLiteralExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getListLiteralExpCS_OwnedParts(), theEssentialOCLCSPackage.getCollectionLiteralPartCS(), null, "ownedParts", null, 0, -1, ListLiteralExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(logExpCSEClass, LogExpCS.class, "LogExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getLogExpCS_Condition(), theEssentialOCLCSPackage.getExpCS(), null, "condition", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(quitExpCSEClass, QuitExpCS.class, "QuitExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getQuitExpCS_Keyword(), ecorePackage.getEString(), "keyword", null, 0, 1, QuitExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQuitExpCS_Value(), theEssentialOCLCSPackage.getExpCS(), null, "value", null, 0, 1, QuitExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLogExpCS_OwnedMessage(), theEssentialOCLCSPackage.getStringLiteralExpCS(), null, "ownedMessage", null, 1, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLogExpCS_OwnedElement(), theEssentialOCLCSPackage.getExpCS(), null, "ownedElement", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLogExpCS_Severity(), theEcorePackage.getEString(), "severity", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLogExpCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(raiseExpCSEClass, RaiseExpCS.class, "RaiseExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRaiseExpCS_OwnedExceptionRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedExceptionRef", null, 1, 1, RaiseExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRaiseExpCS_OwnedArguments(), theEssentialOCLCSPackage.getExpCS(), null, "ownedArguments", null, 0, -1, RaiseExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(returnExpCSEClass, ReturnExpCS.class, "ReturnExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReturnExpCS_Value(), theEssentialOCLCSPackage.getExpCS(), null, "value", null, 0, 1, ReturnExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReturnExpCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 0, 1, ReturnExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(statementCSEClass, StatementCS.class, "StatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(switchAltCSEClass, SwitchAltCS.class, "SwitchAltCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSwitchAltCS_Condition(), theEssentialOCLCSPackage.getExpCS(), null, "condition", null, 1, 1, SwitchAltCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitchAltCS_Body(), theEssentialOCLCSPackage.getExpCS(), null, "body", null, 1, 1, SwitchAltCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSwitchAltCS_Keyword(), ecorePackage.getEString(), "keyword", null, 0, 1, SwitchAltCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchAltCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, SwitchAltCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchAltCS_OwnedBody(), theEssentialOCLCSPackage.getExpCS(), null, "ownedBody", null, 1, 1, SwitchAltCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(switchExpCSEClass, SwitchExpCS.class, "SwitchExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSwitchExpCS_AlternativePart(), this.getSwitchAltCS(), null, "alternativePart", null, 1, -1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSwitchExpCS_ElsePart(), theEssentialOCLCSPackage.getExpCS(), null, "elsePart", null, 0, 1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchExpCS_OwnedAltParts(), this.getSwitchAltCS(), null, "ownedAltParts", null, 1, -1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchExpCS_OwnedElsePart(), theEssentialOCLCSPackage.getExpCS(), null, "ownedElsePart", null, 0, 1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tryExpCSEClass, TryExpCS.class, "TryExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTryExpCS_Catch(), this.getExceptCS(), null, "catch", null, 0, -1, TryExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTryExpCS_OwnedCatchs(), this.getCatchExpCS(), null, "ownedCatchs", null, 1, -1, TryExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(variableInitializationCSEClass, VariableInitializationCS.class, "VariableInitializationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVariableInitializationCS_OclExpressionCS(), theEssentialOCLCSPackage.getExpCS(), null, "oclExpressionCS", null, 0, 1, VariableInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableInitializationCS_SimpleNameCS(), ecorePackage.getEString(), "simpleNameCS", null, 0, 1, VariableInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVariableInitializationCS_TypeCS(), theBaseCSPackage.getTypeCS(), null, "typeCS", null, 0, 1, VariableInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableInitializationCS_WithResult(), ecorePackage.getEBoolean(), "withResult", "false", 1, 1, VariableInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getVarDeclarationCS_InitOp(), theEcorePackage.getEString(), "initOp", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(varsInitializationCSEClass, VarsInitializationCS.class, "VarsInitializationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVarsInitializationCS_OwnedVarDeclarations(), this.getVarDeclarationCS(), null, "ownedVarDeclarations", null, 1, -1, VarsInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(whileExpCSEClass, WhileExpCS.class, "WhileExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWhileExpCS_Condition(), theEssentialOCLCSPackage.getExpCS(), null, "condition", null, 0, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWhileExpCS_ResultVar(), theEssentialOCLCSPackage.getVariableCS(), null, "resultVar", null, 0, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWhileExpCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getWhileExpCS_OwnedResultVar(), this.getVarDeclarationCS(), null, "ownedResultVar", null, 0, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

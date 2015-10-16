@@ -1,48 +1,49 @@
 /**
  */
-package org.eclipse.qvto.examples.xtext.imperativeoclcs.impl;
+package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.ocl.xtext.basecs.impl.OperationCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.DoExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Do Exp CS</b></em>'.
+ * An implementation of the model object '<em><b>Entry Operation CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DoExpCSImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.EntryOperationCSImpl#getBody <em>Body</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
+public class EntryOperationCSImpl extends OperationCSImpl implements EntryOperationCS {
 	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
+	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCondition()
+	 * @see #getBody()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS condition;
+	protected OperationBodyCS body;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected DoExpCSImpl() {
+	protected EntryOperationCSImpl() {
 		super();
 	}
 
@@ -53,7 +54,7 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeOCLCSPackage.Literals.DO_EXP_CS;
+		return QVTOperationalCSPackage.Literals.ENTRY_OPERATION_CS;
 	}
 
 	/**
@@ -61,8 +62,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getCondition() {
-		return condition;
+	public OperationBodyCS getBody() {
+		return body;
 	}
 
 	/**
@@ -70,11 +71,11 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(ExpCS newCondition, NotificationChain msgs) {
-		ExpCS oldCondition = condition;
-		condition = newCondition;
+	public NotificationChain basicSetBody(OperationBodyCS newBody, NotificationChain msgs) {
+		OperationBodyCS oldBody = body;
+		body = newBody;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DO_EXP_CS__CONDITION, oldCondition, newCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY, oldBody, newBody);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -85,18 +86,18 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(ExpCS newCondition) {
-		if (newCondition != condition) {
+	public void setBody(OperationBodyCS newBody) {
+		if (newBody != body) {
 			NotificationChain msgs = null;
-			if (condition != null)
-				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DO_EXP_CS__CONDITION, null, msgs);
-			if (newCondition != null)
-				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DO_EXP_CS__CONDITION, null, msgs);
-			msgs = basicSetCondition(newCondition, msgs);
+			if (body != null)
+				msgs = ((InternalEObject)body).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY, null, msgs);
+			if (newBody != null)
+				msgs = ((InternalEObject)newBody).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY, null, msgs);
+			msgs = basicSetBody(newBody, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DO_EXP_CS__CONDITION, newCondition, newCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY, newBody, newBody));
 	}
 
 	/**
@@ -107,8 +108,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DO_EXP_CS__CONDITION:
-				return basicSetCondition(null, msgs);
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY:
+				return basicSetBody(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -121,8 +122,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DO_EXP_CS__CONDITION:
-				return getCondition();
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY:
+				return getBody();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,8 +136,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DO_EXP_CS__CONDITION:
-				setCondition((ExpCS)newValue);
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY:
+				setBody((OperationBodyCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +151,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DO_EXP_CS__CONDITION:
-				setCondition((ExpCS)null);
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY:
+				setBody((OperationBodyCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,8 +166,8 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DO_EXP_CS__CONDITION:
-				return condition != null;
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS__BODY:
+				return body != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -178,7 +179,7 @@ public class DoExpCSImpl extends ExpressionBlockCSImpl implements DoExpCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) ((ImperativeOCLCSVisitor<?>)visitor).visitDoExpCS(this);
+		return (R) ((QVTOperationalCSVisitor<?>)visitor).visitEntryOperationCS(this);
 	}
 
-} //DoExpCSImpl
+} //EntryOperationCSImpl

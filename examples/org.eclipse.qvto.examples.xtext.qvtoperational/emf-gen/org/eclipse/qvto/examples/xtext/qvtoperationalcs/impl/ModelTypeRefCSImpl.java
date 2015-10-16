@@ -3,14 +3,10 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.ocl.xtext.basecs.impl.ParameterCSImpl;
-
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
-
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**

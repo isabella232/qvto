@@ -95,62 +95,78 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 		private static final @NonNull ReferencedMetamodel MM_ecore = createReferencedMetamodel(org.eclipse.emf.ecore.EcorePackage.eINSTANCE, "ecore"); // http://www.eclipse.org/emf/2002/Ecore
 		private static final @NonNull ReferencedMetamodel MM_essentialocl = createReferencedMetamodel(org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.eINSTANCE, "essentialocl"); // http://www.eclipse.org/ocl/2015/EssentialOCLCS
 		
-		private static final @NonNull TerminalRule TR_ACCESS_OP = createTerminalRule("ACCESS_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_ASSIGN_OP = createTerminalRule("ASSIGN_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_CMP_OP = createTerminalRule("CMP_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_MULTI_ITERATOR_OP = createTerminalRule("MULTI_ITERATOR_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_MULT_OP = createTerminalRule("MULT_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_RESOLVE_IN_KIND = createTerminalRule("RESOLVE_IN_KIND", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_RESOLVE_KIND = createTerminalRule("RESOLVE_KIND", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_SIMPLE_ITERATOR_OP = createTerminalRule("SIMPLE_ITERATOR_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull TerminalRule TR_UNARY_OP = createTerminalRule("UNARY_OP", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
+		private static final @NonNull TerminalRule TR_SEVERITY_KIND = createTerminalRule("SEVERITY_KIND", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
 		
 		private static void initTerminalRules() {
-			TR_ACCESS_OP.setAlternatives(createAlternatives(createKeyword("."), createKeyword("->"), createKeyword("!->")));
-			TR_ASSIGN_OP.setAlternatives(createAlternatives(createKeyword(":="), createKeyword("::="), createKeyword("+="), createKeyword("-=")));
-			TR_CMP_OP.setAlternatives(createAlternatives(createKeyword("="), createKeyword("=="), createKeyword("<>"), createKeyword("<"), createKeyword(">"), createKeyword("<="), createKeyword(">=")));
-			TR_MULTI_ITERATOR_OP.setAlternatives(createKeyword("forAll"));
-			TR_MULT_OP.setAlternatives(createAlternatives(createKeyword("*"), createKeyword("/"), createKeyword("%")));
-			TR_RESOLVE_IN_KIND.setAlternatives(createAlternatives(createKeyword("resolveIn"), createKeyword("resolveoneIn"), createKeyword("invresolveIn"), createKeyword("invresolveoneIn")));
-			TR_RESOLVE_KIND.setAlternatives(createAlternatives(createKeyword("resolve"), createKeyword("resolveone"), createKeyword("invresolve"), createKeyword("invresolveone")));
-			TR_SIMPLE_ITERATOR_OP.setAlternatives(createAlternatives(createKeyword("reject"), createKeyword("select"), createKeyword("collect"), createKeyword("exists"), createKeyword("one"), createKeyword("any"), createKeyword("isUnique"), createKeyword("collectNested"), createKeyword("sortedBy"), createKeyword("xselect"), createKeyword("xcollect"), createKeyword("selectOne"), createKeyword("collectOne"), createKeyword("collectselect"), createKeyword("collectselectOne")));
-			TR_UNARY_OP.setAlternatives(createAlternatives(createKeyword("-"), createKeyword("not"), createKeyword("#"), createKeyword("##"), createKeyword("*")));
+			TR_SEVERITY_KIND.setAlternatives(createAlternatives(createKeyword("error"), createKeyword("fatal"), createKeyword("warning")));
 		}
 		
-		private static final @NonNull ParserRule PR_BlockExpCS = createParserRule("BlockExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.BLOCK_EXP_CS));
+		private static final @NonNull ParserRule PR_AssertExpCS = createParserRule("AssertExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.ASSERT_EXP_CS));
+		private static final @NonNull ParserRule PR_AssignExpCS = createParserRule("AssignExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.ASSIGN_EXP_CS));
+		private static final @NonNull ParserRule PR_BreakExpCS = createParserRule("BreakExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.BREAK_EXP_CS));
+		private static final @NonNull ParserRule PR_CatchExpCS = createParserRule("CatchExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.CATCH_EXP_CS));
+		private static final @NonNull ParserRule PR_ComputeExpCS = createParserRule("ComputeExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.COMPUTE_EXP_CS));
+		private static final @NonNull ParserRule PR_ContinueExpCS = createParserRule("ContinueExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.CONTINUE_EXP_CS));
 		private static final @NonNull ParserRule PR_DictLiteralExpCS = createParserRule("DictLiteralExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_EXP_CS));
 		private static final @NonNull ParserRule PR_DictLiteralPartCS = createParserRule("DictLiteralPartCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_PART_CS));
 		private static final @NonNull ParserRule PR_DictTypeCS = createParserRule("DictTypeCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_TYPE_CS));
+		private static final @NonNull ParserRule PR_ExpressionBlockCS = createParserRule("ExpressionBlockCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.EXPRESSION_BLOCK_CS));
+		private static final @NonNull ParserRule PR_ExpressionStatementCS = createParserRule("ExpressionStatementCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
+		private static final @NonNull ParserRule PR_ForExpCS = createParserRule("ForExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.FOR_EXP_CS));
 		private static final @NonNull ParserRule PR_GrammmarCS = createParserRule("GrammmarCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
+		private static final @NonNull ParserRule PR_ImperativeExpCS = createParserRule("ImperativeExpCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
+		private static final @NonNull ParserRule PR_ImperativeIterateExpCS = createParserRule("ImperativeIterateExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.IMPERATIVE_ITERATE_EXP_CS));
 		private static final @NonNull ParserRule PR_ImperativeOCLExpCS = createParserRule("ImperativeOCLExpCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
-		private static final @NonNull ParserRule PR_ImperativeOCLInfixOperator = createParserRule("ImperativeOCLInfixOperator", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull ParserRule PR_ImperativeOCLNavigationOperator = createParserRule("ImperativeOCLNavigationOperator", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull ParserRule PR_ImperativeOCLPrefixOperator = createParserRule("ImperativeOCLPrefixOperator", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
-		private static final @NonNull ParserRule PR_ImperativeOCLReservedKeyword = createParserRule("ImperativeOCLReservedKeyword", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
+		private static final @NonNull ParserRule PR_InstantiationExpCS = createParserRule("InstantiationExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.INSTANTIATION_EXP_CS));
 		private static final @NonNull ParserRule PR_ListLiteralExpCS = createParserRule("ListLiteralExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.LIST_LITERAL_EXP_CS));
 		private static final @NonNull ParserRule PR_ListTypeCS = createParserRule("ListTypeCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.LIST_TYPE_CS));
+		private static final @NonNull ParserRule PR_LogExpCS = createParserRule("LogExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.LOG_EXP_CS));
 		private static final @NonNull ParserRule PR_PrimaryExpCS = createParserRule("PrimaryExpCS", createTypeRef(MM_essentialocl, org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage.Literals.EXP_CS));
+		private static final @NonNull ParserRule PR_RaiseExpCS = createParserRule("RaiseExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RAISE_EXP_CS));
 		private static final @NonNull ParserRule PR_ReturnExpCS = createParserRule("ReturnExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RETURN_EXP_CS));
 		private static final @NonNull ParserRule PR_StringLiteral = createParserRule("StringLiteral", createTypeRef(MM_ecore, org.eclipse.emf.ecore.EcorePackage.Literals.ESTRING));
+		private static final @NonNull ParserRule PR_SwitchAltCS = createParserRule("SwitchAltCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.SWITCH_ALT_CS));
+		private static final @NonNull ParserRule PR_SwitchExpCS = createParserRule("SwitchExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.SWITCH_EXP_CS));
+		private static final @NonNull ParserRule PR_TryExpCS = createParserRule("TryExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.TRY_EXP_CS));
 		private static final @NonNull ParserRule PR_TypeLiteralCS = createParserRule("TypeLiteralCS", createTypeRef(MM_base, org.eclipse.ocl.xtext.basecs.BaseCSPackage.Literals.TYPED_REF_CS));
+		private static final @NonNull ParserRule PR_VarDeclarationCS = createParserRule("VarDeclarationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.VAR_DECLARATION_CS));
+		private static final @NonNull ParserRule PR_VarDeclarationNoInitCS = createParserRule("VarDeclarationNoInitCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.VAR_DECLARATION_CS));
+		private static final @NonNull ParserRule PR_VarsInitializationCS = createParserRule("VarsInitializationCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.VARS_INITIALIZATION_CS));
+		private static final @NonNull ParserRule PR_WhileExpCS = createParserRule("WhileExpCS", createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.WHILE_EXP_CS));
 		
 		private static void initParserRules() {
-			PR_BlockExpCS.setAlternatives(createGroup(createKeyword("{"), createAssignment("expressions", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword("}")));
+			PR_AssertExpCS.setAlternatives(createGroup(createKeyword("assert"), setCardinality("?", createAssignment("severity", "=", createRuleCall(TR_SEVERITY_KIND))), createAssignment("ownedAssertion", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), setCardinality("?", createGroup(createKeyword("with"), createAssignment("ownedLog", "=", createRuleCall(PR_LogExpCS))))));
+			PR_AssignExpCS.setAlternatives(createGroup(createAssignment("ownedLeft", "=", createRuleCall(_EssentialOCL.PR_NameExpCS)), createAssignment("assignOp", "=", createAlternatives(createKeyword(":="), createKeyword("::="), createKeyword("+="))), createAssignment("ownedValue", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), setCardinality("?", createGroup(createKeyword("default"), createAssignment("ownedDefault", "=", createRuleCall(_EssentialOCL.PR_ExpCS))))));
+			PR_BreakExpCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.BREAK_EXP_CS)), createKeyword("break")));
+			PR_CatchExpCS.setAlternatives(createGroup(createKeyword("except"), createKeyword("("), setCardinality("?", createGroup(createAssignment("varName", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), createKeyword(":"))), createAssignment("ownedExceptionRefs", "+=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedExceptionRefs", "+=", createRuleCall(_EssentialOCL.PR_TypeExpCS)))), createKeyword(")"), createKeyword("{"), setCardinality("*", createAssignment("ownedExps", "+=", createRuleCall(_EssentialOCL.PR_ExpCS))), createKeyword("}")));
+			PR_ComputeExpCS.setAlternatives(createGroup(createKeyword("compute"), createKeyword("("), createAssignment("ownedResultVar", "=", createRuleCall(PR_VarDeclarationCS)), createKeyword(")"), createKeyword("{"), createAssignment("ownedExps", "+=", createRuleCall(PR_ExpressionStatementCS)), createKeyword("}")));
+			PR_ContinueExpCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.CONTINUE_EXP_CS)), createKeyword("continue")));
 			PR_DictLiteralExpCS.setAlternatives(createGroup(createKeyword("Dict"), createKeyword("{"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.DICT_LITERAL_EXP_CS)), setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(PR_DictLiteralPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(PR_DictLiteralPartCS)))))), createKeyword("}")));
-			PR_DictLiteralPartCS.setAlternatives(createGroup(createAssignment("key", "=", createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS)), createKeyword("="), createAssignment("value", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
-			PR_DictTypeCS.setAlternatives(createGroup(createKeyword("Dict"), createKeyword("("), createAssignment("keyType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(","), createAssignment("valueType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
+			PR_DictLiteralPartCS.setAlternatives(createGroup(createAssignment("ownedKey", "=", createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS)), createKeyword("="), createAssignment("ownedValue", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
+			PR_DictTypeCS.setAlternatives(createGroup(createKeyword("Dict"), createKeyword("("), createAssignment("ownedKeyTypeRef", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(","), createAssignment("ownedValueTypeRef", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
+			PR_ExpressionBlockCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.EXPRESSION_BLOCK_CS)), setCardinality("?", createKeyword("do")), createKeyword("{"), setCardinality("*", createAssignment("ownedExps", "+=", createRuleCall(PR_ExpressionStatementCS))), createKeyword("}")));
+			PR_ExpressionStatementCS.setAlternatives(createGroup(createRuleCall(_EssentialOCL.PR_ExpCS), setCardinality("?", createKeyword(";"))));
+			PR_ForExpCS.setAlternatives(createGroup(createAlternatives(createKeyword("forEach"), createAssignment("isOne", "?=", createKeyword("forOne"))), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedTarget", "=", createRuleCall(PR_VarDeclarationCS)), createKeyword(";"))), createAssignment("ownedIterator", "=", createRuleCall(PR_VarDeclarationNoInitCS)), setCardinality("?", createGroup(createKeyword("|"), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), createKeyword(")"), createAssignment("ownedBody", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
 			PR_GrammmarCS.setAlternatives(createRuleCall(PR_ImperativeOCLExpCS));
+			PR_ImperativeExpCS.setAlternatives(createAlternatives(createRuleCall(PR_ExpressionBlockCS), createRuleCall(PR_AssertExpCS), createRuleCall(PR_BreakExpCS), createRuleCall(PR_ContinueExpCS), createRuleCall(PR_InstantiationExpCS), createRuleCall(PR_LogExpCS), createRuleCall(PR_RaiseExpCS), createRuleCall(PR_VarsInitializationCS), createRuleCall(PR_ListLiteralExpCS), createRuleCall(PR_DictLiteralExpCS), createRuleCall(_EssentialOCL.PR_TypeLiteralExpCS), createRuleCall(PR_ReturnExpCS), createRuleCall(PR_ComputeExpCS), createRuleCall(PR_ForExpCS), createRuleCall(PR_WhileExpCS), createRuleCall(PR_ImperativeIterateExpCS), createRuleCall(PR_SwitchExpCS), createRuleCall(PR_AssignExpCS), createRuleCall(PR_TryExpCS)));
+			PR_ImperativeIterateExpCS.setAlternatives(createAlternatives(createGroup(createAssignment("name", "=", createKeyword("xcollect")), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedIterator", "=", createRuleCall(PR_VarDeclarationNoInitCS)), createKeyword("|"))), createAssignment("ownedBody", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(")")), createGroup(createAssignment("name", "=", createAlternatives(createKeyword("xselect"), createKeyword("xselectOne"))), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedIterator", "=", createRuleCall(PR_VarDeclarationNoInitCS)), createKeyword("|"))), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(")")), createGroup(createAssignment("name", "=", createAlternatives(createKeyword("xcollectselect"), createKeyword("xcollectselectOne"))), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedIterator", "=", createRuleCall(PR_VarDeclarationNoInitCS)), createKeyword(";"))), createAssignment("ownedTarget", "=", createRuleCall(PR_VarDeclarationCS)), createKeyword(":="), createAssignment("ownedBody", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword("|"), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(")"))));
 			PR_ImperativeOCLExpCS.setAlternatives(createRuleCall(_EssentialOCL.PR_ExpCS));
-			PR_ImperativeOCLInfixOperator.setAlternatives(createAlternatives(createRuleCall(TR_ASSIGN_OP), createKeyword("default"), createKeyword("==")));
-			PR_ImperativeOCLNavigationOperator.setAlternatives(createKeyword("!->"));
-			PR_ImperativeOCLPrefixOperator.setAlternatives(createAlternatives(createKeyword("#"), createKeyword("##"), createKeyword("*")));
-			PR_ImperativeOCLReservedKeyword.setAlternatives(createAlternatives(createKeyword("default"), createKeyword("elif"), createRuleCall(TR_RESOLVE_KIND), createRuleCall(TR_RESOLVE_IN_KIND)));
+			PR_InstantiationExpCS.setAlternatives(createGroup(createKeyword("new"), createAssignment("ownedClassRef", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), setCardinality("?", createGroup(createKeyword("@"), createAssignment("ownedExtentRef", "=", createRuleCall(_EssentialOCL.PR_TypeNameExpCS)))), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedArguments", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedArguments", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)))))), createKeyword(")")));
 			PR_ListLiteralExpCS.setAlternatives(createGroup(createKeyword("List"), createKeyword("{"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.LIST_LITERAL_EXP_CS)), setCardinality("?", createGroup(createAssignment("ownedParts", "+=", createRuleCall(_EssentialOCL.PR_CollectionLiteralPartCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedParts", "+=", createRuleCall(_EssentialOCL.PR_CollectionLiteralPartCS)))))), createKeyword("}")));
-			PR_ListTypeCS.setAlternatives(createGroup(createKeyword("List"), createKeyword("("), createAssignment("type", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
-			PR_PrimaryExpCS.setAlternatives(createAlternatives(createRuleCall(_EssentialOCL.PR_NestedExpCS), createRuleCall(_EssentialOCL.PR_IfExpCS), createRuleCall(_EssentialOCL.PR_SelfExpCS), createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS), createRuleCall(_EssentialOCL.PR_TupleLiteralExpCS), createRuleCall(_EssentialOCL.PR_MapLiteralExpCS), createRuleCall(_EssentialOCL.PR_CollectionLiteralExpCS), createRuleCall(_EssentialOCL.PR_LambdaLiteralExpCS), createRuleCall(PR_ListLiteralExpCS), createRuleCall(PR_DictLiteralExpCS), createRuleCall(_EssentialOCL.PR_TypeLiteralExpCS), createRuleCall(PR_ReturnExpCS), createRuleCall(_EssentialOCL.PR_NameExpCS)));
-			PR_ReturnExpCS.setAlternatives(createGroup(createKeyword("return"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RETURN_EXP_CS)), setCardinality("?", createAssignment("value", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))));
+			PR_ListTypeCS.setAlternatives(createGroup(createKeyword("List"), createKeyword("("), createAssignment("ownedTypeRef", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword(")")));
+			PR_LogExpCS.setAlternatives(createGroup(createKeyword("log"), createKeyword("("), createAssignment("ownedMessage", "=", createRuleCall(_EssentialOCL.PR_StringLiteralExpCS)), setCardinality("?", createGroup(createKeyword(","), createAssignment("ownedElement", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), setCardinality("?", createGroup(createKeyword(","), createAssignment("severity", "=", createRuleCall(TR_SEVERITY_KIND)))), createKeyword(")"), setCardinality("?", createGroup(createKeyword("when"), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS))))));
+			PR_PrimaryExpCS.setAlternatives(createAlternatives(createRuleCall(_EssentialOCL.PR_NestedExpCS), createRuleCall(_EssentialOCL.PR_IfExpCS), createRuleCall(_EssentialOCL.PR_SelfExpCS), createRuleCall(_EssentialOCL.PR_PrimitiveLiteralExpCS), createRuleCall(_EssentialOCL.PR_TupleLiteralExpCS), createRuleCall(_EssentialOCL.PR_MapLiteralExpCS), createRuleCall(_EssentialOCL.PR_CollectionLiteralExpCS), createRuleCall(_EssentialOCL.PR_LambdaLiteralExpCS), createRuleCall(PR_ImperativeExpCS), createRuleCall(_EssentialOCL.PR_NameExpCS)));
+			PR_RaiseExpCS.setAlternatives(createGroup(createKeyword("raise"), createAssignment("ownedExceptionRef", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)), createKeyword("("), createAssignment("ownedArguments", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedArguments", "+=", createRuleCall(_EssentialOCL.PR_ExpCS)))), createKeyword(")")));
+			PR_ReturnExpCS.setAlternatives(createGroup(createKeyword("return"), createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.RETURN_EXP_CS)), setCardinality("?", createAssignment("ownedValue", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))));
 			PR_StringLiteral.setAlternatives(createAlternatives(createRuleCall(_Base.TR_SINGLE_QUOTED_STRING), createRuleCall(_Base.TR_DOUBLE_QUOTED_STRING)));
+			PR_SwitchAltCS.setAlternatives(createGroup(createKeyword("("), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(")"), createAssignment("ownedBody", "=", createRuleCall(_EssentialOCL.PR_ExpCS))));
+			PR_SwitchExpCS.setAlternatives(createGroup(createKeyword("if"), createAssignment("ownedAltParts", "+=", createRuleCall(PR_SwitchAltCS)), setCardinality("*", createGroup(createKeyword("elif"), createAssignment("ownedAltParts", "+=", createRuleCall(PR_SwitchAltCS)))), setCardinality("?", createGroup(createKeyword("else"), createAssignment("ownedElsePart", "=", createRuleCall(_EssentialOCL.PR_ExpCS)))), setCardinality("?", createKeyword("endif"))));
+			PR_TryExpCS.setAlternatives(createGroup(createAction(null, null, createTypeRef(MM, org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage.Literals.TRY_EXP_CS)), createKeyword("try"), createKeyword("{"), setCardinality("*", createAssignment("ownedExps", "+=", createRuleCall(_EssentialOCL.PR_ExpCS))), createKeyword("}"), setCardinality("+", createAssignment("ownedCatchs", "+=", createRuleCall(PR_CatchExpCS)))));
 			PR_TypeLiteralCS.setAlternatives(createAlternatives(createRuleCall(_EssentialOCL.PR_PrimitiveTypeCS), createRuleCall(_EssentialOCL.PR_CollectionTypeCS), createRuleCall(_EssentialOCL.PR_MapTypeCS), createRuleCall(_EssentialOCL.PR_TupleTypeCS), createRuleCall(PR_ListTypeCS), createRuleCall(PR_DictTypeCS)));
+			PR_VarDeclarationCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS)))), setCardinality("?", createGroup(createAlternatives(createAssignment("initOp", "=", createKeyword("=")), createKeyword(":="), createKeyword("::=")), createAssignment("ownedInitExpression", "=", createRuleCall(_EssentialOCL.PR_ExpCS))))));
+			PR_VarDeclarationNoInitCS.setAlternatives(createGroup(createAssignment("name", "=", createRuleCall(_EssentialOCL.PR_UnrestrictedName)), setCardinality("?", createGroup(createKeyword(":"), createAssignment("ownedType", "=", createRuleCall(_EssentialOCL.PR_TypeExpCS))))));
+			PR_VarsInitializationCS.setAlternatives(createGroup(createKeyword("var"), createAssignment("ownedVarDeclarations", "+=", createRuleCall(PR_VarDeclarationCS)), setCardinality("*", createGroup(createKeyword(","), createAssignment("ownedVarDeclarations", "+=", createRuleCall(PR_VarDeclarationCS))))));
+			PR_WhileExpCS.setAlternatives(createGroup(createKeyword("while"), createKeyword("("), setCardinality("?", createGroup(createAssignment("ownedResultVar", "=", createRuleCall(PR_VarDeclarationCS)), createKeyword(";"))), createAssignment("ownedCondition", "=", createRuleCall(_EssentialOCL.PR_ExpCS)), createKeyword(")"), createKeyword("{"), setCardinality("*", createAssignment("ownedExps", "+=", createRuleCall(PR_ExpressionStatementCS))), createKeyword("}")));
 		}
 		
 		private static @NonNull Grammar initGrammar() {
@@ -167,30 +183,38 @@ public class ImperativeOCLGrammarResource extends AbstractGrammarResource
 			{
 				List<AbstractRule> rules = grammar.getRules();
 				rules.add(PR_GrammmarCS);
-				rules.add(TR_ACCESS_OP);
-				rules.add(TR_ASSIGN_OP);
-				rules.add(TR_CMP_OP);
-				rules.add(TR_MULT_OP);
-				rules.add(TR_MULTI_ITERATOR_OP);
-				rules.add(TR_RESOLVE_IN_KIND);
-				rules.add(TR_RESOLVE_KIND);
-				rules.add(TR_SIMPLE_ITERATOR_OP);
-				rules.add(TR_UNARY_OP);
-				rules.add(PR_ImperativeOCLReservedKeyword);
-				rules.add(PR_ImperativeOCLPrefixOperator);
-				rules.add(PR_ImperativeOCLInfixOperator);
-				rules.add(PR_ImperativeOCLNavigationOperator);
+				rules.add(TR_SEVERITY_KIND);
 				rules.add(PR_ImperativeOCLExpCS);
 				rules.add(PR_TypeLiteralCS);
 				rules.add(PR_ListTypeCS);
 				rules.add(PR_DictTypeCS);
 				rules.add(PR_PrimaryExpCS);
-				rules.add(PR_ListLiteralExpCS);
+				rules.add(PR_ImperativeExpCS);
+				rules.add(PR_AssertExpCS);
+				rules.add(PR_AssignExpCS);
+				rules.add(PR_BreakExpCS);
+				rules.add(PR_CatchExpCS);
+				rules.add(PR_ComputeExpCS);
+				rules.add(PR_ContinueExpCS);
 				rules.add(PR_DictLiteralExpCS);
 				rules.add(PR_DictLiteralPartCS);
+				rules.add(PR_ExpressionBlockCS);
+				rules.add(PR_ExpressionStatementCS);
+				rules.add(PR_ForExpCS);
+				rules.add(PR_ImperativeIterateExpCS);
+				rules.add(PR_InstantiationExpCS);
+				rules.add(PR_ListLiteralExpCS);
+				rules.add(PR_LogExpCS);
+				rules.add(PR_RaiseExpCS);
 				rules.add(PR_ReturnExpCS);
-				rules.add(PR_BlockExpCS);
 				rules.add(PR_StringLiteral);
+				rules.add(PR_SwitchExpCS);
+				rules.add(PR_SwitchAltCS);
+				rules.add(PR_TryExpCS);
+				rules.add(PR_VarDeclarationCS);
+				rules.add(PR_VarDeclarationNoInitCS);
+				rules.add(PR_VarsInitializationCS);
+				rules.add(PR_WhileExpCS);
 			}
 			{
 				List<Grammar> usedGrammars = grammar.getUsedGrammars();

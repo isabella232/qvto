@@ -62,16 +62,34 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeocl.serializer.ImperativeOCLSemanticSequencer;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperational.services.QVTOperationalGrammarAccess;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
@@ -79,6 +97,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
@@ -365,6 +384,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 					return; 
 				}
 				else if(context == grammarAccess.getExpCSRule() ||
+				   context == grammarAccess.getExpressionStatementCSRule() ||
 				   context == grammarAccess.getGrammmarCSRule() ||
 				   context == grammarAccess.getImperativeOCLExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule()) {
@@ -416,8 +436,23 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == ImperativeOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS:
-				sequence_BlockExpCS(context, (BlockExpCS) semanticObject); 
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS:
+				sequence_AssertExpCS(context, (AssertExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.ASSIGN_EXP_CS:
+				sequence_AssignExpCS(context, (AssignExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.BREAK_EXP_CS:
+				sequence_BreakExpCS(context, (BreakExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.CATCH_EXP_CS:
+				sequence_CatchExpCS(context, (CatchExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS:
+				sequence_ComputeExpCS(context, (ComputeExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.CONTINUE_EXP_CS:
+				sequence_ContinueExpCS(context, (ContinueExpCS) semanticObject); 
 				return; 
 			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS:
 				sequence_DictLiteralExpCS(context, (DictLiteralExpCS) semanticObject); 
@@ -446,6 +481,18 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 					return; 
 				}
 				else break;
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS:
+				sequence_ExpressionBlockCS(context, (ExpressionBlockCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.FOR_EXP_CS:
+				sequence_ForExpCS(context, (ForExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.IMPERATIVE_ITERATE_EXP_CS:
+				sequence_ImperativeIterateExpCS(context, (ImperativeIterateExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS:
+				sequence_InstantiationExpCS(context, (InstantiationExpCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS:
 				sequence_ListLiteralExpCS(context, (ListLiteralExpCS) semanticObject); 
 				return; 
@@ -470,13 +517,47 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 					return; 
 				}
 				else break;
+			case ImperativeOCLCSPackage.LOG_EXP_CS:
+				sequence_LogExpCS(context, (LogExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.RAISE_EXP_CS:
+				sequence_RaiseExpCS(context, (RaiseExpCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.RETURN_EXP_CS:
 				sequence_ReturnExpCS(context, (ReturnExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.SWITCH_ALT_CS:
+				sequence_SwitchAltCS(context, (SwitchAltCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS:
+				sequence_SwitchExpCS(context, (SwitchExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.TRY_EXP_CS:
+				sequence_TryExpCS(context, (TryExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.VAR_DECLARATION_CS:
+				if(context == grammarAccess.getVarDeclarationCSRule()) {
+					sequence_VarDeclarationCS(context, (VarDeclarationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getVarDeclarationNoInitCSRule()) {
+					sequence_VarDeclarationNoInitCS(context, (VarDeclarationCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS:
+				sequence_VarsInitializationCS(context, (VarsInitializationCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.WHILE_EXP_CS:
+				sequence_WhileExpCS(context, (WhileExpCS) semanticObject); 
 				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTOperationalCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS:
 				sequence_ClassifierPropertyCS(context, (ClassifierPropertyCS) semanticObject); 
+				return; 
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS:
+				sequence_EntryOperationCS(context, (EntryOperationCS) semanticObject); 
 				return; 
 			case QVTOperationalCSPackage.INIT_PART_CS:
 				sequence_InitPartCS(context, (InitPartCS) semanticObject); 
@@ -498,6 +579,9 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 				return; 
 			case QVTOperationalCSPackage.MODULE_USAGE_CS:
 				sequence_ModuleUsageCS(context, (ModuleUsageCS) semanticObject); 
+				return; 
+			case QVTOperationalCSPackage.OPERATION_BODY_CS:
+				sequence_OperationBodyCS(context, (OperationBodyCS) semanticObject); 
 				return; 
 			case QVTOperationalCSPackage.PACKAGE_REF_CS:
 				sequence_PackageRefCS(context, (PackageRefCS) semanticObject); 
@@ -640,9 +724,18 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (keyType=TypeExpCS valueType=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedKeyTypeRef=TypeExpCS ownedValueTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_DictTypeCS_TypedMultiplicityRef2CS(EObject context, DictTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     body=OperationBodyCS
+	 */
+	protected void sequence_EntryOperationCS(EObject context, EntryOperationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -719,7 +812,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (type=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_ListTypeCS_TypedMultiplicityRef2CS(EObject context, ListTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -747,8 +840,8 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 *         (merges+=PathName2CS merges+=PathName2CS*)? 
 	 *         (disjuncts+=PathName2CS disjuncts+=PathName2CS*)? 
 	 *         refines=PathName2CS? 
-	 *         when=BlockExpCS? 
-	 *         where=BlockExpCS?
+	 *         when=ExpressionBlockCS? 
+	 *         where=ExpressionBlockCS?
 	 *     )
 	 */
 	protected void sequence_MappingOperationHeaderCS(EObject context, MappingOperationCS semanticObject) {
@@ -806,6 +899,15 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 *     (lowerBound=LOWER? upperBound=UPPER)
 	 */
 	protected void sequence_MultiplicityCS(EObject context, MultiplicityBoundsCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (expressions+=ExpressionStatementCS*)
+	 */
+	protected void sequence_OperationBodyCS(EObject context, OperationBodyCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.impl.OperationCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
@@ -103,7 +103,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * @generated
 	 * @ordered
 	 */
-	protected BlockExpCS when;
+	protected ExpressionBlockCS when;
 
 	/**
 	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference.
@@ -113,7 +113,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * @generated
 	 * @ordered
 	 */
-	protected BlockExpCS where;
+	protected ExpressionBlockCS where;
 
 	/**
 	 * The cached value of the '{@link #getInherits() <em>Inherits</em>}' containment reference list.
@@ -243,7 +243,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlockExpCS getWhen() {
+	public ExpressionBlockCS getWhen() {
 		return when;
 	}
 
@@ -252,8 +252,8 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhen(BlockExpCS newWhen, NotificationChain msgs) {
-		BlockExpCS oldWhen = when;
+	public NotificationChain basicSetWhen(ExpressionBlockCS newWhen, NotificationChain msgs) {
+		ExpressionBlockCS oldWhen = when;
 		when = newWhen;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN, oldWhen, newWhen);
@@ -267,7 +267,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhen(BlockExpCS newWhen) {
+	public void setWhen(ExpressionBlockCS newWhen) {
 		if (newWhen != when) {
 			NotificationChain msgs = null;
 			if (when != null)
@@ -286,7 +286,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlockExpCS getWhere() {
+	public ExpressionBlockCS getWhere() {
 		return where;
 	}
 
@@ -295,8 +295,8 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhere(BlockExpCS newWhere, NotificationChain msgs) {
-		BlockExpCS oldWhere = where;
+	public NotificationChain basicSetWhere(ExpressionBlockCS newWhere, NotificationChain msgs) {
+		ExpressionBlockCS oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE, oldWhere, newWhere);
@@ -310,7 +310,7 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhere(BlockExpCS newWhere) {
+	public void setWhere(ExpressionBlockCS newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
@@ -535,10 +535,10 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 				setIsQuery((Boolean)newValue);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
-				setWhen((BlockExpCS)newValue);
+				setWhen((ExpressionBlockCS)newValue);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
-				setWhere((BlockExpCS)newValue);
+				setWhere((ExpressionBlockCS)newValue);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
 				getInherits().clear();
@@ -580,10 +580,10 @@ public class MappingOperationCSImpl extends OperationCSImpl implements MappingOp
 				setIsQuery(IS_QUERY_EDEFAULT);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHEN:
-				setWhen((BlockExpCS)null);
+				setWhen((ExpressionBlockCS)null);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__WHERE:
-				setWhere((BlockExpCS)null);
+				setWhere((ExpressionBlockCS)null);
 				return;
 			case QVTOperationalCSPackage.MAPPING_OPERATION_CS__INHERITS:
 				getInherits().clear();

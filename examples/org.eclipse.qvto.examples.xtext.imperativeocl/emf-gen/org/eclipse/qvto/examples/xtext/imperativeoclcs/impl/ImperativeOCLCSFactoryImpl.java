@@ -7,18 +7,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.*;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignStatementCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.DoExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExceptCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionStatementCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
@@ -28,13 +26,13 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.QuitExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.VariableInitializationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 
 /**
@@ -82,30 +80,29 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS: return createAssertExpCS();
-			case ImperativeOCLCSPackage.ASSIGN_STATEMENT_CS: return createAssignStatementCS();
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS: return createBlockExpCS();
+			case ImperativeOCLCSPackage.ASSIGN_EXP_CS: return createAssignExpCS();
+			case ImperativeOCLCSPackage.BREAK_EXP_CS: return createBreakExpCS();
 			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS: return createDictLiteralExpCS();
 			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS: return createDictLiteralPartCS();
 			case ImperativeOCLCSPackage.DICT_TYPE_CS: return createDictTypeCS();
 			case ImperativeOCLCSPackage.COMPUTE_EXP_CS: return createComputeExpCS();
+			case ImperativeOCLCSPackage.CONTINUE_EXP_CS: return createContinueExpCS();
 			case ImperativeOCLCSPackage.IMPERATIVE_ITERATE_EXP_CS: return createImperativeIterateExpCS();
 			case ImperativeOCLCSPackage.IMPERATIVE_LOOP_EXP_CS: return createImperativeLoopExpCS();
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS: return createInstantiationExpCS();
-			case ImperativeOCLCSPackage.DO_EXP_CS: return createDoExpCS();
-			case ImperativeOCLCSPackage.EXCEPT_CS: return createExceptCS();
+			case ImperativeOCLCSPackage.CATCH_EXP_CS: return createCatchExpCS();
 			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS: return createExpressionBlockCS();
-			case ImperativeOCLCSPackage.EXPRESSION_STATEMENT_CS: return createExpressionStatementCS();
 			case ImperativeOCLCSPackage.FOR_EXP_CS: return createForExpCS();
 			case ImperativeOCLCSPackage.LIST_TYPE_CS: return createListTypeCS();
 			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS: return createListLiteralExpCS();
 			case ImperativeOCLCSPackage.LOG_EXP_CS: return createLogExpCS();
-			case ImperativeOCLCSPackage.QUIT_EXP_CS: return createQuitExpCS();
 			case ImperativeOCLCSPackage.RAISE_EXP_CS: return createRaiseExpCS();
 			case ImperativeOCLCSPackage.RETURN_EXP_CS: return createReturnExpCS();
 			case ImperativeOCLCSPackage.SWITCH_ALT_CS: return createSwitchAltCS();
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS: return createSwitchExpCS();
 			case ImperativeOCLCSPackage.TRY_EXP_CS: return createTryExpCS();
-			case ImperativeOCLCSPackage.VARIABLE_INITIALIZATION_CS: return createVariableInitializationCS();
+			case ImperativeOCLCSPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS: return createVarsInitializationCS();
 			case ImperativeOCLCSPackage.WHILE_EXP_CS: return createWhileExpCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -127,9 +124,9 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AssignStatementCS createAssignStatementCS() {
-		AssignStatementCSImpl assignStatementCS = new AssignStatementCSImpl();
-		return assignStatementCS;
+	public AssignExpCS createAssignExpCS() {
+		AssignExpCSImpl assignExpCS = new AssignExpCSImpl();
+		return assignExpCS;
 	}
 
 	/**
@@ -137,9 +134,9 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlockExpCS createBlockExpCS() {
-		BlockExpCSImpl blockExpCS = new BlockExpCSImpl();
-		return blockExpCS;
+	public BreakExpCS createBreakExpCS() {
+		BreakExpCSImpl breakExpCS = new BreakExpCSImpl();
+		return breakExpCS;
 	}
 
 	/**
@@ -187,6 +184,16 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ContinueExpCS createContinueExpCS() {
+		ContinueExpCSImpl continueExpCS = new ContinueExpCSImpl();
+		return continueExpCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImperativeIterateExpCS createImperativeIterateExpCS() {
 		ImperativeIterateExpCSImpl imperativeIterateExpCS = new ImperativeIterateExpCSImpl();
 		return imperativeIterateExpCS;
@@ -217,19 +224,9 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DoExpCS createDoExpCS() {
-		DoExpCSImpl doExpCS = new DoExpCSImpl();
-		return doExpCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExceptCS createExceptCS() {
-		ExceptCSImpl exceptCS = new ExceptCSImpl();
-		return exceptCS;
+	public CatchExpCS createCatchExpCS() {
+		CatchExpCSImpl catchExpCS = new CatchExpCSImpl();
+		return catchExpCS;
 	}
 
 	/**
@@ -240,16 +237,6 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	public ExpressionBlockCS createExpressionBlockCS() {
 		ExpressionBlockCSImpl expressionBlockCS = new ExpressionBlockCSImpl();
 		return expressionBlockCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExpressionStatementCS createExpressionStatementCS() {
-		ExpressionStatementCSImpl expressionStatementCS = new ExpressionStatementCSImpl();
-		return expressionStatementCS;
 	}
 
 	/**
@@ -290,16 +277,6 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	public LogExpCS createLogExpCS() {
 		LogExpCSImpl logExpCS = new LogExpCSImpl();
 		return logExpCS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public QuitExpCS createQuitExpCS() {
-		QuitExpCSImpl quitExpCS = new QuitExpCSImpl();
-		return quitExpCS;
 	}
 
 	/**
@@ -357,9 +334,19 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableInitializationCS createVariableInitializationCS() {
-		VariableInitializationCSImpl variableInitializationCS = new VariableInitializationCSImpl();
-		return variableInitializationCS;
+	public VarDeclarationCS createVarDeclarationCS() {
+		VarDeclarationCSImpl varDeclarationCS = new VarDeclarationCSImpl();
+		return varDeclarationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VarsInitializationCS createVarsInitializationCS() {
+		VarsInitializationCSImpl varsInitializationCS = new VarsInitializationCSImpl();
+		return varsInitializationCS;
 	}
 
 	/**

@@ -13,7 +13,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS#getOwnedValue <em>Owned Value</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getReturnExpCS()
@@ -22,29 +22,29 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface ReturnExpCS extends ExpCS {
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getReturnExpCS_Value()
+	 * @return the value of the '<em>Owned Value</em>' containment reference.
+	 * @see #setOwnedValue(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getReturnExpCS_OwnedValue()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getValue();
+	ExpCS getOwnedValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS#getOwnedValue <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Owned Value</em>' containment reference.
+	 * @see #getOwnedValue()
 	 * @generated
 	 */
-	void setValue(ExpCS value);
+	void setOwnedValue(ExpCS value);
 
 } // ReturnExpCS

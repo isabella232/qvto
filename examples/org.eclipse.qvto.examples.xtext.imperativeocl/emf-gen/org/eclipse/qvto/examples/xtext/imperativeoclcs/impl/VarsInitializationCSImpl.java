@@ -11,40 +11,40 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Block Exp CS</b></em>'.
+ * An implementation of the model object '<em><b>Vars Initialization CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.BlockExpCSImpl#getExpressions <em>Expressions</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.VarsInitializationCSImpl#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
+public class VarsInitializationCSImpl extends StatementCSImpl implements VarsInitializationCS {
 	/**
-	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedVarDeclarations() <em>Owned Var Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpressions()
+	 * @see #getOwnedVarDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> expressions;
+	protected EList<VarDeclarationCS> ownedVarDeclarations;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BlockExpCSImpl() {
+	protected VarsInitializationCSImpl() {
 		super();
 	}
 
@@ -55,7 +55,7 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return ImperativeOCLCSPackage.Literals.BLOCK_EXP_CS;
+		return ImperativeOCLCSPackage.Literals.VARS_INITIALIZATION_CS;
 	}
 
 	/**
@@ -63,11 +63,11 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getExpressions() {
-		if (expressions == null) {
-			expressions = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS);
+	public EList<VarDeclarationCS> getOwnedVarDeclarations() {
+		if (ownedVarDeclarations == null) {
+			ownedVarDeclarations = new EObjectContainmentEList<VarDeclarationCS>(VarDeclarationCS.class, this, ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS);
 		}
-		return expressions;
+		return ownedVarDeclarations;
 	}
 
 	/**
@@ -78,8 +78,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
-				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS:
+				return ((InternalEList<?>)getOwnedVarDeclarations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -92,8 +92,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
-				return getExpressions();
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS:
+				return getOwnedVarDeclarations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -107,9 +107,9 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
-				getExpressions().clear();
-				getExpressions().addAll((Collection<? extends ExpCS>)newValue);
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS:
+				getOwnedVarDeclarations().clear();
+				getOwnedVarDeclarations().addAll((Collection<? extends VarDeclarationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -123,8 +123,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
-				getExpressions().clear();
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS:
+				getOwnedVarDeclarations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -138,8 +138,8 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS__EXPRESSIONS:
-				return expressions != null && !expressions.isEmpty();
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS__OWNED_VAR_DECLARATIONS:
+				return ownedVarDeclarations != null && !ownedVarDeclarations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -151,7 +151,7 @@ public class BlockExpCSImpl extends StatementCSImpl implements BlockExpCS {
 	@SuppressWarnings("unchecked")
 	@Override
 	public <R> R accept(BaseCSVisitor<R> visitor) {
-		return (R) ((ImperativeOCLCSVisitor<?>)visitor).visitBlockExpCS(this);
+		return (R) ((ImperativeOCLCSVisitor<?>)visitor).visitVarsInitializationCS(this);
 	}
 
-} //BlockExpCSImpl
+} //VarsInitializationCSImpl

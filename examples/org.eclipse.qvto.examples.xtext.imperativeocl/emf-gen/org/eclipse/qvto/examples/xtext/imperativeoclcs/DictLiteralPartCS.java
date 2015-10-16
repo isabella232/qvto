@@ -2,8 +2,7 @@
  */
 package org.eclipse.qvto.examples.xtext.imperativeoclcs;
 
-import org.eclipse.ocl.xtext.basecs.ElementCS;
-
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.PrimitiveLiteralExpCS;
 
@@ -16,65 +15,65 @@ import org.eclipse.ocl.xtext.essentialoclcs.PrimitiveLiteralExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getKey <em>Key</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getOwnedKey <em>Owned Key</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getOwnedValue <em>Owned Value</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getDictLiteralPartCS()
  * @model
  * @generated
  */
-public interface DictLiteralPartCS extends ElementCS {
+public interface DictLiteralPartCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Key</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Key</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Key</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Key</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' containment reference.
-	 * @see #setKey(PrimitiveLiteralExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getDictLiteralPartCS_Key()
-	 * @model containment="true"
+	 * @return the value of the '<em>Owned Key</em>' containment reference.
+	 * @see #setOwnedKey(PrimitiveLiteralExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getDictLiteralPartCS_OwnedKey()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	PrimitiveLiteralExpCS getKey();
+	PrimitiveLiteralExpCS getOwnedKey();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getKey <em>Key</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getOwnedKey <em>Owned Key</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' containment reference.
-	 * @see #getKey()
+	 * @param value the new value of the '<em>Owned Key</em>' containment reference.
+	 * @see #getOwnedKey()
 	 * @generated
 	 */
-	void setKey(PrimitiveLiteralExpCS value);
+	void setOwnedKey(PrimitiveLiteralExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getDictLiteralPartCS_Value()
-	 * @model containment="true"
+	 * @return the value of the '<em>Owned Value</em>' containment reference.
+	 * @see #setOwnedValue(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getDictLiteralPartCS_OwnedValue()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getValue();
+	ExpCS getOwnedValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS#getOwnedValue <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Owned Value</em>' containment reference.
+	 * @see #getOwnedValue()
 	 * @generated
 	 */
-	void setValue(ExpCS value);
+	void setOwnedValue(ExpCS value);
 
 } // DictLiteralPartCS

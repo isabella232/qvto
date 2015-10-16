@@ -4,7 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,12 +77,12 @@ public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(BlockExpCS)
+	 * @see #setWhere(ExpressionBlockCS)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_Where()
 	 * @model containment="true"
 	 * @generated
 	 */
-	BlockExpCS getWhere();
+	ExpressionBlockCS getWhere();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}' containment reference.
@@ -92,6 +92,6 @@ public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	 * @see #getWhere()
 	 * @generated
 	 */
-	void setWhere(BlockExpCS value);
+	void setWhere(ExpressionBlockCS value);
 
 } // ModelTypeCS

@@ -4,22 +4,15 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.ocl.xtext.basecs.TemplateBindingCS;
-
 import org.eclipse.ocl.xtext.basecs.impl.TypedRefCSImpl;
-
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS;
-
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**

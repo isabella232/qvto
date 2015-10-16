@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
@@ -117,7 +117,7 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected BlockExpCS where;
+	protected ExpressionBlockCS where;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -218,7 +218,7 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlockExpCS getWhere() {
+	public ExpressionBlockCS getWhere() {
 		return where;
 	}
 
@@ -227,8 +227,8 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhere(BlockExpCS newWhere, NotificationChain msgs) {
-		BlockExpCS oldWhere = where;
+	public NotificationChain basicSetWhere(ExpressionBlockCS newWhere, NotificationChain msgs) {
+		ExpressionBlockCS oldWhere = where;
 		where = newWhere;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE, oldWhere, newWhere);
@@ -242,7 +242,7 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setWhere(BlockExpCS newWhere) {
+	public void setWhere(ExpressionBlockCS newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;
 			if (where != null)
@@ -326,7 +326,7 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				getPackageRefs().addAll((Collection<? extends PackageRefCS>)newValue);
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE:
-				setWhere((BlockExpCS)newValue);
+				setWhere((ExpressionBlockCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -353,7 +353,7 @@ public class ModelTypeCSImpl extends ClassCSImpl implements ModelTypeCS {
 				getPackageRefs().clear();
 				return;
 			case QVTOperationalCSPackage.MODEL_TYPE_CS__WHERE:
-				setWhere((BlockExpCS)null);
+				setWhere((ExpressionBlockCS)null);
 				return;
 		}
 		super.eUnset(featureID);

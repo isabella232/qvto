@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.CollectionLiteralPartCS;
-import org.eclipse.ocl.xtext.essentialoclcs.impl.ExpCSImpl;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.LiteralExpCSImpl;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
@@ -30,7 +30,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  *
  * @generated
  */
-public class ListLiteralExpCSImpl extends ExpCSImpl implements ListLiteralExpCS {
+public class ListLiteralExpCSImpl extends LiteralExpCSImpl implements ListLiteralExpCS {
 	/**
 	 * The cached value of the '{@link #getOwnedParts() <em>Owned Parts</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

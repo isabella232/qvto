@@ -13,8 +13,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getAssertion <em>Assertion</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getLog <em>Log</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getOwnedAssertion <em>Owned Assertion</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getOwnedLog <em>Owned Log</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getSeverity <em>Severity</em>}</li>
  * </ul>
  *
@@ -24,56 +24,56 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface AssertExpCS extends StatementCS {
 	/**
-	 * Returns the value of the '<em><b>Assertion</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Assertion</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Assertion</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Assertion</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assertion</em>' containment reference.
-	 * @see #setAssertion(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssertExpCS_Assertion()
+	 * @return the value of the '<em>Owned Assertion</em>' containment reference.
+	 * @see #setOwnedAssertion(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssertExpCS_OwnedAssertion()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getAssertion();
+	ExpCS getOwnedAssertion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getAssertion <em>Assertion</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getOwnedAssertion <em>Owned Assertion</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Assertion</em>' containment reference.
-	 * @see #getAssertion()
+	 * @param value the new value of the '<em>Owned Assertion</em>' containment reference.
+	 * @see #getOwnedAssertion()
 	 * @generated
 	 */
-	void setAssertion(ExpCS value);
+	void setOwnedAssertion(ExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Log</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Log</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Log</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Log</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Log</em>' containment reference.
-	 * @see #setLog(LogExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssertExpCS_Log()
+	 * @return the value of the '<em>Owned Log</em>' containment reference.
+	 * @see #setOwnedLog(LogExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssertExpCS_OwnedLog()
 	 * @model containment="true"
 	 * @generated
 	 */
-	LogExpCS getLog();
+	LogExpCS getOwnedLog();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getLog <em>Log</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getOwnedLog <em>Owned Log</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Log</em>' containment reference.
-	 * @see #getLog()
+	 * @param value the new value of the '<em>Owned Log</em>' containment reference.
+	 * @see #getOwnedLog()
 	 * @generated
 	 */
-	void setLog(LogExpCS value);
+	void setOwnedLog(LogExpCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Severity</b></em>' attribute.

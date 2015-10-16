@@ -94,6 +94,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	QVToOperationCS createQVToOperationCS();
 
 	/**
+	 * Returns a new object of class '<em>Entry Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Entry Operation CS</em>'.
+	 * @generated
+	 */
+	EntryOperationCS createEntryOperationCS();
+
+	/**
 	 * Returns a new object of class '<em>Init Part CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,6 +119,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	MetamodelCS createMetamodelCS();
+
+	/**
+	 * Returns a new object of class '<em>Operation Body CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Body CS</em>'.
+	 * @generated
+	 */
+	OperationBodyCS createOperationBodyCS();
 
 	/**
 	 * Returns a new object of class '<em>Primitive Type CS</em>'.

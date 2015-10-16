@@ -61,6 +61,10 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 		return delegate.visitElementWithBody(object);
 	}
 
+	public @Nullable R visitEntryOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS object) {
+		return delegate.visitEntryOperationCS(object);
+	}
+
 	public @Nullable R visitExceptionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS object) {
 		return delegate.visitExceptionCS(object);
 	}
@@ -159,6 +163,10 @@ public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends 
 
 	public @Nullable R visitObjectExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS object) {
 		return delegate.visitObjectExpCS(object);
+	}
+
+	public @Nullable R visitOperationBodyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS object) {
+		return delegate.visitOperationBodyCS(object);
 	}
 
 	public @Nullable R visitOppositePropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS object) {

@@ -33,15 +33,23 @@ public abstract class AbstractNullImperativeOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitAssignStatementCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignStatementCS object) {
+	public @Nullable R visitAssignExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitBlockExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS object) {
+	public @Nullable R visitBreakExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS object) {
+		return null;
+	}
+
+	public @Nullable R visitCatchExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS object) {
 		return null;
 	}
 
 	public @Nullable R visitComputeExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS object) {
+		return null;
+	}
+
+	public @Nullable R visitContinueExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS object) {
 		return null;
 	}
 
@@ -57,19 +65,7 @@ public abstract class AbstractNullImperativeOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitDoExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.DoExpCS object) {
-		return null;
-	}
-
-	public @Nullable R visitExceptCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExceptCS object) {
-		return null;
-	}
-
 	public @Nullable R visitExpressionBlockCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS object) {
-		return null;
-	}
-
-	public @Nullable R visitExpressionStatementCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionStatementCS object) {
 		return null;
 	}
 
@@ -101,10 +97,6 @@ public abstract class AbstractNullImperativeOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitQuitExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.QuitExpCS object) {
-		return null;
-	}
-
 	public @Nullable R visitRaiseExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS object) {
 		return null;
 	}
@@ -129,7 +121,11 @@ public abstract class AbstractNullImperativeOCLCSVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitVariableInitializationCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.VariableInitializationCS object) {
+	public @Nullable R visitVarDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS object) {
+		return null;
+	}
+
+	public @Nullable R visitVarsInitializationCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS object) {
 		return null;
 	}
 

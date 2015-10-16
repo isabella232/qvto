@@ -46,6 +46,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
@@ -63,6 +64,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS;
@@ -70,6 +72,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
@@ -93,6 +96,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS;
 
 /**
@@ -268,6 +272,23 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS: {
+				EntryOperationCS entryOperationCS = (EntryOperationCS)theEObject;
+				T result = caseEntryOperationCS(entryOperationCS);
+				if (result == null) result = caseOperationCS(entryOperationCS);
+				if (result == null) result = caseFeatureCS(entryOperationCS);
+				if (result == null) result = caseTemplateableElementCS(entryOperationCS);
+				if (result == null) result = caseTypedElementCS(entryOperationCS);
+				if (result == null) result = caseNamedElementCS(entryOperationCS);
+				if (result == null) result = caseModelElementCS(entryOperationCS);
+				if (result == null) result = caseNameable(entryOperationCS);
+				if (result == null) result = casePivotableElementCS(entryOperationCS);
+				if (result == null) result = caseElementCS(entryOperationCS);
+				if (result == null) result = casePivotable(entryOperationCS);
+				if (result == null) result = caseVisitableCS(entryOperationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTOperationalCSPackage.INIT_PART_CS: {
 				InitPartCS initPartCS = (InitPartCS)theEObject;
 				T result = caseInitPartCS(initPartCS);
@@ -289,6 +310,16 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(metamodelCS);
 				if (result == null) result = casePivotable(metamodelCS);
 				if (result == null) result = caseVisitableCS(metamodelCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTOperationalCSPackage.OPERATION_BODY_CS: {
+				OperationBodyCS operationBodyCS = (OperationBodyCS)theEObject;
+				T result = caseOperationBodyCS(operationBodyCS);
+				if (result == null) result = casePivotableElementCS(operationBodyCS);
+				if (result == null) result = caseElementCS(operationBodyCS);
+				if (result == null) result = casePivotable(operationBodyCS);
+				if (result == null) result = caseVisitableCS(operationBodyCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -938,6 +969,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry Operation CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntryOperationCS(EntryOperationCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Init Part CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -964,6 +1010,21 @@ public class QVTOperationalCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMetamodelCS(MetamodelCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Operation Body CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Operation Body CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOperationBodyCS(OperationBodyCS object) {
 		return null;
 	}
 

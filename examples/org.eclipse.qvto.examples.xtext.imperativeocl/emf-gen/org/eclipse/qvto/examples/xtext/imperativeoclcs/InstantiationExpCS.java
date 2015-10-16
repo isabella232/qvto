@@ -3,9 +3,7 @@
 package org.eclipse.qvto.examples.xtext.imperativeoclcs;
 
 import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.ocl.xtext.basecs.TypeCS;
-
+import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
@@ -17,8 +15,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getTypeSpecCS <em>Type Spec CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedClassRef <em>Owned Class Ref</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedArguments <em>Owned Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedExtentRef <em>Owned Extent Ref</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS()
@@ -27,45 +26,71 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface InstantiationExpCS extends StatementCS {
 	/**
-	 * Returns the value of the '<em><b>Type Spec CS</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Class Ref</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type Spec CS</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Class Ref</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type Spec CS</em>' containment reference.
-	 * @see #setTypeSpecCS(TypeCS)
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_TypeSpecCS()
+	 * @return the value of the '<em>Owned Class Ref</em>' containment reference.
+	 * @see #setOwnedClassRef(TypedRefCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_OwnedClassRef()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	TypeCS getTypeSpecCS();
+	TypedRefCS getOwnedClassRef();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getTypeSpecCS <em>Type Spec CS</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedClassRef <em>Owned Class Ref</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type Spec CS</em>' containment reference.
-	 * @see #getTypeSpecCS()
+	 * @param value the new value of the '<em>Owned Class Ref</em>' containment reference.
+	 * @see #getOwnedClassRef()
 	 * @generated
 	 */
-	void setTypeSpecCS(TypeCS value);
+	void setOwnedClassRef(TypedRefCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Arguments</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Arguments</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Arguments</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arguments</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_Arguments()
+	 * @return the value of the '<em>Owned Arguments</em>' containment reference list.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_OwnedArguments()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ExpCS> getArguments();
+	EList<ExpCS> getOwnedArguments();
+
+	/**
+	 * Returns the value of the '<em><b>Owned Extent Ref</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Extent Ref</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Extent Ref</em>' containment reference.
+	 * @see #setOwnedExtentRef(TypedRefCS)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_OwnedExtentRef()
+	 * @model containment="true"
+	 * @generated
+	 */
+	TypedRefCS getOwnedExtentRef();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedExtentRef <em>Owned Extent Ref</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Extent Ref</em>' containment reference.
+	 * @see #getOwnedExtentRef()
+	 * @generated
+	 */
+	void setOwnedExtentRef(TypedRefCS value);
 
 } // InstantiationExpCS

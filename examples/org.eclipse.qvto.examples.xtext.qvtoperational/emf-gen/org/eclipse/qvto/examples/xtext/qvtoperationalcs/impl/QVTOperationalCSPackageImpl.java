@@ -23,6 +23,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.FeatureKey;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS;
@@ -54,6 +55,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
@@ -150,6 +152,13 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass entryOperationCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass initPartCSEClass = null;
 
 	/**
@@ -158,6 +167,13 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * @generated
 	 */
 	private EClass metamodelCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass operationBodyCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -783,6 +799,24 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getEntryOperationCS() {
+		return entryOperationCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getEntryOperationCS_Body() {
+		return (EReference)entryOperationCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getInitPartCS() {
 		return initPartCSEClass;
 	}
@@ -821,6 +855,24 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 	 */
 	public EAttribute getMetamodelCS_MetamodelKind() {
 		return (EAttribute)metamodelCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOperationBodyCS() {
+		return operationBodyCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getOperationBodyCS_Expressions() {
+		return (EReference)operationBodyCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -2272,12 +2324,18 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		qvToOperationCSEClass = createEClass(QV_TO_OPERATION_CS);
 		createEReference(qvToOperationCSEClass, QV_TO_OPERATION_CS__STEREOTYPES);
 
+		entryOperationCSEClass = createEClass(ENTRY_OPERATION_CS);
+		createEReference(entryOperationCSEClass, ENTRY_OPERATION_CS__BODY);
+
 		initPartCSEClass = createEClass(INIT_PART_CS);
 		createEAttribute(initPartCSEClass, INIT_PART_CS__INIT_OP);
 		createEReference(initPartCSEClass, INIT_PART_CS__EXPRESSION);
 
 		metamodelCSEClass = createEClass(METAMODEL_CS);
 		createEAttribute(metamodelCSEClass, METAMODEL_CS__METAMODEL_KIND);
+
+		operationBodyCSEClass = createEClass(OPERATION_BODY_CS);
+		createEReference(operationBodyCSEClass, OPERATION_BODY_CS__EXPRESSIONS);
 
 		primitiveTypeCSEClass = createEClass(PRIMITIVE_TYPE_CS);
 
@@ -2526,8 +2584,10 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		qvToImportCSEClass.getESuperTypes().add(theBaseCSPackage.getImportCS());
 		qvToLibraryCSEClass.getESuperTypes().add(this.getModuleCS());
 		qvToOperationCSEClass.getESuperTypes().add(theBaseCSPackage.getOperationCS());
+		entryOperationCSEClass.getESuperTypes().add(theBaseCSPackage.getOperationCS());
 		initPartCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
 		metamodelCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
+		operationBodyCSEClass.getESuperTypes().add(theBaseCSPackage.getPivotableElementCS());
 		primitiveTypeCSEClass.getESuperTypes().add(theBaseCSPackage.getDataTypeCS());
 		classifierPropertyCSEClass.getESuperTypes().add(theBaseCSPackage.getStructuralFeatureCS());
 		stereotypeQualifierCSEClass.getESuperTypes().add(theBaseCSPackage.getElementCS());
@@ -2605,12 +2665,18 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEClass(qvToOperationCSEClass, QVToOperationCS.class, "QVToOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQVToOperationCS_Stereotypes(), this.getStereotypeQualifierCS(), null, "stereotypes", null, 0, 1, QVToOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(entryOperationCSEClass, EntryOperationCS.class, "EntryOperationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getEntryOperationCS_Body(), this.getOperationBodyCS(), null, "body", null, 0, 1, EntryOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(initPartCSEClass, InitPartCS.class, "InitPartCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getInitPartCS_InitOp(), this.getInitOp(), "initOp", null, 0, 1, InitPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInitPartCS_Expression(), theEssentialOCLCSPackage.getExpCS(), null, "expression", null, 0, 1, InitPartCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metamodelCSEClass, MetamodelCS.class, "MetamodelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMetamodelCS_MetamodelKind(), this.getMetamodelKind(), "metamodelKind", null, 0, 1, MetamodelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationBodyCSEClass, OperationBodyCS.class, "OperationBodyCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperationBodyCS_Expressions(), theEssentialOCLCSPackage.getExpCS(), null, "expressions", null, 0, -1, OperationBodyCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeCSEClass, PrimitiveTypeCS.class, "PrimitiveTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2678,8 +2744,8 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEReference(getMappingOperationCS_Results(), this.getParameterDeclarationCS(), null, "results", null, 0, -1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingOperationCS_Direction(), this.getDirectionKindCS(), "direction", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMappingOperationCS_IsQuery(), ecorePackage.getEBoolean(), "isQuery", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingOperationCS_When(), theImperativeOCLCSPackage.getBlockExpCS(), null, "when", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingOperationCS_Where(), theImperativeOCLCSPackage.getBlockExpCS(), null, "where", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingOperationCS_When(), theImperativeOCLCSPackage.getExpressionBlockCS(), null, "when", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingOperationCS_Where(), theImperativeOCLCSPackage.getExpressionBlockCS(), null, "where", null, 0, 1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingOperationCS_Inherits(), this.getPathName2CS(), null, "inherits", null, 0, -1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingOperationCS_Disjuncts(), this.getPathName2CS(), null, "disjuncts", null, 0, -1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingOperationCS_Merges(), this.getPathName2CS(), null, "merges", null, 0, -1, MappingOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2721,7 +2787,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		initEClass(modelTypeCSEClass, ModelTypeCS.class, "ModelTypeCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getModelTypeCS_ComplianceKind(), theEcorePackage.getEString(), "complianceKind", "strict", 0, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getModelTypeCS_PackageRefs(), this.getPackageRefCS(), null, "packageRefs", null, 1, -1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getModelTypeCS_Where(), theImperativeOCLCSPackage.getBlockExpCS(), null, "where", null, 0, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelTypeCS_Where(), theImperativeOCLCSPackage.getExpressionBlockCS(), null, "where", null, 0, 1, ModelTypeCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelTypeRefCSEClass, ModelTypeRefCS.class, "ModelTypeRefCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

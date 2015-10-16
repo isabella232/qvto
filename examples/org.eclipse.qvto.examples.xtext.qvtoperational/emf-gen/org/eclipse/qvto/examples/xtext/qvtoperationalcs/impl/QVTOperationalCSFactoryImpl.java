@@ -18,6 +18,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.DirectionKindCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.FeatureKey;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS;
@@ -38,6 +39,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum;
@@ -45,6 +47,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
@@ -70,6 +73,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS;
 
 /**
@@ -124,8 +128,10 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 			case QVTOperationalCSPackage.QV_TO_IMPORT_CS: return createQVToImportCS();
 			case QVTOperationalCSPackage.QV_TO_LIBRARY_CS: return createQVToLibraryCS();
 			case QVTOperationalCSPackage.QV_TO_OPERATION_CS: return createQVToOperationCS();
+			case QVTOperationalCSPackage.ENTRY_OPERATION_CS: return createEntryOperationCS();
 			case QVTOperationalCSPackage.INIT_PART_CS: return createInitPartCS();
 			case QVTOperationalCSPackage.METAMODEL_CS: return createMetamodelCS();
+			case QVTOperationalCSPackage.OPERATION_BODY_CS: return createOperationBodyCS();
 			case QVTOperationalCSPackage.PRIMITIVE_TYPE_CS: return createPrimitiveTypeCS();
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS: return createClassifierPropertyCS();
 			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS: return createStereotypeQualifierCS();
@@ -321,6 +327,16 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EntryOperationCS createEntryOperationCS() {
+		EntryOperationCSImpl entryOperationCS = new EntryOperationCSImpl();
+		return entryOperationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public InitPartCS createInitPartCS() {
 		InitPartCSImpl initPartCS = new InitPartCSImpl();
 		return initPartCS;
@@ -334,6 +350,16 @@ public class QVTOperationalCSFactoryImpl extends EFactoryImpl implements QVTOper
 	public MetamodelCS createMetamodelCS() {
 		MetamodelCSImpl metamodelCS = new MetamodelCSImpl();
 		return metamodelCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public OperationBodyCS createOperationBodyCS() {
+		OperationBodyCSImpl operationBodyCS = new OperationBodyCSImpl();
+		return operationBodyCS;
 	}
 
 	/**
