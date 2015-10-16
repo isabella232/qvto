@@ -16,95 +16,95 @@
   <genPackages prefix="ImperativeOCLCS" basePackage="org.eclipse.qvto.examples.xtext"
       disposableProviderFactory="true" fileExtensions="iocl" ecorePackage="ImperativeOCLCS.ecore#/">
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//AssertExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/assertion"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/log"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/ownedAssertion"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/ownedLog"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//AssertExpCS/severity"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//AssignStatementCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssignStatementCS/lValueCS"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssignStatementCS/oclExpressionCS"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//AssignStatementCS/incremental"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//AssignExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssignExpCS/ownedLeft"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssignExpCS/ownedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//AssignExpCS/assignOp"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssignExpCS/ownedDefault"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//BlockExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//BlockExpCS/expressions"/>
-    </genClasses>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//BreakExpCS"/>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//DictLiteralExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictLiteralExpCS/ownedParts"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//DictLiteralPartCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictLiteralPartCS/key"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictLiteralPartCS/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictLiteralPartCS/ownedKey"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictLiteralPartCS/ownedValue"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//DictTypeCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictTypeCS/keyType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictTypeCS/valueType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictTypeCS/ownedKeyTypeRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DictTypeCS/ownedValueTypeRef"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ComputeExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ComputeExpCS/returnedElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ComputeExpCS/ownedResultVar"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ImperativeIterateExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeIterateExpCS/target"/>
-    </genClasses>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ContinueExpCS"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ImperativeIterateExpCS"/>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ImperativeLoopExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeLoopExpCS/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeLoopExpCS/ownedCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeLoopExpCS/ownedTarget"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeLoopExpCS/ownedIterator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ImperativeLoopExpCS/ownedBody"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//ImperativeLoopExpCS/name"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//InstantiationExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//InstantiationExpCS/typeSpecCS"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//InstantiationExpCS/arguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//InstantiationExpCS/ownedClassRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//InstantiationExpCS/ownedArguments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//InstantiationExpCS/ownedExtentRef"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//DoExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//DoExpCS/condition"/>
-    </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ExceptCS">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExceptCS/except"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExceptCS/body"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//CatchExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//CatchExpCS/ownedExceptionRefs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//CatchExpCS/varName"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ExpressionBlockCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExpressionBlockCS/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExpressionBlockCS/ownedExps"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ExpressionStatementCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExpressionStatementCS/oclExpressionCS"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ForExpCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//ForExpCS/isOne"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ForExpCS"/>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ListTypeCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ListTypeCS/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ListTypeCS/ownedTypeRef"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ListLiteralExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ListLiteralExpCS/ownedParts"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//LogExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//LogExpCS/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//LogExpCS/ownedMessage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//LogExpCS/ownedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//LogExpCS/severity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//LogExpCS/ownedCondition"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//QuitExpCS">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//QuitExpCS/keyword"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//QuitExpCS/value"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//RaiseExpCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//RaiseExpCS/ownedExceptionRef"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//RaiseExpCS/ownedArguments"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//RaiseExpCS"/>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ReturnExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ReturnExpCS/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ReturnExpCS/ownedValue"/>
     </genClasses>
     <genClasses image="false" ecoreClass="ImperativeOCLCS.ecore#//StatementCS"/>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//SwitchAltCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchAltCS/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchAltCS/body"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//SwitchAltCS/keyword"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchAltCS/ownedCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchAltCS/ownedBody"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//SwitchExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/alternativePart"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/elsePart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/ownedAltParts"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/ownedElsePart"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//TryExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//TryExpCS/catch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//TryExpCS/ownedCatchs"/>
     </genClasses>
-    <genClasses ecoreClass="ImperativeOCLCS.ecore#//VariableInitializationCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//VariableInitializationCS/oclExpressionCS"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//VariableInitializationCS/simpleNameCS"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//VariableInitializationCS/typeCS"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//VariableInitializationCS/withResult"/>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//VarDeclarationCS">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//VarDeclarationCS/initOp"/>
+    </genClasses>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//VarsInitializationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//VarsInitializationCS/ownedVarDeclarations"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//WhileExpCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//WhileExpCS/condition"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//WhileExpCS/resultVar"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//WhileExpCS/ownedCondition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//WhileExpCS/ownedResultVar"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

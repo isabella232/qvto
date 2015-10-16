@@ -301,9 +301,19 @@ ModulePropertyCS returns base::StructuralFeatureCS:
 ;
 
 ModuleOperationCS returns base::OperationCS: 
-	MappingOperationCS
+	EntryOperationCS | MappingOperationCS
 ;
 
+EntryOperationCS :
+	'main' '('')' body=OperationBodyCS ';'?
+;
+
+OperationBodyCS :
+	{OperationBodyCS}
+	'{'
+		expressions += ExpressionStatementCS* 
+	'}'
+;
 MappingOperationCS:
 	MappingDeclarationCS | MappingDefinitionCS
 ;
@@ -314,7 +324,7 @@ MappingDeclarationCS returns MappingOperationCS:
 
 MappingDefinitionCS returns MappingOperationCS:
 	MappingOperationHeaderCS '{'
-	
+		
 	'}' 
 ;
 
@@ -329,6 +339,6 @@ MappingOperationHeaderCS returns MappingOperationCS:
 	& ('disjuncts' disjuncts+=PathName2CS (',' disjuncts+=PathName2CS)* )?
 	& ('refines' refines=PathName2CS)?
 	)
-	('when' when=BlockExpCS)?
-	('where' where=BlockExpCS)?
+	('when' when=ExpressionBlockCS)?
+	('where' where=ExpressionBlockCS)?
 ;

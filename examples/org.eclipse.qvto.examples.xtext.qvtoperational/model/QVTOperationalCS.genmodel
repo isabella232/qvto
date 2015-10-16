@@ -86,12 +86,18 @@
     <genClasses ecoreClass="QVTOperationalCS.ecore#//QVToOperationCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//QVToOperationCS/stereotypes"/>
     </genClasses>
+    <genClasses ecoreClass="QVTOperationalCS.ecore#//EntryOperationCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//EntryOperationCS/body"/>
+    </genClasses>
     <genClasses ecoreClass="QVTOperationalCS.ecore#//InitPartCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTOperationalCS.ecore#//InitPartCS/initOp"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//InitPartCS/expression"/>
     </genClasses>
     <genClasses ecoreClass="QVTOperationalCS.ecore#//MetamodelCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTOperationalCS.ecore#//MetamodelCS/metamodelKind"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTOperationalCS.ecore#//OperationBodyCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperationalCS.ecore#//OperationBodyCS/expressions"/>
     </genClasses>
     <genClasses ecoreClass="QVTOperationalCS.ecore#//PrimitiveTypeCS"/>
     <genClasses ecoreClass="QVTOperationalCS.ecore#//ClassifierPropertyCS">
