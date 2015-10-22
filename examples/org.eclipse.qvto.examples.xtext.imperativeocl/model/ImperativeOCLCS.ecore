@@ -8,7 +8,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLog" eType="#//LogExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" eType="#//SeverityKindCS"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssignExpCS" eSuperTypes="#//StatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLeft" lowerBound="1"
@@ -17,9 +17,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedValue" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignOp" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assignOp" eType="#//AssignOpCS"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDefault" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AssignOpCS">
+    <eLiterals name="Single" literal=":="/>
+    <eLiterals name="MultiWithReset" value="1" literal="::="/>
+    <eLiterals name="MultiWithoutReset" value="2" literal="+="/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BreakExpCS" eSuperTypes="#//StatementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="DictLiteralExpCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//LiteralExpCS">
@@ -57,9 +62,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="InitOpCS">
+    <eLiterals name="Equals" literal="="/>
+    <eLiterals name="ColonEquals" value="1" literal=":="/>
+    <eLiterals name="ColonColonEquals" value="2" literal="::="/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstantiationExpCS" eSuperTypes="#//StatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClassRef" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedRefCS"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypeRefCS"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedArguments" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
@@ -73,9 +83,14 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="varName" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpressionBlockCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressionBlockCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS #//StatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedExps" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtentRefCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ElementRefCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ForExpCS" eSuperTypes="#//ImperativeLoopExpCS">
@@ -96,7 +111,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElement" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="severity" eType="#//SeverityKindCS"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
@@ -112,6 +127,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedValue" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SeverityKindCS">
+    <eLiterals name="error" literal="error"/>
+    <eLiterals name="warning" value="1" literal="warning"/>
+    <eLiterals name="fatal" value="2" literal="fatal"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StatementCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="SwitchAltCS" eSuperTypes="#//StatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" lowerBound="1"
@@ -126,13 +146,16 @@
         upperBound="-1" eType="#//SwitchAltCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElsePart" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedIterator" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//VariableCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ifSyntax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TryExpCS" eSuperTypes="#//ExpressionBlockCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCatchs" lowerBound="1"
         upperBound="-1" eType="#//CatchExpCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VarDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//VariableCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initOp" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="initOp" eType="#//InitOpCS"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VarsInitializationCS" eSuperTypes="#//StatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVarDeclarations" lowerBound="1"

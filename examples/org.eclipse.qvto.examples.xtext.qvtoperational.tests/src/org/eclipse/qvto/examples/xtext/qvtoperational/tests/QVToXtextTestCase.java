@@ -76,28 +76,28 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 	
 	public void testSimpleBlackboxTransformationDeclaration() throws Exception {
 		String testFile =
-				"modeltype MM1 uses \"m1URI\";\n"						
+				"modeltype MM1 uses \"m1URI\";\n"
 				+ "blackbox transformation t1(inout m1 : MM1);";
 		doLoadFromString("simpleBlackboxTransformationDeclaration.qvto2", testFile);
 	}
 	
 	public void testSimpleLibraryDeclaration() throws Exception {
 		String testFile =
-				"modeltype MM1 uses \"m1URI\";\n"						
+				"modeltype MM1 uses \"m1URI\";\n"
 						+ "library l1(MM1);";
 		doLoadFromString("simpleLibraryDeclaration.qvto2", testFile);
 	}
 	
 	public void testSimpleBlackboxLibraryDeclaration() throws Exception {
 		String testFile =
-				"modeltype MM1 uses \"m1URI\";\n"						
+				"modeltype MM1 uses \"m1URI\";\n"
 						+ "blackbox library l1(MM1);";
 		doLoadFromString("simpleBlackboxLibraryDeclaration.qvto2", testFile);
 	}
 		
 	public void testSimpleMappingDefinition() throws Exception {
 		String testFile =
-				"modeltype MM1 uses \"m1URI\";\n"						
+				"modeltype MM1 uses \"m1URI\";\n"
 				+ " transformation t1(inout m1 : MM1) {\n"
 				+ " mapping m1 (in p1 : String);\n"
 				+ "}";
@@ -137,6 +137,8 @@ public class QVToXtextTestCase extends AbstractQVToXtextTestCase {
 //				+ "   { coll->xcollectselectOne(res := toUpper() | res->notEmpty()); }\n"
 				+ "   { if (1 = 2) false elif (2 = 3) false else true endif; }\n"
 				+ "   { if (1 = 2) false elif (2 = 3) false elif (3 = 4) false else true; }\n"
+				+ "   { switch { case (1 = 2) false case (2 = 3) false case (3 = 4) false else true} ; }\n"
+//				+ "   { coll->switch (x) { case (x = 2) false case (x = 3) case (x = 4) false else true; }\n"
 				+ "   { coll := Sequence{\"abc\"}; }\n"
 				+ "   { coll ::= Sequence{\"abc\"}; }\n"
 				+ "   { coll += Sequence{\"abc\"}; }\n"

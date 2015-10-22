@@ -28,27 +28,9 @@ import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCL
 
 GrammmarCS returns essentialocl::ExpCS: ImperativeOCLExpCS;
 
-//terminal ACCESS_OP: '.' | '->' | '!->';
-//
-//// terminal ADD_OP: '+' | '-';
-//
-//terminal ASSIGN_OP: ':=' | '::=' | '+=' | '-=';
-//
-//terminal CMP_OP: '=' | '==' | '<>' | '<' | '>' | '<=' | '>=';
-//
-//terminal MULT_OP: '*' | '/' | '%';
-//
-//terminal MULTI_ITERATOR_OP: 'forAll';
-//
-//// terminal OR_OP: 'or' | 'xor';
-//
-//terminal RESOLVE_IN_KIND: 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn';
-//
-//terminal RESOLVE_KIND: 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone';
-//
-//terminal UNARY_OP: '-' | 'not' | '#' | '##' | '*';
-
-terminal SEVERITY_KIND: 'error' | 'fatal' | 'warning';
+enum SeverityKindCS: error='error' | warning='warning' | fatal='fatal'; 
+enum InitOpCS : Equals='=' | ColonEquals=':=' | ColonColonEquals='::=';
+enum AssignOpCS : Single=':=' | MultiWithReset='::=' | MultiWithoutReset='+=';
 
 //ImperativeOCLReservedKeyword:
 //	'default'
@@ -138,10 +120,10 @@ ImperativeExpCS returns essentialocl::ExpCS :
 ;
 
 AssertExpCS:
-	'assert' (severity=SEVERITY_KIND)? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?
+	'assert' (severity=SeverityKindCS)? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?
 ;
 AssignExpCS:
-	ownedLeft=NameExpCS assignOp=(':=' | '::=' | '+=') ownedValue=ExpCS ('default' ownedDefault=ExpCS)?
+	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ('default' ownedDefault=ExpCS)?
 ;
 
 BreakExpCS:
@@ -159,7 +141,6 @@ ComputeExpCS :
 		ownedExps += ExpressionStatementCS
 	'}'
 ;
-
 ContinueExpCS:
 	{ContinueExpCS}
 	'continue'
@@ -186,6 +167,9 @@ ExpressionStatementCS returns essentialocl::ExpCS:
 	ExpCS ';'?
 ;
 
+ExtentRefCS:
+	ownedPathName = PathNameCS
+;
 // FIXME align with NameExpCS
 ForExpCS:
 	('forEach' | isOne?='forOne') '(' (ownedTarget=VarDeclarationCS ';')? ownedIterator=VarDeclarationNoInitCS ('|' ownedCondition=ExpCS)? ')'
@@ -199,6 +183,7 @@ ImperativeIterateExpCS :
 	| (name=('xcollectselect' | 'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')? ownedTarget=VarDeclarationCS ':=' ownedBody=ExpCS '|' ownedCondition=ExpCS ')')
 ;
 
+// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
 InstantiationExpCS:
 	'new' ownedClassRef=TypeExpCS ('@' ownedExtentRef=TypeNameExpCS )? '(' (ownedArguments+=ExpCS (',' ownedArguments+=ExpCS )*)? ')'
 ;
@@ -214,7 +199,7 @@ ListLiteralExpCS :
 // FIXME severity -> enum
 // Improve spec: result.log("message", severity) when condition
 LogExpCS : 
-	'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS )? (',' severity = SEVERITY_KIND )? ')' ('when' ownedCondition=ExpCS)?
+	'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS )? (',' severity = SeverityKindCS )? ')' ('when' ownedCondition=ExpCS)?
 ;
 
 RaiseExpCS: 
@@ -230,11 +215,19 @@ StringLiteral:
 	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
 ;
 
+// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+// FIXME SwitchExpCS should probably be a CallExp
 SwitchExpCS:
-	'if' ownedAltParts+= SwitchAltCS
+	(ifSyntax?='if' ownedAltParts+= SwitchAltCS
 	('elif' ownedAltParts+=SwitchAltCS)*
 	('else' ownedElsePart=ExpCS)?
-	('endif')?  
+	('endif')?
+	)  
+	| ('switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' 
+		('case' ownedAltParts+= SwitchAltCS )+
+		('else' ownedElsePart=ExpCS)?
+	  '}'
+	) 
 ;
 
 SwitchAltCS:
@@ -248,11 +241,12 @@ TryExpCS :
 	'}' (ownedCatchs+=CatchExpCS)+
 	// FIXME in the AS there should be at least one CatchExp
 ;
+
 // FIXME there should be additional disambiguation between NameExpCS and UnlinkExp
 // UnlinkExpCS returns essentialocl::NameExpCS:
 
 VarDeclarationCS : 
-	name=UnrestrictedName (':' ownedType=TypeExpCS)? ((initOp= '=' | ':=' | '::=') ownedInitExpression=ExpCS)?
+	name=UnrestrictedName (':' ownedType=TypeExpCS)? ((initOp=InitOpCS) ownedInitExpression=ExpCS)?
 ;
 
 VarDeclarationNoInitCS returns VarDeclarationCS: 

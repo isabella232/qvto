@@ -28,28 +28,29 @@ import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCL
 import "platform:/resource/org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.ecore" as imperativeocl
 
 TopLevelCS : (ownedImports += ImportCS)* 
-	(ownedPackages+= UnitPackageCS | ownedTypes+= UnitTypeCS )*	
+	(ownedPackages+= UnitPackageCS 
+	| ownedTypes+= UnitTypeCS
+	| ownedAnnotations+= TagCS )*	
 ;
 
-//enum ClassifierKind : DATATYPE='datatype' | PRIMITIVE='primitive' | EXCEPTION='exception' | CLASS='class';
-//enum FeatureKey : COMPOSES='composes' | REFERRENCES='references' | READONLY='readonly' | DERIVED='derived' | STATIC='static';
-enum InitOp : EQUALS='=' | COLON_EQUALS=':=' | COLON_COLON_EQUALS='::=';
-enum MetamodelKind : METAMODEL= 'metamodel' | PACKAGE='package';
+enum MetamodelKindCS : metamodel= 'metamodel' | package='package';
 enum DirectionKindCS : in='in'| out='out' | inout='inout';
-enum ImportKindEnum : access='access' | extension = 'extends';
-enum ModuleKindEnum : library='library' | transformation = 'transformation';
-
-//enum ParamDirection : IN='in' | INOUT='inout' | OUT='out';
+enum ImportKindCS : access='access' | extension = 'extends';
+enum ModuleKindCS : library='library' | transformation = 'transformation';
 
 // FIXME use a CS element and unordered groups
 TransformationQualifier returns ecore::EString : 'blackbox' | 'abstract' |  'static';
 LibraryQualifier returns ecore::EString : 'blackbox';
 FeatureQualifier returns ecore::EString : 'composes' | 'references' | 'readonly' | 'derived' | 'static';
-OperationQualifier returns ecore::EString : 'blackbox';
+OperationQualifier returns ecore::EString : 'blackbox' | 'abstract' | 'static';
 
 
 
 // ****** OCL redifinitions ******//
+
+// FIXME review this redefiniton. 
+MultiplicityCS returns base::MultiplicityBoundsCS: '[' (lowerBound=LOWER '...')? upperBound=UPPER ']';
+
 PathName2CS returns PathName2CS: 
 	ownedPathElements2+=PathElement2CS ('::' ownedPathElements2+=PathElement2CS)*
 ;
@@ -58,113 +59,11 @@ PathElement2CS:
 	name=UnrestrictedName
 ;
 
-// ****** Imports ******
-ImportCS returns QVToImportCS :
-	  ('import' unit=UnitCS ';')
-	|  ('from' unit=UnitCS 'import' ((importedUnitElement+=Identifier (',' importedUnitElement+=Identifier)*) | isAll?='*') ';')
-;
-
-UnitCS : 
-	segment+=Identifier ('.' segment+=Identifier)*
-;
-	
-// ****** definitions in a compilation unit *******
-UnitPackageCS returns base::PackageCS:
-	MetamodelCS
-;
-
-
-UnitTypeCS returns base::TypeCS:
-	ModelTypeCS | TransformationCS | LibraryCS
-;
-// ****** General rules ******
-//CompleteSignatureCS: SimpleSignatureCS (':' (param+=ParameterCS (',' param+=ParameterCS)*))?;
-//
-//SimpleSignatureCS: {SimpleSignatureCS} 
-//	'(' (parameter+=ParameterDeclarationCS (',' parameter+=ParameterDeclarationCS)*)? ')'
-//;
-
-ParameterCS returns base::ParameterCS:
-	name=UnrestrictedName
-	(':' ownedType=TypedMultiplicityRef2CS)?
-; 
-  
-ParameterDeclarationCS : 
-	direction= DirectionKindCS? 
-	name=UnrestrictedName // FIXME Spec grammar says that you can have just a typeSpec
-	// TODO (':' ownedType=TypedMultiplicityRefCS)?
-	(':' ownedType= TypedMultiplicityRef2CS)?
-	initPart=InitPartCS?
-;
-
-// TODO also remove the corresponding CS metamodel element
-//OperationSimpleSignatureCS : {OperationSimpleSignatureCS}
-//	'(' (parameter+= OperationParameterDeclarationCS (',' parameter+= OperationParameterDeclarationCS)*)? ')'
-//;
-
-//OperationParameterDeclarationCS :
-//	direction=DirectionKindCS? 
-//	name=UnrestrictedName // FIXME Spec grammar says that you can have just a typeSpec  
-//	(':' ownedType=TypeSpecCS)?
-//	initPart=InitPartCS?
-//;
-
-InitPartCS: 
-	initOp=InitOp expression= ExpCS
-;
-
-TypeSpecCS :
-	ownedType= TypedRefCS ('@' extentLocation=UnrestrictedName)?
-;
-
-// General rules END
-
-
-// ****** Syntax for defining explicitly metamodel contents ******
-
-MetamodelCS returns MetamodelCS: // MetamodelKind provides extra semantic, we need to retain the kind 
-	metamodelKind=MetamodelKind 
-	name = UnrestrictedName
-	'{' (ownedClasses+=ClassCS |
-		ownedClasses+=EnumerationCS | // FIXME QVTo grammar distincts classifier from enumeration
-		ownedAnnotations+= TagCS)*
-	'}' 
-	';'?
-;
-
-ClassCS returns base::ClassCS:
-	(DataTypeCS | ExceptionCS | QVToClassCS)
-	';'?
-;
-
-DataTypeCS returns base::DataTypeCS:
-	('datatype' | {PrimitiveTypeCS} 'primitive')
-	 name=UnrestrictedName
-;
-
-ExceptionCS returns base::StructuredClassCS: // FIXME so far, exception is another class
-	'exception' 
-	name = UnrestrictedName	
-	('extends' (ownedSuperTypes+=TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*))?
-;
-
-QVToClassCS returns QVToClassCS: 
-	intermediate ?= 'intermediate' ? 
-	// qualifier += Qualifier*
-	'class'
-	name=UnrestrictedName
-	('extends' (ownedSuperTypes += TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*))?
-	('{' ((ownedProperties += ClassifierPropertyCS | ownedOperations+=ClassifierOperationCS | ownedAnnotations+= TagCS) ';' )+
-	'}' )?	
-;
-
-
-
 TypedMultiplicityRef2CS returns base::TypedRefCS:
-	TypedRef2CS (ownedMultiplicity=MultiplicityCS)?
+	TypedRef2CS (ownedMultiplicity=MultiplicityCS)? 
 ;
 
-TypeRef2CS returns base::TypeRefCS:
+TypeRefCS returns base::TypeRefCS:
 	TypedRef2CS	// | WildcardTypeRefCS
 				// FIXME deviation from OCLInEcore. No templates parameter, yet
 ;
@@ -174,30 +73,81 @@ TypedRef2CS returns base::TypedRefCS:
 ;
 
 TypedTypeRef2CS returns TypedTypeRef2CS:
-	ownedPathName=PathName2CS ('(' ownedBinding=TemplateBindingCS ')')?
+	ownedPathName=PathName2CS ('(' ownedBinding=TemplateBindingCS ')')? ('@' extentLocation=UnrestrictedName)? 
 ;
 
+// ****** QVTo ******
+
+ClassCS returns base::ClassCS:
+	(DataTypeCS | ExceptionCS | QVToClassCS)
+	';'?
+;
+
+ClassifierOperationCS returns QVToOperationCS:
+	ownedStereotype = StereotypeQualifierCS? 
+	qualifiers+= FeatureQualifier*
+	name=UnrestrictedName
+	'(' (ownedParameters+= ParameterCS (',' ownedParameters+=ParameterCS)*)? ')'
+	(':' ownedType=TypedMultiplicityRef2CS)?
+;
 
 ClassifierPropertyCS returns ClassifierPropertyCS:
-	stereotypes = StereotypeQualifierCS?
-	qualifiers+= FeatureQualifier*
+	ownedStereotype=StereotypeQualifierCS?
+	qualifiers+=FeatureQualifier*
 	name=UnrestrictedName ':' ownedType=TypedMultiplicityRef2CS
 	(default=SINGLE_QUOTED_STRING) ? // FIXME QVTO syntax define a more complex InitPartCS	
 	('opposites' '~'? opposite=Identifier)? // FIXME 
 ;
 
-StereotypeQualifierCS returns StereotypeQualifierCS:
-	'<<' (stereotype+=Identifier (',' stereotype+=Identifier)*) '>>'	
+CompoundOperationBodyCS returns OperationBodyCS:
+	{OperationBodyCS}
+	'{'
+		ownedContentExps += ExpressionStatementCS* 
+	'}'
 ;
 
-MultiplicityCS returns base::MultiplicityBoundsCS: '[' (lowerBound=LOWER '...')? upperBound=UPPER ']';
+ConfigurationPropertyCS:
+	'configuration'
+	'property' ownedScopedName=PathName2CS 
+	':' ownedType=TypeLiteralCS
+	// FIXME OMG issue: allow default values for configuration properties
+	'=' default= StringLiteral
+;
 
-ClassifierOperationCS returns QVToOperationCS:
-	stereotypes = StereotypeQualifierCS? 
-	qualifiers+= FeatureQualifier*
-	name=UnrestrictedName
-	'(' (ownedParameters+= ParameterCS (',' ownedParameters+=ParameterCS)*)? ')'
-	(':' ownedType=TypedMultiplicityRef2CS)?
+ContextualPropertyCS:
+	'intermediate' 
+	'property' ownedScopedName=PathName2CS 
+	':' ownedType=TypedMultiplicityRef2CS  
+	('=' ownedInitExp= ExpCS)?
+;
+
+ConstructorCS returns ConstructorOperationCS:
+	ConstructorDeclarationCS | ConstructorDefinitionCS
+;
+
+ConstructorDeclarationCS returns ConstructorOperationCS:
+	ConstructorHeaderCS ';'
+;
+
+ConstructorDefinitionCS returns ConstructorOperationCS:
+	ConstructorHeaderCS ownedBody=CompoundOperationBodyCS ';'?
+;
+
+ConstructorHeaderCS returns ConstructorOperationCS:
+	qualifiers+=OperationQualifier* 
+	'constructor' ownedScopedName=PathName2CS
+	'(' (ownedParameters+= ParameterCS (',' ownedParameters+= ParameterCS)* )? ')'	
+;
+
+
+
+DataTypeCS returns base::DataTypeCS:
+	('datatype' | {PrimitiveTypeCS} 'primitive')
+	 name=UnrestrictedName
+;
+
+EntryOperationCS :
+	'main' '('')' ownedBody=CompoundOperationBodyCS ';'?
 ;
 
 // FIXME Deviation from official grammar
@@ -212,50 +162,46 @@ EnumerationLiteralCS returns base::EnumerationLiteralCS:
 	name=UnrestrictedName
 ;
 
-TagCS returns TagCS:
-	'tag' name=(UnrestrictedName|SINGLE_QUOTED_STRING)? 
-	elementPath=PathName2CS ('=' expression=ExpCS)? ';'
+ExceptionCS returns base::StructuredClassCS: // FIXME for the time being, exception is another class
+	'exception' 
+	name = UnrestrictedName	
+	('extends' (ownedSuperTypes+=TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*))?
 ;
 
-
-// typedefs
-// TypedefCS: 'typedef' name=Identifier '=' typespec=TypeExpCS ('[' condition=ExpCS ']')? ';';
-
-
-// ****** Transformation and Linbary imports
-
-ModuleRefCS: 
-	modulePath=PathName2CS ('(' parameters+=ParameterDeclarationCS (',' parameters+=ParameterDeclarationCS)* ')')?
+HelperCS returns HelperOperationCS:
+	HelperDeclarationCS | HelperDefinitionCS
+;
+	
+HelperDeclarationCS returns HelperOperationCS:
+	HelperHeaderCS ';'
 ;
 
-ModuleUsageCS: 
-	importKind=ImportKindEnum moduleKind=ModuleKindEnum? moduleRefs+=ModuleRefCS (',' moduleRefs+=ModuleRefCS)*
+HelperHeaderCS returns HelperOperationCS:
+	qualifiers+=OperationQualifier* 
+	('helper' | isQuery?='query') ownedScopedName=PathName2CS
+	'{' (ownedParameters+= ParameterDeclarationCS (',' ownedParameters+= ParameterDeclarationCS)* )? ')'
+	(':' ownedResults += ParameterDeclarationCS (',' ownedResults+=ParameterDeclarationCS) )?
 ;
 
-// ****** Transformations, mappings, etc ******
-
-TransformationCS:
-	TransformationDeclCS | TransformationDefCS
+HelperDefinitionCS returns HelperOperationCS:
+	HelperSimpleDefinitionCS | HelperCompoundDefinitionCS
 ;
 
-TransformationDeclCS returns TransformationCS:
-	TransformationHeaderCS ';'
+HelperSimpleDefinitionCS returns HelperOperationCS:
+	HelperHeaderCS ownedBody=SimpleOperationBodyCS ';'
 ;
 
-TransformationDefCS returns TransformationCS:
-	 TransformationHeaderCS '{'
-	 	// (ownedClasses+= ModuleTypeCS)* FIXME Transformation is not a package anymore. Not allowed
-		(ownedProperties+= ModulePropertyCS
-		 | ownedOperations+= ModuleOperationCS)*
-	'}' ';'?
+HelperCompoundDefinitionCS returns HelperOperationCS:
+	HelperHeaderCS ownedBody=CompoundOperationBodyCS ';'?
 ;
 
-TransformationHeaderCS returns TransformationCS:
-	qualifiers+=TransformationQualifier*
-	'transformation' name=UnrestrictedName
-		'(' parameters+= ParameterDeclarationCS (',' parameters+= ParameterDeclarationCS)* ')'
-		(moduleUsages+= ModuleUsageCS)*
-		('refines' refines = ModuleRefCS)? 
+ImportCS returns QVToImportCS :
+	  ('import' ownedUnitRef=UnitRefCS ';')
+	|  ('from' ownedUnitRef=UnitRefCS 'import' ((importedUnitElement+=Identifier (',' importedUnitElement+=Identifier)*) | isAll?='*') ';')
+;
+
+InitPartCS: 
+	initOp=InitOpCS ownedExp=ExpCS
 ;
 
 LibraryCS returns QVToLibraryCS:
@@ -269,51 +215,46 @@ LibraryDeclCS returns QVToLibraryCS:
 LibraryDefCS returns QVToLibraryCS:
 	 LibraryHeaderCS '{'
 		(ownedProperties+= ModulePropertyCS
-		 | ownedOperations+= ModuleOperationCS)*
+		 | ownedOperations+= ModuleOperationCS
+		 | ownedAnnotations+= TagCS)*
 	'}' ';'?
 ;
 
 LibraryHeaderCS returns QVToLibraryCS:
-	qualifiers+=LibraryQualifier*
+	ownedQualifiers+=LibraryQualifier*
 	'library' name=UnrestrictedName
-		'(' parameters+= ModelTypeRefCS (',' parameters+= ModelTypeRefCS)* ')'
-		(moduleUsages+= ModuleUsageCS)* 
+		'(' ownedParameters+= ModelTypeRefCS (',' ownedParameters+= ModelTypeRefCS)* ')'
+		(ownedModuleUsages+= ModuleUsageCS)* 
 ;
 
-ModelTypeCS:
-	'modeltype' name=UnrestrictedName complianceKind=StringLiteral? 'uses' 
-		packageRefs+= PackageRefCS (',' packageRefs+=PackageRefCS)*
-		('where' '{' /*TODO (whereStatements+=ExpCS (';' whereStatements+=ExpCS)* ';'?))? */'}' )?
-		';'
+MappingBodyCS:
+	{MappingBodyCS}
+	('init' '{' ownedInitExps+=ExpCS '}')?
+	
+	( ((hasPopulationKeyword?='population')? '{' ownedContentExps+=ExpCS* '}') 
+		| ownedContentExps+=ExpCS
+	)
+	
+	('end' '{' ownedEndExps+=ExpCS '}')?
 ;
 
-ModelTypeRefCS :
-	ownedType = TypedTypeRef2CS
+// FIXME OMG: the following seems wrong
+// "Note that the omission of the source is a shorthand in terms of the execution semantics - the source is the transformation
+// class itself, denoted by ‘this,’ but not in terms of the metamodel representation: the OperationCallExp::source
+// property may be left empty."
+// 
+// The invoked operation call should refer (as a source) to the transformation/class in which the call took place
+//
+// also ImperativeCallExp::isVirtual doesn't seem to be needed, as this concern should belong to OCL. In OCL, an operation call
+// can also statically refer to a declared operation, otherwise it needs to be dynamically dispatched. 
+//
+// ImperativeCallExpCS: NameExpCS;
+
+MappingCallExpCS:
+	('map' | isStrict?='xmap') 
+	ownedPathName=PathNameCS ownedRoundBracketedClause=RoundBracketedClauseCS
 ;
 
-PackageRefCS:
-	uri= StringLiteralExpCS
-	| packagePath=PathName2CS '(' (uri=StringLiteralExpCS) ')'
-;
-
-ModulePropertyCS returns base::StructuralFeatureCS:
-	ClassifierPropertyCS
-;
-
-ModuleOperationCS returns base::OperationCS: 
-	EntryOperationCS | MappingOperationCS
-;
-
-EntryOperationCS :
-	'main' '('')' body=OperationBodyCS ';'?
-;
-
-OperationBodyCS :
-	{OperationBodyCS}
-	'{'
-		expressions += ExpressionStatementCS* 
-	'}'
-;
 MappingOperationCS:
 	MappingDeclarationCS | MappingDefinitionCS
 ;
@@ -324,21 +265,177 @@ MappingDeclarationCS returns MappingOperationCS:
 
 MappingDefinitionCS returns MappingOperationCS:
 	MappingOperationHeaderCS '{'
-		
+		ownedBody=MappingBodyCS
 	'}' 
 ;
 
 MappingOperationHeaderCS returns MappingOperationCS:
 	qualifiers+=OperationQualifier*
-	'mapping' direction=DirectionKindCS?  
-	scopedName=PathName2CS
+	'mapping' direction=DirectionKindCS?
+	ownedScopedName=PathName2CS
 	'(' (ownedParameters+= ParameterDeclarationCS (',' ownedParameters+= ParameterDeclarationCS)* )? ')'
-	(':' results += ParameterDeclarationCS (',' results+=ParameterDeclarationCS) )?
-	( ('inherits' inherits+=PathName2CS (',' inherits+=PathName2CS)* )?
-	& ('merges' merges+=PathName2CS (',' merges+=PathName2CS)* )?
-	& ('disjuncts' disjuncts+=PathName2CS (',' disjuncts+=PathName2CS)* )?
-	& ('refines' refines=PathName2CS)?
+	(':' ownedResults += ParameterDeclarationCS (',' ownedResults+=ParameterDeclarationCS) )?
+	( ('inherits' ownedInheritRefs+=OperationRefCS (',' ownedInheritRefs+=OperationRefCS)* )?
+	& ('merges' ownedMergeRefs+=OperationRefCS (',' ownedMergeRefs+=OperationRefCS)* )?
+	& ('disjuncts' ownedDisjunctRefs+=OperationRefCS (',' ownedDisjunctRefs+=OperationRefCS)* )?
+	& ('refines' ownedRefinedRule=PathName2CS)?
 	)
-	('when' when=ExpressionBlockCS)?
-	('where' where=ExpressionBlockCS)?
+	('when' '{' ownedWhenExps+=ExpCS* '}')?
+	('where' '{' ownedWhereExps+=ExpressionBlockCS* '}')?
+;
+
+MetamodelCS returns MetamodelCS: // MetamodelKind provides extra semantic, we need to retain the kind 
+	metamodelKind=MetamodelKindCS 
+	name = UnrestrictedName
+	'{' (ownedClasses+=ClassCS |
+		ownedClasses+=EnumerationCS | // FIXME QVTo grammar distincts classifier from enumeration
+		ownedAnnotations+= TagCS)*
+	'}' 
+	';'?
+;
+
+ModelTypeCS:
+	'modeltype' name=UnrestrictedName complianceKind=StringLiteral? 'uses' 
+		ownedPackageRefs+= PackageRefCS (',' ownedPackageRefs+=PackageRefCS)*
+		('where' '{' (ownedConditions+=ExpCS (';' ownedConditions+=ExpCS)* ';'?)? '}' )?
+		';'
+;
+
+ModelTypeRefCS :
+	ownedType = TypedTypeRef2CS
+;
+
+ModuleOperationCS returns ImperativeOperationCS: 
+	EntryOperationCS | MappingOperationCS | HelperCS | ConstructorCS
+;
+
+ModulePropertyCS:
+	ConfigurationPropertyCS | ContextualPropertyCS	
+;
+
+ModuleRefCS: 
+	ownedScopedName=PathName2CS ('(' ownedParameters+=ParameterDeclarationCS (',' ownedParameters+=ParameterDeclarationCS)* ')')?
+;
+
+ModuleUsageCS: 
+	importKind=ImportKindCS moduleKind=ModuleKindCS? ownedModuleRefs+=ModuleRefCS (',' ownedModuleRefs+=ModuleRefCS)*
+;
+
+ObjectExpCS:
+	'object'
+	('(' ownedIterator=VarDeclarationNoInitCS')')?
+	ownedVariable =	ObjectVariableCS
+	('@' ownedExtentRef = ExtentRefCS)? '{'
+		(ownedExps+=ExpCS)*
+	'}'
+;
+
+ObjectVariableCS returns essentialocl::VariableCS:
+	name=UnrestrictedName ':' (ownedType=TypedTypeRef2CS)?
+	| ownedType=TypedTypeRef2CS
+;
+
+OperationRefCS returns OperationRefCS:
+	ownedPathName=PathName2CS
+;
+
+PackageRefCS:
+	uri=StringLiteral
+	| ownedScopedName=PathName2CS '(' (uri= StringLiteral) ')'
+;
+
+ParameterCS returns base::ParameterCS:
+	name=UnrestrictedName
+	(':' ownedType=TypedMultiplicityRef2CS)?
+; 
+  
+ParameterDeclarationCS : 
+	direction= DirectionKindCS? 
+	name=UnrestrictedName // FIXME Spec grammar says that you can have just a typeSpec
+	(':' ownedType= TypedMultiplicityRef2CS)?
+	ownedInitPart=InitPartCS?
+;
+
+QVToClassCS returns QVToClassCS: 
+	isIntermediate ?= 'intermediate' ? 
+	// FIXME qualifier += Qualifier*
+	'class'
+	name=UnrestrictedName
+	('extends' (ownedSuperTypes += TypedRefCS (',' ownedSuperTypes+=TypedRefCS)*))?
+	('{' ((ownedProperties += ClassifierPropertyCS | ownedOperations+=ClassifierOperationCS | ownedAnnotations+= TagCS) ';' )+
+	'}' )?	
+;
+
+// FIXME NameExpCS ???
+ResolveExpCS :
+	 ResolveByTypeExpCS | ResolveByMappingExpCS
+;
+
+ResolveByTypeExpCS : 
+	isDeferred?='late'?
+	name = ('resolve' | 'resolveone' | 'resolveinv' | 'resolveinvone')
+	'(' ownedTarget=TypeSelectorCS ('|' ownedCondition = ExpCS)? ')'
+;
+ResolveByMappingExpCS :
+	isDeferred?='late'?
+	name = ('resolveIn' | 'resolveoneIn' | 'resolveinvIn' | 'resolveinvoneIn')
+	'(' ownedMappingRef=OperationRefCS ( ',' ownedTarget=VarDeclarationNoInitCS '|' ownedCondition=ExpCS) ? ')'
+;
+
+SimpleOperationBodyCS returns OperationBodyCS:
+	'=' ownedContentExps += ExpCS
+;
+
+StereotypeQualifierCS returns StereotypeQualifierCS:
+	'<<' (stereotypes+=Identifier (',' stereotypes+=Identifier)*) '>>'	
+;
+
+TagCS returns TagCS:
+	'tag' name=(UnrestrictedName|SINGLE_QUOTED_STRING)? 
+	ownedElementPath=PathName2CS ('=' ownedExpression=ExpCS)? ';'
+;
+
+TransformationCS:
+	TransformationDeclCS | TransformationDefCS
+;
+
+TransformationDeclCS returns TransformationCS:
+	TransformationHeaderCS ';'
+;
+
+TransformationDefCS returns TransformationCS:
+	 TransformationHeaderCS '{'
+	 	// (ownedClasses+= ModuleTypeCS)* FIXME Transformation is not a package anymore. Not allowed
+		(ownedProperties+= ModulePropertyCS
+		 | ownedOperations+= ModuleOperationCS
+		 | ownedAnnotations+= TagCS)*
+	'}' ';'?
+;
+
+TransformationHeaderCS returns TransformationCS:
+	ownedQualifiers+=TransformationQualifier*
+	'transformation' name=UnrestrictedName
+		'(' ownedParameters+= ParameterDeclarationCS (',' ownedParameters+= ParameterDeclarationCS)* ')'
+		(ownedModuleUsages+= ModuleUsageCS)*
+		('refines' ownedRefinedModule = ModuleRefCS)? 
+;
+
+// typedefs are deprecated
+// TypedefCS: 'typedef' name=Identifier '=' typespec=TypeExpCS ('[' condition=ExpCS ']')? ';';
+
+TypeSelectorCS returns essentialocl::VariableCS:
+	(name=UnrestrictedName ':')? ownedType=TypedRef2CS
+;
+
+UnitPackageCS returns base::PackageCS:
+	MetamodelCS
+;
+
+// FIXME review these units and specially the metamodel UnitRefCS
+UnitRefCS : 
+	segment+=Identifier ('.' segment+=Identifier)*
+;
+
+UnitTypeCS returns base::TypeCS:
+	ModelTypeCS | TransformationCS | LibraryCS
 ;
