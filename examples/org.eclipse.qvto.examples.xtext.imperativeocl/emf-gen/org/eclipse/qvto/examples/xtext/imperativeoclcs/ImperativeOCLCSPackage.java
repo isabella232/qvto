@@ -4,6 +4,7 @@ package org.eclipse.qvto.examples.xtext.imperativeoclcs;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
@@ -65,7 +66,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getStatementCS()
 	 * @generated
 	 */
-	int STATEMENT_CS = 19;
+	int STATEMENT_CS = 20;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2142,6 +2143,61 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	int CATCH_EXP_CS_FEATURE_COUNT = EXPRESSION_BLOCK_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExtentRefCSImpl <em>Extent Ref CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExtentRefCSImpl
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getExtentRefCS()
+	 * @generated
+	 */
+	int EXTENT_REF_CS = 13;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENT_REF_CS__CSI = BaseCSPackage.ELEMENT_REF_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENT_REF_CS__PARENT = BaseCSPackage.ELEMENT_REF_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENT_REF_CS__PIVOT = BaseCSPackage.ELEMENT_REF_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENT_REF_CS__OWNED_PATH_NAME = BaseCSPackage.ELEMENT_REF_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Extent Ref CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXTENT_REF_CS_FEATURE_COUNT = BaseCSPackage.ELEMENT_REF_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ForExpCSImpl <em>For Exp CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2149,7 +2205,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getForExpCS()
 	 * @generated
 	 */
-	int FOR_EXP_CS = 13;
+	int FOR_EXP_CS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2411,7 +2467,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getListTypeCS()
 	 * @generated
 	 */
-	int LIST_TYPE_CS = 14;
+	int LIST_TYPE_CS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2475,7 +2531,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getListLiteralExpCS()
 	 * @generated
 	 */
-	int LIST_LITERAL_EXP_CS = 15;
+	int LIST_LITERAL_EXP_CS = 16;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2611,7 +2667,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getLogExpCS()
 	 * @generated
 	 */
-	int LOG_EXP_CS = 16;
+	int LOG_EXP_CS = 17;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -2855,7 +2911,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getRaiseExpCS()
 	 * @generated
 	 */
-	int RAISE_EXP_CS = 17;
+	int RAISE_EXP_CS = 18;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3000,7 +3056,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getReturnExpCS()
 	 * @generated
 	 */
-	int RETURN_EXP_CS = 18;
+	int RETURN_EXP_CS = 19;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3136,7 +3192,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getSwitchAltCS()
 	 * @generated
 	 */
-	int SWITCH_ALT_CS = 20;
+	int SWITCH_ALT_CS = 21;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3281,7 +3337,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getSwitchExpCS()
 	 * @generated
 	 */
-	int SWITCH_EXP_CS = 21;
+	int SWITCH_EXP_CS = 22;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3410,13 +3466,31 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	int SWITCH_EXP_CS__OWNED_ELSE_PART = STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Iterator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXP_CS__OWNED_ITERATOR = STATEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>If Syntax</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SWITCH_EXP_CS__IF_SYNTAX = STATEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Switch Exp CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SWITCH_EXP_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 2;
+	int SWITCH_EXP_CS_FEATURE_COUNT = STATEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.TryExpCSImpl <em>Try Exp CS</em>}' class.
@@ -3426,7 +3500,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getTryExpCS()
 	 * @generated
 	 */
-	int TRY_EXP_CS = 22;
+	int TRY_EXP_CS = 23;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3571,7 +3645,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getVarDeclarationCS()
 	 * @generated
 	 */
-	int VAR_DECLARATION_CS = 23;
+	int VAR_DECLARATION_CS = 24;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3671,7 +3745,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getVarsInitializationCS()
 	 * @generated
 	 */
-	int VARS_INITIALIZATION_CS = 24;
+	int VARS_INITIALIZATION_CS = 25;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3807,7 +3881,7 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getWhileExpCS()
 	 * @generated
 	 */
-	int WHILE_EXP_CS = 25;
+	int WHILE_EXP_CS = 26;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -3952,6 +4026,37 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int WHILE_EXP_CS_FEATURE_COUNT = EXPRESSION_BLOCK_CS_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS <em>Assign Op CS</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getAssignOpCS()
+	 * @generated
+	 */
+	int ASSIGN_OP_CS = 27;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS <em>Init Op CS</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getInitOpCS()
+	 * @generated
+	 */
+	int INIT_OP_CS = 28;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS <em>Severity Kind CS</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getSeverityKindCS()
+	 * @generated
+	 */
+	int SEVERITY_KIND_CS = 29;
 
 
 	/**
@@ -4349,6 +4454,27 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	EReference getExpressionBlockCS_OwnedExps();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS <em>Extent Ref CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Extent Ref CS</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS
+	 * @generated
+	 */
+	EClass getExtentRefCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS#getOwnedPathName <em>Owned Path Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS#getOwnedPathName()
+	 * @see #getExtentRefCS()
+	 * @generated
+	 */
+	EReference getExtentRefCS_OwnedPathName();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS <em>For Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4593,6 +4719,28 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	EReference getSwitchExpCS_OwnedElsePart();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS#getOwnedIterator <em>Owned Iterator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Iterator</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS#getOwnedIterator()
+	 * @see #getSwitchExpCS()
+	 * @generated
+	 */
+	EReference getSwitchExpCS_OwnedIterator();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS#getIfSyntax <em>If Syntax</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>If Syntax</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS#getIfSyntax()
+	 * @see #getSwitchExpCS()
+	 * @generated
+	 */
+	EAttribute getSwitchExpCS_IfSyntax();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS <em>Try Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4686,6 +4834,36 @@ public interface ImperativeOCLCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getWhileExpCS_OwnedResultVar();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS <em>Assign Op CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Assign Op CS</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS
+	 * @generated
+	 */
+	EEnum getAssignOpCS();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS <em>Init Op CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Init Op CS</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS
+	 * @generated
+	 */
+	EEnum getInitOpCS();
+
+	/**
+	 * Returns the meta object for enum '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS <em>Severity Kind CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Severity Kind CS</em>'.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS
+	 * @generated
+	 */
+	EEnum getSeverityKindCS();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -5032,6 +5210,24 @@ public interface ImperativeOCLCSPackage extends EPackage {
 		EReference EXPRESSION_BLOCK_CS__OWNED_EXPS = eINSTANCE.getExpressionBlockCS_OwnedExps();
 
 		/**
+		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExtentRefCSImpl <em>Extent Ref CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ExtentRefCSImpl
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getExtentRefCS()
+		 * @generated
+		 */
+		EClass EXTENT_REF_CS = eINSTANCE.getExtentRefCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXTENT_REF_CS__OWNED_PATH_NAME = eINSTANCE.getExtentRefCS_OwnedPathName();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ForExpCSImpl <em>For Exp CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5234,6 +5430,22 @@ public interface ImperativeOCLCSPackage extends EPackage {
 		EReference SWITCH_EXP_CS__OWNED_ELSE_PART = eINSTANCE.getSwitchExpCS_OwnedElsePart();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Iterator</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SWITCH_EXP_CS__OWNED_ITERATOR = eINSTANCE.getSwitchExpCS_OwnedIterator();
+
+		/**
+		 * The meta object literal for the '<em><b>If Syntax</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SWITCH_EXP_CS__IF_SYNTAX = eINSTANCE.getSwitchExpCS_IfSyntax();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.TryExpCSImpl <em>Try Exp CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -5312,6 +5524,36 @@ public interface ImperativeOCLCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WHILE_EXP_CS__OWNED_RESULT_VAR = eINSTANCE.getWhileExpCS_OwnedResultVar();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS <em>Assign Op CS</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getAssignOpCS()
+		 * @generated
+		 */
+		EEnum ASSIGN_OP_CS = eINSTANCE.getAssignOpCS();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS <em>Init Op CS</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getInitOpCS()
+		 * @generated
+		 */
+		EEnum INIT_OP_CS = eINSTANCE.getInitOpCS();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS <em>Severity Kind CS</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS
+		 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ImperativeOCLCSPackageImpl#getSeverityKindCS()
+		 * @generated
+		 */
+		EEnum SEVERITY_KIND_CS = eINSTANCE.getSeverityKindCS();
 
 	}
 

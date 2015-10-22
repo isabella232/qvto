@@ -2,7 +2,6 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
-import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 
 /**
@@ -14,7 +13,7 @@ import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS#getStereotypes <em>Stereotypes</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS#getOwnedStereotype <em>Owned Stereotype</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS#getOpposite <em>Opposite</em>}</li>
  * </ul>
  *
@@ -24,30 +23,30 @@ import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
  */
 public interface ClassifierPropertyCS extends StructuralFeatureCS {
 	/**
-	 * Returns the value of the '<em><b>Stereotypes</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Stereotype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Stereotypes</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Stereotype</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Stereotypes</em>' containment reference.
-	 * @see #setStereotypes(ElementCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getClassifierPropertyCS_Stereotypes()
+	 * @return the value of the '<em>Owned Stereotype</em>' containment reference.
+	 * @see #setOwnedStereotype(StereotypeQualifierCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getClassifierPropertyCS_OwnedStereotype()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ElementCS getStereotypes();
+	StereotypeQualifierCS getOwnedStereotype();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS#getStereotypes <em>Stereotypes</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS#getOwnedStereotype <em>Owned Stereotype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stereotypes</em>' containment reference.
-	 * @see #getStereotypes()
+	 * @param value the new value of the '<em>Owned Stereotype</em>' containment reference.
+	 * @see #getOwnedStereotype()
 	 * @generated
 	 */
-	void setStereotypes(ElementCS value);
+	void setOwnedStereotype(StereotypeQualifierCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Opposite</b></em>' attribute.

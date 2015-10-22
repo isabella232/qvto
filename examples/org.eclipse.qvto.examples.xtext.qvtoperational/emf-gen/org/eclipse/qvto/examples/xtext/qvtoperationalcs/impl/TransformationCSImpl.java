@@ -21,22 +21,21 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TransformationCSImpl#getRefines <em>Refines</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TransformationCSImpl#getOwnedRefinedModule <em>Owned Refined Module</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TransformationCSImpl extends ModuleCSImpl implements TransformationCS {
 	/**
-	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedRefinedModule() <em>Owned Refined Module</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRefines()
+	 * @see #getOwnedRefinedModule()
 	 * @generated
 	 * @ordered
 	 */
-	protected ModuleRefCS refines;
-
+	protected ModuleRefCS ownedRefinedModule;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -61,8 +60,8 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModuleRefCS getRefines() {
-		return refines;
+	public ModuleRefCS getOwnedRefinedModule() {
+		return ownedRefinedModule;
 	}
 
 	/**
@@ -70,11 +69,11 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRefines(ModuleRefCS newRefines, NotificationChain msgs) {
-		ModuleRefCS oldRefines = refines;
-		refines = newRefines;
+	public NotificationChain basicSetOwnedRefinedModule(ModuleRefCS newOwnedRefinedModule, NotificationChain msgs) {
+		ModuleRefCS oldOwnedRefinedModule = ownedRefinedModule;
+		ownedRefinedModule = newOwnedRefinedModule;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES, oldRefines, newRefines);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE, oldOwnedRefinedModule, newOwnedRefinedModule);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -85,18 +84,18 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setRefines(ModuleRefCS newRefines) {
-		if (newRefines != refines) {
+	public void setOwnedRefinedModule(ModuleRefCS newOwnedRefinedModule) {
+		if (newOwnedRefinedModule != ownedRefinedModule) {
 			NotificationChain msgs = null;
-			if (refines != null)
-				msgs = ((InternalEObject)refines).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES, null, msgs);
-			if (newRefines != null)
-				msgs = ((InternalEObject)newRefines).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES, null, msgs);
-			msgs = basicSetRefines(newRefines, msgs);
+			if (ownedRefinedModule != null)
+				msgs = ((InternalEObject)ownedRefinedModule).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE, null, msgs);
+			if (newOwnedRefinedModule != null)
+				msgs = ((InternalEObject)newOwnedRefinedModule).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE, null, msgs);
+			msgs = basicSetOwnedRefinedModule(newOwnedRefinedModule, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES, newRefines, newRefines));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE, newOwnedRefinedModule, newOwnedRefinedModule));
 	}
 
 	/**
@@ -107,8 +106,8 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES:
-				return basicSetRefines(null, msgs);
+			case QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE:
+				return basicSetOwnedRefinedModule(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -121,8 +120,8 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES:
-				return getRefines();
+			case QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE:
+				return getOwnedRefinedModule();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -132,12 +131,11 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES:
-				setRefines((ModuleRefCS)newValue);
+			case QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE:
+				setOwnedRefinedModule((ModuleRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -151,8 +149,8 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES:
-				setRefines((ModuleRefCS)null);
+			case QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE:
+				setOwnedRefinedModule((ModuleRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -166,8 +164,8 @@ public class TransformationCSImpl extends ModuleCSImpl implements Transformation
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TRANSFORMATION_CS__REFINES:
-				return refines != null;
+			case QVTOperationalCSPackage.TRANSFORMATION_CS__OWNED_REFINED_MODULE:
+				return ownedRefinedModule != null;
 		}
 		return super.eIsSet(featureID);
 	}

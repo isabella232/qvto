@@ -12,6 +12,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
 /**
@@ -58,7 +59,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SEVERITY_EDEFAULT = null;
+	protected static final SeverityKindCS SEVERITY_EDEFAULT = SeverityKindCS.ERROR;
 
 	/**
 	 * The cached value of the '{@link #getSeverity() <em>Severity</em>}' attribute.
@@ -68,7 +69,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected String severity = SEVERITY_EDEFAULT;
+	protected SeverityKindCS severity = SEVERITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,7 +181,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSeverity() {
+	public SeverityKindCS getSeverity() {
 		return severity;
 	}
 
@@ -189,9 +190,9 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSeverity(String newSeverity) {
-		String oldSeverity = severity;
-		severity = newSeverity;
+	public void setSeverity(SeverityKindCS newSeverity) {
+		SeverityKindCS oldSeverity = severity;
+		severity = newSeverity == null ? SEVERITY_EDEFAULT : newSeverity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY, oldSeverity, severity));
 	}
@@ -254,7 +255,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 				setOwnedLog((LogExpCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
-				setSeverity((String)newValue);
+				setSeverity((SeverityKindCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -294,7 +295,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
 				return ownedLog != null;
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
-				return SEVERITY_EDEFAULT == null ? severity != null : !SEVERITY_EDEFAULT.equals(severity);
+				return severity != SEVERITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

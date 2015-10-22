@@ -4,6 +4,7 @@ package org.eclipse.qvto.examples.xtext.imperativeoclcs.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -12,6 +13,7 @@ import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
@@ -20,17 +22,20 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSFactory;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
@@ -142,6 +147,13 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass extentRefCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass forExpCSEClass = null;
 
 	/**
@@ -227,6 +239,27 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * @generated
 	 */
 	private EClass whileExpCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum assignOpCSEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum initOpCSEEnum = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum severityKindCSEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -630,6 +663,24 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExtentRefCS() {
+		return extentRefCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getExtentRefCS_OwnedPathName() {
+		return (EReference)extentRefCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getForExpCS() {
 		return forExpCSEClass;
 	}
@@ -837,6 +888,24 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getSwitchExpCS_OwnedIterator() {
+		return (EReference)switchExpCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSwitchExpCS_IfSyntax() {
+		return (EAttribute)switchExpCSEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTryExpCS() {
 		return tryExpCSEClass;
 	}
@@ -918,6 +987,33 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EEnum getAssignOpCS() {
+		return assignOpCSEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getInitOpCS() {
+		return initOpCSEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getSeverityKindCS() {
+		return severityKindCSEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ImperativeOCLCSFactory getImperativeOCLCSFactory() {
 		return (ImperativeOCLCSFactory)getEFactoryInstance();
 	}
@@ -991,6 +1087,9 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		expressionBlockCSEClass = createEClass(EXPRESSION_BLOCK_CS);
 		createEReference(expressionBlockCSEClass, EXPRESSION_BLOCK_CS__OWNED_EXPS);
 
+		extentRefCSEClass = createEClass(EXTENT_REF_CS);
+		createEReference(extentRefCSEClass, EXTENT_REF_CS__OWNED_PATH_NAME);
+
 		forExpCSEClass = createEClass(FOR_EXP_CS);
 		createEAttribute(forExpCSEClass, FOR_EXP_CS__IS_ONE);
 
@@ -1022,6 +1121,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		switchExpCSEClass = createEClass(SWITCH_EXP_CS);
 		createEReference(switchExpCSEClass, SWITCH_EXP_CS__OWNED_ALT_PARTS);
 		createEReference(switchExpCSEClass, SWITCH_EXP_CS__OWNED_ELSE_PART);
+		createEReference(switchExpCSEClass, SWITCH_EXP_CS__OWNED_ITERATOR);
+		createEAttribute(switchExpCSEClass, SWITCH_EXP_CS__IF_SYNTAX);
 
 		tryExpCSEClass = createEClass(TRY_EXP_CS);
 		createEReference(tryExpCSEClass, TRY_EXP_CS__OWNED_CATCHS);
@@ -1035,6 +1136,11 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		whileExpCSEClass = createEClass(WHILE_EXP_CS);
 		createEReference(whileExpCSEClass, WHILE_EXP_CS__OWNED_CONDITION);
 		createEReference(whileExpCSEClass, WHILE_EXP_CS__OWNED_RESULT_VAR);
+
+		// Create enums
+		assignOpCSEEnum = createEEnum(ASSIGN_OP_CS);
+		initOpCSEEnum = createEEnum(INIT_OP_CS);
+		severityKindCSEEnum = createEEnum(SEVERITY_KIND_CS);
 	}
 
 	/**
@@ -1062,8 +1168,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 
 		// Obtain other dependent packages
 		EssentialOCLCSPackage theEssentialOCLCSPackage = (EssentialOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(EssentialOCLCSPackage.eNS_URI);
-		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1084,6 +1190,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		instantiationExpCSEClass.getESuperTypes().add(this.getStatementCS());
 		catchExpCSEClass.getESuperTypes().add(this.getExpressionBlockCS());
 		expressionBlockCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
+		expressionBlockCSEClass.getESuperTypes().add(this.getStatementCS());
+		extentRefCSEClass.getESuperTypes().add(theBaseCSPackage.getElementRefCS());
 		forExpCSEClass.getESuperTypes().add(this.getImperativeLoopExpCS());
 		listTypeCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedRefCS());
 		listLiteralExpCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getLiteralExpCS());
@@ -1102,12 +1210,12 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEClass(assertExpCSEClass, AssertExpCS.class, "AssertExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssertExpCS_OwnedAssertion(), theEssentialOCLCSPackage.getExpCS(), null, "ownedAssertion", null, 1, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssertExpCS_OwnedLog(), this.getLogExpCS(), null, "ownedLog", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssertExpCS_Severity(), ecorePackage.getEString(), "severity", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssertExpCS_Severity(), this.getSeverityKindCS(), "severity", null, 0, 1, AssertExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(assignExpCSEClass, AssignExpCS.class, "AssignExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAssignExpCS_OwnedLeft(), theEssentialOCLCSPackage.getExpCS(), null, "ownedLeft", null, 1, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignExpCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getAssignExpCS_AssignOp(), theEcorePackage.getEString(), "assignOp", null, 0, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAssignExpCS_AssignOp(), this.getAssignOpCS(), "assignOp", null, 0, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAssignExpCS_OwnedDefault(), theEssentialOCLCSPackage.getExpCS(), null, "ownedDefault", null, 0, 1, AssignExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(breakExpCSEClass, BreakExpCS.class, "BreakExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1138,7 +1246,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEAttribute(getImperativeLoopExpCS_Name(), theEcorePackage.getEString(), "name", null, 0, 1, ImperativeLoopExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(instantiationExpCSEClass, InstantiationExpCS.class, "InstantiationExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getInstantiationExpCS_OwnedClassRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedClassRef", null, 1, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstantiationExpCS_OwnedClassRef(), theBaseCSPackage.getTypeRefCS(), null, "ownedClassRef", null, 1, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstantiationExpCS_OwnedArguments(), theEssentialOCLCSPackage.getExpCS(), null, "ownedArguments", null, 0, -1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getInstantiationExpCS_OwnedExtentRef(), theBaseCSPackage.getTypedRefCS(), null, "ownedExtentRef", null, 0, 1, InstantiationExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1148,6 +1256,9 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 
 		initEClass(expressionBlockCSEClass, ExpressionBlockCS.class, "ExpressionBlockCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExpressionBlockCS_OwnedExps(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExps", null, 0, -1, ExpressionBlockCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(extentRefCSEClass, ExtentRefCS.class, "ExtentRefCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExtentRefCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 1, 1, ExtentRefCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(forExpCSEClass, ForExpCS.class, "ForExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getForExpCS_IsOne(), theEcorePackage.getEBooleanObject(), "isOne", null, 0, 1, ForExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1161,7 +1272,7 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEClass(logExpCSEClass, LogExpCS.class, "LogExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getLogExpCS_OwnedMessage(), theEssentialOCLCSPackage.getStringLiteralExpCS(), null, "ownedMessage", null, 1, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogExpCS_OwnedElement(), theEssentialOCLCSPackage.getExpCS(), null, "ownedElement", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getLogExpCS_Severity(), theEcorePackage.getEString(), "severity", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLogExpCS_Severity(), this.getSeverityKindCS(), "severity", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getLogExpCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 0, 1, LogExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(raiseExpCSEClass, RaiseExpCS.class, "RaiseExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1180,12 +1291,14 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEClass(switchExpCSEClass, SwitchExpCS.class, "SwitchExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSwitchExpCS_OwnedAltParts(), this.getSwitchAltCS(), null, "ownedAltParts", null, 1, -1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSwitchExpCS_OwnedElsePart(), theEssentialOCLCSPackage.getExpCS(), null, "ownedElsePart", null, 0, 1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSwitchExpCS_OwnedIterator(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedIterator", null, 0, 1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSwitchExpCS_IfSyntax(), ecorePackage.getEBooleanObject(), "ifSyntax", null, 0, 1, SwitchExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(tryExpCSEClass, TryExpCS.class, "TryExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTryExpCS_OwnedCatchs(), this.getCatchExpCS(), null, "ownedCatchs", null, 1, -1, TryExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVarDeclarationCS_InitOp(), theEcorePackage.getEString(), "initOp", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getVarDeclarationCS_InitOp(), this.getInitOpCS(), "initOp", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varsInitializationCSEClass, VarsInitializationCS.class, "VarsInitializationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarsInitializationCS_OwnedVarDeclarations(), this.getVarDeclarationCS(), null, "ownedVarDeclarations", null, 1, -1, VarsInitializationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1193,6 +1306,22 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		initEClass(whileExpCSEClass, WhileExpCS.class, "WhileExpCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWhileExpCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWhileExpCS_OwnedResultVar(), this.getVarDeclarationCS(), null, "ownedResultVar", null, 0, 1, WhileExpCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(assignOpCSEEnum, AssignOpCS.class, "AssignOpCS");
+		addEEnumLiteral(assignOpCSEEnum, AssignOpCS.SINGLE);
+		addEEnumLiteral(assignOpCSEEnum, AssignOpCS.MULTI_WITH_RESET);
+		addEEnumLiteral(assignOpCSEEnum, AssignOpCS.MULTI_WITHOUT_RESET);
+
+		initEEnum(initOpCSEEnum, InitOpCS.class, "InitOpCS");
+		addEEnumLiteral(initOpCSEEnum, InitOpCS.EQUALS);
+		addEEnumLiteral(initOpCSEEnum, InitOpCS.COLON_EQUALS);
+		addEEnumLiteral(initOpCSEEnum, InitOpCS.COLON_COLON_EQUALS);
+
+		initEEnum(severityKindCSEEnum, SeverityKindCS.class, "SeverityKindCS");
+		addEEnumLiteral(severityKindCSEEnum, SeverityKindCS.ERROR);
+		addEEnumLiteral(severityKindCSEEnum, SeverityKindCS.WARNING);
+		addEEnumLiteral(severityKindCSEEnum, SeverityKindCS.FATAL);
 
 		// Create resource
 		createResource(eNS_URI);

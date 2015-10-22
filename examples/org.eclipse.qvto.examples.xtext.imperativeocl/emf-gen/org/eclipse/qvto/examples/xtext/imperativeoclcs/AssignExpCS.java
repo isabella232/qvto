@@ -78,6 +78,7 @@ public interface AssignExpCS extends StatementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Assign Op</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Assign Op</em>' attribute isn't clear,
@@ -85,22 +86,24 @@ public interface AssignExpCS extends StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Assign Op</em>' attribute.
-	 * @see #setAssignOp(String)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS
+	 * @see #setAssignOp(AssignOpCS)
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssignExpCS_AssignOp()
 	 * @model
 	 * @generated
 	 */
-	String getAssignOp();
+	AssignOpCS getAssignOp();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS#getAssignOp <em>Assign Op</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Assign Op</em>' attribute.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS
 	 * @see #getAssignOp()
 	 * @generated
 	 */
-	void setAssignOp(String value);
+	void setAssignOp(AssignOpCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Default</b></em>' containment reference.

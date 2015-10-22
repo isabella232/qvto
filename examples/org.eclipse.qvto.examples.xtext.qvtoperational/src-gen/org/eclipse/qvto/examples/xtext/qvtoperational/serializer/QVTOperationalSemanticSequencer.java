@@ -61,6 +61,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.TupleLiteralPartCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvto.examples.xtext.imperativeocl.serializer.ImperativeOCLSemanticSequencer;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
@@ -72,6 +73,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
@@ -89,15 +91,23 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperational.services.QVTOperationalGrammarAccess;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigurationPropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorOperationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.HelperOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
@@ -108,13 +118,14 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToLibraryCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByMappingExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByTypeExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.StereotypeQualifierCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -186,7 +197,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case BaseCSPackage.PRIMITIVE_TYPE_REF_CS:
 				if(context == grammarAccess.getPrimitiveTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_PrimitiveTypeCS(context, (PrimitiveTypeRefCS) semanticObject); 
 					return; 
@@ -222,7 +233,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case BaseCSPackage.TUPLE_TYPE_CS:
 				if(context == grammarAccess.getTupleTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_TupleTypeCS(context, (TupleTypeCS) semanticObject); 
 					return; 
@@ -273,7 +284,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case EssentialOCLCSPackage.COLLECTION_TYPE_CS:
 				if(context == grammarAccess.getCollectionTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_CollectionTypeCS(context, (CollectionTypeCS) semanticObject); 
 					return; 
@@ -327,7 +338,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case EssentialOCLCSPackage.MAP_TYPE_CS:
 				if(context == grammarAccess.getMapTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_MapTypeCS(context, (MapTypeCS) semanticObject); 
 					return; 
@@ -434,6 +445,16 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS:
 				sequence_UnlimitedNaturalLiteralExpCS(context, (UnlimitedNaturalLiteralExpCS) semanticObject); 
 				return; 
+			case EssentialOCLCSPackage.VARIABLE_CS:
+				if(context == grammarAccess.getObjectVariableCSRule()) {
+					sequence_ObjectVariableCS(context, (VariableCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypeSelectorCSRule()) {
+					sequence_TypeSelectorCS(context, (VariableCS) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == ImperativeOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS:
@@ -463,7 +484,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case ImperativeOCLCSPackage.DICT_TYPE_CS:
 				if(context == grammarAccess.getDictTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_DictTypeCS(context, (DictTypeCS) semanticObject); 
 					return; 
@@ -484,6 +505,9 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS:
 				sequence_ExpressionBlockCS(context, (ExpressionBlockCS) semanticObject); 
 				return; 
+			case ImperativeOCLCSPackage.EXTENT_REF_CS:
+				sequence_ExtentRefCS(context, (ExtentRefCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.FOR_EXP_CS:
 				sequence_ForExpCS(context, (ForExpCS) semanticObject); 
 				return; 
@@ -499,7 +523,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case ImperativeOCLCSPackage.LIST_TYPE_CS:
 				if(context == grammarAccess.getListTypeCSRule() ||
 				   context == grammarAccess.getTypeLiteralCSRule() ||
-				   context == grammarAccess.getTypeRef2CSRule() ||
+				   context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule()) {
 					sequence_ListTypeCS(context, (ListTypeCS) semanticObject); 
 					return; 
@@ -556,15 +580,68 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS:
 				sequence_ClassifierPropertyCS(context, (ClassifierPropertyCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.CONFIGURATION_PROPERTY_CS:
+				sequence_ConfigurationPropertyCS(context, (ConfigurationPropertyCS) semanticObject); 
+				return; 
+			case QVTOperationalCSPackage.CONSTRUCTOR_OPERATION_CS:
+				if(context == grammarAccess.getConstructorDefinitionCSRule()) {
+					sequence_ConstructorDefinitionCS_ConstructorHeaderCS(context, (ConstructorOperationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getConstructorCSRule() ||
+				   context == grammarAccess.getConstructorDeclarationCSRule() ||
+				   context == grammarAccess.getConstructorHeaderCSRule() ||
+				   context == grammarAccess.getModuleOperationCSRule()) {
+					sequence_ConstructorHeaderCS(context, (ConstructorOperationCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case QVTOperationalCSPackage.CONTEXTUAL_PROPERTY_CS:
+				sequence_ContextualPropertyCS(context, (ContextualPropertyCS) semanticObject); 
+				return; 
 			case QVTOperationalCSPackage.ENTRY_OPERATION_CS:
 				sequence_EntryOperationCS(context, (EntryOperationCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.HELPER_OPERATION_CS:
+				if(context == grammarAccess.getHelperCompoundDefinitionCSRule()) {
+					sequence_HelperCompoundDefinitionCS_HelperHeaderCS(context, (HelperOperationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getHelperCSRule() ||
+				   context == grammarAccess.getHelperDeclarationCSRule() ||
+				   context == grammarAccess.getHelperHeaderCSRule() ||
+				   context == grammarAccess.getModuleOperationCSRule()) {
+					sequence_HelperHeaderCS(context, (HelperOperationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getHelperDefinitionCSRule() ||
+				   context == grammarAccess.getHelperSimpleDefinitionCSRule()) {
+					sequence_HelperHeaderCS_HelperSimpleDefinitionCS(context, (HelperOperationCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case QVTOperationalCSPackage.INIT_PART_CS:
 				sequence_InitPartCS(context, (InitPartCS) semanticObject); 
 				return; 
-			case QVTOperationalCSPackage.MAPPING_OPERATION_CS:
-				sequence_MappingOperationHeaderCS(context, (MappingOperationCS) semanticObject); 
+			case QVTOperationalCSPackage.MAPPING_BODY_CS:
+				sequence_MappingBodyCS(context, (MappingBodyCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS:
+				sequence_MappingCallExpCS(context, (MappingCallExpCS) semanticObject); 
+				return; 
+			case QVTOperationalCSPackage.MAPPING_OPERATION_CS:
+				if(context == grammarAccess.getMappingDefinitionCSRule()) {
+					sequence_MappingDefinitionCS_MappingOperationHeaderCS(context, (MappingOperationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getMappingDeclarationCSRule() ||
+				   context == grammarAccess.getMappingOperationCSRule() ||
+				   context == grammarAccess.getMappingOperationHeaderCSRule() ||
+				   context == grammarAccess.getModuleOperationCSRule()) {
+					sequence_MappingOperationHeaderCS(context, (MappingOperationCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case QVTOperationalCSPackage.METAMODEL_CS:
 				sequence_MetamodelCS(context, (MetamodelCS) semanticObject); 
 				return; 
@@ -580,8 +657,21 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case QVTOperationalCSPackage.MODULE_USAGE_CS:
 				sequence_ModuleUsageCS(context, (ModuleUsageCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.OBJECT_EXP_CS:
+				sequence_ObjectExpCS(context, (ObjectExpCS) semanticObject); 
+				return; 
 			case QVTOperationalCSPackage.OPERATION_BODY_CS:
-				sequence_OperationBodyCS(context, (OperationBodyCS) semanticObject); 
+				if(context == grammarAccess.getCompoundOperationBodyCSRule()) {
+					sequence_CompoundOperationBodyCS(context, (OperationBodyCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getSimpleOperationBodyCSRule()) {
+					sequence_SimpleOperationBodyCS(context, (OperationBodyCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case QVTOperationalCSPackage.OPERATION_REF_CS:
+				sequence_OperationRefCS(context, (OperationRefCS) semanticObject); 
 				return; 
 			case QVTOperationalCSPackage.PACKAGE_REF_CS:
 				sequence_PackageRefCS(context, (PackageRefCS) semanticObject); 
@@ -620,6 +710,12 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 			case QVTOperationalCSPackage.QV_TO_OPERATION_CS:
 				sequence_ClassifierOperationCS(context, (QVToOperationCS) semanticObject); 
 				return; 
+			case QVTOperationalCSPackage.RESOLVE_BY_MAPPING_EXP_CS:
+				sequence_ResolveByMappingExpCS(context, (ResolveByMappingExpCS) semanticObject); 
+				return; 
+			case QVTOperationalCSPackage.RESOLVE_BY_TYPE_EXP_CS:
+				sequence_ResolveByTypeExpCS(context, (ResolveByTypeExpCS) semanticObject); 
+				return; 
 			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS:
 				sequence_StereotypeQualifierCS(context, (StereotypeQualifierCS) semanticObject); 
 				return; 
@@ -642,23 +738,20 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 					return; 
 				}
 				else break;
-			case QVTOperationalCSPackage.TYPE_SPEC_CS:
-				sequence_TypeSpecCS(context, (TypeSpecCS) semanticObject); 
-				return; 
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS:
 				if(context == grammarAccess.getTypedMultiplicityRef2CSRule()) {
 					sequence_TypedMultiplicityRef2CS_TypedTypeRef2CS(context, (TypedTypeRef2CS) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getTypeRef2CSRule() ||
+				else if(context == grammarAccess.getTypeRefCSRule() ||
 				   context == grammarAccess.getTypedRef2CSRule() ||
 				   context == grammarAccess.getTypedTypeRef2CSRule()) {
 					sequence_TypedTypeRef2CS(context, (TypedTypeRef2CS) semanticObject); 
 					return; 
 				}
 				else break;
-			case QVTOperationalCSPackage.UNIT_CS:
-				sequence_UnitCS(context, (UnitCS) semanticObject); 
+			case QVTOperationalCSPackage.UNIT_REF_CS:
+				sequence_UnitRefCS(context, (UnitRefCS) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -667,7 +760,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         stereotypes=StereotypeQualifierCS? 
+	 *         ownedStereotype=StereotypeQualifierCS? 
 	 *         qualifiers+=FeatureQualifier* 
 	 *         name=UnrestrictedName 
 	 *         (ownedParameters+=ParameterCS ownedParameters+=ParameterCS*)? 
@@ -682,7 +775,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         stereotypes=StereotypeQualifierCS? 
+	 *         ownedStereotype=StereotypeQualifierCS? 
 	 *         qualifiers+=FeatureQualifier* 
 	 *         name=UnrestrictedName 
 	 *         ownedType=TypedMultiplicityRef2CS 
@@ -700,6 +793,56 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 *     (name=CollectionTypeIdentifier ownedType=TypeExpCS? ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_CollectionTypeCS_TypedMultiplicityRef2CS(EObject context, CollectionTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedContentExps+=ExpressionStatementCS*)
+	 */
+	protected void sequence_CompoundOperationBodyCS(EObject context, OperationBodyCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedScopedName=PathName2CS ownedType=TypeLiteralCS default=StringLiteral)
+	 */
+	protected void sequence_ConfigurationPropertyCS(EObject context, ConfigurationPropertyCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         qualifiers+=OperationQualifier* 
+	 *         ownedScopedName=PathName2CS 
+	 *         (ownedParameters+=ParameterCS ownedParameters+=ParameterCS*)? 
+	 *         ownedBody=CompoundOperationBodyCS
+	 *     )
+	 */
+	protected void sequence_ConstructorDefinitionCS_ConstructorHeaderCS(EObject context, ConstructorOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (qualifiers+=OperationQualifier* ownedScopedName=PathName2CS (ownedParameters+=ParameterCS ownedParameters+=ParameterCS*)?)
+	 */
+	protected void sequence_ConstructorHeaderCS(EObject context, ConstructorOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedScopedName=PathName2CS ownedType=TypedMultiplicityRef2CS ownedInitExp=ExpCS?)
+	 */
+	protected void sequence_ContextualPropertyCS(EObject context, ContextualPropertyCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -733,7 +876,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     body=OperationBodyCS
+	 *     ownedBody=CompoundOperationBodyCS
 	 */
 	protected void sequence_EntryOperationCS(EObject context, EntryOperationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -769,7 +912,54 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (unit=UnitCS | (unit=UnitCS ((importedUnitElement+=Identifier importedUnitElement+=Identifier*) | isAll?='*')))
+	 *     (
+	 *         qualifiers+=OperationQualifier* 
+	 *         isQuery?='query'? 
+	 *         ownedScopedName=PathName2CS 
+	 *         (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)? 
+	 *         (ownedResults+=ParameterDeclarationCS ownedResults+=ParameterDeclarationCS)? 
+	 *         ownedBody=CompoundOperationBodyCS
+	 *     )
+	 */
+	protected void sequence_HelperCompoundDefinitionCS_HelperHeaderCS(EObject context, HelperOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         qualifiers+=OperationQualifier* 
+	 *         isQuery?='query'? 
+	 *         ownedScopedName=PathName2CS 
+	 *         (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)? 
+	 *         (ownedResults+=ParameterDeclarationCS ownedResults+=ParameterDeclarationCS)?
+	 *     )
+	 */
+	protected void sequence_HelperHeaderCS(EObject context, HelperOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         qualifiers+=OperationQualifier* 
+	 *         isQuery?='query'? 
+	 *         ownedScopedName=PathName2CS 
+	 *         (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)? 
+	 *         (ownedResults+=ParameterDeclarationCS ownedResults+=ParameterDeclarationCS)? 
+	 *         ownedBody=SimpleOperationBodyCS
+	 *     )
+	 */
+	protected void sequence_HelperHeaderCS_HelperSimpleDefinitionCS(EObject context, HelperOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedUnitRef=UnitRefCS | (ownedUnitRef=UnitRefCS ((importedUnitElement+=Identifier importedUnitElement+=Identifier*) | isAll?='*')))
 	 */
 	protected void sequence_ImportCS(EObject context, QVToImportCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -778,7 +968,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (initOp=InitOp expression=ExpCS)
+	 *     (initOp=InitOpCS ownedExp=ExpCS)
 	 */
 	protected void sequence_InitPartCS(EObject context, InitPartCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -788,12 +978,12 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         qualifiers+=LibraryQualifier* 
+	 *         ownedQualifiers+=LibraryQualifier* 
 	 *         name=UnrestrictedName 
-	 *         parameters+=ModelTypeRefCS 
-	 *         parameters+=ModelTypeRefCS* 
-	 *         moduleUsages+=ModuleUsageCS* 
-	 *         (ownedProperties+=ModulePropertyCS | ownedOperations+=ModuleOperationCS)*
+	 *         ownedParameters+=ModelTypeRefCS 
+	 *         ownedParameters+=ModelTypeRefCS* 
+	 *         ownedModuleUsages+=ModuleUsageCS* 
+	 *         (ownedProperties+=ModulePropertyCS | ownedOperations+=ModuleOperationCS | ownedAnnotations+=TagCS)*
 	 *     )
 	 */
 	protected void sequence_LibraryDefCS_LibraryHeaderCS(EObject context, QVToLibraryCS semanticObject) {
@@ -803,7 +993,13 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (qualifiers+=LibraryQualifier* name=UnrestrictedName parameters+=ModelTypeRefCS parameters+=ModelTypeRefCS* moduleUsages+=ModuleUsageCS*)
+	 *     (
+	 *         ownedQualifiers+=LibraryQualifier* 
+	 *         name=UnrestrictedName 
+	 *         ownedParameters+=ModelTypeRefCS 
+	 *         ownedParameters+=ModelTypeRefCS* 
+	 *         ownedModuleUsages+=ModuleUsageCS*
+	 *     )
 	 */
 	protected void sequence_LibraryHeaderCS(EObject context, QVToLibraryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -830,18 +1026,58 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
+	 *     (ownedInitExps+=ExpCS? ((hasPopulationKeyword?='population'? ownedContentExps+=ExpCS*) | ownedContentExps+=ExpCS) ownedEndExps+=ExpCS?)
+	 */
+	protected void sequence_MappingBodyCS(EObject context, MappingBodyCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (isStrict?='xmap'? ownedPathName=PathNameCS ownedRoundBracketedClause=RoundBracketedClauseCS)
+	 */
+	protected void sequence_MappingCallExpCS(EObject context, MappingCallExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (
 	 *         qualifiers+=OperationQualifier* 
 	 *         direction=DirectionKindCS? 
-	 *         scopedName=PathName2CS 
+	 *         ownedScopedName=PathName2CS 
 	 *         (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)? 
-	 *         (results+=ParameterDeclarationCS results+=ParameterDeclarationCS)? 
-	 *         (inherits+=PathName2CS inherits+=PathName2CS*)? 
-	 *         (merges+=PathName2CS merges+=PathName2CS*)? 
-	 *         (disjuncts+=PathName2CS disjuncts+=PathName2CS*)? 
-	 *         refines=PathName2CS? 
-	 *         when=ExpressionBlockCS? 
-	 *         where=ExpressionBlockCS?
+	 *         (ownedResults+=ParameterDeclarationCS ownedResults+=ParameterDeclarationCS)? 
+	 *         (ownedInheritRefs+=OperationRefCS ownedInheritRefs+=OperationRefCS*)? 
+	 *         (ownedMergeRefs+=OperationRefCS ownedMergeRefs+=OperationRefCS*)? 
+	 *         (ownedDisjunctRefs+=OperationRefCS ownedDisjunctRefs+=OperationRefCS*)? 
+	 *         ownedRefinedRule=PathName2CS? 
+	 *         ownedWhenExps+=ExpCS* 
+	 *         ownedWhereExps+=ExpressionBlockCS* 
+	 *         ownedBody=MappingBodyCS
+	 *     )
+	 */
+	protected void sequence_MappingDefinitionCS_MappingOperationHeaderCS(EObject context, MappingOperationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         qualifiers+=OperationQualifier* 
+	 *         direction=DirectionKindCS? 
+	 *         ownedScopedName=PathName2CS 
+	 *         (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)? 
+	 *         (ownedResults+=ParameterDeclarationCS ownedResults+=ParameterDeclarationCS)? 
+	 *         (ownedInheritRefs+=OperationRefCS ownedInheritRefs+=OperationRefCS*)? 
+	 *         (ownedMergeRefs+=OperationRefCS ownedMergeRefs+=OperationRefCS*)? 
+	 *         (ownedDisjunctRefs+=OperationRefCS ownedDisjunctRefs+=OperationRefCS*)? 
+	 *         ownedRefinedRule=PathName2CS? 
+	 *         ownedWhenExps+=ExpCS* 
+	 *         ownedWhereExps+=ExpressionBlockCS*
 	 *     )
 	 */
 	protected void sequence_MappingOperationHeaderCS(EObject context, MappingOperationCS semanticObject) {
@@ -851,7 +1087,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (metamodelKind=MetamodelKind name=UnrestrictedName (ownedClasses+=ClassCS | ownedClasses+=EnumerationCS | ownedAnnotations+=TagCS)*)
+	 *     (metamodelKind=MetamodelKindCS name=UnrestrictedName (ownedClasses+=ClassCS | ownedClasses+=EnumerationCS | ownedAnnotations+=TagCS)*)
 	 */
 	protected void sequence_MetamodelCS(EObject context, MetamodelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -860,7 +1096,13 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName complianceKind=StringLiteral? packageRefs+=PackageRefCS packageRefs+=PackageRefCS*)
+	 *     (
+	 *         name=UnrestrictedName 
+	 *         complianceKind=StringLiteral? 
+	 *         ownedPackageRefs+=PackageRefCS 
+	 *         ownedPackageRefs+=PackageRefCS* 
+	 *         (ownedConditions+=ExpCS ownedConditions+=ExpCS*)?
+	 *     )
 	 */
 	protected void sequence_ModelTypeCS(EObject context, ModelTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -878,7 +1120,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (modulePath=PathName2CS (parameters+=ParameterDeclarationCS parameters+=ParameterDeclarationCS*)?)
+	 *     (ownedScopedName=PathName2CS (ownedParameters+=ParameterDeclarationCS ownedParameters+=ParameterDeclarationCS*)?)
 	 */
 	protected void sequence_ModuleRefCS(EObject context, ModuleRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -887,7 +1129,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (importKind=ImportKindEnum moduleKind=ModuleKindEnum? moduleRefs+=ModuleRefCS moduleRefs+=ModuleRefCS*)
+	 *     (importKind=ImportKindCS moduleKind=ModuleKindCS? ownedModuleRefs+=ModuleRefCS ownedModuleRefs+=ModuleRefCS*)
 	 */
 	protected void sequence_ModuleUsageCS(EObject context, ModuleUsageCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -905,16 +1147,34 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (expressions+=ExpressionStatementCS*)
+	 *     (ownedIterator=VarDeclarationNoInitCS? ownedVariable=ObjectVariableCS ownedExtentRef=ExtentRefCS? ownedExps+=ExpCS*)
 	 */
-	protected void sequence_OperationBodyCS(EObject context, OperationBodyCS semanticObject) {
+	protected void sequence_ObjectExpCS(EObject context, ObjectExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (uri=StringLiteralExpCS | (packagePath=PathName2CS uri=StringLiteralExpCS))
+	 *     ((name=UnrestrictedName ownedType=TypedTypeRef2CS?) | ownedType=TypedTypeRef2CS)
+	 */
+	protected void sequence_ObjectVariableCS(EObject context, VariableCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ownedPathName=PathName2CS
+	 */
+	protected void sequence_OperationRefCS(EObject context, OperationRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (uri=StringLiteral | (ownedScopedName=PathName2CS uri=StringLiteral))
 	 */
 	protected void sequence_PackageRefCS(EObject context, PackageRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -932,7 +1192,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (direction=DirectionKindCS? name=UnrestrictedName ownedType=TypedMultiplicityRef2CS? initPart=InitPartCS?)
+	 *     (direction=DirectionKindCS? name=UnrestrictedName ownedType=TypedMultiplicityRef2CS? ownedInitPart=InitPartCS?)
 	 */
 	protected void sequence_ParameterDeclarationCS(EObject context, ParameterDeclarationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -969,7 +1229,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         intermediate?='intermediate'? 
+	 *         isIntermediate?='intermediate'? 
 	 *         name=UnrestrictedName 
 	 *         (ownedSuperTypes+=TypedRefCS ownedSuperTypes+=TypedRefCS*)? 
 	 *         (ownedProperties+=ClassifierPropertyCS | ownedOperations+=ClassifierOperationCS | ownedAnnotations+=TagCS)*
@@ -982,7 +1242,44 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (stereotype+=Identifier stereotype+=Identifier*)
+	 *     (
+	 *         isDeferred?='late'? 
+	 *         (name='resolveIn' | name='resolveoneIn' | name='resolveinvIn' | name='resolveinvoneIn') 
+	 *         ownedMappingRef=OperationRefCS 
+	 *         (ownedTarget=VarDeclarationNoInitCS ownedCondition=ExpCS)?
+	 *     )
+	 */
+	protected void sequence_ResolveByMappingExpCS(EObject context, ResolveByMappingExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         isDeferred?='late'? 
+	 *         (name='resolve' | name='resolveone' | name='resolveinv' | name='resolveinvone') 
+	 *         ownedTarget=TypeSelectorCS 
+	 *         ownedCondition=ExpCS?
+	 *     )
+	 */
+	protected void sequence_ResolveByTypeExpCS(EObject context, ResolveByTypeExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ownedContentExps+=ExpCS
+	 */
+	protected void sequence_SimpleOperationBodyCS(EObject context, OperationBodyCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (stereotypes+=Identifier stereotypes+=Identifier*)
 	 */
 	protected void sequence_StereotypeQualifierCS(EObject context, StereotypeQualifierCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -991,7 +1288,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     ((name=UnrestrictedName | name=SINGLE_QUOTED_STRING)? elementPath=PathName2CS expression=ExpCS?)
+	 *     ((name=UnrestrictedName | name=SINGLE_QUOTED_STRING)? ownedElementPath=PathName2CS ownedExpression=ExpCS?)
 	 */
 	protected void sequence_TagCS(EObject context, TagCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1000,7 +1297,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (ownedImports+=ImportCS* (ownedPackages+=UnitPackageCS | ownedTypes+=UnitTypeCS)*)
+	 *     (ownedImports+=ImportCS* (ownedPackages+=UnitPackageCS | ownedTypes+=UnitTypeCS | ownedAnnotations+=TagCS)*)
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1010,13 +1307,13 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         qualifiers+=TransformationQualifier* 
+	 *         ownedQualifiers+=TransformationQualifier* 
 	 *         name=UnrestrictedName 
-	 *         parameters+=ParameterDeclarationCS 
-	 *         parameters+=ParameterDeclarationCS* 
-	 *         moduleUsages+=ModuleUsageCS* 
-	 *         refines=ModuleRefCS? 
-	 *         (ownedProperties+=ModulePropertyCS | ownedOperations+=ModuleOperationCS)*
+	 *         ownedParameters+=ParameterDeclarationCS 
+	 *         ownedParameters+=ParameterDeclarationCS* 
+	 *         ownedModuleUsages+=ModuleUsageCS* 
+	 *         ownedRefinedModule=ModuleRefCS? 
+	 *         (ownedProperties+=ModulePropertyCS | ownedOperations+=ModuleOperationCS | ownedAnnotations+=TagCS)*
 	 *     )
 	 */
 	protected void sequence_TransformationDefCS_TransformationHeaderCS(EObject context, TransformationCS semanticObject) {
@@ -1027,12 +1324,12 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	/**
 	 * Constraint:
 	 *     (
-	 *         qualifiers+=TransformationQualifier* 
+	 *         ownedQualifiers+=TransformationQualifier* 
 	 *         name=UnrestrictedName 
-	 *         parameters+=ParameterDeclarationCS 
-	 *         parameters+=ParameterDeclarationCS* 
-	 *         moduleUsages+=ModuleUsageCS* 
-	 *         refines=ModuleRefCS?
+	 *         ownedParameters+=ParameterDeclarationCS 
+	 *         ownedParameters+=ParameterDeclarationCS* 
+	 *         ownedModuleUsages+=ModuleUsageCS* 
+	 *         ownedRefinedModule=ModuleRefCS?
 	 *     )
 	 */
 	protected void sequence_TransformationHeaderCS(EObject context, TransformationCS semanticObject) {
@@ -1051,16 +1348,16 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (ownedType=TypedRefCS extentLocation=UnrestrictedName?)
+	 *     (name=UnrestrictedName? ownedType=TypedRef2CS)
 	 */
-	protected void sequence_TypeSpecCS(EObject context, TypeSpecCS semanticObject) {
+	protected void sequence_TypeSelectorCS(EObject context, VariableCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (ownedPathName=PathName2CS ownedBinding=TemplateBindingCS? ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedPathName=PathName2CS ownedBinding=TemplateBindingCS? extentLocation=UnrestrictedName? ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_TypedMultiplicityRef2CS_TypedTypeRef2CS(EObject context, TypedTypeRef2CS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1069,7 +1366,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	
 	/**
 	 * Constraint:
-	 *     (ownedPathName=PathName2CS ownedBinding=TemplateBindingCS?)
+	 *     (ownedPathName=PathName2CS ownedBinding=TemplateBindingCS? extentLocation=UnrestrictedName?)
 	 */
 	protected void sequence_TypedTypeRef2CS(EObject context, TypedTypeRef2CS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1080,7 +1377,7 @@ public class QVTOperationalSemanticSequencer extends ImperativeOCLSemanticSequen
 	 * Constraint:
 	 *     (segment+=Identifier segment+=Identifier*)
 	 */
-	protected void sequence_UnitCS(EObject context, UnitCS semanticObject) {
+	protected void sequence_UnitRefCS(EObject context, UnitRefCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

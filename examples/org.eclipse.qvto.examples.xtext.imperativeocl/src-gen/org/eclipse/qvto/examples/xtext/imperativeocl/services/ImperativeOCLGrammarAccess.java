@@ -345,7 +345,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAssertKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cSeverityAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cSeveritySEVERITY_KINDTerminalRuleCall_1_0 = (RuleCall)cSeverityAssignment_1.eContents().get(0);
+		private final RuleCall cSeveritySeverityKindCSEnumRuleCall_1_0 = (RuleCall)cSeverityAssignment_1.eContents().get(0);
 		private final Assignment cOwnedAssertionAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedAssertionExpCSParserRuleCall_2_0 = (RuleCall)cOwnedAssertionAssignment_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
@@ -354,20 +354,20 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedLogLogExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedLogAssignment_3_1.eContents().get(0);
 		
 		//AssertExpCS:
-		//	"assert" severity=SEVERITY_KIND? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
+		//	"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"assert" severity=SEVERITY_KIND? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?
+		//"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//"assert"
 		public Keyword getAssertKeyword_0() { return cAssertKeyword_0; }
 
-		//severity=SEVERITY_KIND?
+		//severity=SeverityKindCS?
 		public Assignment getSeverityAssignment_1() { return cSeverityAssignment_1; }
 
-		//SEVERITY_KIND
-		public RuleCall getSeveritySEVERITY_KINDTerminalRuleCall_1_0() { return cSeveritySEVERITY_KINDTerminalRuleCall_1_0; }
+		//SeverityKindCS
+		public RuleCall getSeveritySeverityKindCSEnumRuleCall_1_0() { return cSeveritySeverityKindCSEnumRuleCall_1_0; }
 
 		//ownedAssertion=ExpCS
 		public Assignment getOwnedAssertionAssignment_2() { return cOwnedAssertionAssignment_2; }
@@ -394,10 +394,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedLeftAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cOwnedLeftNameExpCSParserRuleCall_0_0 = (RuleCall)cOwnedLeftAssignment_0.eContents().get(0);
 		private final Assignment cAssignOpAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cAssignOpAlternatives_1_0 = (Alternatives)cAssignOpAssignment_1.eContents().get(0);
-		private final Keyword cAssignOpColonEqualsSignKeyword_1_0_0 = (Keyword)cAssignOpAlternatives_1_0.eContents().get(0);
-		private final Keyword cAssignOpColonColonEqualsSignKeyword_1_0_1 = (Keyword)cAssignOpAlternatives_1_0.eContents().get(1);
-		private final Keyword cAssignOpPlusSignEqualsSignKeyword_1_0_2 = (Keyword)cAssignOpAlternatives_1_0.eContents().get(2);
+		private final RuleCall cAssignOpAssignOpCSEnumRuleCall_1_0 = (RuleCall)cAssignOpAssignment_1.eContents().get(0);
 		private final Assignment cOwnedValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedValueExpCSParserRuleCall_2_0 = (RuleCall)cOwnedValueAssignment_2.eContents().get(0);
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
@@ -406,10 +403,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedDefaultExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedDefaultAssignment_3_1.eContents().get(0);
 		
 		//AssignExpCS:
-		//	ownedLeft=NameExpCS assignOp=(":=" | "::=" | "+=") ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
+		//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ownedLeft=NameExpCS assignOp=(":=" | "::=" | "+=") ownedValue=ExpCS ("default" ownedDefault=ExpCS)?
+		//ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//ownedLeft=NameExpCS
@@ -418,20 +415,11 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//NameExpCS
 		public RuleCall getOwnedLeftNameExpCSParserRuleCall_0_0() { return cOwnedLeftNameExpCSParserRuleCall_0_0; }
 
-		//assignOp=(":=" | "::=" | "+=")
+		//assignOp=AssignOpCS
 		public Assignment getAssignOpAssignment_1() { return cAssignOpAssignment_1; }
 
-		//":=" | "::=" | "+="
-		public Alternatives getAssignOpAlternatives_1_0() { return cAssignOpAlternatives_1_0; }
-
-		//":="
-		public Keyword getAssignOpColonEqualsSignKeyword_1_0_0() { return cAssignOpColonEqualsSignKeyword_1_0_0; }
-
-		//"::="
-		public Keyword getAssignOpColonColonEqualsSignKeyword_1_0_1() { return cAssignOpColonColonEqualsSignKeyword_1_0_1; }
-
-		//"+="
-		public Keyword getAssignOpPlusSignEqualsSignKeyword_1_0_2() { return cAssignOpPlusSignEqualsSignKeyword_1_0_2; }
+		//AssignOpCS
+		public RuleCall getAssignOpAssignOpCSEnumRuleCall_1_0() { return cAssignOpAssignOpCSEnumRuleCall_1_0; }
 
 		//ownedValue=ExpCS
 		public Assignment getOwnedValueAssignment_2() { return cOwnedValueAssignment_2; }
@@ -766,6 +754,22 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
+	public class ExtentRefCSElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtentRefCS");
+		private final Assignment cOwnedPathNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cOwnedPathNamePathNameCSParserRuleCall_0 = (RuleCall)cOwnedPathNameAssignment.eContents().get(0);
+		
+		//ExtentRefCS:
+		//	ownedPathName=PathNameCS;
+		@Override public ParserRule getRule() { return rule; }
+
+		//ownedPathName=PathNameCS
+		public Assignment getOwnedPathNameAssignment() { return cOwnedPathNameAssignment; }
+
+		//PathNameCS
+		public RuleCall getOwnedPathNamePathNameCSParserRuleCall_0() { return cOwnedPathNamePathNameCSParserRuleCall_0; }
+	}
+
 	public class ForExpCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ForExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1065,6 +1069,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedArgumentsExpCSParserRuleCall_4_1_1_0 = (RuleCall)cOwnedArgumentsAssignment_4_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
+		//// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
+		//
 		//InstantiationExpCS:
 		//	"new" ownedClassRef=TypeExpCS ("@" ownedExtentRef=TypeNameExpCS)? "(" (ownedArguments+=ExpCS (","
 		//	ownedArguments+=ExpCS)*)? ")";
@@ -1193,7 +1199,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
 		private final Assignment cSeverityAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cSeveritySEVERITY_KINDTerminalRuleCall_4_1_0 = (RuleCall)cSeverityAssignment_4_1.eContents().get(0);
+		private final RuleCall cSeveritySeverityKindCSEnumRuleCall_4_1_0 = (RuleCall)cSeverityAssignment_4_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cWhenKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
@@ -1205,11 +1211,11 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//// Improve spec: result.log("message", severity) when condition
 		// LogExpCS:
-		//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SEVERITY_KIND)? ")" ("when"
+		//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
 		//	ownedCondition=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SEVERITY_KIND)? ")" ("when"
+		//"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
 		//ownedCondition=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
@@ -1237,17 +1243,17 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedElementExpCSParserRuleCall_3_1_0() { return cOwnedElementExpCSParserRuleCall_3_1_0; }
 
-		//("," severity=SEVERITY_KIND)?
+		//("," severity=SeverityKindCS)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//","
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
-		//severity=SEVERITY_KIND
+		//severity=SeverityKindCS
 		public Assignment getSeverityAssignment_4_1() { return cSeverityAssignment_4_1; }
 
-		//SEVERITY_KIND
-		public RuleCall getSeveritySEVERITY_KINDTerminalRuleCall_4_1_0() { return cSeveritySEVERITY_KINDTerminalRuleCall_4_1_0; }
+		//SeverityKindCS
+		public RuleCall getSeveritySeverityKindCSEnumRuleCall_4_1_0() { return cSeveritySeverityKindCSEnumRuleCall_4_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
@@ -1372,62 +1378,145 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class SwitchExpCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SwitchExpCS");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cOwnedAltPartsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cOwnedAltPartsSwitchAltCSParserRuleCall_1_0 = (RuleCall)cOwnedAltPartsAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cElifKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cOwnedAltPartsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cOwnedAltPartsSwitchAltCSParserRuleCall_2_1_0 = (RuleCall)cOwnedAltPartsAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cElseKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cOwnedElsePartAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cOwnedElsePartExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedElsePartAssignment_3_1.eContents().get(0);
-		private final Keyword cEndifKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
+		private final Assignment cIfSyntaxAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
+		private final Keyword cIfSyntaxIfKeyword_0_0_0 = (Keyword)cIfSyntaxAssignment_0_0.eContents().get(0);
+		private final Assignment cOwnedAltPartsAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
+		private final RuleCall cOwnedAltPartsSwitchAltCSParserRuleCall_0_1_0 = (RuleCall)cOwnedAltPartsAssignment_0_1.eContents().get(0);
+		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
+		private final Keyword cElifKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
+		private final Assignment cOwnedAltPartsAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
+		private final RuleCall cOwnedAltPartsSwitchAltCSParserRuleCall_0_2_1_0 = (RuleCall)cOwnedAltPartsAssignment_0_2_1.eContents().get(0);
+		private final Group cGroup_0_3 = (Group)cGroup_0.eContents().get(3);
+		private final Keyword cElseKeyword_0_3_0 = (Keyword)cGroup_0_3.eContents().get(0);
+		private final Assignment cOwnedElsePartAssignment_0_3_1 = (Assignment)cGroup_0_3.eContents().get(1);
+		private final RuleCall cOwnedElsePartExpCSParserRuleCall_0_3_1_0 = (RuleCall)cOwnedElsePartAssignment_0_3_1.eContents().get(0);
+		private final Keyword cEndifKeyword_0_4 = (Keyword)cGroup_0.eContents().get(4);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Keyword cSwitchKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cLeftParenthesisKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cOwnedIteratorAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_1_1_0 = (RuleCall)cOwnedIteratorAssignment_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
+		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
+		private final Keyword cCaseKeyword_1_3_0 = (Keyword)cGroup_1_3.eContents().get(0);
+		private final Assignment cOwnedAltPartsAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cOwnedAltPartsSwitchAltCSParserRuleCall_1_3_1_0 = (RuleCall)cOwnedAltPartsAssignment_1_3_1.eContents().get(0);
+		private final Group cGroup_1_4 = (Group)cGroup_1.eContents().get(4);
+		private final Keyword cElseKeyword_1_4_0 = (Keyword)cGroup_1_4.eContents().get(0);
+		private final Assignment cOwnedElsePartAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
+		private final RuleCall cOwnedElsePartExpCSParserRuleCall_1_4_1_0 = (RuleCall)cOwnedElsePartAssignment_1_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
 		
-		//SwitchExpCS:
-		//	"if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?;
+		//// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+		// // FIXME SwitchExpCS should probably be a CallExp
+		// SwitchExpCS:
+		//	ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
+		//	| "switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
+		//	ownedElsePart=ExpCS)? "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//"if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
-		public Group getGroup() { return cGroup; }
+		//ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"? |
+		//"switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
+		//ownedElsePart=ExpCS)? "}"
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
+		public Group getGroup_0() { return cGroup_0; }
+
+		//ifSyntax?="if"
+		public Assignment getIfSyntaxAssignment_0_0() { return cIfSyntaxAssignment_0_0; }
 
 		//"if"
-		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+		public Keyword getIfSyntaxIfKeyword_0_0_0() { return cIfSyntaxIfKeyword_0_0_0; }
 
 		//ownedAltParts+=SwitchAltCS
-		public Assignment getOwnedAltPartsAssignment_1() { return cOwnedAltPartsAssignment_1; }
+		public Assignment getOwnedAltPartsAssignment_0_1() { return cOwnedAltPartsAssignment_0_1; }
 
 		//SwitchAltCS
-		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_1_0; }
+		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_0_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_0_1_0; }
 
 		//("elif" ownedAltParts+=SwitchAltCS)*
-		public Group getGroup_2() { return cGroup_2; }
+		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//"elif"
-		public Keyword getElifKeyword_2_0() { return cElifKeyword_2_0; }
+		public Keyword getElifKeyword_0_2_0() { return cElifKeyword_0_2_0; }
 
 		//ownedAltParts+=SwitchAltCS
-		public Assignment getOwnedAltPartsAssignment_2_1() { return cOwnedAltPartsAssignment_2_1; }
+		public Assignment getOwnedAltPartsAssignment_0_2_1() { return cOwnedAltPartsAssignment_0_2_1; }
 
 		//SwitchAltCS
-		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_2_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_2_1_0; }
+		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_0_2_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_0_2_1_0; }
 
 		//("else" ownedElsePart=ExpCS)?
-		public Group getGroup_3() { return cGroup_3; }
+		public Group getGroup_0_3() { return cGroup_0_3; }
 
 		//"else"
-		public Keyword getElseKeyword_3_0() { return cElseKeyword_3_0; }
+		public Keyword getElseKeyword_0_3_0() { return cElseKeyword_0_3_0; }
 
 		//ownedElsePart=ExpCS
-		public Assignment getOwnedElsePartAssignment_3_1() { return cOwnedElsePartAssignment_3_1; }
+		public Assignment getOwnedElsePartAssignment_0_3_1() { return cOwnedElsePartAssignment_0_3_1; }
 
 		//ExpCS
-		public RuleCall getOwnedElsePartExpCSParserRuleCall_3_1_0() { return cOwnedElsePartExpCSParserRuleCall_3_1_0; }
+		public RuleCall getOwnedElsePartExpCSParserRuleCall_0_3_1_0() { return cOwnedElsePartExpCSParserRuleCall_0_3_1_0; }
 
 		//"endif"?
-		public Keyword getEndifKeyword_4() { return cEndifKeyword_4; }
+		public Keyword getEndifKeyword_0_4() { return cEndifKeyword_0_4; }
+
+		//"switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
+		//ownedElsePart=ExpCS)? "}"
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"switch"
+		public Keyword getSwitchKeyword_1_0() { return cSwitchKeyword_1_0; }
+
+		//("(" ownedIterator=VarDeclarationNoInitCS ")")?
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
+
+		//ownedIterator=VarDeclarationNoInitCS
+		public Assignment getOwnedIteratorAssignment_1_1_1() { return cOwnedIteratorAssignment_1_1_1; }
+
+		//VarDeclarationNoInitCS
+		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_1_1_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1_2() { return cLeftCurlyBracketKeyword_1_2; }
+
+		//("case" ownedAltParts+=SwitchAltCS)+
+		public Group getGroup_1_3() { return cGroup_1_3; }
+
+		//"case"
+		public Keyword getCaseKeyword_1_3_0() { return cCaseKeyword_1_3_0; }
+
+		//ownedAltParts+=SwitchAltCS
+		public Assignment getOwnedAltPartsAssignment_1_3_1() { return cOwnedAltPartsAssignment_1_3_1; }
+
+		//SwitchAltCS
+		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_1_3_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_1_3_1_0; }
+
+		//("else" ownedElsePart=ExpCS)?
+		public Group getGroup_1_4() { return cGroup_1_4; }
+
+		//"else"
+		public Keyword getElseKeyword_1_4_0() { return cElseKeyword_1_4_0; }
+
+		//ownedElsePart=ExpCS
+		public Assignment getOwnedElsePartAssignment_1_4_1() { return cOwnedElsePartAssignment_1_4_1; }
+
+		//ExpCS
+		public RuleCall getOwnedElsePartExpCSParserRuleCall_1_4_1_0() { return cOwnedElsePartExpCSParserRuleCall_1_4_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_1_5() { return cRightCurlyBracketKeyword_1_5; }
 	}
 
 	public class SwitchAltCSElements extends AbstractParserRuleElementFinder {
@@ -1521,11 +1610,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_1_1_0 = (RuleCall)cOwnedTypeAssignment_1_1.eContents().get(0);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Alternatives cAlternatives_2_0 = (Alternatives)cGroup_2.eContents().get(0);
-		private final Assignment cInitOpAssignment_2_0_0 = (Assignment)cAlternatives_2_0.eContents().get(0);
-		private final Keyword cInitOpEqualsSignKeyword_2_0_0_0 = (Keyword)cInitOpAssignment_2_0_0.eContents().get(0);
-		private final Keyword cColonEqualsSignKeyword_2_0_1 = (Keyword)cAlternatives_2_0.eContents().get(1);
-		private final Keyword cColonColonEqualsSignKeyword_2_0_2 = (Keyword)cAlternatives_2_0.eContents().get(2);
+		private final Assignment cInitOpAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cInitOpInitOpCSEnumRuleCall_2_0_0 = (RuleCall)cInitOpAssignment_2_0.eContents().get(0);
 		private final Assignment cOwnedInitExpressionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_2_1_0 = (RuleCall)cOwnedInitExpressionAssignment_2_1.eContents().get(0);
 		
@@ -1533,10 +1619,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//
 		//// UnlinkExpCS returns essentialocl::NameExpCS:
 		// VarDeclarationCS:
-		//	name=UnrestrictedName (":" ownedType=TypeExpCS)? ((initOp="=" | ":=" | "::=") ownedInitExpression=ExpCS)?;
+		//	name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName (":" ownedType=TypeExpCS)? ((initOp="=" | ":=" | "::=") ownedInitExpression=ExpCS)?
+		//name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -1557,23 +1643,14 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeTypeExpCSParserRuleCall_1_1_0() { return cOwnedTypeTypeExpCSParserRuleCall_1_1_0; }
 
-		//((initOp="=" | ":=" | "::=") ownedInitExpression=ExpCS)?
+		//(initOp=InitOpCS ownedInitExpression=ExpCS)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//initOp="=" | ":=" | "::="
-		public Alternatives getAlternatives_2_0() { return cAlternatives_2_0; }
+		//initOp=InitOpCS
+		public Assignment getInitOpAssignment_2_0() { return cInitOpAssignment_2_0; }
 
-		//initOp="="
-		public Assignment getInitOpAssignment_2_0_0() { return cInitOpAssignment_2_0_0; }
-
-		//"="
-		public Keyword getInitOpEqualsSignKeyword_2_0_0_0() { return cInitOpEqualsSignKeyword_2_0_0_0; }
-
-		//":="
-		public Keyword getColonEqualsSignKeyword_2_0_1() { return cColonEqualsSignKeyword_2_0_1; }
-
-		//"::="
-		public Keyword getColonColonEqualsSignKeyword_2_0_2() { return cColonColonEqualsSignKeyword_2_0_2; }
+		//InitOpCS
+		public RuleCall getInitOpInitOpCSEnumRuleCall_2_0_0() { return cInitOpInitOpCSEnumRuleCall_2_0_0; }
 
 		//ownedInitExpression=ExpCS
 		public Assignment getOwnedInitExpressionAssignment_2_1() { return cOwnedInitExpressionAssignment_2_1; }
@@ -1724,8 +1801,118 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	public class SeverityKindCSElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "SeverityKindCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cErrorEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cErrorErrorKeyword_0_0 = (Keyword)cErrorEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cWarningEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cWarningWarningKeyword_1_0 = (Keyword)cWarningEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cFatalEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cFatalFatalKeyword_2_0 = (Keyword)cFatalEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum SeverityKindCS:
+		//	error | warning | fatal;
+		public EnumRule getRule() { return rule; }
+
+		//error | warning | fatal
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//error
+		public EnumLiteralDeclaration getErrorEnumLiteralDeclaration_0() { return cErrorEnumLiteralDeclaration_0; }
+
+		//"error"
+		public Keyword getErrorErrorKeyword_0_0() { return cErrorErrorKeyword_0_0; }
+
+		//warning
+		public EnumLiteralDeclaration getWarningEnumLiteralDeclaration_1() { return cWarningEnumLiteralDeclaration_1; }
+
+		//"warning"
+		public Keyword getWarningWarningKeyword_1_0() { return cWarningWarningKeyword_1_0; }
+
+		//fatal
+		public EnumLiteralDeclaration getFatalEnumLiteralDeclaration_2() { return cFatalEnumLiteralDeclaration_2; }
+
+		//"fatal"
+		public Keyword getFatalFatalKeyword_2_0() { return cFatalFatalKeyword_2_0; }
+	}
+
+	public class InitOpCSElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "InitOpCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cEqualsEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cEqualsEqualsSignKeyword_0_0 = (Keyword)cEqualsEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cColonEqualsEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cColonEqualsColonEqualsSignKeyword_1_0 = (Keyword)cColonEqualsEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cColonColonEqualsEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cColonColonEqualsColonColonEqualsSignKeyword_2_0 = (Keyword)cColonColonEqualsEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum InitOpCS:
+		//	Equals="=" | ColonEquals=":=" | ColonColonEquals="::=";
+		public EnumRule getRule() { return rule; }
+
+		//Equals="=" | ColonEquals=":=" | ColonColonEquals="::="
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Equals="="
+		public EnumLiteralDeclaration getEqualsEnumLiteralDeclaration_0() { return cEqualsEnumLiteralDeclaration_0; }
+
+		//"="
+		public Keyword getEqualsEqualsSignKeyword_0_0() { return cEqualsEqualsSignKeyword_0_0; }
+
+		//ColonEquals=":="
+		public EnumLiteralDeclaration getColonEqualsEnumLiteralDeclaration_1() { return cColonEqualsEnumLiteralDeclaration_1; }
+
+		//":="
+		public Keyword getColonEqualsColonEqualsSignKeyword_1_0() { return cColonEqualsColonEqualsSignKeyword_1_0; }
+
+		//ColonColonEquals="::="
+		public EnumLiteralDeclaration getColonColonEqualsEnumLiteralDeclaration_2() { return cColonColonEqualsEnumLiteralDeclaration_2; }
+
+		//"::="
+		public Keyword getColonColonEqualsColonColonEqualsSignKeyword_2_0() { return cColonColonEqualsColonColonEqualsSignKeyword_2_0; }
+	}
+
+	public class AssignOpCSElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "AssignOpCS");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cSingleEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cSingleColonEqualsSignKeyword_0_0 = (Keyword)cSingleEnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cMultiWithResetEnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cMultiWithResetColonColonEqualsSignKeyword_1_0 = (Keyword)cMultiWithResetEnumLiteralDeclaration_1.eContents().get(0);
+		private final EnumLiteralDeclaration cMultiWithoutResetEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
+		private final Keyword cMultiWithoutResetPlusSignEqualsSignKeyword_2_0 = (Keyword)cMultiWithoutResetEnumLiteralDeclaration_2.eContents().get(0);
+		
+		//enum AssignOpCS:
+		//	Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+=";
+		public EnumRule getRule() { return rule; }
+
+		//Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+="
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Single=":="
+		public EnumLiteralDeclaration getSingleEnumLiteralDeclaration_0() { return cSingleEnumLiteralDeclaration_0; }
+
+		//":="
+		public Keyword getSingleColonEqualsSignKeyword_0_0() { return cSingleColonEqualsSignKeyword_0_0; }
+
+		//MultiWithReset="::="
+		public EnumLiteralDeclaration getMultiWithResetEnumLiteralDeclaration_1() { return cMultiWithResetEnumLiteralDeclaration_1; }
+
+		//"::="
+		public Keyword getMultiWithResetColonColonEqualsSignKeyword_1_0() { return cMultiWithResetColonColonEqualsSignKeyword_1_0; }
+
+		//MultiWithoutReset="+="
+		public EnumLiteralDeclaration getMultiWithoutResetEnumLiteralDeclaration_2() { return cMultiWithoutResetEnumLiteralDeclaration_2; }
+
+		//"+="
+		public Keyword getMultiWithoutResetPlusSignEqualsSignKeyword_2_0() { return cMultiWithoutResetPlusSignEqualsSignKeyword_2_0; }
+	}
+	
 	private final GrammmarCSElements pGrammmarCS;
-	private final TerminalRule tSEVERITY_KIND;
+	private final SeverityKindCSElements unknownRuleSeverityKindCS;
+	private final InitOpCSElements unknownRuleInitOpCS;
+	private final AssignOpCSElements unknownRuleAssignOpCS;
 	private final ImperativeOCLExpCSElements pImperativeOCLExpCS;
 	private final TypeLiteralCSElements pTypeLiteralCS;
 	private final ListTypeCSElements pListTypeCS;
@@ -1742,6 +1929,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private final DictLiteralPartCSElements pDictLiteralPartCS;
 	private final ExpressionBlockCSElements pExpressionBlockCS;
 	private final ExpressionStatementCSElements pExpressionStatementCS;
+	private final ExtentRefCSElements pExtentRefCS;
 	private final ForExpCSElements pForExpCS;
 	private final ImperativeIterateExpCSElements pImperativeIterateExpCS;
 	private final InstantiationExpCSElements pInstantiationExpCS;
@@ -1768,7 +1956,9 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaEssentialOCL = gaEssentialOCL;
 		this.pGrammmarCS = new GrammmarCSElements();
-		this.tSEVERITY_KIND = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SEVERITY_KIND");
+		this.unknownRuleSeverityKindCS = new SeverityKindCSElements();
+		this.unknownRuleInitOpCS = new InitOpCSElements();
+		this.unknownRuleAssignOpCS = new AssignOpCSElements();
 		this.pImperativeOCLExpCS = new ImperativeOCLExpCSElements();
 		this.pTypeLiteralCS = new TypeLiteralCSElements();
 		this.pListTypeCS = new ListTypeCSElements();
@@ -1785,6 +1975,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pDictLiteralPartCS = new DictLiteralPartCSElements();
 		this.pExpressionBlockCS = new ExpressionBlockCSElements();
 		this.pExpressionStatementCS = new ExpressionStatementCSElements();
+		this.pExtentRefCS = new ExtentRefCSElements();
 		this.pForExpCS = new ForExpCSElements();
 		this.pImperativeIterateExpCS = new ImperativeIterateExpCSElements();
 		this.pInstantiationExpCS = new InstantiationExpCSElements();
@@ -1839,36 +2030,35 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getGrammmarCSAccess().getRule();
 	}
 
-	////terminal ACCESS_OP: '.' | '->' | '!->';
-	// //
-	// //// terminal ADD_OP: '+' | '-';
-	// //
-	//
-	////terminal ASSIGN_OP: ':=' | '::=' | '+=' | '-=';
-	// //
-	//
-	////terminal CMP_OP: '=' | '==' | '<>' | '<' | '>' | '<=' | '>=';
-	// //
-	// //terminal MULT_OP: '*' | '/' | '%';
-	// //
-	//
-	////terminal MULTI_ITERATOR_OP: 'forAll';
-	// //
-	// //// terminal OR_OP: 'or' | 'xor';
-	// //
-	//
-	////terminal RESOLVE_IN_KIND: 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn';
-	// //
-	//
-	////terminal RESOLVE_KIND: 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone';
-	// //
-	//
-	////terminal UNARY_OP: '-' | 'not' | '#' | '##' | '*';
-	// terminal SEVERITY_KIND:
-	//	"error" | "fatal" | "warning";
-	public TerminalRule getSEVERITY_KINDRule() {
-		return tSEVERITY_KIND;
-	} 
+	//enum SeverityKindCS:
+	//	error | warning | fatal;
+	public SeverityKindCSElements getSeverityKindCSAccess() {
+		return unknownRuleSeverityKindCS;
+	}
+	
+	public EnumRule getSeverityKindCSRule() {
+		return getSeverityKindCSAccess().getRule();
+	}
+
+	//enum InitOpCS:
+	//	Equals="=" | ColonEquals=":=" | ColonColonEquals="::=";
+	public InitOpCSElements getInitOpCSAccess() {
+		return unknownRuleInitOpCS;
+	}
+	
+	public EnumRule getInitOpCSRule() {
+		return getInitOpCSAccess().getRule();
+	}
+
+	//enum AssignOpCS:
+	//	Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+=";
+	public AssignOpCSElements getAssignOpCSAccess() {
+		return unknownRuleAssignOpCS;
+	}
+	
+	public EnumRule getAssignOpCSRule() {
+		return getAssignOpCSAccess().getRule();
+	}
 
 	////ImperativeOCLReservedKeyword:
 	// //	'default'
@@ -1973,7 +2163,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AssertExpCS:
-	//	"assert" severity=SEVERITY_KIND? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
+	//	"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
 	public AssertExpCSElements getAssertExpCSAccess() {
 		return pAssertExpCS;
 	}
@@ -1983,7 +2173,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AssignExpCS:
-	//	ownedLeft=NameExpCS assignOp=(":=" | "::=" | "+=") ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
+	//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
 	public AssignExpCSElements getAssignExpCSAccess() {
 		return pAssignExpCS;
 	}
@@ -2073,6 +2263,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionStatementCSAccess().getRule();
 	}
 
+	//ExtentRefCS:
+	//	ownedPathName=PathNameCS;
+	public ExtentRefCSElements getExtentRefCSAccess() {
+		return pExtentRefCS;
+	}
+	
+	public ParserRule getExtentRefCSRule() {
+		return getExtentRefCSAccess().getRule();
+	}
+
 	//// FIXME align with NameExpCS
 	// ForExpCS:
 	//	("forEach" | isOne?="forOne") "(" (ownedTarget=VarDeclarationCS ";")? ownedIterator=VarDeclarationNoInitCS ("|"
@@ -2099,6 +2299,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getImperativeIterateExpCSAccess().getRule();
 	}
 
+	//// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
+	//
 	//InstantiationExpCS:
 	//	"new" ownedClassRef=TypeExpCS ("@" ownedExtentRef=TypeNameExpCS)? "(" (ownedArguments+=ExpCS (","
 	//	ownedArguments+=ExpCS)*)? ")";
@@ -2125,7 +2327,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//// Improve spec: result.log("message", severity) when condition
 	// LogExpCS:
-	//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SEVERITY_KIND)? ")" ("when"
+	//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
 	//	ownedCondition=ExpCS)?;
 	public LogExpCSElements getLogExpCSAccess() {
 		return pLogExpCS;
@@ -2166,8 +2368,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		return getStringLiteralAccess().getRule();
 	}
 
-	//SwitchExpCS:
-	//	"if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?;
+	//// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+	// // FIXME SwitchExpCS should probably be a CallExp
+	// SwitchExpCS:
+	//	ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
+	//	| "switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
+	//	ownedElsePart=ExpCS)? "}";
 	public SwitchExpCSElements getSwitchExpCSAccess() {
 		return pSwitchExpCS;
 	}
@@ -2201,7 +2407,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//// UnlinkExpCS returns essentialocl::NameExpCS:
 	// VarDeclarationCS:
-	//	name=UnrestrictedName (":" ownedType=TypeExpCS)? ((initOp="=" | ":=" | "::=") ownedInitExpression=ExpCS)?;
+	//	name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
 	public VarDeclarationCSElements getVarDeclarationCSAccess() {
 		return pVarDeclarationCS;
 	}

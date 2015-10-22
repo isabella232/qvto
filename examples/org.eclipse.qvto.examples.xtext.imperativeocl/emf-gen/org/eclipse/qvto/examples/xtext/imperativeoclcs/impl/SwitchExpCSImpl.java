@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
@@ -29,6 +30,8 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.SwitchExpCSImpl#getOwnedAltParts <em>Owned Alt Parts</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.SwitchExpCSImpl#getOwnedElsePart <em>Owned Else Part</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.SwitchExpCSImpl#getOwnedIterator <em>Owned Iterator</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.SwitchExpCSImpl#getIfSyntax <em>If Syntax</em>}</li>
  * </ul>
  *
  * @generated
@@ -53,6 +56,36 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 	 * @ordered
 	 */
 	protected ExpCS ownedElsePart;
+
+	/**
+	 * The cached value of the '{@link #getOwnedIterator() <em>Owned Iterator</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedIterator()
+	 * @generated
+	 * @ordered
+	 */
+	protected VariableCS ownedIterator;
+
+	/**
+	 * The default value of the '{@link #getIfSyntax() <em>If Syntax</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIfSyntax()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IF_SYNTAX_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getIfSyntax() <em>If Syntax</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIfSyntax()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean ifSyntax = IF_SYNTAX_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +166,79 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public VariableCS getOwnedIterator() {
+		return ownedIterator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedIterator(VariableCS newOwnedIterator, NotificationChain msgs) {
+		VariableCS oldOwnedIterator = ownedIterator;
+		ownedIterator = newOwnedIterator;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR, oldOwnedIterator, newOwnedIterator);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwnedIterator(VariableCS newOwnedIterator) {
+		if (newOwnedIterator != ownedIterator) {
+			NotificationChain msgs = null;
+			if (ownedIterator != null)
+				msgs = ((InternalEObject)ownedIterator).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR, null, msgs);
+			if (newOwnedIterator != null)
+				msgs = ((InternalEObject)newOwnedIterator).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR, null, msgs);
+			msgs = basicSetOwnedIterator(newOwnedIterator, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR, newOwnedIterator, newOwnedIterator));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Boolean getIfSyntax() {
+		return ifSyntax;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIfSyntax(Boolean newIfSyntax) {
+		Boolean oldIfSyntax = ifSyntax;
+		ifSyntax = newIfSyntax;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.SWITCH_EXP_CS__IF_SYNTAX, oldIfSyntax, ifSyntax));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -140,6 +246,8 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 				return ((InternalEList<?>)getOwnedAltParts()).basicRemove(otherEnd, msgs);
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ELSE_PART:
 				return basicSetOwnedElsePart(null, msgs);
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR:
+				return basicSetOwnedIterator(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -156,6 +264,10 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 				return getOwnedAltParts();
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ELSE_PART:
 				return getOwnedElsePart();
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR:
+				return getOwnedIterator();
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__IF_SYNTAX:
+				return getIfSyntax();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -176,6 +288,12 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ELSE_PART:
 				setOwnedElsePart((ExpCS)newValue);
 				return;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR:
+				setOwnedIterator((VariableCS)newValue);
+				return;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__IF_SYNTAX:
+				setIfSyntax((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -194,6 +312,12 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ELSE_PART:
 				setOwnedElsePart((ExpCS)null);
 				return;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR:
+				setOwnedIterator((VariableCS)null);
+				return;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__IF_SYNTAX:
+				setIfSyntax(IF_SYNTAX_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -210,6 +334,10 @@ public class SwitchExpCSImpl extends StatementCSImpl implements SwitchExpCS {
 				return ownedAltParts != null && !ownedAltParts.isEmpty();
 			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ELSE_PART:
 				return ownedElsePart != null;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__OWNED_ITERATOR:
+				return ownedIterator != null;
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS__IF_SYNTAX:
+				return IF_SYNTAX_EDEFAULT == null ? ifSyntax != null : !IF_SYNTAX_EDEFAULT.equals(ifSyntax);
 		}
 		return super.eIsSet(featureID);
 	}

@@ -19,31 +19,31 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVToClassCSImpl#isIntermediate <em>Intermediate</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.QVToClassCSImpl#isIsIntermediate <em>Is Intermediate</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassCS {
 	/**
-	 * The default value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
+	 * The default value of the '{@link #isIsIntermediate() <em>Is Intermediate</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIntermediate()
+	 * @see #isIsIntermediate()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean INTERMEDIATE_EDEFAULT = false;
+	protected static final boolean IS_INTERMEDIATE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isIntermediate() <em>Intermediate</em>}' attribute.
+	 * The cached value of the '{@link #isIsIntermediate() <em>Is Intermediate</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIntermediate()
+	 * @see #isIsIntermediate()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean intermediate = INTERMEDIATE_EDEFAULT;
+	protected boolean isIntermediate = IS_INTERMEDIATE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,8 +69,8 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIntermediate() {
-		return intermediate;
+	public boolean isIsIntermediate() {
+		return isIntermediate;
 	}
 
 	/**
@@ -78,11 +78,11 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIntermediate(boolean newIntermediate) {
-		boolean oldIntermediate = intermediate;
-		intermediate = newIntermediate;
+	public void setIsIntermediate(boolean newIsIntermediate) {
+		boolean oldIsIntermediate = isIntermediate;
+		isIntermediate = newIsIntermediate;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE, oldIntermediate, intermediate));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.QV_TO_CLASS_CS__IS_INTERMEDIATE, oldIsIntermediate, isIntermediate));
 	}
 
 	/**
@@ -102,8 +102,8 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE:
-				return isIntermediate();
+			case QVTOperationalCSPackage.QV_TO_CLASS_CS__IS_INTERMEDIATE:
+				return isIsIntermediate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,8 +116,8 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE:
-				setIntermediate((Boolean)newValue);
+			case QVTOperationalCSPackage.QV_TO_CLASS_CS__IS_INTERMEDIATE:
+				setIsIntermediate((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -131,8 +131,8 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE:
-				setIntermediate(INTERMEDIATE_EDEFAULT);
+			case QVTOperationalCSPackage.QV_TO_CLASS_CS__IS_INTERMEDIATE:
+				setIsIntermediate(IS_INTERMEDIATE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -146,8 +146,8 @@ public class QVToClassCSImpl extends StructuredClassCSImpl implements QVToClassC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.QV_TO_CLASS_CS__INTERMEDIATE:
-				return intermediate != INTERMEDIATE_EDEFAULT;
+			case QVTOperationalCSPackage.QV_TO_CLASS_CS__IS_INTERMEDIATE:
+				return isIntermediate != IS_INTERMEDIATE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -139,6 +139,15 @@ public interface ImperativeOCLCSFactory extends EFactory {
 	ExpressionBlockCS createExpressionBlockCS();
 
 	/**
+	 * Returns a new object of class '<em>Extent Ref CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Extent Ref CS</em>'.
+	 * @generated
+	 */
+	ExtentRefCS createExtentRefCS();
+
+	/**
 	 * Returns a new object of class '<em>For Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

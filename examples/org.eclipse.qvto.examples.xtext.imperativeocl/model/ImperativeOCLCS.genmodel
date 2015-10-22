@@ -15,6 +15,21 @@
   <foreignModel>ImperativeOCLCS.ecore</foreignModel>
   <genPackages prefix="ImperativeOCLCS" basePackage="org.eclipse.qvto.examples.xtext"
       disposableProviderFactory="true" fileExtensions="iocl" ecorePackage="ImperativeOCLCS.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ImperativeOCLCS.ecore#//AssignOpCS">
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//AssignOpCS/Single"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//AssignOpCS/MultiWithReset"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//AssignOpCS/MultiWithoutReset"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ImperativeOCLCS.ecore#//InitOpCS">
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//InitOpCS/Equals"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//InitOpCS/ColonEquals"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//InitOpCS/ColonColonEquals"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ImperativeOCLCS.ecore#//SeverityKindCS">
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//SeverityKindCS/error"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//SeverityKindCS/warning"/>
+      <genEnumLiterals ecoreEnumLiteral="ImperativeOCLCS.ecore#//SeverityKindCS/fatal"/>
+    </genEnums>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//AssertExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/ownedAssertion"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//AssertExpCS/ownedLog"/>
@@ -62,6 +77,9 @@
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ExpressionBlockCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExpressionBlockCS/ownedExps"/>
     </genClasses>
+    <genClasses ecoreClass="ImperativeOCLCS.ecore#//ExtentRefCS">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//ExtentRefCS/ownedPathName"/>
+    </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//ForExpCS">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//ForExpCS/isOne"/>
     </genClasses>
@@ -92,6 +110,8 @@
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//SwitchExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/ownedAltParts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/ownedElsePart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//SwitchExpCS/ownedIterator"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ImperativeOCLCS.ecore#//SwitchExpCS/ifSyntax"/>
     </genClasses>
     <genClasses ecoreClass="ImperativeOCLCS.ecore#//TryExpCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ImperativeOCLCS.ecore#//TryExpCS/ownedCatchs"/>

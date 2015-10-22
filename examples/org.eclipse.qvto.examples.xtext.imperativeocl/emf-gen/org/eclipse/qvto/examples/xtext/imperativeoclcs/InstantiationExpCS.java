@@ -3,6 +3,7 @@
 package org.eclipse.qvto.examples.xtext.imperativeoclcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.ocl.xtext.basecs.TypeRefCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
@@ -34,12 +35,12 @@ public interface InstantiationExpCS extends StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Class Ref</em>' containment reference.
-	 * @see #setOwnedClassRef(TypedRefCS)
+	 * @see #setOwnedClassRef(TypeRefCS)
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getInstantiationExpCS_OwnedClassRef()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	TypedRefCS getOwnedClassRef();
+	TypeRefCS getOwnedClassRef();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS#getOwnedClassRef <em>Owned Class Ref</em>}' containment reference.
@@ -49,7 +50,7 @@ public interface InstantiationExpCS extends StatementCS {
 	 * @see #getOwnedClassRef()
 	 * @generated
 	 */
-	void setOwnedClassRef(TypedRefCS value);
+	void setOwnedClassRef(TypeRefCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Arguments</b></em>' containment reference list.

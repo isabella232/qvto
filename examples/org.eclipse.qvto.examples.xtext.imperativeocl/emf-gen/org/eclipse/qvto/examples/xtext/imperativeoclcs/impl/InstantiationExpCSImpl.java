@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.xtext.basecs.TypeRefCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
@@ -43,7 +44,7 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedRefCS ownedClassRef;
+	protected TypeRefCS ownedClassRef;
 
 	/**
 	 * The cached value of the '{@link #getOwnedArguments() <em>Owned Arguments</em>}' containment reference list.
@@ -89,7 +90,7 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypedRefCS getOwnedClassRef() {
+	public TypeRefCS getOwnedClassRef() {
 		return ownedClassRef;
 	}
 
@@ -98,8 +99,8 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwnedClassRef(TypedRefCS newOwnedClassRef, NotificationChain msgs) {
-		TypedRefCS oldOwnedClassRef = ownedClassRef;
+	public NotificationChain basicSetOwnedClassRef(TypeRefCS newOwnedClassRef, NotificationChain msgs) {
+		TypeRefCS oldOwnedClassRef = ownedClassRef;
 		ownedClassRef = newOwnedClassRef;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF, oldOwnedClassRef, newOwnedClassRef);
@@ -113,7 +114,7 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwnedClassRef(TypedRefCS newOwnedClassRef) {
+	public void setOwnedClassRef(TypeRefCS newOwnedClassRef) {
 		if (newOwnedClassRef != ownedClassRef) {
 			NotificationChain msgs = null;
 			if (ownedClassRef != null)
@@ -228,7 +229,7 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
-				setOwnedClassRef((TypedRefCS)newValue);
+				setOwnedClassRef((TypeRefCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
 				getOwnedArguments().clear();
@@ -250,7 +251,7 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
-				setOwnedClassRef((TypedRefCS)null);
+				setOwnedClassRef((TypeRefCS)null);
 				return;
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
 				getOwnedArguments().clear();

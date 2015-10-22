@@ -11,7 +11,6 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
-import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -25,9 +24,8 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected AbstractElementAlias match_ExpressionBlockCS_DoKeyword_1_q;
 	protected AbstractElementAlias match_ExpressionStatementCS_SemicolonKeyword_1_q;
 	protected AbstractElementAlias match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q;
-	protected AbstractElementAlias match_SwitchExpCS_EndifKeyword_4_q;
+	protected AbstractElementAlias match_SwitchExpCS_EndifKeyword_0_4_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
-	protected AbstractElementAlias match_VarDeclarationCS_ColonColonEqualsSignKeyword_2_0_2_or_ColonEqualsSignKeyword_2_0_1;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -35,9 +33,8 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 		match_ExpressionBlockCS_DoKeyword_1_q = new TokenAlias(false, true, grammarAccess.getExpressionBlockCSAccess().getDoKeyword_1());
 		match_ExpressionStatementCS_SemicolonKeyword_1_q = new TokenAlias(false, true, grammarAccess.getExpressionStatementCSAccess().getSemicolonKeyword_1());
 		match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q = new TokenAlias(false, true, grammarAccess.getMultiplicityCSAccess().getVerticalLineQuestionMarkKeyword_2_0());
-		match_SwitchExpCS_EndifKeyword_4_q = new TokenAlias(false, true, grammarAccess.getSwitchExpCSAccess().getEndifKeyword_4());
+		match_SwitchExpCS_EndifKeyword_0_4_q = new TokenAlias(false, true, grammarAccess.getSwitchExpCSAccess().getEndifKeyword_0_4());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
-		match_VarDeclarationCS_ColonColonEqualsSignKeyword_2_0_2_or_ColonEqualsSignKeyword_2_0_1 = new AlternativeAlias(false, false, new TokenAlias(false, false, grammarAccess.getVarDeclarationCSAccess().getColonColonEqualsSignKeyword_2_0_2()), new TokenAlias(false, false, grammarAccess.getVarDeclarationCSAccess().getColonEqualsSignKeyword_2_0_1()));
 	}
 	
 	@Override
@@ -58,12 +55,10 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 				emit_ExpressionStatementCS_SemicolonKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
 				emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SwitchExpCS_EndifKeyword_4_q.equals(syntax))
-				emit_SwitchExpCS_EndifKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_SwitchExpCS_EndifKeyword_0_4_q.equals(syntax))
+				emit_SwitchExpCS_EndifKeyword_0_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_VarDeclarationCS_ColonColonEqualsSignKeyword_2_0_2_or_ColonEqualsSignKeyword_2_0_1.equals(syntax))
-				emit_VarDeclarationCS_ColonColonEqualsSignKeyword_2_0_2_or_ColonEqualsSignKeyword_2_0_1(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -98,6 +93,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     (rule start) 'self' (ambiguity) (rule start)
 	 *     isPre?='@' 'pre' (ambiguity) (rule end)
 	 *     ownedAltParts+=SwitchAltCS 'endif'? (ambiguity) (rule end)
+	 *     ownedAltParts+=SwitchAltCS '}' (ambiguity) (rule end)
 	 *     ownedArguments+=ExpCS ')' (ambiguity) (rule end)
 	 *     ownedAssertion=ExpCS (ambiguity) (rule end)
 	 *     ownedBody=ExpCS ')' (ambiguity) (rule end)
@@ -112,6 +108,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     ownedElement=ExpCS ')' (ambiguity) (rule end)
 	 *     ownedElseExpression=ExpCS 'endif' (ambiguity) (rule end)
 	 *     ownedElsePart=ExpCS 'endif'? (ambiguity) (rule end)
+	 *     ownedElsePart=ExpCS '}' (ambiguity) (rule end)
 	 *     ownedExpression=ExpCS ')' (ambiguity) (rule end)
 	 *     ownedExpressionCS=ExpCS '}' (ambiguity) (rule end)
 	 *     ownedExps+=ExpressionStatementCS '}' (ambiguity) (rule end)
@@ -135,7 +132,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     ownedValue=ExpCS (ambiguity) (rule end)
 	 *     ownedVarDeclarations+=VarDeclarationCS (ambiguity) (rule end)
 	 *     segments+=StringLiteral (ambiguity) (rule end)
-	 *     severity=SEVERITY_KIND ')' (ambiguity) (rule end)
+	 *     severity=SeverityKindCS ')' (ambiguity) (rule end)
 	 *     symbol='false' (ambiguity) (rule end)
 	 *     symbol='true' (ambiguity) (rule end)
 	 *     symbol=NUMBER_LITERAL (ambiguity) (rule end)
@@ -169,7 +166,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     ownedElsePart=ExpCS (ambiguity) ';'? (rule end)
 	 *     ownedElsePart=ExpCS (ambiguity) (rule end)
 	 */
-	protected void emit_SwitchExpCS_EndifKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_SwitchExpCS_EndifKeyword_0_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -182,18 +179,6 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	 *     name='Tuple' (ambiguity) ownedMultiplicity=MultiplicityCS
 	 */
 	protected void emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Ambiguous syntax:
-	 *     ':=' | '::='
-	 *
-	 * This ambiguous syntax occurs at:
-	 *     name=UnrestrictedName (ambiguity) ownedInitExpression=ExpCS
-	 *     ownedType=TypeExpCS (ambiguity) ownedInitExpression=ExpCS
-	 */
-	protected void emit_VarDeclarationCS_ColonColonEqualsSignKeyword_2_0_2_or_ColonEqualsSignKeyword_2_0_1(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

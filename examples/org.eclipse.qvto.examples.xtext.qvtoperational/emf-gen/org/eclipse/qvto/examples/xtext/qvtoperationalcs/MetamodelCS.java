@@ -23,7 +23,7 @@ import org.eclipse.ocl.xtext.basecs.PackageCS;
 public interface MetamodelCS extends PackageCS {
 	/**
 	 * Returns the value of the '<em><b>Metamodel Kind</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind}.
+	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKindCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Metamodel Kind</em>' attribute isn't clear,
@@ -31,23 +31,23 @@ public interface MetamodelCS extends PackageCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Metamodel Kind</em>' attribute.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind
-	 * @see #setMetamodelKind(MetamodelKind)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKindCS
+	 * @see #setMetamodelKind(MetamodelKindCS)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getMetamodelCS_MetamodelKind()
 	 * @model
 	 * @generated
 	 */
-	MetamodelKind getMetamodelKind();
+	MetamodelKindCS getMetamodelKind();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS#getMetamodelKind <em>Metamodel Kind</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Metamodel Kind</em>' attribute.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKindCS
 	 * @see #getMetamodelKind()
 	 * @generated
 	 */
-	void setMetamodelKind(MetamodelKind value);
+	void setMetamodelKind(MetamodelKindCS value);
 
 } // MetamodelCS

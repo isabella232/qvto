@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.VariableCSImpl;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
@@ -33,7 +34,7 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String INIT_OP_EDEFAULT = null;
+	protected static final InitOpCS INIT_OP_EDEFAULT = InitOpCS.EQUALS;
 
 	/**
 	 * The cached value of the '{@link #getInitOp() <em>Init Op</em>}' attribute.
@@ -43,7 +44,7 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	 * @generated
 	 * @ordered
 	 */
-	protected String initOp = INIT_OP_EDEFAULT;
+	protected InitOpCS initOp = INIT_OP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,7 +70,7 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getInitOp() {
+	public InitOpCS getInitOp() {
 		return initOp;
 	}
 
@@ -78,9 +79,9 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitOp(String newInitOp) {
-		String oldInitOp = initOp;
-		initOp = newInitOp;
+	public void setInitOp(InitOpCS newInitOp) {
+		InitOpCS oldInitOp = initOp;
+		initOp = newInitOp == null ? INIT_OP_EDEFAULT : newInitOp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.VAR_DECLARATION_CS__INIT_OP, oldInitOp, initOp));
 	}
@@ -117,7 +118,7 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case ImperativeOCLCSPackage.VAR_DECLARATION_CS__INIT_OP:
-				setInitOp((String)newValue);
+				setInitOp((InitOpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -147,7 +148,7 @@ public class VarDeclarationCSImpl extends VariableCSImpl implements VarDeclarati
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case ImperativeOCLCSPackage.VAR_DECLARATION_CS__INIT_OP:
-				return INIT_OP_EDEFAULT == null ? initOp != null : !INIT_OP_EDEFAULT.equals(initOp);
+				return initOp != INIT_OP_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

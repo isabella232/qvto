@@ -25,6 +25,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TypedTypeRef2CSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TypedTypeRef2CSImpl#getOwnedBinding <em>Owned Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TypedTypeRef2CSImpl#getExtentLocation <em>Extent Location</em>}</li>
  * </ul>
  *
  * @generated
@@ -49,6 +50,26 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 	 * @ordered
 	 */
 	protected TemplateBindingCS ownedBinding;
+
+	/**
+	 * The default value of the '{@link #getExtentLocation() <em>Extent Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtentLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String EXTENT_LOCATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getExtentLocation() <em>Extent Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExtentLocation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String extentLocation = EXTENT_LOCATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -160,6 +181,36 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getExtentLocation() {
+		return extentLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtentLocation(String newExtentLocation) {
+		String oldExtentLocation = extentLocation;
+		extentLocation = newExtentLocation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__EXTENT_LOCATION, oldExtentLocation, extentLocation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -183,6 +234,8 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 				return getOwnedPathName();
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__OWNED_BINDING:
 				return getOwnedBinding();
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__EXTENT_LOCATION:
+				return getExtentLocation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +253,9 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 				return;
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__OWNED_BINDING:
 				setOwnedBinding((TemplateBindingCS)newValue);
+				return;
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__EXTENT_LOCATION:
+				setExtentLocation((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -219,6 +275,9 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__OWNED_BINDING:
 				setOwnedBinding((TemplateBindingCS)null);
 				return;
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__EXTENT_LOCATION:
+				setExtentLocation(EXTENT_LOCATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -235,6 +294,8 @@ public class TypedTypeRef2CSImpl extends TypedRefCSImpl implements TypedTypeRef2
 				return ownedPathName != null;
 			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__OWNED_BINDING:
 				return ownedBinding != null;
+			case QVTOperationalCSPackage.TYPED_TYPE_REF2_CS__EXTENT_LOCATION:
+				return EXTENT_LOCATION_EDEFAULT == null ? extentLocation != null : !EXTENT_LOCATION_EDEFAULT.equals(extentLocation);
 		}
 		return super.eIsSet(featureID);
 	}

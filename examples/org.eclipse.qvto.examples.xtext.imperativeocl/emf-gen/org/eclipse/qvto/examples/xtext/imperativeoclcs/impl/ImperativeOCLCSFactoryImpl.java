@@ -3,12 +3,14 @@
 package org.eclipse.qvto.examples.xtext.imperativeoclcs.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
@@ -17,17 +19,20 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSFactory;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
@@ -92,6 +97,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS: return createInstantiationExpCS();
 			case ImperativeOCLCSPackage.CATCH_EXP_CS: return createCatchExpCS();
 			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS: return createExpressionBlockCS();
+			case ImperativeOCLCSPackage.EXTENT_REF_CS: return createExtentRefCS();
 			case ImperativeOCLCSPackage.FOR_EXP_CS: return createForExpCS();
 			case ImperativeOCLCSPackage.LIST_TYPE_CS: return createListTypeCS();
 			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS: return createListLiteralExpCS();
@@ -106,6 +112,44 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 			case ImperativeOCLCSPackage.WHILE_EXP_CS: return createWhileExpCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImperativeOCLCSPackage.ASSIGN_OP_CS:
+				return createAssignOpCSFromString(eDataType, initialValue);
+			case ImperativeOCLCSPackage.INIT_OP_CS:
+				return createInitOpCSFromString(eDataType, initialValue);
+			case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
+				return createSeverityKindCSFromString(eDataType, initialValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+			case ImperativeOCLCSPackage.ASSIGN_OP_CS:
+				return convertAssignOpCSToString(eDataType, instanceValue);
+			case ImperativeOCLCSPackage.INIT_OP_CS:
+				return convertInitOpCSToString(eDataType, instanceValue);
+			case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
+				return convertSeverityKindCSToString(eDataType, instanceValue);
+			default:
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -244,6 +288,16 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public ExtentRefCS createExtentRefCS() {
+		ExtentRefCSImpl extentRefCS = new ExtentRefCSImpl();
+		return extentRefCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ForExpCS createForExpCS() {
 		ForExpCSImpl forExpCS = new ForExpCSImpl();
 		return forExpCS;
@@ -357,6 +411,66 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	public WhileExpCS createWhileExpCS() {
 		WhileExpCSImpl whileExpCS = new WhileExpCSImpl();
 		return whileExpCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public AssignOpCS createAssignOpCSFromString(EDataType eDataType, String initialValue) {
+		AssignOpCS result = AssignOpCS.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertAssignOpCSToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InitOpCS createInitOpCSFromString(EDataType eDataType, String initialValue) {
+		InitOpCS result = InitOpCS.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertInitOpCSToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SeverityKindCS createSeverityKindCSFromString(EDataType eDataType, String initialValue) {
+		SeverityKindCS result = SeverityKindCS.get(initialValue);
+		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertSeverityKindCSToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

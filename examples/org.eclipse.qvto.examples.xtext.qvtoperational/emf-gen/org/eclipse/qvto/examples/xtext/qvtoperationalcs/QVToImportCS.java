@@ -14,7 +14,7 @@ import org.eclipse.ocl.xtext.basecs.ImportCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getUnit <em>Unit</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getOwnedUnitRef <em>Owned Unit Ref</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getImportedUnitElement <em>Imported Unit Element</em>}</li>
  * </ul>
  *
@@ -24,30 +24,30 @@ import org.eclipse.ocl.xtext.basecs.ImportCS;
  */
 public interface QVToImportCS extends ImportCS {
 	/**
-	 * Returns the value of the '<em><b>Unit</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Unit Ref</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Unit</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Unit Ref</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unit</em>' containment reference.
-	 * @see #setUnit(UnitCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToImportCS_Unit()
+	 * @return the value of the '<em>Owned Unit Ref</em>' containment reference.
+	 * @see #setOwnedUnitRef(UnitRefCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToImportCS_OwnedUnitRef()
 	 * @model containment="true"
 	 * @generated
 	 */
-	UnitCS getUnit();
+	UnitRefCS getOwnedUnitRef();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getUnit <em>Unit</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS#getOwnedUnitRef <em>Owned Unit Ref</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unit</em>' containment reference.
-	 * @see #getUnit()
+	 * @param value the new value of the '<em>Owned Unit Ref</em>' containment reference.
+	 * @see #getOwnedUnitRef()
 	 * @generated
 	 */
-	void setUnit(UnitCS value);
+	void setOwnedUnitRef(UnitRefCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Imported Unit Element</b></em>' attribute list.

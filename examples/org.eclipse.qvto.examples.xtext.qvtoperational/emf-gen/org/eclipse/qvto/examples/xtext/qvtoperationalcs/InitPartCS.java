@@ -4,6 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,7 +16,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getInitOp <em>Init Op</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getOwnedExp <em>Owned Exp</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getInitPartCS()
@@ -25,7 +26,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 public interface InitPartCS extends ElementCS {
 	/**
 	 * Returns the value of the '<em><b>Init Op</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitOp}.
+	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Init Op</em>' attribute isn't clear,
@@ -33,49 +34,49 @@ public interface InitPartCS extends ElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Init Op</em>' attribute.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitOp
-	 * @see #setInitOp(InitOp)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS
+	 * @see #setInitOp(InitOpCS)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getInitPartCS_InitOp()
 	 * @model
 	 * @generated
 	 */
-	InitOp getInitOp();
+	InitOpCS getInitOp();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getInitOp <em>Init Op</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Init Op</em>' attribute.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitOp
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS
 	 * @see #getInitOp()
 	 * @generated
 	 */
-	void setInitOp(InitOp value);
+	void setInitOp(InitOpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Exp</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getInitPartCS_Expression()
+	 * @return the value of the '<em>Owned Exp</em>' containment reference.
+	 * @see #setOwnedExp(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getInitPartCS_OwnedExp()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getExpression();
+	ExpCS getOwnedExp();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS#getOwnedExp <em>Owned Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Owned Exp</em>' containment reference.
+	 * @see #getOwnedExp()
 	 * @generated
 	 */
-	void setExpression(ExpCS value);
+	void setOwnedExp(ExpCS value);
 
 } // InitPartCS

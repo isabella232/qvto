@@ -24,7 +24,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ParameterDeclarationCSImpl#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ParameterDeclarationCSImpl#getInitPart <em>Init Part</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ParameterDeclarationCSImpl#getOwnedInitPart <em>Owned Init Part</em>}</li>
  * </ul>
  *
  * @generated
@@ -60,14 +60,14 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 	protected boolean directionESet;
 
 	/**
-	 * The cached value of the '{@link #getInitPart() <em>Init Part</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInitPart() <em>Owned Init Part</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInitPart()
+	 * @see #getOwnedInitPart()
 	 * @generated
 	 * @ordered
 	 */
-	protected InitPartCS initPart;
+	protected InitPartCS ownedInitPart;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -139,8 +139,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InitPartCS getInitPart() {
-		return initPart;
+	public InitPartCS getOwnedInitPart() {
+		return ownedInitPart;
 	}
 
 	/**
@@ -148,11 +148,11 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitPart(InitPartCS newInitPart, NotificationChain msgs) {
-		InitPartCS oldInitPart = initPart;
-		initPart = newInitPart;
+	public NotificationChain basicSetOwnedInitPart(InitPartCS newOwnedInitPart, NotificationChain msgs) {
+		InitPartCS oldOwnedInitPart = ownedInitPart;
+		ownedInitPart = newOwnedInitPart;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART, oldInitPart, newInitPart);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART, oldOwnedInitPart, newOwnedInitPart);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -163,18 +163,18 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitPart(InitPartCS newInitPart) {
-		if (newInitPart != initPart) {
+	public void setOwnedInitPart(InitPartCS newOwnedInitPart) {
+		if (newOwnedInitPart != ownedInitPart) {
 			NotificationChain msgs = null;
-			if (initPart != null)
-				msgs = ((InternalEObject)initPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART, null, msgs);
-			if (newInitPart != null)
-				msgs = ((InternalEObject)newInitPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART, null, msgs);
-			msgs = basicSetInitPart(newInitPart, msgs);
+			if (ownedInitPart != null)
+				msgs = ((InternalEObject)ownedInitPart).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART, null, msgs);
+			if (newOwnedInitPart != null)
+				msgs = ((InternalEObject)newOwnedInitPart).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART, null, msgs);
+			msgs = basicSetOwnedInitPart(newOwnedInitPart, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART, newInitPart, newInitPart));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART, newOwnedInitPart, newOwnedInitPart));
 	}
 
 	/**
@@ -194,8 +194,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART:
-				return basicSetInitPart(null, msgs);
+			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART:
+				return basicSetOwnedInitPart(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -210,8 +210,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 		switch (featureID) {
 			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__DIRECTION:
 				return getDirection();
-			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART:
-				return getInitPart();
+			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART:
+				return getOwnedInitPart();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -227,8 +227,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__DIRECTION:
 				setDirection((DirectionKindCS)newValue);
 				return;
-			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART:
-				setInitPart((InitPartCS)newValue);
+			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART:
+				setOwnedInitPart((InitPartCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -245,8 +245,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__DIRECTION:
 				unsetDirection();
 				return;
-			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART:
-				setInitPart((InitPartCS)null);
+			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART:
+				setOwnedInitPart((InitPartCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -262,8 +262,8 @@ public class ParameterDeclarationCSImpl extends ParameterCSImpl implements Param
 		switch (featureID) {
 			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__DIRECTION:
 				return isSetDirection();
-			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__INIT_PART:
-				return initPart != null;
+			case QVTOperationalCSPackage.PARAMETER_DECLARATION_CS__OWNED_INIT_PART:
+				return ownedInitPart != null;
 		}
 		return super.eIsSet(featureID);
 	}

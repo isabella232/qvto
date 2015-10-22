@@ -9,7 +9,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
@@ -23,7 +22,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getPackagePath <em>Package Path</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getOwnedScopedName <em>Owned Scoped Name</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.PackageRefCSImpl#getUri <em>Uri</em>}</li>
  * </ul>
  *
@@ -31,24 +30,34 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  */
 public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	/**
-	 * The cached value of the '{@link #getPackagePath() <em>Package Path</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedScopedName() <em>Owned Scoped Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPackagePath()
+	 * @see #getOwnedScopedName()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathName2CS packagePath;
+	protected PathName2CS ownedScopedName;
 
 	/**
-	 * The cached value of the '{@link #getUri() <em>Uri</em>}' containment reference.
+	 * The default value of the '{@link #getUri() <em>Uri</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getUri()
 	 * @generated
 	 * @ordered
 	 */
-	protected StringLiteralExpCS uri;
+	protected static final String URI_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getUri() <em>Uri</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUri()
+	 * @generated
+	 * @ordered
+	 */
+	protected String uri = URI_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +83,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PathName2CS getPackagePath() {
-		return packagePath;
+	public PathName2CS getOwnedScopedName() {
+		return ownedScopedName;
 	}
 
 	/**
@@ -83,11 +92,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPackagePath(PathName2CS newPackagePath, NotificationChain msgs) {
-		PathName2CS oldPackagePath = packagePath;
-		packagePath = newPackagePath;
+	public NotificationChain basicSetOwnedScopedName(PathName2CS newOwnedScopedName, NotificationChain msgs) {
+		PathName2CS oldOwnedScopedName = ownedScopedName;
+		ownedScopedName = newOwnedScopedName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, oldPackagePath, newPackagePath);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME, oldOwnedScopedName, newOwnedScopedName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +107,18 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPackagePath(PathName2CS newPackagePath) {
-		if (newPackagePath != packagePath) {
+	public void setOwnedScopedName(PathName2CS newOwnedScopedName) {
+		if (newOwnedScopedName != ownedScopedName) {
 			NotificationChain msgs = null;
-			if (packagePath != null)
-				msgs = ((InternalEObject)packagePath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, null, msgs);
-			if (newPackagePath != null)
-				msgs = ((InternalEObject)newPackagePath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, null, msgs);
-			msgs = basicSetPackagePath(newPackagePath, msgs);
+			if (ownedScopedName != null)
+				msgs = ((InternalEObject)ownedScopedName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME, null, msgs);
+			if (newOwnedScopedName != null)
+				msgs = ((InternalEObject)newOwnedScopedName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME, null, msgs);
+			msgs = basicSetOwnedScopedName(newOwnedScopedName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH, newPackagePath, newPackagePath));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME, newOwnedScopedName, newOwnedScopedName));
 	}
 
 	/**
@@ -117,7 +126,7 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringLiteralExpCS getUri() {
+	public String getUri() {
 		return uri;
 	}
 
@@ -126,14 +135,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetUri(StringLiteralExpCS newUri, NotificationChain msgs) {
-		StringLiteralExpCS oldUri = uri;
+	public void setUri(String newUri) {
+		String oldUri = uri;
 		uri = newUri;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI, oldUri, newUri);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI, oldUri, uri));
 	}
 
 	/**
@@ -141,18 +147,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setUri(StringLiteralExpCS newUri) {
-		if (newUri != uri) {
-			NotificationChain msgs = null;
-			if (uri != null)
-				msgs = ((InternalEObject)uri).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI, null, msgs);
-			if (newUri != null)
-				msgs = ((InternalEObject)newUri).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.PACKAGE_REF_CS__URI, null, msgs);
-			msgs = basicSetUri(newUri, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.PACKAGE_REF_CS__URI, newUri, newUri));
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -163,10 +159,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
-				return basicSetPackagePath(null, msgs);
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
-				return basicSetUri(null, msgs);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME:
+				return basicSetOwnedScopedName(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,8 +173,8 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
-				return getPackagePath();
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME:
+				return getOwnedScopedName();
 			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
 				return getUri();
 		}
@@ -195,11 +189,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
-				setPackagePath((PathName2CS)newValue);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME:
+				setOwnedScopedName((PathName2CS)newValue);
 				return;
 			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
-				setUri((StringLiteralExpCS)newValue);
+				setUri((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,11 +207,11 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
-				setPackagePath((PathName2CS)null);
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME:
+				setOwnedScopedName((PathName2CS)null);
 				return;
 			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
-				setUri((StringLiteralExpCS)null);
+				setUri(URI_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -231,10 +225,10 @@ public class PackageRefCSImpl extends ElementCSImpl implements PackageRefCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.PACKAGE_REF_CS__PACKAGE_PATH:
-				return packagePath != null;
+			case QVTOperationalCSPackage.PACKAGE_REF_CS__OWNED_SCOPED_NAME:
+				return ownedScopedName != null;
 			case QVTOperationalCSPackage.PACKAGE_REF_CS__URI:
-				return uri != null;
+				return URI_EDEFAULT == null ? uri != null : !URI_EDEFAULT.equals(uri);
 		}
 		return super.eIsSet(featureID);
 	}

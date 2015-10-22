@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignOpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
@@ -58,7 +59,7 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ASSIGN_OP_EDEFAULT = null;
+	protected static final AssignOpCS ASSIGN_OP_EDEFAULT = AssignOpCS.SINGLE;
 
 	/**
 	 * The cached value of the '{@link #getAssignOp() <em>Assign Op</em>}' attribute.
@@ -68,7 +69,7 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected String assignOp = ASSIGN_OP_EDEFAULT;
+	protected AssignOpCS assignOp = ASSIGN_OP_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOwnedDefault() <em>Owned Default</em>}' containment reference.
@@ -190,7 +191,7 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getAssignOp() {
+	public AssignOpCS getAssignOp() {
 		return assignOp;
 	}
 
@@ -199,9 +200,9 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAssignOp(String newAssignOp) {
-		String oldAssignOp = assignOp;
-		assignOp = newAssignOp;
+	public void setAssignOp(AssignOpCS newAssignOp) {
+		AssignOpCS oldAssignOp = assignOp;
+		assignOp = newAssignOp == null ? ASSIGN_OP_EDEFAULT : newAssignOp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSIGN_EXP_CS__ASSIGN_OP, oldAssignOp, assignOp));
 	}
@@ -311,7 +312,7 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 				setOwnedValue((ExpCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.ASSIGN_EXP_CS__ASSIGN_OP:
-				setAssignOp((String)newValue);
+				setAssignOp((AssignOpCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.ASSIGN_EXP_CS__OWNED_DEFAULT:
 				setOwnedDefault((ExpCS)newValue);
@@ -357,7 +358,7 @@ public class AssignExpCSImpl extends StatementCSImpl implements AssignExpCS {
 			case ImperativeOCLCSPackage.ASSIGN_EXP_CS__OWNED_VALUE:
 				return ownedValue != null;
 			case ImperativeOCLCSPackage.ASSIGN_EXP_CS__ASSIGN_OP:
-				return ASSIGN_OP_EDEFAULT == null ? assignOp != null : !ASSIGN_OP_EDEFAULT.equals(assignOp);
+				return assignOp != ASSIGN_OP_EDEFAULT;
 			case ImperativeOCLCSPackage.ASSIGN_EXP_CS__OWNED_DEFAULT:
 				return ownedDefault != null;
 		}

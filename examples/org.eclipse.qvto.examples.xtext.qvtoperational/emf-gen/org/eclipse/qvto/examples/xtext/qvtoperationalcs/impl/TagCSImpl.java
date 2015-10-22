@@ -23,32 +23,32 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TagCSImpl#getElementPath <em>Element Path</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TagCSImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TagCSImpl#getOwnedElementPath <em>Owned Element Path</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.TagCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	/**
-	 * The cached value of the '{@link #getElementPath() <em>Element Path</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedElementPath() <em>Owned Element Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getElementPath()
+	 * @see #getOwnedElementPath()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathName2CS elementPath;
+	protected PathName2CS ownedElementPath;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getOwnedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expression;
+	protected ExpCS ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PathName2CS getElementPath() {
-		return elementPath;
+	public PathName2CS getOwnedElementPath() {
+		return ownedElementPath;
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetElementPath(PathName2CS newElementPath, NotificationChain msgs) {
-		PathName2CS oldElementPath = elementPath;
-		elementPath = newElementPath;
+	public NotificationChain basicSetOwnedElementPath(PathName2CS newOwnedElementPath, NotificationChain msgs) {
+		PathName2CS oldOwnedElementPath = ownedElementPath;
+		ownedElementPath = newOwnedElementPath;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH, oldElementPath, newElementPath);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH, oldOwnedElementPath, newOwnedElementPath);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +98,18 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setElementPath(PathName2CS newElementPath) {
-		if (newElementPath != elementPath) {
+	public void setOwnedElementPath(PathName2CS newOwnedElementPath) {
+		if (newOwnedElementPath != ownedElementPath) {
 			NotificationChain msgs = null;
-			if (elementPath != null)
-				msgs = ((InternalEObject)elementPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH, null, msgs);
-			if (newElementPath != null)
-				msgs = ((InternalEObject)newElementPath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH, null, msgs);
-			msgs = basicSetElementPath(newElementPath, msgs);
+			if (ownedElementPath != null)
+				msgs = ((InternalEObject)ownedElementPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH, null, msgs);
+			if (newOwnedElementPath != null)
+				msgs = ((InternalEObject)newOwnedElementPath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH, null, msgs);
+			msgs = basicSetOwnedElementPath(newOwnedElementPath, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH, newElementPath, newElementPath));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH, newOwnedElementPath, newOwnedElementPath));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getExpression() {
-		return expression;
+	public ExpCS getOwnedExpression() {
+		return ownedExpression;
 	}
 
 	/**
@@ -126,11 +126,11 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
-		ExpCS oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetOwnedExpression(ExpCS newOwnedExpression, NotificationChain msgs) {
+		ExpCS oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -141,18 +141,18 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(ExpCS newExpression) {
-		if (newExpression != expression) {
+	public void setOwnedExpression(ExpCS newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -163,10 +163,10 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH:
-				return basicSetElementPath(null, msgs);
-			case QVTOperationalCSPackage.TAG_CS__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH:
+				return basicSetOwnedElementPath(null, msgs);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,10 +179,10 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH:
-				return getElementPath();
-			case QVTOperationalCSPackage.TAG_CS__EXPRESSION:
-				return getExpression();
+			case QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH:
+				return getOwnedElementPath();
+			case QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,11 +195,11 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH:
-				setElementPath((PathName2CS)newValue);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH:
+				setOwnedElementPath((PathName2CS)newValue);
 				return;
-			case QVTOperationalCSPackage.TAG_CS__EXPRESSION:
-				setExpression((ExpCS)newValue);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,11 +213,11 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH:
-				setElementPath((PathName2CS)null);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH:
+				setOwnedElementPath((PathName2CS)null);
 				return;
-			case QVTOperationalCSPackage.TAG_CS__EXPRESSION:
-				setExpression((ExpCS)null);
+			case QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -231,10 +231,10 @@ public class TagCSImpl extends AnnotationCSImpl implements TagCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.TAG_CS__ELEMENT_PATH:
-				return elementPath != null;
-			case QVTOperationalCSPackage.TAG_CS__EXPRESSION:
-				return expression != null;
+			case QVTOperationalCSPackage.TAG_CS__OWNED_ELEMENT_PATH:
+				return ownedElementPath != null;
+			case QVTOperationalCSPackage.TAG_CS__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

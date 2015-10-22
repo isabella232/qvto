@@ -68,6 +68,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
@@ -414,6 +415,9 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS:
 				sequence_ExpressionBlockCS(context, (ExpressionBlockCS) semanticObject); 
 				return; 
+			case ImperativeOCLCSPackage.EXTENT_REF_CS:
+				sequence_ExtentRefCS(context, (ExtentRefCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.FOR_EXP_CS:
 				sequence_ForExpCS(context, (ForExpCS) semanticObject); 
 				return; 
@@ -481,7 +485,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (severity=SEVERITY_KIND? ownedAssertion=ExpCS ownedLog=LogExpCS?)
+	 *     (severity=SeverityKindCS? ownedAssertion=ExpCS ownedLog=LogExpCS?)
 	 */
 	protected void sequence_AssertExpCS(EObject context, AssertExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -490,7 +494,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (ownedLeft=NameExpCS (assignOp=':=' | assignOp='::=' | assignOp='+=') ownedValue=ExpCS ownedDefault=ExpCS?)
+	 *     (ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ownedDefault=ExpCS?)
 	 */
 	protected void sequence_AssignExpCS(EObject context, AssignExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -589,6 +593,15 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
+	 *     ownedPathName=PathNameCS
+	 */
+	protected void sequence_ExtentRefCS(EObject context, ExtentRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (isOne?='forOne'? ownedTarget=VarDeclarationCS? ownedIterator=VarDeclarationNoInitCS ownedCondition=ExpCS? ownedBody=ExpCS)
 	 */
 	protected void sequence_ForExpCS(EObject context, ForExpCS semanticObject) {
@@ -662,7 +675,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (ownedMessage=StringLiteralExpCS ownedElement=ExpCS? severity=SEVERITY_KIND? ownedCondition=ExpCS?)
+	 *     (ownedMessage=StringLiteralExpCS ownedElement=ExpCS? severity=SeverityKindCS? ownedCondition=ExpCS?)
 	 */
 	protected void sequence_LogExpCS(EObject context, LogExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -698,7 +711,10 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (ownedAltParts+=SwitchAltCS ownedAltParts+=SwitchAltCS* ownedElsePart=ExpCS?)
+	 *     (
+	 *         (ifSyntax?='if' ownedAltParts+=SwitchAltCS ownedAltParts+=SwitchAltCS* ownedElsePart=ExpCS?) | 
+	 *         (ownedIterator=VarDeclarationNoInitCS? ownedAltParts+=SwitchAltCS+ ownedElsePart=ExpCS?)
+	 *     )
 	 */
 	protected void sequence_SwitchExpCS(EObject context, SwitchExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -716,7 +732,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (name=UnrestrictedName ownedType=TypeExpCS? (initOp='='? ownedInitExpression=ExpCS)?)
+	 *     (name=UnrestrictedName ownedType=TypeExpCS? (initOp=InitOpCS ownedInitExpression=ExpCS)?)
 	 */
 	protected void sequence_VarDeclarationCS(EObject context, VarDeclarationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

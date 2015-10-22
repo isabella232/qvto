@@ -77,6 +77,7 @@ public interface AssertExpCS extends StatementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Severity</b></em>' attribute.
+	 * The literals are from the enumeration {@link org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Severity</em>' attribute isn't clear,
@@ -84,21 +85,23 @@ public interface AssertExpCS extends StatementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Severity</em>' attribute.
-	 * @see #setSeverity(String)
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS
+	 * @see #setSeverity(SeverityKindCS)
 	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage#getAssertExpCS_Severity()
 	 * @model
 	 * @generated
 	 */
-	String getSeverity();
+	SeverityKindCS getSeverity();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS#getSeverity <em>Severity</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Severity</em>' attribute.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS
 	 * @see #getSeverity()
 	 * @generated
 	 */
-	void setSeverity(String value);
+	void setSeverity(SeverityKindCS value);
 
 } // AssertExpCS

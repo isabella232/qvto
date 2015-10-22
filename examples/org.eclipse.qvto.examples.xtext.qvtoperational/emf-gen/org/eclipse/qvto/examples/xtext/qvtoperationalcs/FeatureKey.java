@@ -19,57 +19,55 @@ import org.eclipse.emf.common.util.Enumerator;
  */
 public enum FeatureKey implements Enumerator {
 	/**
-	 * The '<em><b>COMPOSES</b></em>' literal object.
+	 * The '<em><b>Composes</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #COMPOSES_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	COMPOSES(0, "COMPOSES", "COMPOSES"),
+	COMPOSES(0, "composes", "composes"),
 
 	/**
-	 * The '<em><b>REFERRENCES</b></em>' literal object.
+	 * The '<em><b>References</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #REFERRENCES_VALUE
+	 * @see #REFERENCES_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	REFERRENCES(1, "REFERRENCES", "REFERRENCES"),
-
-	/**
-	 * The '<em><b>READONLY</b></em>' literal object.
+	REFERENCES(1, "references", "references"), /**
+	 * The '<em><b>Readonly</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #READONLY_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	READONLY(2, "READONLY", "READONLY"),
+	READONLY(2, "readonly", "readonly"),
 
 	/**
-	 * The '<em><b>DERIVED</b></em>' literal object.
+	 * The '<em><b>Derived</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #DERIVED_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DERIVED(3, "DERIVED", "DERIVED"),
+	DERIVED(3, "derived", "derived"),
 
 	/**
-	 * The '<em><b>STATIC</b></em>' literal object.
+	 * The '<em><b>Static</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #STATIC_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	STATIC(4, "STATIC", "STATIC");
+	STATIC(4, "static", "static");
 
 	/**
-	 * The '<em><b>COMPOSES</b></em>' literal value.
+	 * The '<em><b>Composes</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>COMPOSES</b></em>' literal object isn't clear,
@@ -77,29 +75,29 @@ public enum FeatureKey implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #COMPOSES
-	 * @model
+	 * @model name="composes"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int COMPOSES_VALUE = 0;
 
 	/**
-	 * The '<em><b>REFERRENCES</b></em>' literal value.
+	 * The '<em><b>References</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of '<em><b>REFERRENCES</b></em>' literal object isn't clear,
+	 * If the meaning of '<em><b>References</b></em>' literal object isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @see #REFERRENCES
-	 * @model
+	 * @see #REFERENCES
+	 * @model name="references"
 	 * @generated
 	 * @ordered
 	 */
-	public static final int REFERRENCES_VALUE = 1;
+	public static final int REFERENCES_VALUE = 1;
 
 	/**
-	 * The '<em><b>READONLY</b></em>' literal value.
+	 * The '<em><b>Readonly</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>READONLY</b></em>' literal object isn't clear,
@@ -107,14 +105,14 @@ public enum FeatureKey implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #READONLY
-	 * @model
+	 * @model name="readonly"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int READONLY_VALUE = 2;
 
 	/**
-	 * The '<em><b>DERIVED</b></em>' literal value.
+	 * The '<em><b>Derived</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>DERIVED</b></em>' literal object isn't clear,
@@ -122,14 +120,14 @@ public enum FeatureKey implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #DERIVED
-	 * @model
+	 * @model name="derived"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DERIVED_VALUE = 3;
 
 	/**
-	 * The '<em><b>STATIC</b></em>' literal value.
+	 * The '<em><b>Static</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of '<em><b>STATIC</b></em>' literal object isn't clear,
@@ -137,7 +135,7 @@ public enum FeatureKey implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #STATIC
-	 * @model
+	 * @model name="static"
 	 * @generated
 	 * @ordered
 	 */
@@ -152,7 +150,7 @@ public enum FeatureKey implements Enumerator {
 	private static final FeatureKey[] VALUES_ARRAY =
 		new FeatureKey[] {
 			COMPOSES,
-			REFERRENCES,
+			REFERENCES,
 			READONLY,
 			DERIVED,
 			STATIC,
@@ -213,7 +211,7 @@ public enum FeatureKey implements Enumerator {
 	public static FeatureKey get(int value) {
 		switch (value) {
 			case COMPOSES_VALUE: return COMPOSES;
-			case REFERRENCES_VALUE: return REFERRENCES;
+			case REFERENCES_VALUE: return REFERENCES;
 			case READONLY_VALUE: return READONLY;
 			case DERIVED_VALUE: return DERIVED;
 			case STATIC_VALUE: return STATIC;

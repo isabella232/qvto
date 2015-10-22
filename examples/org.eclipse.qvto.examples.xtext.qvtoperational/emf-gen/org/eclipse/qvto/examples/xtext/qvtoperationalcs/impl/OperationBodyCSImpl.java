@@ -25,22 +25,21 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.OperationBodyCSImpl#getExpressions <em>Expressions</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.OperationBodyCSImpl#getOwnedContentExps <em>Owned Content Exps</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class OperationBodyCSImpl extends PivotableElementCSImpl implements OperationBodyCS {
 	/**
-	 * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedContentExps() <em>Owned Content Exps</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpressions()
+	 * @see #getOwnedContentExps()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> expressions;
-
+	protected EList<ExpCS> ownedContentExps;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -65,11 +64,11 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getExpressions() {
-		if (expressions == null) {
-			expressions = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS);
+	public EList<ExpCS> getOwnedContentExps() {
+		if (ownedContentExps == null) {
+			ownedContentExps = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS);
 		}
-		return expressions;
+		return ownedContentExps;
 	}
 
 	/**
@@ -80,8 +79,8 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS:
-				return ((InternalEList<?>)getExpressions()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS:
+				return ((InternalEList<?>)getOwnedContentExps()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -94,8 +93,8 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS:
-				return getExpressions();
+			case QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS:
+				return getOwnedContentExps();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -109,9 +108,9 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS:
-				getExpressions().clear();
-				getExpressions().addAll((Collection<? extends ExpCS>)newValue);
+			case QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS:
+				getOwnedContentExps().clear();
+				getOwnedContentExps().addAll((Collection<? extends ExpCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -125,8 +124,8 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS:
-				getExpressions().clear();
+			case QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS:
+				getOwnedContentExps().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -140,8 +139,8 @@ public class OperationBodyCSImpl extends PivotableElementCSImpl implements Opera
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.OPERATION_BODY_CS__EXPRESSIONS:
-				return expressions != null && !expressions.isEmpty();
+			case QVTOperationalCSPackage.OPERATION_BODY_CS__OWNED_CONTENT_EXPS:
+				return ownedContentExps != null && !ownedContentExps.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

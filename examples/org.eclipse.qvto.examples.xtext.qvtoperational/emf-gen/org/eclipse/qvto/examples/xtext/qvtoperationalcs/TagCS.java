@@ -14,8 +14,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getElementPath <em>Element Path</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getOwnedElementPath <em>Owned Element Path</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS()
@@ -24,55 +24,55 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface TagCS extends AnnotationCS {
 	/**
-	 * Returns the value of the '<em><b>Element Path</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Element Path</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Element Path</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Element Path</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Element Path</em>' containment reference.
-	 * @see #setElementPath(PathName2CS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_ElementPath()
+	 * @return the value of the '<em>Owned Element Path</em>' containment reference.
+	 * @see #setOwnedElementPath(PathName2CS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_OwnedElementPath()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	PathName2CS getElementPath();
+	PathName2CS getOwnedElementPath();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getElementPath <em>Element Path</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getOwnedElementPath <em>Owned Element Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Element Path</em>' containment reference.
-	 * @see #getElementPath()
+	 * @param value the new value of the '<em>Owned Element Path</em>' containment reference.
+	 * @see #getOwnedElementPath()
 	 * @generated
 	 */
-	void setElementPath(PathName2CS value);
+	void setOwnedElementPath(PathName2CS value);
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_Expression()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTagCS_OwnedExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getExpression();
+	ExpCS getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setExpression(ExpCS value);
+	void setOwnedExpression(ExpCS value);
 
 } // TagCS

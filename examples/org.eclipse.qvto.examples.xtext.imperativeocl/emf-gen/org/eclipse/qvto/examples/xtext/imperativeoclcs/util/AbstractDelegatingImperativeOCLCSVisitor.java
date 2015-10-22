@@ -69,6 +69,10 @@ public abstract class AbstractDelegatingImperativeOCLCSVisitor<R, C, D extends I
 		return delegate.visitExpressionBlockCS(object);
 	}
 
+	public @Nullable R visitExtentRefCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS object) {
+		return delegate.visitExtentRefCS(object);
+	}
+
 	public @Nullable R visitForExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS object) {
 		return delegate.visitForExpCS(object);
 	}

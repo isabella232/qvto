@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.impl.NameExpCSImpl;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
@@ -18,31 +19,31 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingCallExpCSImpl#isStrict <em>Strict</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingCallExpCSImpl#isIsStrict <em>Is Strict</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl implements MappingCallExpCS {
+public class MappingCallExpCSImpl extends NameExpCSImpl implements MappingCallExpCS {
 	/**
-	 * The default value of the '{@link #isStrict() <em>Strict</em>}' attribute.
+	 * The default value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStrict()
+	 * @see #isIsStrict()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean STRICT_EDEFAULT = false;
+	protected static final boolean IS_STRICT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isStrict() <em>Strict</em>}' attribute.
+	 * The cached value of the '{@link #isIsStrict() <em>Is Strict</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isStrict()
+	 * @see #isIsStrict()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean strict = STRICT_EDEFAULT;
+	protected boolean isStrict = IS_STRICT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -68,8 +69,8 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isStrict() {
-		return strict;
+	public boolean isIsStrict() {
+		return isStrict;
 	}
 
 	/**
@@ -77,11 +78,11 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStrict(boolean newStrict) {
-		boolean oldStrict = strict;
-		strict = newStrict;
+	public void setIsStrict(boolean newIsStrict) {
+		boolean oldIsStrict = isStrict;
+		isStrict = newIsStrict;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__STRICT, oldStrict, strict));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__IS_STRICT, oldIsStrict, isStrict));
 	}
 
 	/**
@@ -101,8 +102,8 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__STRICT:
-				return isStrict();
+			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__IS_STRICT:
+				return isIsStrict();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -115,8 +116,8 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__STRICT:
-				setStrict((Boolean)newValue);
+			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__IS_STRICT:
+				setIsStrict((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,8 +131,8 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__STRICT:
-				setStrict(STRICT_EDEFAULT);
+			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__IS_STRICT:
+				setIsStrict(IS_STRICT_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -145,8 +146,8 @@ public class MappingCallExpCSImpl extends ImperativeOperationCallExpCSImpl imple
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__STRICT:
-				return strict != STRICT_EDEFAULT;
+			case QVTOperationalCSPackage.MAPPING_CALL_EXP_CS__IS_STRICT:
+				return isStrict != IS_STRICT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

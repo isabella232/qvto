@@ -15,11 +15,10 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isOne <em>One</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isIsInverse <em>Is Inverse</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isIsDeferred <em>Is Deferred</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getIsDeferred <em>Is Deferred</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getOwnedCondition <em>Owned Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getOwnedTarget <em>Owned Target</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS()
@@ -27,58 +26,6 @@ import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
  * @generated
  */
 public interface ResolveExpCS extends CallExpCS {
-	/**
-	 * Returns the value of the '<em><b>One</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>One</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>One</em>' attribute.
-	 * @see #setOne(boolean)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_One()
-	 * @model required="true"
-	 * @generated
-	 */
-	boolean isOne();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isOne <em>One</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>One</em>' attribute.
-	 * @see #isOne()
-	 * @generated
-	 */
-	void setOne(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Inverse</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Is Inverse</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Inverse</em>' attribute.
-	 * @see #setIsInverse(boolean)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_IsInverse()
-	 * @model required="true"
-	 * @generated
-	 */
-	boolean isIsInverse();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isIsInverse <em>Is Inverse</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Inverse</em>' attribute.
-	 * @see #isIsInverse()
-	 * @generated
-	 */
-	void setIsInverse(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>Is Deferred</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -88,73 +35,99 @@ public interface ResolveExpCS extends CallExpCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Deferred</em>' attribute.
-	 * @see #setIsDeferred(boolean)
+	 * @see #setIsDeferred(Boolean)
 	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_IsDeferred()
 	 * @model required="true"
 	 * @generated
 	 */
-	boolean isIsDeferred();
+	Boolean getIsDeferred();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#isIsDeferred <em>Is Deferred</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getIsDeferred <em>Is Deferred</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Deferred</em>' attribute.
-	 * @see #isIsDeferred()
+	 * @see #getIsDeferred()
 	 * @generated
 	 */
-	void setIsDeferred(boolean value);
+	void setIsDeferred(Boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Condition</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' containment reference.
-	 * @see #setTarget(VariableCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_Target()
+	 * @return the value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #setOwnedCondition(ExpCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_OwnedCondition()
 	 * @model containment="true"
 	 * @generated
 	 */
-	VariableCS getTarget();
+	ExpCS getOwnedCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getTarget <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getOwnedCondition <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' containment reference.
-	 * @see #getTarget()
+	 * @param value the new value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #getOwnedCondition()
 	 * @generated
 	 */
-	void setTarget(VariableCS value);
+	void setOwnedCondition(ExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Condition</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition</em>' containment reference.
-	 * @see #setCondition(ExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_Condition()
-	 * @model containment="true"
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_Name()
+	 * @model
 	 * @generated
 	 */
-	ExpCS getCondition();
+	String getName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getCondition <em>Condition</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getName <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition</em>' containment reference.
-	 * @see #getCondition()
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
 	 * @generated
 	 */
-	void setCondition(ExpCS value);
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Owned Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owned Target</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owned Target</em>' containment reference.
+	 * @see #setOwnedTarget(VariableCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getResolveExpCS_OwnedTarget()
+	 * @model containment="true" required="true"
+	 * @generated
+	 */
+	VariableCS getOwnedTarget();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS#getOwnedTarget <em>Owned Target</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owned Target</em>' containment reference.
+	 * @see #getOwnedTarget()
+	 * @generated
+	 */
+	void setOwnedTarget(VariableCS value);
 
 } // ResolveExpCS

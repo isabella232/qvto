@@ -94,6 +94,24 @@ public interface QVTOperationalCSFactory extends EFactory {
 	QVToOperationCS createQVToOperationCS();
 
 	/**
+	 * Returns a new object of class '<em>Constructor Operation CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Constructor Operation CS</em>'.
+	 * @generated
+	 */
+	ConstructorOperationCS createConstructorOperationCS();
+
+	/**
+	 * Returns a new object of class '<em>Configuration Property CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Configuration Property CS</em>'.
+	 * @generated
+	 */
+	ConfigurationPropertyCS createConfigurationPropertyCS();
+
+	/**
 	 * Returns a new object of class '<em>Entry Operation CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -128,6 +146,15 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	OperationBodyCS createOperationBodyCS();
+
+	/**
+	 * Returns a new object of class '<em>Operation Ref CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Operation Ref CS</em>'.
+	 * @generated
+	 */
+	OperationRefCS createOperationRefCS();
 
 	/**
 	 * Returns a new object of class '<em>Primitive Type CS</em>'.
@@ -175,49 +202,22 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ExceptionCS createExceptionCS();
 
 	/**
-	 * Returns a new object of class '<em>Classifier Def CS</em>'.
+	 * Returns a new object of class '<em>Helper Operation CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Classifier Def CS</em>'.
+	 * @return a new object of class '<em>Helper Operation CS</em>'.
 	 * @generated
 	 */
-	ClassifierDefCS createClassifierDefCS();
+	HelperOperationCS createHelperOperationCS();
 
 	/**
-	 * Returns a new object of class '<em>Classifier Property2 CS</em>'.
+	 * Returns a new object of class '<em>Imperative Operation CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Classifier Property2 CS</em>'.
+	 * @return a new object of class '<em>Imperative Operation CS</em>'.
 	 * @generated
 	 */
-	ClassifierProperty2CS createClassifierProperty2CS();
-
-	/**
-	 * Returns a new object of class '<em>Complete Signature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Complete Signature CS</em>'.
-	 * @generated
-	 */
-	CompleteSignatureCS createCompleteSignatureCS();
-
-	/**
-	 * Returns a new object of class '<em>Config Property CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Config Property CS</em>'.
-	 * @generated
-	 */
-	ConfigPropertyCS createConfigPropertyCS();
-
-	/**
-	 * Returns a new object of class '<em>Constructor CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constructor CS</em>'.
-	 * @generated
-	 */
-	ConstructorCS createConstructorCS();
+	ImperativeOperationCS createImperativeOperationCS();
 
 	/**
 	 * Returns a new object of class '<em>Contextual Property CS</em>'.
@@ -229,31 +229,13 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ContextualPropertyCS createContextualPropertyCS();
 
 	/**
-	 * Returns a new object of class '<em>Imperative Operation Call Exp CS</em>'.
+	 * Returns a new object of class '<em>Module Property CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Imperative Operation Call Exp CS</em>'.
+	 * @return a new object of class '<em>Module Property CS</em>'.
 	 * @generated
 	 */
-	ImperativeOperationCallExpCS createImperativeOperationCallExpCS();
-
-	/**
-	 * Returns a new object of class '<em>Library Import CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Library Import CS</em>'.
-	 * @generated
-	 */
-	LibraryImportCS createLibraryImportCS();
-
-	/**
-	 * Returns a new object of class '<em>Local Property CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Local Property CS</em>'.
-	 * @generated
-	 */
-	LocalPropertyCS createLocalPropertyCS();
+	ModulePropertyCS createModulePropertyCS();
 
 	/**
 	 * Returns a new object of class '<em>Mapping Body CS</em>'.
@@ -281,60 +263,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	MappingOperationCS createMappingOperationCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping End CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping End CS</em>'.
-	 * @generated
-	 */
-	MappingEndCS createMappingEndCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Init CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Init CS</em>'.
-	 * @generated
-	 */
-	MappingInitCS createMappingInitCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Query CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Query CS</em>'.
-	 * @generated
-	 */
-	MappingQueryCS createMappingQueryCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Rule CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Rule CS</em>'.
-	 * @generated
-	 */
-	MappingRuleCS createMappingRuleCS();
-
-	/**
-	 * Returns a new object of class '<em>Mapping Sections CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mapping Sections CS</em>'.
-	 * @generated
-	 */
-	MappingSectionsCS createMappingSectionsCS();
-
-	/**
-	 * Returns a new object of class '<em>Module Kind CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Module Kind CS</em>'.
-	 * @generated
-	 */
-	ModuleKindCS createModuleKindCS();
 
 	/**
 	 * Returns a new object of class '<em>Module Ref CS</em>'.
@@ -382,15 +310,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ModuleUsageCS createModuleUsageCS();
 
 	/**
-	 * Returns a new object of class '<em>Multiplicity Def CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Multiplicity Def CS</em>'.
-	 * @generated
-	 */
-	MultiplicityDefCS createMultiplicityDefCS();
-
-	/**
 	 * Returns a new object of class '<em>Object Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -398,15 +317,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	ObjectExpCS createObjectExpCS();
-
-	/**
-	 * Returns a new object of class '<em>Opposite Property CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Opposite Property CS</em>'.
-	 * @generated
-	 */
-	OppositePropertyCS createOppositePropertyCS();
 
 	/**
 	 * Returns a new object of class '<em>Parameter Declaration CS</em>'.
@@ -418,24 +328,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ParameterDeclarationCS createParameterDeclarationCS();
 
 	/**
-	 * Returns a new object of class '<em>Rename CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rename CS</em>'.
-	 * @generated
-	 */
-	RenameCS createRenameCS();
-
-	/**
-	 * Returns a new object of class '<em>Resolve Op Args Exp CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resolve Op Args Exp CS</em>'.
-	 * @generated
-	 */
-	ResolveOpArgsExpCS createResolveOpArgsExpCS();
-
-	/**
 	 * Returns a new object of class '<em>Package Ref CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -443,24 +335,6 @@ public interface QVTOperationalCSFactory extends EFactory {
 	 * @generated
 	 */
 	PackageRefCS createPackageRefCS();
-
-	/**
-	 * Returns a new object of class '<em>Scoped Name CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Scoped Name CS</em>'.
-	 * @generated
-	 */
-	ScopedNameCS createScopedNameCS();
-
-	/**
-	 * Returns a new object of class '<em>Simple Signature CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Signature CS</em>'.
-	 * @generated
-	 */
-	SimpleSignatureCS createSimpleSignatureCS();
 
 	/**
 	 * Returns a new object of class '<em>Transformation CS</em>'.
@@ -472,31 +346,13 @@ public interface QVTOperationalCSFactory extends EFactory {
 	TransformationCS createTransformationCS();
 
 	/**
-	 * Returns a new object of class '<em>Transformation Refine CS</em>'.
+	 * Returns a new object of class '<em>Unit Ref CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transformation Refine CS</em>'.
+	 * @return a new object of class '<em>Unit Ref CS</em>'.
 	 * @generated
 	 */
-	TransformationRefineCS createTransformationRefineCS();
-
-	/**
-	 * Returns a new object of class '<em>Type Spec CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Spec CS</em>'.
-	 * @generated
-	 */
-	TypeSpecCS createTypeSpecCS();
-
-	/**
-	 * Returns a new object of class '<em>Unit CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unit CS</em>'.
-	 * @generated
-	 */
-	UnitCS createUnitCS();
+	UnitRefCS createUnitRefCS();
 
 	/**
 	 * Returns a new object of class '<em>Resolve Exp CS</em>'.
@@ -508,13 +364,22 @@ public interface QVTOperationalCSFactory extends EFactory {
 	ResolveExpCS createResolveExpCS();
 
 	/**
-	 * Returns a new object of class '<em>Resolve In Exp CS</em>'.
+	 * Returns a new object of class '<em>Resolve By Type Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resolve In Exp CS</em>'.
+	 * @return a new object of class '<em>Resolve By Type Exp CS</em>'.
 	 * @generated
 	 */
-	ResolveInExpCS createResolveInExpCS();
+	ResolveByTypeExpCS createResolveByTypeExpCS();
+
+	/**
+	 * Returns a new object of class '<em>Resolve By Mapping Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Resolve By Mapping Exp CS</em>'.
+	 * @generated
+	 */
+	ResolveByMappingExpCS createResolveByMappingExpCS();
 
 	/**
 	 * Returns the package supported by this factory.

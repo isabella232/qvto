@@ -13,6 +13,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.StringLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.impl.CallExpCSImpl;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
 /**
@@ -58,7 +59,7 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SEVERITY_EDEFAULT = null;
+	protected static final SeverityKindCS SEVERITY_EDEFAULT = SeverityKindCS.ERROR;
 	/**
 	 * The cached value of the '{@link #getSeverity() <em>Severity</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -67,7 +68,7 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected String severity = SEVERITY_EDEFAULT;
+	protected SeverityKindCS severity = SEVERITY_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getOwnedCondition() <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -187,7 +188,7 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSeverity() {
+	public SeverityKindCS getSeverity() {
 		return severity;
 	}
 
@@ -196,9 +197,9 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSeverity(String newSeverity) {
-		String oldSeverity = severity;
-		severity = newSeverity;
+	public void setSeverity(SeverityKindCS newSeverity) {
+		SeverityKindCS oldSeverity = severity;
+		severity = newSeverity == null ? SEVERITY_EDEFAULT : newSeverity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.LOG_EXP_CS__SEVERITY, oldSeverity, severity));
 	}
@@ -308,7 +309,7 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 				setOwnedElement((ExpCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.LOG_EXP_CS__SEVERITY:
-				setSeverity((String)newValue);
+				setSeverity((SeverityKindCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.LOG_EXP_CS__OWNED_CONDITION:
 				setOwnedCondition((ExpCS)newValue);
@@ -354,7 +355,7 @@ public class LogExpCSImpl extends CallExpCSImpl implements LogExpCS {
 			case ImperativeOCLCSPackage.LOG_EXP_CS__OWNED_ELEMENT:
 				return ownedElement != null;
 			case ImperativeOCLCSPackage.LOG_EXP_CS__SEVERITY:
-				return SEVERITY_EDEFAULT == null ? severity != null : !SEVERITY_EDEFAULT.equals(severity);
+				return severity != SEVERITY_EDEFAULT;
 			case ImperativeOCLCSPackage.LOG_EXP_CS__OWNED_CONDITION:
 				return ownedCondition != null;
 		}

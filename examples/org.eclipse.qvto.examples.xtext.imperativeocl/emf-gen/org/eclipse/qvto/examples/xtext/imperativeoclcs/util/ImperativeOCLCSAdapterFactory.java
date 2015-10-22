@@ -31,6 +31,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
@@ -156,6 +157,10 @@ public class ImperativeOCLCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
 				return createExpressionBlockCSAdapter();
+			}
+			@Override
+			public Adapter caseExtentRefCS(ExtentRefCS object) {
+				return createExtentRefCSAdapter();
 			}
 			@Override
 			public Adapter caseForExpCS(ForExpCS object) {
@@ -468,6 +473,20 @@ public class ImperativeOCLCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionBlockCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS <em>Extent Ref CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS
+	 * @generated
+	 */
+	public Adapter createExtentRefCSAdapter() {
 		return null;
 	}
 

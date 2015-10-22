@@ -73,6 +73,10 @@ public abstract class AbstractExtendingImperativeOCLCSVisitor<R, C>
 		return visitExpCS(object);
 	}
 
+	public @Nullable R visitExtentRefCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS object) {
+		return visitElementRefCS(object);
+	}
+
 	public @Nullable R visitForExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS object) {
 		return visitImperativeLoopExpCS(object);
 	}

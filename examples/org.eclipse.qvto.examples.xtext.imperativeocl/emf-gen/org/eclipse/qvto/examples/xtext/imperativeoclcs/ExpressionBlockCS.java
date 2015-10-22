@@ -21,7 +21,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * @model
  * @generated
  */
-public interface ExpressionBlockCS extends ExpCS {
+public interface ExpressionBlockCS extends ExpCS, StatementCS {
 	/**
 	 * Returns the value of the '<em><b>Owned Exps</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
