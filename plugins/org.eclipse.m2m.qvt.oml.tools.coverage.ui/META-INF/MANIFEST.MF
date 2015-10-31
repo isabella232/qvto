@@ -13,11 +13,11 @@ Require-Bundle: org.eclipse.ui;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.debug.core;bundle-version="[3.6.0,4.0.0)",
  org.eclipse.m2m.qvt.oml;bundle-version="[3.4.0,4.0.0)",
  org.eclipse.m2m.qvt.oml.runtime;bundle-version="[3.4.0,4.0.0)",
- org.eclipse.m2m.qvt.oml.tools.coverage;bundle-version="[1.1.0,2.0.0)"
+ org.eclipse.m2m.qvt.oml.tools.coverage;bundle-version="[1.1.0,2.0.0)",
+ com.google.guava;bundle-version="[10.0.1,19.0.0)"
 Export-Package: org.eclipse.m2m.qvt.oml.tools.coverage.ui,
  org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui,
  org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.handlers,
  org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Import-Package: com.google.common.collect
