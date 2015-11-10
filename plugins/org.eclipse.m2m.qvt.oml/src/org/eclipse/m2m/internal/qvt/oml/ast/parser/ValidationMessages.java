@@ -147,8 +147,8 @@ public final class ValidationMessages extends NLS {
 	public static String NoLibrary;
 	public static String FailedToLoadUnit;
 	
-	public static String ReturnTypeMismatch;
-	public static String ContextTypeMismatch;
+	public static String ReturnSubtypeMismatch;
+	public static String ReturnSupertypeMismatch;
 	public static String DuplicateMetamodelImport;
 	public static String moduleNameMustBeSimpleIdentifierError;	
 	

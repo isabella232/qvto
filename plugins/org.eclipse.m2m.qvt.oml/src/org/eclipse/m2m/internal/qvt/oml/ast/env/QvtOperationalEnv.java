@@ -705,20 +705,19 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 					}
 				}
 			}
-			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_RETURNTYPE) {
+			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_SUBTYPE) {
 				isError = true;
 				HiddenElementAdapter.markAsHidden(operation);				
-				reportError(NLS.bind(ValidationMessages.ReturnTypeMismatch,  
+				reportError(NLS.bind(ValidationMessages.ReturnSubtypeMismatch,  
 						operation.getName(), QvtOperationalTypesUtil.getTypeFullName(collidingOperStatus.getOperation().getEType())), 
 						operation.getStartPosition(), operation.getEndPosition());
 			}
-			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_CONTEXTTYPE) {
+			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_SUPERTYPE) {
 				isError = true;
-				HiddenElementAdapter.markAsHidden(collidingOperStatus.getOperation());
-				ImperativeOperation colliding = (ImperativeOperation) collidingOper;
-				reportError(NLS.bind(ValidationMessages.ReturnTypeMismatch,  
-						colliding.getName(), QvtOperationalTypesUtil.getTypeFullName(operation.getEType())), 
-						colliding.getStartPosition(), colliding.getEndPosition());
+				HiddenElementAdapter.markAsHidden(operation);				
+				reportError(NLS.bind(ValidationMessages.ReturnSupertypeMismatch,  
+						operation.getName(), QvtOperationalTypesUtil.getTypeFullName(collidingOperStatus.getOperation().getEType())), 
+						operation.getStartPosition(), operation.getEndPosition());
 			} 
 			else {
 				assert false;
