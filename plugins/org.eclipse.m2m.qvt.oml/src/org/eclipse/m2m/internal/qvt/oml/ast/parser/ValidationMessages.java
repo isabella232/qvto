@@ -148,6 +148,7 @@ public final class ValidationMessages extends NLS {
 	public static String FailedToLoadUnit;
 	
 	public static String ReturnTypeMismatch;
+	public static String ContextTypeMismatch;
 	public static String DuplicateMetamodelImport;
 	public static String moduleNameMustBeSimpleIdentifierError;	
 	

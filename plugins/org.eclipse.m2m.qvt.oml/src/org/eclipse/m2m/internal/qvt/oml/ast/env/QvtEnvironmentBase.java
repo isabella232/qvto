@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase.CollisionStatus.CollisionKind;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
@@ -69,24 +70,23 @@ import lpg.runtime.ParseErrorCodes;
 public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVTOEnvironment {
 	
 	public static class CollisionStatus {
-		public static final int ALREADY_DEFINED = 1;		
-		public static final int VIRTUAL_METHOD_RETURNTYPE = 2;
-		public static final int OVERRIDES = 3;		
 		
-		private int fKind;
+		enum CollisionKind {
+			ALREADY_DEFINED,
+			VIRTUAL_METHOD_RETURNTYPE,
+			OVERRIDES,
+			VIRTUAL_METHOD_CONTEXTTYPE
+		}
+				
+		private CollisionKind fKind;
 		private EOperation fOperation;		
 		
-		CollisionStatus(EOperation operation, int kind) {
-			if(kind != ALREADY_DEFINED && kind != VIRTUAL_METHOD_RETURNTYPE &&
-				kind != OVERRIDES) {
-				throw new IllegalArgumentException("illegal collision kind"); //$NON-NLS-1$
-			}
-			
+		CollisionStatus(EOperation operation, CollisionKind kind) {			
 			fKind = kind;
 			fOperation = operation;			
 		}
 		
-		public int getCollisionKind() {
+		public CollisionKind getCollisionKind() {
 			return fKind;
 		}
 		
@@ -626,19 +626,46 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				}
 				
 				if(isContextual) {
-					int rel = TypeUtil.getRelationship(this, ownerType, nextOwner); 
-					if((rel != UMLReflection.SAME_TYPE) && (UMLReflection.RELATED_TYPE & rel) != 0) {
+					int ownerRelation = TypeUtil.getRelationship(this, ownerType, nextOwner); 
+					if((ownerRelation != UMLReflection.SAME_TYPE) && (UMLReflection.RELATED_TYPE & ownerRelation) != 0) {
 						// context types are different but part of a common type hierarchy
-						EClassifier ret1 = next.getEType(); 
-						EClassifier ret2 = operation.getEType();
-						if(ret1 != null && ret2 != null && TypeUtil.getRelationship(this, ret1, ret2) != SAME_TYPE) {
-							if(QvtOperationalEnv.MAIN.equals(operationName)) {
-								// clashes with main(..) are handled separately
-								return null;
+						
+						EClassifier nextReturnType = next.getEType(); 
+						EClassifier operationReturnType = operation.getEType();
+						int returnRelation = TypeUtil.getRelationship(this, operationReturnType, nextReturnType);
+						
+						if ((ownerRelation & UMLReflection.SUPERTYPE) != 0) {
+							if(nextReturnType != null && operationReturnType != null && (returnRelation & UMLReflection.SUPERTYPE) == 0) {
+								if(QvtOperationalEnv.MAIN.equals(operationName)) {
+									// clashes with main(..) are handled separately
+									return null;
+								}
+								// report ill-formed return type for virtual operations
+								return new CollisionStatus(next, CollisionKind.VIRTUAL_METHOD_CONTEXTTYPE);
 							}
-							// report ill-formed return type for virtual operations
-							return new CollisionStatus(next, CollisionStatus.VIRTUAL_METHOD_RETURNTYPE);
 						}
+						else if ((ownerRelation & UMLReflection.SUBTYPE) != 0) {
+							if(nextReturnType != null && operationReturnType != null && (returnRelation & UMLReflection.SUBTYPE) == 0) {
+								if(QvtOperationalEnv.MAIN.equals(operationName)) {
+									// clashes with main(..) are handled separately
+									return null;
+								}
+								// report ill-formed return type for virtual operations
+								return new CollisionStatus(next, CollisionKind.VIRTUAL_METHOD_RETURNTYPE);
+							}
+						}
+						
+						
+//						EClassifier ret1 = next.getEType(); 
+//						EClassifier ret2 = operation.getEType();
+//						if(ret1 != null && ret2 != null && TypeUtil.getRelationship(this, ret1, ret2) != SAME_TYPE) {
+//							if(QvtOperationalEnv.MAIN.equals(operationName)) {
+//								// clashes with main(..) are handled separately
+//								return null;
+//							}
+//							// report ill-formed return type for virtual operations
+//							return new CollisionStatus(next, CollisionKind.VIRTUAL_METHOD_RETURNTYPE);
+//						}
 
 						// assemble virtual table info
 						if(QvtOperationalUtil.isImperativeOperation(operation) && QvtOperationalUtil.isImperativeOperation(next)) {
@@ -658,10 +685,10 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 					if(definingModule != next.getEContainingClass()) {
 						// we try to override operation only from extended modules
 						if(isImportedByExtends(next) && overrideCandidates.contains(next)) {
-							result = new CollisionStatus(next, CollisionStatus.OVERRIDES);
+							result = new CollisionStatus(next, CollisionKind.OVERRIDES);
 						}
 					} else {
-						return new CollisionStatus(next, CollisionStatus.ALREADY_DEFINED);
+						return new CollisionStatus(next, CollisionKind.ALREADY_DEFINED);
 					}
 				}
 			} // end of matching operation processing

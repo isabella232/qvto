@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase.CollisionStatus.CollisionKind;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.HiddenElementAdapter;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.MappingsMapKey;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
@@ -671,14 +672,14 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 		if(collidingOperStatus != null) {
 			EOperation collidingOper = collidingOperStatus.getOperation();
 			
-			if(collidingOperStatus.getCollisionKind() == CollisionStatus.ALREADY_DEFINED) {
+			if(collidingOperStatus.getCollisionKind() == CollisionKind.ALREADY_DEFINED) {
 				isError = true;
 				HiddenElementAdapter.markAsHidden(operation);
 				reportError(NLS.bind(ValidationMessages.SemanticUtil_0, new Object[] {
 								operation.getName(), ownerType.getName() }),
 								operation.getStartPosition(), operation.getEndPosition());
 			} 
-			else if(collidingOperStatus.getCollisionKind() == CollisionStatus.OVERRIDES) {
+			else if(collidingOperStatus.getCollisionKind() == CollisionKind.OVERRIDES) {
 				if(collidingOper instanceof ImperativeOperation) {
 					// only imperative operations can be overridden
 					EClassifier overriddenReturnType = collidingOper.getEType(); 
@@ -704,13 +705,22 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 					}
 				}
 			}
-			else if(collidingOperStatus.getCollisionKind() == CollisionStatus.VIRTUAL_METHOD_RETURNTYPE) {
+			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_RETURNTYPE) {
 				isError = true;
 				HiddenElementAdapter.markAsHidden(operation);				
 				reportError(NLS.bind(ValidationMessages.ReturnTypeMismatch,  
 						operation.getName(), QvtOperationalTypesUtil.getTypeFullName(collidingOperStatus.getOperation().getEType())), 
 						operation.getStartPosition(), operation.getEndPosition());
-			} else {
+			}
+			else if(collidingOperStatus.getCollisionKind() == CollisionKind.VIRTUAL_METHOD_CONTEXTTYPE) {
+				isError = true;
+				HiddenElementAdapter.markAsHidden(collidingOperStatus.getOperation());
+				ImperativeOperation colliding = (ImperativeOperation) collidingOper;
+				reportError(NLS.bind(ValidationMessages.ReturnTypeMismatch,  
+						colliding.getName(), QvtOperationalTypesUtil.getTypeFullName(operation.getEType())), 
+						colliding.getStartPosition(), colliding.getEndPosition());
+			} 
+			else {
 				assert false;
 			}
 		} 
