@@ -1,0 +1,28 @@
+modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation bug477331();
+
+main() {}
+
+-- base mapping
+mapping EClassifier :: m() : EClassifier {
+	init {}
+}
+
+-- legal concretization
+mapping EDataType :: m() : EDataType {}
+
+-- legal generalization
+mapping EModelElement :: m() : EModelElement {
+	init {}
+}
+
+-- illegal concretization
+/*<error>*/mapping EClass :: m() : ENamedElement/*</error>*/ {
+	init {}
+}
+
+-- illegal generalization
+/*<error>*/mapping ENamedElement :: m() : EClass/*</error>*/ {
+	init {}
+}

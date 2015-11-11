@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,7 @@
  *   
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - Bug 390088
+ *     Christopher Gerking - bugs 390088, 477331
  *     Alex Paperno - bugs 416584, 401521, 403440, 424584
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
