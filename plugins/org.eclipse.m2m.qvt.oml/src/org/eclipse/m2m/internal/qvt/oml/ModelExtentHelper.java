@@ -11,6 +11,7 @@
 package org.eclipse.m2m.internal.qvt.oml;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -28,6 +29,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter.Saveable;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
@@ -76,16 +78,28 @@ public class ModelExtentHelper {
 
 	public Diagnostic saveExtents() {
 		BasicDiagnostic diagnostic = QvtPlugin.createDiagnostic("Save model param extents diagnostic");
-
+		
+		Set<Resource> resources = new HashSet<Resource>();
+		
 		for (ExtentEntry nextEntry : fExtentMap.values()) {
 			URI saveAsURI = nextEntry.saveAsURI;
 			if(saveAsURI != null) {
-				try {
-					saveExtentToResources(nextEntry.extent.getContents(), fResourceSet, saveAsURI);
-				} catch (EmfException e) {
-					diagnostic.add(QvtPlugin.createErrorDiagnostic(
-							"Failed to save model extent uri=" + saveAsURI, e));
-				}
+				resources.addAll(addExtentContentsToResources(nextEntry.extent.getContents(), fResourceSet, saveAsURI));
+			}
+		}
+		
+		for (Resource outExtent : resources) {
+//			Resource outExtent = fResourceSet.getResource(saveAsURI, false);
+//			if(outExtent == null) {
+//				outExtent = EmfUtil.createResource(saveAsURI, fResourceSet);       	    	
+//				fResourceSet.getResources().add(outExtent);
+//			}
+			try {
+				EmfUtil.saveModel(outExtent, EmfUtil.DEFAULT_SAVE_OPTIONS);
+			}
+			catch (EmfException e) {
+				diagnostic.add(QvtPlugin.createErrorDiagnostic(
+						"Failed to save model extent uri=" + outExtent.getURI(), e));
 			}
 		}
 
@@ -166,6 +180,16 @@ public class ModelExtentHelper {
      * @throws EmfException
      */
 	public static void saveExtentToResources(List<EObject> extentContent, ResourceSet resSet, URI outUri) throws EmfException {
+		Set<Resource> linkedResources = addExtentContentsToResources(extentContent, resSet, outUri);
+
+		for (Resource rs : linkedResources) {
+//			Resource rs = nextExtent.getKey();
+//			mergeExtentToResource(rs, nextExtent.getValue());
+			EmfUtil.saveModel(rs, EmfUtil.DEFAULT_SAVE_OPTIONS);
+		}
+	}
+	
+	public static Set<Resource> addExtentContentsToResources(List<EObject> extentContent, ResourceSet resSet, URI outUri) {
 		URI modelUri = outUri.trimFragment();
 		Resource outExtent = resSet.getResource(modelUri, false);
 		if(outExtent == null) {
@@ -189,12 +213,14 @@ public class ModelExtentHelper {
 				content.add(eObject);
 			}
 		}
-
+		
 		for (Map.Entry<Resource, List<EObject>> nextExtent : linkedExtents.entrySet()) {
 			Resource rs = nextExtent.getKey();
 			mergeExtentToResource(rs, nextExtent.getValue());
-			EmfUtil.saveModel(rs, EmfUtil.DEFAULT_SAVE_OPTIONS);
+			//EmfUtil.saveModel(rs, EmfUtil.DEFAULT_SAVE_OPTIONS);
 		}
+		
+		return linkedExtents.keySet();
 	}
 
 	public static void mergeExtentToResource(Resource outExtent, List<? extends EObject> extentContent) {

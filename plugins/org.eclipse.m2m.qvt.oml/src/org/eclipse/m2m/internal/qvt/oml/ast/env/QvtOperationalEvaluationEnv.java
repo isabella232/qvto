@@ -1018,13 +1018,13 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	    private EObjectEStructuralFeaturePair myLastAssignLvalue;	  
 	    private ModelParameterExtent myUnboundExtent;
 	    private TransformationInstance myThisTransformation;
-	    private boolean myIsDefferedExecution;
+	    private boolean myIsDeferredExecution;
 	    private Trace myTraces;
 
 	    RootInternal(IContext context) {
 	    	assert context != null;
 	    	myContext = context;
-	    	myIsDefferedExecution = false;
+	    	myIsDeferredExecution = false;
 	    	myTraces = TraceFactory.eINSTANCE.createTrace();
 	    }
 
@@ -1035,7 +1035,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 			myContext = another.myContext;
 			myUnboundExtent = another.myUnboundExtent;
 			myThisTransformation = another.myThisTransformation;
-			myIsDefferedExecution = another.myIsDefferedExecution;
+			myIsDeferredExecution = another.myIsDeferredExecution;
 		}
 
 	    @Override
@@ -1092,7 +1092,7 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	    public void processDeferredTasks() {
 	    	if (myDeferredTasks != null) {
 	    		try {
-		    		myIsDefferedExecution = true;	    			
+		    		myIsDeferredExecution = true;	    			
 		    		// make me re-entrant in case of errorenous call to #addDeferredTask() 
 		    		// from running the task => concurrent modification exception
 		    		// This error condition should be handled elsewhere
@@ -1101,14 +1101,14 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 		                task.run();
 		            }
 	    		} finally {
-		    		myIsDefferedExecution = false;	    			
+		    		myIsDeferredExecution = false;	    			
 	    		}
 	    	}
 	    }
 
 	    @Override
 		public boolean isDeferredExecution() {
-			return myIsDefferedExecution;
+			return myIsDeferredExecution;
 		}
 	    
 	    @Override

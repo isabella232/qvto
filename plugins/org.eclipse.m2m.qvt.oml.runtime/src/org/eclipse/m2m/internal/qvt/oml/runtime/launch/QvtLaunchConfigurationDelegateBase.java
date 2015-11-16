@@ -14,18 +14,24 @@ package org.eclipse.m2m.internal.qvt.oml.runtime.launch;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -45,6 +51,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
+import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TraceSerializer;
 import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner;
@@ -56,8 +63,14 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.Transf
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.util.EvaluationMonitor;
 import org.eclipse.m2m.qvt.oml.util.IContext;
+import org.eclipse.m2m.qvt.oml.util.ISessionData;
+import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.m2m.qvt.oml.util.ISessionData.Entry;
 import org.eclipse.osgi.util.NLS;
 
 public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigurationDelegate {
@@ -186,7 +199,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         }
         outConsole.add(consoleLogger.getBuffer().toString());
     }
-        
+            
     public static List<URI> doLaunch(final QvtTransformation transformation, final List<ModelContent> inObjs,
     		List<TargetUriData> targetData, final String traceFileName, IContext context) throws Exception {
     	
@@ -237,6 +250,31 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         return result;
     }
     
+    public static void doLaunch(QvtTransformation transf, List<URI> inUris, URI traceUri, IContext qvtContext) throws MdaException {
+    	   	
+    	org.eclipse.m2m.internal.qvt.oml.TransformationRunner runner =
+    			new org.eclipse.m2m.internal.qvt.oml.TransformationRunner(transf.getURI(), transf.getResourceSet().getPackageRegistry(), inUris);
+    	
+    	//runner.initialize();
+    	
+    	boolean isIncrementalUpdate = transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap());
+    	
+    	runner.setSaveTrace(isIncrementalUpdate);
+    	runner.setTraceFile(traceUri);
+    	runner.setIncrementalUpdate(isIncrementalUpdate);
+    	
+    	ExecutionContextImpl context = new ExecutionContextImpl();
+    	context.setLog(qvtContext.getLog());
+    	context.setProgressMonitor(qvtContext.getProgressMonitor());
+    	
+    	for (java.util.Map.Entry<String, Object> configProperty : qvtContext.getConfigProperties().entrySet()) {
+    		context.setConfigProperty(configProperty.getKey(), configProperty.getValue());
+    	}
+    	
+    	// TODO fail on error diagnostic
+    	Diagnostic diag = runner.execute(context);
+    }
+    
     @SuppressWarnings("unchecked")
 	private static void saveTransformationResult(ModelExtentContents extent, TargetUriData targetData, ResourceSet resSet) throws MdaException {
     	if (targetData.getContentProvider() != null) {
@@ -249,6 +287,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         switch(targetData.getTargetType()) {
         	case NEW_MODEL: {
         		try {
+        			//new ModelExtentHelper(trans, modelExtentURIs, resSet)
             		ModelExtentHelper.saveExtentToResources(extent.getAllRootElements(), resSet, outUri);
         		}
         		catch(EmfException e) {
