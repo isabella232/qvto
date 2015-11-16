@@ -30,6 +30,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -46,6 +47,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilder;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
@@ -212,16 +214,17 @@ public abstract class TestTransformation extends TestCase {
         	ResourceSet rs = data.getResourceSet(project);
         	int i = 0;
         	for (URI actualResultURI : transfResult) {
-        		URI uri = expectedResultURIs.get(i++);
+        		URI expectedURI = expectedResultURIs.get(i++);
         		
-        		Resource expectedResource = rs.getResource(uri, true);
+        		Resource expectedResource = rs.getResource(expectedURI, true);
         		
         		List<EObject> actualExtentObjects = rs.getResource(actualResultURI, true).getContents();
-        		ModelTestData.compareWithExpected(data.getName(), expectedResource.getContents(), actualExtentObjects);
+        		List<EObject> expectedExtentObjects = expectedResource.getContents();
+        		ModelTestData.compareWithExpected(data.getName(), expectedExtentObjects, actualExtentObjects);
 			}        	
         }
         
-        private final ITransformer  myTransformer;
+        private final ITransformer myTransformer;
     };
     
     public static interface ITransformer {
@@ -268,14 +271,16 @@ public abstract class TestTransformation extends TestCase {
     
 	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext,
 			QvtTransformation transf) throws Exception {
-		
+				
 		EclipseFile eclipseFile = new EclipseFile(transformation);
     	
-    	List<ModelContent> inObjects = new ArrayList<ModelContent>(transf.getParameters().size());
+    	//List<ModelContent> inObjects = new ArrayList<ModelContent>(transf.getParameters().size());
     	List<TargetUriData> targetData = new ArrayList<TargetUriData>(transf.getParameters().size());
     	List<URI> resultUris = new ArrayList<URI>(transf.getParameters().size());
     	
 		int inoutExtentCount = transf.getResourceSet().getResources().size() + inUris.size();
+		
+		List<URI> paramUris = new ArrayList<URI>(inUris);
 		
     	int outExtentCount = 0;
     	Iterator<URI> itInUris = inUris.iterator();
@@ -284,7 +289,7 @@ public abstract class TestTransformation extends TestCase {
 			if (transfParam.getDirectionKind() == DirectionKind.IN || transfParam.getDirectionKind() == DirectionKind.INOUT) {
     			inUri = itInUris.next();
 		        ModelContent inModel = transf.loadInput(inUri);
-		        inObjects.add(inModel);
+		        //inObjects.add(inModel);
 
 		        if (transfParam.getDirectionKind() == DirectionKind.IN 
 		        		&& inModel.getContent().size() == 1
@@ -300,8 +305,10 @@ public abstract class TestTransformation extends TestCase {
 			        CFile outFile = getModelExtentFile(eclipseFile, transfParam);	    			        
 			        inUri = URI.createFileURI(outFile.getFullPath());
 			        ++outExtentCount;
+			        
+			        paramUris.add(inUri);
 				}
-				targetData.add(new TargetUriData(TargetType.NEW_MODEL, inUri.toString(), null, false));
+				//targetData.add(new TargetUriData(TargetType.NEW_MODEL, inUri.toString(), null, false));
 				resultUris.add(inUri);
 			}
 		}
@@ -315,14 +322,19 @@ public abstract class TestTransformation extends TestCase {
 		}
 		
 		URI outTraceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
-		QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
+		
+		URI transformationUri = URIUtils.getResourceURI(transformation);
+		
+		QvtLaunchConfigurationDelegateBase.doLaunch(transf, paramUris, outTraceURI, qvtContext);
+		
+		//QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
 				
-		assertTrue(
-				NLS.bind("Unexpected number of resources. Expected ({0}), got ({1}).", inoutExtentCount + outExtentCount, //$NON-NLS-1$
-						 transf.getResourceSet().getResources().size()), 
-				inoutExtentCount + outExtentCount == transf.getResourceSet().getResources().size());
+//		assertTrue(
+//				NLS.bind("Unexpected number of resources. Expected ({0}), got ({1}).", inoutExtentCount + outExtentCount, //$NON-NLS-1$
+//						 transf.getResourceSet().getResources().size()), 
+//				inoutExtentCount + outExtentCount == transf.getResourceSet().getResources().size());
 		
 		transf.cleanup();    		
-        return resultUris;
+		return resultUris;
 	}
 }
