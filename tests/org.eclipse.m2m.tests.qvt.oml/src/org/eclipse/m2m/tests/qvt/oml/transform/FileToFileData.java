@@ -13,6 +13,7 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 
 import java.util.Collections;
 
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
@@ -33,7 +34,7 @@ public class FileToFileData extends FilesToFilesData {
     	this(name, fromFile, expectedFile, makeFileContext(props));
     }
     
-    public FileToFileData(String name, String fromFile, String expectedFile, IContext context) {
+    public FileToFileData(String name, String fromFile, String expectedFile, ExecutionContext context) {
         super(name, Collections.singletonList(fromFile), Collections.singletonList(expectedFile), context);
         myFromFile = fromFile;
         myExpectedFile = expectedFile;

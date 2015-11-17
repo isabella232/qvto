@@ -13,6 +13,7 @@ package org.eclipse.m2m.internal.qvt.oml.runtime.launch;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 
 
 public class QvtLaunchUtil {
@@ -119,13 +122,13 @@ public class QvtLaunchUtil {
         return loadConfigurationProperties(configuration);
     }
     
-    public static Context createContext(ILaunchConfiguration configuration) {
+    public static ExecutionContext createContext(ILaunchConfiguration configuration) {
     	Map<String, Object> configProps = getConfigurationProperty(configuration);
     	return createContext(configProps);
     }
 
-	public static Context createContext(Map<String, Object> configProps) {
-		Context context = new Context();
+	public static ExecutionContext createContext(Map<String, Object> configProps) {
+		ExecutionContextImpl context = new ExecutionContextImpl();
 		if (configProps != null) {
 	    	for (String name : configProps.keySet()) {
 				context.setConfigProperty(name, configProps.get(name));
@@ -134,7 +137,6 @@ public class QvtLaunchUtil {
         return context;
 	}
     
-
     public static Map<String, Object> loadConfigurationProperties(ILaunchConfiguration configuration) {
         Map<String, Object> map;
         try {
@@ -146,6 +148,14 @@ public class QvtLaunchUtil {
         }
         return map;
     }
+    
+    public static Map<String, Object> getConfigProperties(ExecutionContext context) {
+		Map<String, Object> props = new HashMap<String, Object>();
+		for(String name : context.getConfigPropertyNames()) {
+			props.put(name, context.getConfigProperty(name));
+		}
+		return props;
+	}
 
 
     

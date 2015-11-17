@@ -28,6 +28,8 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
@@ -67,7 +69,7 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 			Map<String, Object> passedProps = (configProperties == null) ? Collections.<String, Object>emptyMap() : configProperties;
 			Map<String, Object> extProps = new HashMap<String, Object>(passedProps);
 			extProps.put("testcase", testCaseName);		//$NON-NLS-1$		
-			IContext context = QvtLaunchUtil.createContext(extProps);
+			ExecutionContext context = QvtLaunchUtil.createContext(extProps);
 			
 			transformer.transform(
 					getIFile(getData().getTransformation(getProject())),
@@ -140,14 +142,19 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 			}
 			
 			@Override
-	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception {
+	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext context) throws Exception {
 	        	QvtInterpretedTransformation transf = getTransformation(transformation);
 	        	
 	        	if(!fUseCompiledXMI) {
 	        		TestUtil.assertAllPersistableAST(transf.getModule().getUnit());
-	        	}	        	
+	        	}
 	        	
-	        	Context qvtContext = QvtLaunchUtil.createContext(context.getConfigProperties());
+	        	Map<String, Object> props = new HashMap<String, Object>();
+	        	for(String name : context.getConfigPropertyNames()) {
+	        		props.put(name, context.getConfigProperty(name));
+	        	}
+	        	
+	        	ExecutionContextImpl qvtContext = (ExecutionContextImpl) QvtLaunchUtil.createContext(props);
 	        	qvtContext.setLog(new WriterLog(fLogger));
 	            
 	        	return launchTransform(transformation, inUris, traceUri, qvtContext, transf);

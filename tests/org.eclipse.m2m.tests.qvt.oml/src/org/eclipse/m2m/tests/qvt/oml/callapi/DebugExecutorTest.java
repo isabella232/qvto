@@ -125,8 +125,8 @@ public class DebugExecutorTest extends TestCase {
 		factory.transformationURI = getTransformationUri().toString();
 		
 		executionContext = new ExecutionContextImpl();
-		for (String key : myData.getContext().getConfigProperties().keySet()) {
-			executionContext.setConfigProperty(key, myData.getContext().getConfigProperties().get(key));
+		for (String key : myData.getContext().getConfigPropertyNames()) {
+			executionContext.setConfigProperty(key, myData.getContext().getConfigProperty(key));
 		}
 	}
 	

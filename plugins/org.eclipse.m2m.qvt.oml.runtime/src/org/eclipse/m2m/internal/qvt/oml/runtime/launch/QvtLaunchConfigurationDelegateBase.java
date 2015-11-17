@@ -125,7 +125,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         return SafeRunner.getSafeRunnable(r);
     }
     
-    public static void doLaunch(QvtTransformation transformation, ILaunchConfiguration configuration, IContext context) throws Exception {
+    public static void doLaunch(QvtTransformation transformation, ILaunchConfiguration configuration, ExecutionContext context) throws Exception {
     	List<ModelContent> inObjects = new ArrayList<ModelContent>();
     	List<TargetUriData> targetData = new ArrayList<TargetUriData>();
 		List<TargetUriData> targetUris = QvtLaunchUtil.getTargetUris(configuration);
@@ -152,19 +152,26 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
 				targetData.add(nextUri);
 			}
 		}
+		
+		List<URI> paramUris = new ArrayList<URI>();
+		for(TargetUriData data : targetData) {
+			paramUris.add(data.getUri());
+		}
 
         boolean saveTrace = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false);
         String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$        
         boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false);
+
+        // TODO re-enable incremental update
+//		if (isIncrementalUpdate && traceFile != null) {
+//			ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceFile), transformation.getResourceSet());
+//			if (traceContent != null) {
+//				context.getTrace().setTraceContent(traceContent.getContent());
+//			}
+//		}
         
-		if (isIncrementalUpdate && traceFile != null) {
-			ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceFile), transformation.getResourceSet());
-			if (traceContent != null) {
-				context.getTrace().setTraceContent(traceContent.getContent());
-			}
-		}
-        
-        doLaunch(transformation, inObjects, targetData, saveTrace ? traceFile : null, context);
+        //doLaunch(transformation, inObjects, targetData, saveTrace ? traceFile : null, context);
+        doLaunch(transformation, paramUris, saveTrace ? toUri(traceFile) : null, context, isIncrementalUpdate);
     }
     
     public static void doLaunch(QvtTransformation transformation, List<ModelContent> inObjs, Map<String, Object> configProps,
@@ -175,7 +182,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         	throw new MdaException(status);
         }      	
     	
-        Context context = QvtLaunchUtil.createContext(configProps);
+        ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configProps);
 
 		final StringWriter consoleLogger = new StringWriter();
 		context.setLog(new WriterLog(consoleLogger));
@@ -201,7 +208,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
     }
             
     public static List<URI> doLaunch(final QvtTransformation transformation, final List<ModelContent> inObjs,
-    		List<TargetUriData> targetData, final String traceFileName, IContext context) throws Exception {
+    		List<TargetUriData> targetData, final String traceFileName, ExecutionContext context) throws Exception {
     	
         TransformationRunner.In in = new TransformationRunner.In(inObjs.toArray(new ModelContent[inObjs.size()]), context);
         TransformationRunner.Out out = transformation.run(in);
@@ -250,26 +257,25 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         return result;
     }
     
-    public static void doLaunch(QvtTransformation transf, List<URI> inUris, URI traceUri, IContext qvtContext) throws MdaException {
-    	   	
+    public static void doLaunch(QvtTransformation transf, List<URI> inUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
+    	  
+    	// TODO use factory?
     	org.eclipse.m2m.internal.qvt.oml.TransformationRunner runner =
     			new org.eclipse.m2m.internal.qvt.oml.TransformationRunner(transf.getURI(), transf.getResourceSet().getPackageRegistry(), inUris);
     	
     	//runner.initialize();
-    	
-    	boolean isIncrementalUpdate = transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap());
-    	
-    	runner.setSaveTrace(isIncrementalUpdate);
+    	    	
+    	runner.setSaveTrace(traceUri != null);
     	runner.setTraceFile(traceUri);
     	runner.setIncrementalUpdate(isIncrementalUpdate);
     	
-    	ExecutionContextImpl context = new ExecutionContextImpl();
-    	context.setLog(qvtContext.getLog());
-    	context.setProgressMonitor(qvtContext.getProgressMonitor());
-    	
-    	for (java.util.Map.Entry<String, Object> configProperty : qvtContext.getConfigProperties().entrySet()) {
-    		context.setConfigProperty(configProperty.getKey(), configProperty.getValue());
-    	}
+//    	ExecutionContextImpl context = new ExecutionContextImpl();
+//    	context.setLog(qvtContext.getLog());
+//    	context.setProgressMonitor(qvtContext.getProgressMonitor());
+//    	    	    	    	
+//    	for (java.util.Map.Entry<String, Object> configProperty : qvtContext.getConfigProperties().entrySet()) {
+//    		context.setConfigProperty(configProperty.getKey(), configProperty.getValue());
+//    	}
     	
     	// TODO fail on error diagnostic
     	Diagnostic diag = runner.execute(context);

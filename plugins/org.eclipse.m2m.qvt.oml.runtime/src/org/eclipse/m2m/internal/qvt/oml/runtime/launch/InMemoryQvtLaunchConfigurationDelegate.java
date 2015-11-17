@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransforma
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.osgi.util.NLS;
 
@@ -77,7 +78,7 @@ public class InMemoryQvtLaunchConfigurationDelegate extends QvtLaunchConfigurati
 	                	throw new CoreException(status);
 	                }
 	            	
-	            	Context context = QvtLaunchUtil.createContext(configuration);
+	            	ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configuration);
 	            	context.setLog(new WriterLog(streamsProxy.getOutputWriter()));
 	            	context.setProgressMonitor(actualMonitor);
 	

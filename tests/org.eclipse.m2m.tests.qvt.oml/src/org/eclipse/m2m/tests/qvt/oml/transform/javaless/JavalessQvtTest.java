@@ -24,6 +24,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestQvtInterpreter;
@@ -91,7 +92,7 @@ public class JavalessQvtTest extends TestQvtInterpreter {
 	protected ITransformer getTransformer() {
 		return new DefaultTransformer(getData(), getProject()) {
 			@Override
-			public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
+			public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext qvtContext) throws Exception {
 				List<URI> outUris = super.transform(transformation, inUris, traceUri, qvtContext);
 				processOutputUri(outUris);
 				return outUris;

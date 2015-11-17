@@ -19,6 +19,7 @@ import java.util.List;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
@@ -31,7 +32,7 @@ public interface TransformationRunner {
          * @param sources {ordered} list of 'in' and 'inout' transformation params
          * @param context transformation context (external properties, etc.)
          */
-        public In(ModelContent[] sources, IContext context) {
+        public In(ModelContent[] sources, ExecutionContext context) {
             mySources = sources.clone();
             myContext = context;
         }
@@ -40,12 +41,12 @@ public interface TransformationRunner {
             return mySources;
         }
         
-        public IContext getContext() {
+        public ExecutionContext getContext() {
             return myContext;
         }
         
         private final ModelContent[] mySources;
-        private final IContext myContext;
+        private final ExecutionContext myContext;
     }
     
     public static class Out {

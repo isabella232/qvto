@@ -11,15 +11,20 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.callapi;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.tests.qvt.oml.transform.FilesToFilesData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
@@ -35,10 +40,10 @@ public class TestQvtExecutor extends TransformationExecutorTest {
 	private final List<URI> ecoreMetamodels;
 	
 	public TestQvtExecutor(ModelTestData data) {
-		super(data.getName(), getInModels(data), getOutModels(data), data.getContext().getConfigProperties());
+		super(data.getName(), getInModels(data), getOutModels(data), QvtLaunchUtil.getConfigProperties(data.getContext()));
 		ecoreMetamodels = data.getEcoreMetamodels();
 	}
-	
+		
 	@Parameters(name="{0}")
 	public static Iterable<ModelTestData> data() {
 		return Arrays.asList(TransformTests.createTestData());

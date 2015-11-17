@@ -101,6 +101,9 @@ public class ModelExtentHelper {
 				diagnostic.add(QvtPlugin.createErrorDiagnostic(
 						"Failed to save model extent uri=" + outExtent.getURI(), e));
 			}
+			
+			// TODO required?
+			org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils.refresh(outExtent.getURI());
 		}
 
 		return diagnostic;

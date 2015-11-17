@@ -36,6 +36,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.QVTOCoverageDecorator;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 
@@ -70,7 +71,7 @@ public class QvtLaunchConfigurationCoverageDelegate extends QvtLaunchConfigurati
                         throw new CoreException(status);
                     }
 
-                    Context context = QvtLaunchUtil.createContext(configuration);
+                    ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configuration);
                     context.setLog(new WriterLog(streamsProxy.getOutputWriter()));
                     context.setProgressMonitor(monitor);
 

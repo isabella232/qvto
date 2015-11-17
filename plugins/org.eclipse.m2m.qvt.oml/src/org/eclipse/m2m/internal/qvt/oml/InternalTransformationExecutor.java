@@ -477,7 +477,8 @@ public class InternalTransformationExecutor {
 		return mainDiagnostic;
 	}
 
-	private static IContext createInternalContext(ExecutionContext executionContext, IProgressMonitor monitor) {
+	// TODO switch back to private?
+	public static IContext createInternalContext(ExecutionContext executionContext, IProgressMonitor monitor) {
 		Context ctx = new Context();
 		ctx.setLog(executionContext.getLog());
 		ctx.setProgressMonitor(monitor);

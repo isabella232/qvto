@@ -42,6 +42,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.osgi.util.NLS;
 
@@ -347,15 +348,16 @@ public class QvtoAntTransformationTask extends Task {
 		                	throw new MdaException(status);
 		                }      	
 		        		
-						Context context = QvtLaunchUtil.createContext(getConfiguration());
+						ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(getConfiguration());
 						context.setLog(createQVTLog());
 						
-						if (isIncrementalUpdate && traceUri != null) {
-							ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceUri), transformation.getResourceSet());
-							if (traceContent != null) {
-								context.getTrace().setTraceContent(traceContent.getContent());
-							}
-						}
+						// TODO re-enable incremental update
+//						if (isIncrementalUpdate && traceUri != null) {
+//							ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceUri), transformation.getResourceSet());
+//							if (traceContent != null) {
+//								context.getTrace().setTraceContent(traceContent.getContent());
+//							}
+//						}
 						
 						QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData, traceUri, context);
 	            	}

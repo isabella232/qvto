@@ -25,6 +25,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMISerializer;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.WorkspaceQvtModule;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,7 +133,7 @@ public class TestQvtInterpreter extends TestTransformation {
 			return new QvtInterpretedTransformation(qvtModule); 
 		}
 		
-		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
+		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext qvtContext) throws Exception {
         	QvtInterpretedTransformation transf = getTransformation(transformation);
         	
         	//TestUtil.assertAllPersistableAST(transf.getModule().getUnit());

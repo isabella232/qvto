@@ -47,6 +47,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.osgi.util.NLS;
 
@@ -106,7 +107,7 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 	                    return;
 	                }
 	
-	            	Context context = QvtLaunchUtil.createContext(configuration);
+	            	ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configuration);
 	                context.setLog(new WriterLog(printWriter));
 	                context.setProgressMonitor(monitor);
 	

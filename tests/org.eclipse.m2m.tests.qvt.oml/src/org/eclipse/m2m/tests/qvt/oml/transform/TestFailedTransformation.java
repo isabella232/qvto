@@ -20,6 +20,8 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
+import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.junit.Before;
@@ -42,8 +44,8 @@ public class TestFailedTransformation extends TestTransformation {
 			new ModelTestData[] {
         		new FileToFileData("scr878") { //$NON-NLS-1$
                 	@Override
-                	public IContext getContext() {
-        	    		IContext ctx = super.getContext();
+                	public ExecutionContext getContext() {
+        	    		ExecutionContext ctx = super.getContext();
         	    		ctx.getSessionData().setValue(QVTEvaluationOptions.FLAG_READONLY_GUARD_ENABLED, Boolean.TRUE);
         	    		return ctx;
                 	}
@@ -52,8 +54,8 @@ public class TestFailedTransformation extends TestTransformation {
         		new FilesToFilesData("bug323915"), //$NON-NLS-1$
         		new FilesToFilesData("bug370098") { //$NON-NLS-1$
                 	@Override
-                	public IContext getContext() {
-                		IContext ctx = super.getContext();
+                	public ExecutionContext getContext() {
+                		ExecutionContext ctx = super.getContext();
                 		ctx.getSessionData().setValue(QVTEvaluationOptions.EVALUATION_MAX_STACK_DEPTH, 10);
                 		return ctx;
                 	}
@@ -80,7 +82,7 @@ public class TestFailedTransformation extends TestTransformation {
 	private QvtRuntimeException runTransformation() throws Exception {
         ITransformer transformer = TestQvtInterpreter.getDefaultTransformer(getData());
 		try {
-			Context context = (Context) getData().getContext();
+			ExecutionContextImpl context = (ExecutionContextImpl) getData().getContext();
 			context.setLog(new WriterLog(myLogger));
 			
 			transformer.transform(

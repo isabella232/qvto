@@ -57,6 +57,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
@@ -228,7 +229,7 @@ public abstract class TestTransformation extends TestCase {
     };
     
     public static interface ITransformer {
-    	List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext context) throws Exception;
+    	List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext context) throws Exception;
     }	
 
     protected void checkTransformation(IChecker checker) throws Exception {
@@ -269,7 +270,7 @@ public abstract class TestTransformation extends TestCase {
         return modelExtentFile;
     }
     
-	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext,
+	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext context,
 			QvtTransformation transf) throws Exception {
 				
 		EclipseFile eclipseFile = new EclipseFile(transformation);
@@ -313,19 +314,21 @@ public abstract class TestTransformation extends TestCase {
 			}
 		}
 
-		if (transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap())) {
-			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, transf.getResourceSet());
-			if (traceContent != null) {
-				qvtContext.getTrace().setTraceContent(traceContent.getContent());
-				outExtentCount += 2; // one for trace itself and one for 'expected.ecore' ('in.ecore' is already loaded)
-			}
-		}
+//		if (transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap())) {
+//			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, transf.getResourceSet());
+//			if (traceContent != null) {
+//				context.getTrace().setTraceContent(traceContent.getContent());
+//				outExtentCount += 2; // one for trace itself and one for 'expected.ecore' ('in.ecore' is already loaded)
+//			}
+//		}
 		
 		URI outTraceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
 		
 		URI transformationUri = URIUtils.getResourceURI(transformation);
 		
-		QvtLaunchConfigurationDelegateBase.doLaunch(transf, paramUris, outTraceURI, qvtContext);
+		boolean isIncrementalUpdate = outTraceURI == null ? false : transf.getResourceSet().getURIConverter().exists(outTraceURI, Collections.emptyMap());
+		
+		QvtLaunchConfigurationDelegateBase.doLaunch(transf, paramUris, outTraceURI, context, isIncrementalUpdate);
 		
 		//QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
 				

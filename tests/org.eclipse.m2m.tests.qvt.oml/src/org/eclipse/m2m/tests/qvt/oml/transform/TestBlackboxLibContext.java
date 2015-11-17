@@ -17,6 +17,7 @@ import java.util.Collections;
 
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtInterruptedExecutionException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -44,7 +45,7 @@ public class TestBlackboxLibContext extends AbstractStackTraceTest {
 	@Test
 	public void testInvalidConfigProp() throws Exception {
 		String testcase = "executionTerminated"; //$NON-NLS-1$
-		QvtRuntimeException e = runQvtModuleTestCase(testcase, getData().getContext().getConfigProperties());						
+		QvtRuntimeException e = runQvtModuleTestCase(testcase, QvtLaunchUtil.getConfigProperties(getData().getContext()));						
 		assertValidQVTRuntimeException(e);
 		assertEquals(QvtInterruptedExecutionException.class, e.getClass());
 		

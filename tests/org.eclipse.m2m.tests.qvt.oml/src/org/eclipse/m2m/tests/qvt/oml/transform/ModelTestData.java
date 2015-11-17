@@ -41,6 +41,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.URIMapping;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor.BlackboxRegistry;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
@@ -57,7 +58,7 @@ public abstract class ModelTestData {
 	
 	public static final String MODEL_FOLDER = "models"; //$NON-NLS-1$
 	
-    public ModelTestData(String name, IContext context) {
+    public ModelTestData(String name, ExecutionContext context) {
         myName = name;
         myContext = context;
     }
@@ -122,7 +123,7 @@ public abstract class ModelTestData {
     	return true;
     }
     
-    public IContext getContext() { 
+    public ExecutionContext getContext() { 
         return myContext; 
     }
     
@@ -232,12 +233,12 @@ public abstract class ModelTestData {
         return file;
     }
     
-    protected static IContext makeFileContext(String[][] props) {
+    protected static ExecutionContext makeFileContext(String[][] props) {
         Map<String, Object> cfgMap = new HashMap<String, Object>();
         for (int i = 0; i < props.length; i++) {
             cfgMap.put(props[i][0], props[i][1]);
         }
-        IContext context = QvtLaunchUtil.createContext(cfgMap);
+        ExecutionContext context = QvtLaunchUtil.createContext(cfgMap);
         return context;
     }
     
@@ -269,7 +270,7 @@ public abstract class ModelTestData {
     
     
     private final String myName;
-    private final IContext myContext;
+    private final ExecutionContext myContext;
     protected final List<URI> ecoreFileMetamodels = new ArrayList<URI>();
     
     public static final String ENCODING = "UTF-8"; //$NON-NLS-1$

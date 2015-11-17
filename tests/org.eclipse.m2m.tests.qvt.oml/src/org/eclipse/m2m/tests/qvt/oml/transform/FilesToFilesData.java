@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
@@ -36,7 +37,7 @@ public class FilesToFilesData extends ModelTestData {
     	this(name, fromFiles, expectedFiles, makeFileContext(props));
     }
     
-    public FilesToFilesData(String name, List<String> fromFiles, List<String> expectedFiles, IContext context) {
+    public FilesToFilesData(String name, List<String> fromFiles, List<String> expectedFiles, ExecutionContext context) {
         super(name, context);
         myFromFiles = fromFiles;
         myExpectedFiles = expectedFiles;

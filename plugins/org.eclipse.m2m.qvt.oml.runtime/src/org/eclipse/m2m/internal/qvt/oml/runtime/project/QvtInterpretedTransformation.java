@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
@@ -115,7 +117,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
             }
         }
         
-        return evaluate(myModule.getResourceSet(), module, inputs, in.getContext());
+        return evaluate(myModule.getResourceSet(), module, inputs, InternalTransformationExecutor.createInternalContext(in.getContext(), new NullProgressMonitor()));
     }
 	
 	public String getModuleName() throws MdaException {
@@ -163,7 +165,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
     
 	private Out evaluate(ResourceSet rs, Module module, List<ModelContent> args, IContext context) {
 		QvtOperationalEnvFactory factory = getEnvironmentFactory();
-
+				
 		QvtOperationalEvaluationEnv evaluationEnv = factory.createEvaluationEnvironment(context, null);
 		// FIXME
 		setArguments(evaluationEnv, (OperationalTransformation) module, args, rs);
