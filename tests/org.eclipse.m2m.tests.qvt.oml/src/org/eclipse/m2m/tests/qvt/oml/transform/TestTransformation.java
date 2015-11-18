@@ -322,7 +322,7 @@ public abstract class TestTransformation extends TestCase {
 //			}
 //		}
 		
-		URI outTraceURI = URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
+		URI outTraceURI = traceUri; //URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
 		
 		URI transformationUri = URIUtils.getResourceURI(transformation);
 		

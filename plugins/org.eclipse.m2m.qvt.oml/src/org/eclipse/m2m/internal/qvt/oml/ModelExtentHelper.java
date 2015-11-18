@@ -192,7 +192,7 @@ public class ModelExtentHelper {
 		}
 	}
 	
-	public static Set<Resource> addExtentContentsToResources(List<EObject> extentContent, ResourceSet resSet, URI outUri) {
+	public static Set<Resource> addExtentContentsToResources(List<EObject> rootContents, ResourceSet resSet, URI outUri) {
 		URI modelUri = outUri.trimFragment();
 		Resource outExtent = resSet.getResource(modelUri, false);
 		if(outExtent == null) {
@@ -201,19 +201,21 @@ public class ModelExtentHelper {
 		}
 		
 		Map<Resource, List<EObject>> linkedExtents = new LinkedHashMap<Resource, List<EObject>>();
-		linkedExtents.put(outExtent, extentContent);
+		linkedExtents.put(outExtent, rootContents);
 		
-		TreeIterator<EObject> allContents = EcoreUtil.getAllContents(extentContent, false);
+		TreeIterator<EObject> allContents = EcoreUtil.getAllContents(rootContents, false);
 		while (allContents.hasNext()) {
 			EObject eObject = allContents.next();
-			Resource eResource = eObject.eResource();
-			if (eResource != null && eResource != outExtent) {
-				List<EObject> content = linkedExtents.get(eResource);
-				if (content == null) {
-					content = new ArrayList<EObject>();
-					linkedExtents.put(eResource, content);
+			if (!rootContents.contains(eObject)) {
+				Resource eResource = eObject.eResource();
+				if (eResource != null && eResource != outExtent) {
+					List<EObject> content = linkedExtents.get(eResource);
+					if (content == null) {
+						content = new ArrayList<EObject>();
+						linkedExtents.put(eResource, content);
+					}
+					content.add(eObject);
 				}
-				content.add(eObject);
 			}
 		}
 		
@@ -255,13 +257,18 @@ public class ModelExtentHelper {
 	}
     
     private static Set<EObject> getEssentialRootElements(List<? extends EObject> allRootElements) {
-    	Set<EObject> roots = new LinkedHashSet<EObject>();
+    	Set<EObject> roots = new LinkedHashSet<EObject>(allRootElements);
     	for (EObject e : allRootElements) {
-    		EObject nextRoot = e;
-    		while (nextRoot.eContainer() instanceof EObject && nextRoot.eContainer().eResource() == e.eResource()) {
-    			nextRoot = nextRoot.eContainer();
+    		//EObject nextRoot = e;
+    		
+    		if (allRootElements.contains(e.eContainer())) {
+    			roots.remove(e);
     		}
-    		roots.add(nextRoot);
+    		    		
+//    		while (nextRoot.eContainer() instanceof EObject && nextRoot.eContainer().eResource() == e.eResource()) {
+//    			nextRoot = nextRoot.eContainer();
+//    		}
+//    		roots.add(nextRoot);
     	}
 		return roots;
 	}
