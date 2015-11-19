@@ -51,6 +51,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TraceSerializer;
@@ -257,14 +258,12 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         return result;
     }
     
-    public static void doLaunch(QvtTransformation transf, List<URI> inUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
+    public static void doLaunch(QvtTransformation transf, List<URI> paramUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
     	  
     	// TODO use factory?
     	org.eclipse.m2m.internal.qvt.oml.TransformationRunner runner =
-    			new org.eclipse.m2m.internal.qvt.oml.TransformationRunner(transf.getURI(), transf.getResourceSet().getPackageRegistry(), inUris);
-    	
-    	//runner.initialize();
-    	    	
+    			new org.eclipse.m2m.internal.qvt.oml.TransformationRunner(transf.getURI(), transf.getResourceSet().getPackageRegistry(), paramUris);
+    	    	    	
     	runner.setSaveTrace(traceUri != null);
     	runner.setTraceFile(traceUri);
     	runner.setIncrementalUpdate(isIncrementalUpdate);
@@ -279,6 +278,17 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
     	
     	// TODO fail on error diagnostic
     	Diagnostic diag = runner.execute(context);
+    	
+    	Throwable exception = diag.getException();
+    	if (exception instanceof QvtRuntimeException) {
+    		throw (QvtRuntimeException) exception;
+    	}
+    	else if (exception instanceof MdaException) {
+    		throw (MdaException) exception;
+    	}
+//    	else if (exception != null) {
+//    		throw new MdaException(exception);
+//    	}
     }
     
     @SuppressWarnings("unchecked")

@@ -203,8 +203,11 @@ public class InternalTransformationExecutor {
 				return doExecute(modelParameters,
 						createInternalContext(executionContext, progress.newChild(1)));
 			} catch (QvtRuntimeException e) {
-				Log logger = executionContext.getLog();
-				logger.log(EvaluationMessages.TerminatingExecution);
+				
+				// TODO suppress logging?
+				
+//				Log logger = executionContext.getLog();
+//				logger.log(EvaluationMessages.TerminatingExecution);
 	
 				return createExecutionFailure(e);
 			}
@@ -415,7 +418,7 @@ public class InternalTransformationExecutor {
 		int code = 0;
 		int severity = Diagnostic.ERROR;
 		String message = qvtRuntimeException.getLocalizedMessage();
-		Object[] data = null;
+		Object[] data = new Object[] {qvtRuntimeException};
 
 		if (qvtRuntimeException instanceof QvtException) {
 			code = ((QvtException) qvtRuntimeException).getExceptionType() == QvtOperationalStdLibrary.INSTANCE.getAssertionFailedClass() ?
@@ -440,6 +443,7 @@ public class InternalTransformationExecutor {
 		ExecutionDiagnosticImpl diagnostic = new ExecutionDiagnosticImpl(severity,
 				code, message, data);
 		diagnostic.setStackTrace(qvtRuntimeException.getQvtStackTrace());
+				
 		return diagnostic;
 	}
 

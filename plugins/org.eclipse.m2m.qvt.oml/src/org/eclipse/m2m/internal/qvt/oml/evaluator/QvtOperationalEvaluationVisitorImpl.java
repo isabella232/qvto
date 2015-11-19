@@ -862,7 +862,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
     	boolean isSuppressLoggin = myIsSuppressLoggin;
     	try {
-    		myIsSuppressLoggin = true;
+    		// TODO verify
+    		//myIsSuppressLoggin = true;
     		return transformation.accept(getVisitor());
     	} finally {
     		myIsSuppressLoggin = isSuppressLoggin;

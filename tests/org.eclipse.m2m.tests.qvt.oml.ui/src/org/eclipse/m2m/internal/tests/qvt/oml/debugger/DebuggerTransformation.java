@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.debug.core.launch.QVTODebugConfiguration;
 import org.eclipse.m2m.qvt.oml.debug.core.srclookup.QVTOSourceLookupDirector;
 import org.eclipse.m2m.qvt.oml.util.IContext;
@@ -84,7 +85,7 @@ public class DebuggerTransformation extends TestTransformation {
     
 	private class DebuggerTransformer implements ITransformer {
 		
-		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, IContext qvtContext) throws Exception {
+		public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext qvtContext) throws Exception {
 	        ILaunchConfigurationType type = DebugPlugin.getDefault().getLaunchManager().getLaunchConfigurationType(QvtLaunchConfigurationDelegate.LAUNCH_CONFIGURATION_TYPE_ID);
 	        myLaunchConfigurationWorkingCopy = type.newInstance(null, "debugConfig"); //$NON-NLS-1$
 	        

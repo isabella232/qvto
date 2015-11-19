@@ -64,7 +64,7 @@ import org.eclipse.ocl.ecore.SendSignalAction;
 public class QvtInterpretedTransformation implements QvtTransformation {
 
 	public QvtInterpretedTransformation(IFile transformationFile) {
-    	myModule = new WorkspaceQvtModule(transformationFile);
+    	this(new WorkspaceQvtModule(transformationFile));
     }
 	
 	public QvtInterpretedTransformation(QvtModule qvtModule) {
