@@ -78,15 +78,15 @@ public abstract class TransformationRegistry {
         }
     }
     
-    public List<CompiledTransformation> getTransformations(Filter filter) {
-        List<CompiledTransformation> transformations = new ArrayList<CompiledTransformation>();
+    public List<DeployedTransformation> getTransformations(Filter filter) {
+        List<DeployedTransformation> transformations = new ArrayList<DeployedTransformation>();
         
         IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(myPoint);
         for (int i = 0; i < configurationElements.length; i++) {
             IConfigurationElement element = configurationElements[i];
             try { 
                 if(filter == null || filter.accept(element)) {
-                    CompiledTransformation transformation = makeTransformation(element);
+                    DeployedTransformation transformation = makeTransformation(element);
                     transformations.add(transformation);
                 }
             }
@@ -98,8 +98,8 @@ public abstract class TransformationRegistry {
         return transformations;
     }
     
-    public CompiledTransformation getSingleTransformationById(final String id) {
-        List<CompiledTransformation> transformations = getTransformations(
+    public DeployedTransformation getSingleTransformationById(final String id) {
+        List<DeployedTransformation> transformations = getTransformations(
                 new Filter() {
                     public boolean accept(IConfigurationElement element) {
                         return id.equals(element.getAttribute(IRegistryConstants.ID));
@@ -110,15 +110,15 @@ public abstract class TransformationRegistry {
     }
     
     @Deprecated
-    public List<CompiledTransformation> getTransformationsByInput(final EClass input) {
+    public List<DeployedTransformation> getTransformationsByInput(final EClass input) {
         return getTransformations(new InputFilter(input));            
     }
 
-    public List<CompiledTransformation> getTransformations() {
-        return getTransformations(null);
+    public List<DeployedTransformation> getTransformations() {
+        return getTransformations(EMPTY_FILTER);
     }
 
-    protected abstract CompiledTransformation makeTransformation(IConfigurationElement element) throws MdaException;
+    protected abstract DeployedTransformation makeTransformation(IConfigurationElement element) throws MdaException;
     
     protected static EClass getEClassElement(IConfigurationElement parent, String name) throws MdaException {
         Pair<String, String> eCl = parseEClassElement(parent, name);

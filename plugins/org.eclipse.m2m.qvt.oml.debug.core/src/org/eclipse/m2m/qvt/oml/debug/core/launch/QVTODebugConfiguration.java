@@ -33,6 +33,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.StreamsProxy;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugTarget;
@@ -57,10 +58,9 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		
-		ExecutionContextImpl context = createExecutionContext(configuration);
 		StreamsProxy streamsProxy = new StreamsProxy();
-		context.setLog(new WriterLog(streamsProxy.getOutputWriter(), true));
-		
+		ExecutionContext context = QvtLaunchUtil.createContext(configuration, new WriterLog(streamsProxy.getOutputWriter(), true), monitor);
+				
 		DebugTransformationRunner runner = createRunner(configuration);
 		runner.setErrorLog(new PrintWriter(streamsProxy.getErrWriter(), true));
 		
@@ -69,7 +69,7 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 			throw new CoreException(BasicDiagnostic.toIStatus(initDiagnostic));			
 		}
 		
-		DebuggableExecutorAdapter executable = runner.createDebugableAdapter(context);
+		DebuggableExecutorAdapter executable = runner.createDebuggableAdapter(context);
 		IQVTOVirtualMachineShell vm = new QVTOVirtualMachine(executable);
 		
 		QVTOVirtualProcess process = new QVTOVirtualProcess(launch, vm);
@@ -83,18 +83,7 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 		QVTODebugTarget debugTarget = new QVTODebugTarget(process, vm);		
 		launch.addDebugTarget(debugTarget);
 	}
-	
-	private ExecutionContextImpl createExecutionContext(ILaunchConfiguration configuration) {
-		ExecutionContextImpl context = new ExecutionContextImpl();
-		Map<String, Object> configProperties = QvtLaunchUtil.loadConfigurationProperties(configuration);
-		for (String name : configProperties.keySet()) {
-			Object value = configProperties.get(name);
-			context.setConfigProperty(name, value);
-		}
-		return context;
-	}
-	
-	
+		
 	private DebugTransformationRunner createRunner(ILaunchConfiguration configuration) throws CoreException {
 		DebugRunnerFactory runnerFactory = new DebugRunnerFactory();
 

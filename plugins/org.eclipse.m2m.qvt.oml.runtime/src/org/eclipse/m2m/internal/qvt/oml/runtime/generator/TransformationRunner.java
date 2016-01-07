@@ -20,11 +20,11 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 
-
+@Deprecated
 public interface TransformationRunner {
 	
+	@Deprecated
     public static class In {
     	
         /**
@@ -49,6 +49,7 @@ public interface TransformationRunner {
         private final ExecutionContext myContext;
     }
     
+	@Deprecated
     public static class Out {
     	
         public Out(List<ModelExtentContents> modelExtents, List<Object> outParamValues, Trace trace) {

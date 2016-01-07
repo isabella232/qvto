@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.launch;
 
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,19 +20,35 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
+import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
+import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.util.Log;
+import org.eclipse.m2m.qvt.oml.util.WriterLog;
+import org.eclipse.osgi.util.NLS;
 
 
 public class QvtLaunchUtil {
@@ -123,17 +140,32 @@ public class QvtLaunchUtil {
     }
     
     public static ExecutionContext createContext(ILaunchConfiguration configuration) {
-    	Map<String, Object> configProps = getConfigurationProperty(configuration);
-    	return createContext(configProps);
+    	return createContext(configuration, Log.NULL_LOG, new NullProgressMonitor());
     }
-
+    
+    public static ExecutionContext createContext(ILaunchConfiguration configuration, Log log, IProgressMonitor monitor) {
+    	return createContext(getConfigurationProperty(configuration), log, monitor);
+    }
+    
 	public static ExecutionContext createContext(Map<String, Object> configProps) {
+		return createContext(configProps, Log.NULL_LOG);
+	}
+	
+	public static ExecutionContext createContext(Map<String, Object> configProps, Log log) {
+		return createContext(configProps, log, new NullProgressMonitor());
+	}
+	
+	public static ExecutionContext createContext(Map<String, Object> configProps, Log log, IProgressMonitor monitor) {
 		ExecutionContextImpl context = new ExecutionContextImpl();
 		if (configProps != null) {
 	    	for (String name : configProps.keySet()) {
 				context.setConfigProperty(name, configProps.get(name));
 			}
 		}
+		
+		context.setLog(log);
+		context.setProgressMonitor(monitor);
+		
         return context;
 	}
     
@@ -165,6 +197,92 @@ public class QvtLaunchUtil {
     	}
     	return name + index;
     }
-    
-}
 
+	public static void doLaunch(QvtTransformation transformation, ILaunchConfiguration configuration, ExecutionContext context) throws Exception {
+			List<TargetUriData> targetUris = getTargetUris(configuration);
+						
+			List<URI> paramUris = new ArrayList<URI>(targetUris.size());
+			for(TargetUriData data : targetUris) {
+				paramUris.add(data.getUri());
+			}
+	
+	        boolean saveTrace = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false);
+	        String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$        
+	        boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false);
+		    
+	        doLaunch(transformation, paramUris, saveTrace ? toUri(traceFile) : null, context, isIncrementalUpdate);
+	    }
+
+	@Deprecated
+	public static void doLaunch(QvtTransformation transformation, List<ModelContent> inObjs, Map<String, Object> configProps,
+			List<ModelExtentContents> outExtents, List<EObject> outMainParams, List<Trace> outTraces, List<String> outConsole) throws MdaException {
+	
+	    IStatus status = QvtValidator.validateTransformation(transformation, inObjs, null);                    
+	    if (status.getSeverity() > IStatus.WARNING) {
+	    	throw new MdaException(status);
+	    }      	
+	    
+	    final StringWriter consoleLogger = new StringWriter();
+	    
+	    ExecutionContext context = createContext(configProps, new WriterLog(consoleLogger));
+			
+		org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.In in = 
+			new org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.In(
+					inObjs.toArray(new ModelContent[inObjs.size()]), context);
+		org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out out = transformation.run(in);
+	
+	    outExtents.addAll(out.getExtents());
+	
+	    for (Object outValue : out.getOutParamValues()) {
+	    	if (outValue instanceof EObject) {
+	    		outMainParams.add((EObject) outValue);
+	    	}
+	    	else {
+	    		outMainParams.add(null);
+	    	}
+	    }
+	    
+	    if (out.getTrace() != null) {
+	    	outTraces.add(out.getTrace());
+	    }
+	    outConsole.add(consoleLogger.getBuffer().toString());
+	}
+	
+	public static void doLaunch(final QvtTransformation transf, List<URI> paramUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
+	    		    	
+	    	TransformationRunner runner = new QvtTransformationRunner(transf, paramUris);
+	    	    	
+	    	runner.setSaveTrace(traceUri != null);
+	    	runner.setTraceFile(traceUri);
+	    	runner.setIncrementalUpdate(isIncrementalUpdate);
+	    		    	
+	    	Diagnostic diag = runner.execute(context);
+	    	
+	    	IStatus status = BasicDiagnostic.toIStatus(diag);
+	    	
+	    	if (!status.isOK()) {
+	    		Throwable exception = status.getException();
+	    		
+	    		if (exception instanceof QvtRuntimeException) {
+	        		throw (QvtRuntimeException) exception;
+	        	}
+	    		
+	    		// TODO throw MdaException in case of failure   		
+	    	}
+	}
+
+	private static URI toUri(String uriString) throws MdaException {
+	    URI uri = URI.createURI(uriString);  
+	    if(uri == null) {
+	        throw new MdaException(NLS.bind(Messages.QvtValidator_InvalidUri, uriString));
+	    }
+	    
+	    return uri;
+	}
+	
+	private static class QvtTransformationRunner extends TransformationRunner {
+		public QvtTransformationRunner(QvtTransformation transf, List<URI> paramUris) {
+			super(transf, paramUris);
+		}
+	}
+}

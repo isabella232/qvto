@@ -12,8 +12,7 @@
 package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
 import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
-import org.eclipse.m2m.internal.qvt.oml.common.project.CompiledTransformation;
+import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.common.project.IRegistryConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.project.TransformationRegistry;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
@@ -28,16 +27,12 @@ public class QvtTransformationRegistry extends TransformationRegistry {
     }
 
     @Override
-	protected CompiledTransformation makeTransformation(IConfigurationElement element) throws MdaException {
+	protected DeployedTransformation makeTransformation(IConfigurationElement element) {
         String namespace = element.getNamespaceIdentifier();
         String id = element.getAttribute(IRegistryConstants.ID);
         String file = element.getAttribute(IRegistryConstants.FILE);
-        if(IRegistryConstants.TRANSFORMATION.equals(element.getName())) {
-//        	EClass in = getEClassElement(element, IRegistryConstants.INPUT);
-//        	EClass out = getEClassElement(element, IRegistryConstants.OUTPUT);        	    
-        	return new QvtCompiledTransformation(namespace, id, file);
-        }
-        return QvtCompiledTransformation.createLibraryModule(namespace, id, file);
+
+        return new DeployedTransformationImpl(namespace, id, file);
     }
     
     private static final QvtTransformationRegistry ourInstance = new QvtTransformationRegistry();

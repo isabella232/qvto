@@ -36,6 +36,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtCompilerFacade;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtModule;
@@ -131,7 +132,7 @@ public class QvtoTransformationHelper {
                 	for (EObject inObj : inObjects) {
                 		inModels.add(new ModelContent(Collections.singletonList(inObj)));
                 	}
-            		QvtLaunchConfigurationDelegateBase.doLaunch(transf, inModels, inConfigProperties,
+            		QvtLaunchUtil.doLaunch(transf, inModels, inConfigProperties,
             				outExtents, outMainParams, outTraces, outConsole);
             		
             		transf.cleanup();

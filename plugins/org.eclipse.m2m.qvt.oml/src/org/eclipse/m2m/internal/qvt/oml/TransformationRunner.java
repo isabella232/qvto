@@ -55,17 +55,25 @@ public class TransformationRunner  {
 			EPackage.Registry packageRegistry,
 			List<URI> modelParamURIs) {
 		
-		if (transformationURI == null || modelParamURIs == null
+		this(getTransformation(transformationURI, packageRegistry), modelParamURIs);
+	}
+	
+	protected TransformationRunner(Transformation transformation, List<URI> modelParamURIs) {
+		if (transformation == null || modelParamURIs == null
 				|| modelParamURIs.contains(null)) {
 			throw new IllegalArgumentException();
 		}
 
-		fExecutor = packageRegistry == null ? new TracesAwareExecutor(transformationURI) : 
-			new TracesAwareExecutor(transformationURI, packageRegistry);
-		fTransformationURI = transformationURI;
+		fExecutor = new TracesAwareExecutor(transformation);
+		fTransformationURI = transformation.getURI();
 		fModelParamURIs = modelParamURIs;
 	}
 	
+	private static Transformation getTransformation(URI transformationURI, EPackage.Registry packageRegistry) {
+		return packageRegistry == null ? new CstTransformation(transformationURI) : 
+			new CstTransformation(transformationURI, packageRegistry);
+	}
+		
 	protected InternalTransformationExecutor getExecutor() {
 		return fExecutor;
 	};

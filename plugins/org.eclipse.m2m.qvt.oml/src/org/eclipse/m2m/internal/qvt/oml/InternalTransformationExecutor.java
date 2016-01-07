@@ -19,10 +19,7 @@ import java.util.List;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -38,31 +35,22 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEvaluationResult;
-import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalFileEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
-import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
-import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
-import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.EvaluationMessages;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.InternalEvaluator;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelInstance;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelParameterHelper;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtInterruptedExecutionException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtStackOverFlowError;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
-import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
-import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
@@ -70,8 +58,6 @@ import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.ModelExtent;
 import org.eclipse.m2m.qvt.oml.util.IContext;
-import org.eclipse.m2m.qvt.oml.util.ISessionData;
-import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
@@ -84,13 +70,11 @@ import org.eclipse.ocl.ecore.SendSignalAction;
  */
 public class InternalTransformationExecutor {
 
-	private URI fURI;
 	private EPackage.Registry fPackageRegistry;
-	private CompiledUnit fCompiledUnit;
-	private ResourceSet fCompilationRs;
 	private ExecutionDiagnostic fLoadDiagnostic;
-	private OperationalTransformation fTransformation;
-	private QvtOperationalEnvFactory fEnvFactory;
+	private OperationalTransformation fOperationalTransformation;
+	private QvtOperationalEnvFactory fEnvFactory;	
+	private Transformation fTransformation;
 
 	/**
 	 * Constructs the executor for the given transformation URI.
@@ -101,29 +85,37 @@ public class InternalTransformationExecutor {
 	 *            the URI of an existing transformation
 	 */
 	public InternalTransformationExecutor(URI uri) {
-		if (uri == null) {
-			throw new IllegalArgumentException("null transformation URI"); //$NON-NLS-1$
-		}
-
-		fURI = uri;
+		this(new CstTransformation(uri));
 	}
 	
 	public InternalTransformationExecutor(URI uri, EPackage.Registry registry) {
-		this(uri);
+		this(new CstTransformation(uri, registry), registry);
+	}
+	
+	public InternalTransformationExecutor(Transformation transformation) {
+		if (transformation == null) {
+			throw new IllegalArgumentException("null transformation"); //$NON-NLS-1$
+		}
+		
+		fTransformation = transformation;
+	}
+		
+	public InternalTransformationExecutor(Transformation transformation, EPackage.Registry registry) {
+		this(transformation);
 		
 		if (registry == null) {
 			throw new IllegalArgumentException("null package registry"); //$NON-NLS-1$
 		}
 		
 		fPackageRegistry = registry;
-	}	
+	}
 			
 	public URI getURI() {
-		return fURI;
+		return fTransformation.getURI();
 	}
 	
 	public ResourceSet getResourceSet() {
-		return fCompilationRs;
+		return fTransformation.getResourceSet();
 	}
 		
 	/**
@@ -159,8 +151,8 @@ public class InternalTransformationExecutor {
 	 * @return compiled unit or <code>null</code> if it failed to be obtained
 	 */
 	public CompiledUnit getUnit() {
-		loadTransformation(new NullProgressMonitor());
-		return fCompiledUnit;
+//		loadTransformation(new NullProgressMonitor());
+		return fTransformation.getUnit();
 	}	
 
 	/**
@@ -201,14 +193,8 @@ public class InternalTransformationExecutor {
 	
 			try {
 				return doExecute(modelParameters,
-						createInternalContext(executionContext, progress.newChild(1)));
-			} catch (QvtRuntimeException e) {
-				
-				// TODO suppress logging?
-				
-//				Log logger = executionContext.getLog();
-//				logger.log(EvaluationMessages.TerminatingExecution);
-	
+						new Context(executionContext, progress.newChild(1)));
+			} catch (QvtRuntimeException e) {	
 				return createExecutionFailure(e);
 			}
 		} finally {
@@ -223,12 +209,12 @@ public class InternalTransformationExecutor {
 		QvtOperationalEvaluationEnv evaluationEnv = factory
 				.createEvaluationEnvironment(context, null);
 
-		ExecutionDiagnostic modelParamsDiagnostic = initArguments(evaluationEnv, fTransformation, args);
+		ExecutionDiagnostic modelParamsDiagnostic = initArguments(evaluationEnv, fOperationalTransformation, args);
 		if (!isSuccess(modelParamsDiagnostic)) {
 			return modelParamsDiagnostic;
 		}
 
-		QvtOperationalFileEnv rootEnv = factory.createEnvironment(fCompiledUnit.getURI());
+		QvtOperationalFileEnv rootEnv = factory.createEnvironment(getURI());
 		EvaluationVisitor<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> evaluator = factory
 				.createEvaluationVisitor(rootEnv, evaluationEnv, null);
 
@@ -236,13 +222,13 @@ public class InternalTransformationExecutor {
 		assert evaluator instanceof InternalEvaluator : "expecting InternalEvaluator implementation"; //$NON-NLS-1$
 		InternalEvaluator rawEvaluator = (InternalEvaluator) evaluator;
 
-		Object evalResult = rawEvaluator.execute(fTransformation);
+		Object evalResult = rawEvaluator.execute(fOperationalTransformation);
 		
 		// unpack the internal extents into the passed model parameters
 		if (evalResult instanceof QvtEvaluationResult) {
 			int extentIndex = 0;
-			for (int i = 0; i < fTransformation.getModelParameter().size(); ++i) {
-				ModelParameter p = fTransformation.getModelParameter().get(i);
+			for (int i = 0; i < fOperationalTransformation.getModelParameter().size(); ++i) {
+				ModelParameter p = fOperationalTransformation.getModelParameter().get(i);
 				if (p.getKind() == DirectionKind.IN) {
 					continue;
 				}
@@ -278,49 +264,11 @@ public class InternalTransformationExecutor {
 	protected void handleExecutionTraces(Trace traces) {
 		// nothing interesting here
 	}
-
+		
 	private void doLoad(IProgressMonitor monitor) {
-		fLoadDiagnostic = ExecutionDiagnostic.OK_INSTANCE;
-
-		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(fURI);
-		if (unit == null) {
-			fLoadDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR,
-					ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS.bind(
-							Messages.UnitNotFoundError, fURI));
-			return;
-		}
-
-		QVTOCompiler compiler = createCompiler();
-		try {
-			fCompiledUnit = compiler.compile(unit, null, BasicMonitor.toMonitor(monitor));
-			fCompilationRs = compiler.getResourceSet();
-
-			fLoadDiagnostic = createCompilationDiagnostic(fCompiledUnit);
-
-		} catch (MdaException e) {
-			fLoadDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR,
-					ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS.bind(
-							Messages.FailedToCompileUnitError, fURI));
-
-			((DiagnosticChain) fLoadDiagnostic).merge(BasicDiagnostic.toDiagnostic(e));
-		}
-
-		if (fCompiledUnit != null
-				&& isSuccess(fLoadDiagnostic)) {
-			fTransformation = getTransformation();
-			if (fTransformation == null) {
-				fLoadDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR,
-						ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS
-								.bind(Messages.NotTransformationInUnitError,
-										fURI));
-				return;
-			}
-
-			ExecutionDiagnostic validForExecution = checkIsExecutable(fTransformation);
-			if (!isSuccess(validForExecution)) {
-				fLoadDiagnostic = validForExecution;
-			}
-		}
+		fOperationalTransformation = fTransformation.getTransformation(monitor);
+		
+		fLoadDiagnostic = fTransformation.getDiagnostic();
 	}
 
 	private ExecutionDiagnostic initArguments(
@@ -359,42 +307,10 @@ public class InternalTransformationExecutor {
 
 		return result;
 	}
-
-	private static ExecutionDiagnostic checkIsExecutable(
-			OperationalTransformation transformation) {
-		
-		if (transformation.isIsBlackbox()) {
-			return ExecutionDiagnostic.OK_INSTANCE;
-		}
-		
-		EList<EOperation> operations = transformation.getEOperations();
-		for (EOperation oper : operations) {
-			if (oper instanceof ImperativeOperation
-					&& QvtOperationalEnv.MAIN.equals(oper.getName())) {
-				return ExecutionDiagnostic.OK_INSTANCE;
-			}
-		}
-
-		return new ExecutionDiagnosticImpl(Diagnostic.ERROR,
-				ExecutionDiagnostic.VALIDATION, NLS.bind(
-						Messages.NoTransformationEntryPointError,
-						transformation.getName()));
-	}
-
+	
 	public OperationalTransformation getTransformation() {
-		// TODO - cached the transformation selected as main
-		if(fCompiledUnit == null) {
-			return null;
-		}
-		
-		List<Module> allModules = fCompiledUnit.getModules();
-		for (Module module : allModules) {
-			if (module instanceof OperationalTransformation) {
-				return (OperationalTransformation) module;
-			}
-		}
-
-		return null;
+		loadTransformation(new NullProgressMonitor());
+		return fOperationalTransformation;
 	}
 	
 	public void setEnvironmentFactory(QvtOperationalEnvFactory factory) {
@@ -407,9 +323,8 @@ public class InternalTransformationExecutor {
 	
 	public void cleanup() {
 		setEnvironmentFactory(null);
-		if (fCompilationRs != null) {
-			EmfUtil.cleanupResourceSet(fCompilationRs);
-		}
+		
+		fTransformation.cleanup();
 	}
 
 
@@ -460,53 +375,10 @@ public class InternalTransformationExecutor {
 			}
 		}
 	}
-
-	private static ExecutionDiagnostic createCompilationDiagnostic(
-			CompiledUnit compiledUnit) {
-		List<QvtMessage> errors = compiledUnit.getErrors();
-		if (errors.isEmpty()) {
-			return ExecutionDiagnostic.OK_INSTANCE;
-		}
-
-		URI uri = compiledUnit.getURI();
-		ExecutionDiagnosticImpl mainDiagnostic = new ExecutionDiagnosticImpl(
-				Diagnostic.ERROR, ExecutionDiagnostic.VALIDATION, NLS.bind(
-						Messages.CompilationErrorsFoundInUnit, uri.toString()));
-
-		for (QvtMessage message : errors) {
-			// FIXME - we should include warnings as well
-			mainDiagnostic.add(CompilerUtils.createProblemDiagnostic(uri, message));
-		}
-
-		return mainDiagnostic;
-	}
-
-	// TODO switch back to private?
-	public static IContext createInternalContext(ExecutionContext executionContext, IProgressMonitor monitor) {
-		Context ctx = new Context();
-		ctx.setLog(executionContext.getLog());
-		ctx.setProgressMonitor(monitor);
-
-		for (String key : executionContext.getConfigPropertyNames()) {
-			Object value = executionContext.getConfigProperty(key);
-			ctx.setConfigProperty(key, value);
-		}
-		
-		for (ISessionData.Entry<Object> key : executionContext.getSessionDataEntries()) {
-			ctx.getSessionData().setValue(key, executionContext.getSessionData().getValue(key));
-		}
-		
-		org.eclipse.m2m.qvt.oml.util.Trace trace = executionContext.getSessionData().getValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE);
-		if (trace != null) {
-			ctx.getTrace().setTraceContent(trace.getTraceContent());
-		}
-
-		return ctx;
-	}
-
+	
 	@Override
 	public String toString() {
-		return "QVTO-Executor: " + fURI; //$NON-NLS-1$
+		return "QVTO-Executor: " + toString(); //$NON-NLS-1$
 	}
 	
 	protected QVTOCompiler createCompiler() {
@@ -528,6 +400,14 @@ public class InternalTransformationExecutor {
 
 		public TracesAwareExecutor(URI uri) {
 			super(uri);
+		}
+		
+		public TracesAwareExecutor(Transformation transformation) {
+			super(transformation);
+		}
+			
+		public TracesAwareExecutor(Transformation transformation, EPackage.Registry registry) {
+			super(transformation, registry);
 		}
 		
 		public Trace getTraces() {

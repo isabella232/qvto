@@ -12,7 +12,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
-import org.eclipse.m2m.internal.qvt.oml.common.project.CompiledTransformation;
+import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.common.project.TransformationRegistry;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.DelegatingUnitResolver;
@@ -46,7 +46,7 @@ public class DeployedImportResolver extends DelegatingUnitResolver {
 	
 	@Override
 	protected UnitProxy doResolveUnit(String qualifiedName) {
-		CompiledTransformation transformation = transformationRegistry.getSingleTransformationById(qualifiedName);
+		DeployedTransformation transformation = transformationRegistry.getSingleTransformationById(qualifiedName);
 				
 		return transformation == null ? null : UnitResolverFactory.Registry.INSTANCE.getUnit(transformation.getUri());
 	}

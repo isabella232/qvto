@@ -25,12 +25,10 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
-import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 import org.junit.Before;
@@ -143,10 +141,10 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 			
 			@Override
 	        public List<URI> transform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext context) throws Exception {
-	        	QvtInterpretedTransformation transf = getTransformation(transformation);
+	        	QvtTransformation transf = getTransformation(transformation);
 	        	
 	        	if(!fUseCompiledXMI) {
-	        		TestUtil.assertAllPersistableAST(transf.getModule().getUnit());
+	        		TestUtil.assertAllPersistableAST(transf.getUnit());
 	        	}
 	        	
 	        	Map<String, Object> props = new HashMap<String, Object>();
@@ -154,9 +152,8 @@ public abstract class AbstractStackTraceTest extends TestTransformation {
 	        		props.put(name, context.getConfigProperty(name));
 	        	}
 	        	
-	        	ExecutionContextImpl qvtContext = (ExecutionContextImpl) QvtLaunchUtil.createContext(props);
-	        	qvtContext.setLog(new WriterLog(fLogger));
-	            
+	        	ExecutionContext qvtContext = QvtLaunchUtil.createContext(props, new WriterLog(fLogger));
+	        		            
 	        	return launchTransform(transformation, inUris, traceUri, qvtContext, transf);
 	        }
 		};

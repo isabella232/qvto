@@ -37,11 +37,7 @@ public class WorkspaceQvtModule extends QvtModule {
         myResourceSet = result.getCompiler().getResourceSet();
     	return result.getCompiledModule();
     }
-    
-    protected ResourceSet getResourceSetImpl() {
-    	return myResourceSet;
-    }
-	
+        
     @Override
     public final Module getModule() throws MdaException {
         if(myModule == null) {
@@ -68,15 +64,15 @@ public class WorkspaceQvtModule extends QvtModule {
     }
     
 	@Override
-	public ResourceSet getResourceSet() throws MdaException {
-		getModule();
-		return getResourceSetImpl();
+	public ResourceSet getResourceSet() {
+		return myResourceSet;
 	}
 	
 	@Override
 	public void cleanup() {
-		if (getResourceSetImpl() != null) {
-			EmfUtil.cleanupResourceSet(getResourceSetImpl());
+		ResourceSet rs = getResourceSet();
+		if (rs != null) {
+			EmfUtil.cleanupResourceSet(rs);
 		}
 	}
 	

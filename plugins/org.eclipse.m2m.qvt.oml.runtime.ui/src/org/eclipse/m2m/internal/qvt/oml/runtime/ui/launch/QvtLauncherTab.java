@@ -98,11 +98,9 @@ public class QvtLauncherTab extends MdaLaunchTab {
 	@Override
 	public void dispose() {
 		super.dispose();
-		try {
-			if (myTransformation != null) {
-				myTransformation.cleanup();
-			}
-		} catch (MdaException e) {
+		
+		if (myTransformation != null) {
+			myTransformation.cleanup();
 		}
 	}
     
@@ -330,10 +328,10 @@ public class QvtLauncherTab extends MdaLaunchTab {
     
     private boolean validateQvtFile() {
         if (myTransformation != null) {
-        	try {
+//        	try {
 				myTransformation.cleanup();
-			} catch (MdaException e) {
-			}
+//			} catch (MdaException e) {
+//			}
         	myTransformation = null;
         }
 

@@ -95,7 +95,7 @@ public class DebugTransformationRunner extends TransformationRunner {
 		
 	}
 
-	public DebuggableExecutorAdapter createDebugableAdapter(final ExecutionContext context) {
+	public DebuggableExecutorAdapter createDebuggableAdapter(final ExecutionContext context) {
 		
 		return new DebuggableExecutorAdapter() {
 			public Diagnostic execute() throws IllegalStateException {

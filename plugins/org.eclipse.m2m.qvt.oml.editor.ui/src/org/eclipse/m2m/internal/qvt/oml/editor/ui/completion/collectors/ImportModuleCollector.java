@@ -16,16 +16,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import lpg.runtime.IToken;
-
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
-import org.eclipse.m2m.internal.qvt.oml.common.project.CompiledTransformation;
-import org.eclipse.m2m.internal.qvt.oml.common.project.TransformationRegistry;
+import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
@@ -36,6 +33,8 @@ import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionData;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionProposal;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformationRegistry;
+
+import lpg.runtime.IToken;
 
 /**
  * @author aigdalov
@@ -113,8 +112,8 @@ public class ImportModuleCollector extends AbstractCollector {
 
 
     private void addDeployedModulesProposals(Collection<ICompletionProposal> proposals, QvtCompletionData data) {
-        List<CompiledTransformation> transformations = QvtTransformationRegistry.getInstance().getTransformations(TransformationRegistry.EMPTY_FILTER);
-        for (CompiledTransformation transformation : transformations) {
+        List<DeployedTransformation> transformations = QvtTransformationRegistry.getInstance().getTransformations();
+        for (DeployedTransformation transformation : transformations) {
             String proposalString = transformation.getId();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, CategoryImageConstants.CLASS, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);

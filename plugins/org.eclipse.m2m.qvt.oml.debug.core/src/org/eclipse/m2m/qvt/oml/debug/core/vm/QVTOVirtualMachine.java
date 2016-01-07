@@ -29,6 +29,7 @@ import org.eclipse.m2m.qvt.oml.debug.core.QVTOLocalValue.LocalValue;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.BreakpointData;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.NewBreakpointData;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMBreakpointRequest;
+import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMBreakpointRequest.ActionKind;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMBreakpointResponse;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMDetailRequest;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMDetailResponse;
@@ -41,7 +42,6 @@ import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMStartEvent;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMStartRequest;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMTerminateEvent;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMVariableRequest;
-import org.eclipse.m2m.qvt.oml.debug.core.vm.protocol.VMBreakpointRequest.ActionKind;
 import org.eclipse.ocl.utilities.ASTNode;
 
 public class QVTOVirtualMachine implements IQVTOVirtualMachineShell {

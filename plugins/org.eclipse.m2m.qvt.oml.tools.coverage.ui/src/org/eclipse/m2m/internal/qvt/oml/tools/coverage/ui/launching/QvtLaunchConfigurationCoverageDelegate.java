@@ -29,14 +29,13 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.StreamsProxy;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtGenericVisitorDecorator;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.QVTOCoverageDecorator;
-import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 
@@ -71,16 +70,14 @@ public class QvtLaunchConfigurationCoverageDelegate extends QvtLaunchConfigurati
                         throw new CoreException(status);
                     }
 
-                    ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configuration);
-                    context.setLog(new WriterLog(streamsProxy.getOutputWriter()));
-                    context.setProgressMonitor(monitor);
-
+                    ExecutionContext context = QvtLaunchUtil.createContext(configuration, new WriterLog(streamsProxy.getOutputWriter()), monitor);
+                    
                     // Install the decorators for collecting coverage data
                     ArrayList<Class<? extends QvtGenericVisitorDecorator>> decorators = new ArrayList<Class<? extends QvtGenericVisitorDecorator>>();
                     decorators.add(QVTOCoverageDecorator.class);
                     context.getSessionData().setValue(QVTEvaluationOptions.VISITOR_DECORATORS, decorators);
 
-                    QvtLaunchConfigurationDelegateBase.doLaunch(qvtTransformation, configuration, context);
+                    QvtLaunchUtil.doLaunch(qvtTransformation, configuration, context);
 
                     qvtTransformation.cleanup();
 

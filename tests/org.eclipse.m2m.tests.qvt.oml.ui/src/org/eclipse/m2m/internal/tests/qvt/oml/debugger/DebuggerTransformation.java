@@ -38,7 +38,6 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.debug.core.launch.QVTODebugConfiguration;
 import org.eclipse.m2m.qvt.oml.debug.core.srclookup.QVTOSourceLookupDirector;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
 import org.eclipse.m2m.tests.qvt.oml.transform.TestTransformation;
 import org.eclipse.swt.widgets.Display;
@@ -115,8 +114,9 @@ public class DebuggerTransformation extends TestTransformation {
 	        myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.ELEM_COUNT, index-1);
 	        
 	        Map<String, String> configProps = new LinkedHashMap<String, String>();
-	        for (Map.Entry<String, Object> e : qvtContext.getConfigProperties().entrySet()) {
-	        	configProps.put(e.getKey(), e.getValue() == null ? null : String.valueOf(e.getValue()));
+	        for (String property : qvtContext.getConfigPropertyNames()) {
+	        	Object value = qvtContext.getConfigProperty(property);
+	        	configProps.put(property, value == null ? null : String.valueOf(value));
 	        }
 	        myLaunchConfigurationWorkingCopy.setAttribute(IQvtLaunchConstants.CONFIGURATION_PROPERTIES, configProps);
 	        

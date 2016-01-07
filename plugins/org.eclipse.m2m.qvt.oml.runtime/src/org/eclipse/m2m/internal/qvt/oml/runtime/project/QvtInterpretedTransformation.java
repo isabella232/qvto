@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
@@ -31,7 +34,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
+import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelExtentContents;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
@@ -50,11 +53,11 @@ import org.eclipse.m2m.internal.qvt.oml.evaluator.ModelParameterHelper;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
-import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.In;
-import org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out;
+import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.config.QvtConfigurationProperty;
 import org.eclipse.m2m.internal.qvt.oml.trace.Trace;
+import org.eclipse.m2m.qvt.oml.ExecutionDiagnostic;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.ecore.CallOperationAction;
@@ -78,6 +81,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
 		return myModule;
 	}
 	
+	@Deprecated
     public ModelContent loadInput(URI inputObjectURI) throws MdaException {
     	return EmfUtil.loadModel(inputObjectURI, myModule.getResourceSet());
     }
@@ -86,7 +90,8 @@ public class QvtInterpretedTransformation implements QvtTransformation {
     	myModule.setQvtCompilerOptions(options);
     }
     
-	public Out run(In in) throws MdaException {
+    @Deprecated
+	public org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out run(org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.In in) throws MdaException {
         Module module = myModule.getModule();
 
         Iterator<TransformationParameter> itrParam = getParameters().iterator();
@@ -117,15 +122,15 @@ public class QvtInterpretedTransformation implements QvtTransformation {
             }
         }
         
-        return evaluate(myModule.getResourceSet(), module, inputs, InternalTransformationExecutor.createInternalContext(in.getContext(), new NullProgressMonitor()));
+        return evaluate(myModule.getResourceSet(), module, inputs, new Context(in.getContext()));
     }
 	
 	public String getModuleName() throws MdaException {
 		return myModule.getModule().getName();
 	}
 	
-	public URI getURI() throws MdaException {
-		return myModule.getUnit().getURI();
+	public URI getURI() {
+		return getUnit().getURI();
 	}
 
 	public List<TransformationParameter> getParameters() throws MdaException {
@@ -144,11 +149,24 @@ public class QvtInterpretedTransformation implements QvtTransformation {
         return myModule.getConfigurationProperties();
     }
     
-	public ResourceSet getResourceSet() throws MdaException {
+	public ResourceSet getResourceSet() {
 		return myModule.getResourceSet();
 	}
+	
+	public CompiledUnit getUnit() {
+		try {
+			return myModule.getUnit();
+		} catch(MdaException e) {
+			IStatus status = e.getStatus();
+    		
+    		myDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR, status.getCode(), status.getMessage());
+			myDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+    		    		
+			return null;
+		}
+	}
 
-	public void cleanup() throws MdaException {
+	public void cleanup() {
 		myModule.cleanup();
 	}
 
@@ -163,7 +181,8 @@ public class QvtInterpretedTransformation implements QvtTransformation {
 		myEnvFactory = factory;
 	}
     
-	private Out evaluate(ResourceSet rs, Module module, List<ModelContent> args, IContext context) {
+	@Deprecated
+	private org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out evaluate(ResourceSet rs, Module module, List<ModelContent> args, IContext context) {
 		QvtOperationalEnvFactory factory = getEnvironmentFactory();
 				
 		QvtOperationalEvaluationEnv evaluationEnv = factory.createEvaluationEnvironment(context, null);
@@ -187,11 +206,11 @@ public class QvtInterpretedTransformation implements QvtTransformation {
 		Object outObj = module.accept(evaluator);
 		
         if (false == outObj instanceof QvtEvaluationResult) {
-            return new Out(Collections.<ModelExtentContents>emptyList(),
+            return new org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out(Collections.<ModelExtentContents>emptyList(),
             		Collections.emptyList(), traces);
         }
 
-        return new Out(((QvtEvaluationResult) outObj).getModelExtents(),
+        return new org.eclipse.m2m.internal.qvt.oml.runtime.generator.TransformationRunner.Out(((QvtEvaluationResult) outObj).getModelExtents(),
         		((QvtEvaluationResult) outObj).getOutParamValues(), traces);
 	}
 
@@ -238,5 +257,29 @@ public class QvtInterpretedTransformation implements QvtTransformation {
     
     private final QvtModule myModule;
     private QvtOperationalEnvFactory myEnvFactory;
-
+    
+    private ExecutionDiagnostic myDiagnostic = ExecutionDiagnostic.OK_INSTANCE;
+        
+    public OperationalTransformation getTransformation(IProgressMonitor monitor) {
+    	try {
+    		Module module = myModule.getModule();
+    	
+    		return module instanceof OperationalTransformation ? (OperationalTransformation) module : null;
+    	}
+    	catch(MdaException e) {
+    		IStatus status = e.getStatus();
+    		
+    		myDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR, status.getCode(), status.getMessage());
+			myDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+    		    		
+			return null;
+    	}
+    	finally {
+    		monitor.done();
+    	}
+    }
+        
+    public ExecutionDiagnostic getDiagnostic() {
+    	return myDiagnostic;
+    }
 }

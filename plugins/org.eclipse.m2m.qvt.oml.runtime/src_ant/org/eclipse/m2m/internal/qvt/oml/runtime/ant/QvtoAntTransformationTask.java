@@ -12,7 +12,6 @@
 package org.eclipse.m2m.internal.qvt.oml.runtime.ant;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,22 +26,17 @@ import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.ShallowProcess;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator.ValidationType;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
-import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.Log;
 import org.eclipse.osgi.util.NLS;
 
@@ -327,13 +321,8 @@ public class QvtoAntTransformationTask extends Task {
 	    try {
 	        ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
 	            public void run() throws Exception {
-	            	try {
-		            	List<ModelContent> inObjects = new ArrayList<ModelContent>();
-		            	List<TargetUriData> targetData = new ArrayList<TargetUriData>();
-		            	
-		        		loadTransformationParams(transformation, inObjects, targetData);
-		
-		        		String traceUri = getTraceUri(QvtoAntTransformationTask.this);
+	            	try {		
+		        		URI traceUri = getTraceUri(QvtoAntTransformationTask.this);
 		        		boolean useTrace = myTrace == null ? false : myTrace.isGenerate();
 		        		boolean isIncrementalUpdate = myTrace == null ? false : myTrace.isIncrementalUpdate();
 		        		List<TargetUriData> allTargetData = new ArrayList<TargetUriData>();
@@ -342,24 +331,20 @@ public class QvtoAntTransformationTask extends Task {
 		        	        allTargetData.add(p.getTargetUriData(QvtoAntTransformationTask.this));
 		        		}
 		        		
-		                IStatus status = QvtValidator.validateTransformation(transformation, allTargetData, traceUri, useTrace,
+		                IStatus status = QvtValidator.validateTransformation(transformation, allTargetData, traceUri == null ? null : traceUri.toString(), useTrace,
 		                		isIncrementalUpdate, ValidationType.FULL_VALIDATION);                    
 		                if (status.getSeverity() > IStatus.WARNING) {
 		                	throw new MdaException(status);
-		                }      	
+		                }
+		                
+		                List<URI> modelParamUris = new ArrayList<URI>(allTargetData.size());
+		                for(TargetUriData uriData : allTargetData) {
+		                	modelParamUris.add(uriData.getUri());
+		                }
 		        		
-						ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(getConfiguration());
-						context.setLog(createQVTLog());
+						ExecutionContext context = QvtLaunchUtil.createContext(getConfiguration(), createQVTLog());
 						
-						// TODO re-enable incremental update
-//						if (isIncrementalUpdate && traceUri != null) {
-//							ModelContent traceContent = EmfUtil.safeLoadModel(URI.createURI(traceUri), transformation.getResourceSet());
-//							if (traceContent != null) {
-//								context.getTrace().setTraceContent(traceContent.getContent());
-//							}
-//						}
-						
-						QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData, traceUri, context);
+						QvtLaunchUtil.doLaunch(transformation, modelParamUris, traceUri, context, isIncrementalUpdate);
 	            	}
 	            	finally {
 	            		transformation.cleanup();
@@ -419,73 +404,16 @@ public class QvtoAntTransformationTask extends Task {
                     );
 		}
 	}
-
-	private void loadTransformationParams(QvtTransformation transformation,
-			List<ModelContent> inObjects, List<TargetUriData> targetData) throws MdaException {
-		
-		Integer parameterIndex = 0;
-		Iterator<ModelParameter> itrModelParam = myModelParameters.iterator();
-		for (TransformationParameter transfParam : transformation.getParameters()) {
-			parameterIndex++;
-			if (!itrModelParam.hasNext()) {
-	            throw new BuildException(NLS.bind(Messages.AbstractApplyTransformationTask_Required_attribute_is_not_specified,
-	            		transfParam.getName()));
-			}
-			ModelParameter modelParam = itrModelParam.next();
-			
-			if (transfParam.getDirectionKind() == DirectionKind.IN) {
-				if (false == modelParam instanceof In) {
-    	            throw new BuildException(NLS.bind(Messages.ModelParameterTypeMismatch,
-    	            		new Object[] {parameterIndex, transfParam.getName(), DirectionKind.IN.name().toLowerCase()}));
-				}
-				In inParam = (In) modelParam;
-				
-		        ModelContent inModel = transformation.loadInput(inParam.getURI(this));
-		        inObjects.add(inModel);
-			}
-			if (transfParam.getDirectionKind() == DirectionKind.INOUT) {
-				if (false == modelParam instanceof Inout) {
-    	            throw new BuildException(NLS.bind(Messages.ModelParameterTypeMismatch,
-    	            		new Object[] {parameterIndex, transfParam.getName(), DirectionKind.INOUT.name().toLowerCase()}));
-				}
-				Inout inoutParam = (Inout) modelParam;
-				
-		        ModelContent inModel = transformation.loadInput(inoutParam.getURI(this));
-		        inObjects.add(inModel);
-
-		        targetData.add(inoutParam.getTargetUriData(this));
-			}
-			if (transfParam.getDirectionKind() == DirectionKind.OUT) {
-				if (false == modelParam instanceof Out) {
-    	            throw new BuildException(NLS.bind(Messages.ModelParameterTypeMismatch,
-    	            		new Object[] {parameterIndex, transfParam.getName(), DirectionKind.OUT.name().toLowerCase()}));
-				}
-				Out outParam = (Out) modelParam;
-
-				targetData.add(outParam.getTargetUriData(this));
-			}
-		}
-
-		List<ModelParameter> extraParameters = new ArrayList<ModelParameter>(2); 
-		while (itrModelParam.hasNext()) {
-			ModelParameter modelParam = itrModelParam.next();
-			extraParameters.add(modelParam);
-		}
-		
-		if (!extraParameters.isEmpty()) {			
-            throw new BuildException(NLS.bind(Messages.ExtraModelParameter, extraParameters));
-		}
-	}
-
+	
 	private URI getModuleURI(ProjectComponent project) {
 	    return toUri(myModuleUri, project);
 	}
 	
-	private String getTraceUri(ProjectComponent project) {
+	private URI getTraceUri(ProjectComponent project) {
 		if (myTrace == null) {
 			return null;
 		}
-		return myTrace.getURI(project).toString();
+		return myTrace.getURI(project);
 	}
 	
 	private Map<String, Object> getConfiguration() {

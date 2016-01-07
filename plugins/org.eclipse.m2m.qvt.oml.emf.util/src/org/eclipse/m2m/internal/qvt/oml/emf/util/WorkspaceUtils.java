@@ -44,7 +44,7 @@ public class WorkspaceUtils {
 		if (uri.isFile()) {
 			uriPath = uri.toFileString();
 		}
-		else if (uri.isPlatform()) {
+		else if (uri.isPlatformResource()) {
 			uriPath = uri.toPlatformString(true);
 		}
 		else {

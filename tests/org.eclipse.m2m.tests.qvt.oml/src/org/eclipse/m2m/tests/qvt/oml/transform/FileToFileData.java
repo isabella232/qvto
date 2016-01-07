@@ -14,7 +14,6 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 import java.util.Collections;
 
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
 public class FileToFileData extends FilesToFilesData {

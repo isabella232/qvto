@@ -68,12 +68,7 @@ public class TransformationUtil {
 			return null;
 		}
 		
-		try {
-			return transformation.getURI().toString();
-		}
-		catch (MdaException e) {
-			return transformation.toString();
-		}
+		return transformation.getURI().toString();
 	}
 
 	public static boolean isRunnable(QvtTransformation transformation) throws MdaException {

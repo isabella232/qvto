@@ -20,7 +20,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 
 
 public class FilesToFilesData extends ModelTestData {

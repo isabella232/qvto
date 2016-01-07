@@ -203,7 +203,7 @@ public class TransformationSignatureLaunchControl extends ScrolledComposite {
 			List<ModelParameterInfo> transfParameters = getTransfParameters();
 			if (transfParameters.size() > 0) {
 				createValidationButton(parent, listeners);
-
+				
 				ResourceSet mappingAwareRS = CompilerUtils.cloneResourceSet(myTransformation.getURI(), myTransformation.getResourceSet());				
 				
 				for (ModelParameterInfo paramInfo : transfParameters) {

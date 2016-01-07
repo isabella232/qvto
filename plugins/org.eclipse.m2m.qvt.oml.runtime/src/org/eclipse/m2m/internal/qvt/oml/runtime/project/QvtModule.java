@@ -76,7 +76,7 @@ public abstract class QvtModule {
      */
     public abstract Module getModule() throws MdaException;
     
-    public abstract ResourceSet getResourceSet() throws MdaException;
+    public abstract ResourceSet getResourceSet();
 
 	public abstract void cleanup();
     

@@ -30,35 +30,25 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.io.CFile;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
 import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.EclipseFile;
-import org.eclipse.m2m.internal.qvt.oml.common.io.eclipse.EclipseResource;
-import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
-import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilder;
 import org.eclipse.m2m.internal.qvt.oml.project.builder.QVTOBuilderConfig;
 import org.eclipse.m2m.internal.qvt.oml.project.nature.NatureUtils;
-import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.tests.qvt.oml.TestProject;
 import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 import org.junit.After;
@@ -270,73 +260,38 @@ public abstract class TestTransformation extends TestCase {
         return modelExtentFile;
     }
     
-	protected static List<URI> launchTransform(IFile transformation, List<URI> inUris, URI traceUri, ExecutionContext context,
+	protected static List<URI> launchTransform(IFile transformationFile, List<URI> inUris, URI traceUri, ExecutionContext context,
 			QvtTransformation transf) throws Exception {
 				
-		EclipseFile eclipseFile = new EclipseFile(transformation);
+		EclipseFile eclipseFile = new EclipseFile(transformationFile);
     	
-    	//List<ModelContent> inObjects = new ArrayList<ModelContent>(transf.getParameters().size());
-    	List<TargetUriData> targetData = new ArrayList<TargetUriData>(transf.getParameters().size());
     	List<URI> resultUris = new ArrayList<URI>(transf.getParameters().size());
-    	
-		int inoutExtentCount = transf.getResourceSet().getResources().size() + inUris.size();
-		
+    			
 		List<URI> paramUris = new ArrayList<URI>(inUris);
 		
-    	int outExtentCount = 0;
     	Iterator<URI> itInUris = inUris.iterator();
 		for (TransformationParameter transfParam : transf.getParameters()) {
-			URI inUri = null;
+			URI paramUri = null;
 			if (transfParam.getDirectionKind() == DirectionKind.IN || transfParam.getDirectionKind() == DirectionKind.INOUT) {
-    			inUri = itInUris.next();
-		        ModelContent inModel = transf.loadInput(inUri);
-		        //inObjects.add(inModel);
-
-		        if (transfParam.getDirectionKind() == DirectionKind.IN 
-		        		&& inModel.getContent().size() == 1
-		        		&& inModel.getContent().get(0) instanceof EPackage) {
-		        	String nsURI = ((EPackage) inModel.getContent().get(0)).getNsURI();
-					if (transf.getResourceSet().getPackageRegistry().getEPackage(nsURI) == inModel.getContent().get(0)) {
-						--outExtentCount;
-					}
-				}
+    			paramUri = itInUris.next();
 			}
 			if (transfParam.getDirectionKind() == DirectionKind.OUT || transfParam.getDirectionKind() == DirectionKind.INOUT) {
-				if (inUri == null) {
+				if (paramUri == null) {
+					assertEquals(DirectionKind.OUT, transfParam.getDirectionKind());
 			        CFile outFile = getModelExtentFile(eclipseFile, transfParam);	    			        
-			        inUri = URI.createFileURI(outFile.getFullPath());
-			        ++outExtentCount;
+			        paramUri = URI.createFileURI(outFile.getFullPath());
 			        
-			        paramUris.add(inUri);
+			        paramUris.add(paramUri);
 				}
-				//targetData.add(new TargetUriData(TargetType.NEW_MODEL, inUri.toString(), null, false));
-				resultUris.add(inUri);
+				
+				resultUris.add(paramUri);
 			}
 		}
-
-//		if (transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap())) {
-//			ModelContent traceContent = EmfUtil.safeLoadModel(traceUri, transf.getResourceSet());
-//			if (traceContent != null) {
-//				context.getTrace().setTraceContent(traceContent.getContent());
-//				outExtentCount += 2; // one for trace itself and one for 'expected.ecore' ('in.ecore' is already loaded)
-//			}
-//		}
 		
-		URI outTraceURI = traceUri; //URI.createFileURI(((EclipseResource) getTraceFile(eclipseFile)).getResource().getLocation().toString());
+		boolean isIncrementalUpdate = traceUri == null ? false : transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap());
 		
-		URI transformationUri = URIUtils.getResourceURI(transformation);
-		
-		boolean isIncrementalUpdate = outTraceURI == null ? false : transf.getResourceSet().getURIConverter().exists(outTraceURI, Collections.emptyMap());
-		
-		QvtLaunchConfigurationDelegateBase.doLaunch(transf, paramUris, outTraceURI, context, isIncrementalUpdate);
-		
-		//QvtLaunchConfigurationDelegateBase.doLaunch(transf, inObjects, targetData, outTraceURI.toString(), qvtContext);
+		QvtLaunchUtil.doLaunch(transf, paramUris, traceUri, context, isIncrementalUpdate);
 				
-//		assertTrue(
-//				NLS.bind("Unexpected number of resources. Expected ({0}), got ({1}).", inoutExtentCount + outExtentCount, //$NON-NLS-1$
-//						 transf.getResourceSet().getResources().size()), 
-//				inoutExtentCount + outExtentCount == transf.getResourceSet().getResources().size());
-		
 		transf.cleanup();    		
 		return resultUris;
 	}

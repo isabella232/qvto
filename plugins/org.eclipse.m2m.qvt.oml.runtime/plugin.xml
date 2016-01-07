@@ -36,9 +36,6 @@
               public="false"/>			
 	</extension> 
     
-	<extension point="org.eclipse.m2m.qvt.oml.runtime.qvtTransformationImplFactory">
-		<factory class="org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformationFactory"/>
- 	</extension>
 
 	<extension point="org.eclipse.emf.ecore.extension_parser">
 		<parser

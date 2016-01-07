@@ -18,11 +18,9 @@ import java.util.Arrays;
 import org.eclipse.m2m.internal.qvt.oml.common.io.IOFile;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
-import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,29 +37,27 @@ public class TestFailedTransformation extends TestTransformation {
     }
     
     @Parameters(name="{0}")
-	public static Iterable<ModelTestData> data() {    	
-		return Arrays.asList(
-			new ModelTestData[] {
-        		new FileToFileData("scr878") { //$NON-NLS-1$
-                	@Override
-                	public ExecutionContext getContext() {
-        	    		ExecutionContext ctx = super.getContext();
-        	    		ctx.getSessionData().setValue(QVTEvaluationOptions.FLAG_READONLY_GUARD_ENABLED, Boolean.TRUE);
-        	    		return ctx;
-                	}
-                },
-        		new FilesToFilesData("bug301134"), //$NON-NLS-1$
-        		new FilesToFilesData("bug323915"), //$NON-NLS-1$
-        		new FilesToFilesData("bug370098") { //$NON-NLS-1$
-                	@Override
-                	public ExecutionContext getContext() {
-                		ExecutionContext ctx = super.getContext();
-                		ctx.getSessionData().setValue(QVTEvaluationOptions.EVALUATION_MAX_STACK_DEPTH, 10);
-                		return ctx;
-                	}
-                },
-        		new FilesToFilesData("bug289982_failed") //$NON-NLS-1$		
-	        }
+	public static Iterable<ModelTestData> data() {   	
+		return Arrays.<ModelTestData>asList(
+    		new FileToFileData("scr878") { //$NON-NLS-1$
+            	@Override
+            	public ExecutionContext getContext() {
+    	    		ExecutionContext ctx = super.getContext();
+    	    		ctx.getSessionData().setValue(QVTEvaluationOptions.FLAG_READONLY_GUARD_ENABLED, Boolean.TRUE);
+    	    		return ctx;
+            	}
+            },
+    		new FilesToFilesData("bug301134"), //$NON-NLS-1$
+    		new FilesToFilesData("bug323915"), //$NON-NLS-1$
+    		new FilesToFilesData("bug370098") { //$NON-NLS-1$
+            	@Override
+            	public ExecutionContext getContext() {
+            		ExecutionContext ctx = super.getContext();
+            		ctx.getSessionData().setValue(QVTEvaluationOptions.EVALUATION_MAX_STACK_DEPTH, 10);
+            		return ctx;
+            	}
+            },
+    		new FilesToFilesData("bug289982_failed") //$NON-NLS-1$
 		);
     }
     	

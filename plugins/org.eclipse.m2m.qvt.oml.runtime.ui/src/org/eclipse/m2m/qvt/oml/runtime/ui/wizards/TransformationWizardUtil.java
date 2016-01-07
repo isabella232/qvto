@@ -60,7 +60,6 @@ public class TransformationWizardUtil {
 				return resource.getContents();
 			}
 			
-			@SuppressWarnings("restriction")
 			public void setContents(final List<? extends EObject> contents) {
 				ModelExtentHelper.mergeExtentToResource(resource, contents);
 			}

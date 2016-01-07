@@ -25,7 +25,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.ShallowProcess;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.WorkspaceUtils;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchConfigurationDelegateBase;
@@ -187,10 +187,7 @@ public abstract class AbstractApplyTransformationTask extends Task {
         try {
             ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
                 public void run() throws Exception {
-                	try {
-	                	List<ModelContent> inObjects = new ArrayList<ModelContent>();
-	                	List<TargetUriData> targetData = new ArrayList<TargetUriData>();
-	                	
+                	try {	                		                	
 	            		Iterator<TargetUriData> itrTargetData = targetUris.iterator();
 	            		for (TransformationParameter transfParam : transformation.getParameters()) {
 	            			if (!itrTargetData.hasNext()) {
@@ -201,17 +198,18 @@ public abstract class AbstractApplyTransformationTask extends Task {
 	            			if (transfParam.getDirectionKind() == DirectionKind.IN || transfParam.getDirectionKind() == DirectionKind.INOUT) {
 	            		        URI inUri = resolveUri(nextUri.getUriString());
 	            		        inUris.add(inUri);
-	            		        ModelContent inModel = transformation.loadInput(inUri);
-	            		        inObjects.add(inModel);
 	            			}
 	            			if (transfParam.getDirectionKind() == DirectionKind.OUT || transfParam.getDirectionKind() == DirectionKind.INOUT) {
-	            				targetData.add(nextUri);
+	            				outUris.add(nextUri.getUri());
 	            			}
 	            		}
-	
-	            		List<URI> resultUris = QvtLaunchConfigurationDelegateBase.doLaunch(transformation, inObjects, targetData,
-	            				getTraceFile(), QvtLaunchUtil.createContext(getConfiguration()));
-	            		outUris.addAll(resultUris);
+	            		
+	            		List<URI> modelParamUris = new ArrayList<URI>(targetUris.size());
+		                for(TargetUriData uriData : targetUris) {
+		                	modelParamUris.add(uriData.getUri());
+		                }
+	            				
+	            		QvtLaunchUtil.doLaunch(transformation, modelParamUris, isTraceUsed() ? EmfUtil.makeUri(getTraceFile()) : null, QvtLaunchUtil.createContext(getConfiguration()), false);
                 	}
                 	finally {
                 		transformation.cleanup();

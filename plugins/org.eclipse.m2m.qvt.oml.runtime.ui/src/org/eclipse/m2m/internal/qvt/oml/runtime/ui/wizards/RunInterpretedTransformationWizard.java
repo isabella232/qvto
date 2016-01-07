@@ -183,11 +183,9 @@ public class RunInterpretedTransformationWizard extends PersistedValuesWizard im
 	@Override
 	public void dispose() {
 		super.dispose();
-		try {
-			if (myTransformation != null) {
-				myTransformation.cleanup();
-			}
-		} catch (MdaException e) {
+		
+		if (myTransformation != null) {
+			myTransformation.cleanup();
 		}
 	}
 	

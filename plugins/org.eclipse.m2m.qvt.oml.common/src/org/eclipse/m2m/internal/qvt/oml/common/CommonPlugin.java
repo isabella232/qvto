@@ -102,7 +102,7 @@ public class CommonPlugin extends Plugin {
     }
     
     public static void log(Throwable e) {
-        log(new Status(IStatus.ERROR, ID, 100001, "Caught exception", e)); //$NON-NLS-1$
+        log(createStatus(IStatus.ERROR, "Caught exception", e)); //$NON-NLS-1$
     }
     
 	public static IStatus createStatus(int severity, String message, Throwable throwable) {

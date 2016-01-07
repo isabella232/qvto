@@ -37,7 +37,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
-import org.eclipse.m2m.internal.qvt.oml.common.project.CompiledTransformation;
+import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.common.project.TransformationRegistry;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.CommonPluginImages;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.controls.UniSelectTransformationControl.ISelectionListener.TreeAction;
@@ -125,7 +125,7 @@ public class UniSelectTransformationControl extends Composite {
         
         List<ITreeContentProviderEx> contentProviders = new ArrayList<ITreeContentProviderEx>(2);
         contentProviders.add(new WorkspaceContentProvider());
-        contentProviders.add(new CompiledTransfContentProvider());
+        contentProviders.add(new DeployedTransformationContentProvider());
 
         List<ILabelProviderEx> labelProviders = new ArrayList<ILabelProviderEx>(3);
         
@@ -135,21 +135,21 @@ public class UniSelectTransformationControl extends Composite {
 			}
         });
         
-        labelProviders.add(new LabelProviderDelegate(new QvtCompiledTransformationLabelProvider()) {
+        labelProviders.add(new LabelProviderDelegate(new QvtDeployedTransformationLabelProvider()) {
 			public boolean canHandle(Object element) {
-				return element instanceof CompiledTransformation
-						|| element instanceof CompiledTransformationRoot;
+				return element instanceof DeployedTransformation
+						|| element instanceof DeployedTransformationRoot;
 			}
 			@Override
 			public String getText(Object element) {
-				if (element instanceof CompiledTransformationRoot) {
+				if (element instanceof DeployedTransformationRoot) {
 					return Messages.UniSelectTransformationControl_DeployedTransformations;
 				}
 				return super.getText(element);
 			}
 			@Override
 			public Image getImage(Object element) {
-				if (element instanceof CompiledTransformationRoot) {
+				if (element instanceof DeployedTransformationRoot) {
 					return CommonPluginImages.getInstance().getImage(CommonPluginImages.REGISTRY);
 				}
 				return super.getImage(element);
@@ -225,7 +225,7 @@ public class UniSelectTransformationControl extends Composite {
         List<Object> inputs = new ArrayList<Object>(2);
         inputs.add(ResourcesPlugin.getWorkspace().getRoot());
         myCompiledTransformations = transfRegistry.getTransformations(transfFilter);
-        inputs.add(new CompiledTransformationRoot(myCompiledTransformations));
+        inputs.add(new DeployedTransformationRoot(myCompiledTransformations));
         myViewer.setInput(inputs);
 
         TransformationControls.createLabel(this, Messages.UniSelectTransformationControl_CurrentSelection, TransformationControls.GRID);
@@ -246,7 +246,7 @@ public class UniSelectTransformationControl extends Composite {
         }
         
 		if (uri.isPlatformPlugin()) {
-			for (CompiledTransformation compiledTransf : myCompiledTransformations) {
+			for (DeployedTransformation compiledTransf : myCompiledTransformations) {
 				if (compiledTransf.getUri().equals(uri)) {
 		            StructuredSelection sel = new StructuredSelection(new Object[] {compiledTransf});
 		            myViewer.setSelection(sel);
@@ -254,7 +254,7 @@ public class UniSelectTransformationControl extends Composite {
 				}
 			}
 			final String transfId = uri.toPlatformString(false).replace("/", ""); //$NON-NLS-1$ //$NON-NLS-2$
-			for (CompiledTransformation compiledTransf : myCompiledTransformations) {
+			for (DeployedTransformation compiledTransf : myCompiledTransformations) {
 				if (compiledTransf.getId().equals(transfId)) {
 		            StructuredSelection sel = new StructuredSelection(new Object[] {compiledTransf});
 		            myViewer.setSelection(sel);
@@ -346,8 +346,8 @@ public class UniSelectTransformationControl extends Composite {
                 myUri = URI.createPlatformResourceURI(ifile.getFullPath().toOSString(), false);
                 myFileNameText.setText(myUri.toString());
             }
-            else if (selection != null && selection.getFirstElement() instanceof CompiledTransformation){
-            	CompiledTransformation transf = (CompiledTransformation) selection.getFirstElement();
+            else if (selection != null && selection.getFirstElement() instanceof DeployedTransformation){
+            	DeployedTransformation transf = (DeployedTransformation) selection.getFirstElement();
                 myUri = transf.getUri();
                 myFileNameText.setText(myUri.toString());
             }
@@ -362,7 +362,7 @@ public class UniSelectTransformationControl extends Composite {
     private final IResourceFilter myResourceFilter;
     private final ISelectionListener mySelectionListener;
     private URI myUri;
-    private final List<CompiledTransformation> myCompiledTransformations;
+    private final List<DeployedTransformation> myCompiledTransformations;
     
     private final DeferredTreeContentManager myContentManager;
     
@@ -617,8 +617,8 @@ public class UniSelectTransformationControl extends Composite {
 		private final ILabelProvider myDelegate;
     };
     
-    private static class CompiledTransformationRoot {
-    	CompiledTransformationRoot(List<CompiledTransformation> trasformations) {
+    private static class DeployedTransformationRoot {
+    	DeployedTransformationRoot(List<DeployedTransformation> trasformations) {
     		myTrasformations = trasformations;
     	}
     	
@@ -626,13 +626,13 @@ public class UniSelectTransformationControl extends Composite {
     		return myTrasformations.toArray();
     	}
     	
-    	private final List<CompiledTransformation> myTrasformations;
+    	private final List<DeployedTransformation> myTrasformations;
     }
     
-    private class CompiledTransfContentProvider implements ITreeContentProviderEx {
+    private class DeployedTransformationContentProvider implements ITreeContentProviderEx {
     	
-	    private AbstractDeferredAdapter compiledTransformationAdapter;
-		private IAdapterFactory compiledTransformationProviderFactory;
+	    private AbstractDeferredAdapter deployedTransformationAdapter;
+		private IAdapterFactory deployedTransformationProviderFactory;
 		
         public Object[] getChildren(Object parentElement) {
             return getElements(parentElement);
@@ -651,14 +651,14 @@ public class UniSelectTransformationControl extends Composite {
         }
 
         public void dispose() {
-			compiledTransformationAdapter.cancel();
+			deployedTransformationAdapter.cancel();
             IAdapterManager adapterManager = Platform.getAdapterManager();
-            adapterManager.unregisterAdapters(compiledTransformationProviderFactory);
+            adapterManager.unregisterAdapters(deployedTransformationProviderFactory);
         }
 
         public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-        	if (compiledTransformationAdapter == null) {
-	    	    compiledTransformationAdapter = new AbstractDeferredAdapter(myViewer) {
+        	if (deployedTransformationAdapter == null) {
+	    	    deployedTransformationAdapter = new AbstractDeferredAdapter(myViewer) {
 	    			
 	    			public String getLabel(Object o) {
 	    				return Messages.UniSelectTransformationControl_platformTransformations;
@@ -666,7 +666,7 @@ public class UniSelectTransformationControl extends Composite {
 	    			
 	    			@Override
 	    			public Object[] getChildren(Object o) {
-	    				return ((CompiledTransformationRoot) o).getChildren();
+	    				return ((DeployedTransformationRoot) o).getChildren();
 	    			}
 	
 	    			@Override
@@ -674,7 +674,7 @@ public class UniSelectTransformationControl extends Composite {
 	    				if (mySelectionListener == null) {
 	    					return true;
 	    				}
-	    				return mySelectionListener.accept(((CompiledTransformation) object).getUri());
+	    				return mySelectionListener.accept(((DeployedTransformation) object).getUri());
 	    			}
 
 	    			@Override
@@ -682,15 +682,15 @@ public class UniSelectTransformationControl extends Composite {
 	    				if (mySelectionListener == null) {
 	    					return TreeAction.NONE;
 	    				}
-	    				return mySelectionListener.getTreeAction(((CompiledTransformation) object).getUri());
+	    				return mySelectionListener.getTreeAction(((DeployedTransformation) object).getUri());
 	    		    }    			
 	    	    };
 	
-	    		compiledTransformationProviderFactory = new IAdapterFactory() {
+	    		deployedTransformationProviderFactory = new IAdapterFactory() {
 	
 	    			@SuppressWarnings("rawtypes")
 					public Object getAdapter(Object adaptableObject, Class adapterType) {
-	    				return compiledTransformationAdapter;
+	    				return deployedTransformationAdapter;
 	    			}
 	
 	    			@SuppressWarnings("rawtypes")
@@ -700,13 +700,13 @@ public class UniSelectTransformationControl extends Composite {
 	    		};
 
 		        IAdapterManager adapterManager = Platform.getAdapterManager();
-		        adapterManager.registerAdapters(compiledTransformationProviderFactory, CompiledTransformationRoot.class);
+		        adapterManager.registerAdapters(deployedTransformationProviderFactory, DeployedTransformationRoot.class);
         	}
         }
 
 		public boolean canHandle(Object element) {
-			return element instanceof CompiledTransformation 
-					|| element instanceof CompiledTransformationRoot;
+			return element instanceof DeployedTransformation 
+					|| element instanceof DeployedTransformationRoot;
 		}
     };
 

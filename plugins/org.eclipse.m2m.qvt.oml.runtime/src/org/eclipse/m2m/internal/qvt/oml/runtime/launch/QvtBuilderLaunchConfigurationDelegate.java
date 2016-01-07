@@ -40,14 +40,13 @@ import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
-import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtModule;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
-import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 import org.eclipse.osgi.util.NLS;
 
@@ -107,11 +106,9 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 	                    return;
 	                }
 	
-	            	ExecutionContextImpl context = (ExecutionContextImpl) QvtLaunchUtil.createContext(configuration);
-	                context.setLog(new WriterLog(printWriter));
-	                context.setProgressMonitor(monitor);
+	            	ExecutionContext context = QvtLaunchUtil.createContext(configuration, new WriterLog(printWriter), monitor);
 	
-	                QvtLaunchConfigurationDelegateBase.doLaunch(transformation, configuration, context);
+	                QvtLaunchUtil.doLaunch(transformation, configuration, context);
             	}
             	finally {
             		transformation.cleanup();

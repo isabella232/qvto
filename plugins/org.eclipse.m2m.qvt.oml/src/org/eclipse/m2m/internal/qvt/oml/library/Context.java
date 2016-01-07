@@ -18,6 +18,8 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
+import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.util.EvaluationMonitor;
 import org.eclipse.m2m.qvt.oml.util.IContext;
 import org.eclipse.m2m.qvt.oml.util.ISessionData;
@@ -38,11 +40,37 @@ public class Context implements IContext {
     private Trace myTrace;
     
     public Context() {
-    	myConfiguration = new HashMap<String, Object>();
-    	myLog = Log.NULL_LOG;
-		myMonitor = new NullProgressMonitor();
+    	this(Log.NULL_LOG, new NullProgressMonitor());
+    }
+    
+    public Context(ExecutionContext context) {
+    	this(context, context.getProgressMonitor());
+    }
+    
+    public Context(ExecutionContext executionContext, IProgressMonitor monitor) {
+    	this(executionContext.getLog(), monitor);
+		
+		for (String key : executionContext.getConfigPropertyNames()) {
+			Object value = executionContext.getConfigProperty(key);
+			setConfigProperty(key, value);
+		}
+		
+		for (ISessionData.Entry<Object> key : executionContext.getSessionDataEntries()) {
+			myData.setValue(key, executionContext.getSessionData().getValue(key));
+		}
+		
+		org.eclipse.m2m.qvt.oml.util.Trace trace = executionContext.getSessionData().getValue(QVTEvaluationOptions.INCREMENTAL_UPDATE_TRACE);
+		if (trace != null) {
+			myTrace.setTraceContent(trace.getTraceContent());
+		}
+    }
+    
+    private Context(Log log, IProgressMonitor monitor) {
+    	myLog = log;
+		myMonitor = monitor;
+		myConfiguration = new HashMap<String, Object>();
+		myData = new SessionDataImpl();		
 		myTrace = Trace.createEmptyTrace();
-		myData = new SessionDataImpl();
     }
 
     public void setProgressMonitor(IProgressMonitor monitor) {
@@ -105,7 +133,7 @@ public class Context implements IContext {
     	myConfiguration.put(name, value);
     }
     
-            
+    
     public static class SessionDataImpl implements ISessionData {
     	
     	private final Map<Entry<Object>, Object> fData;

@@ -29,10 +29,10 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter.Saveable;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -75,7 +75,7 @@ public class ModelExtentHelper {
 	public ResourceSet getResourceSet() {
 		return fResourceSet;
 	};
-
+	
 	public Diagnostic saveExtents() {
 		BasicDiagnostic diagnostic = QvtPlugin.createDiagnostic("Save model param extents diagnostic");
 		
@@ -89,11 +89,6 @@ public class ModelExtentHelper {
 		}
 		
 		for (Resource outExtent : resources) {
-//			Resource outExtent = fResourceSet.getResource(saveAsURI, false);
-//			if(outExtent == null) {
-//				outExtent = EmfUtil.createResource(saveAsURI, fResourceSet);       	    	
-//				fResourceSet.getResources().add(outExtent);
-//			}
 			try {
 				EmfUtil.saveModel(outExtent, EmfUtil.DEFAULT_SAVE_OPTIONS);
 			}
@@ -102,16 +97,13 @@ public class ModelExtentHelper {
 						"Failed to save model extent uri=" + outExtent.getURI(), e));
 			}
 			
-			// TODO required?
-			org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils.refresh(outExtent.getURI());
+			URIUtils.refresh(outExtent.getURI());
 		}
 
 		return diagnostic;
 	}
 
 	public List<ModelExtent> loadExtents() throws DiagnosticException {
-		//fResourceSet.getResources().clear();
-		
 		List<ModelParameter> params = fTransformation.getModelParameter();
 		if(params.size() > fModelExtentURIs.size()) {
 			throw new DiagnosticException(QvtPlugin.createErrorDiagnostic(NLS.bind(
@@ -172,27 +164,17 @@ public class ModelExtentHelper {
 		}
 		return result;
 	}
-		
-    /**
-     * Save given MOF extent (represented by 'extentContent') to all appropriate Resources in given ResourceSet (represented by 'resSet').
+	
+	/**
+     * Adds given MOF extent (represented by 'rootContents') to all appropriate resources in given ResourceSet (represented by 'resSet').
      * Takes into account that EObject's containment hierarchy may split between different Resources.
      *  
-     * @param extentContent
+     * @param rootContents
      * @param resSet
      * @param outUri
-     * @throws EmfException
+     * @return the set of affected resources 
      */
-	public static void saveExtentToResources(List<EObject> extentContent, ResourceSet resSet, URI outUri) throws EmfException {
-		Set<Resource> linkedResources = addExtentContentsToResources(extentContent, resSet, outUri);
-
-		for (Resource rs : linkedResources) {
-//			Resource rs = nextExtent.getKey();
-//			mergeExtentToResource(rs, nextExtent.getValue());
-			EmfUtil.saveModel(rs, EmfUtil.DEFAULT_SAVE_OPTIONS);
-		}
-	}
-	
-	public static Set<Resource> addExtentContentsToResources(List<EObject> rootContents, ResourceSet resSet, URI outUri) {
+	private static Set<Resource> addExtentContentsToResources(List<EObject> rootContents, ResourceSet resSet, URI outUri) {
 		URI modelUri = outUri.trimFragment();
 		Resource outExtent = resSet.getResource(modelUri, false);
 		if(outExtent == null) {
@@ -222,7 +204,6 @@ public class ModelExtentHelper {
 		for (Map.Entry<Resource, List<EObject>> nextExtent : linkedExtents.entrySet()) {
 			Resource rs = nextExtent.getKey();
 			mergeExtentToResource(rs, nextExtent.getValue());
-			//EmfUtil.saveModel(rs, EmfUtil.DEFAULT_SAVE_OPTIONS);
 		}
 		
 		return linkedExtents.keySet();

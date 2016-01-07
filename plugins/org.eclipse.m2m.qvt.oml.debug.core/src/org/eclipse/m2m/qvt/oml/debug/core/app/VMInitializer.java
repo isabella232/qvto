@@ -105,7 +105,7 @@ class VMInitializer implements VMProvider {
 			diagnostic = fRunner.initialize();
 			
 			if(QvtPlugin.isSuccess(diagnostic)) {
-				vm = new QVTOVirtualMachine(fRunner.createDebugableAdapter(fExecContext)); 
+				vm = new QVTOVirtualMachine(fRunner.createDebuggableAdapter(fExecContext)); 
 			}
 			
 		} catch(Throwable e) {

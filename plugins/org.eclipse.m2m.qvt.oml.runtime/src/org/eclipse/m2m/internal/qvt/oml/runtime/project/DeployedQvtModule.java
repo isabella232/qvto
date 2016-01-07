@@ -32,14 +32,14 @@ public class DeployedQvtModule extends QvtModule {
 	private Module myModule;
 	private CompiledUnit myUnit;
     private ResourceSet myResourceSet;
-	private URI moduleID;
+	private URI moduleUri;
 	
-	public DeployedQvtModule(URI qvtModuleID) throws MdaException {
-		if(qvtModuleID == null || qvtModuleID.segmentCount() == 0) {
+	public DeployedQvtModule(URI qvtModuleUri) throws MdaException {
+		if(qvtModuleUri == null || qvtModuleUri.segmentCount() == 0) {
 			throw new MdaException(NLS.bind(Messages.TransformationUtil_InvalidUri, 
-					qvtModuleID == null ? String.valueOf(null) : qvtModuleID.toString()));
+					qvtModuleUri == null ? String.valueOf(null) : qvtModuleUri.toString()));
 		}
-		this.moduleID = qvtModuleID;
+		this.moduleUri = qvtModuleUri;
     }
 	
 	protected IMetamodelRegistryProvider creatMetamodelRegistryProvider() {
@@ -49,9 +49,9 @@ public class DeployedQvtModule extends QvtModule {
     @Override
 	public Module getModule() throws MdaException {
         if (myModule == null) {
-        	UnitProxy srcUnit = UnitResolverFactory.Registry.INSTANCE.getUnit(moduleID);
+        	UnitProxy srcUnit = UnitResolverFactory.Registry.INSTANCE.getUnit(moduleUri);
         	if (srcUnit == null) {
-        		throw new MdaException(NLS.bind(CompilerMessages.importedModuleNotFound, moduleID));
+        		throw new MdaException(NLS.bind(CompilerMessages.importedModuleNotFound, moduleUri));
         	}
         	
             QVTOCompiler qvtCompiler = new QVTOCompiler(creatMetamodelRegistryProvider());
@@ -77,8 +77,7 @@ public class DeployedQvtModule extends QvtModule {
     }
     
 	@Override
-	public ResourceSet getResourceSet() throws MdaException {
-		getModule();
+	public ResourceSet getResourceSet() {
 		return myResourceSet;
 	}
 	
@@ -97,6 +96,6 @@ public class DeployedQvtModule extends QvtModule {
 	
     @Override
 	public String toString() {
-        return "deployed:/" + moduleID; //$NON-NLS-1$
+        return "deployed:/" + moduleUri; //$NON-NLS-1$
     }
 }
