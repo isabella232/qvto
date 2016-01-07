@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ImportToNonTransformCtxHelper;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
+import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.ParserException;
 import org.eclipse.ocl.ecore.Constraint;
@@ -76,14 +76,14 @@ public class ExtOCLEnvironmentWithQVTAccessTest extends OCLEnvironmentWithQVTAcc
 				evaluate(fOCL.createQuery(q));
 				fail("QVT exception expected");
 			} catch(QvtRuntimeException e) {
-				List<QVTStackTraceElement> stackElements = e.getQvtStackTrace();
+				List<? extends ExecutionStackTraceElement> stackElements = e.getQvtStackTrace();
 				assertEquals(stackElements.size(), 2);
-				QVTStackTraceElement e1 = stackElements.get(0);
+				ExecutionStackTraceElement e1 = stackElements.get(0);
 				assertEquals("q1", e1.getModuleName());
 				assertEquals("throwingException", e1.getOperationName());
 				assertEquals(37, e1.getLineNumber());
 				
-				QVTStackTraceElement e2 = stackElements.get(1);
+				ExecutionStackTraceElement e2 = stackElements.get(1);
 				assertEquals("q2", e2.getModuleName());
 				assertEquals("callQueryThrowingException", e2.getOperationName());
 				assertEquals(28, e2.getLineNumber());

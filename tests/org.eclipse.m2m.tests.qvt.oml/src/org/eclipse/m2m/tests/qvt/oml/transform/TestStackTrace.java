@@ -14,10 +14,10 @@ package org.eclipse.m2m.tests.qvt.oml.transform;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtAssertionFailed;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtStackOverFlowError;
+import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -88,7 +88,7 @@ public class TestStackTrace extends AbstractStackTraceTest {
 		} 
 		
 		int elementCount = 10;	
-		for (QVTStackTraceElement element : e.getQvtStackTrace()) {
+		for (ExecutionStackTraceElement element : e.getQvtStackTrace()) {
 			if(--elementCount == 0) {
 				break;
 			}

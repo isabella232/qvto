@@ -14,7 +14,7 @@ package org.eclipse.m2m.internal.qvt.oml.stdlib.model;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
+import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
 
 public interface ExceptionInstance extends EObject {
 
@@ -31,5 +31,5 @@ public interface ExceptionInstance extends EObject {
 	 * @return the list of elements or empty list, in case no stack trace is
 	 *         available
 	 */
-	List<QVTStackTraceElement> getStackElements();
+	List<? extends ExecutionStackTraceElement> getStackElements();
 }

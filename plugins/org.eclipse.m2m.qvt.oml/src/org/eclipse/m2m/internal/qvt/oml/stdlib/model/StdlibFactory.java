@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory.ExceptionClassInstance;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.AbstractQVTStdlib;
+import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLFactory;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ListType;
@@ -70,7 +70,7 @@ public class StdlibFactory {
 		return status;
 	}
 	
-	public ExceptionInstance createException(EClass exceptionClass, String argument, List<QVTStackTraceElement> stackElements) {
+	public ExceptionInstance createException(EClass exceptionClass, String argument, List<? extends ExecutionStackTraceElement> stackElements) {
 		ExceptionClassInstance exception = new ExceptionClassInstance(exceptionClass);
 		exception.setArgument(argument);
 		exception.setStackElements(Collections.unmodifiableList(stackElements));

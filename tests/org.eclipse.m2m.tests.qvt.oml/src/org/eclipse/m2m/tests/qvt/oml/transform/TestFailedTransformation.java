@@ -17,7 +17,6 @@ import java.util.Arrays;
 
 import org.eclipse.m2m.internal.qvt.oml.common.io.IOFile;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
@@ -75,7 +74,7 @@ public class TestFailedTransformation extends TestTransformation {
 		assertLogMatch("qvtTraceLog.stack"); //$NON-NLS-1$
 	}
 	
-	private QvtRuntimeException runTransformation() throws Exception {
+	private Exception runTransformation() throws Exception {
         ITransformer transformer = TestQvtInterpreter.getDefaultTransformer(getData());
 		try {
 			ExecutionContextImpl context = (ExecutionContextImpl) getData().getContext();
@@ -84,7 +83,7 @@ public class TestFailedTransformation extends TestTransformation {
 			transformer.transform(
 					getIFile(getData().getTransformation(getProject())),
 					getData().getIn(getProject()), getData().getTrace(getProject()), context);
-		} catch (QvtRuntimeException e) {
+		} catch (Exception e) {
 			return e;			
 		}
 		

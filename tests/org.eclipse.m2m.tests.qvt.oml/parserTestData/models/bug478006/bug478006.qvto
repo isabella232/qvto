@@ -1,0 +1,17 @@
+modeltype Ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
+transformation bug478006(out packages2:Ecore, out packages:Ecore);
+
+main() {
+
+	var c0 = object EClass @ packages {
+		name := "a";
+	};
+
+	var c1 = object EClass @ packages2 {
+		name := "b";
+		eSuperTypes += c0;
+	};
+	
+	assert fatal (c1.eSuperTypes->includes(c0));
+}

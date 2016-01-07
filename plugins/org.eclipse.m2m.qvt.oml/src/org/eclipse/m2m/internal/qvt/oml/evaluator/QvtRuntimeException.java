@@ -26,7 +26,7 @@ public class QvtRuntimeException extends EvaluationHaltedException {
 
 	private static final long serialVersionUID = -8903219155434276631L;
 	
-	private List<QVTStackTraceElement> fQVTStackTrace;
+	private List<? extends ExecutionStackTraceElement> fQVTStackTrace;
 	
 	
 	public QvtRuntimeException() {
@@ -64,21 +64,21 @@ public class QvtRuntimeException extends EvaluationHaltedException {
         }
      }    
 	
-	public List<QVTStackTraceElement> getQvtStackTrace() {		
+	public List<? extends ExecutionStackTraceElement> getQvtStackTrace() {		
 		if(fQVTStackTrace != null) {
 			return Collections.unmodifiableList(fQVTStackTrace);
 		}
 		return Collections.emptyList();
 	}
 	
-	public void setStackQvtTrace(List<QVTStackTraceElement> stackTrace) {
+	public void setStackQvtTrace(List<? extends ExecutionStackTraceElement> stackTrace) {
 		if(fQVTStackTrace != null) {
 			throw new IllegalStateException("Can't reassign stack elements"); //$NON-NLS-1$
 		}
 		
 		fQVTStackTrace = null;
 		if(stackTrace != null) {
-			fQVTStackTrace = new ArrayList<QVTStackTraceElement>(stackTrace);
+			fQVTStackTrace = new ArrayList<ExecutionStackTraceElement>(stackTrace);
 		}
 	}		
 }

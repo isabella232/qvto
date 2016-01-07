@@ -250,25 +250,27 @@ public class QvtLaunchUtil {
 	
 	public static void doLaunch(final QvtTransformation transf, List<URI> paramUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
 	    		    	
-	    	TransformationRunner runner = new QvtTransformationRunner(transf, paramUris);
-	    	    	
-	    	runner.setSaveTrace(traceUri != null);
-	    	runner.setTraceFile(traceUri);
-	    	runner.setIncrementalUpdate(isIncrementalUpdate);
-	    		    	
-	    	Diagnostic diag = runner.execute(context);
-	    	
-	    	IStatus status = BasicDiagnostic.toIStatus(diag);
-	    	
-	    	if (!status.isOK()) {
-	    		Throwable exception = status.getException();
-	    		
-	    		if (exception instanceof QvtRuntimeException) {
-	        		throw (QvtRuntimeException) exception;
-	        	}
-	    		
-	    		// TODO throw MdaException in case of failure   		
-	    	}
+    	TransformationRunner runner = new QvtTransformationRunner(transf, paramUris);
+    	    	
+    	runner.setSaveTrace(traceUri != null);
+    	runner.setTraceFile(traceUri);
+    	runner.setIncrementalUpdate(isIncrementalUpdate);
+    		    	
+    	Diagnostic diag = runner.execute(context);
+    	    	
+    	IStatus status = BasicDiagnostic.toIStatus(diag);
+    	
+    	if (!status.isOK()) {
+    		
+    		Throwable e = diag.getException();
+    		
+    		// ensure stack trace access by propagating QvtRuntimeException
+    		if (e instanceof QvtRuntimeException) {
+    			throw (QvtRuntimeException) e;
+    		}
+    		
+    		throw new MdaException(status); 		
+    	}
 	}
 
 	private static URI toUri(String uriString) throws MdaException {

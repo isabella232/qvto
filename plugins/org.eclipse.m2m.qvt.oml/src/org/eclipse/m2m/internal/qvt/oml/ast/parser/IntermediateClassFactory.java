@@ -36,7 +36,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.cst.adapters.AbstractGenericAdapter;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.EvaluationUtil;
-import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTStackTraceElement;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitor;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsFactory;
@@ -45,6 +44,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.model.ExceptionInstance;
+import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
 import org.eclipse.ocl.expressions.OCLExpression;
 
 /**
@@ -321,9 +321,9 @@ public class IntermediateClassFactory extends EFactoryImpl {
 		}
 	}
 
-	public static class ExceptionClassInstance extends IntermediateClassInstance implements ExceptionInstance{
+	public static class ExceptionClassInstance extends IntermediateClassInstance implements ExceptionInstance {
 		private String argument;
-		private List<QVTStackTraceElement> stackElements;		
+		private List<? extends ExecutionStackTraceElement> stackElements;		
 		
 		public ExceptionClassInstance(EClass eClass) {
 			super(eClass);
@@ -337,12 +337,12 @@ public class IntermediateClassFactory extends EFactoryImpl {
 			argument = argumentNew;
 		}
 
-		public void setStackElements(List<QVTStackTraceElement> stackElementsNew) {
+		public void setStackElements(List<? extends ExecutionStackTraceElement> stackElementsNew) {
 			stackElements = stackElementsNew;
 		}
 		
-		public List<QVTStackTraceElement> getStackElements() {
-			return (stackElements != null) ? stackElements : Collections.<QVTStackTraceElement>emptyList();
+		public List<? extends ExecutionStackTraceElement> getStackElements() {
+			return (stackElements != null) ? stackElements : Collections.<ExecutionStackTraceElement>emptyList();
 		}
 		
 		@Override
