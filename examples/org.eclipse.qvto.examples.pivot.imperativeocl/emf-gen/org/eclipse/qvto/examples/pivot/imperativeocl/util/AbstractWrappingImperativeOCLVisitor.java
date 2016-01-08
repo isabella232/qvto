@@ -28,12 +28,13 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 	extends org.eclipse.ocl.pivot.util.AbstractWrappingVisitor<R, C, D, P>
 	implements ImperativeOCLVisitor<R>
 {
-	protected AbstractWrappingImperativeOCLVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingImperativeOCLVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
-	public @Nullable R visitAltExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AltExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitAltExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AltExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitAltExp(object);
 			return postVisit(object, prologue, result);
@@ -43,8 +44,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitAssertExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitAssertExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AssertExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitAssertExp(object);
 			return postVisit(object, prologue, result);
@@ -54,8 +56,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitAssignExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitAssignExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AssignExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitAssignExp(object);
 			return postVisit(object, prologue, result);
@@ -65,8 +68,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitBlockExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitBlockExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull BlockExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitBlockExp(object);
 			return postVisit(object, prologue, result);
@@ -76,8 +80,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitBreakExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitBreakExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull BreakExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitBreakExp(object);
 			return postVisit(object, prologue, result);
@@ -87,8 +92,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitCatchExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitCatchExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull CatchExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitCatchExp(object);
 			return postVisit(object, prologue, result);
@@ -98,8 +104,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitComputeExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitComputeExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ComputeExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitComputeExp(object);
 			return postVisit(object, prologue, result);
@@ -109,8 +116,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitContinueExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitContinueExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ContinueExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitContinueExp(object);
 			return postVisit(object, prologue, result);
@@ -120,8 +128,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitDictLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDictLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDictLiteralExp(object);
 			return postVisit(object, prologue, result);
@@ -131,8 +140,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitDictLiteralPart(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDictLiteralPart(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictLiteralPart object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDictLiteralPart(object);
 			return postVisit(object, prologue, result);
@@ -142,8 +152,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitDictionaryType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDictionaryType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictionaryType object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDictionaryType(object);
 			return postVisit(object, prologue, result);
@@ -153,8 +164,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitForExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ForExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitForExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ForExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitForExp(object);
 			return postVisit(object, prologue, result);
@@ -164,8 +176,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitImperativeExpression(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitImperativeExpression(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeExpression object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeExpression(object);
 			return postVisit(object, prologue, result);
@@ -175,8 +188,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitImperativeIterateExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitImperativeIterateExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeIterateExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeIterateExp(object);
 			return postVisit(object, prologue, result);
@@ -186,8 +200,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitImperativeLoopExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitImperativeLoopExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeLoopExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeLoopExp(object);
 			return postVisit(object, prologue, result);
@@ -197,8 +212,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitInstantiationExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitInstantiationExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull InstantiationExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitInstantiationExp(object);
 			return postVisit(object, prologue, result);
@@ -208,8 +224,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitListLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitListLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ListLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitListLiteralExp(object);
 			return postVisit(object, prologue, result);
@@ -219,8 +236,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitListType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ListType object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitListType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ListType object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitListType(object);
 			return postVisit(object, prologue, result);
@@ -230,8 +248,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitLogExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.LogExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitLogExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull LogExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitLogExp(object);
 			return postVisit(object, prologue, result);
@@ -241,8 +260,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitOrderedTupleLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitOrderedTupleLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleLiteralExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOrderedTupleLiteralExp(object);
 			return postVisit(object, prologue, result);
@@ -252,8 +272,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitOrderedTupleLiteralPart(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitOrderedTupleLiteralPart(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleLiteralPart object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOrderedTupleLiteralPart(object);
 			return postVisit(object, prologue, result);
@@ -263,8 +284,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitOrderedTupleType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitOrderedTupleType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleType object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOrderedTupleType(object);
 			return postVisit(object, prologue, result);
@@ -274,8 +296,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitRaiseExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitRaiseExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull RaiseExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRaiseExp(object);
 			return postVisit(object, prologue, result);
@@ -285,8 +308,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitReturnExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitReturnExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ReturnExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitReturnExp(object);
 			return postVisit(object, prologue, result);
@@ -296,8 +320,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitSwitchExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitSwitchExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull SwitchExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitSwitchExp(object);
 			return postVisit(object, prologue, result);
@@ -307,8 +332,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitTryExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.TryExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitTryExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull TryExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTryExp(object);
 			return postVisit(object, prologue, result);
@@ -318,8 +344,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitTypedef(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.Typedef object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitTypedef(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull Typedef object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTypedef(object);
 			return postVisit(object, prologue, result);
@@ -329,8 +356,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitUnlinkExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitUnlinkExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull UnlinkExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitUnlinkExp(object);
 			return postVisit(object, prologue, result);
@@ -340,8 +368,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitUnpackExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitUnpackExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull UnpackExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitUnpackExp(object);
 			return postVisit(object, prologue, result);
@@ -351,8 +380,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitVariableInitExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitVariableInitExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull VariableInitExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitVariableInitExp(object);
 			return postVisit(object, prologue, result);
@@ -362,8 +392,9 @@ public abstract class AbstractWrappingImperativeOCLVisitor<R, C, D extends Imper
 		}
 	}
 
-	public @Nullable R visitWhileExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitWhileExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull WhileExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitWhileExp(object);
 			return postVisit(object, prologue, result);

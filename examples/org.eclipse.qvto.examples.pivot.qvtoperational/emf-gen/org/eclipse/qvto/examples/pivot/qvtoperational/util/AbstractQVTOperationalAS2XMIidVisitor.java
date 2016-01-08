@@ -44,107 +44,133 @@ public abstract class AbstractQVTOperationalAS2XMIidVisitor
 		super(context);
 	}	
 
-	public @Nullable Boolean visitConstructor(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Constructor object) {
+	@Override
+	public @Nullable Boolean visitConstructor(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Constructor object) {
 		return visitImperativeOperation(object);
 	}
 
-	public @Nullable Boolean visitConstructorBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody object) {
+	@Override
+	public @Nullable Boolean visitConstructorBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ConstructorBody object) {
 		return visitOperationBody(object);
 	}
 
-	public @Nullable Boolean visitContextualProperty(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty object) {
+	@Override
+	public @Nullable Boolean visitContextualProperty(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ContextualProperty object) {
 		return visitProperty(object);
 	}
 
-	public @Nullable Boolean visitDummyRelation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation object) {
+	@Override
+	public @Nullable Boolean visitDummyRelation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelation object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitDummyRelationDomain(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain object) {
+	@Override
+	public @Nullable Boolean visitDummyRelationDomain(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelationDomain object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitDummyRelationalTransformation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation object) {
+	@Override
+	public @Nullable Boolean visitDummyRelationalTransformation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelationalTransformation object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitEntryOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation object) {
+	@Override
+	public @Nullable Boolean visitEntryOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull EntryOperation object) {
 		return visitImperativeOperation(object);
 	}
 
-	public @Nullable Boolean visitHelper(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Helper object) {
+	@Override
+	public @Nullable Boolean visitHelper(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Helper object) {
 		return visitImperativeOperation(object);
 	}
 
-	public @Nullable Boolean visitImperativeCallExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp object) {
+	@Override
+	public @Nullable Boolean visitImperativeCallExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ImperativeCallExp object) {
 		return visitOperationCallExp(object);
 	}
 
-	public @Nullable Boolean visitImperativeOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation object) {
+	@Override
+	public @Nullable Boolean visitImperativeOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ImperativeOperation object) {
 		return visitOperation(object);
 	}
 
-	public @Nullable Boolean visitLibrary(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Library object) {
+	@Override
+	public @Nullable Boolean visitLibrary(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Library object) {
 		return visitModule(object);
 	}
 
-	public @Nullable Boolean visitMappingBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody object) {
+	@Override
+	public @Nullable Boolean visitMappingBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingBody object) {
 		return visitOperationBody(object);
 	}
 
-	public @Nullable Boolean visitMappingCallExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp object) {
+	@Override
+	public @Nullable Boolean visitMappingCallExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingCallExp object) {
 		return visitImperativeCallExp(object);
 	}
 
-	public @Nullable Boolean visitMappingOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation object) {
+	@Override
+	public @Nullable Boolean visitMappingOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingOperation object) {
 		return visitImperativeOperation(object);
 	}
 
-	public @Nullable Boolean visitMappingParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter object) {
+	@Override
+	public @Nullable Boolean visitMappingParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingParameter object) {
 		return visitVarParameter(object);
 	}
 
-	public @Nullable Boolean visitModelParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter object) {
+	@Override
+	public @Nullable Boolean visitModelParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModelParameter object) {
 		return visitVarParameter(object);
 	}
 
-	public @Nullable Boolean visitModelType(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModelType object) {
+	@Override
+	public @Nullable Boolean visitModelType(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModelType object) {
 		return visitClass(object);
 	}
 
-	public @Nullable Boolean visitModule(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Module object) {
+	@Override
+	public @Nullable Boolean visitModule(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Module object) {
 		return visitClass(object);
 	}
 
-	public @Nullable Boolean visitModuleImport(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport object) {
+	@Override
+	public @Nullable Boolean visitModuleImport(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModuleImport object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitObjectExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp object) {
+	@Override
+	public @Nullable Boolean visitObjectExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ObjectExp object) {
 		return visitInstantiationExp(object);
 	}
 
-	public @Nullable Boolean visitOperationBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody object) {
+	@Override
+	public @Nullable Boolean visitOperationBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull OperationBody object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitOperationalTransformation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation object) {
+	@Override
+	public @Nullable Boolean visitOperationalTransformation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull OperationalTransformation object) {
 		return visitModule(object);
 	}
 
-	public @Nullable Boolean visitResolveExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp object) {
+	@Override
+	public @Nullable Boolean visitResolveExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ResolveExp object) {
 		return visitCallExp(object);
 	}
 
-	public @Nullable Boolean visitResolveInExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp object) {
+	@Override
+	public @Nullable Boolean visitResolveInExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ResolveInExp object) {
 		return visitResolveExp(object);
 	}
 
-	public @Nullable Boolean visitTag(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Tag object) {
+	@Override
+	public @Nullable Boolean visitTag(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Tag object) {
 		return visitElement(object);
 	}
 
-	public @Nullable Boolean visitVarParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter object) {
+	@Override
+	public @Nullable Boolean visitVarParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull VarParameter object) {
 		return visitVariable(object);
 	}
 }

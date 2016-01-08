@@ -1,6 +1,6 @@
-/**
+/*******************************************************************************
  * <copyright>
- * Copyright (c) 2013 Willink Transformations, University of York, and others.
+ * Copyright (c) 2013, 2016 Willink Transformations, University of York, and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,18 +21,19 @@ package	org.eclipse.qvto.examples.pivot.qvtoperational.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLASSaverLocateVisitor;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLTemplateParameterSubstitutionVisitor;
 
 /**
- * An AbstractQVTOperationalASSaverLocateVisitor provides a default implementation for each
+ * An AbstractQVTOperationalTemplateParameterSubstitutionVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractQVTOperationalASSaverLocateVisitor
-	extends ImperativeOCLASSaverLocateVisitor
+public abstract class AbstractQVTOperationalTemplateParameterSubstitutionVisitor
+	extends ImperativeOCLTemplateParameterSubstitutionVisitor
 	implements QVTOperationalVisitor<Object>
 {
 	/**
@@ -40,8 +41,8 @@ public abstract class AbstractQVTOperationalASSaverLocateVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTOperationalASSaverLocateVisitor(@NonNull ASSaver context) {
-		super(context);
+	protected AbstractQVTOperationalTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactoryInternal environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+		super(environmentFactory, selfType, selfTypeValue);
 	}	
 
 	@Override

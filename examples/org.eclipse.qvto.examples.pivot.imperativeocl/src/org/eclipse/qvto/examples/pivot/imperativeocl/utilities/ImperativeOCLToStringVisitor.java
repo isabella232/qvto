@@ -43,133 +43,133 @@ public class ImperativeOCLToStringVisitor extends ToStringVisitor implements Imp
 		}
 	}
 
-	public static @NonNull ToStringVisitor.Factory FACTORY = new ImperativeOCLToStringFactory();
+	public static ToStringVisitor.@NonNull Factory FACTORY = new ImperativeOCLToStringFactory();
 	
 	public ImperativeOCLToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
 	}
 
-	public @Nullable String visitAltExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AltExp object) {
+	public @Nullable String visitAltExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AltExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitAssertExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp object) {
+	public @Nullable String visitAssertExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AssertExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitAssignExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp object) {
+	public @Nullable String visitAssignExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull AssignExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitBlockExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp object) {
+	public @Nullable String visitBlockExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull BlockExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitBreakExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp object) {
+	public @Nullable String visitBreakExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull BreakExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitCatchExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp object) {
+	public @Nullable String visitCatchExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull CatchExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitComputeExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp object) {
+	public @Nullable String visitComputeExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ComputeExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitContinueExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp object) {
+	public @Nullable String visitContinueExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ContinueExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitDictLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp object) {
+	public @Nullable String visitDictLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictLiteralExp object) {
 		return visitLiteralExp(object);
 	}
 
-	public @Nullable String visitDictLiteralPart(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart object) {
+	public @Nullable String visitDictLiteralPart(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictLiteralPart object) {
 		return visitElement(object);
 	}
 
-	public @Nullable String visitDictionaryType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType object) {
+	public @Nullable String visitDictionaryType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull DictionaryType object) {
 		return visitCollectionType(object);
 	}
 
-	public @Nullable String visitForExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ForExp object) {
+	public @Nullable String visitForExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ForExp object) {
 		return visitImperativeLoopExp(object);
 	}
 
-	public @Nullable String visitImperativeExpression(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression object) {
+	public @Nullable String visitImperativeExpression(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeExpression object) {
 		return visitOCLExpression(object);
 	}
 
-	public @Nullable String visitImperativeIterateExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp object) {
+	public @Nullable String visitImperativeIterateExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeIterateExp object) {
 		return visitImperativeLoopExp(object);
 	}
 
-	public @Nullable String visitImperativeLoopExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp object) {
+	public @Nullable String visitImperativeLoopExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ImperativeLoopExp object) {
 		return visitLoopExp(object);
 	}
 
-	public @Nullable String visitInstantiationExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp object) {
+	public @Nullable String visitInstantiationExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull InstantiationExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitListLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp object) {
+	public @Nullable String visitListLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ListLiteralExp object) {
 		return visitLiteralExp(object);
 	}
 
-	public @Nullable String visitListType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ListType object) {
+	public @Nullable String visitListType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ListType object) {
 		return visitCollectionType(object);
 	}
 
-	public @Nullable String visitLogExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.LogExp object) {
+	public @Nullable String visitLogExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull LogExp object) {
 		return visitOperationCallExp(object);
 	}
 
-	public @Nullable String visitOrderedTupleLiteralExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp object) {
+	public @Nullable String visitOrderedTupleLiteralExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleLiteralExp object) {
 		return visitLiteralExp(object);
 	}
 
-	public @Nullable String visitOrderedTupleLiteralPart(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart object) {
+	public @Nullable String visitOrderedTupleLiteralPart(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleLiteralPart object) {
 		return visitElement(object);
 	}
 
-	public @Nullable String visitOrderedTupleType(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType object) {
+	public @Nullable String visitOrderedTupleType(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull OrderedTupleType object) {
 		return visitClass(object);
 	}
 
-	public @Nullable String visitRaiseExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp object) {
+	public @Nullable String visitRaiseExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull RaiseExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitReturnExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp object) {
+	public @Nullable String visitReturnExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull ReturnExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitSwitchExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp object) {
+	public @Nullable String visitSwitchExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull SwitchExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitTryExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.TryExp object) {
+	public @Nullable String visitTryExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull TryExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitTypedef(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.Typedef object) {
+	public @Nullable String visitTypedef(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull Typedef object) {
 		return visitClass(object);
 	}
 
-	public @Nullable String visitUnlinkExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp object) {
+	public @Nullable String visitUnlinkExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull UnlinkExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitUnpackExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp object) {
+	public @Nullable String visitUnpackExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull UnpackExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitVariableInitExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp object) {
+	public @Nullable String visitVariableInitExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull VariableInitExp object) {
 		return visitImperativeExpression(object);
 	}
 
-	public @Nullable String visitWhileExp(@NonNull org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp object) {
+	public @Nullable String visitWhileExp(org.eclipse.qvto.examples.pivot.imperativeocl.@NonNull WhileExp object) {
 		return visitImperativeExpression(object);
 	}
 }

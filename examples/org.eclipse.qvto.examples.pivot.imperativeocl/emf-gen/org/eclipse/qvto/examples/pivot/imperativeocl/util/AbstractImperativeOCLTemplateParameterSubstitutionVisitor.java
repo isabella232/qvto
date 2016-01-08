@@ -1,4 +1,4 @@
-/**
+/*******************************************************************************
  * <copyright>
  * Copyright (c) 2013 Willink Transformations, University of York, and others.
  * All rights reserved. This program and the accompanying materials
@@ -21,18 +21,19 @@ package	org.eclipse.qvto.examples.pivot.imperativeocl.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.manager.TemplateParameterSubstitutionVisitor;
 
 /**
- * An AbstractImperativeOCLASSaverLocateVisitor provides a default implementation for each
+ * An AbstractImperativeOCLTemplateParameterSubstitutionVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractImperativeOCLASSaverLocateVisitor
-	extends ASSaverLocateVisitor
+public abstract class AbstractImperativeOCLTemplateParameterSubstitutionVisitor
+	extends TemplateParameterSubstitutionVisitor
 	implements ImperativeOCLVisitor<Object>
 {
 	/**
@@ -40,8 +41,8 @@ public abstract class AbstractImperativeOCLASSaverLocateVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractImperativeOCLASSaverLocateVisitor(@NonNull ASSaver context) {
-		super(context);
+	protected AbstractImperativeOCLTemplateParameterSubstitutionVisitor(@NonNull EnvironmentFactoryInternal environmentFactory, @Nullable Type selfType, @Nullable Type selfTypeValue) {
+		super(environmentFactory, selfType, selfTypeValue);
 	}	
 
 	@Override
