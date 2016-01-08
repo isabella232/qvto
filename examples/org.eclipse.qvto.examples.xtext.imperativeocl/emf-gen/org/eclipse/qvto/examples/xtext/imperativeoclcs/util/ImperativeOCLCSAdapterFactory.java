@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -104,8 +105,8 @@ public class ImperativeOCLCSAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImperativeOCLCSSwitch<Adapter> modelSwitch =
-		new ImperativeOCLCSSwitch<Adapter>() {
+	protected ImperativeOCLCSSwitch<@Nullable Adapter> modelSwitch =
+		new ImperativeOCLCSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAssertExpCS(AssertExpCS object) {
 				return createAssertExpCSAdapter();

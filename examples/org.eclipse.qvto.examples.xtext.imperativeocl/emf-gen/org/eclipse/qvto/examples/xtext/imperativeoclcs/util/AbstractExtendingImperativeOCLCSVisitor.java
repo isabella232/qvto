@@ -11,7 +11,6 @@
 package	org.eclipse.qvto.examples.xtext.imperativeoclcs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * An AbstractExtendingImperativeOCLCSVisitor provides a default implementation for each
@@ -29,115 +28,142 @@ public abstract class AbstractExtendingImperativeOCLCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractExtendingImperativeOCLCSVisitor(@NonNull C context) {
+	protected AbstractExtendingImperativeOCLCSVisitor(C context) {
 		super(context);
 	}	
 
-	public @Nullable R visitAssertExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS object) {
+	@Override
+	public R visitAssertExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull AssertExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitAssignExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS object) {
+	@Override
+	public R visitAssignExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull AssignExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitBreakExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS object) {
+	@Override
+	public R visitBreakExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull BreakExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitCatchExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS object) {
+	@Override
+	public R visitCatchExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull CatchExpCS object) {
 		return visitExpressionBlockCS(object);
 	}
 
-	public @Nullable R visitComputeExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS object) {
+	@Override
+	public R visitComputeExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ComputeExpCS object) {
 		return visitExpressionBlockCS(object);
 	}
 
-	public @Nullable R visitContinueExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS object) {
+	@Override
+	public R visitContinueExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ContinueExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitDictLiteralExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS object) {
+	@Override
+	public R visitDictLiteralExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull DictLiteralExpCS object) {
 		return visitLiteralExpCS(object);
 	}
 
-	public @Nullable R visitDictLiteralPartCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS object) {
+	@Override
+	public R visitDictLiteralPartCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull DictLiteralPartCS object) {
 		return visitModelElementCS(object);
 	}
 
-	public @Nullable R visitDictTypeCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS object) {
+	@Override
+	public R visitDictTypeCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull DictTypeCS object) {
 		return visitTypedRefCS(object);
 	}
 
-	public @Nullable R visitExpressionBlockCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS object) {
+	@Override
+	public R visitExpressionBlockCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ExpressionBlockCS object) {
 		return visitExpCS(object);
 	}
 
-	public @Nullable R visitExtentRefCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS object) {
+	@Override
+	public R visitExtentRefCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ExtentRefCS object) {
 		return visitElementRefCS(object);
 	}
 
-	public @Nullable R visitForExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS object) {
+	@Override
+	public R visitForExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ForExpCS object) {
 		return visitImperativeLoopExpCS(object);
 	}
 
-	public @Nullable R visitImperativeIterateExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS object) {
+	@Override
+	public R visitImperativeIterateExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ImperativeIterateExpCS object) {
 		return visitImperativeLoopExpCS(object);
 	}
 
-	public @Nullable R visitImperativeLoopExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS object) {
+	@Override
+	public R visitImperativeLoopExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ImperativeLoopExpCS object) {
 		return visitCallExpCS(object);
 	}
 
-	public @Nullable R visitInstantiationExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS object) {
+	@Override
+	public R visitInstantiationExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull InstantiationExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitListLiteralExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS object) {
+	@Override
+	public R visitListLiteralExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ListLiteralExpCS object) {
 		return visitLiteralExpCS(object);
 	}
 
-	public @Nullable R visitListTypeCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS object) {
+	@Override
+	public R visitListTypeCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ListTypeCS object) {
 		return visitTypedRefCS(object);
 	}
 
-	public @Nullable R visitLogExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS object) {
+	@Override
+	public R visitLogExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull LogExpCS object) {
 		return visitCallExpCS(object);
 	}
 
-	public @Nullable R visitRaiseExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS object) {
+	@Override
+	public R visitRaiseExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull RaiseExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitReturnExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS object) {
+	@Override
+	public R visitReturnExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull ReturnExpCS object) {
 		return visitExpCS(object);
 	}
 
-	public @Nullable R visitStatementCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS object) {
+	@Override
+	public R visitStatementCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull StatementCS object) {
 		return visitExpCS(object);
 	}
 
-	public @Nullable R visitSwitchAltCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS object) {
+	@Override
+	public R visitSwitchAltCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull SwitchAltCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitSwitchExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS object) {
+	@Override
+	public R visitSwitchExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull SwitchExpCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitTryExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS object) {
+	@Override
+	public R visitTryExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull TryExpCS object) {
 		return visitExpressionBlockCS(object);
 	}
 
-	public @Nullable R visitVarDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS object) {
+	@Override
+	public R visitVarDeclarationCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull VarDeclarationCS object) {
 		return visitVariableCS(object);
 	}
 
-	public @Nullable R visitVarsInitializationCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS object) {
+	@Override
+	public R visitVarsInitializationCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull VarsInitializationCS object) {
 		return visitStatementCS(object);
 	}
 
-	public @Nullable R visitWhileExpCS(@NonNull org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS object) {
+	@Override
+	public R visitWhileExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull WhileExpCS object) {
 		return visitExpressionBlockCS(object);
 	}
 }

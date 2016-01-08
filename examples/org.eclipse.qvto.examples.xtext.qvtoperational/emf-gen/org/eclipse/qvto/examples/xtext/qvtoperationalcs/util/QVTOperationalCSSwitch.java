@@ -5,6 +5,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.AnnotationCS;
@@ -101,7 +102,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS;
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage
  * @generated
  */
-public class QVTOperationalCSSwitch<T> extends Switch<T> {
+public class QVTOperationalCSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

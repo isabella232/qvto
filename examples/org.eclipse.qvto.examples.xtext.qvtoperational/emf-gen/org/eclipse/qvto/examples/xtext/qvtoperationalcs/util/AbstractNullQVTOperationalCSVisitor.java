@@ -16,8 +16,11 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractNullQVTOperationalCSVisitor provides a default implementation for each
  * visitXxx method that returns null.
+ *
+ * @deprecated Explicit 'Null' functionality is obsolete with Java 8 @Nullable annotations.  
  */
-public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
+ @Deprecated
+public abstract class AbstractNullQVTOperationalCSVisitor<@Nullable R, C>
 	extends org.eclipse.qvto.examples.xtext.imperativeoclcs.util.AbstractNullImperativeOCLCSVisitor<R, C> implements QVTOperationalCSVisitor<R>
 {
 	/**
@@ -25,167 +28,207 @@ public abstract class AbstractNullQVTOperationalCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractNullQVTOperationalCSVisitor(@NonNull C context) {
+	protected AbstractNullQVTOperationalCSVisitor(C context) {
 		super(context);
 	}	
 
-	public @Nullable R visitClassifierPropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS object) {
+	@Override
+	public R visitClassifierPropertyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ClassifierPropertyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitConfigurationPropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigurationPropertyCS object) {
+	@Override
+	public R visitConfigurationPropertyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ConfigurationPropertyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitConstructorOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorOperationCS object) {
+	@Override
+	public R visitConstructorOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ConstructorOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitContextualPropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS object) {
+	@Override
+	public R visitContextualPropertyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ContextualPropertyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitEntryOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS object) {
+	@Override
+	public R visitEntryOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull EntryOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitExceptionCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS object) {
+	@Override
+	public R visitExceptionCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ExceptionCS object) {
 		return null;
 	}
 
-	public @Nullable R visitHelperOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.HelperOperationCS object) {
+	@Override
+	public R visitHelperOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull HelperOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitImperativeOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCS object) {
+	@Override
+	public R visitImperativeOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ImperativeOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitInitPartCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS object) {
+	@Override
+	public R visitInitPartCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull InitPartCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMappingBodyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS object) {
+	@Override
+	public R visitMappingBodyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull MappingBodyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMappingCallExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS object) {
+	@Override
+	public R visitMappingCallExpCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull MappingCallExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMappingOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS object) {
+	@Override
+	public R visitMappingOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull MappingOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitMetamodelCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS object) {
+	@Override
+	public R visitMetamodelCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull MetamodelCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModelTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS object) {
+	@Override
+	public R visitModelTypeCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModelTypeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModelTypeRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS object) {
+	@Override
+	public R visitModelTypeRefCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModelTypeRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModuleCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS object) {
+	@Override
+	public R visitModuleCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModuleCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModulePropertyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS object) {
+	@Override
+	public R visitModulePropertyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModulePropertyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModuleRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS object) {
+	@Override
+	public R visitModuleRefCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModuleRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitModuleUsageCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS object) {
+	@Override
+	public R visitModuleUsageCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ModuleUsageCS object) {
 		return null;
 	}
 
-	public @Nullable R visitObjectExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS object) {
+	@Override
+	public R visitObjectExpCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ObjectExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitOperationBodyCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS object) {
+	@Override
+	public R visitOperationBodyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull OperationBodyCS object) {
 		return null;
 	}
 
-	public @Nullable R visitOperationRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationRefCS object) {
+	@Override
+	public R visitOperationRefCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull OperationRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPackageRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS object) {
+	@Override
+	public R visitPackageRefCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull PackageRefCS object) {
 		return null;
 	}
 
-	public @Nullable R visitParameterDeclarationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS object) {
+	@Override
+	public R visitParameterDeclarationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ParameterDeclarationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitPathElement2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS object) {
+	@Override
+	public R visitPathElement2CS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull PathElement2CS object) {
 		return null;
 	}
 
-	public @Nullable R visitPathName2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS object) {
+	@Override
+	public R visitPathName2CS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull PathName2CS object) {
 		return null;
 	}
 
-	public @Nullable R visitPrimitiveTypeCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.PrimitiveTypeCS object) {
+	@Override
+	public R visitPrimitiveTypeCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull PrimitiveTypeCS object) {
 		return null;
 	}
 
-	public @Nullable R visitQVToClassCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS object) {
+	@Override
+	public R visitQVToClassCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull QVToClassCS object) {
 		return null;
 	}
 
-	public @Nullable R visitQVToImportCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS object) {
+	@Override
+	public R visitQVToImportCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull QVToImportCS object) {
 		return null;
 	}
 
-	public @Nullable R visitQVToLibraryCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToLibraryCS object) {
+	@Override
+	public R visitQVToLibraryCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull QVToLibraryCS object) {
 		return null;
 	}
 
-	public @Nullable R visitQVToOperationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS object) {
+	@Override
+	public R visitQVToOperationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull QVToOperationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitResolveByMappingExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByMappingExpCS object) {
+	@Override
+	public R visitResolveByMappingExpCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ResolveByMappingExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitResolveByTypeExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByTypeExpCS object) {
+	@Override
+	public R visitResolveByTypeExpCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ResolveByTypeExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitResolveExpCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS object) {
+	@Override
+	public R visitResolveExpCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ResolveExpCS object) {
 		return null;
 	}
 
-	public @Nullable R visitStereotypeQualifierCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.StereotypeQualifierCS object) {
+	@Override
+	public R visitStereotypeQualifierCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull StereotypeQualifierCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTagCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS object) {
+	@Override
+	public R visitTagCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull TagCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS object) {
+	@Override
+	public R visitTopLevelCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull TopLevelCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS object) {
+	@Override
+	public R visitTransformationCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull TransformationCS object) {
 		return null;
 	}
 
-	public @Nullable R visitTypedTypeRef2CS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS object) {
+	@Override
+	public R visitTypedTypeRef2CS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull TypedTypeRef2CS object) {
 		return null;
 	}
 
-	public @Nullable R visitUnitRefCS(@NonNull org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS object) {
+	@Override
+	public R visitUnitRefCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull UnitRefCS object) {
 		return null;
 	}
 }

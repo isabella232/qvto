@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.AnnotationCS;
@@ -143,8 +144,8 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTOperationalCSSwitch<Adapter> modelSwitch =
-		new QVTOperationalCSSwitch<Adapter>() {
+	protected QVTOperationalCSSwitch<@Nullable Adapter> modelSwitch =
+		new QVTOperationalCSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter casePathName2CS(PathName2CS object) {
 				return createPathName2CSAdapter();

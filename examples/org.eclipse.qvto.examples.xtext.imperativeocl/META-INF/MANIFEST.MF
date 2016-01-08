@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Imperativeocl
 Bundle-SymbolicName: org.eclipse.qvto.examples.xtext.imperativeocl;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.ocl.xtext.essentialocl;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.qvto.examples.pivot.imperativeocl;bundle-version="[1.0.0,2.0.0)"

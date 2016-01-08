@@ -5,7 +5,7 @@
     modelPluginID="org.eclipse.qvto.examples.xtext.qvtoperational" forceOverwrite="true"
     modelName="QVTOperational" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     testsDirectory="/org.eclipse.qvto.examples.xtext.qvtoperational.tests/emf-gen"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     usedGenPackages="../../org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel#//imperativeocl ../../org.eclipse.qvto.examples.xtext.imperativeocl/model/ImperativeOCLCS.genmodel#//imperativeoclcs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.genmodel#//qvtoperational ../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialoclcs ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore"
     importOrganizing="true">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package	org.eclipse.qvto.examples.xtext.qvtoperationalcs.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractQVTOperationalCSVisitor provides a default implementation of the visitor framework
@@ -25,7 +24,7 @@ public abstract class AbstractQVTOperationalCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTOperationalCSVisitor(@NonNull C context) {
+	protected AbstractQVTOperationalCSVisitor(C context) {
 		super(context);
 	}
 }

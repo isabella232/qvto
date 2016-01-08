@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.eclipse.qvto.examples.xtext.qvtoperational;singleton:=t
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-Version: 1.0.0.qualifier
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.qvto.examples.xtext.imperativeocl;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,

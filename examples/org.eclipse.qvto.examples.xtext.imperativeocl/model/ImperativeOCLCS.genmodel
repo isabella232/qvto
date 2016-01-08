@@ -4,7 +4,7 @@
     editDirectory="/org.eclipse.qvto.examples.xtext.imperativeocl.edit/emf-gen" editorDirectory="/org.eclipse.qvto.examples.xtext.imperativeocl.editor/emf-gen"
     modelPluginID="org.eclipse.qvto.examples.xtext.imperativeocl" forceOverwrite="true"
     modelName="ImperativeOCL" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
     editPluginID="org.eclipse.qvto.examples.xtext.imperativeocl.edit" editorPluginID="org.eclipse.qvto.examples.xtext.imperativeocl.editor"
     runtimeVersion="2.9" usedGenPackages="../../org.eclipse.ocl.xtext.base/model/BaseCS.genmodel#//basecs ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.genmodel#//essentialoclcs ../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.emf.ecore/model/Ecore.genmodel#//ecore">
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/ToString"/>
