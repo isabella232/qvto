@@ -1,126 +1,86 @@
-import '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'
-import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore'
-import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalLookup.ocl'
-import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore'
+import  qvtocs : 'QVTOperationalCS.ecore#/'
+import  basecs : '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/'
+import  qvto : '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#/'
+import  ocl : '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/'
 import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.ocl'
-import 'QVTOperationalCS.ecore'
+import 'QVTOperationalCS2ASHelpers.ocl'
+import 'QVTOperationalCS2ASLookup.ocl'
+import 'QVTOperationalCS2ASDisambiguation.ocl'
+package qvtocs
 
-package qvtoperationalcs
 context TopLevelCS
-def : ast() : ocl::Model = 	
+def : ast() : ocl::Model =
 	ocl::Model {
-		ownedPackages = let dummyPackage = ocl::Package {
-							name = '',
-							ownedClasses = ownedTypes.ast().oclAsType(ocl::Class) -- FIXME
-						} in dummyPackage->includingAll(ownedPackages.ast())
+		ownedPackages = let dummyPackage  = ocl::Package{
+					-- Part temporarily addded by hand
+					name = '',
+					ownedClasses = ownedTypes.ast().oclAsType(ocl::Class) -- FIXME
+				}
+		in dummyPackage->includingAll(ownedPackages.ast())
 	}
-		
 context QVToClassCS
 def : ast() : ocl::Class =
 	ocl::Class {
-		name = name,
-		ownedProperties = ownedProperties.ast().oclAsType(ocl::Property), -- FIXME 
-		ownedOperations = ownedOperations.ast()
+		name = name, 
+	ownedProperties = ownedProperties.ast().oclAsType(ocl::Property), 
+	ownedOperations = ownedOperations.ast() 
 	}
-
---context OperationParameterDeclarationCS
---def : ast() : qvtoperational::VarParameter =
---	qvtoperational::VarParameter {
---		name = name
---		--kind = if direction = DirectionKindCS::inout then
---		--			qvtoperational::DirectionKind::inout
---		--	   else if direction = DirectionKindCS::out then
---		--	   		qvtoperational::DirectionKind::out
---		--	   else 
---		--	   		qvtoperational::DirectionKind::_in
---		--	   endif endif
---		--initExpression = if (initPart.oclIsUndefined()) then
---		--					null
---		--				else
---		--					initPart.expression -- FIXME todo .ast()
---		--				endif
---	}
-	
 context MetamodelCS
 def : ast() : ocl::Package =
 	ocl::Package {
-		name = name,
-		nsPrefix = name,	-- QVTo spec doesn't provide concrete syntax for nsPrefix
-		URI = name,			-- QVTo spec doesn't provide concrete syntax for nsURI. Build an internal protocol
-		ownedClasses = ownedClasses.ast() 
-		-- type = TODO
+		name = name, 
+	nsPrefix = name, 
+	URI = name, 
+	ownedClasses = ownedClasses.ast() 
 	}
-	
-
 context ModelTypeCS
-def : ast() : qvtoperational::ModelType =
-	 qvtoperational::ModelType {
-	 	name = name	
-	 }
-	 
-	 
+def : ast() : qvto::ModelType =
+	qvto::ModelType {
+		name = name 
+	}
 context ClassifierPropertyCS
-def : ast() : ocl::Property = 
+def : ast() : ocl::Property =
 	ocl::Property {
-		name = name,
-		isComposite = qualifiers->exists(x | x = 'composite')
-		-- type = TODO
+		name = name, 
+	isComposite = qualifiers->exists(x | x =  'composite') 
 	}
-
 context MappingOperationCS
-def : ast() : qvtoperational::MappingOperation =
-	qvtoperational::MappingOperation {
-		name = name,
-		-- ownedParameter = signature.parameter.ast()
-		ownedParameters = ownedParameters.ast()
+def : ast() : qvto::MappingOperation =
+	qvto::MappingOperation {
+		name = name, 
+	ownedParameters = ownedParameters.ast() 
 	}
-	 
 context TransformationCS
-def : ast() : qvtoperational::OperationalTransformation =
-	qvtoperational::OperationalTransformation {
-		name = name,
-		modelParameter = ownedParameters.ast().oclAsType(qvtoperational::ModelParameter),
-		ownedOperations = ownedOperations.ast(),
-		isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox),
-		isAbstract = ownedQualifiers->exists(x | x = QualifierKindCS::abstract)
-		-- refined = ast().lookupRelationalTransformation(refines)
+def : ast() : qvto::OperationalTransformation =
+	qvto::OperationalTransformation {
+		name = name, 
+	modelParameter = ownedParameters.ast().oclAsType(qvto::ModelParameter), 
+	ownedOperations = ownedOperations.ast(), 
+	isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox), 
+	isAbstract = ownedQualifiers->exists(x | x = QualifierKindCS::abstract) 
 	}
-
 context ParameterDeclarationCS
-def : ast() : qvtoperational::VarParameter =
-
-	if (self.oclContainer().oclIsKindOf(ModuleCS)) 
-	then
-		qvtoperational::ModelParameter {
-			name = name,
-			type = ast().lookupModelType(ownedType.oclAsType(TypedTypeRef2CS))
-		}
-	else	
-		qvtoperational::VarParameter {
-			name = name
-			--kind = if direction = DirectionKindCS::inout then
-			--			qvtoperational::DirectionKind::inout
-			--	   else if direction = DirectionKindCS::out then
-			--	   		qvtoperational::DirectionKind::out
-			--	   else 
-			--	   		qvtoperational::DirectionKind::_in
-			--	   endif endif
-			--initExpression = if (initPart.oclIsUndefined()) then
-			--					null
-			--				else
-			--					initPart.expression -- FIXME todo .ast()
-			--				endif	
-		}
-	endif
-
-context QVToLibraryCS
-def : ast() : qvtoperational::Library =
-	qvtoperational::Library {
-		name = name,
-		ownedOperations = ownedOperations.ast(),
-		usedModelType = ownedParameters->collect(x | self.ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS))),
-		-- ownedParameters = ownedParameters.ast(), FIXME specification is wrong.
-		isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox)
+def : ast() : qvto::VarParameter =
+	if containedInModule()
+	then qvto::ModelParameter {
+		name = name, 
+	type = ast().lookupModelType(self.ownedType.oclAsType(TypedTypeRef2CS)) 
 	}
-	
+	else
+		if notContainedInModule()
+		then qvto::VarParameter {
+			name = name 
+		}
+		else
+			invalid
+		endif
+	endif
+context QVToLibraryCS
+def : ast() : qvto::Library =
+	qvto::Library {
+		name = name, 
+	ownedOperations = ownedOperations.ast(), 
+	usedModelType = ownedParameters->collect(x | ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS))), 
+	isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox) 
+	}
 endpackage

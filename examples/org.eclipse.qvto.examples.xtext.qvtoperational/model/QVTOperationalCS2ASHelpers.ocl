@@ -1,0 +1,4 @@
+import  qvtocs : 'QVTOperationalCS.ecore#/'
+import  basecs : '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/'
+import  qvto : '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#/'
+import  ocl : '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/'

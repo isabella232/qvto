@@ -1,0 +1,243 @@
+source qvtocs : 'QVTOperationalCS.ecore#/',
+	   basecs : '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/'
+target qvto: '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#/', 
+		ocl: '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/'
+		
+-- NOT SUPPORTED YET extends '/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.cs2as'
+ 
+ 
+mappings {
+	map ocl::Model from TopLevelCS {
+		ownedPackages := let dummyPackage = ocl::Package {
+							-- NOT SUPPORTED YET name = '',
+							-- NOT SUPPORTED YET ownedClasses = ownedTypes.ast().oclAsType(ocl::Class) -- FIXME
+						} in dummyPackage->includingAll(ownedPackages.resolve);
+	}
+	
+	map ocl::Class from QVToClassCS {
+		name := name;
+		ownedProperties := ownedProperties.resolve.oclAsType(ocl::Property); -- FIXME 
+		ownedOperations := ownedOperations.resolve;
+	}
+	
+--	map qvto::VarParameter from OperationParameterDeclarationCS {
+--		
+--		name := name
+--		--kind = if direction = DirectionKindCS::inout then
+--		--			qvto::DirectionKind::inout
+--		--	   else if direction = DirectionKindCS::out then
+--		--	   		qvto::DirectionKind::out
+--		--	   else 
+--		--	   		qvto::DirectionKind::_in
+--		--	   endif endif
+--		--initExpression = if (initPart.oclIsUndefined()) then
+--		--					null
+--		--				else
+--		--					initPart.expression -- FIXME todo .ast()
+--		--				endif
+--	}
+
+	map  ocl::Package from MetamodelCS {
+		name := name;
+		nsPrefix := name;	-- QVTo spec doesn't provide concrete syntax for nsPrefix
+		URI := name;			-- QVTo spec doesn't provide concrete syntax for nsURI. Build an internal protocol
+		ownedClasses := ownedClasses.resolve; 
+		-- type = TODO
+	}
+	
+	map  qvto::ModelType from ModelTypeCS {
+	 	name := name;	
+	}
+	
+	map ocl::Property from ClassifierPropertyCS {
+		name := name;
+		isComposite := qualifiers->exists(x | x = 'composite');
+		-- type = TODO
+	}
+	
+	map qvto::MappingOperation from MappingOperationCS {
+		name := name;
+		-- ownedParameter := signature.parameter.ast()
+		ownedParameters := ownedParameters.ast();
+	}
+	
+	map qvto::OperationalTransformation from TransformationCS {
+		name := name;
+		modelParameter := ownedParameters.resolve.oclAsType(qvto::ModelParameter);
+		ownedOperations := ownedOperations.resolve;
+		isBlackbox := ownedQualifiers->exists(x | x = QualifierKindCS::blackbox);
+		isAbstract := ownedQualifiers->exists(x | x = QualifierKindCS::abstract);
+		-- refined := ast().lookupRelationalTransformation(refines);
+	}
+	
+	
+	map qvto::ModelParameter from ParameterDeclarationCS {
+		when containedInModule;
+			name := name;
+			type := resolve.lookup(ModelType, self.ownedType.oclAsType(TypedTypeRef2CS)); -- FIXME rework this
+	}
+
+	map qvto::VarParameter  from ParameterDeclarationCS {
+		when notContainedInModule;
+		 
+		 name := name;
+			--kind := if direction = DirectionKindCS::inout then
+			--			qvto::DirectionKind::inout
+			--	   else if direction = DirectionKindCS::out then
+			--	   		qvto::DirectionKind::out
+			--	   else 
+			--	   		qvto::DirectionKind::_in
+			--	   endif endif
+			--initExpression := if (initPart.oclIsUndefined()) then
+			--					null
+			--				else
+			--					initPart.expression -- FIXME todo .ast()
+			--				endif	
+	}
+
+	map qvto::Library from QVToLibraryCS{
+		name := name;
+		ownedOperations := ownedOperations.resolve;
+		usedModelType := ownedParameters->collect(x | resolve.lookup(ModelType, x.ownedType.oclAsType(TypedTypeRef2CS))); -- FIXME rework this
+		-- ownedParameters = ownedParameters.ast(), FIXME specification is wrong.
+		isBlackbox := ownedQualifiers->exists(x | x = QualifierKindCS::blackbox);
+	}
+}
+
+disambiguation {
+	
+	ParameterDeclarationCS {
+		containedInModule := self.oclContainer().oclIsKindOf(ModuleCS);
+		notContainedInModule := not self.oclContainer().oclIsKindOf(ModuleCS);
+	}
+}
+
+
+nameresolution {
+	
+--	Module {
+--		nested-scope
+--			ownedProperties,ownedOperations,ownedVariable
+--			occluding
+--				imported moduleImport.module;
+--			
+--			
+--	}
+
+	OperationalTransformation {
+		for modelParameter
+			nested-scope
+				ownedProperties,
+				ownedOperations,
+				--ownedOperations->excluding(ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?				
+				--ownedClasses No Package anymore
+				--ownedPackages No Package anymore
+				--ownedTag
+				ownedVariable
+				occluding
+					imported moduleImport.module;
+		for all -- remaining
+			nested-scope
+				ownedProperties,
+				ownedOperations,
+				--ownedOperations->excluding(ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?				
+				--ownedClasses No Package anymore
+				--ownedPackages No Package anymore
+				--ownedTag
+				ownedVariable,
+				modelParameter
+				occluding
+					imported moduleImport.module;
+	}
+
+	Library {
+		
+		nested-scope
+			ownedProperties,
+			ownedOperations,
+			--ownedOperations->excluding(ownedOperations->any(oclIsKindOf(EntryOperation)))) -- To discuss, can entry main() operation be called ?				
+			--ownedClasses No Package anymore
+			--ownedPackages No Package anymore
+			--ownedTag
+			ownedVariable
+			occluding
+				imported moduleImport.module;
+	}
+
+	ModelType {
+		named-element;
+		
+		for additionalCondition
+			nested-scope
+				metamodel--,
+				-- ADD SELF VAR FROM WHERE ???? -> OMG fix
+				;
+		for all --remaining
+			nested-scope
+				metamodel;
+	}
+
+	ImperativeOperation {
+		
+		for _body
+			nested-scope
+				_context,
+				result,
+				ownedParameters;
+				
+	}
+
+	MappingOperation {
+		for _body
+			nested-scope
+				_context,
+				result,
+				ownedParameters;
+		for _when
+			nested-scope
+				_context,
+				ownedParameters;
+		for _where
+			nested-scope
+				_context,
+				result,
+				ownedParameters;
+				
+	}
+
+	OperationBody {
+		for content
+			nested-scope
+				variable,
+				following content->selectByKind(imperativeocl::VariableInitExp).referredVariable;
+	}
+	
+
+	ConstructorBody {
+		for content
+			nested-scope
+				variable,
+				following content->selectByKind(imperativeocl::VariableInitExp).referredVariable;
+	}	
+
+	MappingBody {
+		for content
+			nested-scope
+				variable,
+				following content->selectByKind(imperativeocl::VariableInitExp).referredVariable;
+		for initSection
+			nested-scope
+				variable,
+				following initSection->selectByKind(imperativeocl::VariableInitExp).referredVariable;
+		for initSection
+			nested-scope
+				variable,
+				following initSection->selectByKind(imperativeocl::VariableInitExp).referredVariable;				
+	}
+
+	ResolveExp {
+		for condition
+			nested-scope
+				_target;
+	}
+}
