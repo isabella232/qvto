@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Export-Package: org.eclipse.qvto.examples.pivot.imperativeocl,
  org.eclipse.qvto.examples.pivot.imperativeocl.impl,
  org.eclipse.qvto.examples.pivot.imperativeocl.lookup,
+ org.eclipse.qvto.examples.pivot.imperativeocl.lookup.util,
  org.eclipse.qvto.examples.pivot.imperativeocl.util,
  org.eclipse.qvto.examples.pivot.imperativeocl.utilities
 Require-Bundle: org.eclipse.core.runtime,

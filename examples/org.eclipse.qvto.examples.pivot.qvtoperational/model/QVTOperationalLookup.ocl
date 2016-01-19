@@ -2,14 +2,13 @@ import '/resource/org.eclipse.ocl.pivot/model/Lookup.ecore'
 import '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'
 import '/resource/org.eclipse.ocl.pivot/model/PivotLookup.ocl'
 import '/resource/org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.ecore'
-import '/resource/org.eclipse.qvto.examples.xtext.qvtoperational/model/QVTOperationalCS.ecore'
 import 'QVTOperational.ecore'
 
 package pivot
 
 -- Lookup operations
 
-context pivot::Visitable
+context Visitable
 
 def : _lookupModelType(env : lookup::LookupEnvironment, path : qvtoperationalcs::PathElement2CS, local : Boolean) : qvtoperational::ModelType[?] =
 	let foundElements = env.namedElements->selectByKind(qvtoperational::ModelType)->select(name = path.name) 
