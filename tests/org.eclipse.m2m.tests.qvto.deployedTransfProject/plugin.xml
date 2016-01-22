@@ -13,5 +13,12 @@
             id="deployedTransformationId">
       </transformation>
    </extension>
+   <extension
+         point="org.eclipse.m2m.qvt.oml.runtime.qvtTransformation">
+      <library
+            file="transforms/NonExistingLibrary.qvto"
+            id="NonExistingLibrary">
+      </library>
+   </extension>
 
 </plugin>

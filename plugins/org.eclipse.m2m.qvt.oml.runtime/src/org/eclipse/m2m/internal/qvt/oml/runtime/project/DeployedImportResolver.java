@@ -8,10 +8,12 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 319076, 465184
+ *     Christopher Gerking - bugs 319076, 465184, 483290
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.common.project.TransformationRegistry;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
@@ -48,7 +50,13 @@ public class DeployedImportResolver extends DelegatingUnitResolver {
 	protected UnitProxy doResolveUnit(String qualifiedName) {
 		DeployedTransformation transformation = transformationRegistry.getSingleTransformationById(qualifiedName);
 				
-		return transformation == null ? null : UnitResolverFactory.Registry.INSTANCE.getUnit(transformation.getUri());
+		URI uri = transformation == null ? null : transformation.getUri();
+		
+		if (uri != null && URIConverter.INSTANCE.exists(uri, null)) {
+			return UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
+		}
+		
+		return null;
 	}
 
 }
