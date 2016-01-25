@@ -45,6 +45,11 @@ public class ParserTests {
         	return usesSourceAnnotations;
 		}
         
+        @Override
+        public String toString() {
+        	return getDir();
+        }
+        
         private final String myDir;
         private final int myErrCount;
         private final int myWarnCount;
