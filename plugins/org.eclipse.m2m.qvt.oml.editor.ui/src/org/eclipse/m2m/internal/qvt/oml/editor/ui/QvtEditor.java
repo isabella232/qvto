@@ -695,7 +695,7 @@ public class QvtEditor extends TextEditor implements IQVTReconcilingListener {
 		public void prependTextPresentationListener(ITextPresentationListener listener) {
 
     		if (fTextPresentationListeners == null)
-    			fTextPresentationListeners = new ArrayList<Object>();
+    			fTextPresentationListeners = new ArrayList();
 
     		fTextPresentationListeners.remove(listener);
     		fTextPresentationListeners.add(0, listener);
