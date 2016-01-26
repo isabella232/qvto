@@ -22,7 +22,7 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
+import org.eclipse.ocl.pivot.utilities.PivotAS2MonikerVisitor;
 
 /**
  * An AbstractImperativeOCLAS2MonikerVisitor provides a default implementation for each
@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractImperativeOCLAS2MonikerVisitor
-	extends AS2MonikerVisitor
+	extends PivotAS2MonikerVisitor
 	implements ImperativeOCLVisitor<Object>
 {
 	/**

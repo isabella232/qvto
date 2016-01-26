@@ -328,7 +328,8 @@ public class ImperativeOCLPackageImpl extends EPackageImpl implements Imperative
 		if (isInited) return (ImperativeOCLPackage)EPackage.Registry.INSTANCE.getEPackage(ImperativeOCLPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ImperativeOCLPackageImpl theImperativeOCLPackage = (ImperativeOCLPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImperativeOCLPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImperativeOCLPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ImperativeOCLPackageImpl theImperativeOCLPackage = (ImperativeOCLPackageImpl)(ePackage instanceof ImperativeOCLPackageImpl ? ePackage : new ImperativeOCLPackageImpl());
 
 		isInited = true;
 

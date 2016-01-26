@@ -303,7 +303,8 @@ public class ImperativeOCLCSPackageImpl extends EPackageImpl implements Imperati
 		if (isInited) return (ImperativeOCLCSPackage)EPackage.Registry.INSTANCE.getEPackage(ImperativeOCLCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		ImperativeOCLCSPackageImpl theImperativeOCLCSPackage = (ImperativeOCLCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImperativeOCLCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImperativeOCLCSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ImperativeOCLCSPackageImpl theImperativeOCLCSPackage = (ImperativeOCLCSPackageImpl)(ePackage instanceof ImperativeOCLCSPackageImpl ? ePackage : new ImperativeOCLCSPackageImpl());
 
 		isInited = true;
 

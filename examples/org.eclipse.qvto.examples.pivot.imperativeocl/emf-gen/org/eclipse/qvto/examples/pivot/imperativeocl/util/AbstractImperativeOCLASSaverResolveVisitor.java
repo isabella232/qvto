@@ -22,7 +22,7 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
-import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
+import org.eclipse.ocl.pivot.utilities.PivotASSaverResolveVisitor;
 
 /**
  * An AbstractImperativeOCLASSaverResolveVisitor provides a default implementation for each
@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractImperativeOCLASSaverResolveVisitor
-	extends ASSaverResolveVisitor
+	extends PivotASSaverResolveVisitor
 	implements ImperativeOCLVisitor<Object>
 {
 	/**

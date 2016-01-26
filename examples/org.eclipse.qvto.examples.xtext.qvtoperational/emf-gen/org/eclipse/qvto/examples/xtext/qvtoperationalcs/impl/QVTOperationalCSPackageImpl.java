@@ -425,7 +425,8 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		if (isInited) return (QVTOperationalCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTOperationalCSPackageImpl theQVTOperationalCSPackage = (QVTOperationalCSPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTOperationalCSPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTOperationalCSPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTOperationalCSPackageImpl theQVTOperationalCSPackage = (QVTOperationalCSPackageImpl)(ePackage instanceof QVTOperationalCSPackageImpl ? ePackage : new QVTOperationalCSPackageImpl());
 
 		isInited = true;
 
