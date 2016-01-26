@@ -27,51 +27,26 @@ import org.eclipse.emf.ecore.resource.impl.*
  *	Generate the Pivot-based QVTo Models.
  */
 var platformURI = ".."
-var javaSrcFolder = "emf-gen"
+
 /*
  * OCL related configuration variables
  */
 var oclProjectName = "org.eclipse.ocl.pivot"
-var oclProjectURI = "platform:/resource/${oclProjectName}"
-var oclProjectPrefix = ""
-var oclEcoreProjectPath = "model/Pivot.ecore"
-var oclEcoreURI = "${oclProjectURI}/${oclEcoreProjectPath}"
-var oclModelPackage = "${oclProjectName}"
-var oclVisitorPackage = "${oclModelPackage}.util"
-var oclVisitorName = "Visitor"
-var oclVisitorQualifiedName = "${oclVisitorPackage}.${oclVisitorName}"
-var oclVisitablePackage = "${oclVisitorPackage}"
-var oclVisitableName = "Visitable"
+var oclGenModelProjectPath = "model/Pivot.genmodel"
 
 /*
  * ImperativeOCL related configuration variables
  */
 var imperativeOclProjectName = "org.eclipse.qvto.examples.pivot.imperativeocl"
-var imperativeOclProjectURI = "platform:/resource/${imperativeOclProjectName}"
-var imperativeOclProjectPrefix = "ImperativeOCL"
-var imperativeOclEcoreProjectPath = "model/ImperativeOCL.ecore"
-var imperativeOclEcoreURI = "${imperativeOclProjectURI}/${imperativeOclEcoreProjectPath}"
-var imperativeOclGenModelProjectPath = "model/${imperativeOclProjectPrefix}.genmodel"
+var imperativeOclGenModelProjectPath = "model/ImperativeOCL.genmodel"
 var imperativeOclGenModelPath = "${imperativeOclProjectName}/${imperativeOclGenModelProjectPath}"
-var imperativeOclModelPackage = "${imperativeOclProjectName}"
-var imperativeOclVisitorPackage = "${imperativeOclProjectName}.util"
-var imperativeOclVisitorName = "${imperativeOclProjectPrefix}Visitor"
-var imperativeOclVisitorQualifiedName = "${imperativeOclVisitorPackage}.${imperativeOclVisitorName}"
 
 /*
  * QVTOperational related configuration variables
  */
 var qvtOperationalProjectName = "org.eclipse.qvto.examples.pivot.qvtoperational"
-var qvtOperationalProjectURI = "platform:/resource/${qvtOperationalProjectName}"
-var qvtOperationalProjectPrefix = "QVTOperational"
-var qvtOperationalEcoreProjectPath = "model/QVTOperational.ecore"
-var qvtOperationalEcoreURI = "${qvtOperationalProjectURI}/${qvtOperationalEcoreProjectPath}"
-var qvtOperationalGenModelProjectPath = "model/${qvtOperationalProjectPrefix}.genmodel"
+var qvtOperationalGenModelProjectPath = "model/QVTOperational.genmodel"
 var qvtOperationalGenModelPath = "${qvtOperationalProjectName}/${qvtOperationalGenModelProjectPath}"
-var qvtOperationalModelPackage = "${qvtOperationalProjectName}"
-var qvtOperationalVisitorPackage = "${qvtOperationalProjectName}.util"
-var qvtOperationalVisitorName = "${qvtOperationalProjectPrefix}Visitor"
-var qvtOperationalVisitorQualifiedName = "${qvtOperationalVisitorPackage}.${qvtOperationalVisitorName}"
 
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
@@ -131,34 +106,20 @@ Workflow {
 	}
     
     component = GenerateASVisitors {	resourceSet = resourceSet
-    	projectName = imperativeOclProjectName
-    	projectPrefix = imperativeOclProjectPrefix 
+    	projectName = imperativeOclProjectName 
     	superProjectName = oclProjectName
-    	superProjectPrefix = oclProjectPrefix
-    	javaFolder = javaSrcFolder
+    	baseProjectName = oclProjectName    	
     	genModelFile = imperativeOclGenModelProjectPath
-    	modelPackageName = imperativeOclModelPackage
-    	visitorPackageName = imperativeOclVisitorPackage
-    	visitorClassName = imperativeOclVisitorName
-    	superVisitorPackageName = oclVisitorPackage
-    	superVisitorClassName = oclVisitorName
-    	visitablePackageName = oclVisitablePackage
-    	visitableClassName = oclVisitableName
+    	superGenModelFile = oclGenModelProjectPath
+    	baseGenModelFile = oclGenModelProjectPath
     }
     
     component = GenerateASVisitors {	resourceSet = resourceSet
     	projectName = qvtOperationalProjectName
-    	projectPrefix =  qvtOperationalProjectPrefix
     	superProjectName = imperativeOclProjectName
-    	superProjectPrefix = imperativeOclProjectPrefix
-    	javaFolder = javaSrcFolder
+    	baseProjectName = oclProjectName
     	genModelFile = qvtOperationalGenModelProjectPath
-    	modelPackageName = qvtOperationalModelPackage
-    	visitorPackageName = qvtOperationalVisitorPackage
-    	visitorClassName = qvtOperationalVisitorName
-    	superVisitorPackageName = imperativeOclVisitorPackage
-    	superVisitorClassName = imperativeOclVisitorName
-    	visitablePackageName = oclVisitablePackage
-    	visitableClassName = oclVisitableName
+    	superGenModelFile = imperativeOclGenModelProjectPath
+    	baseGenModelFile = oclGenModelProjectPath
     }
 }
