@@ -2,7 +2,7 @@
  * «codeGenHelper.getCopyright(' * ')»
  *
  * This code is 100% auto-generated
- * using: org.eclipse.ocl.examples.codegen.java.JavaStream
+ * using: org.eclipse.ocl.examples.autogen.lookup.LookupUnqualifiedCodeGenerator
  *
  * Do not edit it.
  ********************************************************************************/
@@ -10,15 +10,12 @@
 package org.eclipse.qvto.examples.pivot.imperativeocl.util;
 
 import java.util.Iterator;
-import java.util.List;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.ids.ClassId;
-import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.ids.NsURIPackageId;
-import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.lookup.LookupEnvironment;
 import org.eclipse.ocl.pivot.internal.lookup.LookupPackage;
@@ -26,53 +23,21 @@ import org.eclipse.ocl.pivot.library.collection.CollectionIncludesOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.util.PivotUnqualifiedLookupVisitor;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
-import org.eclipse.qvto.examples.pivot.imperativeocl.AltExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.AssertExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.AssignExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.BlockExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.BreakExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.CatchExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ComputeExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ContinueExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.DictLiteralPart;
-import org.eclipse.qvto.examples.pivot.imperativeocl.DictionaryType;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ForExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeExpression;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeIterateExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeLoopExp;
 import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
-import org.eclipse.qvto.examples.pivot.imperativeocl.InstantiationExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ListLiteralExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ListType;
-import org.eclipse.qvto.examples.pivot.imperativeocl.LogExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleLiteralPart;
-import org.eclipse.qvto.examples.pivot.imperativeocl.OrderedTupleType;
-import org.eclipse.qvto.examples.pivot.imperativeocl.RaiseExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.ReturnExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.SwitchExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.TryExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.Typedef;
-import org.eclipse.qvto.examples.pivot.imperativeocl.UnlinkExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.UnpackExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.VariableInitExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp;
-import org.eclipse.qvto.examples.pivot.imperativeocl.util.ImperativeOCLVisitor;
 
 public class ImperativeOCLUnqualifiedLookupVisitor
-	extends PivotUnqualifiedLookupVisitor
-	implements ImperativeOCLVisitor<LookupEnvironment>
+	extends AbstractImperativeOCLCommonLookupVisitor
 {
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_ocl_s_2015_s_Lookup = IdManager.getNsURIPackageId("http://www.eclipse.org/ocl/2015/Lookup", null, LookupPackage.eINSTANCE);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/pivot/1.0/ImperativeOCL", null, ImperativeOCLPackage.eINSTANCE);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_java_c_s_s_org_eclipse_qvto_examples_pivot_imperativeocl_util = IdManager.getRootPackageId("java://org.eclipse.qvto.examples.pivot.imperativeocl.util");
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AltExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("AltExp", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AssertExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("AssertExp", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_AssignExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("AssignExp", 0);
@@ -85,7 +50,9 @@ public class ImperativeOCLUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_DictLiteralPart = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("DictLiteralPart", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_DictionaryType = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("DictionaryType", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Element = PACKid_$metamodel$.getClassId("Element", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_Executor = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Executor", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ForExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ForExp", 0);
+    public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ImperativeExpression = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ImperativeExpression", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ImperativeIterateExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ImperativeIterateExp", 0);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull ClassId CLSSid_ImperativeLoopExp = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_pivot_s_1_0_s_ImperativeOCL.getClassId("ImperativeLoopExp", 0);
@@ -113,10 +80,36 @@ public class ImperativeOCLUnqualifiedLookupVisitor
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_OCLExpression = TypeId.ORDERED_SET.getSpecializedId(CLSSid_OCLExpression);
     public static final /*@NonInvalid*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull CollectionTypeId ORD_CLSSid_Variable = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Variable);
     
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.evaluation.@org.eclipse.jdt.annotation.NonNull Executor executor;
+    protected final /*@Thrown*/ org.eclipse.ocl.pivot.ids.@org.eclipse.jdt.annotation.NonNull IdResolver idResolver;
     protected /*@Thrown*/ java.lang.@org.eclipse.jdt.annotation.Nullable Object child;
     
     public ImperativeOCLUnqualifiedLookupVisitor(/*@NonNull*/ LookupEnvironment context) {
         super(context);
+        this.executor = context.getExecutor();
+        this.idResolver = executor.getIdResolver();
+    }
+    
+    @Override
+    protected /*@Nullable*/ LookupEnvironment doVisiting(/*@NonNull*/ Visitable visitable) {
+        return parentEnv((EObject)visitable);
+    }
+    @Override
+    protected PivotUnqualifiedLookupVisitor createSuperLangVisitor() {
+        return new PivotUnqualifiedLookupVisitor(context);}
+    
+    /**
+     * Continue the search for matches in the parent of element.
+     */
+    protected /*@Nullable*/ LookupEnvironment parentEnv(/*@NonNull*/ EObject element) {
+        EObject parent = element.eContainer();
+        if (parent instanceof Visitable) {
+            this.child = element;
+            return ((Visitable)parent).accept(this);
+        }
+        else {
+            return context;
+        }
     }
     
     /**
@@ -297,7 +290,7 @@ public class ImperativeOCLUnqualifiedLookupVisitor
             }
             else {
                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedIterators_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Variable, ownedIterators);
-                final /*@Thrown*/ boolean includes = ClassUtil.nonNullState(CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child).booleanValue());
+                final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child).booleanValue();
                 /*@Thrown*/ org.eclipse.ocl.pivot.internal.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_3;
                 if (includes) {
                     /*@Thrown*/ OrderedSetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_Variable);
@@ -312,9 +305,9 @@ public class ImperativeOCLUnqualifiedLookupVisitor
                         /**
                          * _'<' : Boolean[1]
                          */
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, x));
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf_0 = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child));
-                        final /*@Thrown*/ boolean lt = ClassUtil.nonNullState(OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue());
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, x);
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child);
+                        final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue();
                         //
                         if (lt == ValueUtil.TRUE_VALUE) {
                             accumulator.add(x);
@@ -400,7 +393,7 @@ public class ImperativeOCLUnqualifiedLookupVisitor
             }
             else {
                 final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_ownedIterators_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Variable, ownedIterators_1);
-                final /*@Thrown*/ boolean includes = ClassUtil.nonNullState(CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child).booleanValue());
+                final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child).booleanValue();
                 /*@Thrown*/ org.eclipse.ocl.pivot.internal.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_3;
                 if (includes) {
                     /*@Thrown*/ OrderedSetValue.@org.eclipse.jdt.annotation.NonNull Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_Variable);
@@ -415,9 +408,9 @@ public class ImperativeOCLUnqualifiedLookupVisitor
                         /**
                          * _'<' : Boolean[1]
                          */
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, x));
-                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf_0 = ClassUtil.nonNullState(OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child));
-                        final /*@Thrown*/ boolean lt = ClassUtil.nonNullState(OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue());
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, x);
+                        final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedIterators_1, child);
+                        final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(executor, indexOf, indexOf_0).booleanValue();
                         //
                         if (lt == ValueUtil.TRUE_VALUE) {
                             accumulator.add(x);
@@ -578,7 +571,7 @@ public class ImperativeOCLUnqualifiedLookupVisitor
         final /*@Thrown*/ org.eclipse.ocl.pivot.internal.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment parentEnv_0 = this.parentEnv(element_24);
         final /*@Thrown*/ java.util.@org.eclipse.jdt.annotation.NonNull List<OCLExpression> tryBody = element_24.getTryBody();
         final /*@Thrown*/ org.eclipse.ocl.pivot.values.@org.eclipse.jdt.annotation.NonNull OrderedSetValue BOXED_tryBody = idResolver.createOrderedSetOfAll(ORD_CLSSid_OCLExpression, tryBody);
-        final /*@Thrown*/ boolean includes = ClassUtil.nonNullState(CollectionIncludesOperation.INSTANCE.evaluate(BOXED_tryBody, child).booleanValue());
+        final /*@Thrown*/ boolean includes = CollectionIncludesOperation.INSTANCE.evaluate(BOXED_tryBody, child).booleanValue();
         /*@Thrown*/ org.eclipse.ocl.pivot.internal.lookup.@org.eclipse.jdt.annotation.Nullable LookupEnvironment symbol_0;
         if (includes) {
             symbol_0 = parentEnv_0;

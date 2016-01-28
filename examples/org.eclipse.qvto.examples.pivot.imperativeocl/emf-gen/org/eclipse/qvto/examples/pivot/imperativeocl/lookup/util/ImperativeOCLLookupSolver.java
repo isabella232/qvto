@@ -13,17 +13,19 @@
  *
  * This code is auto-generated
  * from: org.eclipse.qvto.examples.pivot.imperativeocl/model/ImperativeOCL.genmodel
+ * template: org.eclipse.ocl.examples.build.xtend.GenerateAutoLookupInfrastructureXtend
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
 package	org.eclipse.qvto.examples.pivot.imperativeocl.lookup.util;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.evaluation.Executor;
 import org.eclipse.ocl.pivot.internal.lookup.util.PivotLookupSolver;
 
 public class ImperativeOCLLookupSolver extends PivotLookupSolver {
 	
-	public ImperativeOCLLookupSolver (Executor executor) {
+	public ImperativeOCLLookupSolver (@NonNull Executor executor) {
 		super(executor);
 	}
 	

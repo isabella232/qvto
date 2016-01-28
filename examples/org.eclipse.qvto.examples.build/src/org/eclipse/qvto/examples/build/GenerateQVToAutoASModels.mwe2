@@ -60,7 +60,8 @@ Workflow {
     
     /* FIXME due to a weird/hard bug. Just one of lookup generation can properly be generated. Imports of .ocl are not 
      * properly resolved when executing the second generation
-      component = @SubGenerateAutoASModel {	resourceSet = resourceSet
+     */
+    component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = imperativeOclProjectName 
     	superProjectName = oclProjectName
     	baseProjectName = oclProjectName    	
@@ -70,9 +71,9 @@ Workflow {
     	lookupFilePath = imperativeOclLookupFilePath
     	superlookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
     	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
-    }*/
+    }
           
-   
+   /*
    component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = qvtOperationalProjectName
     	superProjectName = imperativeOclProjectName
@@ -82,5 +83,5 @@ Workflow {
     	baseGenModelFile = oclGenModelProjectPath
     	lookupFilePath = qvtOperationalLookupFilePath
     	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
-    }
+    }*/
 }
