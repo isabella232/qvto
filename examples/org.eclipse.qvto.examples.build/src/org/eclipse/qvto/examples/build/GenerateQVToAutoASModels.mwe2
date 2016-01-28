@@ -45,7 +45,7 @@ var imperativeOclLookupFilePath = "model/ImperativeOCLLookup.ocl"
  */
 var qvtOperationalProjectName = "org.eclipse.qvto.examples.pivot.qvtoperational"
 var qvtOperationalGenModelProjectPath = "model/QVTOperational.genmodel"
-var qvtOperationalLookupFilePath = "model/QVTOperationalLookup.ocl"
+var qvtOperationalLookupFilePath = "model/QVTOperationalCS2ASLookup.ocl"
 
 /**
  *	Generate the Concrete Syntax Models used by the Xtext editors.
@@ -69,6 +69,7 @@ Workflow {
     	baseGenModelFile = oclGenModelProjectPath
     	lookupFilePath = imperativeOclLookupFilePath
     	superlookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
+    	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
     }*/
           
    
@@ -79,6 +80,7 @@ Workflow {
     	genModelFile = qvtOperationalGenModelProjectPath
     	superGenModelFile = imperativeOclGenModelProjectPath
     	baseGenModelFile = oclGenModelProjectPath
-    	lookupFilePath = qvtOperationalLookupFilePath    	
+    	lookupFilePath = qvtOperationalLookupFilePath
+    	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
     }
 }

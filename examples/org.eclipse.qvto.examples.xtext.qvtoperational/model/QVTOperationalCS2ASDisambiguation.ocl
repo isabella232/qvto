@@ -2,8 +2,8 @@ import  qvtocs : 'QVTOperationalCS.ecore#/'
 import  basecs : '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/'
 import  qvto : '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#/'
 import  ocl : '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/'
-import 'QVTOperationalCS2ASHelpers.ocl'
-import 'QVTOperationalCS2ASLookup.ocl'
+import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalCS2ASHelpers.ocl'
+import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalCS2ASLookup.ocl'
 package qvtocs
 
 context ParameterDeclarationCS
