@@ -1011,7 +1011,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
         if (_lookupResult.size() == 1) {
             _lookupModelType = _lookupResult.getSingleResult();
         } else {
-            handleLookupError(pathSeq,name);
+            handleLookupError(pathSeq,last);
         };
         // property assignments
         oclAsType.setType(_lookupModelType);
@@ -1335,7 +1335,7 @@ public class QVTOperationalCS2AS_qvtp_qvtias extends AbstractCS2ASTransformer
             if (_lookupResult.size() == 1) {
                 _lookupModelType = _lookupResult.getSingleResult();
             } else {
-                handleLookupError(pathSeq,name);
+                handleLookupError(pathSeq,last);
             };
             //
             accumulator.add(_lookupModelType);
