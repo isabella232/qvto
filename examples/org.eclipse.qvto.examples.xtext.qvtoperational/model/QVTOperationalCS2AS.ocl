@@ -64,7 +64,7 @@ def : ast() : qvto::VarParameter =
 	if containedInModule()
 	then qvto::ModelParameter {
 		name = name, 
-	type = ast().lookupModelType(self.ownedType.oclAsType(TypedTypeRef2CS)) 
+	type = ast().lookupModelType(self.ownedType.oclAsType(TypedTypeRef2CS).ownedPathName) 
 	}
 	else
 		if notContainedInModule()
@@ -80,7 +80,7 @@ def : ast() : qvto::Library =
 	qvto::Library {
 		name = name, 
 	ownedOperations = ownedOperations.ast(), 
-	usedModelType = ownedParameters->collect(x | ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS))), 
+	usedModelType = ownedParameters->collect(x | ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS).ownedPathName)), 
 	isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox) 
 	}
 endpackage

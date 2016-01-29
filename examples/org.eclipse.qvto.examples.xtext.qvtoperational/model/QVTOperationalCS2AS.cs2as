@@ -74,7 +74,7 @@ mappings {
 	map qvto::ModelParameter from ParameterDeclarationCS {
 		when containedInModule;
 			name := name;
-			type := resolve.lookup(ModelType, self.ownedType.oclAsType(TypedTypeRef2CS)); -- FIXME rework this
+			type := resolve.lookup(ModelType, self.ownedType.oclAsType(TypedTypeRef2CS).ownedPathName); -- FIXME rework this
 	}
 
 	map qvto::VarParameter  from ParameterDeclarationCS {
@@ -98,7 +98,7 @@ mappings {
 	map qvto::Library from QVToLibraryCS{
 		name := name;
 		ownedOperations := ownedOperations.resolve;
-		usedModelType := ownedParameters->collect(x | resolve.lookup(ModelType, x.ownedType.oclAsType(TypedTypeRef2CS))); -- FIXME rework this
+		usedModelType := ownedParameters->collect(x | resolve.lookup(ModelType, x.ownedType.oclAsType(TypedTypeRef2CS).ownedPathName)); -- FIXME rework this
 		-- ownedParameters = ownedParameters.ast(), FIXME specification is wrong.
 		isBlackbox := ownedQualifiers->exists(x | x = QualifierKindCS::blackbox);
 	}
