@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
@@ -121,8 +122,8 @@ public class ImperativeOCLAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ImperativeOCLSwitch<Adapter> modelSwitch =
-		new ImperativeOCLSwitch<Adapter>() {
+	protected ImperativeOCLSwitch<@Nullable Adapter> modelSwitch =
+		new ImperativeOCLSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseAltExp(AltExp object) {
 				return createAltExpAdapter();

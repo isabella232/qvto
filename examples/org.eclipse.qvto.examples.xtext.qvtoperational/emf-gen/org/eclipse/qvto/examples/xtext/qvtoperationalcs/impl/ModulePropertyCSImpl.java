@@ -3,11 +3,16 @@
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.StructuralFeatureCSImpl;
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathName2CS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -17,31 +22,21 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModulePropertyCSImpl#getSimpleNameCS <em>Simple Name CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModulePropertyCSImpl#getOwnedScopedName <em>Owned Scoped Name</em>}</li>
  * </ul>
  *
  * @generated
  */
-public abstract class ModulePropertyCSImpl extends ElementCSImpl implements ModulePropertyCS {
+public class ModulePropertyCSImpl extends StructuralFeatureCSImpl implements ModulePropertyCS {
 	/**
-	 * The default value of the '{@link #getSimpleNameCS() <em>Simple Name CS</em>}' attribute.
+	 * The cached value of the '{@link #getOwnedScopedName() <em>Owned Scoped Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSimpleNameCS()
+	 * @see #getOwnedScopedName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SIMPLE_NAME_CS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSimpleNameCS() <em>Simple Name CS</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSimpleNameCS()
-	 * @generated
-	 * @ordered
-	 */
-	protected String simpleNameCS = SIMPLE_NAME_CS_EDEFAULT;
+	protected PathName2CS ownedScopedName;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -67,8 +62,8 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSimpleNameCS() {
-		return simpleNameCS;
+	public PathName2CS getOwnedScopedName() {
+		return ownedScopedName;
 	}
 
 	/**
@@ -76,11 +71,14 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSimpleNameCS(String newSimpleNameCS) {
-		String oldSimpleNameCS = simpleNameCS;
-		simpleNameCS = newSimpleNameCS;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_PROPERTY_CS__SIMPLE_NAME_CS, oldSimpleNameCS, simpleNameCS));
+	public NotificationChain basicSetOwnedScopedName(PathName2CS newOwnedScopedName, NotificationChain msgs) {
+		PathName2CS oldOwnedScopedName = ownedScopedName;
+		ownedScopedName = newOwnedScopedName;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME, oldOwnedScopedName, newOwnedScopedName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -88,8 +86,32 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String toString() {
-		return super.toString();
+	public void setOwnedScopedName(PathName2CS newOwnedScopedName) {
+		if (newOwnedScopedName != ownedScopedName) {
+			NotificationChain msgs = null;
+			if (ownedScopedName != null)
+				msgs = ((InternalEObject)ownedScopedName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME, null, msgs);
+			if (newOwnedScopedName != null)
+				msgs = ((InternalEObject)newOwnedScopedName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME, null, msgs);
+			msgs = basicSetOwnedScopedName(newOwnedScopedName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME, newOwnedScopedName, newOwnedScopedName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME:
+				return basicSetOwnedScopedName(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -100,8 +122,8 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__SIMPLE_NAME_CS:
-				return getSimpleNameCS();
+			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME:
+				return getOwnedScopedName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,8 +136,8 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__SIMPLE_NAME_CS:
-				setSimpleNameCS((String)newValue);
+			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME:
+				setOwnedScopedName((PathName2CS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -129,8 +151,8 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__SIMPLE_NAME_CS:
-				setSimpleNameCS(SIMPLE_NAME_CS_EDEFAULT);
+			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME:
+				setOwnedScopedName((PathName2CS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -144,10 +166,20 @@ public abstract class ModulePropertyCSImpl extends ElementCSImpl implements Modu
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__SIMPLE_NAME_CS:
-				return SIMPLE_NAME_CS_EDEFAULT == null ? simpleNameCS != null : !SIMPLE_NAME_CS_EDEFAULT.equals(simpleNameCS);
+			case QVTOperationalCSPackage.MODULE_PROPERTY_CS__OWNED_SCOPED_NAME:
+				return ownedScopedName != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(BaseCSVisitor<R> visitor) {
+		return (R) ((QVTOperationalCSVisitor<?>)visitor).visitModulePropertyCS(this);
 	}
 
 

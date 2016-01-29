@@ -12,6 +12,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SeverityKindCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
 /**
@@ -22,8 +23,8 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.AssertExpCSImpl#getAssertion <em>Assertion</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.AssertExpCSImpl#getLog <em>Log</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.AssertExpCSImpl#getOwnedAssertion <em>Owned Assertion</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.AssertExpCSImpl#getOwnedLog <em>Owned Log</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.AssertExpCSImpl#getSeverity <em>Severity</em>}</li>
  * </ul>
  *
@@ -31,24 +32,24 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  */
 public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	/**
-	 * The cached value of the '{@link #getAssertion() <em>Assertion</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedAssertion() <em>Owned Assertion</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getAssertion()
+	 * @see #getOwnedAssertion()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS assertion;
+	protected ExpCS ownedAssertion;
 
 	/**
-	 * The cached value of the '{@link #getLog() <em>Log</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedLog() <em>Owned Log</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLog()
+	 * @see #getOwnedLog()
 	 * @generated
 	 * @ordered
 	 */
-	protected LogExpCS log;
+	protected LogExpCS ownedLog;
 
 	/**
 	 * The default value of the '{@link #getSeverity() <em>Severity</em>}' attribute.
@@ -58,7 +59,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String SEVERITY_EDEFAULT = null;
+	protected static final SeverityKindCS SEVERITY_EDEFAULT = SeverityKindCS.ERROR;
 
 	/**
 	 * The cached value of the '{@link #getSeverity() <em>Severity</em>}' attribute.
@@ -68,7 +69,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected String severity = SEVERITY_EDEFAULT;
+	protected SeverityKindCS severity = SEVERITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,8 +95,8 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getAssertion() {
-		return assertion;
+	public ExpCS getOwnedAssertion() {
+		return ownedAssertion;
 	}
 
 	/**
@@ -103,11 +104,11 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetAssertion(ExpCS newAssertion, NotificationChain msgs) {
-		ExpCS oldAssertion = assertion;
-		assertion = newAssertion;
+	public NotificationChain basicSetOwnedAssertion(ExpCS newOwnedAssertion, NotificationChain msgs) {
+		ExpCS oldOwnedAssertion = ownedAssertion;
+		ownedAssertion = newOwnedAssertion;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION, oldAssertion, newAssertion);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION, oldOwnedAssertion, newOwnedAssertion);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -118,18 +119,18 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAssertion(ExpCS newAssertion) {
-		if (newAssertion != assertion) {
+	public void setOwnedAssertion(ExpCS newOwnedAssertion) {
+		if (newOwnedAssertion != ownedAssertion) {
 			NotificationChain msgs = null;
-			if (assertion != null)
-				msgs = ((InternalEObject)assertion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION, null, msgs);
-			if (newAssertion != null)
-				msgs = ((InternalEObject)newAssertion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION, null, msgs);
-			msgs = basicSetAssertion(newAssertion, msgs);
+			if (ownedAssertion != null)
+				msgs = ((InternalEObject)ownedAssertion).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION, null, msgs);
+			if (newOwnedAssertion != null)
+				msgs = ((InternalEObject)newOwnedAssertion).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION, null, msgs);
+			msgs = basicSetOwnedAssertion(newOwnedAssertion, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION, newAssertion, newAssertion));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION, newOwnedAssertion, newOwnedAssertion));
 	}
 
 	/**
@@ -137,8 +138,8 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LogExpCS getLog() {
-		return log;
+	public LogExpCS getOwnedLog() {
+		return ownedLog;
 	}
 
 	/**
@@ -146,11 +147,11 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLog(LogExpCS newLog, NotificationChain msgs) {
-		LogExpCS oldLog = log;
-		log = newLog;
+	public NotificationChain basicSetOwnedLog(LogExpCS newOwnedLog, NotificationChain msgs) {
+		LogExpCS oldOwnedLog = ownedLog;
+		ownedLog = newOwnedLog;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG, oldLog, newLog);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG, oldOwnedLog, newOwnedLog);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -161,18 +162,18 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setLog(LogExpCS newLog) {
-		if (newLog != log) {
+	public void setOwnedLog(LogExpCS newOwnedLog) {
+		if (newOwnedLog != ownedLog) {
 			NotificationChain msgs = null;
-			if (log != null)
-				msgs = ((InternalEObject)log).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG, null, msgs);
-			if (newLog != null)
-				msgs = ((InternalEObject)newLog).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG, null, msgs);
-			msgs = basicSetLog(newLog, msgs);
+			if (ownedLog != null)
+				msgs = ((InternalEObject)ownedLog).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG, null, msgs);
+			if (newOwnedLog != null)
+				msgs = ((InternalEObject)newOwnedLog).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG, null, msgs);
+			msgs = basicSetOwnedLog(newOwnedLog, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG, newLog, newLog));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG, newOwnedLog, newOwnedLog));
 	}
 
 	/**
@@ -180,7 +181,7 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSeverity() {
+	public SeverityKindCS getSeverity() {
 		return severity;
 	}
 
@@ -189,9 +190,9 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setSeverity(String newSeverity) {
-		String oldSeverity = severity;
-		severity = newSeverity;
+	public void setSeverity(SeverityKindCS newSeverity) {
+		SeverityKindCS oldSeverity = severity;
+		severity = newSeverity == null ? SEVERITY_EDEFAULT : newSeverity;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY, oldSeverity, severity));
 	}
@@ -213,10 +214,10 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION:
-				return basicSetAssertion(null, msgs);
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG:
-				return basicSetLog(null, msgs);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION:
+				return basicSetOwnedAssertion(null, msgs);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
+				return basicSetOwnedLog(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -229,10 +230,10 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION:
-				return getAssertion();
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG:
-				return getLog();
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION:
+				return getOwnedAssertion();
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
+				return getOwnedLog();
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
 				return getSeverity();
 		}
@@ -247,14 +248,14 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION:
-				setAssertion((ExpCS)newValue);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION:
+				setOwnedAssertion((ExpCS)newValue);
 				return;
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG:
-				setLog((LogExpCS)newValue);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
+				setOwnedLog((LogExpCS)newValue);
 				return;
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
-				setSeverity((String)newValue);
+				setSeverity((SeverityKindCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -268,11 +269,11 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION:
-				setAssertion((ExpCS)null);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION:
+				setOwnedAssertion((ExpCS)null);
 				return;
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG:
-				setLog((LogExpCS)null);
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
+				setOwnedLog((LogExpCS)null);
 				return;
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
 				setSeverity(SEVERITY_EDEFAULT);
@@ -289,12 +290,12 @@ public class AssertExpCSImpl extends StatementCSImpl implements AssertExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__ASSERTION:
-				return assertion != null;
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS__LOG:
-				return log != null;
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_ASSERTION:
+				return ownedAssertion != null;
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS__OWNED_LOG:
+				return ownedLog != null;
 			case ImperativeOCLCSPackage.ASSERT_EXP_CS__SEVERITY:
-				return SEVERITY_EDEFAULT == null ? severity != null : !SEVERITY_EDEFAULT.equals(severity);
+				return severity != SEVERITY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

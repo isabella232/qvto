@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitOp;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InitOpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
@@ -24,7 +24,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.InitPartCSImpl#getInitOp <em>Init Op</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.InitPartCSImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.InitPartCSImpl#getOwnedExp <em>Owned Exp</em>}</li>
  * </ul>
  *
  * @generated
@@ -38,7 +38,7 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final InitOp INIT_OP_EDEFAULT = InitOp.EQUALS;
+	protected static final InitOpCS INIT_OP_EDEFAULT = InitOpCS.EQUALS;
 
 	/**
 	 * The cached value of the '{@link #getInitOp() <em>Init Op</em>}' attribute.
@@ -48,17 +48,17 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected InitOp initOp = INIT_OP_EDEFAULT;
+	protected InitOpCS initOp = INIT_OP_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExp() <em>Owned Exp</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getOwnedExp()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expression;
+	protected ExpCS ownedExp;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -84,7 +84,7 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InitOp getInitOp() {
+	public InitOpCS getInitOp() {
 		return initOp;
 	}
 
@@ -93,8 +93,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setInitOp(InitOp newInitOp) {
-		InitOp oldInitOp = initOp;
+	public void setInitOp(InitOpCS newInitOp) {
+		InitOpCS oldInitOp = initOp;
 		initOp = newInitOp == null ? INIT_OP_EDEFAULT : newInitOp;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.INIT_PART_CS__INIT_OP, oldInitOp, initOp));
@@ -105,8 +105,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getExpression() {
-		return expression;
+	public ExpCS getOwnedExp() {
+		return ownedExp;
 	}
 
 	/**
@@ -114,11 +114,11 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
-		ExpCS oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetOwnedExp(ExpCS newOwnedExp, NotificationChain msgs) {
+		ExpCS oldOwnedExp = ownedExp;
+		ownedExp = newOwnedExp;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP, oldOwnedExp, newOwnedExp);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -129,18 +129,18 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(ExpCS newExpression) {
-		if (newExpression != expression) {
+	public void setOwnedExp(ExpCS newOwnedExp) {
+		if (newOwnedExp != ownedExp) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (ownedExp != null)
+				msgs = ((InternalEObject)ownedExp).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP, null, msgs);
+			if (newOwnedExp != null)
+				msgs = ((InternalEObject)newOwnedExp).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP, null, msgs);
+			msgs = basicSetOwnedExp(newOwnedExp, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP, newOwnedExp, newOwnedExp));
 	}
 
 	/**
@@ -160,8 +160,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP:
+				return basicSetOwnedExp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -176,8 +176,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 		switch (featureID) {
 			case QVTOperationalCSPackage.INIT_PART_CS__INIT_OP:
 				return getInitOp();
-			case QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION:
-				return getExpression();
+			case QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP:
+				return getOwnedExp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -191,10 +191,10 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTOperationalCSPackage.INIT_PART_CS__INIT_OP:
-				setInitOp((InitOp)newValue);
+				setInitOp((InitOpCS)newValue);
 				return;
-			case QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION:
-				setExpression((ExpCS)newValue);
+			case QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP:
+				setOwnedExp((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -211,8 +211,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 			case QVTOperationalCSPackage.INIT_PART_CS__INIT_OP:
 				setInitOp(INIT_OP_EDEFAULT);
 				return;
-			case QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION:
-				setExpression((ExpCS)null);
+			case QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP:
+				setOwnedExp((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -228,8 +228,8 @@ public class InitPartCSImpl extends ElementCSImpl implements InitPartCS {
 		switch (featureID) {
 			case QVTOperationalCSPackage.INIT_PART_CS__INIT_OP:
 				return initOp != INIT_OP_EDEFAULT;
-			case QVTOperationalCSPackage.INIT_PART_CS__EXPRESSION:
-				return expression != null;
+			case QVTOperationalCSPackage.INIT_PART_CS__OWNED_EXP:
+				return ownedExp != null;
 		}
 		return super.eIsSet(featureID);
 	}

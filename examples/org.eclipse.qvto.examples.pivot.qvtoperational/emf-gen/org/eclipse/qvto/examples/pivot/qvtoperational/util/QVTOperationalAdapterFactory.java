@@ -17,6 +17,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Feature;
@@ -120,8 +121,8 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTOperationalSwitch<Adapter> modelSwitch =
-		new QVTOperationalSwitch<Adapter>() {
+	protected QVTOperationalSwitch<@Nullable Adapter> modelSwitch =
+		new QVTOperationalSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter caseConstructor(Constructor object) {
 				return createConstructorAdapter();

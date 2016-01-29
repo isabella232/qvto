@@ -2,7 +2,7 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
-import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.StructuralFeatureCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,38 +13,38 @@ import org.eclipse.ocl.xtext.basecs.ElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS#getSimpleNameCS <em>Simple Name CS</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS#getOwnedScopedName <em>Owned Scoped Name</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModulePropertyCS()
- * @model abstract="true"
+ * @model
  * @generated
  */
-public interface ModulePropertyCS extends ElementCS {
+public interface ModulePropertyCS extends StructuralFeatureCS {
 	/**
-	 * Returns the value of the '<em><b>Simple Name CS</b></em>' attribute.
+	 * Returns the value of the '<em><b>Owned Scoped Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Simple Name CS</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Owned Scoped Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Simple Name CS</em>' attribute.
-	 * @see #setSimpleNameCS(String)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModulePropertyCS_SimpleNameCS()
-	 * @model
+	 * @return the value of the '<em>Owned Scoped Name</em>' containment reference.
+	 * @see #setOwnedScopedName(PathName2CS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModulePropertyCS_OwnedScopedName()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	String getSimpleNameCS();
+	PathName2CS getOwnedScopedName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS#getSimpleNameCS <em>Simple Name CS</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS#getOwnedScopedName <em>Owned Scoped Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Simple Name CS</em>' attribute.
-	 * @see #getSimpleNameCS()
+	 * @param value the new value of the '<em>Owned Scoped Name</em>' containment reference.
+	 * @see #getOwnedScopedName()
 	 * @generated
 	 */
-	void setSimpleNameCS(String value);
+	void setOwnedScopedName(PathName2CS value);
 
 } // ModulePropertyCS

@@ -7,11 +7,11 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.impl.StructuralFeatureCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.StereotypeQualifierCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**
@@ -22,7 +22,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ClassifierPropertyCSImpl#getStereotypes <em>Stereotypes</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ClassifierPropertyCSImpl#getOwnedStereotype <em>Owned Stereotype</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ClassifierPropertyCSImpl#getOpposite <em>Opposite</em>}</li>
  * </ul>
  *
@@ -30,14 +30,14 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  */
 public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements ClassifierPropertyCS {
 	/**
-	 * The cached value of the '{@link #getStereotypes() <em>Stereotypes</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedStereotype() <em>Owned Stereotype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStereotypes()
+	 * @see #getOwnedStereotype()
 	 * @generated
 	 * @ordered
 	 */
-	protected ElementCS stereotypes;
+	protected StereotypeQualifierCS ownedStereotype;
 
 	/**
 	 * The default value of the '{@link #getOpposite() <em>Opposite</em>}' attribute.
@@ -83,8 +83,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ElementCS getStereotypes() {
-		return stereotypes;
+	public StereotypeQualifierCS getOwnedStereotype() {
+		return ownedStereotype;
 	}
 
 	/**
@@ -92,11 +92,11 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetStereotypes(ElementCS newStereotypes, NotificationChain msgs) {
-		ElementCS oldStereotypes = stereotypes;
-		stereotypes = newStereotypes;
+	public NotificationChain basicSetOwnedStereotype(StereotypeQualifierCS newOwnedStereotype, NotificationChain msgs) {
+		StereotypeQualifierCS oldOwnedStereotype = ownedStereotype;
+		ownedStereotype = newOwnedStereotype;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES, oldStereotypes, newStereotypes);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE, oldOwnedStereotype, newOwnedStereotype);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -107,18 +107,18 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStereotypes(ElementCS newStereotypes) {
-		if (newStereotypes != stereotypes) {
+	public void setOwnedStereotype(StereotypeQualifierCS newOwnedStereotype) {
+		if (newOwnedStereotype != ownedStereotype) {
 			NotificationChain msgs = null;
-			if (stereotypes != null)
-				msgs = ((InternalEObject)stereotypes).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES, null, msgs);
-			if (newStereotypes != null)
-				msgs = ((InternalEObject)newStereotypes).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES, null, msgs);
-			msgs = basicSetStereotypes(newStereotypes, msgs);
+			if (ownedStereotype != null)
+				msgs = ((InternalEObject)ownedStereotype).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE, null, msgs);
+			if (newOwnedStereotype != null)
+				msgs = ((InternalEObject)newOwnedStereotype).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE, null, msgs);
+			msgs = basicSetOwnedStereotype(newOwnedStereotype, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES, newStereotypes, newStereotypes));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE, newOwnedStereotype, newOwnedStereotype));
 	}
 
 	/**
@@ -159,8 +159,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES:
-				return basicSetStereotypes(null, msgs);
+			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE:
+				return basicSetOwnedStereotype(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -173,8 +173,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES:
-				return getStereotypes();
+			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE:
+				return getOwnedStereotype();
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OPPOSITE:
 				return getOpposite();
 		}
@@ -189,8 +189,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES:
-				setStereotypes((ElementCS)newValue);
+			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE:
+				setOwnedStereotype((StereotypeQualifierCS)newValue);
 				return;
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OPPOSITE:
 				setOpposite((String)newValue);
@@ -207,8 +207,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES:
-				setStereotypes((ElementCS)null);
+			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE:
+				setOwnedStereotype((StereotypeQualifierCS)null);
 				return;
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OPPOSITE:
 				setOpposite(OPPOSITE_EDEFAULT);
@@ -225,8 +225,8 @@ public class ClassifierPropertyCSImpl extends StructuralFeatureCSImpl implements
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__STEREOTYPES:
-				return stereotypes != null;
+			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OWNED_STEREOTYPE:
+				return ownedStereotype != null;
 			case QVTOperationalCSPackage.CLASSIFIER_PROPERTY_CS__OPPOSITE:
 				return OPPOSITE_EDEFAULT == null ? opposite != null : !OPPOSITE_EDEFAULT.equals(opposite);
 		}

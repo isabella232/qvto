@@ -23,95 +23,74 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#isOne <em>One</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#isIsInverse <em>Is Inverse</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#isIsDeferred <em>Is Deferred</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getCondition <em>Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getIsDeferred <em>Is Deferred</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getOwnedCondition <em>Owned Condition</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ResolveExpCSImpl#getOwnedTarget <em>Owned Target</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	/**
-	 * The default value of the '{@link #isOne() <em>One</em>}' attribute.
+	 * The default value of the '{@link #getIsDeferred() <em>Is Deferred</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOne()
+	 * @see #getIsDeferred()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ONE_EDEFAULT = false;
+	protected static final Boolean IS_DEFERRED_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #isOne() <em>One</em>}' attribute.
+	 * The cached value of the '{@link #getIsDeferred() <em>Is Deferred</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isOne()
+	 * @see #getIsDeferred()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean one = ONE_EDEFAULT;
+	protected Boolean isDeferred = IS_DEFERRED_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isIsInverse() <em>Is Inverse</em>}' attribute.
+	 * The cached value of the '{@link #getOwnedCondition() <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsInverse()
+	 * @see #getOwnedCondition()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_INVERSE_EDEFAULT = false;
+	protected ExpCS ownedCondition;
 
 	/**
-	 * The cached value of the '{@link #isIsInverse() <em>Is Inverse</em>}' attribute.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsInverse()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isInverse = IS_INVERSE_EDEFAULT;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #isIsDeferred() <em>Is Deferred</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDeferred()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_DEFERRED_EDEFAULT = false;
+	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #isIsDeferred() <em>Is Deferred</em>}' attribute.
+	 * The cached value of the '{@link #getOwnedTarget() <em>Owned Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsDeferred()
+	 * @see #getOwnedTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean isDeferred = IS_DEFERRED_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getTarget()
-	 * @generated
-	 * @ordered
-	 */
-	protected VariableCS target;
-
-	/**
-	 * The cached value of the '{@link #getCondition() <em>Condition</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCondition()
-	 * @generated
-	 * @ordered
-	 */
-	protected ExpCS condition;
+	protected VariableCS ownedTarget;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -137,49 +116,7 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isOne() {
-		return one;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOne(boolean newOne) {
-		boolean oldOne = one;
-		one = newOne;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__ONE, oldOne, one));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsInverse() {
-		return isInverse;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsInverse(boolean newIsInverse) {
-		boolean oldIsInverse = isInverse;
-		isInverse = newIsInverse;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_INVERSE, oldIsInverse, isInverse));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isIsDeferred() {
+	public Boolean getIsDeferred() {
 		return isDeferred;
 	}
 
@@ -188,8 +125,8 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsDeferred(boolean newIsDeferred) {
-		boolean oldIsDeferred = isDeferred;
+	public void setIsDeferred(Boolean newIsDeferred) {
+		Boolean oldIsDeferred = isDeferred;
 		isDeferred = newIsDeferred;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_DEFERRED, oldIsDeferred, isDeferred));
@@ -200,8 +137,8 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableCS getTarget() {
-		return target;
+	public ExpCS getOwnedCondition() {
+		return ownedCondition;
 	}
 
 	/**
@@ -209,11 +146,11 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(VariableCS newTarget, NotificationChain msgs) {
-		VariableCS oldTarget = target;
-		target = newTarget;
+	public NotificationChain basicSetOwnedCondition(ExpCS newOwnedCondition, NotificationChain msgs) {
+		ExpCS oldOwnedCondition = ownedCondition;
+		ownedCondition = newOwnedCondition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION, oldOwnedCondition, newOwnedCondition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -224,18 +161,18 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTarget(VariableCS newTarget) {
-		if (newTarget != target) {
+	public void setOwnedCondition(ExpCS newOwnedCondition) {
+		if (newOwnedCondition != ownedCondition) {
 			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
+			if (ownedCondition != null)
+				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION, null, msgs);
+			if (newOwnedCondition != null)
+				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION, null, msgs);
+			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION, newOwnedCondition, newOwnedCondition));
 	}
 
 	/**
@@ -243,8 +180,8 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getCondition() {
-		return condition;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -252,11 +189,32 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(ExpCS newCondition, NotificationChain msgs) {
-		ExpCS oldCondition = condition;
-		condition = newCondition;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public VariableCS getOwnedTarget() {
+		return ownedTarget;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedTarget(VariableCS newOwnedTarget, NotificationChain msgs) {
+		VariableCS oldOwnedTarget = ownedTarget;
+		ownedTarget = newOwnedTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION, oldCondition, newCondition);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET, oldOwnedTarget, newOwnedTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -267,18 +225,18 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(ExpCS newCondition) {
-		if (newCondition != condition) {
+	public void setOwnedTarget(VariableCS newOwnedTarget) {
+		if (newOwnedTarget != ownedTarget) {
 			NotificationChain msgs = null;
-			if (condition != null)
-				msgs = ((InternalEObject)condition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION, null, msgs);
-			if (newCondition != null)
-				msgs = ((InternalEObject)newCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION, null, msgs);
-			msgs = basicSetCondition(newCondition, msgs);
+			if (ownedTarget != null)
+				msgs = ((InternalEObject)ownedTarget).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET, null, msgs);
+			if (newOwnedTarget != null)
+				msgs = ((InternalEObject)newOwnedTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET, null, msgs);
+			msgs = basicSetOwnedTarget(newOwnedTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION, newCondition, newCondition));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET, newOwnedTarget, newOwnedTarget));
 	}
 
 	/**
@@ -298,10 +256,10 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET:
-				return basicSetTarget(null, msgs);
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION:
-				return basicSetCondition(null, msgs);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION:
+				return basicSetOwnedCondition(null, msgs);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET:
+				return basicSetOwnedTarget(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -314,16 +272,14 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__ONE:
-				return isOne();
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_INVERSE:
-				return isIsInverse();
 			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_DEFERRED:
-				return isIsDeferred();
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET:
-				return getTarget();
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION:
-				return getCondition();
+				return getIsDeferred();
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION:
+				return getOwnedCondition();
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__NAME:
+				return getName();
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET:
+				return getOwnedTarget();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -336,20 +292,17 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__ONE:
-				setOne((Boolean)newValue);
-				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_INVERSE:
-				setIsInverse((Boolean)newValue);
-				return;
 			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_DEFERRED:
 				setIsDeferred((Boolean)newValue);
 				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET:
-				setTarget((VariableCS)newValue);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION:
+				setOwnedCondition((ExpCS)newValue);
 				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION:
-				setCondition((ExpCS)newValue);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__NAME:
+				setName((String)newValue);
+				return;
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET:
+				setOwnedTarget((VariableCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -363,20 +316,17 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__ONE:
-				setOne(ONE_EDEFAULT);
-				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_INVERSE:
-				setIsInverse(IS_INVERSE_EDEFAULT);
-				return;
 			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_DEFERRED:
 				setIsDeferred(IS_DEFERRED_EDEFAULT);
 				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET:
-				setTarget((VariableCS)null);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION:
+				setOwnedCondition((ExpCS)null);
 				return;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION:
-				setCondition((ExpCS)null);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET:
+				setOwnedTarget((VariableCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -390,16 +340,14 @@ public class ResolveExpCSImpl extends CallExpCSImpl implements ResolveExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__ONE:
-				return one != ONE_EDEFAULT;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_INVERSE:
-				return isInverse != IS_INVERSE_EDEFAULT;
 			case QVTOperationalCSPackage.RESOLVE_EXP_CS__IS_DEFERRED:
-				return isDeferred != IS_DEFERRED_EDEFAULT;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__TARGET:
-				return target != null;
-			case QVTOperationalCSPackage.RESOLVE_EXP_CS__CONDITION:
-				return condition != null;
+				return IS_DEFERRED_EDEFAULT == null ? isDeferred != null : !IS_DEFERRED_EDEFAULT.equals(isDeferred);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_CONDITION:
+				return ownedCondition != null;
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTOperationalCSPackage.RESOLVE_EXP_CS__OWNED_TARGET:
+				return ownedTarget != null;
 		}
 		return super.eIsSet(featureID);
 	}

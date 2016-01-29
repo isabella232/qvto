@@ -7,7 +7,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.PrimitiveLiteralExpCS;
@@ -23,32 +23,32 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DictLiteralPartCSImpl#getKey <em>Key</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DictLiteralPartCSImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DictLiteralPartCSImpl#getOwnedKey <em>Owned Key</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.DictLiteralPartCSImpl#getOwnedValue <em>Owned Value</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralPartCS {
+public class DictLiteralPartCSImpl extends ModelElementCSImpl implements DictLiteralPartCS {
 	/**
-	 * The cached value of the '{@link #getKey() <em>Key</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedKey() <em>Owned Key</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKey()
+	 * @see #getOwnedKey()
 	 * @generated
 	 * @ordered
 	 */
-	protected PrimitiveLiteralExpCS key;
+	protected PrimitiveLiteralExpCS ownedKey;
 
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedValue() <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getOwnedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS value;
+	protected ExpCS ownedValue;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +74,8 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrimitiveLiteralExpCS getKey() {
-		return key;
+	public PrimitiveLiteralExpCS getOwnedKey() {
+		return ownedKey;
 	}
 
 	/**
@@ -83,11 +83,11 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetKey(PrimitiveLiteralExpCS newKey, NotificationChain msgs) {
-		PrimitiveLiteralExpCS oldKey = key;
-		key = newKey;
+	public NotificationChain basicSetOwnedKey(PrimitiveLiteralExpCS newOwnedKey, NotificationChain msgs) {
+		PrimitiveLiteralExpCS oldOwnedKey = ownedKey;
+		ownedKey = newOwnedKey;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY, oldKey, newKey);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY, oldOwnedKey, newOwnedKey);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +98,18 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setKey(PrimitiveLiteralExpCS newKey) {
-		if (newKey != key) {
+	public void setOwnedKey(PrimitiveLiteralExpCS newOwnedKey) {
+		if (newOwnedKey != ownedKey) {
 			NotificationChain msgs = null;
-			if (key != null)
-				msgs = ((InternalEObject)key).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY, null, msgs);
-			if (newKey != null)
-				msgs = ((InternalEObject)newKey).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY, null, msgs);
-			msgs = basicSetKey(newKey, msgs);
+			if (ownedKey != null)
+				msgs = ((InternalEObject)ownedKey).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY, null, msgs);
+			if (newOwnedKey != null)
+				msgs = ((InternalEObject)newOwnedKey).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY, null, msgs);
+			msgs = basicSetOwnedKey(newOwnedKey, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY, newKey, newKey));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY, newOwnedKey, newOwnedKey));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getValue() {
-		return value;
+	public ExpCS getOwnedValue() {
+		return ownedValue;
 	}
 
 	/**
@@ -126,11 +126,11 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(ExpCS newValue, NotificationChain msgs) {
-		ExpCS oldValue = value;
-		value = newValue;
+	public NotificationChain basicSetOwnedValue(ExpCS newOwnedValue, NotificationChain msgs) {
+		ExpCS oldOwnedValue = ownedValue;
+		ownedValue = newOwnedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE, oldOwnedValue, newOwnedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -141,18 +141,18 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(ExpCS newValue) {
-		if (newValue != value) {
+	public void setOwnedValue(ExpCS newOwnedValue) {
+		if (newOwnedValue != ownedValue) {
 			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
+			if (ownedValue != null)
+				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE, null, msgs);
+			if (newOwnedValue != null)
+				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE, null, msgs);
+			msgs = basicSetOwnedValue(newOwnedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE, newOwnedValue, newOwnedValue));
 	}
 
 	/**
@@ -163,10 +163,10 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY:
-				return basicSetKey(null, msgs);
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE:
-				return basicSetValue(null, msgs);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY:
+				return basicSetOwnedKey(null, msgs);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE:
+				return basicSetOwnedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,10 +179,10 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY:
-				return getKey();
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE:
-				return getValue();
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY:
+				return getOwnedKey();
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE:
+				return getOwnedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -195,11 +195,11 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY:
-				setKey((PrimitiveLiteralExpCS)newValue);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY:
+				setOwnedKey((PrimitiveLiteralExpCS)newValue);
 				return;
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE:
-				setValue((ExpCS)newValue);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE:
+				setOwnedValue((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,11 +213,11 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY:
-				setKey((PrimitiveLiteralExpCS)null);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY:
+				setOwnedKey((PrimitiveLiteralExpCS)null);
 				return;
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE:
-				setValue((ExpCS)null);
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE:
+				setOwnedValue((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -231,10 +231,10 @@ public class DictLiteralPartCSImpl extends ElementCSImpl implements DictLiteralP
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__KEY:
-				return key != null;
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__VALUE:
-				return value != null;
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_KEY:
+				return ownedKey != null;
+			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS__OWNED_VALUE:
+				return ownedValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

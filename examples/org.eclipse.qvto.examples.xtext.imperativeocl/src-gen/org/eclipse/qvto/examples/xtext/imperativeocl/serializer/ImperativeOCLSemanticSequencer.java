@@ -58,14 +58,32 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeocl.services.ImperativeOCLGrammarAccess;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 import org.eclipse.xtext.serializer.acceptor.ISemanticSequenceAcceptor;
 import org.eclipse.xtext.serializer.diagnostic.ISemanticSequencerDiagnosticProvider;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
@@ -303,6 +321,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 					return; 
 				}
 				else if(context == grammarAccess.getExpCSRule() ||
+				   context == grammarAccess.getExpressionStatementCSRule() ||
 				   context == grammarAccess.getGrammmarCSRule() ||
 				   context == grammarAccess.getImperativeOCLExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule()) {
@@ -354,8 +373,23 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == ImperativeOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS:
-				sequence_BlockExpCS(context, (BlockExpCS) semanticObject); 
+			case ImperativeOCLCSPackage.ASSERT_EXP_CS:
+				sequence_AssertExpCS(context, (AssertExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.ASSIGN_EXP_CS:
+				sequence_AssignExpCS(context, (AssignExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.BREAK_EXP_CS:
+				sequence_BreakExpCS(context, (BreakExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.CATCH_EXP_CS:
+				sequence_CatchExpCS(context, (CatchExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS:
+				sequence_ComputeExpCS(context, (ComputeExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.CONTINUE_EXP_CS:
+				sequence_ContinueExpCS(context, (ContinueExpCS) semanticObject); 
 				return; 
 			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS:
 				sequence_DictLiteralExpCS(context, (DictLiteralExpCS) semanticObject); 
@@ -378,6 +412,21 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 					return; 
 				}
 				else break;
+			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS:
+				sequence_ExpressionBlockCS(context, (ExpressionBlockCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.EXTENT_REF_CS:
+				sequence_ExtentRefCS(context, (ExtentRefCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.FOR_EXP_CS:
+				sequence_ForExpCS(context, (ForExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.IMPERATIVE_ITERATE_EXP_CS:
+				sequence_ImperativeIterateExpCS(context, (ImperativeIterateExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS:
+				sequence_InstantiationExpCS(context, (InstantiationExpCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS:
 				sequence_ListLiteralExpCS(context, (ListLiteralExpCS) semanticObject); 
 				return; 
@@ -396,8 +445,39 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 					return; 
 				}
 				else break;
+			case ImperativeOCLCSPackage.LOG_EXP_CS:
+				sequence_LogExpCS(context, (LogExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.RAISE_EXP_CS:
+				sequence_RaiseExpCS(context, (RaiseExpCS) semanticObject); 
+				return; 
 			case ImperativeOCLCSPackage.RETURN_EXP_CS:
 				sequence_ReturnExpCS(context, (ReturnExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.SWITCH_ALT_CS:
+				sequence_SwitchAltCS(context, (SwitchAltCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.SWITCH_EXP_CS:
+				sequence_SwitchExpCS(context, (SwitchExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.TRY_EXP_CS:
+				sequence_TryExpCS(context, (TryExpCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.VAR_DECLARATION_CS:
+				if(context == grammarAccess.getVarDeclarationCSRule()) {
+					sequence_VarDeclarationCS(context, (VarDeclarationCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getVarDeclarationNoInitCSRule()) {
+					sequence_VarDeclarationNoInitCS(context, (VarDeclarationCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS:
+				sequence_VarsInitializationCS(context, (VarsInitializationCS) semanticObject); 
+				return; 
+			case ImperativeOCLCSPackage.WHILE_EXP_CS:
+				sequence_WhileExpCS(context, (WhileExpCS) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -405,9 +485,54 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     expressions+=ExpCS
+	 *     (severity=SeverityKindCS? ownedAssertion=ExpCS ownedLog=LogExpCS?)
 	 */
-	protected void sequence_BlockExpCS(EObject context, BlockExpCS semanticObject) {
+	protected void sequence_AssertExpCS(EObject context, AssertExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ownedDefault=ExpCS?)
+	 */
+	protected void sequence_AssignExpCS(EObject context, AssignExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {BreakExpCS}
+	 */
+	protected void sequence_BreakExpCS(EObject context, BreakExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (varName=UnrestrictedName? ownedExceptionRefs+=TypeExpCS ownedExceptionRefs+=TypeExpCS* ownedExps+=ExpCS*)
+	 */
+	protected void sequence_CatchExpCS(EObject context, CatchExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedResultVar=VarDeclarationCS ownedExps+=ExpressionStatementCS)
+	 */
+	protected void sequence_ComputeExpCS(EObject context, ComputeExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {ContinueExpCS}
+	 */
+	protected void sequence_ContinueExpCS(EObject context, ContinueExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -423,7 +548,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (key=PrimitiveLiteralExpCS value=ExpCS)
+	 *     (ownedKey=PrimitiveLiteralExpCS ownedValue=ExpCS)
 	 */
 	protected void sequence_DictLiteralPartCS(EObject context, DictLiteralPartCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -432,7 +557,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (keyType=TypeExpCS valueType=TypeExpCS)
+	 *     (ownedKeyTypeRef=TypeExpCS ownedValueTypeRef=TypeExpCS)
 	 */
 	protected void sequence_DictTypeCS(EObject context, DictTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -441,7 +566,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (keyType=TypeExpCS valueType=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedKeyTypeRef=TypeExpCS ownedValueTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_DictTypeCS_TypeExpCS(EObject context, DictTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -450,9 +575,64 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (keyType=TypeExpCS valueType=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedKeyTypeRef=TypeExpCS ownedValueTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_DictTypeCS_TypeLiteralWithMultiplicityCS(EObject context, DictTypeCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedExps+=ExpressionStatementCS*)
+	 */
+	protected void sequence_ExpressionBlockCS(EObject context, ExpressionBlockCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ownedPathName=PathNameCS
+	 */
+	protected void sequence_ExtentRefCS(EObject context, ExtentRefCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (isOne?='forOne'? ownedTarget=VarDeclarationCS? ownedIterator=VarDeclarationNoInitCS ownedCondition=ExpCS? ownedBody=ExpCS)
+	 */
+	protected void sequence_ForExpCS(EObject context, ForExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (name='xcollect' ownedIterator=VarDeclarationNoInitCS? ownedBody=ExpCS) | 
+	 *         ((name='xselect' | name='xselectOne') ownedIterator=VarDeclarationNoInitCS? ownedCondition=ExpCS) | 
+	 *         (
+	 *             (name='xcollectselect' | name='xcollectselectOne') 
+	 *             ownedIterator=VarDeclarationNoInitCS? 
+	 *             ownedTarget=VarDeclarationCS 
+	 *             ownedBody=ExpCS 
+	 *             ownedCondition=ExpCS
+	 *         )
+	 *     )
+	 */
+	protected void sequence_ImperativeIterateExpCS(EObject context, ImperativeIterateExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedClassRef=TypeExpCS ownedExtentRef=TypeNameExpCS? (ownedArguments+=ExpCS ownedArguments+=ExpCS*)?)
+	 */
+	protected void sequence_InstantiationExpCS(EObject context, InstantiationExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -468,7 +648,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     type=TypeExpCS
+	 *     ownedTypeRef=TypeExpCS
 	 */
 	protected void sequence_ListTypeCS(EObject context, ListTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -477,7 +657,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (type=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_ListTypeCS_TypeExpCS(EObject context, ListTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -486,7 +666,7 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (type=TypeExpCS ownedMultiplicity=MultiplicityCS?)
+	 *     (ownedTypeRef=TypeExpCS ownedMultiplicity=MultiplicityCS?)
 	 */
 	protected void sequence_ListTypeCS_TypeLiteralWithMultiplicityCS(EObject context, ListTypeCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -495,9 +675,93 @@ public class ImperativeOCLSemanticSequencer extends EssentialOCLSemanticSequence
 	
 	/**
 	 * Constraint:
-	 *     (value=ExpCS?)
+	 *     (ownedMessage=StringLiteralExpCS ownedElement=ExpCS? severity=SeverityKindCS? ownedCondition=ExpCS?)
+	 */
+	protected void sequence_LogExpCS(EObject context, LogExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedExceptionRef=TypeExpCS ownedArguments+=ExpCS ownedArguments+=ExpCS*)
+	 */
+	protected void sequence_RaiseExpCS(EObject context, RaiseExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedValue=ExpCS?)
 	 */
 	protected void sequence_ReturnExpCS(EObject context, ReturnExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedCondition=ExpCS ownedBody=ExpCS)
+	 */
+	protected void sequence_SwitchAltCS(EObject context, SwitchAltCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (ifSyntax?='if' ownedAltParts+=SwitchAltCS ownedAltParts+=SwitchAltCS* ownedElsePart=ExpCS?) | 
+	 *         (ownedIterator=VarDeclarationNoInitCS? ownedAltParts+=SwitchAltCS+ ownedElsePart=ExpCS?)
+	 *     )
+	 */
+	protected void sequence_SwitchExpCS(EObject context, SwitchExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedExps+=ExpCS* ownedCatchs+=CatchExpCS+)
+	 */
+	protected void sequence_TryExpCS(EObject context, TryExpCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS? (initOp=InitOpCS ownedInitExpression=ExpCS)?)
+	 */
+	protected void sequence_VarDeclarationCS(EObject context, VarDeclarationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS?)
+	 */
+	protected void sequence_VarDeclarationNoInitCS(EObject context, VarDeclarationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedVarDeclarations+=VarDeclarationCS ownedVarDeclarations+=VarDeclarationCS*)
+	 */
+	protected void sequence_VarsInitializationCS(EObject context, VarsInitializationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedResultVar=VarDeclarationCS? ownedCondition=ExpCS ownedExps+=ExpressionStatementCS*)
+	 */
+	protected void sequence_WhileExpCS(EObject context, WhileExpCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 }

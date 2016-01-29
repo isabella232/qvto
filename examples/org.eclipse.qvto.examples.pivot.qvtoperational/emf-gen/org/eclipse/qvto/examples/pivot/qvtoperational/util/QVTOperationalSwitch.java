@@ -16,6 +16,7 @@ package org.eclipse.qvto.examples.pivot.qvtoperational.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Feature;
@@ -78,7 +79,7 @@ import org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter;
  * @see org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage
  * @generated
  */
-public class QVTOperationalSwitch<T> extends Switch<T> {
+public class QVTOperationalSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

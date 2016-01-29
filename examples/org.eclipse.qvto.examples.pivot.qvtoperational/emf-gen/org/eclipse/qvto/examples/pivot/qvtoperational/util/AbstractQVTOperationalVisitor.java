@@ -18,7 +18,6 @@
  *******************************************************************************/
 package	org.eclipse.qvto.examples.pivot.qvtoperational.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractQVTOperationalVisitor provides a default implementation of the visitor framework
@@ -33,7 +32,7 @@ public abstract class AbstractQVTOperationalVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTOperationalVisitor(@NonNull C context) {
+	protected AbstractQVTOperationalVisitor(C context) {
 		super(context);
 	}
 }

@@ -6,6 +6,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
 import org.eclipse.ocl.xtext.basecs.AnnotationCS;
@@ -35,43 +36,40 @@ import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.AssociationClassCallExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.CallExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.IterateCallExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.IterationCallExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.OperationCallExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.PropertyCallExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ShadowExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.*;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.CompleteSignatureCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigPropertyCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigurationPropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ContextualPropertyCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ExceptionCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.HelperOperationCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.LibraryImportCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingCallExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingOperationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModulePropertyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.PathElement2CS;
@@ -82,19 +80,15 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToClassCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToImportCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToLibraryCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.RenameCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByMappingExpCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByTypeExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveInExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveOpArgsExpCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ScopedNameCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.SimpleSignatureCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.StereotypeQualifierCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TopLevelCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -150,8 +144,8 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected QVTOperationalCSSwitch<Adapter> modelSwitch =
-		new QVTOperationalCSSwitch<Adapter>() {
+	protected QVTOperationalCSSwitch<@Nullable Adapter> modelSwitch =
+		new QVTOperationalCSSwitch<@Nullable Adapter>() {
 			@Override
 			public Adapter casePathName2CS(PathName2CS object) {
 				return createPathName2CSAdapter();
@@ -167,6 +161,106 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
 				return createTopLevelCSAdapter();
+			}
+			@Override
+			public Adapter caseClassifierPropertyCS(ClassifierPropertyCS object) {
+				return createClassifierPropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseConstructorOperationCS(ConstructorOperationCS object) {
+				return createConstructorOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseConfigurationPropertyCS(ConfigurationPropertyCS object) {
+				return createConfigurationPropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseContextualPropertyCS(ContextualPropertyCS object) {
+				return createContextualPropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseEntryOperationCS(EntryOperationCS object) {
+				return createEntryOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseExceptionCS(ExceptionCS object) {
+				return createExceptionCSAdapter();
+			}
+			@Override
+			public Adapter caseHelperOperationCS(HelperOperationCS object) {
+				return createHelperOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseImperativeOperationCS(ImperativeOperationCS object) {
+				return createImperativeOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseInitPartCS(InitPartCS object) {
+				return createInitPartCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingBodyCS(MappingBodyCS object) {
+				return createMappingBodyCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingCallExpCS(MappingCallExpCS object) {
+				return createMappingCallExpCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingOperationCS(MappingOperationCS object) {
+				return createMappingOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseMetamodelCS(MetamodelCS object) {
+				return createMetamodelCSAdapter();
+			}
+			@Override
+			public Adapter caseModelTypeCS(ModelTypeCS object) {
+				return createModelTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseModelTypeRefCS(ModelTypeRefCS object) {
+				return createModelTypeRefCSAdapter();
+			}
+			@Override
+			public Adapter caseModuleCS(ModuleCS object) {
+				return createModuleCSAdapter();
+			}
+			@Override
+			public Adapter caseModulePropertyCS(ModulePropertyCS object) {
+				return createModulePropertyCSAdapter();
+			}
+			@Override
+			public Adapter caseModuleRefCS(ModuleRefCS object) {
+				return createModuleRefCSAdapter();
+			}
+			@Override
+			public Adapter caseModuleUsageCS(ModuleUsageCS object) {
+				return createModuleUsageCSAdapter();
+			}
+			@Override
+			public Adapter caseObjectExpCS(ObjectExpCS object) {
+				return createObjectExpCSAdapter();
+			}
+			@Override
+			public Adapter caseOperationBodyCS(OperationBodyCS object) {
+				return createOperationBodyCSAdapter();
+			}
+			@Override
+			public Adapter caseOperationRefCS(OperationRefCS object) {
+				return createOperationRefCSAdapter();
+			}
+			@Override
+			public Adapter casePackageRefCS(PackageRefCS object) {
+				return createPackageRefCSAdapter();
+			}
+			@Override
+			public Adapter caseParameterDeclarationCS(ParameterDeclarationCS object) {
+				return createParameterDeclarationCSAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveTypeCS(PrimitiveTypeCS object) {
+				return createPrimitiveTypeCSAdapter();
 			}
 			@Override
 			public Adapter caseQVToClassCS(QVToClassCS object) {
@@ -185,20 +279,16 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createQVToOperationCSAdapter();
 			}
 			@Override
-			public Adapter caseInitPartCS(InitPartCS object) {
-				return createInitPartCSAdapter();
+			public Adapter caseResolveExpCS(ResolveExpCS object) {
+				return createResolveExpCSAdapter();
 			}
 			@Override
-			public Adapter caseMetamodelCS(MetamodelCS object) {
-				return createMetamodelCSAdapter();
+			public Adapter caseResolveByTypeExpCS(ResolveByTypeExpCS object) {
+				return createResolveByTypeExpCSAdapter();
 			}
 			@Override
-			public Adapter casePrimitiveTypeCS(PrimitiveTypeCS object) {
-				return createPrimitiveTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseClassifierPropertyCS(ClassifierPropertyCS object) {
-				return createClassifierPropertyCSAdapter();
+			public Adapter caseResolveByMappingExpCS(ResolveByMappingExpCS object) {
+				return createResolveByMappingExpCSAdapter();
 			}
 			@Override
 			public Adapter caseStereotypeQualifierCS(StereotypeQualifierCS object) {
@@ -209,172 +299,12 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createTagCSAdapter();
 			}
 			@Override
-			public Adapter caseExceptionCS(ExceptionCS object) {
-				return createExceptionCSAdapter();
-			}
-			@Override
-			public Adapter caseClassifierDefCS(ClassifierDefCS object) {
-				return createClassifierDefCSAdapter();
-			}
-			@Override
-			public Adapter caseClassifierProperty2CS(ClassifierProperty2CS object) {
-				return createClassifierProperty2CSAdapter();
-			}
-			@Override
-			public Adapter caseCompleteSignatureCS(CompleteSignatureCS object) {
-				return createCompleteSignatureCSAdapter();
-			}
-			@Override
-			public Adapter caseConfigPropertyCS(ConfigPropertyCS object) {
-				return createConfigPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseConstructorCS(ConstructorCS object) {
-				return createConstructorCSAdapter();
-			}
-			@Override
-			public Adapter caseContextualPropertyCS(ContextualPropertyCS object) {
-				return createContextualPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseElementWithBody(ElementWithBody object) {
-				return createElementWithBodyAdapter();
-			}
-			@Override
-			public Adapter caseImperativeOperationCallExpCS(ImperativeOperationCallExpCS object) {
-				return createImperativeOperationCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseLibraryImportCS(LibraryImportCS object) {
-				return createLibraryImportCSAdapter();
-			}
-			@Override
-			public Adapter caseLocalPropertyCS(LocalPropertyCS object) {
-				return createLocalPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingBodyCS(MappingBodyCS object) {
-				return createMappingBodyCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingCallExpCS(MappingCallExpCS object) {
-				return createMappingCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingOperationCS(MappingOperationCS object) {
-				return createMappingOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingEndCS(MappingEndCS object) {
-				return createMappingEndCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingInitCS(MappingInitCS object) {
-				return createMappingInitCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingMethodCS(MappingMethodCS object) {
-				return createMappingMethodCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingQueryCS(MappingQueryCS object) {
-				return createMappingQueryCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingRuleCS(MappingRuleCS object) {
-				return createMappingRuleCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingSectionCS(MappingSectionCS object) {
-				return createMappingSectionCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingSectionsCS(MappingSectionsCS object) {
-				return createMappingSectionsCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleKindCS(ModuleKindCS object) {
-				return createModuleKindCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleRefCS(ModuleRefCS object) {
-				return createModuleRefCSAdapter();
-			}
-			@Override
-			public Adapter caseModelTypeCS(ModelTypeCS object) {
-				return createModelTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleCS(ModuleCS object) {
-				return createModuleCSAdapter();
-			}
-			@Override
-			public Adapter caseModulePropertyCS(ModulePropertyCS object) {
-				return createModulePropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleUsageCS(ModuleUsageCS object) {
-				return createModuleUsageCSAdapter();
-			}
-			@Override
-			public Adapter caseMultiplicityDefCS(MultiplicityDefCS object) {
-				return createMultiplicityDefCSAdapter();
-			}
-			@Override
-			public Adapter caseObjectExpCS(ObjectExpCS object) {
-				return createObjectExpCSAdapter();
-			}
-			@Override
-			public Adapter caseOppositePropertyCS(OppositePropertyCS object) {
-				return createOppositePropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseParameterDeclarationCS(ParameterDeclarationCS object) {
-				return createParameterDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter caseRenameCS(RenameCS object) {
-				return createRenameCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveOpArgsExpCS(ResolveOpArgsExpCS object) {
-				return createResolveOpArgsExpCSAdapter();
-			}
-			@Override
-			public Adapter casePackageRefCS(PackageRefCS object) {
-				return createPackageRefCSAdapter();
-			}
-			@Override
-			public Adapter caseScopedNameCS(ScopedNameCS object) {
-				return createScopedNameCSAdapter();
-			}
-			@Override
-			public Adapter caseSimpleSignatureCS(SimpleSignatureCS object) {
-				return createSimpleSignatureCSAdapter();
-			}
-			@Override
 			public Adapter caseTransformationCS(TransformationCS object) {
 				return createTransformationCSAdapter();
 			}
 			@Override
-			public Adapter caseTransformationRefineCS(TransformationRefineCS object) {
-				return createTransformationRefineCSAdapter();
-			}
-			@Override
-			public Adapter caseTypeSpecCS(TypeSpecCS object) {
-				return createTypeSpecCSAdapter();
-			}
-			@Override
-			public Adapter caseUnitCS(UnitCS object) {
-				return createUnitCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveExpCS(ResolveExpCS object) {
-				return createResolveExpCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveInExpCS(ResolveInExpCS object) {
-				return createResolveInExpCSAdapter();
+			public Adapter caseUnitRefCS(UnitRefCS object) {
+				return createUnitRefCSAdapter();
 			}
 			@Override
 			public Adapter caseVisitableCS(VisitableCS object) {
@@ -429,30 +359,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseTypeCS(TypeCS object) {
-				return createTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
-				return createTemplateableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseClassCS(ClassCS object) {
-				return createClassCSAdapter();
-			}
-			@Override
-			public Adapter caseNamespaceCS(NamespaceCS object) {
-				return createNamespaceCSAdapter();
-			}
-			@Override
-			public Adapter caseStructuredClassCS(StructuredClassCS object) {
-				return createStructuredClassCSAdapter();
-			}
-			@Override
-			public Adapter caseImportCS(ImportCS object) {
-				return createImportCSAdapter();
-			}
-			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
 			}
@@ -461,28 +367,24 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createFeatureCSAdapter();
 			}
 			@Override
-			public Adapter caseOperationCS(OperationCS object) {
-				return createOperationCSAdapter();
-			}
-			@Override
-			public Adapter casePackageCS(PackageCS object) {
-				return createPackageCSAdapter();
-			}
-			@Override
-			public Adapter caseDataTypeCS(DataTypeCS object) {
-				return createDataTypeCSAdapter();
-			}
-			@Override
 			public Adapter caseStructuralFeatureCS(StructuralFeatureCS object) {
 				return createStructuralFeatureCSAdapter();
 			}
 			@Override
-			public Adapter caseAnnotationElementCS(AnnotationElementCS object) {
-				return createAnnotationElementCSAdapter();
+			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
+				return createTemplateableElementCSAdapter();
 			}
 			@Override
-			public Adapter caseAnnotationCS(AnnotationCS object) {
-				return createAnnotationCSAdapter();
+			public Adapter caseOperationCS(OperationCS object) {
+				return createOperationCSAdapter();
+			}
+			@Override
+			public Adapter caseTypeCS(TypeCS object) {
+				return createTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseClassCS(ClassCS object) {
+				return createClassCSAdapter();
 			}
 			@Override
 			public Adapter caseExpCS(ExpCS object) {
@@ -497,12 +399,76 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 				return createCallExpCSAdapter();
 			}
 			@Override
-			public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
-				return createExpressionBlockCSAdapter();
+			public Adapter caseAssociationClassCallExpCS(AssociationClassCallExpCS object) {
+				return createAssociationClassCallExpCSAdapter();
+			}
+			@Override
+			public Adapter caseShadowExpCS(ShadowExpCS object) {
+				return createShadowExpCSAdapter();
+			}
+			@Override
+			public Adapter caseIterationCallExpCS(IterationCallExpCS object) {
+				return createIterationCallExpCSAdapter();
+			}
+			@Override
+			public Adapter caseIterateCallExpCS(IterateCallExpCS object) {
+				return createIterateCallExpCSAdapter();
+			}
+			@Override
+			public Adapter caseOperationCallExpCS(OperationCallExpCS object) {
+				return createOperationCallExpCSAdapter();
+			}
+			@Override
+			public Adapter casePropertyCallExpCS(PropertyCallExpCS object) {
+				return createPropertyCallExpCSAdapter();
+			}
+			@Override
+			public Adapter caseVariableExpCS(VariableExpCS object) {
+				return createVariableExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNameExpCS(NameExpCS object) {
+				return createNameExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNamespaceCS(NamespaceCS object) {
+				return createNamespaceCSAdapter();
+			}
+			@Override
+			public Adapter casePackageCS(PackageCS object) {
+				return createPackageCSAdapter();
 			}
 			@Override
 			public Adapter caseParameterCS(ParameterCS object) {
 				return createParameterCSAdapter();
+			}
+			@Override
+			public Adapter caseStructuredClassCS(StructuredClassCS object) {
+				return createStructuredClassCSAdapter();
+			}
+			@Override
+			public Adapter caseStatementCS(StatementCS object) {
+				return createStatementCSAdapter();
+			}
+			@Override
+			public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
+				return createExpressionBlockCSAdapter();
+			}
+			@Override
+			public Adapter caseDataTypeCS(DataTypeCS object) {
+				return createDataTypeCSAdapter();
+			}
+			@Override
+			public Adapter caseImportCS(ImportCS object) {
+				return createImportCSAdapter();
+			}
+			@Override
+			public Adapter caseAnnotationElementCS(AnnotationElementCS object) {
+				return createAnnotationElementCSAdapter();
+			}
+			@Override
+			public Adapter caseAnnotationCS(AnnotationCS object) {
+				return createAnnotationCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -637,6 +603,48 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorOperationCS <em>Constructor Operation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorOperationCS
+	 * @generated
+	 */
+	public Adapter createConstructorOperationCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigurationPropertyCS <em>Configuration Property CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigurationPropertyCS
+	 * @generated
+	 */
+	public Adapter createConfigurationPropertyCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS <em>Entry Operation CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.EntryOperationCS
+	 * @generated
+	 */
+	public Adapter createEntryOperationCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.InitPartCS <em>Init Part CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -661,6 +669,34 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMetamodelCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS <em>Operation Body CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationBodyCS
+	 * @generated
+	 */
+	public Adapter createOperationBodyCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationRefCS <em>Operation Ref CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.OperationRefCS
+	 * @generated
+	 */
+	public Adapter createOperationRefCSAdapter() {
 		return null;
 	}
 
@@ -735,72 +771,30 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS <em>Classifier Def CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.HelperOperationCS <em>Helper Operation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierDefCS
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.HelperOperationCS
 	 * @generated
 	 */
-	public Adapter createClassifierDefCSAdapter() {
+	public Adapter createHelperOperationCSAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS <em>Classifier Property2 CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCS <em>Imperative Operation CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierProperty2CS
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCS
 	 * @generated
 	 */
-	public Adapter createClassifierProperty2CSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.CompleteSignatureCS <em>Complete Signature CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.CompleteSignatureCS
-	 * @generated
-	 */
-	public Adapter createCompleteSignatureCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigPropertyCS <em>Config Property CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConfigPropertyCS
-	 * @generated
-	 */
-	public Adapter createConfigPropertyCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS <em>Constructor CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ConstructorCS
-	 * @generated
-	 */
-	public Adapter createConstructorCSAdapter() {
+	public Adapter createImperativeOperationCSAdapter() {
 		return null;
 	}
 
@@ -815,62 +809,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createContextualPropertyCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody <em>Element With Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ElementWithBody
-	 * @generated
-	 */
-	public Adapter createElementWithBodyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS <em>Imperative Operation Call Exp CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImperativeOperationCallExpCS
-	 * @generated
-	 */
-	public Adapter createImperativeOperationCallExpCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.LibraryImportCS <em>Library Import CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.LibraryImportCS
-	 * @generated
-	 */
-	public Adapter createLibraryImportCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS <em>Local Property CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.LocalPropertyCS
-	 * @generated
-	 */
-	public Adapter createLocalPropertyCSAdapter() {
 		return null;
 	}
 
@@ -917,118 +855,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS <em>Mapping End CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingEndCS
-	 * @generated
-	 */
-	public Adapter createMappingEndCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS <em>Mapping Init CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingInitCS
-	 * @generated
-	 */
-	public Adapter createMappingInitCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS <em>Mapping Method CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingMethodCS
-	 * @generated
-	 */
-	public Adapter createMappingMethodCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS <em>Mapping Query CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingQueryCS
-	 * @generated
-	 */
-	public Adapter createMappingQueryCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS <em>Mapping Rule CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingRuleCS
-	 * @generated
-	 */
-	public Adapter createMappingRuleCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionCS <em>Mapping Section CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionCS
-	 * @generated
-	 */
-	public Adapter createMappingSectionCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS <em>Mapping Sections CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingSectionsCS
-	 * @generated
-	 */
-	public Adapter createMappingSectionsCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS <em>Module Kind CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS
-	 * @generated
-	 */
-	public Adapter createModuleKindCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS <em>Module Ref CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1053,6 +879,20 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createModelTypeCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS <em>Model Type Ref CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeRefCS
+	 * @generated
+	 */
+	public Adapter createModelTypeRefCSAdapter() {
 		return null;
 	}
 
@@ -1099,20 +939,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS <em>Multiplicity Def CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.MultiplicityDefCS
-	 * @generated
-	 */
-	public Adapter createMultiplicityDefCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ObjectExpCS <em>Object Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1123,20 +949,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createObjectExpCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS <em>Opposite Property CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.OppositePropertyCS
-	 * @generated
-	 */
-	public Adapter createOppositePropertyCSAdapter() {
 		return null;
 	}
 
@@ -1155,34 +967,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.RenameCS <em>Rename CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.RenameCS
-	 * @generated
-	 */
-	public Adapter createRenameCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveOpArgsExpCS <em>Resolve Op Args Exp CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveOpArgsExpCS
-	 * @generated
-	 */
-	public Adapter createResolveOpArgsExpCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS <em>Package Ref CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1193,34 +977,6 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageRefCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ScopedNameCS <em>Scoped Name CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ScopedNameCS
-	 * @generated
-	 */
-	public Adapter createScopedNameCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.SimpleSignatureCS <em>Simple Signature CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.SimpleSignatureCS
-	 * @generated
-	 */
-	public Adapter createSimpleSignatureCSAdapter() {
 		return null;
 	}
 
@@ -1239,44 +995,16 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS <em>Transformation Refine CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS <em>Unit Ref CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.TransformationRefineCS
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitRefCS
 	 * @generated
 	 */
-	public Adapter createTransformationRefineCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS <em>Type Spec CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypeSpecCS
-	 * @generated
-	 */
-	public Adapter createTypeSpecCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS <em>Unit CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.UnitCS
-	 * @generated
-	 */
-	public Adapter createUnitCSAdapter() {
+	public Adapter createUnitRefCSAdapter() {
 		return null;
 	}
 
@@ -1295,16 +1023,30 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveInExpCS <em>Resolve In Exp CS</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByTypeExpCS <em>Resolve By Type Exp CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveInExpCS
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByTypeExpCS
 	 * @generated
 	 */
-	public Adapter createResolveInExpCSAdapter() {
+	public Adapter createResolveByTypeExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByMappingExpCS <em>Resolve By Mapping Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.ResolveByMappingExpCS
+	 * @generated
+	 */
+	public Adapter createResolveByMappingExpCSAdapter() {
 		return null;
 	}
 
@@ -1547,6 +1289,20 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS <em>Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS
+	 * @generated
+	 */
+	public Adapter createStatementCSAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.basecs.NamespaceCS <em>Namespace CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1697,6 +1453,118 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.AssociationClassCallExpCS <em>Association Class Call Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.AssociationClassCallExpCS
+	 * @generated
+	 */
+	public Adapter createAssociationClassCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.ShadowExpCS <em>Shadow Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.ShadowExpCS
+	 * @generated
+	 */
+	public Adapter createShadowExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.IterationCallExpCS <em>Iteration Call Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.IterationCallExpCS
+	 * @generated
+	 */
+	public Adapter createIterationCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.IterateCallExpCS <em>Iterate Call Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.IterateCallExpCS
+	 * @generated
+	 */
+	public Adapter createIterateCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.OperationCallExpCS <em>Operation Call Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.OperationCallExpCS
+	 * @generated
+	 */
+	public Adapter createOperationCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.PropertyCallExpCS <em>Property Call Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.PropertyCallExpCS
+	 * @generated
+	 */
+	public Adapter createPropertyCallExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.VariableExpCS <em>Variable Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.VariableExpCS
+	 * @generated
+	 */
+	public Adapter createVariableExpCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.xtext.essentialoclcs.NameExpCS <em>Name Exp CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.xtext.essentialoclcs.NameExpCS
+	 * @generated
+	 */
+	public Adapter createNameExpCSAdapter() {
 		return null;
 	}
 

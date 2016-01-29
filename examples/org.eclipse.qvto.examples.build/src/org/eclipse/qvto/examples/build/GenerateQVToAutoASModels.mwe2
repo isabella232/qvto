@@ -24,57 +24,28 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.emf.ecore.resource.impl.*
 
 /**
- *	Generate the Pivot-based QVTo Models.
+ *	Generate the Pivot-based QVTo  Models.
  */
 /*
  * OCL related configuration variables
  */
 var oclProjectName = "org.eclipse.ocl.pivot"
-var oclProjectURI = "platform:/resource/${oclProjectName}"
-var oclProjectPrefix = "Pivot"
-var oclEcoreProjectPath = "model/Pivot.ecore"
-var oclEcoreURI = "${oclProjectURI}/${oclEcoreProjectPath}"
-var oclModelPackage = "${oclProjectName}"
-var oclModelName = "pivot"
-var oclVisitorPackage = "${oclModelPackage}.util"
-var oclVisitorName = "Visitor"
-var oclVisitorQualifiedName = "${oclVisitorPackage}.${oclVisitorName}"
-var oclVisitablePackage = "${oclVisitorPackage}"
-var oclVisitableName = "Visitable"
+var oclGenModelProjectPath = "model/Pivot.genmodel"
 
 /*
  * ImperativeOCL related configuration variables
  */
 var imperativeOclProjectName = "org.eclipse.qvto.examples.pivot.imperativeocl"
-var imperativeOclProjectURI = "platform:/resource/${imperativeOclProjectName}"
-var imperativeOclProjectPrefix = "ImperativeOCL"
-var imperativeOclEcoreProjectPath = "model/ImperativeOCL.ecore"
-var imperativeOclEcoreURI = "${imperativeOclProjectURI}/${imperativeOclEcoreProjectPath}"
-var imperativeOclGenModelProjectPath = "model/${imperativeOclProjectPrefix}.genmodel"
-var imperativeOclGenModelPath = "${imperativeOclProjectName}/${imperativeOclGenModelProjectPath}"
-var imperativeOclModelPackage = "${imperativeOclProjectName}"
-var imperativeOclModelName = "imperativeocl"
-var imperativeOclVisitorPackage = "${imperativeOclProjectName}.util"
-var imperativeOclVisitorName = "${imperativeOclProjectPrefix}Visitor"
-var imperativeOclVisitorQualifiedName = "${imperativeOclVisitorPackage}.${imperativeOclVisitorName}"
+var imperativeOclGenModelProjectPath = "model/ImperativeOCL.genmodel"
 var imperativeOclLookupFilePath = "model/ImperativeOCLLookup.ocl"
+
 
 /*
  * QVTOperational related configuration variables
  */
 var qvtOperationalProjectName = "org.eclipse.qvto.examples.pivot.qvtoperational"
-var qvtOperationalProjectURI = "platform:/resource/${qvtOperationalProjectName}"
-var qvtOperationalProjectPrefix = "QVTOperational"
-var qvtOperationalEcoreProjectPath = "model/QVTOperational.ecore"
-var qvtOperationalEcoreURI = "${qvtOperationalProjectURI}/${qvtOperationalEcoreProjectPath}"
-var qvtOperationalGenModelProjectPath = "model/${qvtOperationalProjectPrefix}.genmodel"
-var qvtOperationalGenModelPath = "${qvtOperationalProjectName}/${qvtOperationalGenModelProjectPath}"
-var qvtOperationalModelPackage = "${qvtOperationalProjectName}"
-var qvtOperationalModelName = "qvtoperational"
-var qvtOperationalVisitorPackage = "${qvtOperationalProjectName}.util"
-var qvtOperationalVisitorName = "${qvtOperationalProjectPrefix}Visitor"
-var qvtOperationalVisitorQualifiedName = "${qvtOperationalVisitorPackage}.${qvtOperationalVisitorName}"
-var qvtOperationalLookupFilePath = "model/QVTOperationalLookup.ocl"
+var qvtOperationalGenModelProjectPath = "model/QVTOperational.genmodel"
+var qvtOperationalLookupFilePath = "model/QVTOperationalCS2ASLookup.ocl"
 
 /**
  *	Generate the Concrete Syntax Models used by the Xtext editors.
@@ -86,46 +57,31 @@ Workflow {
     	scanClassPath = true
     }
     bean = EcoreGenModelSetup { resourceSet = resourceSet }
-
     
-     component = @SubGenerateAutoASModel {	resourceSet = resourceSet
-    	projectName = imperativeOclProjectName
-    	projectPrefix = imperativeOclProjectPrefix 
-    	superProjectName = oclProjectName
-    	superProjectPrefix = oclProjectPrefix
-    	baseProjectPrefix = oclProjectPrefix
-    	baseVisitorPackage = oclVisitorPackage
-    	genModelFile = imperativeOclGenModelProjectPath
-    	lookupFilePath = imperativeOclLookupFilePath
-    	modelPackageName = imperativeOclModelPackage
-    	modelName = imperativeOclModelName
-    	superModelName = oclModelName
-    	visitorPackageName = imperativeOclVisitorPackage
-    	visitorClassName = imperativeOclVisitorName
-    	superVisitorPackageName = oclVisitorPackage
-    	superVisitorClassName = oclVisitorName
-    	visitablePackageName = oclVisitablePackage
-    	visitableClassName = oclVisitableName
-    }
-          
+    /* FIXME due to a weird/hard bug. Just one of lookup generation can properly be generated. Imports of .ocl are not 
+     * properly resolved when executing the second generation
+     */
+//    component = @SubGenerateAutoASModel {	resourceSet = resourceSet
+//    	projectName = imperativeOclProjectName 
+//    	superProjectName = oclProjectName
+//    	baseProjectName = oclProjectName    	
+//    	genModelFile = imperativeOclGenModelProjectPath
+//    	superGenModelFile = oclGenModelProjectPath
+//    	baseGenModelFile = oclGenModelProjectPath
+//    	lookupFilePath = imperativeOclLookupFilePath
+//    	superlookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
+//    	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
+//    }
+   
    
    component = @SubGenerateAutoASModel {	resourceSet = resourceSet
     	projectName = qvtOperationalProjectName
-    	projectPrefix =  qvtOperationalProjectPrefix
     	superProjectName = imperativeOclProjectName
-    	superProjectPrefix = imperativeOclProjectPrefix
-    	baseProjectPrefix = oclProjectPrefix
-    	baseVisitorPackage = oclVisitorPackage
+    	baseProjectName = oclProjectName
     	genModelFile = qvtOperationalGenModelProjectPath
+    	superGenModelFile = imperativeOclGenModelProjectPath
+    	baseGenModelFile = oclGenModelProjectPath
     	lookupFilePath = qvtOperationalLookupFilePath
-    	modelPackageName = qvtOperationalModelPackage
-    	modelName = qvtOperationalModelName
-    	superModelName = imperativeOclModelName
-    	visitorPackageName = qvtOperationalVisitorPackage
-    	visitorClassName = qvtOperationalVisitorName
-    	superVisitorPackageName = imperativeOclVisitorPackage
-    	superVisitorClassName = imperativeOclVisitorName
-    	visitablePackageName = oclVisitablePackage
-    	visitableClassName = oclVisitableName
+    	baselookupPackageName = "org.eclipse.ocl.pivot.internal.lookup"
     }
 }

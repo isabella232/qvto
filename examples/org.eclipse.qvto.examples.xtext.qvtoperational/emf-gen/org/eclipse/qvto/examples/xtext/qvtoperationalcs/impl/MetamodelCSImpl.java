@@ -8,7 +8,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.impl.PackageCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKind;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MetamodelKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
@@ -34,7 +34,7 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final MetamodelKind METAMODEL_KIND_EDEFAULT = MetamodelKind.METAMODEL;
+	protected static final MetamodelKindCS METAMODEL_KIND_EDEFAULT = MetamodelKindCS.METAMODEL;
 
 	/**
 	 * The cached value of the '{@link #getMetamodelKind() <em>Metamodel Kind</em>}' attribute.
@@ -44,7 +44,7 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected MetamodelKind metamodelKind = METAMODEL_KIND_EDEFAULT;
+	protected MetamodelKindCS metamodelKind = METAMODEL_KIND_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -70,7 +70,7 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public MetamodelKind getMetamodelKind() {
+	public MetamodelKindCS getMetamodelKind() {
 		return metamodelKind;
 	}
 
@@ -79,8 +79,8 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setMetamodelKind(MetamodelKind newMetamodelKind) {
-		MetamodelKind oldMetamodelKind = metamodelKind;
+	public void setMetamodelKind(MetamodelKindCS newMetamodelKind) {
+		MetamodelKindCS oldMetamodelKind = metamodelKind;
 		metamodelKind = newMetamodelKind == null ? METAMODEL_KIND_EDEFAULT : newMetamodelKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.METAMODEL_CS__METAMODEL_KIND, oldMetamodelKind, metamodelKind));
@@ -118,7 +118,7 @@ public class MetamodelCSImpl extends PackageCSImpl implements MetamodelCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTOperationalCSPackage.METAMODEL_CS__METAMODEL_KIND:
-				setMetamodelKind((MetamodelKind)newValue);
+				setMetamodelKind((MetamodelKindCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

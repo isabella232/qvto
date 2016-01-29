@@ -28,46 +28,24 @@ import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCL
 
 GrammmarCS returns essentialocl::ExpCS: ImperativeOCLExpCS;
 
-terminal ACCESS_OP: '.' | '->' | '!->';
+enum SeverityKindCS: error='error' | warning='warning' | fatal='fatal'; 
+enum InitOpCS : Equals='=' | ColonEquals=':=' | ColonColonEquals='::=';
+enum AssignOpCS : Single=':=' | MultiWithReset='::=' | MultiWithoutReset='+=';
 
-// terminal ADD_OP: '+' | '-';
-
-terminal ASSIGN_OP: ':=' | '::=' | '+=' | '-=';
-
-terminal CMP_OP: '=' | '==' | '<>' | '<' | '>' | '<=' | '>=';
-
-terminal MULT_OP: '*' | '/' | '%';
-
-terminal MULTI_ITERATOR_OP: 'forAll';
-
-// terminal OR_OP: 'or' | 'xor';
-
-terminal RESOLVE_IN_KIND: 'resolveIn' | 'resolveoneIn' | 'invresolveIn' | 'invresolveoneIn';
-
-terminal RESOLVE_KIND: 'resolve' | 'resolveone' | 'invresolve' | 'invresolveone';
-
-terminal SIMPLE_ITERATOR_OP: 'reject' | 'select' | 'collect' | 'exists'
-| 'one' | 'any' | 'isUnique' | 'collectNested'
-| 'sortedBy' | 'xselect' | 'xcollect'
-| 'selectOne' | 'collectOne'
-| 'collectselect' | 'collectselectOne';
-
-terminal UNARY_OP: '-' | 'not' | '#' | '##' | '*';
-
-ImperativeOCLReservedKeyword:
-	'default'
-	| 'elif'
-	| RESOLVE_KIND
-	| RESOLVE_IN_KIND;
-
-ImperativeOCLPrefixOperator:
-	'#' | '##' | '*';
-
-ImperativeOCLInfixOperator:
-	ASSIGN_OP | 'default' | '==';
-
-ImperativeOCLNavigationOperator:
-	'!->';
+//ImperativeOCLReservedKeyword:
+//	'default'
+//	| 'elif'
+//	| RESOLVE_KIND
+//	| RESOLVE_IN_KIND;
+//
+//ImperativeOCLPrefixOperator:
+//	'#' | '##' | '*';
+//
+//ImperativeOCLInfixOperator:
+//	ASSIGN_OP | 'default' | '==';
+//
+//ImperativeOCLNavigationOperator:
+//	'!->';
 
 //PrefixOperator:
 //	EssentialOCLPrefixOperator | QVToPrefixOperator;
@@ -93,13 +71,15 @@ TypeLiteralCS returns base::TypedRefCS:
 	| DictTypeCS;
 
 ListTypeCS : 
-	'List' '(' type=TypeExpCS ')'
+	'List' '(' ownedTypeRef=TypeExpCS ')'
 ;
 
 
 DictTypeCS : 
-	'Dict' '(' keyType=TypeExpCS ',' valueType=TypeExpCS ')'
+	'Dict' '(' ownedKeyTypeRef=TypeExpCS ',' ownedValueTypeRef=TypeExpCS ')'
 ;
+
+// Typedef is deprecated
 
 // ********* ImperativeOCL Expressions *********
 // PrimaryExpCS redefined to include the new List and Dict literal expressions
@@ -113,18 +93,57 @@ PrimaryExpCS returns essentialocl::ExpCS:	// These rules are ordered most reject
 |	MapLiteralExpCS
 |	CollectionLiteralExpCS
 |	LambdaLiteralExpCS
+|	ImperativeExpCS
+|	NameExpCS
+;
+
+ImperativeExpCS returns essentialocl::ExpCS :
+	ExpressionBlockCS
+|	AssertExpCS
+|	BreakExpCS
+|	ContinueExpCS
+|	InstantiationExpCS
+|	LogExpCS
+|	RaiseExpCS
+|	VarsInitializationCS
 |	ListLiteralExpCS
 |	DictLiteralExpCS
 |	TypeLiteralExpCS
 |	ReturnExpCS
-|	NameExpCS
+|	ComputeExpCS
+|	ForExpCS
+|	WhileExpCS
+|	ImperativeIterateExpCS
+|	SwitchExpCS
+|   AssignExpCS
+|   TryExpCS
 ;
-	
-ListLiteralExpCS : 
-	'List' '{' {ListLiteralExpCS} 
-		(ownedParts+=CollectionLiteralPartCS
-		(',' ownedParts+=CollectionLiteralPartCS)*)? 
+
+AssertExpCS:
+	'assert' (severity=SeverityKindCS)? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?
+;
+AssignExpCS:
+	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ('default' ownedDefault=ExpCS)?
+;
+
+BreakExpCS:
+	{BreakExpCS}
+	'break'
+;
+
+CatchExpCS:
+	'except' '(' (varName=UnrestrictedName ':')? ownedExceptionRefs+=TypeExpCS (',' ownedExceptionRefs+=TypeExpCS )* ')' '{'
+		(ownedExps+=ExpCS)*
 	'}'
+;
+ComputeExpCS :
+	'compute' '(' ownedResultVar = VarDeclarationCS ')' '{'
+		ownedExps += ExpressionStatementCS
+	'}'
+;
+ContinueExpCS:
+	{ContinueExpCS}
+	'continue'
 ;
 
 DictLiteralExpCS : 
@@ -135,17 +154,112 @@ DictLiteralExpCS :
 ;
 
 DictLiteralPartCS :
-	key = PrimitiveLiteralExpCS '=' value = ExpCS
-;
- 	
-ReturnExpCS : 
-	'return' {ReturnExpCS} (value = ExpCS)?
+	ownedKey = PrimitiveLiteralExpCS '=' ownedValue = ExpCS
 ;
 
-BlockExpCS :
-	'{' expressions+=ExpCS '}'
+ExpressionBlockCS :
+	{ExpressionBlockCS}
+	'do'? 
+	'{' ownedExps += ExpressionStatementCS* '}'
+;
+
+ExpressionStatementCS returns essentialocl::ExpCS:
+	ExpCS ';'?
+;
+
+ExtentRefCS:
+	ownedPathName = PathNameCS
+;
+// FIXME align with NameExpCS
+ForExpCS:
+	('forEach' | isOne?='forOne') '(' (ownedTarget=VarDeclarationCS ';')? ownedIterator=VarDeclarationNoInitCS ('|' ownedCondition=ExpCS)? ')'
+	ownedBody=ExpCS
+;
+
+// FIXME align with NameExpCS
+ImperativeIterateExpCS :
+	(name='xcollect' '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedBody=ExpCS ')')
+	| (name=('xselect' | 'xselectOne') '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedCondition=ExpCS ')')
+	| (name=('xcollectselect' | 'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')? ownedTarget=VarDeclarationCS ':=' ownedBody=ExpCS '|' ownedCondition=ExpCS ')')
+;
+
+// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
+InstantiationExpCS:
+	'new' ownedClassRef=TypeExpCS ('@' ownedExtentRef=TypeNameExpCS )? '(' (ownedArguments+=ExpCS (',' ownedArguments+=ExpCS )*)? ')'
+;
+
+ListLiteralExpCS : 
+	'List' '{' {ListLiteralExpCS} 
+		(ownedParts+=CollectionLiteralPartCS
+		(',' ownedParts+=CollectionLiteralPartCS)*)? 
+	'}'
+;
+
+// FIXME align with NameExpCS
+// FIXME severity -> enum
+// Improve spec: result.log("message", severity) when condition
+LogExpCS : 
+	'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS )? (',' severity = SeverityKindCS )? ')' ('when' ownedCondition=ExpCS)?
+;
+
+RaiseExpCS: 
+	'raise' ownedExceptionRef=TypeExpCS '(' ownedArguments+=ExpCS (',' ownedArguments+=ExpCS)* ')'
+	// FIXME OMG: should support several arguments
+;
+
+ReturnExpCS : 
+	'return' {ReturnExpCS} (ownedValue = ExpCS)?
 ;
 
 StringLiteral:
 	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING
 ;
+
+// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+// FIXME SwitchExpCS should probably be a CallExp
+SwitchExpCS:
+	(ifSyntax?='if' ownedAltParts+= SwitchAltCS
+	('elif' ownedAltParts+=SwitchAltCS)*
+	('else' ownedElsePart=ExpCS)?
+	('endif')?
+	)  
+	| ('switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' 
+		('case' ownedAltParts+= SwitchAltCS )+
+		('else' ownedElsePart=ExpCS)?
+	  '}'
+	) 
+;
+
+SwitchAltCS:
+	'(' ownedCondition=ExpCS ')' ownedBody=ExpCS
+;
+
+TryExpCS :
+	{TryExpCS}
+	'try' '{'
+		(ownedExps+=ExpCS)*
+	'}' (ownedCatchs+=CatchExpCS)+
+	// FIXME in the AS there should be at least one CatchExp
+;
+
+// FIXME there should be additional disambiguation between NameExpCS and UnlinkExp
+// UnlinkExpCS returns essentialocl::NameExpCS:
+
+VarDeclarationCS : 
+	name=UnrestrictedName (':' ownedType=TypeExpCS)? ((initOp=InitOpCS) ownedInitExpression=ExpCS)?
+;
+
+VarDeclarationNoInitCS returns VarDeclarationCS: 
+	name=UnrestrictedName (':' ownedType=TypeExpCS)? 
+;
+
+VarsInitializationCS:
+	'var' ownedVarDeclarations+=VarDeclarationCS (',' ownedVarDeclarations+=VarDeclarationCS)*
+;
+
+WhileExpCS:
+	'while' '(' (ownedResultVar= VarDeclarationCS ';')? ownedCondition=ExpCS ')' '{' 
+		ownedExps+=ExpressionStatementCS* 
+	'}'
+;
+

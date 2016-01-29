@@ -28,12 +28,13 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 	extends org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractWrappingImperativeOCLVisitor<R, C, D, P>
 	implements QVTOperationalVisitor<R>
 {
-	protected AbstractWrappingQVTOperationalVisitor(@NonNull D delegate, @NonNull C context) {
+	protected AbstractWrappingQVTOperationalVisitor(@NonNull D delegate, C context) {
 		super(delegate, context);
 	}
 
-	public @Nullable R visitConstructor(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Constructor object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitConstructor(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Constructor object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitConstructor(object);
 			return postVisit(object, prologue, result);
@@ -43,8 +44,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitConstructorBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ConstructorBody object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitConstructorBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ConstructorBody object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitConstructorBody(object);
 			return postVisit(object, prologue, result);
@@ -54,8 +56,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitContextualProperty(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ContextualProperty object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitContextualProperty(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ContextualProperty object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitContextualProperty(object);
 			return postVisit(object, prologue, result);
@@ -65,8 +68,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitDummyRelation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDummyRelation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDummyRelation(object);
 			return postVisit(object, prologue, result);
@@ -76,8 +80,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitDummyRelationDomain(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationDomain object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDummyRelationDomain(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelationDomain object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDummyRelationDomain(object);
 			return postVisit(object, prologue, result);
@@ -87,8 +92,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitDummyRelationalTransformation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.DummyRelationalTransformation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitDummyRelationalTransformation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull DummyRelationalTransformation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitDummyRelationalTransformation(object);
 			return postVisit(object, prologue, result);
@@ -98,8 +104,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitEntryOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.EntryOperation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitEntryOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull EntryOperation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitEntryOperation(object);
 			return postVisit(object, prologue, result);
@@ -109,8 +116,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitHelper(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Helper object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitHelper(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Helper object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitHelper(object);
 			return postVisit(object, prologue, result);
@@ -120,8 +128,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitImperativeCallExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitImperativeCallExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ImperativeCallExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeCallExp(object);
 			return postVisit(object, prologue, result);
@@ -131,8 +140,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitImperativeOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitImperativeOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ImperativeOperation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitImperativeOperation(object);
 			return postVisit(object, prologue, result);
@@ -142,8 +152,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitLibrary(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Library object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitLibrary(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Library object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitLibrary(object);
 			return postVisit(object, prologue, result);
@@ -153,8 +164,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitMappingBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingBody object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitMappingBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingBody object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingBody(object);
 			return postVisit(object, prologue, result);
@@ -164,8 +176,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitMappingCallExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingCallExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitMappingCallExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingCallExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingCallExp(object);
 			return postVisit(object, prologue, result);
@@ -175,8 +188,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitMappingOperation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingOperation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitMappingOperation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingOperation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingOperation(object);
 			return postVisit(object, prologue, result);
@@ -186,8 +200,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitMappingParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.MappingParameter object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitMappingParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull MappingParameter object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitMappingParameter(object);
 			return postVisit(object, prologue, result);
@@ -197,8 +212,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitModelParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModelParameter object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitModelParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModelParameter object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitModelParameter(object);
 			return postVisit(object, prologue, result);
@@ -208,8 +224,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitModelType(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModelType object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitModelType(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModelType object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitModelType(object);
 			return postVisit(object, prologue, result);
@@ -219,8 +236,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitModule(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Module object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitModule(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Module object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitModule(object);
 			return postVisit(object, prologue, result);
@@ -230,8 +248,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitModuleImport(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ModuleImport object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitModuleImport(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ModuleImport object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitModuleImport(object);
 			return postVisit(object, prologue, result);
@@ -241,8 +260,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitObjectExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ObjectExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitObjectExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ObjectExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitObjectExp(object);
 			return postVisit(object, prologue, result);
@@ -252,8 +272,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitOperationBody(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.OperationBody object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitOperationBody(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull OperationBody object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOperationBody(object);
 			return postVisit(object, prologue, result);
@@ -263,8 +284,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitOperationalTransformation(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.OperationalTransformation object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitOperationalTransformation(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull OperationalTransformation object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitOperationalTransformation(object);
 			return postVisit(object, prologue, result);
@@ -274,8 +296,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitResolveExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ResolveExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitResolveExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ResolveExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitResolveExp(object);
 			return postVisit(object, prologue, result);
@@ -285,8 +308,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitResolveInExp(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.ResolveInExp object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitResolveInExp(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull ResolveInExp object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitResolveInExp(object);
 			return postVisit(object, prologue, result);
@@ -296,8 +320,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitTag(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.Tag object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitTag(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Tag object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitTag(object);
 			return postVisit(object, prologue, result);
@@ -307,8 +332,9 @@ public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTO
 		}
 	}
 
-	public @Nullable R visitVarParameter(@NonNull org.eclipse.qvto.examples.pivot.qvtoperational.VarParameter object) {
-		P prologue = preVisit(object);
+	@Override
+	public R visitVarParameter(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull VarParameter object) {
+		@Nullable P prologue = preVisit(object);
 		try {
 			R result = delegate.visitVarParameter(object);
 			return postVisit(object, prologue, result);

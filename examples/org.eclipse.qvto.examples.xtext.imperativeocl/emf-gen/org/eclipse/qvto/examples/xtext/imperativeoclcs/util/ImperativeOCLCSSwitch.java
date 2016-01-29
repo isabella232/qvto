@@ -4,25 +4,51 @@ package org.eclipse.qvto.examples.xtext.imperativeoclcs.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.pivot.utilities.Pivotable;
-
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ElementRefCS;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
 import org.eclipse.ocl.xtext.basecs.TypeRefCS;
 import org.eclipse.ocl.xtext.basecs.TypedRefCS;
-
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
-
 import org.eclipse.ocl.xtext.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.CallExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.*;
+import org.eclipse.ocl.xtext.essentialoclcs.LiteralExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssertExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.AssignExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.BreakExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.CatchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ContinueExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictLiteralPartCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.DictTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExpressionBlockCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ExtentRefCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ForExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeIterateExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeLoopExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.InstantiationExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListLiteralExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ListTypeCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.LogExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.RaiseExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.ReturnExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.StatementCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchAltCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.SwitchExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.TryExpCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarsInitializationCS;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.WhileExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,7 +63,7 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.*;
  * @see org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage
  * @generated
  */
-public class ImperativeOCLCSSwitch<T> extends Switch<T> {
+public class ImperativeOCLCSSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -94,35 +120,36 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeOCLCSPackage.ASSIGN_STATEMENT_CS: {
-				AssignStatementCS assignStatementCS = (AssignStatementCS)theEObject;
-				T result = caseAssignStatementCS(assignStatementCS);
-				if (result == null) result = caseStatementCS(assignStatementCS);
-				if (result == null) result = caseExpCS(assignStatementCS);
-				if (result == null) result = caseModelElementCS(assignStatementCS);
-				if (result == null) result = casePivotableElementCS(assignStatementCS);
-				if (result == null) result = caseElementCS(assignStatementCS);
-				if (result == null) result = casePivotable(assignStatementCS);
-				if (result == null) result = caseVisitableCS(assignStatementCS);
+			case ImperativeOCLCSPackage.ASSIGN_EXP_CS: {
+				AssignExpCS assignExpCS = (AssignExpCS)theEObject;
+				T result = caseAssignExpCS(assignExpCS);
+				if (result == null) result = caseStatementCS(assignExpCS);
+				if (result == null) result = caseExpCS(assignExpCS);
+				if (result == null) result = caseModelElementCS(assignExpCS);
+				if (result == null) result = casePivotableElementCS(assignExpCS);
+				if (result == null) result = caseElementCS(assignExpCS);
+				if (result == null) result = casePivotable(assignExpCS);
+				if (result == null) result = caseVisitableCS(assignExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeOCLCSPackage.BLOCK_EXP_CS: {
-				BlockExpCS blockExpCS = (BlockExpCS)theEObject;
-				T result = caseBlockExpCS(blockExpCS);
-				if (result == null) result = caseStatementCS(blockExpCS);
-				if (result == null) result = caseExpCS(blockExpCS);
-				if (result == null) result = caseModelElementCS(blockExpCS);
-				if (result == null) result = casePivotableElementCS(blockExpCS);
-				if (result == null) result = caseElementCS(blockExpCS);
-				if (result == null) result = casePivotable(blockExpCS);
-				if (result == null) result = caseVisitableCS(blockExpCS);
+			case ImperativeOCLCSPackage.BREAK_EXP_CS: {
+				BreakExpCS breakExpCS = (BreakExpCS)theEObject;
+				T result = caseBreakExpCS(breakExpCS);
+				if (result == null) result = caseStatementCS(breakExpCS);
+				if (result == null) result = caseExpCS(breakExpCS);
+				if (result == null) result = caseModelElementCS(breakExpCS);
+				if (result == null) result = casePivotableElementCS(breakExpCS);
+				if (result == null) result = caseElementCS(breakExpCS);
+				if (result == null) result = casePivotable(breakExpCS);
+				if (result == null) result = caseVisitableCS(breakExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS: {
 				DictLiteralExpCS dictLiteralExpCS = (DictLiteralExpCS)theEObject;
 				T result = caseDictLiteralExpCS(dictLiteralExpCS);
+				if (result == null) result = caseLiteralExpCS(dictLiteralExpCS);
 				if (result == null) result = caseExpCS(dictLiteralExpCS);
 				if (result == null) result = caseModelElementCS(dictLiteralExpCS);
 				if (result == null) result = casePivotableElementCS(dictLiteralExpCS);
@@ -135,7 +162,10 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS: {
 				DictLiteralPartCS dictLiteralPartCS = (DictLiteralPartCS)theEObject;
 				T result = caseDictLiteralPartCS(dictLiteralPartCS);
+				if (result == null) result = caseModelElementCS(dictLiteralPartCS);
+				if (result == null) result = casePivotableElementCS(dictLiteralPartCS);
 				if (result == null) result = caseElementCS(dictLiteralPartCS);
+				if (result == null) result = casePivotable(dictLiteralPartCS);
 				if (result == null) result = caseVisitableCS(dictLiteralPartCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -157,12 +187,26 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				ComputeExpCS computeExpCS = (ComputeExpCS)theEObject;
 				T result = caseComputeExpCS(computeExpCS);
 				if (result == null) result = caseExpressionBlockCS(computeExpCS);
+				if (result == null) result = caseStatementCS(computeExpCS);
 				if (result == null) result = caseExpCS(computeExpCS);
 				if (result == null) result = caseModelElementCS(computeExpCS);
 				if (result == null) result = casePivotableElementCS(computeExpCS);
 				if (result == null) result = caseElementCS(computeExpCS);
 				if (result == null) result = casePivotable(computeExpCS);
 				if (result == null) result = caseVisitableCS(computeExpCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImperativeOCLCSPackage.CONTINUE_EXP_CS: {
+				ContinueExpCS continueExpCS = (ContinueExpCS)theEObject;
+				T result = caseContinueExpCS(continueExpCS);
+				if (result == null) result = caseStatementCS(continueExpCS);
+				if (result == null) result = caseExpCS(continueExpCS);
+				if (result == null) result = caseModelElementCS(continueExpCS);
+				if (result == null) result = casePivotableElementCS(continueExpCS);
+				if (result == null) result = caseElementCS(continueExpCS);
+				if (result == null) result = casePivotable(continueExpCS);
+				if (result == null) result = caseVisitableCS(continueExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -210,30 +254,24 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeOCLCSPackage.DO_EXP_CS: {
-				DoExpCS doExpCS = (DoExpCS)theEObject;
-				T result = caseDoExpCS(doExpCS);
-				if (result == null) result = caseExpressionBlockCS(doExpCS);
-				if (result == null) result = caseExpCS(doExpCS);
-				if (result == null) result = caseModelElementCS(doExpCS);
-				if (result == null) result = casePivotableElementCS(doExpCS);
-				if (result == null) result = caseElementCS(doExpCS);
-				if (result == null) result = casePivotable(doExpCS);
-				if (result == null) result = caseVisitableCS(doExpCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImperativeOCLCSPackage.EXCEPT_CS: {
-				ExceptCS exceptCS = (ExceptCS)theEObject;
-				T result = caseExceptCS(exceptCS);
-				if (result == null) result = caseElementCS(exceptCS);
-				if (result == null) result = caseVisitableCS(exceptCS);
+			case ImperativeOCLCSPackage.CATCH_EXP_CS: {
+				CatchExpCS catchExpCS = (CatchExpCS)theEObject;
+				T result = caseCatchExpCS(catchExpCS);
+				if (result == null) result = caseExpressionBlockCS(catchExpCS);
+				if (result == null) result = caseStatementCS(catchExpCS);
+				if (result == null) result = caseExpCS(catchExpCS);
+				if (result == null) result = caseModelElementCS(catchExpCS);
+				if (result == null) result = casePivotableElementCS(catchExpCS);
+				if (result == null) result = caseElementCS(catchExpCS);
+				if (result == null) result = casePivotable(catchExpCS);
+				if (result == null) result = caseVisitableCS(catchExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS: {
 				ExpressionBlockCS expressionBlockCS = (ExpressionBlockCS)theEObject;
 				T result = caseExpressionBlockCS(expressionBlockCS);
+				if (result == null) result = caseStatementCS(expressionBlockCS);
 				if (result == null) result = caseExpCS(expressionBlockCS);
 				if (result == null) result = caseModelElementCS(expressionBlockCS);
 				if (result == null) result = casePivotableElementCS(expressionBlockCS);
@@ -243,16 +281,14 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeOCLCSPackage.EXPRESSION_STATEMENT_CS: {
-				ExpressionStatementCS expressionStatementCS = (ExpressionStatementCS)theEObject;
-				T result = caseExpressionStatementCS(expressionStatementCS);
-				if (result == null) result = caseStatementCS(expressionStatementCS);
-				if (result == null) result = caseExpCS(expressionStatementCS);
-				if (result == null) result = caseModelElementCS(expressionStatementCS);
-				if (result == null) result = casePivotableElementCS(expressionStatementCS);
-				if (result == null) result = caseElementCS(expressionStatementCS);
-				if (result == null) result = casePivotable(expressionStatementCS);
-				if (result == null) result = caseVisitableCS(expressionStatementCS);
+			case ImperativeOCLCSPackage.EXTENT_REF_CS: {
+				ExtentRefCS extentRefCS = (ExtentRefCS)theEObject;
+				T result = caseExtentRefCS(extentRefCS);
+				if (result == null) result = caseElementRefCS(extentRefCS);
+				if (result == null) result = casePivotableElementCS(extentRefCS);
+				if (result == null) result = caseElementCS(extentRefCS);
+				if (result == null) result = casePivotable(extentRefCS);
+				if (result == null) result = caseVisitableCS(extentRefCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -288,6 +324,7 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS: {
 				ListLiteralExpCS listLiteralExpCS = (ListLiteralExpCS)theEObject;
 				T result = caseListLiteralExpCS(listLiteralExpCS);
+				if (result == null) result = caseLiteralExpCS(listLiteralExpCS);
 				if (result == null) result = caseExpCS(listLiteralExpCS);
 				if (result == null) result = caseModelElementCS(listLiteralExpCS);
 				if (result == null) result = casePivotableElementCS(listLiteralExpCS);
@@ -308,19 +345,6 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(logExpCS);
 				if (result == null) result = casePivotable(logExpCS);
 				if (result == null) result = caseVisitableCS(logExpCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case ImperativeOCLCSPackage.QUIT_EXP_CS: {
-				QuitExpCS quitExpCS = (QuitExpCS)theEObject;
-				T result = caseQuitExpCS(quitExpCS);
-				if (result == null) result = caseStatementCS(quitExpCS);
-				if (result == null) result = caseExpCS(quitExpCS);
-				if (result == null) result = caseModelElementCS(quitExpCS);
-				if (result == null) result = casePivotableElementCS(quitExpCS);
-				if (result == null) result = caseElementCS(quitExpCS);
-				if (result == null) result = casePivotable(quitExpCS);
-				if (result == null) result = caseVisitableCS(quitExpCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -391,6 +415,7 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				TryExpCS tryExpCS = (TryExpCS)theEObject;
 				T result = caseTryExpCS(tryExpCS);
 				if (result == null) result = caseExpressionBlockCS(tryExpCS);
+				if (result == null) result = caseStatementCS(tryExpCS);
 				if (result == null) result = caseExpCS(tryExpCS);
 				if (result == null) result = caseModelElementCS(tryExpCS);
 				if (result == null) result = casePivotableElementCS(tryExpCS);
@@ -400,16 +425,30 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ImperativeOCLCSPackage.VARIABLE_INITIALIZATION_CS: {
-				VariableInitializationCS variableInitializationCS = (VariableInitializationCS)theEObject;
-				T result = caseVariableInitializationCS(variableInitializationCS);
-				if (result == null) result = caseStatementCS(variableInitializationCS);
-				if (result == null) result = caseExpCS(variableInitializationCS);
-				if (result == null) result = caseModelElementCS(variableInitializationCS);
-				if (result == null) result = casePivotableElementCS(variableInitializationCS);
-				if (result == null) result = caseElementCS(variableInitializationCS);
-				if (result == null) result = casePivotable(variableInitializationCS);
-				if (result == null) result = caseVisitableCS(variableInitializationCS);
+			case ImperativeOCLCSPackage.VAR_DECLARATION_CS: {
+				VarDeclarationCS varDeclarationCS = (VarDeclarationCS)theEObject;
+				T result = caseVarDeclarationCS(varDeclarationCS);
+				if (result == null) result = caseVariableCS(varDeclarationCS);
+				if (result == null) result = caseNamedElementCS(varDeclarationCS);
+				if (result == null) result = caseModelElementCS(varDeclarationCS);
+				if (result == null) result = caseNameable(varDeclarationCS);
+				if (result == null) result = casePivotableElementCS(varDeclarationCS);
+				if (result == null) result = caseElementCS(varDeclarationCS);
+				if (result == null) result = casePivotable(varDeclarationCS);
+				if (result == null) result = caseVisitableCS(varDeclarationCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS: {
+				VarsInitializationCS varsInitializationCS = (VarsInitializationCS)theEObject;
+				T result = caseVarsInitializationCS(varsInitializationCS);
+				if (result == null) result = caseStatementCS(varsInitializationCS);
+				if (result == null) result = caseExpCS(varsInitializationCS);
+				if (result == null) result = caseModelElementCS(varsInitializationCS);
+				if (result == null) result = casePivotableElementCS(varsInitializationCS);
+				if (result == null) result = caseElementCS(varsInitializationCS);
+				if (result == null) result = casePivotable(varsInitializationCS);
+				if (result == null) result = caseVisitableCS(varsInitializationCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -417,6 +456,7 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 				WhileExpCS whileExpCS = (WhileExpCS)theEObject;
 				T result = caseWhileExpCS(whileExpCS);
 				if (result == null) result = caseExpressionBlockCS(whileExpCS);
+				if (result == null) result = caseStatementCS(whileExpCS);
 				if (result == null) result = caseExpCS(whileExpCS);
 				if (result == null) result = caseModelElementCS(whileExpCS);
 				if (result == null) result = casePivotableElementCS(whileExpCS);
@@ -446,32 +486,32 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assign Statement CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Assign Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assign Statement CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Assign Exp CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAssignStatementCS(AssignStatementCS object) {
+	public T caseAssignExpCS(AssignExpCS object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Block Exp CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Break Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Block Exp CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Break Exp CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBlockExpCS(BlockExpCS object) {
+	public T caseBreakExpCS(BreakExpCS object) {
 		return null;
 	}
 
@@ -536,6 +576,21 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Continue Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Continue Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseContinueExpCS(ContinueExpCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Imperative Iterate Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -581,32 +636,17 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Do Exp CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Catch Exp CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Do Exp CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Catch Exp CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDoExpCS(DoExpCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Except CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Except CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExceptCS(ExceptCS object) {
+	public T caseCatchExpCS(CatchExpCS object) {
 		return null;
 	}
 
@@ -626,17 +666,17 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression Statement CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Extent Ref CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression Statement CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Extent Ref CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpressionStatementCS(ExpressionStatementCS object) {
+	public T caseExtentRefCS(ExtentRefCS object) {
 		return null;
 	}
 
@@ -697,21 +737,6 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseLogExpCS(LogExpCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Quit Exp CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Quit Exp CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseQuitExpCS(QuitExpCS object) {
 		return null;
 	}
 
@@ -806,17 +831,32 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable Initialization CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Var Declaration CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable Initialization CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Var Declaration CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariableInitializationCS(VariableInitializationCS object) {
+	public T caseVarDeclarationCS(VarDeclarationCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Vars Initialization CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Vars Initialization CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVarsInitializationCS(VarsInitializationCS object) {
 		return null;
 	}
 
@@ -926,6 +966,21 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal Exp CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal Exp CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteralExpCS(LiteralExpCS object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Element Ref CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -997,6 +1052,51 @@ public class ImperativeOCLCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCallExpCS(CallExpCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Nameable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Nameable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNameable(Nameable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedElementCS(NamedElementCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVariableCS(VariableCS object) {
 		return null;
 	}
 

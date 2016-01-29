@@ -16,6 +16,7 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS#getOwnedBinding <em>Owned Binding</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS#getExtentLocation <em>Extent Location</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTypedTypeRef2CS()
@@ -74,5 +75,31 @@ public interface TypedTypeRef2CS extends TypedRefCS {
 	 * @generated
 	 */
 	void setOwnedBinding(TemplateBindingCS value);
+
+	/**
+	 * Returns the value of the '<em><b>Extent Location</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Extent Location</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Extent Location</em>' attribute.
+	 * @see #setExtentLocation(String)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getTypedTypeRef2CS_ExtentLocation()
+	 * @model
+	 * @generated
+	 */
+	String getExtentLocation();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.TypedTypeRef2CS#getExtentLocation <em>Extent Location</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Extent Location</em>' attribute.
+	 * @see #getExtentLocation()
+	 * @generated
+	 */
+	void setExtentLocation(String value);
 
 } // TypedTypeRef2CS

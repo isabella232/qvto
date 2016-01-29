@@ -22,22 +22,21 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ReturnExpCSImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ReturnExpCSImpl#getOwnedValue <em>Owned Value</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedValue() <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getOwnedValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS value;
-
+	protected ExpCS ownedValue;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,8 +61,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ExpCS getValue() {
-		return value;
+	public ExpCS getOwnedValue() {
+		return ownedValue;
 	}
 
 	/**
@@ -71,11 +70,11 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValue(ExpCS newValue, NotificationChain msgs) {
-		ExpCS oldValue = value;
-		value = newValue;
+	public NotificationChain basicSetOwnedValue(ExpCS newOwnedValue, NotificationChain msgs) {
+		ExpCS oldOwnedValue = ownedValue;
+		ownedValue = newOwnedValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE, oldValue, newValue);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE, oldOwnedValue, newOwnedValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -86,18 +85,18 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(ExpCS newValue) {
-		if (newValue != value) {
+	public void setOwnedValue(ExpCS newOwnedValue) {
+		if (newOwnedValue != ownedValue) {
 			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
+			if (ownedValue != null)
+				msgs = ((InternalEObject)ownedValue).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE, null, msgs);
+			if (newOwnedValue != null)
+				msgs = ((InternalEObject)newOwnedValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE, null, msgs);
+			msgs = basicSetOwnedValue(newOwnedValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE, newValue, newValue));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE, newOwnedValue, newOwnedValue));
 	}
 
 	/**
@@ -108,8 +107,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE:
-				return basicSetValue(null, msgs);
+			case ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE:
+				return basicSetOwnedValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -122,8 +121,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE:
-				return getValue();
+			case ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE:
+				return getOwnedValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -136,8 +135,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE:
-				setValue((ExpCS)newValue);
+			case ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE:
+				setOwnedValue((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -151,8 +150,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE:
-				setValue((ExpCS)null);
+			case ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE:
+				setOwnedValue((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -166,8 +165,8 @@ public class ReturnExpCSImpl extends ExpCSImpl implements ReturnExpCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.RETURN_EXP_CS__VALUE:
-				return value != null;
+			case ImperativeOCLCSPackage.RETURN_EXP_CS__OWNED_VALUE:
+				return ownedValue != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -297,7 +297,8 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 		if (isInited) return (QVTOperationalPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalPackage.eNS_URI);
 
 		// Obtain or create and register package
-		QVTOperationalPackageImpl theQVTOperationalPackage = (QVTOperationalPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTOperationalPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTOperationalPackageImpl());
+		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTOperationalPackageImpl theQVTOperationalPackage = (QVTOperationalPackageImpl)(ePackage instanceof QVTOperationalPackageImpl ? ePackage : new QVTOperationalPackageImpl());
 
 		isInited = true;
 

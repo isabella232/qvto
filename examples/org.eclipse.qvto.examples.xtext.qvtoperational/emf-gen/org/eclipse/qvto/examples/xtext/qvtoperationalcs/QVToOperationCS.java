@@ -13,7 +13,7 @@ import org.eclipse.ocl.xtext.basecs.OperationCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS#getStereotypes <em>Stereotypes</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS#getOwnedStereotype <em>Owned Stereotype</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToOperationCS()
@@ -22,29 +22,29 @@ import org.eclipse.ocl.xtext.basecs.OperationCS;
  */
 public interface QVToOperationCS extends OperationCS {
 	/**
-	 * Returns the value of the '<em><b>Stereotypes</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Stereotype</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Stereotypes</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Stereotype</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Stereotypes</em>' containment reference.
-	 * @see #setStereotypes(StereotypeQualifierCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToOperationCS_Stereotypes()
+	 * @return the value of the '<em>Owned Stereotype</em>' containment reference.
+	 * @see #setOwnedStereotype(StereotypeQualifierCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getQVToOperationCS_OwnedStereotype()
 	 * @model containment="true"
 	 * @generated
 	 */
-	StereotypeQualifierCS getStereotypes();
+	StereotypeQualifierCS getOwnedStereotype();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS#getStereotypes <em>Stereotypes</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVToOperationCS#getOwnedStereotype <em>Owned Stereotype</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Stereotypes</em>' containment reference.
-	 * @see #getStereotypes()
+	 * @param value the new value of the '<em>Owned Stereotype</em>' containment reference.
+	 * @see #getOwnedStereotype()
 	 * @generated
 	 */
-	void setStereotypes(StereotypeQualifierCS value);
+	void setOwnedStereotype(StereotypeQualifierCS value);
 
 } // QVToOperationCS

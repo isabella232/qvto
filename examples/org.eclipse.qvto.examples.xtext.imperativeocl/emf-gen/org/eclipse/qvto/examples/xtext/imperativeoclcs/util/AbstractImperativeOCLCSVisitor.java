@@ -10,7 +10,6 @@
  *******************************************************************************/
 package	org.eclipse.qvto.examples.xtext.imperativeoclcs.util;
 
-import org.eclipse.jdt.annotation.NonNull;
 
 /*
  * An AbstractImperativeOCLCSVisitor provides a default implementation of the visitor framework
@@ -25,7 +24,7 @@ public abstract class AbstractImperativeOCLCSVisitor<R, C>
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractImperativeOCLCSVisitor(@NonNull C context) {
+	protected AbstractImperativeOCLCSVisitor(C context) {
 		super(context);
 	}
 }

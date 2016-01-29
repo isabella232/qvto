@@ -21,22 +21,21 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.StereotypeQualifierCSImpl#getStereotype <em>Stereotype</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.StereotypeQualifierCSImpl#getStereotypes <em>Stereotypes</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class StereotypeQualifierCSImpl extends ElementCSImpl implements StereotypeQualifierCS {
 	/**
-	 * The cached value of the '{@link #getStereotype() <em>Stereotype</em>}' attribute list.
+	 * The cached value of the '{@link #getStereotypes() <em>Stereotypes</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getStereotype()
+	 * @see #getStereotypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<String> stereotype;
-
+	protected EList<String> stereotypes;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -61,11 +60,11 @@ public class StereotypeQualifierCSImpl extends ElementCSImpl implements Stereoty
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getStereotype() {
-		if (stereotype == null) {
-			stereotype = new EDataTypeEList<String>(String.class, this, QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPE);
+	public EList<String> getStereotypes() {
+		if (stereotypes == null) {
+			stereotypes = new EDataTypeEList<String>(String.class, this, QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPES);
 		}
-		return stereotype;
+		return stereotypes;
 	}
 
 	/**
@@ -85,8 +84,8 @@ public class StereotypeQualifierCSImpl extends ElementCSImpl implements Stereoty
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPE:
-				return getStereotype();
+			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPES:
+				return getStereotypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -100,9 +99,9 @@ public class StereotypeQualifierCSImpl extends ElementCSImpl implements Stereoty
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPE:
-				getStereotype().clear();
-				getStereotype().addAll((Collection<? extends String>)newValue);
+			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPES:
+				getStereotypes().clear();
+				getStereotypes().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -116,8 +115,8 @@ public class StereotypeQualifierCSImpl extends ElementCSImpl implements Stereoty
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPE:
-				getStereotype().clear();
+			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPES:
+				getStereotypes().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -131,8 +130,8 @@ public class StereotypeQualifierCSImpl extends ElementCSImpl implements Stereoty
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPE:
-				return stereotype != null && !stereotype.isEmpty();
+			case QVTOperationalCSPackage.STEREOTYPE_QUALIFIER_CS__STEREOTYPES:
+				return stereotypes != null && !stereotypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

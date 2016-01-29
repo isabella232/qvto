@@ -16,6 +16,7 @@ package org.eclipse.qvto.examples.pivot.imperativeocl.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.DataType;
@@ -79,7 +80,7 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.WhileExp;
  * @see org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage
  * @generated
  */
-public class ImperativeOCLSwitch<T> extends Switch<T> {
+public class ImperativeOCLSwitch<@Nullable T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->

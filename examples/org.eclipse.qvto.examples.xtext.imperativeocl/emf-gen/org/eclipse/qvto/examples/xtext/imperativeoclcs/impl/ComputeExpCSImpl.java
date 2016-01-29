@@ -8,9 +8,9 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ComputeExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
+import org.eclipse.qvto.examples.xtext.imperativeoclcs.VarDeclarationCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor;
 
 /**
@@ -21,22 +21,21 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ComputeExpCSImpl#getReturnedElement <em>Returned Element</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.ComputeExpCSImpl#getOwnedResultVar <em>Owned Result Var</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeExpCS {
 	/**
-	 * The cached value of the '{@link #getReturnedElement() <em>Returned Element</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedResultVar() <em>Owned Result Var</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReturnedElement()
+	 * @see #getOwnedResultVar()
 	 * @generated
 	 * @ordered
 	 */
-	protected VariableCS returnedElement;
-
+	protected VarDeclarationCS ownedResultVar;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -61,8 +60,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableCS getReturnedElement() {
-		return returnedElement;
+	public VarDeclarationCS getOwnedResultVar() {
+		return ownedResultVar;
 	}
 
 	/**
@@ -70,11 +69,11 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetReturnedElement(VariableCS newReturnedElement, NotificationChain msgs) {
-		VariableCS oldReturnedElement = returnedElement;
-		returnedElement = newReturnedElement;
+	public NotificationChain basicSetOwnedResultVar(VarDeclarationCS newOwnedResultVar, NotificationChain msgs) {
+		VarDeclarationCS oldOwnedResultVar = ownedResultVar;
+		ownedResultVar = newOwnedResultVar;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT, oldReturnedElement, newReturnedElement);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR, oldOwnedResultVar, newOwnedResultVar);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -85,18 +84,18 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReturnedElement(VariableCS newReturnedElement) {
-		if (newReturnedElement != returnedElement) {
+	public void setOwnedResultVar(VarDeclarationCS newOwnedResultVar) {
+		if (newOwnedResultVar != ownedResultVar) {
 			NotificationChain msgs = null;
-			if (returnedElement != null)
-				msgs = ((InternalEObject)returnedElement).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT, null, msgs);
-			if (newReturnedElement != null)
-				msgs = ((InternalEObject)newReturnedElement).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT, null, msgs);
-			msgs = basicSetReturnedElement(newReturnedElement, msgs);
+			if (ownedResultVar != null)
+				msgs = ((InternalEObject)ownedResultVar).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR, null, msgs);
+			if (newOwnedResultVar != null)
+				msgs = ((InternalEObject)newOwnedResultVar).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR, null, msgs);
+			msgs = basicSetOwnedResultVar(newOwnedResultVar, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT, newReturnedElement, newReturnedElement));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR, newOwnedResultVar, newOwnedResultVar));
 	}
 
 	/**
@@ -107,8 +106,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT:
-				return basicSetReturnedElement(null, msgs);
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR:
+				return basicSetOwnedResultVar(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -121,8 +120,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT:
-				return getReturnedElement();
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR:
+				return getOwnedResultVar();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,8 +134,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT:
-				setReturnedElement((VariableCS)newValue);
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR:
+				setOwnedResultVar((VarDeclarationCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -150,8 +149,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT:
-				setReturnedElement((VariableCS)null);
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR:
+				setOwnedResultVar((VarDeclarationCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,8 +164,8 @@ public class ComputeExpCSImpl extends ExpressionBlockCSImpl implements ComputeEx
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__RETURNED_ELEMENT:
-				return returnedElement != null;
+			case ImperativeOCLCSPackage.COMPUTE_EXP_CS__OWNED_RESULT_VAR:
+				return ownedResultVar != null;
 		}
 		return super.eIsSet(featureID);
 	}

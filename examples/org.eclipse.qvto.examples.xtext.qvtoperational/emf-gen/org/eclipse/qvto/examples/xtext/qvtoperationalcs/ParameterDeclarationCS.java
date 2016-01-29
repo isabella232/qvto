@@ -14,7 +14,7 @@ import org.eclipse.ocl.xtext.basecs.ParameterCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS#getInitPart <em>Init Part</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS#getOwnedInitPart <em>Owned Init Part</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getParameterDeclarationCS()
@@ -79,29 +79,29 @@ public interface ParameterDeclarationCS extends ParameterCS {
 	boolean isSetDirection();
 
 	/**
-	 * Returns the value of the '<em><b>Init Part</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init Part</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Init Part</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init Part</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Init Part</em>' containment reference.
-	 * @see #setInitPart(InitPartCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getParameterDeclarationCS_InitPart()
+	 * @return the value of the '<em>Owned Init Part</em>' containment reference.
+	 * @see #setOwnedInitPart(InitPartCS)
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getParameterDeclarationCS_OwnedInitPart()
 	 * @model containment="true"
 	 * @generated
 	 */
-	InitPartCS getInitPart();
+	InitPartCS getOwnedInitPart();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS#getInitPart <em>Init Part</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS#getOwnedInitPart <em>Owned Init Part</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Init Part</em>' containment reference.
-	 * @see #getInitPart()
+	 * @param value the new value of the '<em>Owned Init Part</em>' containment reference.
+	 * @see #getOwnedInitPart()
 	 * @generated
 	 */
-	void setInitPart(InitPartCS value);
+	void setOwnedInitPart(InitPartCS value);
 
 } // ParameterDeclarationCS

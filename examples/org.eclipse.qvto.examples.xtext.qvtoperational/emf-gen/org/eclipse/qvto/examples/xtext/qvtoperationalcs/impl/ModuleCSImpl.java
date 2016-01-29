@@ -11,13 +11,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.xtext.basecs.ParameterCS;
 import org.eclipse.ocl.xtext.basecs.impl.StructuredClassCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ParameterDeclarationCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.TagCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
 
 /**
@@ -28,54 +27,43 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getModuleUsages <em>Module Usages</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getTags <em>Tags</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getQualifiers <em>Qualifiers</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getOwnedModuleUsages <em>Owned Module Usages</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleCSImpl#getOwnedQualifiers <em>Owned Qualifiers</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParameters()
+	 * @see #getOwnedParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParameterDeclarationCS> parameters;
+	protected EList<ParameterCS> ownedParameters;
 
 	/**
-	 * The cached value of the '{@link #getModuleUsages() <em>Module Usages</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedModuleUsages() <em>Owned Module Usages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModuleUsages()
+	 * @see #getOwnedModuleUsages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModuleUsageCS> moduleUsages;
+	protected EList<ModuleUsageCS> ownedModuleUsages;
 
 	/**
-	 * The cached value of the '{@link #getTags() <em>Tags</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedQualifiers() <em>Owned Qualifiers</em>}' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTags()
+	 * @see #getOwnedQualifiers()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TagCS> tags;
-
-	/**
-	 * The cached value of the '{@link #getQualifiers() <em>Qualifiers</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getQualifiers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> qualifiers;
+	protected EList<String> ownedQualifiers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,11 +89,11 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ParameterDeclarationCS> getParameters() {
-		if (parameters == null) {
-			parameters = new EObjectContainmentEList<ParameterDeclarationCS>(ParameterDeclarationCS.class, this, QVTOperationalCSPackage.MODULE_CS__PARAMETERS);
+	public EList<ParameterCS> getOwnedParameters() {
+		if (ownedParameters == null) {
+			ownedParameters = new EObjectContainmentEList<ParameterCS>(ParameterCS.class, this, QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS);
 		}
-		return parameters;
+		return ownedParameters;
 	}
 
 	/**
@@ -113,11 +101,11 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModuleUsageCS> getModuleUsages() {
-		if (moduleUsages == null) {
-			moduleUsages = new EObjectContainmentEList<ModuleUsageCS>(ModuleUsageCS.class, this, QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES);
+	public EList<ModuleUsageCS> getOwnedModuleUsages() {
+		if (ownedModuleUsages == null) {
+			ownedModuleUsages = new EObjectContainmentEList<ModuleUsageCS>(ModuleUsageCS.class, this, QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES);
 		}
-		return moduleUsages;
+		return ownedModuleUsages;
 	}
 
 	/**
@@ -125,23 +113,11 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TagCS> getTags() {
-		if (tags == null) {
-			tags = new EObjectContainmentEList<TagCS>(TagCS.class, this, QVTOperationalCSPackage.MODULE_CS__TAGS);
+	public EList<String> getOwnedQualifiers() {
+		if (ownedQualifiers == null) {
+			ownedQualifiers = new EDataTypeUniqueEList<String>(String.class, this, QVTOperationalCSPackage.MODULE_CS__OWNED_QUALIFIERS);
 		}
-		return tags;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getQualifiers() {
-		if (qualifiers == null) {
-			qualifiers = new EDataTypeUniqueEList<String>(String.class, this, QVTOperationalCSPackage.MODULE_CS__QUALIFIERS);
-		}
-		return qualifiers;
+		return ownedQualifiers;
 	}
 
 	/**
@@ -161,12 +137,10 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
-				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
-				return ((InternalEList<?>)getModuleUsages()).basicRemove(otherEnd, msgs);
-			case QVTOperationalCSPackage.MODULE_CS__TAGS:
-				return ((InternalEList<?>)getTags()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS:
+				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES:
+				return ((InternalEList<?>)getOwnedModuleUsages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -179,14 +153,12 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
-				return getParameters();
-			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
-				return getModuleUsages();
-			case QVTOperationalCSPackage.MODULE_CS__TAGS:
-				return getTags();
-			case QVTOperationalCSPackage.MODULE_CS__QUALIFIERS:
-				return getQualifiers();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS:
+				return getOwnedParameters();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES:
+				return getOwnedModuleUsages();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_QUALIFIERS:
+				return getOwnedQualifiers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,21 +172,17 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
-				getParameters().clear();
-				getParameters().addAll((Collection<? extends ParameterDeclarationCS>)newValue);
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
+				getOwnedParameters().addAll((Collection<? extends ParameterCS>)newValue);
 				return;
-			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
-				getModuleUsages().clear();
-				getModuleUsages().addAll((Collection<? extends ModuleUsageCS>)newValue);
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES:
+				getOwnedModuleUsages().clear();
+				getOwnedModuleUsages().addAll((Collection<? extends ModuleUsageCS>)newValue);
 				return;
-			case QVTOperationalCSPackage.MODULE_CS__TAGS:
-				getTags().clear();
-				getTags().addAll((Collection<? extends TagCS>)newValue);
-				return;
-			case QVTOperationalCSPackage.MODULE_CS__QUALIFIERS:
-				getQualifiers().clear();
-				getQualifiers().addAll((Collection<? extends String>)newValue);
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_QUALIFIERS:
+				getOwnedQualifiers().clear();
+				getOwnedQualifiers().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -228,17 +196,14 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
-				getParameters().clear();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
 				return;
-			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
-				getModuleUsages().clear();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES:
+				getOwnedModuleUsages().clear();
 				return;
-			case QVTOperationalCSPackage.MODULE_CS__TAGS:
-				getTags().clear();
-				return;
-			case QVTOperationalCSPackage.MODULE_CS__QUALIFIERS:
-				getQualifiers().clear();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_QUALIFIERS:
+				getOwnedQualifiers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -252,14 +217,12 @@ public class ModuleCSImpl extends StructuredClassCSImpl implements ModuleCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_CS__PARAMETERS:
-				return parameters != null && !parameters.isEmpty();
-			case QVTOperationalCSPackage.MODULE_CS__MODULE_USAGES:
-				return moduleUsages != null && !moduleUsages.isEmpty();
-			case QVTOperationalCSPackage.MODULE_CS__TAGS:
-				return tags != null && !tags.isEmpty();
-			case QVTOperationalCSPackage.MODULE_CS__QUALIFIERS:
-				return qualifiers != null && !qualifiers.isEmpty();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_PARAMETERS:
+				return ownedParameters != null && !ownedParameters.isEmpty();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_MODULE_USAGES:
+				return ownedModuleUsages != null && !ownedModuleUsages.isEmpty();
+			case QVTOperationalCSPackage.MODULE_CS__OWNED_QUALIFIERS:
+				return ownedQualifiers != null && !ownedQualifiers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

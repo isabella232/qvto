@@ -4,7 +4,7 @@ package org.eclipse.qvto.examples.xtext.qvtoperationalcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.ClassCS;
-import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -16,15 +16,15 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.BlockExpCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getComplianceKind <em>Compliance Kind</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getPackageRefs <em>Package Refs</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getOwnedPackageRefs <em>Owned Package Refs</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getOwnedConditions <em>Owned Conditions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS()
  * @model
  * @generated
  */
-public interface ModelTypeCS extends ClassCS, ElementWithBody {
+public interface ModelTypeCS extends ClassCS {
 	/**
 	 * Returns the value of the '<em><b>Compliance Kind</b></em>' attribute.
 	 * The default value is <code>"strict"</code>.
@@ -53,45 +53,35 @@ public interface ModelTypeCS extends ClassCS, ElementWithBody {
 	void setComplianceKind(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Package Refs</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Package Refs</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.PackageRefCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Package Refs</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Package Refs</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Package Refs</em>' containment reference list.
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_PackageRefs()
+	 * @return the value of the '<em>Owned Package Refs</em>' containment reference list.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_OwnedPackageRefs()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<PackageRefCS> getPackageRefs();
+	EList<PackageRefCS> getOwnedPackageRefs();
 
 	/**
-	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Conditions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.essentialoclcs.ExpCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Where</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Conditions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(BlockExpCS)
-	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_Where()
+	 * @return the value of the '<em>Owned Conditions</em>' containment reference list.
+	 * @see org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage#getModelTypeCS_OwnedConditions()
 	 * @model containment="true"
 	 * @generated
 	 */
-	BlockExpCS getWhere();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModelTypeCS#getWhere <em>Where</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Where</em>' containment reference.
-	 * @see #getWhere()
-	 * @generated
-	 */
-	void setWhere(BlockExpCS value);
+	EList<ExpCS> getOwnedConditions();
 
 } // ModelTypeCS

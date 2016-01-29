@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.impl.ElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImportKindEnum;
-import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindEnum;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ImportKindCS;
+import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleKindCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleRefCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ModuleUsageCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
@@ -31,7 +31,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * <ul>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl#getImportKind <em>Import Kind</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl#getModuleKind <em>Module Kind</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl#getModuleRefs <em>Module Refs</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.ModuleUsageCSImpl#getOwnedModuleRefs <em>Owned Module Refs</em>}</li>
  * </ul>
  *
  * @generated
@@ -45,7 +45,7 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ImportKindEnum IMPORT_KIND_EDEFAULT = ImportKindEnum.EXTENSION;
+	protected static final ImportKindCS IMPORT_KIND_EDEFAULT = ImportKindCS.EXTENSION;
 
 	/**
 	 * The cached value of the '{@link #getImportKind() <em>Import Kind</em>}' attribute.
@@ -55,7 +55,7 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected ImportKindEnum importKind = IMPORT_KIND_EDEFAULT;
+	protected ImportKindCS importKind = IMPORT_KIND_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getModuleKind() <em>Module Kind</em>}' attribute.
@@ -65,7 +65,7 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final ModuleKindEnum MODULE_KIND_EDEFAULT = ModuleKindEnum.TRANSFORMATION;
+	protected static final ModuleKindCS MODULE_KIND_EDEFAULT = ModuleKindCS.TRANSFORMATION;
 
 	/**
 	 * The cached value of the '{@link #getModuleKind() <em>Module Kind</em>}' attribute.
@@ -75,17 +75,17 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected ModuleKindEnum moduleKind = MODULE_KIND_EDEFAULT;
+	protected ModuleKindCS moduleKind = MODULE_KIND_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getModuleRefs() <em>Module Refs</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedModuleRefs() <em>Owned Module Refs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModuleRefs()
+	 * @see #getOwnedModuleRefs()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModuleRefCS> moduleRefs;
+	protected EList<ModuleRefCS> ownedModuleRefs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -111,7 +111,7 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ImportKindEnum getImportKind() {
+	public ImportKindCS getImportKind() {
 		return importKind;
 	}
 
@@ -120,8 +120,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setImportKind(ImportKindEnum newImportKind) {
-		ImportKindEnum oldImportKind = importKind;
+	public void setImportKind(ImportKindCS newImportKind) {
+		ImportKindCS oldImportKind = importKind;
 		importKind = newImportKind == null ? IMPORT_KIND_EDEFAULT : newImportKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_USAGE_CS__IMPORT_KIND, oldImportKind, importKind));
@@ -132,7 +132,7 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ModuleKindEnum getModuleKind() {
+	public ModuleKindCS getModuleKind() {
 		return moduleKind;
 	}
 
@@ -141,8 +141,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModuleKind(ModuleKindEnum newModuleKind) {
-		ModuleKindEnum oldModuleKind = moduleKind;
+	public void setModuleKind(ModuleKindCS newModuleKind) {
+		ModuleKindCS oldModuleKind = moduleKind;
 		moduleKind = newModuleKind == null ? MODULE_KIND_EDEFAULT : newModuleKind;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_KIND, oldModuleKind, moduleKind));
@@ -153,11 +153,11 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ModuleRefCS> getModuleRefs() {
-		if (moduleRefs == null) {
-			moduleRefs = new EObjectContainmentEList<ModuleRefCS>(ModuleRefCS.class, this, QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS);
+	public EList<ModuleRefCS> getOwnedModuleRefs() {
+		if (ownedModuleRefs == null) {
+			ownedModuleRefs = new EObjectContainmentEList<ModuleRefCS>(ModuleRefCS.class, this, QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS);
 		}
-		return moduleRefs;
+		return ownedModuleRefs;
 	}
 
 	/**
@@ -177,8 +177,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS:
-				return ((InternalEList<?>)getModuleRefs()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS:
+				return ((InternalEList<?>)getOwnedModuleRefs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -195,8 +195,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 				return getImportKind();
 			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_KIND:
 				return getModuleKind();
-			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS:
-				return getModuleRefs();
+			case QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS:
+				return getOwnedModuleRefs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -211,14 +211,14 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTOperationalCSPackage.MODULE_USAGE_CS__IMPORT_KIND:
-				setImportKind((ImportKindEnum)newValue);
+				setImportKind((ImportKindCS)newValue);
 				return;
 			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_KIND:
-				setModuleKind((ModuleKindEnum)newValue);
+				setModuleKind((ModuleKindCS)newValue);
 				return;
-			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS:
-				getModuleRefs().clear();
-				getModuleRefs().addAll((Collection<? extends ModuleRefCS>)newValue);
+			case QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS:
+				getOwnedModuleRefs().clear();
+				getOwnedModuleRefs().addAll((Collection<? extends ModuleRefCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,8 +238,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_KIND:
 				setModuleKind(MODULE_KIND_EDEFAULT);
 				return;
-			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS:
-				getModuleRefs().clear();
+			case QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS:
+				getOwnedModuleRefs().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -257,8 +257,8 @@ public class ModuleUsageCSImpl extends ElementCSImpl implements ModuleUsageCS {
 				return importKind != IMPORT_KIND_EDEFAULT;
 			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_KIND:
 				return moduleKind != MODULE_KIND_EDEFAULT;
-			case QVTOperationalCSPackage.MODULE_USAGE_CS__MODULE_REFS:
-				return moduleRefs != null && !moduleRefs.isEmpty();
+			case QVTOperationalCSPackage.MODULE_USAGE_CS__OWNED_MODULE_REFS:
+				return ownedModuleRefs != null && !ownedModuleRefs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -2,10 +2,18 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.MappingBodyCS;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.QVTOperationalCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVisitor;
@@ -18,12 +26,34 @@ import org.eclipse.qvto.examples.xtext.qvtoperationalcs.util.QVTOperationalCSVis
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingBodyCSImpl#getOwnedInitExps <em>Owned Init Exps</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingBodyCSImpl#getOwnedEndExps <em>Owned End Exps</em>}</li>
  *   <li>{@link org.eclipse.qvto.examples.xtext.qvtoperationalcs.impl.MappingBodyCSImpl#isHasPopulationKeyword <em>Has Population Keyword</em>}</li>
  * </ul>
  *
  * @generated
  */
-public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBodyCS {
+public class MappingBodyCSImpl extends OperationBodyCSImpl implements MappingBodyCS {
+	/**
+	 * The cached value of the '{@link #getOwnedInitExps() <em>Owned Init Exps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedInitExps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExpCS> ownedInitExps;
+
+	/**
+	 * The cached value of the '{@link #getOwnedEndExps() <em>Owned End Exps</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedEndExps()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExpCS> ownedEndExps;
+
 	/**
 	 * The default value of the '{@link #isHasPopulationKeyword() <em>Has Population Keyword</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -68,6 +98,30 @@ public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExpCS> getOwnedInitExps() {
+		if (ownedInitExps == null) {
+			ownedInitExps = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS);
+		}
+		return ownedInitExps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<ExpCS> getOwnedEndExps() {
+		if (ownedEndExps == null) {
+			ownedEndExps = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS);
+		}
+		return ownedEndExps;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean isHasPopulationKeyword() {
 		return hasPopulationKeyword;
 	}
@@ -99,8 +153,28 @@ public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBo
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS:
+				return ((InternalEList<?>)getOwnedInitExps()).basicRemove(otherEnd, msgs);
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS:
+				return ((InternalEList<?>)getOwnedEndExps()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS:
+				return getOwnedInitExps();
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS:
+				return getOwnedEndExps();
 			case QVTOperationalCSPackage.MAPPING_BODY_CS__HAS_POPULATION_KEYWORD:
 				return isHasPopulationKeyword();
 		}
@@ -112,9 +186,18 @@ public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS:
+				getOwnedInitExps().clear();
+				getOwnedInitExps().addAll((Collection<? extends ExpCS>)newValue);
+				return;
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS:
+				getOwnedEndExps().clear();
+				getOwnedEndExps().addAll((Collection<? extends ExpCS>)newValue);
+				return;
 			case QVTOperationalCSPackage.MAPPING_BODY_CS__HAS_POPULATION_KEYWORD:
 				setHasPopulationKeyword((Boolean)newValue);
 				return;
@@ -130,6 +213,12 @@ public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBo
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS:
+				getOwnedInitExps().clear();
+				return;
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS:
+				getOwnedEndExps().clear();
+				return;
 			case QVTOperationalCSPackage.MAPPING_BODY_CS__HAS_POPULATION_KEYWORD:
 				setHasPopulationKeyword(HAS_POPULATION_KEYWORD_EDEFAULT);
 				return;
@@ -145,6 +234,10 @@ public class MappingBodyCSImpl extends MappingSectionCSImpl implements MappingBo
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_INIT_EXPS:
+				return ownedInitExps != null && !ownedInitExps.isEmpty();
+			case QVTOperationalCSPackage.MAPPING_BODY_CS__OWNED_END_EXPS:
+				return ownedEndExps != null && !ownedEndExps.isEmpty();
 			case QVTOperationalCSPackage.MAPPING_BODY_CS__HAS_POPULATION_KEYWORD:
 				return hasPopulationKeyword != HAS_POPULATION_KEYWORD_EDEFAULT;
 		}

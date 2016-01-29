@@ -41,9 +41,8 @@ Workflow {
 		// FIXME the following only work if the output project are in the same FS folder. Better use a projectName and improve generator 
 		javaFolder = "../${projectName}/src-gen"
 		javaPackage = "${projectName}.cs2as"
-		environmentClassName = "${projectName}.cs2as.SingleResultLookupEnvironment"
-		lookupVisitorClassName = "org.eclipse.qvto.examples.pivot.qvtoperational.lookup.QVTOperationalLookupVisitor"
-		namedElementItfName = "org.eclipse.ocl.pivot.NamedElement"
+		lookupSolverClassName = "org.eclipse.qvto.examples.pivot.qvtoperational.lookup.util.QVTOperationalLookupSolver"
+		lookupResultItfName = "org.eclipse.ocl.pivot.internal.lookup.util.PivotLookupResult"
 		tracePropertyName = "pivot"
 	}
 }

@@ -12,7 +12,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.ocl.xtext.basecs.TypeCS;
+import org.eclipse.ocl.xtext.basecs.TypeRefCS;
+import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
@@ -27,32 +28,43 @@ import org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisit
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.InstantiationExpCSImpl#getTypeSpecCS <em>Type Spec CS</em>}</li>
- *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.InstantiationExpCSImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.InstantiationExpCSImpl#getOwnedClassRef <em>Owned Class Ref</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.InstantiationExpCSImpl#getOwnedArguments <em>Owned Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvto.examples.xtext.imperativeoclcs.impl.InstantiationExpCSImpl#getOwnedExtentRef <em>Owned Extent Ref</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class InstantiationExpCSImpl extends StatementCSImpl implements InstantiationExpCS {
 	/**
-	 * The cached value of the '{@link #getTypeSpecCS() <em>Type Spec CS</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedClassRef() <em>Owned Class Ref</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypeSpecCS()
+	 * @see #getOwnedClassRef()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeCS typeSpecCS;
+	protected TypeRefCS ownedClassRef;
 
 	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedArguments() <em>Owned Arguments</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getArguments()
+	 * @see #getOwnedArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ExpCS> arguments;
+	protected EList<ExpCS> ownedArguments;
+
+	/**
+	 * The cached value of the '{@link #getOwnedExtentRef() <em>Owned Extent Ref</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedExtentRef()
+	 * @generated
+	 * @ordered
+	 */
+	protected TypedRefCS ownedExtentRef;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,8 +90,8 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeCS getTypeSpecCS() {
-		return typeSpecCS;
+	public TypeRefCS getOwnedClassRef() {
+		return ownedClassRef;
 	}
 
 	/**
@@ -87,11 +99,11 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTypeSpecCS(TypeCS newTypeSpecCS, NotificationChain msgs) {
-		TypeCS oldTypeSpecCS = typeSpecCS;
-		typeSpecCS = newTypeSpecCS;
+	public NotificationChain basicSetOwnedClassRef(TypeRefCS newOwnedClassRef, NotificationChain msgs) {
+		TypeRefCS oldOwnedClassRef = ownedClassRef;
+		ownedClassRef = newOwnedClassRef;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS, oldTypeSpecCS, newTypeSpecCS);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF, oldOwnedClassRef, newOwnedClassRef);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -102,18 +114,18 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypeSpecCS(TypeCS newTypeSpecCS) {
-		if (newTypeSpecCS != typeSpecCS) {
+	public void setOwnedClassRef(TypeRefCS newOwnedClassRef) {
+		if (newOwnedClassRef != ownedClassRef) {
 			NotificationChain msgs = null;
-			if (typeSpecCS != null)
-				msgs = ((InternalEObject)typeSpecCS).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS, null, msgs);
-			if (newTypeSpecCS != null)
-				msgs = ((InternalEObject)newTypeSpecCS).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS, null, msgs);
-			msgs = basicSetTypeSpecCS(newTypeSpecCS, msgs);
+			if (ownedClassRef != null)
+				msgs = ((InternalEObject)ownedClassRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF, null, msgs);
+			if (newOwnedClassRef != null)
+				msgs = ((InternalEObject)newOwnedClassRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF, null, msgs);
+			msgs = basicSetOwnedClassRef(newOwnedClassRef, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS, newTypeSpecCS, newTypeSpecCS));
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF, newOwnedClassRef, newOwnedClassRef));
 	}
 
 	/**
@@ -121,11 +133,54 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<ExpCS> getArguments() {
-		if (arguments == null) {
-			arguments = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS);
+	public EList<ExpCS> getOwnedArguments() {
+		if (ownedArguments == null) {
+			ownedArguments = new EObjectContainmentEList<ExpCS>(ExpCS.class, this, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS);
 		}
-		return arguments;
+		return ownedArguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypedRefCS getOwnedExtentRef() {
+		return ownedExtentRef;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedExtentRef(TypedRefCS newOwnedExtentRef, NotificationChain msgs) {
+		TypedRefCS oldOwnedExtentRef = ownedExtentRef;
+		ownedExtentRef = newOwnedExtentRef;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF, oldOwnedExtentRef, newOwnedExtentRef);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwnedExtentRef(TypedRefCS newOwnedExtentRef) {
+		if (newOwnedExtentRef != ownedExtentRef) {
+			NotificationChain msgs = null;
+			if (ownedExtentRef != null)
+				msgs = ((InternalEObject)ownedExtentRef).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF, null, msgs);
+			if (newOwnedExtentRef != null)
+				msgs = ((InternalEObject)newOwnedExtentRef).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF, null, msgs);
+			msgs = basicSetOwnedExtentRef(newOwnedExtentRef, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF, newOwnedExtentRef, newOwnedExtentRef));
 	}
 
 	/**
@@ -136,10 +191,12 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS:
-				return basicSetTypeSpecCS(null, msgs);
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS:
-				return ((InternalEList<?>)getArguments()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
+				return basicSetOwnedClassRef(null, msgs);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
+				return ((InternalEList<?>)getOwnedArguments()).basicRemove(otherEnd, msgs);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF:
+				return basicSetOwnedExtentRef(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -152,10 +209,12 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS:
-				return getTypeSpecCS();
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS:
-				return getArguments();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
+				return getOwnedClassRef();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
+				return getOwnedArguments();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF:
+				return getOwnedExtentRef();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -169,12 +228,15 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS:
-				setTypeSpecCS((TypeCS)newValue);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
+				setOwnedClassRef((TypeRefCS)newValue);
 				return;
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS:
-				getArguments().clear();
-				getArguments().addAll((Collection<? extends ExpCS>)newValue);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
+				getOwnedArguments().clear();
+				getOwnedArguments().addAll((Collection<? extends ExpCS>)newValue);
+				return;
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF:
+				setOwnedExtentRef((TypedRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -188,11 +250,14 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS:
-				setTypeSpecCS((TypeCS)null);
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
+				setOwnedClassRef((TypeRefCS)null);
 				return;
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS:
-				getArguments().clear();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
+				getOwnedArguments().clear();
+				return;
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF:
+				setOwnedExtentRef((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -206,10 +271,12 @@ public class InstantiationExpCSImpl extends StatementCSImpl implements Instantia
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__TYPE_SPEC_CS:
-				return typeSpecCS != null;
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_CLASS_REF:
+				return ownedClassRef != null;
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_ARGUMENTS:
+				return ownedArguments != null && !ownedArguments.isEmpty();
+			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS__OWNED_EXTENT_REF:
+				return ownedExtentRef != null;
 		}
 		return super.eIsSet(featureID);
 	}
