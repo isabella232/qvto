@@ -1,0 +1,3 @@
+import /*<error>*/NonExistingLibrary/*</error>*/;
+
+transformation bug483290();
