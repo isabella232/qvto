@@ -102,7 +102,7 @@ public class TransformationRunner  {
 		fDiagnostic = QvtPlugin.createDiagnostic("Transformation runner initialize"); //$NON-NLS-1$
 		
 		Diagnostic loadDiagnostic = fExecutor.loadTransformation(new NullProgressMonitor());
-		if(!QvtPlugin.isSuccess(loadDiagnostic)) {
+		if(!isSuccess(loadDiagnostic)) {
 			fDiagnostic.add(loadDiagnostic);
 		}
 
@@ -124,7 +124,7 @@ public class TransformationRunner  {
 		}
 		
 		handleLoadExtents(extentsDiagnostic);
-		if(!QvtPlugin.isSuccess(extentsDiagnostic)) {
+		if(!isSuccess(extentsDiagnostic)) {
 			fDiagnostic.add(extentsDiagnostic);
 		}
 		
@@ -142,7 +142,7 @@ public class TransformationRunner  {
 			}
 			
 			handleLoadTrace(traceDiagnostic);
-			if(!QvtPlugin.isSuccess(traceDiagnostic)) {
+			if(!isSuccess(traceDiagnostic)) {
 				fDiagnostic.add(traceDiagnostic);
 			}
 		}
@@ -243,8 +243,7 @@ public class TransformationRunner  {
 	 * Successfully finished execution, no errors and user interruption 
 	 */
 	private static boolean isSuccess(Diagnostic diagnostic) {
-		int severity = diagnostic.getSeverity();
-		return severity != Diagnostic.ERROR && severity != Diagnostic.CANCEL;
+		return QvtPlugin.isSuccess(diagnostic);
 	}
 		
 }

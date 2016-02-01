@@ -288,9 +288,7 @@ public abstract class TestTransformation extends TestCase {
 			}
 		}
 		
-		boolean isIncrementalUpdate = traceUri == null ? false : transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap());
-		
-		QvtLaunchUtil.doLaunch(transf, paramUris, traceUri, context, isIncrementalUpdate);
+		QvtLaunchUtil.doLaunch(transf, paramUris, traceUri, context, traceUri != null, traceUri != null);
 				
 		transf.cleanup();    		
 		return resultUris;

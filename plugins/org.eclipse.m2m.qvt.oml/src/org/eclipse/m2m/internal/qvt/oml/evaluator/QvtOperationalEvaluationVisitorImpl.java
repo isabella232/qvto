@@ -180,8 +180,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 	private static int tempCounter = 0;
 	
-    private boolean myIsSuppressLoggin = false;
-
     private QvtOperationalEvaluationEnv myEvalEnv;
     // FIXME - move me to the root environment?
     private OCLAnnotationSupport oclAnnotationSupport;
@@ -860,14 +858,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	}
 
     public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
-    	boolean isSuppressLoggin = myIsSuppressLoggin;
-    	try {
-    		// TODO verify
-    		//myIsSuppressLoggin = true;
-    		return transformation.accept(getVisitor());
-    	} finally {
-    		myIsSuppressLoggin = isSuppressLoggin;
-		}    		
+   		return transformation.accept(getVisitor());
     }
     
     public Object visitModule(Module module) {
@@ -879,15 +870,14 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			return doVisitTransformation((OperationalTransformation) module);
 		} 
 		catch (QvtRuntimeException e) {
-			if (!myIsSuppressLoggin) {
-				StringWriter strWriter = new StringWriter();
-				PrintWriter printWriter = new PrintWriter(strWriter);
-				e.printQvtStackTrace(printWriter);
-	
-				Log logger = getContext().getLog();
-				logger.log(EvaluationMessages.TerminatingExecution);
-				logger.log(strWriter.getBuffer().toString());
-			}			
+			StringWriter strWriter = new StringWriter();
+			PrintWriter printWriter = new PrintWriter(strWriter);
+			e.printQvtStackTrace(printWriter);
+
+			Log logger = getContext().getLog();
+			logger.log(EvaluationMessages.TerminatingExecution);
+			logger.log(strWriter.getBuffer().toString());
+
 			throw e;
 		} finally {
 			IntermediatePropertyModelAdapter.cleanup(module);

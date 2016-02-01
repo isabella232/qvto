@@ -51,5 +51,10 @@ public class MdaException extends Exception {
 		return myStatus.getException();
 	}
 	
+	@Override
+	public String getMessage() {
+		return super.getMessage() + (getStatus() != null ? " , " + getStatus().toString() : ""); //$NON-NLS-1$ //$NON-NLS-2$
+	}
+	
 	private IStatus myStatus; 
 }

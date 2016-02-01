@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -79,8 +80,8 @@ public class ModelExtentHelper {
 	public Diagnostic saveExtents() {
 		BasicDiagnostic diagnostic = QvtPlugin.createDiagnostic("Save model param extents diagnostic");
 		
-		Set<Resource> resources = new HashSet<Resource>();
-		
+		Set<Resource> resources = new HashSet<Resource>();		
+
 		for (ExtentEntry nextEntry : fExtentMap.values()) {
 			URI saveAsURI = nextEntry.saveAsURI;
 			if(saveAsURI != null) {
@@ -232,25 +233,28 @@ public class ModelExtentHelper {
 			}
 			
 			outExtent.getContents().retainAll(resolvedRootElements);
+
+			for (EObject eObject : outExtent.getContents()) {
+				InternalEObject internalEObject = (InternalEObject) eObject;
+				if (internalEObject.eDirectResource() == null) {
+					internalEObject.eSetResource((Resource.Internal) outExtent, null);
+				}
+			}
+			
 			resolvedRootElements.removeAll(outExtent.getContents());
 			addAllContents(outExtent.getContents(), resolvedRootElements);
 		}
 	}
     
-    private static Set<EObject> getEssentialRootElements(List<? extends EObject> allRootElements) {
-    	Set<EObject> roots = new LinkedHashSet<EObject>(allRootElements);
-    	for (EObject e : allRootElements) {
-    		//EObject nextRoot = e;
-    		
-    		if (allRootElements.contains(e.eContainer())) {
-    			roots.remove(e);
-    		}
-    		    		
-//    		while (nextRoot.eContainer() instanceof EObject && nextRoot.eContainer().eResource() == e.eResource()) {
-//    			nextRoot = nextRoot.eContainer();
-//    		}
-//    		roots.add(nextRoot);
-    	}
+	private static Set<EObject> getEssentialRootElements(List<? extends EObject> allRootElements) {
+		Set<EObject> roots = new LinkedHashSet<EObject>();
+		for (EObject e : allRootElements) {
+			EObject nextRoot = e;
+			while (nextRoot.eContainer() instanceof EObject && nextRoot.eContainer().eResource() == e.eResource()) {
+				nextRoot = nextRoot.eContainer();
+			}
+			roots.add(nextRoot);
+		}
 		return roots;
 	}
 

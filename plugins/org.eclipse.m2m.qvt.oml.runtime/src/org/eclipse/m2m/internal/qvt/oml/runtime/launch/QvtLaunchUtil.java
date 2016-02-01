@@ -38,6 +38,7 @@ import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData.TargetType;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException;
 import org.eclipse.m2m.internal.qvt.oml.runtime.QvtRuntimePlugin;
@@ -206,11 +207,8 @@ public class QvtLaunchUtil {
 				paramUris.add(data.getUri());
 			}
 	
-	        boolean saveTrace = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false);
-	        String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$        
-	        boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false);
-		    
-	        doLaunch(transformation, paramUris, saveTrace ? toUri(traceFile) : null, context, isIncrementalUpdate);
+	        String traceFile = getTraceFileURI(configuration);        
+	        doLaunch(transformation, paramUris, toUri(traceFile), context, shouldGenerateTraceFile(configuration), isIncrementalUpdate(configuration));
 	    }
 
 	@Deprecated
@@ -248,13 +246,14 @@ public class QvtLaunchUtil {
 	    outConsole.add(consoleLogger.getBuffer().toString());
 	}
 	
-	public static void doLaunch(final QvtTransformation transf, List<URI> paramUris, URI traceUri, ExecutionContext context, boolean isIncrementalUpdate) throws MdaException {
+	public static void doLaunch(final QvtTransformation transf, List<URI> paramUris, URI traceUri, ExecutionContext context,
+			boolean isSaveTrace, boolean isIncrementalUpdate) throws MdaException {
 	    		    	
     	TransformationRunner runner = new QvtTransformationRunner(transf, paramUris);
     	    	
-    	runner.setSaveTrace(traceUri != null);
     	runner.setTraceFile(traceUri);
-    	runner.setIncrementalUpdate(isIncrementalUpdate);
+    	runner.setSaveTrace(isSaveTrace && traceUri != null);
+    	runner.setIncrementalUpdate(isIncrementalUpdate && transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap()));
     		    	
     	Diagnostic diag = runner.execute(context);
     	    	
@@ -274,7 +273,7 @@ public class QvtLaunchUtil {
 	}
 
 	private static URI toUri(String uriString) throws MdaException {
-	    URI uri = URI.createURI(uriString);  
+	    URI uri = EmfUtil.makeUri(uriString);  
 	    if(uri == null) {
 	        throw new MdaException(NLS.bind(Messages.QvtValidator_InvalidUri, uriString));
 	    }

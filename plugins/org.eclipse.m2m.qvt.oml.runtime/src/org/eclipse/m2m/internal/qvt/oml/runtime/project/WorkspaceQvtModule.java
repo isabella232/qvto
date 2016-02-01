@@ -86,7 +86,7 @@ public class WorkspaceQvtModule extends QvtModule {
     }    
     
     private final IFile myTransformationFile;
-    private Module myModule;
+    private volatile Module myModule;
     private CompiledUnit myUnit;    
     private ResourceSet myResourceSet;
 }

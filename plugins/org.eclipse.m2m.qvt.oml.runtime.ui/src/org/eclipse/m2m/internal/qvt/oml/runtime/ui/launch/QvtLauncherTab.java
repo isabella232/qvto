@@ -48,6 +48,7 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.project.QvtEngine;
+import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtValidator.ValidationType;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.ITransformationMaker;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
@@ -253,8 +254,8 @@ public class QvtLauncherTab extends MdaLaunchTab {
 		}
 
         try {
-        	String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
-        	if (traceFile.length() > 0) {
+        	String traceFile = QvtLaunchUtil.getTraceFileURI(configuration);
+        	if (traceFile != null) {
         		if (!myTraceFile.getText().equals(traceFile)) {
         			myTraceFile.setText(traceFile);
         		}
@@ -267,12 +268,12 @@ public class QvtLauncherTab extends MdaLaunchTab {
         }
 
         try {
-            myTraceFile.setUseFileFlag(configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false)); 
+            myTraceFile.setUseFileFlag(QvtLaunchUtil.shouldGenerateTraceFile(configuration)); 
         } catch (CoreException e) {
         }
 
         try {
-            myTraceFile.setIncrementalUpdate(configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false)); 
+            myTraceFile.setIncrementalUpdate(QvtLaunchUtil.isIncrementalUpdate(configuration)); 
         } catch (CoreException e) {
         }
 	}

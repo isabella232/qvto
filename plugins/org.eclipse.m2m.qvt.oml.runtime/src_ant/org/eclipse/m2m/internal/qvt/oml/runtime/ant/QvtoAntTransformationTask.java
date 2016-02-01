@@ -344,7 +344,7 @@ public class QvtoAntTransformationTask extends Task {
 		        		
 						ExecutionContext context = QvtLaunchUtil.createContext(getConfiguration(), createQVTLog());
 						
-						QvtLaunchUtil.doLaunch(transformation, modelParamUris, traceUri, context, isIncrementalUpdate);
+						QvtLaunchUtil.doLaunch(transformation, modelParamUris, traceUri, context, useTrace, isIncrementalUpdate);
 	            	}
 	            	finally {
 	            		transformation.cleanup();

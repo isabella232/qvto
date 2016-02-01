@@ -41,10 +41,10 @@ public class TaskModel {
 	public TaskModel(ILaunchConfiguration config, String name) throws CoreException {
 		myTaskName = name;
 
-        myModuleUri = config.getAttribute(IQvtLaunchConstants.MODULE, ""); //$NON-NLS-1$
-        myTraceFile = config.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
-        myIsUseTraceFile = config.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false); 
-        myIsIncrementalUpdate = config.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false); 
+        myModuleUri = QvtLaunchUtil.getTransformationURI(config);
+        myTraceFile = QvtLaunchUtil.getTraceFileURI(config);
+        myIsUseTraceFile = QvtLaunchUtil.shouldGenerateTraceFile(config); 
+        myIsIncrementalUpdate = QvtLaunchUtil.isIncrementalUpdate(config); 
     	myTargetUris = QvtLaunchUtil.getTargetUris(config);
     	myConfigProps = QvtLaunchUtil.getConfigurationProperty(config);
     	

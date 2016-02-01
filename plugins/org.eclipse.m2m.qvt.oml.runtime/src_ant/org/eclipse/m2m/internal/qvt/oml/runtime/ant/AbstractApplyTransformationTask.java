@@ -209,7 +209,8 @@ public abstract class AbstractApplyTransformationTask extends Task {
 		                	modelParamUris.add(uriData.getUri());
 		                }
 	            				
-	            		QvtLaunchUtil.doLaunch(transformation, modelParamUris, isTraceUsed() ? EmfUtil.makeUri(getTraceFile()) : null, QvtLaunchUtil.createContext(getConfiguration()), false);
+	            		QvtLaunchUtil.doLaunch(transformation, modelParamUris, EmfUtil.makeUri(getTraceFile()),
+	            				QvtLaunchUtil.createContext(getConfiguration()), isTraceUsed(), false);
                 	}
                 	finally {
                 		transformation.cleanup();

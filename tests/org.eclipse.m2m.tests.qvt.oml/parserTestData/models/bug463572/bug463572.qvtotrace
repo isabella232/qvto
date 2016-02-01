@@ -15,7 +15,7 @@
     <result>
       <result kind="OUT" name="result" type="EPackage">
         <value>
-          <modelElement href="output.ecore#/0"/>
+          <modelElement href="expected.ecore#/0"/>
         </value>
       </result>
     </result>
@@ -41,12 +41,12 @@
         <value collectionType="Tuple">
           <collection xsi:type="trace:ETuplePartValue" name="r1">
             <value>
-              <modelElement href="output.ecore#/0/Class_-662974751"/>
+              <modelElement href="expected.ecore#/0/Class_-662974751"/>
             </value>
           </collection>
           <collection xsi:type="trace:ETuplePartValue" name="r2">
             <value>
-              <modelElement href="output.ecore#/1"/>
+              <modelElement href="expected.ecore#/1"/>
             </value>
           </collection>
         </value>
@@ -74,12 +74,12 @@
         <value collectionType="Tuple">
           <collection xsi:type="trace:ETuplePartValue" name="r1">
             <value>
-              <modelElement href="output.ecore#/0/TestIdentifier_-662974741"/>
+              <modelElement href="expected.ecore#/0/TestIdentifier_-662974741"/>
             </value>
           </collection>
           <collection xsi:type="trace:ETuplePartValue" name="r2">
             <value>
-              <modelElement href="output.ecore#/2"/>
+              <modelElement href="expected.ecore#/2"/>
             </value>
           </collection>
         </value>

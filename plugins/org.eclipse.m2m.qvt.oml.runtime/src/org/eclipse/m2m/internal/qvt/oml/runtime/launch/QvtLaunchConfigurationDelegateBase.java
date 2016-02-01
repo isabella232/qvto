@@ -56,9 +56,9 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
     }
 
     public static IFile getModuleFile(ILaunchConfiguration configuration) throws CoreException {
-        String moduleFileName = configuration.getAttribute(IQvtLaunchConstants.MODULE, ""); //$NON-NLS-1$
-        URI moduleUri = URI.createURI(moduleFileName);
-        IFile moduleFile = WorkspaceUtils.getWorkspaceFile(moduleUri);
+        String moduleFileName = QvtLaunchUtil.getTransformationURI(configuration);
+        URI moduleUri = EmfUtil.makeUri(moduleFileName);
+        IFile moduleFile = moduleUri != null ? WorkspaceUtils.getWorkspaceFile(moduleUri) : null;
         if(moduleFile == null) {
         	//IStatus errorStatus = MiscUtil.makeErrorStatus( 
         		//	NLS.bind(Messages.QvtLaunchConfigurationDelegate_transformationFileNotFound, moduleFileName));
@@ -70,9 +70,9 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
 
     public static IStatus validate(QvtTransformation transformation, ILaunchConfiguration configuration) throws CoreException {
     	List<TargetUriData> targetUris = QvtLaunchUtil.getTargetUris(configuration);
-        String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
-        boolean useTraceFile = configuration.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false); 
-        boolean isIncrementalUpdate = configuration.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false); 
+        String traceFile = QvtLaunchUtil.getTraceFileURI(configuration);
+        boolean useTraceFile = QvtLaunchUtil.shouldGenerateTraceFile(configuration); 
+        boolean isIncrementalUpdate = QvtLaunchUtil.isIncrementalUpdate(configuration); 
         
         try {
         	return QvtValidator.validateTransformation(transformation, targetUris, traceFile, useTraceFile,

@@ -144,7 +144,7 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
         	}
         }
         
-        String traceFile = configuration.getAttribute(IQvtLaunchConstants.TRACE_FILE, ""); //$NON-NLS-1$
+        String traceFile = QvtLaunchUtil.getTraceFileURI(configuration);
         if (traceFile != null) {
         	URI traceUri = URI.createPlatformResourceURI(traceFile, false);
         	if (traceUri != null) {

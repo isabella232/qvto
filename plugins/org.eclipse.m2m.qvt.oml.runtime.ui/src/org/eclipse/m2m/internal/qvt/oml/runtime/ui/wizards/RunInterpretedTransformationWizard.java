@@ -156,9 +156,9 @@ public class RunInterpretedTransformationWizard extends PersistedValuesWizard im
 	                    SOURCE_URI, myTargetUris.get(0).getUriString(),
 	                    IQvtLaunchConstants.MODULE, myTransformation.getURI().toString()
 	            );
-	            section.put(IQvtLaunchConstants.TRACE_FILE, launchConfig.getAttribute(IQvtLaunchConstants.TRACE_FILE, "")); //$NON-NLS-1$
-	            section.put(IQvtLaunchConstants.USE_TRACE_FILE, launchConfig.getAttribute(IQvtLaunchConstants.USE_TRACE_FILE, false));
-	            section.put(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, launchConfig.getAttribute(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, false));
+	            section.put(IQvtLaunchConstants.TRACE_FILE, QvtLaunchUtil.getTraceFileURI(launchConfig));
+	            section.put(IQvtLaunchConstants.USE_TRACE_FILE, QvtLaunchUtil.shouldGenerateTraceFile(launchConfig));
+	            section.put(IQvtLaunchConstants.IS_INCREMENTAL_UPDATE, QvtLaunchUtil.isIncrementalUpdate(launchConfig));
 	            section.put(IQvtLaunchConstants.DONE_ACTION, myTransformationData.isOpenResult());
 	            section.put(IQvtLaunchConstants.CONFIGURATION_PROPERTIES, myTransformationData.getConfiguration());
 	            

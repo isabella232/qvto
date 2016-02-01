@@ -95,6 +95,9 @@ public class DebugTransformationRunner extends TransformationRunner {
 		
 	}
 
+	/**
+	 * @since 1.6
+	 */
 	public DebuggableExecutorAdapter createDebuggableAdapter(final ExecutionContext context) {
 		
 		return new DebuggableExecutorAdapter() {

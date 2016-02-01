@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
+import org.eclipse.m2m.internal.qvt.oml.trace.TracePackage;
 import org.eclipse.m2m.qvt.oml.TransformationExecutor.BlackboxRegistry;
 import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.EmfToolsLibrary;
 import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.StringLibrary;
@@ -533,6 +534,13 @@ public class TransformTests extends TestCase {
         		new FilesToFilesData("bug463410"), //$NON-NLS-1$
         		new FilesToFilesData("bug463416", Collections.<String>emptyList(), Collections.singletonList("expected.ecore")), //$NON-NLS-1$
         		new FileToFileData("bug463572") { //$NON-NLS-1$
+        			@Override
+        			public List<? extends EPackage> getUsedPackages() {
+        				List<EPackage> packages = new ArrayList<EPackage>(super.getUsedPackages());
+        				packages.add(TracePackage.eINSTANCE);
+        				return packages;
+        			}
+
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
         				blackboxRegistry.registerModule(EmfToolsLibrary.class, "emf.tools", "tools", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});

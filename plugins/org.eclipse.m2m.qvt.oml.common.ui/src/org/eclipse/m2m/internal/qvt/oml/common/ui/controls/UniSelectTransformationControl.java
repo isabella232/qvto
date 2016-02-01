@@ -224,8 +224,8 @@ public class UniSelectTransformationControl extends Composite {
         
         List<Object> inputs = new ArrayList<Object>(2);
         inputs.add(ResourcesPlugin.getWorkspace().getRoot());
-        myCompiledTransformations = transfRegistry.getTransformations(transfFilter);
-        inputs.add(new DeployedTransformationRoot(myCompiledTransformations));
+        myDeployedTransformations = transfRegistry.getTransformations(transfFilter);
+        inputs.add(new DeployedTransformationRoot(myDeployedTransformations));
         myViewer.setInput(inputs);
 
         TransformationControls.createLabel(this, Messages.UniSelectTransformationControl_CurrentSelection, TransformationControls.GRID);
@@ -246,17 +246,17 @@ public class UniSelectTransformationControl extends Composite {
         }
         
 		if (uri.isPlatformPlugin()) {
-			for (DeployedTransformation compiledTransf : myCompiledTransformations) {
-				if (compiledTransf.getUri().equals(uri)) {
-		            StructuredSelection sel = new StructuredSelection(new Object[] {compiledTransf});
+			for (DeployedTransformation deployedTransf : myDeployedTransformations) {
+				if (deployedTransf.getUri().equals(uri)) {
+		            StructuredSelection sel = new StructuredSelection(new Object[] {deployedTransf});
 		            myViewer.setSelection(sel);
 		            return;
 				}
 			}
 			final String transfId = uri.toPlatformString(false).replace("/", ""); //$NON-NLS-1$ //$NON-NLS-2$
-			for (DeployedTransformation compiledTransf : myCompiledTransformations) {
-				if (compiledTransf.getId().equals(transfId)) {
-		            StructuredSelection sel = new StructuredSelection(new Object[] {compiledTransf});
+			for (DeployedTransformation deployedTransf : myDeployedTransformations) {
+				if (deployedTransf.getId().equals(transfId)) {
+		            StructuredSelection sel = new StructuredSelection(new Object[] {deployedTransf});
 		            myViewer.setSelection(sel);
 		            return;
 				}
@@ -362,7 +362,7 @@ public class UniSelectTransformationControl extends Composite {
     private final IResourceFilter myResourceFilter;
     private final ISelectionListener mySelectionListener;
     private URI myUri;
-    private final List<DeployedTransformation> myCompiledTransformations;
+    private final List<DeployedTransformation> myDeployedTransformations;
     
     private final DeferredTreeContentManager myContentManager;
     

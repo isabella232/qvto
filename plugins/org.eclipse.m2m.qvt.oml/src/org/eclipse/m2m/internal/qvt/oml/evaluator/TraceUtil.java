@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
@@ -721,17 +722,17 @@ public class TraceUtil {
 			if (mappingOperation != null) {
 				if (traceRecord.getContext() != null && traceRecord.getContext().getContext() != null) {
 					VarParameterValue value = traceRecord.getContext().getContext();
-					value.getValue().setOclObject(createOclObjectFromValue(env, value.getValue()));
+					value.getValue().setOclObject(createOclObjectFromValue(env, value.getValue(), value.getKind()));
 				}
 
 				EList<VarParameterValue> eParameters = traceRecord.getParameters().getParameters();
 				for (VarParameterValue param : eParameters) {
-					param.getValue().setOclObject(createOclObjectFromValue(env, param.getValue()));
+					param.getValue().setOclObject(createOclObjectFromValue(env, param.getValue(), param.getKind()));
 				}
 				
 				EList<VarParameterValue> eResults = traceRecord.getResult().getResult();
 				for (VarParameterValue result : eResults) {
-					result.getValue().setOclObject(createOclObjectFromValue(env, result.getValue()));
+					result.getValue().setOclObject(createOclObjectFromValue(env, result.getValue(), result.getKind()));
 				}
 				
 				addTraceRecordByMapping(mappingOperation, traceRecord, trace);
@@ -741,11 +742,18 @@ public class TraceUtil {
     	//EcoreUtil.resolveAll(trace);
 	}
 
-	private static Object createOclObjectFromValue(QvtOperationalEnv env, EValue value) {
+	private static Object createOclObjectFromValue(QvtOperationalEnv env, EValue value, EDirectionKind directionKind) {
 		
 		if (value.getModelElement() != null) {
 			EObject modelElement = value.getModelElement();
-			return modelElement.eIsProxy() ? null : modelElement;
+			if (modelElement.eIsProxy()) {
+				return null;
+			}
+			if (directionKind == EDirectionKind.OUT) {
+				// model element which is fetched from the trace should operate like a new object
+				((InternalEObject) modelElement).eSetResource(null, null);
+			}
+			return modelElement;
 		}
 		
 		final String type = value.getCollectionType();
@@ -782,7 +790,7 @@ public class TraceUtil {
 				assert "value".equals(val.getName());
 				
 				
-				dict.put(createOclObjectFromValue(env, key.getValue()), createOclObjectFromValue(env, val.getValue()));
+				dict.put(createOclObjectFromValue(env, key.getValue(), directionKind), createOclObjectFromValue(env, val.getValue(), directionKind));
 			}
 			
 			return dict;
@@ -805,7 +813,7 @@ public class TraceUtil {
 				ETuplePartValue part = (ETuplePartValue) elem;
 				
 				EStructuralFeature feature = tuple.eClass().getEStructuralFeature(part.getName());
-				tuple.eSet(feature, createOclObjectFromValue(env, part.getValue()));
+				tuple.eSet(feature, createOclObjectFromValue(env, part.getValue(), directionKind));
 			}
 			
 			return tuple;
@@ -831,7 +839,7 @@ public class TraceUtil {
 		
 		if (oclCollection != null) {
 			for (EValue elem : value.getCollection()) {
-				oclCollection.add(createOclObjectFromValue(env, elem));
+				oclCollection.add(createOclObjectFromValue(env, elem, directionKind));
 			}
 			return oclCollection;
 		}

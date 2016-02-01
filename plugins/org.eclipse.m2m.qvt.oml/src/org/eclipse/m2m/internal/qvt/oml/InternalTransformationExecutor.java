@@ -378,7 +378,7 @@ public class InternalTransformationExecutor {
 	
 	@Override
 	public String toString() {
-		return "QVTO-Executor: " + toString(); //$NON-NLS-1$
+		return "QVTO-Executor: " + fTransformation.getURI(); //$NON-NLS-1$
 	}
 	
 	protected QVTOCompiler createCompiler() {
@@ -406,10 +406,6 @@ public class InternalTransformationExecutor {
 			super(transformation);
 		}
 			
-		public TracesAwareExecutor(Transformation transformation, EPackage.Registry registry) {
-			super(transformation, registry);
-		}
-		
 		public Trace getTraces() {
 			return fTraces;
 		}

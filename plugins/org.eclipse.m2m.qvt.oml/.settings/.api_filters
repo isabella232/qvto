@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.m2m.qvt.oml" version="2">
+    <resource path="src/org/eclipse/m2m/qvt/oml/ExecutionDiagnostic.java" type="org.eclipse.m2m.qvt.oml.ExecutionDiagnostic">
+        <filter comment="Won't affect end users since implementation class org.eclipse.emf.common.util.BasicDiagnostic extends DiagnosticChain" id="403984517">
+            <message_arguments>
+                <message_argument value="org.eclipse.m2m.qvt.oml.ExecutionDiagnostic"/>
+                <message_argument value="org.eclipse.emf.common.util.DiagnosticChain"/>
+                <message_argument value="add(Diagnostic)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
