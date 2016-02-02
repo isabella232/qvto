@@ -11,3 +11,4 @@ QvtCompletionProposal[org.eclipse.m2m.qvt.oml.editor.ui.completion.category.defa
 QvtCompletionProposal[org.eclipse.m2m.qvt.oml.editor.ui.completion.category.default]: replacementString = Strings, displayString = Strings, replacementOffsetDelta = 0, replacementLength = 0, cursorPosition = 7
 QvtCompletionProposal[org.eclipse.m2m.qvt.oml.editor.ui.completion.category.default]: replacementString = emf.tools, displayString = emf.tools, replacementOffsetDelta = 0, replacementLength = 0, cursorPosition = 9
 QvtCompletionProposal[org.eclipse.m2m.qvt.oml.editor.ui.completion.category.default]: replacementString = TestBlackboxLibrary, displayString = TestBlackboxLibrary, replacementOffsetDelta = 0, replacementLength = 0, cursorPosition = 19
+QvtCompletionProposal[org.eclipse.m2m.qvt.oml.editor.ui.completion.category.default]: replacementString = NonExistingLibrary, displayString = NonExistingLibrary, replacementOffsetDelta = 0, replacementLength = 0, cursorPosition = 18
