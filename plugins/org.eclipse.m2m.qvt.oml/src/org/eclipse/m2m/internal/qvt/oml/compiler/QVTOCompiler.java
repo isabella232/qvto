@@ -319,10 +319,10 @@ public class QVTOCompiler {
 		} 
 		catch (ParserException e) {
 			Throwable cause = e.getCause() != null ? e.getCause() : e;
-			throw new MdaException(cause.getMessage(), cause);
+			throw new MdaException(cause);
 		}
 		catch (IOException e) {
-			throw new MdaException(e.getMessage(), e);			
+			throw new MdaException(e);			
 		}
                 
         return nextResult;        

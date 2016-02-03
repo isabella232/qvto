@@ -21,11 +21,6 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 public class MdaException extends Exception {
 	private static final long serialVersionUID = 4003559255399844949L;
 	
-	public MdaException(String message, IStatus status) {
-		super(message);
-		myStatus = status;
-	}
-	
 	public MdaException(IStatus status) {
 		this(status.getMessage(), status);
 	}
@@ -42,6 +37,11 @@ public class MdaException extends Exception {
 		this(cause.getMessage(), cause);
 	}
 	
+	private MdaException(String message, IStatus status) {
+		super(message);
+		myStatus = status;
+	}
+	
 	public IStatus getStatus() {
 		return myStatus;
 	}
@@ -53,7 +53,28 @@ public class MdaException extends Exception {
 	
 	@Override
 	public String getMessage() {
-		return super.getMessage() + (getStatus() != null ? " , " + getStatus().toString() : ""); //$NON-NLS-1$ //$NON-NLS-2$
+		String msg = super.getMessage();
+		String statusMsg = getStatusMessage(myStatus);
+		if (msg.equals(statusMsg)) {
+			return msg;
+		}
+		return msg + " [" + statusMsg + "]"; //$NON-NLS-1$ //$NON-NLS-2$
+	}
+	
+	private static String getStatusMessage(IStatus status) {
+		String children = "";
+		for (IStatus childStatus : status.getChildren()) {
+			if (!children.isEmpty())  {
+				children += ',';
+			}
+			children += getStatusMessage(childStatus);
+		}
+
+		String msg = status.getMessage();
+		if (!children.isEmpty())  {
+			msg += " [" + children + "]"; //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return msg;
 	}
 	
 	private IStatus myStatus; 

@@ -130,7 +130,8 @@ public class QvtInterpretedTransformation implements QvtTransformation {
 	}
 	
 	public URI getURI() {
-		return getUnit().getURI();
+		CompiledUnit unit = getUnit();
+		return unit != null ? unit.getURI() : URI.createURI(""); //$NON-NLS-1$
 	}
 
 	public List<TransformationParameter> getParameters() throws MdaException {

@@ -111,7 +111,7 @@ public class QvtLaunchConfigurationDelegate extends QvtLaunchConfigurationDelega
 								}
 							}						
 							
-							QvtPlugin.error(e);							
+							QvtPlugin.error(Messages.InMemoryQvtLaunchConfigurationDelegate_TransformationJobName, e);							
 						}
 					}
 					
