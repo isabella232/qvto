@@ -1273,7 +1273,7 @@ public class QvtOperationalVisitorCS
     	OCLExpression<EClassifier> result = super.operationCallExpCS(operationCallExpCS, env);
     	
     	if(result instanceof OperationCallExp<?,?>) {
-    	    OperationCallExp<EClassifier, EOperation> opCallExp = (org.eclipse.ocl.ecore.OperationCallExp) result;
+    		org.eclipse.ocl.ecore.OperationCallExp opCallExp = (org.eclipse.ocl.ecore.OperationCallExp) result;
     	    if(opCallExp.getReferredOperation() != null) {
     	    	EOperation referredOperation = opCallExp.getReferredOperation();
     	    	if(QvtOperationalParserUtil.isDeprecated(referredOperation)) {
@@ -1515,7 +1515,7 @@ public class QvtOperationalVisitorCS
      */
 	protected ImperativeIterateExp createImplicitXCollect(
 			OCLExpression<EClassifier> source,
-			FeatureCallExp<EClassifier> propertyCall,
+			CallExp propertyCall,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			CSTNode cstNode) {
         
@@ -4838,7 +4838,8 @@ public class QvtOperationalVisitorCS
 			EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
     	if(resolveExp.isIsDeferred()) {    	
     		if(!QvtResolveUtil.isSuppportedAsDeferredAssigned(resolveExp)) {
-    			int startPos = (resolveExp.getSource() != null) ? resolveExp.getSource().getEndPosition() : resolveExp.getStartPosition(); 
+    			int startPos = resolveExp.getStartPosition();
+    			assert startPos > 0;
     			QvtOperationalUtil.reportWarning(env, ValidationMessages.lateResolveNotUsedInDeferredAssignment, startPos, resolveExp.getEndPosition());
     		}
 		}
@@ -4887,7 +4888,7 @@ public class QvtOperationalVisitorCS
             }
         }
         
-        ResolveExp result = populateResolveExp(resolveInExpCS, env, resolveInExp, mappingResultType, mappingContextType);
+        org.eclipse.ocl.ecore.OCLExpression result = populateResolveExp(resolveInExpCS, env, resolveInExp, mappingResultType, mappingContextType);
         //        DeprecatedImplicitSourceCallHelper.validateCallExp(resolveInExpCS, result, env);
         
         if(mappingOperations.size() == 1) {
@@ -5591,7 +5592,7 @@ public class QvtOperationalVisitorCS
 		if ((source != null) && (source.getType() instanceof CollectionType<?,?>)
 				&& (astNode instanceof FeatureCallExp<?>)) {
 		    CallExpCS callExpCS = (CallExpCS) simpleNameCS.eContainer();
-		    FeatureCallExp<EClassifier> featureCallExp = (FeatureCallExp<EClassifier>) astNode;
+		    org.eclipse.ocl.ecore.FeatureCallExp featureCallExp = (org.eclipse.ocl.ecore.FeatureCallExp) astNode;
 		    astNode = isArrowAccessToCollection(callExpCS, source) ?
 		            createImplicitXCollect(source, featureCallExp, env, simpleNameCS)
 		            : createImplicitCollect(source, featureCallExp, env, simpleNameCS);

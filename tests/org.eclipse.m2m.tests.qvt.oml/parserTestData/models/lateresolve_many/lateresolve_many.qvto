@@ -2,7 +2,7 @@
 modeltype UML uses "http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml";
 modeltype ECORE uses "http://www.eclipse.org/emf/2002/Ecore";
 
-transformation lateresolve_col(in eModel :ECORE, out umlModel : UML);
+transformation lateresolve_many(in eModel :ECORE, out umlModel : UML);
 
 property x : Sequence(UML::Package) = null;
 property counter: Integer = 0;
