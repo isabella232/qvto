@@ -17,6 +17,7 @@ qvto-plugins.psf
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.ocl"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.project"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.runtime"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.runtime.jdt"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.runtime.ui"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.trace.edit"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,plugins/org.eclipse.m2m.qvt.oml.ui"/>
@@ -31,6 +32,7 @@ qvto-plugins.psf
 <item elementID="=org.eclipse.m2m.qvt.oml.debug.core" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.qvt.oml.project" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.qvt.oml.debug.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.m2m.qvt.oml.runtime.jdt" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.qvt.oml.runtime.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.qvt.oml" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
 <item elementID="=org.eclipse.m2m.qvt.oml.ecore.imperativeocl" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
