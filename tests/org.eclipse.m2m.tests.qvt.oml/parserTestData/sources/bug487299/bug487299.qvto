@@ -1,0 +1,17 @@
+import imports.Lib1;
+import imports.Lib2;
+
+transformation bug487299() access Lib1, Lib2;
+
+main() {
+
+	testHelper1();
+	/*<warn>*/testHelper2/*</warn>*/();
+	testHelper3();
+
+	"".testHelper1();
+	""./*<warn>*/testHelper2/*</warn>*/();
+	"".testHelper3();
+
+}
+

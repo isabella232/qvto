@@ -1,0 +1,18 @@
+library Lib1;
+
+helper testHelper1() : String {
+	return "";
+}
+
+helper testHelper2() : String {
+	return "";
+}
+
+helper String::testHelper1() : String {
+	return self;
+}
+
+helper String::testHelper2() : String {
+	return self;
+}
+
