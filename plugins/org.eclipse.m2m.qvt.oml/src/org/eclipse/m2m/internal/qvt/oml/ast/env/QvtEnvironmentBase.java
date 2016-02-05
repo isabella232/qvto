@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase.CollisionStatus.CollisionKind;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImportKind;
@@ -45,6 +46,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.QVTUMLReflection;
+import org.eclipse.ocl.AmbiguousLookupException;
 import org.eclipse.ocl.LookupException;
 import org.eclipse.ocl.ecore.CallOperationAction;
 import org.eclipse.ocl.ecore.Constraint;
@@ -180,10 +182,8 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
     	try {
     		return tryLookupImplicitSourceForOperation(name, args);
     	} catch(LookupException e) {
-    		List<?> ambiguousMatches = e.getAmbiguousMatches();
-    		@SuppressWarnings("unchecked")
-			Variable<EClassifier, EParameter> result = ambiguousMatches.isEmpty() ? null : (Variable<EClassifier, EParameter>)ambiguousMatches.get(0);
-			return result;
+    		// report resolution ambiguity
+    		throw new RuntimeException(e);
     	}
 	}
     
@@ -197,10 +197,11 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				return this.getInternalParent().lookupImplicitSourceForOperation(name, args);
 			}
 			
+			List<Variable<EClassifier, EParameter>> ambiguous = new LinkedList<Variable<EClassifier,EParameter>>();
 			for (QvtEnvironmentBase nextExtendedEnv : rootEnv.getAllExtendedModules()) {
 				result = nextExtendedEnv.localLookupImplicitSourceForOperation(name, args);
 				if(result != null) {
-					return result;
+					ambiguous.add(result);
 				}
 			}
 			
@@ -211,10 +212,15 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 					// this cannot be done transformations which has an explicit instance					
 					result = nextAccessedEnv.localLookupImplicitSourceForOperation(name, args);
 					if(result != null) {
-						break;
+						ambiguous.add(result);
 					}
 				}
-			}			
+			}
+			
+			if (ambiguous.size() > 1) {
+				throw new AmbiguousLookupException(ValidationMessages.AmbiguousImplicitSourceLookup, ambiguous);
+			}
+			result = ambiguous.isEmpty() ? null : ambiguous.get(0);
 		}
 		
 		return result;

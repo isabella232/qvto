@@ -190,6 +190,7 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.SwitchExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.TryExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.VariableInitExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.WhileExp;
+import org.eclipse.ocl.AmbiguousLookupException;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.Environment.Internal;
 import org.eclipse.ocl.LookupException;
@@ -577,6 +578,14 @@ public class QvtOperationalVisitorCS
 			return filteredMatches.get(0);
 		}
 			
+		String message = NLS.bind(ValidationMessages.AmbiguousOperationReference, formatMatches(env, filteredMatches));
+		getEnvironment().analyzerWarning(message, "lookupOperation", problemNode); //$NON-NLS-1$" 
+		return filteredMatches.get(0);
+	}
+
+	private String formatMatches(
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
+			List<?> filteredMatches) {
 		StringBuffer buf = new StringBuffer();		
 		try {
 			int i = 0;			
@@ -596,10 +605,7 @@ public class QvtOperationalVisitorCS
 			// Remark : safety measure, added in 2.0 RC1
 			buf.append("<null>"); //$NON-NLS-1$
 		}
-		
-		String message = NLS.bind(ValidationMessages.AmbiguousOperationReference, buf.toString());
-		getEnvironment().analyzerWarning(message, "lookupOperation", problemNode); //$NON-NLS-1$" 
-		return filteredMatches.get(0);
+		return buf.toString();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -611,20 +617,38 @@ public class QvtOperationalVisitorCS
 		return eType == env.getOCLStandardLibrary().getT2();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected Variable<EClassifier, EParameter> lookupImplicitSourceForOperation(
 			CSTNode cstNode,
 			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env,
 			List<OCLExpression<EClassifier>> args, String operationName) {
 
-		 Variable<EClassifier, EParameter> source = super.lookupImplicitSourceForOperation(cstNode, env, args, operationName);
-		 if(source == null) {
+		Variable<EClassifier, EParameter> source = null;
+		try {
+			source = super.lookupImplicitSourceForOperation(cstNode, env, args, operationName);
+		}
+		catch (RuntimeException e) {
+			if (e.getCause() instanceof AmbiguousLookupException) {
+	    		List<?> ambiguousMatches = ((AmbiguousLookupException) e.getCause()).getAmbiguousMatches();
+	    		
+	    		String message = NLS.bind(ValidationMessages.AmbiguousImplicitSourceReference, formatMatches(env, ambiguousMatches));
+	    		((QvtEnvironmentBase) env).analyzerWarning(message, "lookupImplicitSource", ((OperationCallExpCS) cstNode).getSimpleNameCS()); //$NON-NLS-1$" 
+	    		
+	    		source = ambiguousMatches.isEmpty() ? null : (Variable<EClassifier, EParameter>) ambiguousMatches.get(0);
+			}
+			else {
+				throw e;
+			}
+		}
+		
+		if(source == null) {
 			 	// FIXME - why is this done?, looks like a workaround for MDT OCL, 
 			 	// it's a legal contract for the lookupXXX operation to return null
 				source = EcoreFactory.eINSTANCE.createVariable();
 				initASTMapping(env, source, cstNode);
-		 }
-		 return source;
+		}
+		return source;
 	}
 
 	private EClassifier visitTypeCSInModelType(TypeSpecCS typeSpecCS, ModelType modelType,
