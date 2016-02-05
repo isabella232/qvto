@@ -130,7 +130,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		QVTOCompiler compiler = CompilerUtils.createCompiler();
 		try {
 			CompiledUnit compiledUnit = compiler.compile(unit, null, null);
-			assertTrue("Unit must not have compilation problems", compiledUnit.getProblems().isEmpty());
+			assertTrue("Unit must not have compilation errors", compiledUnit.getErrors().isEmpty()); //$NON-NLS-1$
 		} catch (MdaException e) {
 			fail(e.getLocalizedMessage());
 		}
