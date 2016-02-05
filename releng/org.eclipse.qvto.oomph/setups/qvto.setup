@@ -229,6 +229,9 @@
             pattern="org.eclipse.m2m.qvt.oml.runtime"/>
         <predicate
             xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.m2m.qvt.oml.runtime.jdt"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.tools.coverage"/>
         <predicate
             xsi:type="predicates:NamePredicate"
