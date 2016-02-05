@@ -22,7 +22,6 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.java.jdt.JdtBlackboxHelper;
 import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProvider;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
@@ -33,6 +32,7 @@ import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.CompletionProposalU
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionData;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionProposal;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.internal.qvt.oml.runtime.jdt.blackbox.JdtBlackboxHelper;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformationRegistry;
 
 import lpg.runtime.IToken;
