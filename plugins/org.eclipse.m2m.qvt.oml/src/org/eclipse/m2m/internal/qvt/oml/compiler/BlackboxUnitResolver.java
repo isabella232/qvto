@@ -51,8 +51,8 @@ public class BlackboxUnitResolver implements UnitResolver {
 	}
 	
 	public static boolean isBlackboxUnitURI(URI uri) {
-		return AbstractCompilationUnitDescriptor.URI_SCHEME.equals(uri.scheme()) && 
-			AbstractCompilationUnitDescriptor.URI_AUTHORITY.equals(uri.authority());
+		return AbstractCompilationUnitDescriptor.URI_QVTO_SCHEME.equals(uri.scheme()) && 
+			AbstractCompilationUnitDescriptor.URI_BLACKBOX_AUTHORITY.equals(uri.authority());
 	}
 		
 	public UnitProxy resolveUnit(String qualifiedName) {

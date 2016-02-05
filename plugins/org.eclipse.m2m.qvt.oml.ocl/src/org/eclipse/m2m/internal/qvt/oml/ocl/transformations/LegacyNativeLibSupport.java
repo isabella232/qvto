@@ -55,7 +55,7 @@ public class LegacyNativeLibSupport {
 		// FIXME - set isBlackBox=TRUE, as soon is it gets into the AST metamodel
 				
         QvtOperationalModuleEnv libEnv = initLibEnvironment(lib, libModule);
-        URI libUri = URI.createHierarchicalURI(AbstractCompilationUnitDescriptor.URI_SCHEME, AbstractCompilationUnitDescriptor.URI_AUTHORITY,
+        URI libUri = URI.createHierarchicalURI(AbstractCompilationUnitDescriptor.URI_QVTO_SCHEME, AbstractCompilationUnitDescriptor.URI_BLACKBOX_AUTHORITY,
         		null, new String[] {lib.getId()}, null, null);
 		libModule.eResource().setURI(libUri);
 

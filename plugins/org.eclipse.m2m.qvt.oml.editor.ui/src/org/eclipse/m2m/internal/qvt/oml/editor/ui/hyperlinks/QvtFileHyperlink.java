@@ -15,6 +15,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.java.jdt.JdtBlackboxHelper;
+import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.QvtEditor;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.ui.IWorkbenchPage;
@@ -35,6 +37,8 @@ public class QvtFileHyperlink extends AbstractHyperlink {
 	
 	private final IRegion myDestinationSelectRegion;
 	
+	private final String myDestinationElement;
+	
 	
 	public QvtFileHyperlink(IRegion hyperlinkRegion, URI destinationURI, 
 			IRegion destinationRevealRegion, IRegion destinationSelectRegion) {
@@ -43,11 +47,22 @@ public class QvtFileHyperlink extends AbstractHyperlink {
 			throw new IllegalArgumentException();
 		}
 		
-		
-		
 		myDestinationURI = destinationURI;
 		myDestinationRevealRegion = destinationRevealRegion;
 		myDestinationSelectRegion = destinationSelectRegion;
+		myDestinationElement = null;
+	}
+
+	public QvtFileHyperlink(IRegion hyperlinkRegion, URI destinationURI, String destinationElement) {
+		super(hyperlinkRegion);
+		if (destinationURI == null) {
+			throw new IllegalArgumentException();
+		}
+		
+		myDestinationURI = destinationURI;
+		myDestinationRevealRegion = null;
+		myDestinationSelectRegion = null;
+		myDestinationElement = destinationElement;
 	}
 
 	public void open() {
@@ -66,6 +81,10 @@ public class QvtFileHyperlink extends AbstractHyperlink {
 
 			IFile file = URIUtils.getFile(myDestinationURI);
 			if(file == null) {
+				if (BlackboxUnitResolver.isBlackboxUnitURI(myDestinationURI)) {
+					FileEditorInput editorInput = (FileEditorInput) activePage.getActiveEditor().getEditorInput();
+					JdtBlackboxHelper.navigateToJavaElement(editorInput.getURI(), myDestinationURI.segment(0), myDestinationElement);
+				}
 				return;
 			}
 			

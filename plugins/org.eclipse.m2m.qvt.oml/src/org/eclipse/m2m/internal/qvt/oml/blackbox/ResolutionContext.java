@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2011 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2015 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,7 +11,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
+import org.eclipse.emf.common.util.URI;
 
 public interface ResolutionContext {
+	
+	public URI getURI();
 	
 }

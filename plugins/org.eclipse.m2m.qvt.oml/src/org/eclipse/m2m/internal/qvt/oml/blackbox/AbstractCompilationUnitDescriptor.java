@@ -23,8 +23,8 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 
 public abstract class AbstractCompilationUnitDescriptor {
 	
-	public static final String URI_SCHEME = "qvto"; //$NON-NLS-1$
-	public static final String URI_AUTHORITY = "blackbox"; //$NON-NLS-1$	
+	public static final String URI_QVTO_SCHEME = "qvto"; //$NON-NLS-1$
+	public static final String URI_BLACKBOX_AUTHORITY = "blackbox"; //$NON-NLS-1$	
 	
 	private URI fURI;
 	private String fQualifiedName;
@@ -46,9 +46,17 @@ public abstract class AbstractCompilationUnitDescriptor {
 		fProvider = provider;
 		fQualifiedName = qualifiedName;
 		// TODO - better error handling of invalid segments
-		fURI = URI.createHierarchicalURI(URI_SCHEME, URI_AUTHORITY, null, uriSegments, null, null);		
+		fURI = URI.createHierarchicalURI(URI_QVTO_SCHEME, URI_BLACKBOX_AUTHORITY, null, uriSegments, getUnitQuery(), getFragment());		
 	}
 	
+	protected String getUnitQuery() {
+		return null;
+	}
+
+	protected String getFragment() {
+		return null;
+	}
+
 	protected AbstractCompilationUnitDescriptor(AbstractBlackboxProvider provider, String qualifiedName) {
 		this(provider, qualifiedName, qualifiedName);
 	}

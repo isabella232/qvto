@@ -15,11 +15,12 @@ package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 import java.util.List;
 
 
-abstract class ModuleHandle {
+public abstract class ModuleHandle {
 	
 	private final String className;
 	private final String simpleName;
-	ModuleHandle(String className, String moduleName) {
+	
+	public ModuleHandle(String className, String moduleName) {
 		if(className == null || moduleName == null) {
 			throw new IllegalArgumentException();
 		}

@@ -19,13 +19,17 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
+import org.eclipse.m2m.internal.qvt.oml.ast.binding.IModuleSourceInfo;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.ConstructorOperationAdapter;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
+import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.cst.InstantiationExpCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingDeclarationCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingMethodCS;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.CSTHelper;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
+import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.InstantiationExp;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.OperationCallExpCS;
@@ -68,12 +72,19 @@ public class OperationHyperlinkDetector implements IHyperlinkDetectorHelper {
 			EOperation operation = resolveOperationDecl(nameCS);
 			if(operation != null) {
 				// handle specially operations defined in a QVT module
+				Module owningModule = QvtOperationalParserUtil.getOwningModule(operation);
 				MappingMethodCS methodCS = resolveImperativeOperationDecl(nameCS);
 				if(methodCS != null) {
 					IRegion destRegion = getGoToOperationRegion(methodCS);
 					URI sourceURI = ASTBindingHelper.resolveModuleFile(CSTHelper.getModule(methodCS));
 					return new QvtFileHyperlink(HyperlinkUtil.createRegion(nameCS), sourceURI, 
 									destRegion, destRegion);
+				}
+				else if (owningModule != null) {
+					IModuleSourceInfo moduleSourceBinding = ASTBindingHelper.getModuleSourceBinding(owningModule);
+					if (moduleSourceBinding != null && BlackboxUnitResolver.isBlackboxUnitURI(moduleSourceBinding.getSourceURI())) {
+						return new QvtFileHyperlink(HyperlinkUtil.createRegion(nameCS), moduleSourceBinding.getSourceURI(), operation.getName());
+					}
 				}
 				// proceed as with ordinary ecore metamodel operation
 				return new MetamodelElementHyperlink(HyperlinkUtil.createRegion(nameCS), operation);						

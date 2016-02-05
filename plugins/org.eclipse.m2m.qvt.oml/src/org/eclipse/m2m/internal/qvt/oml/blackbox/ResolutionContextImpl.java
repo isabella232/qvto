@@ -13,12 +13,9 @@ package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
 import org.eclipse.emf.common.util.URI;
 
-/**
- * FIXME - temp solution due to #264335, mixing CFile, URI based context 
- */
 public class ResolutionContextImpl implements ResolutionContext {
 	
-	private URI fURI;	
+	private final URI fURI;	
 	
 	public ResolutionContextImpl(URI contextURI) {
 		if(contextURI == null) {
@@ -32,4 +29,8 @@ public class ResolutionContextImpl implements ResolutionContext {
 	public String toString() {	
 		return "Resolution context (" + fURI.toString() + ")"; //$NON-NLS-1$ //$NON-NLS-2$
 	}
+	
+	public URI getURI() {
+		return fURI;
+	}			
 }

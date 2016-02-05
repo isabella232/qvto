@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.CompilationUnit;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.OperationMatcher;
+import org.eclipse.m2m.internal.qvt.oml.common.util.StringLineNumberProvider;
 import org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
@@ -87,6 +88,8 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 			if (DiagnosticUtil.isSuccess(diagnostic)) {
 				QvtOperationalModuleEnv nextModuleEnv = javaModuleLoader.getLoadedModule();
 				nextModuleEnv.getTypeResolver().getResource().setURI(descriptor.getURI());
+				ASTBindingHelper.createModuleSourceBinding(nextModuleEnv.getModuleContextType(), descriptor.getURI(),
+						new StringLineNumberProvider("")); //$NON-NLS-1$
 				loadedModules.add(nextModuleEnv);
 
 				if (diagnostic.getSeverity() != Diagnostic.OK) {
@@ -172,11 +175,11 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 		return className.substring(lastSeparatorPos + 1);
 	}
 
-	abstract class JavaUnitDescriptor extends AbstractCompilationUnitDescriptor {
+	public abstract class JavaUnitDescriptor extends AbstractCompilationUnitDescriptor {
 
 		private Map<ModuleHandle, Map<String, List<EOperation>>> fModules = new LinkedHashMap<ModuleHandle, Map<String, List<EOperation>>>();
 
-		JavaUnitDescriptor(String unitQualifiedName) {
+		public JavaUnitDescriptor(String unitQualifiedName) {
 			super(JavaBlackboxProvider.this, unitQualifiedName);
 		}
 
