@@ -213,6 +213,7 @@ public class TestQvtParser extends TestCase {
 		    	TestData.createSourceChecked("bug477331", 2, 0), //$NON-NLS-1$
 		    	TestData.createSourceChecked("bug483290", 1, 0), //$NON-NLS-1$
 		    	TestData.createSourceChecked("bug487299", 0, 2), //$NON-NLS-1$
+		    	new TestData("bug486810", 0), //$NON-NLS-1$
 			}
 		);
 	}

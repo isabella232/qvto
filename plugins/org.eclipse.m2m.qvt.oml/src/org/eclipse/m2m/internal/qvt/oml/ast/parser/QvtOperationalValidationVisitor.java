@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Alex Paperno - bugs 414616, 424584
- *     Christopher Gerking - bug 427237
+ *     Christopher Gerking - bugs 427237, 486810
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.parser;
 
@@ -626,20 +626,21 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 	}
 
 	private boolean validateOutParamType(VarParameter resultParam) {
-		boolean result = true;
 		EClassifier paramType = resultParam.getEType();
 		if(paramType != null) {
 			if(QVTUMLReflection.isModelTypeInstance(paramType) ||
-				QVTUMLReflection.isModuleInstance(paramType)
-				|| (!QVTUMLReflection.isUserModelElement(paramType)
-				        && (paramType != null) && !(paramType instanceof CollectionType))) {
-				result = false;
+			   QVTUMLReflection.isModuleInstance(paramType) || 
+			   (!QVTUMLReflection.isUserModelElement(paramType)
+					   && !(paramType instanceof CollectionType)
+					   && !(paramType == QvtOperationalStdLibrary.INSTANCE.getElementType()))
+			) {
 				fEnv.reportError(NLS.bind(ValidationMessages.nonModelTypeError, 
 									QvtOperationalParserUtil.safeGetQualifiedName(fEnv, paramType)), 
 									resultParam.getStartPosition(), resultParam.getEndPosition());
+				return false;
 			}
 		}
-		return result;
+		return true;
 	}
 	
 	private void validateUniqueParamNames(ImperativeOperation operation) {
