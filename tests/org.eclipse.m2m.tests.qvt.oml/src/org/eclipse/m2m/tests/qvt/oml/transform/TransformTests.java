@@ -562,7 +562,8 @@ public class TransformTests extends TestCase {
         		new FilesToFilesData("bug467600_Sequence"), //$NON-NLS-1$
         		new FilesToFilesData("bug467600_Set"), //$NON-NLS-1$
         		new FilesToFilesData("bug475123"), //$NON-NLS-1$ 
-        		new FilesToFilesData("bug478006", Collections.<String>emptyList(), Arrays.asList("workingorderDepending.ecore", "workingorderReferenced.ecore")), //$NON-NLS-1$ 
+        		new FilesToFilesData("bug478006", Collections.<String>emptyList(), Arrays.asList("workingorderDepending.ecore", "workingorderReferenced.ecore")), //$NON-NLS-1$
+        		new FilesToFilesData("bug486579"), //$NON-NLS-1$ 
         	};
     }
 

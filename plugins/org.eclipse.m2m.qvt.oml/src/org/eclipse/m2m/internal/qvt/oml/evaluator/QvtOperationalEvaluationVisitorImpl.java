@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2015 Borland Software Corporation and others
+ * Copyright (c) 2007, 2016 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,9 +11,9 @@
  *     Christopher Gerking - bugs 302594, 309762, 310991, 325192, 377882, 388325, 
  *     							  392080, 392153, 394498, 397215, 397218, 269744, 
  *     							  415660, 415315, 414642, 427237, 428618, 425069,
- *     							  463410
+ *     							  463410, 486579
  *     Alex Paperno - bugs 294127, 416584, 419299, 267917, 420970, 424584
- *     Christine Gerpheide - bugs 432969
+ *     Christine Gerpheide - bug 432969
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.evaluator;
 
@@ -973,9 +973,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				actualArguments.add(argVal); 
 			}
 
-			Adapter adapter = EcoreUtil.getAdapter(objectExp.eAdapters(), ConstructorOperationAdapter.class);
-			if (adapter != null) {
-				Constructor constructorOp = ((ConstructorOperationAdapter) adapter).getReferredConstructor();
+			Adapter constructorOperationAdapter = EcoreUtil.getAdapter(objectExp.eAdapters(), ConstructorOperationAdapter.class);
+			if (constructorOperationAdapter != null) {
+				Constructor constructorOp = ((ConstructorOperationAdapter) constructorOperationAdapter).getReferredConstructor();
 				
 				ImperativeOperation overriding = EvaluationUtil.getOverridingOperation(getOperationalEvaluationEnv(), constructorOp);
 	    		if (overriding instanceof Constructor) {
@@ -986,8 +986,14 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					actualArguments.set(i, EvaluationUtil.doImplicitListCoercion(
 							constructorOp.getEParameters().get(i).getEType(), actualArguments.get(i)));
 				}
-
-				executeImperativeOperation(constructorOp, owner, actualArguments, false);
+				
+				if (constructorOp.getBody() == null && CallHandler.Access.hasHandler(constructorOp)) {
+					// invoke body-less constructor defined in blackbox module 
+					getEvaluationEnvironment().callOperation(constructorOp, -1, owner, actualArguments.toArray());
+				}
+				else {
+					executeImperativeOperation(constructorOp, owner, actualArguments, false);
+				}
 			}
 			else {
 				if (objectExp.getArgument().isEmpty()) {
@@ -1163,7 +1169,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	// stop executing the next lines and return this result.
         	if(result instanceof BreakingResult) {
 	        	if(result instanceof OperationCallResult) {
-	        		result = ((OperationCallResult)result).myResult;
+	        		result = ((OperationCallResult) result).myResult;
 	        	}
 	        	else {
 	        		result = null;

@@ -1,0 +1,13 @@
+import org.bar.Foo;
+
+modeltype ECORE uses "http://www.eclipse.org/emf/2002/Ecore";
+
+transformation bug486579();
+
+main() {
+	var l = List{};
+	var p = new EPackage(l);
+	
+	assert fatal (p.name = "blackbox");
+	assert fatal (l->includes("blackbox")); 
+}
