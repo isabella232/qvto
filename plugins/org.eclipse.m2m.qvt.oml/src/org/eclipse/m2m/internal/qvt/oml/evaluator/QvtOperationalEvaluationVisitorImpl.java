@@ -11,7 +11,7 @@
  *     Christopher Gerking - bugs 302594, 309762, 310991, 325192, 377882, 388325, 
  *     							  392080, 392153, 394498, 397215, 397218, 269744, 
  *     							  415660, 415315, 414642, 427237, 428618, 425069,
- *     							  463410, 486579
+ *     							  463410, 486579, 425066
  *     Alex Paperno - bugs 294127, 416584, 419299, 267917, 420970, 424584
  *     Christine Gerpheide - bug 432969
  *******************************************************************************/
@@ -93,7 +93,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveInExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.impl.ImperativeOperationImpl;
-import org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationBodyImpl;
 import org.eclipse.m2m.internal.qvt.oml.library.Context;
 import org.eclipse.m2m.internal.qvt.oml.library.EObjectEStructuralFeaturePair;
 import org.eclipse.m2m.internal.qvt.oml.library.LateResolveInTask;
@@ -812,7 +811,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	return new MappingCallResult(null, evalEnv, MappingCallResult.PRECOND_FAILED);
         }
 		
-		MappingCallResult result = executeMappingBody(mappingOperation, evalEnv);
+		MappingCallResult result = executeMapping(mappingOperation, evalEnv);
 		if (!isWherePreconditionSatisfied(mappingOperation)) {
 			throwQVTException(new QvtAssertionFailed(NLS.bind(EvaluationMessages.MappingPostconditionFailed,
 					mappingOperation.getName())));
@@ -820,7 +819,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		return result;
     }
 
-	protected MappingCallResult executeMappingBody(MappingOperation mappingOperation, QvtOperationalEvaluationEnv evalEnv) {
+	protected MappingCallResult executeMapping(MappingOperation mappingOperation, QvtOperationalEvaluationEnv evalEnv) {
         // check the traces whether the relation already holds
 		TraceRecord traceRecord = TraceUtil.getTraceRecord(evalEnv, mappingOperation);
 		if (traceRecord != null) {
@@ -837,8 +836,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			return dispatchDisjunctMapping(mappingOperation);
 		}
 		
+		Object result;
 		if (mappingOperation.isIsBlackbox()) {        	
-			Object result = doVisitBlackboxOperation(mappingOperation);        	
+			result = doVisitBlackboxOperation(mappingOperation);        	
 			if (isUndefined(result)) {
 				throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.BlackboxMappingFailedToAssignResult,
 						QvtOperationalParserUtil.safeGetMappingQualifiedName(getOperationalEnv(), mappingOperation))));
@@ -848,13 +848,26 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		    TraceUtil.addTraceRecord(getOperationalEvaluationEnv(), mappingOperation);
 		    
 		    // call merged mappings
-			callMergedMappings(mappingOperation, evalEnv);
-		    
-		    return new MappingCallResult(result, evalEnv, MappingCallResult.BODY_EXECUTED);        	
+			callMergedMappings(mappingOperation, evalEnv);        	
 		}
+		else {
+			result = mappingOperation.getBody().accept(getVisitor());
+		}
+		
+		// add mapping result to model extent if it wasn't added by default 
+		for (VarParameter varParam : mappingOperation.getResult()) {
+        	Object resultValue = getRuntimeValue(varParam.getName());
+        	        	
+        	if (resultValue instanceof EObject) {
+        		EObject eObject = (EObject) resultValue;
+        		
+        		if (eObject.eResource() == null) {
+        			getOperationalEvaluationEnv().putInstanceToExtent(eObject, ((MappingParameter) varParam).getExtent());
+        		}
+        	}
+        }
 		                                		
-		return new MappingCallResult(((OperationBodyImpl) mappingOperation.getBody()).accept(getVisitor()), evalEnv,
-				MappingCallResult.BODY_EXECUTED);
+		return new MappingCallResult(result, evalEnv, MappingCallResult.MAPPING_EXECUTED);
 	}
 
     public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
@@ -1810,7 +1823,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	result = getRuntimeValue(varParam.getName());
         	
         	if (isUndefined(result)) {
-        		
         		if (false == varParam.getEType() instanceof VoidType<?>) {
                     result = createInstance(varParam.getEType(), ((MappingParameter) varParam).getExtent());
                     replaceInEnv(varParam.getName(), result, varParam.getEType());
@@ -1907,7 +1919,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     }
     
     private static class MappingCallResult extends OperationCallResult {
-		static final int BODY_EXECUTED = 0;
+		static final int MAPPING_EXECUTED = 0;
 		static final int PRECOND_FAILED = 2;
 		static final int FETCHED_FROM_TRACE = 4;
 		static final int NO_DISJUNCT_SELECTED = 8;		
@@ -1918,7 +1930,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			super(myResult, myEvalEnv);
 			myStatus = status;
 		}
-    	boolean isBodyExecuted() { return myStatus == BODY_EXECUTED; }
+    	boolean isMappingExecuted() { return myStatus == MAPPING_EXECUTED; }
     	boolean isPreconditionFailed() { return (myStatus & PRECOND_FAILED) != 0; };
     	//boolean isFetchedFromTrace() { return (myStatus & FETCHED_FROM_TRACE) != 0; };
     	//boolean isNoDisjunctSelected() { return (myStatus & NO_DISJUCT_SELECTED) != 0; };    	
@@ -1983,7 +1995,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         finally {
             if(isMapping && isReusingMappingCall && callResult != null) {
             	// reflect our output in the reusing mapping caller
-            	if(((MappingCallResult)callResult).isBodyExecuted()) {
+            	if(((MappingCallResult)callResult).isMappingExecuted()) {
             		EvaluationUtil.mapOperationOutAndResultParams(nestedEnv, oldEvalEnv);
             	}
             }        	
@@ -2022,7 +2034,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     		MappingCallResult result = (MappingCallResult) executeImperativeOperation(nextDisjunct, source, args, false);
     		if(!result.isPreconditionFailed()) {
     			// precondition holds, mapping either executed, fetched from trace, or disjuncted
-    			result.myStatus = MappingCallResult.BODY_EXECUTED; // from disjuncting mapping consider as executed
+    			result.myStatus = MappingCallResult.MAPPING_EXECUTED; // from disjuncting mapping consider as executed
     			
     			// add trace record for disjuncting mapping (fixed by bug 377882) 
     			replaceInEnv(Environment.RESULT_VARIABLE_NAME, result.myResult, method.getEType());
@@ -2498,7 +2510,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 //    }
     
     /**
-	* Wraps the environment's creatInstance() and transforms failures to QVT exception
+	* Wraps the environment's createInstance() and transforms failures to QVT exception
 	*/    
 	protected Object createInstance(EClassifier type, ModelParameter extent) throws QvtRuntimeException {
 		Object newInstance = null;

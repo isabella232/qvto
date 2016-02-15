@@ -1,0 +1,43 @@
+import org.bar.Foo;
+
+modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation bug425066(out e : ecore);
+
+main() {
+
+	// regular mapping
+	var c1 = map m1();
+	assert fatal (e.objects()->includes(c1));
+		
+	// concrete syntax blackbox mapping
+	var c2 = map createEClass1();
+	assert fatal (e.objects()->includes(c2));
+	
+	// concrete syntax blackbox constructor
+	var c3 = new EClass("");
+	assert fatal (e.objects()->includes(c3));
+	
+	// mapping defined in blackbox module	
+	//var c4 = map createEClass2();
+	//assert fatal (e.objects()->includes(c4));
+	
+	// constructor defined in blackbox module
+	var c5 = new EClass(0);
+	assert fatal (e.objects()->includes(c5));
+	
+	// object expression with null variable	
+	var c6 : EClass = null;
+	object c6 : EClass {};
+	assert fatal (e.objects()->includes(c6));
+}
+
+mapping m1() : EClass {
+	init {
+		result := getEClass();
+	}
+}
+
+blackbox mapping createEClass1() : EClass;
+
+blackbox constructor EClass::EClass(s : String);
