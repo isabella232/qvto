@@ -68,29 +68,29 @@ public class QvtCompilerFacade {
 			
 			monitor.worked(1);
 
-			final String contents = document.get();			
+			String contents = document.get();			
 			try {
 				UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(URIUtils.getResourceURI(file));
-				UnitResolver unitResolver = unit.getResolver();
-				final UnitProxy inMemoryUnit = new InMemoryUnitProxy(unit.getNamespace(), unit.getName(), unit.getURI(), contents, unitResolver);
-				
-				QVTOCompiler compiler = CompilerUtils.createCompiler();				
-                result = compiler.compile(inMemoryUnit, options, CompilerUtils.createMonitor(BasicMonitor.toMonitor(monitor), 3));
-                
-                if (result != null) {
-                    documentProvider.setMappingModule(result);
-                }
+				if (unit != null) {
+					UnitResolver unitResolver = unit.getResolver();
+					UnitProxy inMemoryUnit = new InMemoryUnitProxy(unit.getNamespace(), unit.getName(), unit.getURI(), contents, unitResolver);
+					
+					QVTOCompiler compiler = CompilerUtils.createCompiler();				
+	                result = compiler.compile(inMemoryUnit, options, CompilerUtils.createMonitor(BasicMonitor.toMonitor(monitor), 3));
+				}                
             } catch (MdaException e) {
-                documentProvider.setMappingModule(result);
                 Activator.log(e);
             }
-            
+
+            documentProvider.setMappingModule(result);
+			
             if (options.isReportErrors() && options.isShowAnnotations()) {
             	//reportProblems(result, editor.getAnnotationModel());
             }
         } finally {
             monitor.done();
         }
+		
         return result;
 	}	
 	
