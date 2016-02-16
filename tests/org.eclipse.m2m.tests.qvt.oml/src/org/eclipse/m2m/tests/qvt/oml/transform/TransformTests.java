@@ -30,6 +30,7 @@ import org.eclipse.m2m.qvt.oml.ocl.legacy.libraries.StringLibrary;
 import org.eclipse.m2m.tests.qvt.oml.TestBlackboxLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.AnnotatedJavaLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug289982_Library;
+import org.eclipse.m2m.tests.qvt.oml.bbox.Bug425066_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug427237_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary;
 import org.junit.runner.RunWith;
@@ -563,8 +564,18 @@ public class TransformTests extends TestCase {
         		new FilesToFilesData("bug467600_Set"), //$NON-NLS-1$
         		new FilesToFilesData("bug475123"), //$NON-NLS-1$ 
         		new FilesToFilesData("bug478006", Collections.<String>emptyList(), Arrays.asList("workingorderDepending.ecore", "workingorderReferenced.ecore")), //$NON-NLS-1$
-        		new FilesToFilesData("bug486579"), //$NON-NLS-1$ 
-        		new FilesToFilesData("bug425066", Collections.<String>emptyList(), Collections.singletonList("out.ecore")), //$NON-NLS-1$ 
+        		new FilesToFilesData("bug486579") { //$NON-NLS-1$
+        			@Override
+        			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(Bug289982_Library.class, "org.bar.Foo", "Bug289982_Lib", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
+        			}
+        		},
+        		new FilesToFilesData("bug425066", Collections.<String>emptyList(), Collections.singletonList("out.ecore")) { //$NON-NLS-1$
+        			@Override
+        			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(Bug425066_Library.class, "org.bar.Foo", "Bug425066_Lib", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
+        			}
+        		},
         	};
     }
 
