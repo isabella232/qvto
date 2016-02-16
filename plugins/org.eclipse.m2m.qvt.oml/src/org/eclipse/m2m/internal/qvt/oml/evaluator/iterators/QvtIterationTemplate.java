@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.BreakingResult;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.ContinueResult;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QvtOperationalEvaluationVisitorImpl.OperationCallResult;
 import org.eclipse.ocl.EvaluationEnvironment;
 import org.eclipse.ocl.EvaluationVisitor;
 import org.eclipse.ocl.expressions.OCLExpression;
@@ -89,7 +90,7 @@ public abstract class QvtIterationTemplate<PK, C, O, P, EL, PM, S, COA, SSA, CT,
         				// No continue, so no more iterations.
         				setDone(true);
         			}
-            		isUpdateResultVal = false;
+            		isUpdateResultVal = (resultVal instanceof OperationCallResult);
         		}
 
                 // set the result variable in the environment with the result value

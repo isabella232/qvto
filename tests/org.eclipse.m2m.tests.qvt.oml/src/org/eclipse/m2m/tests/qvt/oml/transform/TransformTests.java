@@ -576,6 +576,7 @@ public class TransformTests extends TestCase {
         				blackboxRegistry.registerModule(Bug425066_Library.class, "org.bar.Foo", "Bug425066_Lib", new String[] {"http://www.eclipse.org/emf/2002/Ecore"});
         			}
         		},
+        		new FilesToFilesData("bug472376"), //$NON-NLS-1$ 
         	};
     }
 

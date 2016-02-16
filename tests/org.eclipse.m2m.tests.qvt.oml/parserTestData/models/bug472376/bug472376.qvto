@@ -1,0 +1,19 @@
+
+transformation bug472376() {
+	
+	main() {
+		if (checkCondition(Set{1.0, 2.0})) {
+			return
+		};
+		
+		assert fatal (false) with log ("This line should not be reached");
+	}
+	
+	helper checkCondition(realNumbers : Set(Real)) : Boolean {
+		realNumbers->forEach(realNumber) {
+			return true
+		};
+		return false
+	}
+	
+}

@@ -1492,6 +1492,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     public Object visitForExp(ForExp forExp) {
     	Object sourceValue = visitExpression(forExp.getSource());
         
+    	Object result = null;
         if (!isUndefined(sourceValue)) {
             // generate a name for the result variable and add it to the environment
             String resultName = generateName();
@@ -1506,7 +1507,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
             OCLExpression<EClassifier> body = forExp.getBody();
             
             // evaluate
-            QvtIterationTemplateForExp.getInstance(getVisitor()).evaluate(
+            result = QvtIterationTemplateForExp.getInstance(getVisitor()).evaluate(
                     sourceCollection, iterators, null, condition, body, resultName, "forOne".equals(forExp.getName())); //$NON-NLS-1$
 
             // remove result name from environment
@@ -1514,7 +1515,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
             
         }
         
-        return null;
+        return result;
     }
 
     public Object visitImperativeIterateExp(ImperativeIterateExp imperativeIterateExp) {
