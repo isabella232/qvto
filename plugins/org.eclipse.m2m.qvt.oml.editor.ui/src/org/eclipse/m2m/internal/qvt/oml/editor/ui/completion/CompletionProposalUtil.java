@@ -198,8 +198,12 @@ public class CompletionProposalUtil {
     
     public static final void addPackageContentsProposals(Collection<ICompletionProposal> proposals, QvtCompletionData data, EPackage pack) {
         for (EClassifier classifier : pack.getEClassifiers()) {
-            String imageCategory;
             String classifierName = classifier.getName();
+            if (classifierName == null) {
+            	continue;
+            }
+            
+            String imageCategory = CategoryImageConstants.CLASSIFIER;
             if (classifier instanceof EClass) {
                 imageCategory = CategoryImageConstants.CLASS;
                 classifierName = escapeNameIfNecessary(classifierName);
@@ -207,9 +211,8 @@ public class CompletionProposalUtil {
                 imageCategory = CategoryImageConstants.ENUM;
             } else if (classifier instanceof EDataType) {
                 imageCategory = CategoryImageConstants.DATATYPE;
-            } else {
-                imageCategory = CategoryImageConstants.CLASSIFIER;
             }
+            
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(classifierName, imageCategory, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);
         }
