@@ -563,17 +563,12 @@ public class QvtOperationalEvaluationEnv extends EcoreEvaluationEnvironment {
 	}
 	
 	public EObject createInstance(EClassifier type, ModelParameter extent) {
-        if (type instanceof EClass == false) {
+		if (!QvtOperationalUtil.isInstantiable(type)) {
             internalEnv().throwQVTException(
-                	new QvtRuntimeException("Expected EClass, got " + type)); //$NON-NLS-1$
-        }
-		EClass impl = (EClass) type;
-		if (!QvtOperationalUtil.isInstantiable(impl)) {
-            internalEnv().throwQVTException(
-            	new QvtRuntimeException("Cannot instantiate type " + impl.getName())); //$NON-NLS-1$
+            	new QvtRuntimeException("Cannot instantiate type " + QvtOperationalParserUtil.safeGetQualifiedName(getUMLReflection(), type, ""))); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		
-		EObject newObject = impl.getEPackage().getEFactoryInstance().create(impl);
+		EObject newObject = type.getEPackage().getEFactoryInstance().create((EClass) type);
 		if (newObject == null) {
 			return null;
 		}

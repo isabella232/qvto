@@ -1,4 +1,4 @@
-org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException: Cannot instantiate type EClassifier
+org.eclipse.m2m.internal.qvt.oml.evaluator.QvtRuntimeException: Cannot instantiate type ecore::EClassifier
 	at stacktrace::EClass::mapCreateInstaceFailure3(Unknown Source)
 	at stacktrace::EClassifier::mapCreateInstaceFailure2(Unknown Source)
 	at stacktrace::EClassifier::mapCreateInstaceFailure(Unknown Source)

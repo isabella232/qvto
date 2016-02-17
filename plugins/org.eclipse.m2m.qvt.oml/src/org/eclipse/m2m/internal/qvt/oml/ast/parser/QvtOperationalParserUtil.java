@@ -595,19 +595,25 @@ public class QvtOperationalParserUtil {
 	 *         derived
 	 */	
 	public static String safeGetQualifiedName(QvtOperationalEnv env, EClassifier type, String defaultValue) {
+		return safeGetQualifiedName(env.getUMLReflection(), type, defaultValue);
+	}
+	
+	public static String safeGetQualifiedName(
+			UMLReflection<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint> umlReflection,
+			EClassifier type, String defaultValue) {
 		if(type == null) {
 			return defaultValue;
 		}
 		
 		String result = defaultValue;
 		if(type.getEPackage() == null) {
-			result = env.getUMLReflection().getName(type);
+			result = umlReflection.getName(type);
 		}
 		else {
 			try {
-				result = env.getUMLReflection().getQualifiedName(type);
+				result = umlReflection.getQualifiedName(type);
 			} catch(RuntimeException e) {
-				result = env.getUMLReflection().getName(type);
+				result = umlReflection.getName(type);
 			}
 		}
 
