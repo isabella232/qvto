@@ -1756,8 +1756,10 @@ public class QvtOperationalVisitorCS
 		}
 		if (switchExpCS.getElsePart() != null) {
 			org.eclipse.ocl.ecore.OCLExpression elsePart = visitOclExpressionCS(switchExpCS.getElsePart(), env);
-		    switchExp.setElsePart(elsePart);
-		    allPartTypes.add(elsePart.getType());
+			if (elsePart != null) {
+			    switchExp.setElsePart(elsePart);
+			    allPartTypes.add(elsePart.getType());
+			}
 		}
 		
 		if (allPartTypes.isEmpty()) {
