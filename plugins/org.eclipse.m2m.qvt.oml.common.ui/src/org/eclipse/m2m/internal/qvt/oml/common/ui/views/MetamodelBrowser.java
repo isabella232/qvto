@@ -834,7 +834,12 @@ public class MetamodelBrowser  implements IAdaptable {
 
 		public boolean isLoaded() {
 			return true;
-		}    	
+		}
+		
+		@Override
+		public String toString() {
+			return getId();
+		}
     }
     
     private void metamodelFileAdded(IPath ecoreFilePath) {
