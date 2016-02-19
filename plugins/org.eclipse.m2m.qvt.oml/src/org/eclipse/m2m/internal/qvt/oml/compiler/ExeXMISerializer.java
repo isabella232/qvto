@@ -91,6 +91,6 @@ public class ExeXMISerializer {
 		}
 	}
 
-	public static final String COMPILED_XMI_FILE_EXTENSION = "qvtox"; //$NON-NLS-1$ 
+	static final String COMPILED_XMI_FILE_EXTENSION = "qvtox"; //$NON-NLS-1$ 
 	
 }

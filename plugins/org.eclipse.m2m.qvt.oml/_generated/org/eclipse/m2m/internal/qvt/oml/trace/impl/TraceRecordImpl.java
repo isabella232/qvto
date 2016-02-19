@@ -32,13 +32,13 @@ import org.eclipse.m2m.internal.qvt.oml.trace.TraceRecord;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.TraceRecordImpl#getMappingOperation <em>Mapping Operation</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.TraceRecordImpl#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.TraceRecordImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.TraceRecordImpl#getResult <em>Result</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

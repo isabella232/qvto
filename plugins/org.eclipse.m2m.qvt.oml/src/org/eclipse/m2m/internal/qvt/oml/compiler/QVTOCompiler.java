@@ -495,7 +495,7 @@ public class QVTOCompiler {
 	private CompiledUnit createCompiledUnit(UnitProxy unit, QvtOperationalFileEnv env) {
 		// adjust QVT environment resource to point to executable XMI
 		Resource resource = env.getTypeResolver().getResource();
-		resource.setURI(ExeXMISerializer.toXMIUnitURI(unit.getURI()));
+		//resource.setURI(ExeXMISerializer.toXMIUnitURI(unit.getURI()));
 		fExeXMIResourceSet.getResources().add(resource);
 
 		List<String> qualifiedName = getQualifiedNameSegments(unit);

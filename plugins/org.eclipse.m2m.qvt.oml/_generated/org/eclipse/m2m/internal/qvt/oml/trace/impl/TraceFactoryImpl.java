@@ -58,7 +58,7 @@ public class TraceFactoryImpl extends EFactoryImpl implements TraceFactory {
 	 */
     public static TraceFactory init() {
 		try {
-			TraceFactory theTraceFactory = (TraceFactory)EPackage.Registry.INSTANCE.getEFactory("http:///www.eclipse.org/m2m/qvt/operational/trace.ecore");  //$NON-NLS-1$
+			TraceFactory theTraceFactory = (TraceFactory)EPackage.Registry.INSTANCE.getEFactory(TracePackage.eNS_URI);
 			if (theTraceFactory != null) {
 				return theTraceFactory;
 			}

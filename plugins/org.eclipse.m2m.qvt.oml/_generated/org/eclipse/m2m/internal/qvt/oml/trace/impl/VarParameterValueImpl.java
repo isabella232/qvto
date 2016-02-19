@@ -30,13 +30,13 @@ import org.eclipse.m2m.internal.qvt.oml.trace.VarParameterValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.VarParameterValueImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.VarParameterValueImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.VarParameterValueImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.VarParameterValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -20,8 +20,6 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface IMetamodelRegistryProvider { 
 	
-	URI GLOBAL_CONTEXT = URI.createURI("/"); //$NON-NLS-1$ 
-
 	/**
 	 * Represents a context in which to look for available metamodels
 	 */

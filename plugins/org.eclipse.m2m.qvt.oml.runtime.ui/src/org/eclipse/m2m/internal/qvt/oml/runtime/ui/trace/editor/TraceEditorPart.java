@@ -106,7 +106,7 @@ public class TraceEditorPart extends EditorPart implements IGotoMarker {
 	}
 	
     private Trace initTrace(IFile file) throws PartInitException {
-    	URI uri = URI.createFileURI(file.getFullPath().toString());
+    	URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
     	ResourceSet mappingAwareRS = CompilerUtils.cloneResourceSet(uri, null);
     	
     	ModelContent traceModel = EmfUtil.loadModel(uri, mappingAwareRS);

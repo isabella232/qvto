@@ -25,13 +25,13 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.MappingOperation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.Trace#getTraceRecords <em>Trace Records</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.Trace#getTraceRecordMap <em>Trace Record Map</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.Trace#getSourceToTraceRecordMap <em>Source To Trace Record Map</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.Trace#getTargetToTraceRecordMap <em>Target To Trace Record Map</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.trace.TracePackage#getTrace()
  * @model

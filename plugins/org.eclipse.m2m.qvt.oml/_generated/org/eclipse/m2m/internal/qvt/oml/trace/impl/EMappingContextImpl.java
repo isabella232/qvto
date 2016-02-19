@@ -29,10 +29,10 @@ import org.eclipse.m2m.internal.qvt.oml.trace.VarParameterValue;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.EMappingContextImpl#getContext <em>Context</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

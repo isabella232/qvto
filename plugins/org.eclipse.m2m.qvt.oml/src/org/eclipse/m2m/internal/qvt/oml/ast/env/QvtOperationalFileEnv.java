@@ -20,6 +20,7 @@ import lpg.runtime.ParseErrorCodes;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 
 public class QvtOperationalFileEnv extends QvtOperationalModuleEnv {
 
@@ -27,8 +28,7 @@ public class QvtOperationalFileEnv extends QvtOperationalModuleEnv {
 	private List<QvtOperationalModuleEnv> innerEnvs;
 	
 	protected QvtOperationalFileEnv(final URI uri, EPackage.Registry registry) {
-		// TODO - revisit the null resource passed
-		super(new EPackageRegistryImpl(registry), null);
+		super(new EPackageRegistryImpl(registry), new EcoreResourceFactoryImpl().createResource(uri));
 		this.innerEnvs = new ArrayList<QvtOperationalModuleEnv>(1);
 
 		if(uri == null) {

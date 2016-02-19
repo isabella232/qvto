@@ -28,11 +28,11 @@ import org.eclipse.m2m.internal.qvt.oml.trace.TracePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.ETuplePartValueImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.ETuplePartValueImpl#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

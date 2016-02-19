@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.EMappingContext#getContext <em>Context</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.trace.TracePackage#getEMappingContext()
  * @model

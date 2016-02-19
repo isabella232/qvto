@@ -28,13 +28,13 @@ import org.eclipse.m2m.internal.qvt.oml.trace.TracePackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.EMappingOperationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.EMappingOperationImpl#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.EMappingOperationImpl#getModule <em>Module</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.impl.EMappingOperationImpl#getRuntimeMappingOperation <em>Runtime Mapping Operation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -23,13 +23,13 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.MappingOperation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.EMappingOperation#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.EMappingOperation#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.EMappingOperation#getModule <em>Module</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.EMappingOperation#getRuntimeMappingOperation <em>Runtime Mapping Operation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.trace.TracePackage#getEMappingOperation()
  * @model
@@ -132,7 +132,7 @@ public interface EMappingOperation extends EObject {
 	 * @return the value of the '<em>Runtime Mapping Operation</em>' reference.
 	 * @see #setRuntimeMappingOperation(MappingOperation)
 	 * @see org.eclipse.m2m.internal.qvt.oml.trace.TracePackage#getEMappingOperation_RuntimeMappingOperation()
-	 * @model required="true"
+	 * @model required="true" transient="true"
 	 * @generated
 	 */
     MappingOperation getRuntimeMappingOperation();

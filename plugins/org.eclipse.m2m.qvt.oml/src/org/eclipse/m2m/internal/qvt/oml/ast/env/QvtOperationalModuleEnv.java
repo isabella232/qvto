@@ -45,7 +45,7 @@ public class QvtOperationalModuleEnv extends QvtOperationalEnv {
 	
 	QvtOperationalModuleEnv(EPackage.Registry registry, Resource resource) {
 		super(registry, resource != null ?
-				resource : new EcoreResourceFactoryImpl().createResource(URI.createURI("qvto:/module.env"))); //$NON-NLS-1$
+				resource : new EcoreResourceFactoryImpl().createResource(URI.createURI("qvto.env.module"))); //$NON-NLS-1$
 
         // Eliminate parsing warning on "" occurrences, used in model types URIs, etc.
         // TODO - solve in QVT grammar

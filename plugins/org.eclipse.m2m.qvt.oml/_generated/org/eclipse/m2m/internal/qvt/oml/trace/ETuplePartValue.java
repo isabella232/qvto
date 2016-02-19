@@ -21,11 +21,11 @@ package org.eclipse.m2m.internal.qvt.oml.trace;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.ETuplePartValue#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.trace.ETuplePartValue#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.trace.TracePackage#getETuplePartValue()
  * @model

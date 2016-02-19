@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trace"
-    nsURI="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore" nsPrefix="trace">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trace" nsURI="http:///www.eclipse.org/m2m/qvt/operational/trace.ecore"
+    nsPrefix="trace">
   <eClassifiers xsi:type="ecore:EClass" name="Trace">
     <eOperations name="getRecordBySource" eType="#//TraceRecord">
       <eParameters name="mapping" eType="ecore:EClass QVTOperational.ecore#//expressions/MappingOperation"/>
@@ -56,7 +55,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="module" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="runtimeMappingOperation"
-        lowerBound="1" eType="ecore:EClass QVTOperational.ecore#//expressions/MappingOperation"/>
+        lowerBound="1" eType="ecore:EClass QVTOperational.ecore#//expressions/MappingOperation"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EDirectionKind">
     <eLiterals name="IN"/>
