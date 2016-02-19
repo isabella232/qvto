@@ -253,7 +253,7 @@ public class QvtLaunchUtil {
     	    	
     	runner.setTraceFile(traceUri);
     	runner.setSaveTrace(isSaveTrace && traceUri != null);
-    	runner.setIncrementalUpdate(isIncrementalUpdate && transf.getResourceSet().getURIConverter().exists(traceUri, Collections.emptyMap()));
+    	runner.setIncrementalUpdate(isIncrementalUpdate && traceUri != null);
     		    	
     	Diagnostic diag = runner.execute(context);
     	    	

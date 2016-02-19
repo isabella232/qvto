@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -88,11 +89,11 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 			result.add(createArgStr(QVTOApplication.ARG_TRACE, fTraceURI.toString()));
 		}
 
-		if (QvtLaunchUtil.shouldGenerateTraceFile(configuration)) {
+		if (QvtLaunchUtil.shouldGenerateTraceFile(configuration) && fTraceURI != null) {
 			result.add(QVTOApplication.ARG_TRACE_SAVE);
 		}
 		
-		if (QvtLaunchUtil.isIncrementalUpdate(configuration)) {
+		if (QvtLaunchUtil.isIncrementalUpdate(configuration) && fTraceURI != null) {
 			result.add(QVTOApplication.ARG_TRACE_INCREMENTAL);
 		}
 		
@@ -200,7 +201,13 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 			if (platformPluginURI != null) {
 				return platformPluginURI;
 			}
+
+			if (uri.isPlatformResource()) {
+				URI baseURI = URI.createURI(ResourcesPlugin.getWorkspace().getRoot().getLocationURI().toString());
+				uri = URI.createURI(baseURI.toString() + uri.toPlatformString(true), true);			
+			}
 		}
+		
 		return uri;
 	}
 	
@@ -223,6 +230,9 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 	private List<String> createMetamodelMappings(String transformationURI) throws CoreException {
 		IFile file = getIFile(transformationURI);
 		if (file == null) {
+			return Collections.emptyList();
+		}
+		if (!MetamodelURIMappingHelper.hasMappingResource(file.getProject())) {
 			return Collections.emptyList();
 		}
 

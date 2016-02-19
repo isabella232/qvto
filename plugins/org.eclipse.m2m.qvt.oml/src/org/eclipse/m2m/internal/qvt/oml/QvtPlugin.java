@@ -224,7 +224,7 @@ public class QvtPlugin extends EMFPlugin {
 	}
 	
 	public static Diagnostic createWarnDiagnostic(String message) {
-		return new BasicDiagnostic(Diagnostic.ERROR, ID, 0, message, null);
+		return new BasicDiagnostic(Diagnostic.WARNING, ID, 0, message, null);
 	}	
 
 	/**

@@ -33,7 +33,7 @@ public class QVTODebugApplication extends QVTOApplication {
 	
 	protected int doRun(TransformationRunner runner) {		
 		DebugTransformationRunner dbgRunner = (DebugTransformationRunner) runner;
-		dbgRunner.setErrorLog(new PrintWriter(System.err));
+		dbgRunner.setErrorLog(new PrintWriter(System.err, true));
 		
 		VMInitializer vmProvider = new VMInitializer(dbgRunner, getExecutionContext());
 		vmProvider.startBackgrouInitialization();

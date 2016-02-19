@@ -144,15 +144,15 @@ public class QVTOApplication implements IApplication {
 			}
 			factory.addMetamodelMapping(mmaping[0], mmaping[1]);
 
+		} else if (ARG_TRACE_SAVE.equals(nextArg)) {
+			factory.isSaveTrace = true;
+
+		} else if (ARG_TRACE_INCREMENTAL.equals(nextArg)) {
+			factory.isIncrementalUpdate = true;
+
 		} else if (isValueSpecArg(ARG_TRACE, nextArg)) {
 			String val = getArgValue(ARG_TRACE, nextArg);
 			factory.traceFileURI = val;
-
-		} else if (isValueSpecArg(ARG_TRACE_SAVE, nextArg)) {
-			factory.isSaveTrace = true;
-
-		} else if (isValueSpecArg(ARG_TRACE_INCREMENTAL, nextArg)) {
-			factory.isIncrementalUpdate = true;
 
 		} else if (ARG_HELP.equals(nextArg)) {
 			System.out.println(getCommandLineUsage());

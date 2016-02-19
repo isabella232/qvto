@@ -87,13 +87,13 @@ class VMInitializer implements VMProvider {
 		try {			
 			fInitThread.join(timeoutMilisec);
 		} catch (InterruptedException e) {
-			// nobody should interrupt us by contract;
-			QVTODebugCore.log(e); //$NON-NLS-1$
+			// nobody should interrupt us by contract
+			QVTODebugCore.log(e);
 		}
 
 		if(fInitThread.isAlive()) {
 			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR,
-					NLS.bind("QVTO VM initialization not finished in ({0}) ms",
+					NLS.bind("QVTO VM initialization not finished in ({0}) ms", //$NON-NLS-1$
 							timeoutMilisec)));
 		}
 	}
