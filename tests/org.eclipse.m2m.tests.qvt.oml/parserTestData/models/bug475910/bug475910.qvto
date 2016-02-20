@@ -1,0 +1,17 @@
+modeltype ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
+transformation bug475910();
+
+main() {
+    var x1: ELong := 22147000000 + 1000000; // 22148000000
+    var x2: ELong := 22147000000 + 2000000; // 22149000000
+    
+    assert fatal (x1 < x2);
+    assert fatal (not (x1 = x2));
+    assert fatal (not (x1 > x2));
+
+    var xs: Sequence(ELong) := Sequence{x2, x1};
+    xs := xs->sortedBy(x | x);
+    assert fatal (xs = Sequence{x1, x2});
+}
+
