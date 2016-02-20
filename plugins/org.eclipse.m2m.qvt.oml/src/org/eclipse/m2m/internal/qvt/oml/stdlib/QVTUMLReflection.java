@@ -377,6 +377,12 @@ public class QVTUMLReflection
 	}
 
 	public boolean isComparable(EClassifier type) {
+		Class<?> javaClass = type.getInstanceClass();
+		
+		if (javaClass != null && javaClass.isPrimitive()) {
+			return true;
+		}
+		
 		return fUmlReflection.isComparable(type);
 	}
 
