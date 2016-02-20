@@ -203,6 +203,7 @@ import org.eclipse.ocl.cst.CollectionTypeCS;
 import org.eclipse.ocl.cst.DotOrArrowEnum;
 import org.eclipse.ocl.cst.FeatureCallExpCS;
 import org.eclipse.ocl.cst.IfExpCS;
+import org.eclipse.ocl.cst.IntegerLiteralExpCS;
 import org.eclipse.ocl.cst.IteratorExpCS;
 import org.eclipse.ocl.cst.LiteralExpCS;
 import org.eclipse.ocl.cst.OCLExpressionCS;
@@ -227,6 +228,7 @@ import org.eclipse.ocl.expressions.CollectionLiteralExp;
 import org.eclipse.ocl.expressions.CollectionLiteralPart;
 import org.eclipse.ocl.expressions.FeatureCallExp;
 import org.eclipse.ocl.expressions.IfExp;
+import org.eclipse.ocl.expressions.IntegerLiteralExp;
 import org.eclipse.ocl.expressions.InvalidLiteralExp;
 import org.eclipse.ocl.expressions.IteratorExp;
 import org.eclipse.ocl.expressions.OCLExpression;
@@ -1626,6 +1628,21 @@ public class QvtOperationalVisitorCS
         return result;
     }
 
+	@Override
+	protected IntegerLiteralExp<EClassifier> integerLiteralExpCS(IntegerLiteralExpCS integerLiteralExpCS,
+			Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {
+
+		IntegerLiteralExp<EClassifier> astNode = new FixedIntegerLiteralExpImpl();
+		initASTMapping(env, astNode, integerLiteralExpCS);
+		astNode.setLongSymbol(integerLiteralExpCS.getLongSymbol());
+		astNode.setType(env.getOCLStandardLibrary().getInteger());
+
+		TRACE(
+			"integerLiteralExpCS", "Integer: " + integerLiteralExpCS.getSymbol());//$NON-NLS-2$//$NON-NLS-1$
+
+		return astNode;
+	}
+	
     private org.eclipse.ocl.ecore.OCLExpression visitOclExpressionCS(OCLExpressionCS expressionCS, 
     		Environment<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, 
 			EObject, CallOperationAction, SendSignalAction, Constraint, EClass, EObject> env) {

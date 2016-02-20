@@ -15,9 +15,6 @@ package org.eclipse.m2m.internal.qvt.oml.cst.parser;
 import java.util.ArrayList;
 import java.util.List;
 
-import lpg.runtime.IToken;
-import lpg.runtime.Token;
-
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -102,6 +99,7 @@ import org.eclipse.ocl.cst.CSTFactory;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.CollectionLiteralPartCS;
 import org.eclipse.ocl.cst.DotOrArrowEnum;
+import org.eclipse.ocl.cst.IntegerLiteralExpCS;
 import org.eclipse.ocl.cst.IsMarkedPreCS;
 import org.eclipse.ocl.cst.LiteralExpCS;
 import org.eclipse.ocl.cst.OCLExpressionCS;
@@ -117,6 +115,9 @@ import org.eclipse.ocl.cst.VariableExpCS;
 import org.eclipse.ocl.lpg.BasicEnvironment;
 import org.eclipse.ocl.lpg.ProblemHandler.Severity;
 import org.eclipse.ocl.parser.AbstractOCLParser;
+
+import lpg.runtime.IToken;
+import lpg.runtime.Token;
 
 public abstract class AbstractQVTParser extends AbstractOCLParser {
 
@@ -1291,6 +1292,23 @@ public abstract class AbstractQVTParser extends AbstractOCLParser {
 		}
 
 		return super.extendStringLiteralExpCS(string, token);
+	}
+	
+	@Override
+	protected IntegerLiteralExpCS createIntegerLiteralExpCS(String string) {
+		try {
+			return super.createIntegerLiteralExpCS(string);
+		}
+		catch (NumberFormatException e) {
+			IToken token = getRhsIToken(1);
+			reportError(NumberFormatException.class.getSimpleName() + ": " + e.getMessage(), token.getStartOffset(), token.getEndOffset());
+		}
+		
+		IntegerLiteralExpCS result = CSTFactory.eINSTANCE.createIntegerLiteralExpCS();
+		result.setSymbol(string);
+		result.setIntegerSymbol(0);
+
+		return result;
 	}
 	
 	@Override

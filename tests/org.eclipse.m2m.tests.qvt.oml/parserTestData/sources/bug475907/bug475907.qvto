@@ -1,0 +1,11 @@
+modeltype ecore uses "http://www.eclipse.org/emf/2002/Ecore";
+
+transformation NewTransformation();
+
+main() {
+    var i1: Integer := 2149999999998000000;
+    assert fatal (i1 = 2149999999998000000);
+    
+    var i2: Integer := /*<error>*/214999999999999999999998000000/*</error>*/;
+}
+
