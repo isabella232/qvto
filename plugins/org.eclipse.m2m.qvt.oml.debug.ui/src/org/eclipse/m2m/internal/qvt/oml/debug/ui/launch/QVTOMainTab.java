@@ -20,7 +20,6 @@ import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
 import org.eclipse.m2m.internal.qvt.oml.debug.ui.DebugUIMessages;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
-import org.eclipse.m2m.qvt.oml.debug.core.app.QVTODebugApplication;
 import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.eclipse.pde.launching.IPDELauncherConstants;
 import org.eclipse.pde.ui.launcher.MainTab;
@@ -30,11 +29,7 @@ import org.eclipse.swt.widgets.Control;
 
 
 
-public class QVTOMainTab implements ILaunchConfigurationTab {
-	
-	public static final String APP_ID = QVTODebugApplication.ID;
-	
-	public static final String ID = "org.eclipse.m2m.qvt.oml.debug.QVTOMainTab"; //$NON-NLS-1$ 
+public abstract class QVTOMainTab implements ILaunchConfigurationTab {
 	
 	private final MainTab fMainTab;
 	private String fLocalErrorMessage;
@@ -48,7 +43,11 @@ public class QVTOMainTab implements ILaunchConfigurationTab {
 			boolean useProduct = config.getAttribute(IPDELauncherConstants.USE_PRODUCT, true);
 			String application = config.getAttribute(IPDELauncherConstants.APPLICATION, (String)null);
 			
-			if(!APP_ID.equals(application) || Boolean.TRUE.equals(useProduct)) {
+			if (application != null && application.startsWith(QVTODebugCore.PLUGIN_ID)) {
+				application = getAppId();
+			}
+			
+			if(!getAppId().equals(application) || Boolean.TRUE.equals(useProduct)) {
 				setBadApplicationError();
 				return false;
 			} else {
@@ -68,7 +67,7 @@ public class QVTOMainTab implements ILaunchConfigurationTab {
 		try {
 			workingCopy = config.getWorkingCopy();
 			
-			workingCopy.setAttribute(IPDELauncherConstants.APPLICATION, APP_ID);
+			workingCopy.setAttribute(IPDELauncherConstants.APPLICATION, getAppId());
 			workingCopy.removeAttribute(TargetPlatform.getDefaultProduct());
 			workingCopy.setAttribute(IPDELauncherConstants.USE_PRODUCT, false);
 			
@@ -106,10 +105,6 @@ public class QVTOMainTab implements ILaunchConfigurationTab {
 		return (fLocalErrorMessage != null) ? fLocalErrorMessage : fMainTab.getErrorMessage();
 	}
 
-	public String getId() {
-		return ID;
-	}
-
 	public Image getImage() {
 		return fMainTab.getImage();
 	}
@@ -134,20 +129,14 @@ public class QVTOMainTab implements ILaunchConfigurationTab {
 		fMainTab.setLaunchConfigurationDialog(dialog);
 	}
 
-	public void updateLaunchConfigurationDialog() {
-		fMainTab.updateLaunchConfigurationDialog();
-	}
-
-	public void validateTab() {
-		fMainTab.validateTab();
-	}
-
 	public void launched(ILaunch launch) {
 		// do nothing, deprecated anyway
 	}
 	
+	protected abstract String getAppId();
+	
 	private void setBadApplicationError() {
-		setErrorMessage(NLS.bind(DebugUIMessages.QVTOMainTab_mustRunAsQVTApp, APP_ID));
+		setErrorMessage(NLS.bind(DebugUIMessages.QVTOMainTab_mustRunAsQVTApp, getAppId()));
 	}
 	
 	private void setErrorMessage(String message) {

@@ -162,9 +162,9 @@
           </modeCombination>
        </launchDelegate>
    
-       <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTOApplicationDelegate"            
-             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration"
-             modes="debug, run"
+       <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTODebugApplicationDelegate"            
+             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTODebugApplicationConfiguration"
+             modes="debug"
              name="%QVTOAppLaunchConfig.name"
              sourceLocatorId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourceLookupDirector"
              sourcePathComputerId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourcePathComputer"
@@ -174,12 +174,29 @@
                 perspective="org.eclipse.debug.ui.DebugPerspective">
           </modeCombination>
        </launchDelegate>
+   
+       <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTOApplicationDelegate"            
+             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration"
+             modes="run"
+             name="%QVTOAppLaunchConfig.name"
+             type="org.eclipse.m2m.qvt.oml.QVTOApplicationConfiguration">
+       </launchDelegate>
     </extension>
     
     <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+        <launchConfigurationTabGroup id="org.eclipse.m2m.qvt.oml.QVTODebugApplicationConfigTabGroup"
+        	type="org.eclipse.m2m.qvt.oml.QVTOApplicationConfiguration"
+            class="org.eclipse.m2m.internal.qvt.oml.debug.ui.launch.QVTODebugApplicationConfigurationTabGroup">
+            
+          <launchMode mode="debug"/>
+        </launchConfigurationTabGroup>
+
         <launchConfigurationTabGroup id="org.eclipse.m2m.qvt.oml.QVTOApplicationConfigTabGroup"
         	type="org.eclipse.m2m.qvt.oml.QVTOApplicationConfiguration"
-            class="org.eclipse.m2m.internal.qvt.oml.debug.ui.launch.QVTOApplicationConfigurationTabGroup"/>
+            class="org.eclipse.m2m.internal.qvt.oml.debug.ui.launch.QVTOApplicationConfigurationTabGroup">
+            
+          <launchMode mode="run"/>
+        </launchConfigurationTabGroup>
     </extension>        
     
     <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">        

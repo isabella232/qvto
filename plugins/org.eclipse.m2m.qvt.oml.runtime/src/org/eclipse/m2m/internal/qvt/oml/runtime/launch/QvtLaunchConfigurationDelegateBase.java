@@ -23,7 +23,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.BaseProcess;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.BaseProcess.IRunnable;
-import org.eclipse.m2m.internal.qvt.oml.common.launch.IQvtLaunchConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.SafeRunner;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
@@ -36,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.TransformationUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.MiscUtil;
 
 public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigurationDelegate {
+	
     @Override
 	protected IProject[] getProjectsForProblemSearch(ILaunchConfiguration configuration, String mode) throws CoreException {
     	IFile moduleFile = getModuleFile(configuration);

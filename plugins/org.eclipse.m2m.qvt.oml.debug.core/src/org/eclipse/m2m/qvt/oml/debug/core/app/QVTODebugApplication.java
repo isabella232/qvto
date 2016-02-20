@@ -14,11 +14,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
+import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.m2m.qvt.oml.debug.core.launch.TransformationRunnerFactory;
 
 public class QVTODebugApplication extends QVTOApplication {
 
-	public static final String ID = "org.eclipse.m2m.qvt.oml.debug.core.QVTODebugApplication"; //$NON-NLS-1$
+	public static final String ID = QVTODebugCore.PLUGIN_ID + ".QVTODebugApplication"; //$NON-NLS-1$
 	
 	public static final String ARG_PORT = "-port"; //$NON-NLS-1$
 	

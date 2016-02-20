@@ -137,8 +137,7 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 		HashMap<Long, QVTOBreakpoint> installedBreakpoints = new HashMap<Long, QVTOBreakpoint>();
 		List<NewBreakpointData> allBpData = new ArrayList<NewBreakpointData>();
 		
-		for (QVTOBreakpoint qvtBp : QVTODebugCore
-				.getQVTOBreakpoints(QVTOBreakpoint.class)) {
+		for (QVTOBreakpoint qvtBp : QVTODebugCore.getQVTOBreakpoints(QVTOBreakpoint.class)) {
 			boolean enabled = false;
 			try {
 				enabled = qvtBp.isEnabled();
@@ -147,8 +146,7 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 			}
 
 			if (enabled) {
-				installedBreakpoints.put(new Long(((QVTOBreakpoint) qvtBp).getID()),
-						qvtBp);
+				installedBreakpoints.put(new Long(((QVTOBreakpoint) qvtBp).getID()), qvtBp);
 				try {
 					NewBreakpointData data = qvtBp.createNewBreakpointData();
 					data.targetURI = computeBreakpointURI(URI.createURI(data.targetURI, true)).toString();
@@ -156,6 +154,8 @@ public class QVTODebugTarget extends QVTODebugElement implements IQVTODebugTarge
 					allBpData.add(data);
 				} catch (CoreException e) {
 					QVTODebugCore.log(e.getStatus());
+				} catch (Exception e) {
+					QVTODebugCore.log(QVTODebugUtil.createDebugError("Failed to install breakpoint", e));
 				}
 			}
 		}

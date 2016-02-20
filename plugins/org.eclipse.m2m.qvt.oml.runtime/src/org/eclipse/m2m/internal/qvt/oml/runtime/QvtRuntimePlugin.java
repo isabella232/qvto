@@ -25,6 +25,9 @@ import org.osgi.framework.BundleContext;
 public class QvtRuntimePlugin extends Plugin {
 	
     public static final String ID = "org.eclipse.m2m.qvt.oml.runtime"; //$NON-NLS-1$
+    
+    public static final IStatus LAUNCH_ERROR_STATUS = new Status(IStatus.ERROR, QvtRuntimePlugin.ID, 210, "Launch configuration error", null); //$NON-NLS-1$	
+    
 	
 	//The shared instance.
 	private static QvtRuntimePlugin plugin;

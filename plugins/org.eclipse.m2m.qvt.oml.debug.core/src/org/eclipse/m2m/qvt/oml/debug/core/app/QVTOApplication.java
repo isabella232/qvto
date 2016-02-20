@@ -20,14 +20,14 @@ import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.ExecutionContextImpl;
+import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.m2m.qvt.oml.debug.core.launch.TransformationRunnerFactory;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
 
 public class QVTOApplication implements IApplication {
 
-	public static final String ID = "org.eclipse.m2m.qvt.oml.debug.QVTOApplication"; //$NON-NLS-1$
+	public static final String ID = QVTODebugCore.PLUGIN_ID + ".QVTOApplication"; //$NON-NLS-1$
 
-	public static final String ARG_PORT = "-port"; //$NON-NLS-1$
 	public static final String ARG_TRANSFORMATION = "-transform"; //$NON-NLS-1$
 	public static final String ARG_PARAM = "-param"; //$NON-NLS-1$
 	/**

@@ -37,15 +37,15 @@ import org.osgi.framework.BundleContext;
  */
 public class QVTODebugCore extends Plugin {
 	
-	public static final String BREAKPOINT_MARKER_ID = "org.eclipse.m2m.qvt.oml.debug.core.QVTOBreakpointMarker"; //$NON-NLS-1$
+	// The plug-in ID
+	public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.debug.core"; //$NON-NLS-1$
+
+	public static final String BREAKPOINT_MARKER_ID = PLUGIN_ID + ".QVTOBreakpointMarker"; //$NON-NLS-1$
 
 	public static final String MODEL_ID = "org.eclipse.m2m.qvt.oml.debug"; //$NON-NLS-1$
 	
 	public static final String DEBUGGER_ACTIVE_PROPERTY = "org.eclipse.m2m.qvt.oml.debug.debuggerActive"; //$NON-NLS-1$
 	
-	// The plug-in fBreakpointID
-	public static final String PLUGIN_ID = "org.eclipse.m2m.qvt.oml.debug.core"; //$NON-NLS-1$
-
 	public static Trace TRACE = new Trace();	
 	
 	// The shared instance

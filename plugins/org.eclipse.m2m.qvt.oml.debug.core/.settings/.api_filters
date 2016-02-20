@@ -8,4 +8,26 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="src/org/eclipse/m2m/qvt/oml/debug/core/app/QVTOApplication.java" type="org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication">
+        <filter id="338755678">
+            <message_arguments>
+                <message_argument value="org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication"/>
+                <message_argument value="ARG_PORT"/>
+            </message_arguments>
+        </filter>
+        <filter id="388194388">
+            <message_arguments>
+                <message_argument value="org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication"/>
+                <message_argument value="ID"/>
+                <message_argument value="org.eclipse.m2m.qvt.oml.debug.QVTOApplication"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/m2m/qvt/oml/debug/core/launch/QVTOApplicationConfiguration.java" type="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration">
+        <filter id="1227882500">
+            <message_arguments>
+                <message_argument value="reset()"/>
+            </message_arguments>
+        </filter>
+    </resource>
 </component>

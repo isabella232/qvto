@@ -17,6 +17,12 @@
     </extension>
     
     
+    <extension id="QVTOApplication" point="org.eclipse.core.runtime.applications">
+       <application cardinality="*" thread="main" visible="true">
+          <run class="org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication"/>
+       </application>
+    </extension>
+
     <extension id="QVTODebugApplication" point="org.eclipse.core.runtime.applications">
        <application cardinality="*" thread="main" visible="true">
           <run class="org.eclipse.m2m.qvt.oml.debug.core.app.QVTODebugApplication"/>

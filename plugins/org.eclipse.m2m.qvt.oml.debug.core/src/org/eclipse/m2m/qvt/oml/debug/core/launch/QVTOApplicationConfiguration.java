@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.qvt.oml.debug.core.launch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -27,10 +26,8 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.ILaunchManager;
+import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.core.model.IProcess;
-import org.eclipse.emf.common.util.BasicMonitor;
-import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.TargetUriData;
@@ -42,41 +39,26 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.Transf
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation.TransformationParameter.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.WorkspaceQvtModule;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
-import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugTarget;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugUtil;
 import org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication;
-import org.eclipse.m2m.qvt.oml.debug.core.app.SocketUtil;
-import org.eclipse.m2m.qvt.oml.debug.core.vm.IQVTOVirtualMachineShell;
-import org.eclipse.m2m.qvt.oml.debug.core.vm.QVTOVirtualMachineProxy;
 import org.eclipse.pde.launching.EclipseApplicationLaunchConfiguration;
+import org.eclipse.pde.launching.IPDELauncherConstants;
 
 public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfiguration {
 	
-	private int fPort;
-	private List<URI> fModels;
+	private final List<URI> fModels;
 	private URI fTraceURI;
 	
 	public QVTOApplicationConfiguration() {
-		fPort = -1;
 		fModels = new ArrayList<URI>();
-	}
-	
-	private int getPort() {
-		if(fPort == -1) {
-			fPort = SocketUtil.findFreePort();
-		}
-		return fPort;
 	}
 	
 	@Override
 	public String[] getProgramArguments(ILaunchConfiguration configuration) throws CoreException {
 		String[] programArguments = super.getProgramArguments(configuration);
 		
-		List<String> result = new ArrayList<String>();
-		result.addAll(Arrays.asList(programArguments));
+		List<String> result = new ArrayList<String>(Arrays.asList(programArguments));
 
-		result.add(createArgStr(QVTOApplication.ARG_PORT, String.valueOf(getPort())));		
-		
 		String transformationURI = QvtLaunchUtil.getTransformationURI(configuration);
 		if(transformationURI != null) {
 			result.add(createArgStr(QVTOApplication.ARG_TRANSFORMATION,
@@ -123,67 +105,28 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		reset();
 		
-		int port = getPort();
-		if(port == -1) {
-			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR, "Failed to find free debugging port"));
-		}
+		configuration = validateLaunchConfiguration(configuration);
 		
-		launchSeparateEclipse(configuration, mode, launch, monitor);
+		super.launch(configuration, mode, launch, monitor == null ? new NullProgressMonitor() : monitor);
+		
+		IProcess p = getProcess(launch);
+		if(p != null) {
+			addTerminationHook(p);
+		}
+	}
+
+	ILaunchConfiguration validateLaunchConfiguration(ILaunchConfiguration configuration) {
+		try {
+			ILaunchConfigurationWorkingCopy workingCopy = configuration.getWorkingCopy();
+			workingCopy.setAttribute(IPDELauncherConstants.APPLICATION, QVTOApplication.ID);
+			return workingCopy.doSave();
+		} catch (CoreException e) {
+			QVTODebugCore.log(e.getStatus());
+		}
+		return configuration;
 	}
 	
-	void launchSeparateEclipse(final ILaunchConfiguration configuration, String mode, final ILaunch launch, IProgressMonitor monitor) throws CoreException {
-		ILaunchConfiguration launchConfiguration = configuration;
-		
-		// launch the PDE process and connect the QVTO target to QVTO VM afterwards
-		super.launch(launchConfiguration, mode, launch, new NullProgressMonitor());					
-
-		if(ILaunchManager.RUN_MODE.equals(mode)) {
-			return;
-		}
-		
-		IQVTOVirtualMachineShell vm;
-		try {
-			Monitor connectMonitor = new BasicMonitor() {
-				public boolean isCanceled() {
-					IProcess p = getProcess(launch);
-					return p != null ? p.isTerminated() : false;
-				}
-			};
-			
-			vm = new QVTOVirtualMachineProxy("localhost", getPort(), connectMonitor); //$NON-NLS-1$
-		} catch (IOException e) {
-			IProcess p = getProcess(launch);
-			if(p != null && p.isTerminated() && p.getExitValue() != 0) {
-				return;
-			}
-			throw new CoreException(QVTODebugCore.createStatus(IStatus.ERROR,
-					"Failed to connect to QVTO VM", e)); //$NON-NLS-1$
-		}
-		
-		try {
-			// Note: there must be a process ready as we have connected to QVTO VM hosted by the process
-			IProcess[] launchedProcesses = launch.getProcesses();
-			if(launchedProcesses.length == 0) {
-				// the process have been terminated, hopefully reported the reason ;)
-				return;
-			}
-
-			final IProcess pdeProcess = launchedProcesses[0];
-			addTerminationHook(pdeProcess);			
-		
-			QVTODebugTarget debugTarget = new QVTODebugTarget(pdeProcess, vm) {
-				@Override
-				protected URI computeBreakpointURI(URI sourceURI) {				
-					return QVTODebugCore.getDefault().resolvePlatformPluginURI(sourceURI);
-				}
-			};
-			launch.addDebugTarget(debugTarget);
-		} finally {
-			fPort = -1;
-		}
-	}
-
-	private IProcess getProcess(ILaunch launch) {
+	IProcess getProcess(ILaunch launch) {
 		IProcess[] launchedProcesses = launch.getProcesses();
 		if(launchedProcesses.length == 0) {
 			// the process have been terminated, hopefully reported the reason ;)
@@ -223,7 +166,7 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 		return null;
 	}
 	
-	private static String createArgStr(String argName, String argValue) {
+	static String createArgStr(String argName, String argValue) {
 		return argName + "=" + argValue; //$NON-NLS-1$
 	}
 	
@@ -294,8 +237,7 @@ public class QVTOApplicationConfiguration extends EclipseApplicationLaunchConfig
 		}
 	}
 	
-	private void reset() {
-		fPort = -1;
+	protected void reset() {
 		fModels.clear();
 		fTraceURI = null;
 	}

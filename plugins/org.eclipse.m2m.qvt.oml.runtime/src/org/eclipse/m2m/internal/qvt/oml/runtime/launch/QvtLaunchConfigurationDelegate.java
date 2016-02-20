@@ -35,9 +35,6 @@ public class QvtLaunchConfigurationDelegate extends QvtLaunchConfigurationDelega
 
     public static final String LAUNCH_CONFIGURATION_TYPE_ID = QvtPlugin.ID + ".QvtTransformation"; //$NON-NLS-1$
 
-    private static final int LAUNCH_ERROR_CODE = 210;
-    private static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QvtRuntimePlugin.ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$	
-	
 	public QvtLaunchConfigurationDelegate() {
 	}
 	
@@ -100,10 +97,11 @@ public class QvtLaunchConfigurationDelegate extends QvtLaunchConfigurationDelega
 						if(e instanceof QvtRuntimeException == false) {
 							// QVT runtime exception are legal QVT transformation level errors
 							
-							IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(fgLaunchErrorStatus);
+							IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(QvtRuntimePlugin.LAUNCH_ERROR_STATUS);
 							if(statusHandler != null) {
-								IStatus actualStatus = new Status(IStatus.ERROR, QvtRuntimePlugin.ID, LAUNCH_ERROR_CODE, 
-														e.getMessage(), e.getMessage() == null ? e : null);
+								IStatus actualStatus = new Status(IStatus.ERROR, QvtRuntimePlugin.ID,
+										QvtRuntimePlugin.LAUNCH_ERROR_STATUS.getCode(), e.getMessage(),
+										e.getMessage() == null ? e : null);
 								try {
 									statusHandler.handleStatus(actualStatus, configuration);
 								} catch (CoreException coreExc) {
