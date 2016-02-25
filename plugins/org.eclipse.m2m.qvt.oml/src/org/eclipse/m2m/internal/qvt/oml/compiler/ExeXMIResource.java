@@ -18,8 +18,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -38,12 +36,9 @@ import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.IModuleSourceInfo;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.FixedIntegerLiteralExpImpl;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMIExtensionEncoder.CorruptedExtensionData;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
-import org.eclipse.ocl.ecore.EcoreFactory;
-import org.eclipse.ocl.ecore.EcorePackage;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class ExeXMIResource extends XMIResourceImpl implements Resource {
@@ -299,13 +294,6 @@ public class ExeXMIResource extends XMIResourceImpl implements Resource {
 			return super.getHREF(obj);
 		}
 		
-		@Override
-		public EObject createObject(EFactory eFactory, EClassifier type) {
-			if (eFactory == EcoreFactory.eINSTANCE && type == EcorePackage.eINSTANCE.getIntegerLiteralExp()) {
-				return new FixedIntegerLiteralExpImpl();
-			}
-			return super.createObject(eFactory, type);
-		}
 	}
 
 	

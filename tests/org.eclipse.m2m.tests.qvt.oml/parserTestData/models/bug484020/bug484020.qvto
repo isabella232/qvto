@@ -5,26 +5,22 @@ transformation bug484020();
 main() {
 	var test := "test";
 	
-	// Validation error: Can't instantiate type '<null>'
 	var a := new ECORE::EString('test');
 	assert fatal (a = 'test');
 	var a1 := new ECORE::EString(test);
 	assert fatal (a1 = 'test');
 	
-	// Validation error: Can't instantiate type '<null>'
 	var b : ECORE::EString := new ECORE::EString('test');
 	assert fatal (b = 'test');
 	var b1 : ECORE::EString := new ECORE::EString(test);
 	assert fatal (b1 = 'test');
 	   
-	// Runtime exception: Expected EClass, got org.eclipse.emf.ecore.impl.EDataTypeImpl
 	var c : ECORE::EString;
 	c := new ECORE::EString('test');
 	assert fatal (c = 'test');
 	c := new ECORE::EString(test);
 	assert fatal (c = 'test');
 	
-	// Runtime exception: Expected EClass, got org.eclipse.emf.ecore.impl.EDataTypeImpl
 	var o := object EClass {
 		name := new ECORE::EString('test');
 	};
