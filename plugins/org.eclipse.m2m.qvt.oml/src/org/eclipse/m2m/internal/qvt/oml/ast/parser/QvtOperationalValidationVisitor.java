@@ -22,6 +22,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
@@ -56,6 +57,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveInExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor;
+import org.eclipse.m2m.internal.qvt.oml.stdlib.ConversionUtils;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.QVTUMLReflection;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.AltExp;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.AssertExp;
@@ -290,7 +292,7 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 				
 				QvtOperationalUtil.reportError(fEnv,
 						NLS.bind(ValidationMessages.QvtOperationalVisitorCS_canNotInstantiateAbstractType, 
-						fEnv.getFormatter().formatType(instantiatedClass)), 
+								QvtOperationalParserUtil.safeGetQualifiedName(fEnv, instantiatedClass)), 
 						instantiationExp.getStartPosition(), 
 						instantiationExp.getEndPosition());
 				result = Boolean.FALSE;
@@ -307,7 +309,7 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 				
 				QvtOperationalUtil.reportError(fEnv,
 						NLS.bind(ValidationMessages.QvtOperationalVisitorCS_canNotInstantiateAbstractType, 
-						fEnv.getFormatter().formatType(instantiatedClass)), 
+								QvtOperationalParserUtil.safeGetQualifiedName(fEnv, instantiatedClass)), 
 						instantiationExp.getStartPosition(), 
 						instantiationExp.getEndPosition());
 				result = Boolean.FALSE;
@@ -317,11 +319,27 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 
 		// transformation instantiation
 		if(instantiatedClass == null || QvtOperationalStdLibrary.INSTANCE.getTransformationClass().isSuperTypeOf(instantiatedClass) == false) {
-			if(referredObject != null)	{ 
-				if(referredObject.getType() != null && (referredObject.getType() instanceof org.eclipse.ocl.types.CollectionType<?,?> == false)) { 
+			EClassifier type = referredObject != null ? referredObject.getType() : instantiationExp.getType();
+			if(type != null)	{
+				if(type instanceof org.eclipse.ocl.types.CollectionType) {
+					// OK to try to instantiate
+				}
+				else if (type instanceof EDataType) {
+					if (instantiationExp.getArgument().size() != 1
+							|| !ConversionUtils.isStringType(instantiationExp.getArgument().get(0).getType())) {
+						fEnv.reportError(NLS.bind(
+								ValidationMessages.QvtOperationalValidationVisitor_invalidParamsForDatatypeInstantiation,
+									instantiationExp.getArgument(),
+									QvtOperationalParserUtil.safeGetQualifiedName(fEnv, type)), 
+								instantiationExp.getStartPosition(), 
+								instantiationExp.getEndPosition());
+						result = Boolean.FALSE;
+					}
+				}
+				else {
 					fEnv.reportError(NLS.bind(
 							ValidationMessages.QvtOperationalValidationVisitor_invalidInstantiatedType, 
-							fEnv.getFormatter().formatType(instantiatedClass)), 
+								QvtOperationalParserUtil.safeGetQualifiedName(fEnv, type)), 
 							instantiationExp.getStartPosition(), 
 							instantiationExp.getEndPosition());
 					result = Boolean.FALSE;

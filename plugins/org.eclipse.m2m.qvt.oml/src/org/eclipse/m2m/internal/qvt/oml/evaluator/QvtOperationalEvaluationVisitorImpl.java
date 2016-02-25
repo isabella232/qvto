@@ -34,6 +34,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EModelElement;
@@ -61,6 +62,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory.ExceptionClassInstance;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.TransformationInstance.InternalTransformation;
@@ -975,8 +977,6 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 			}
 		}
 		else {
-	        Object owner = createInstance(objectExp.getType(), (ModelParameter) objectExp.getExtent());
-
 			EList<org.eclipse.ocl.ecore.OCLExpression> formalArguments = objectExp.getArgument();		
 			List<Object> actualArguments = new ArrayList<Object>(formalArguments.size());
 	
@@ -985,6 +985,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				actualArguments.add(argVal); 
 			}
 
+	        Object owner = createInstance(objectExp.getType(), (ModelParameter) objectExp.getExtent(), actualArguments);
+			
 			Adapter constructorOperationAdapter = EcoreUtil.getAdapter(objectExp.eAdapters(), ConstructorOperationAdapter.class);
 			if (constructorOperationAdapter != null) {
 				Constructor constructorOp = ((ConstructorOperationAdapter) constructorOperationAdapter).getReferredConstructor();
@@ -1011,11 +1013,11 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				if (objectExp.getArgument().isEmpty()) {
 					// it's OK since default constructor is called
 				}
-				else if (objectExp.getEType() instanceof CollectionType<?,?> && owner instanceof Collection<?>) {
+				else if (objectExp.getEType() instanceof CollectionType && owner instanceof Collection) {
 					((Collection<Object>) owner).addAll(actualArguments);
 				}
-				else {
-					throwQVTException(new QvtRuntimeException("Undefined constructor is called")); //$NON-NLS-1$
+				else if (false == objectExp.getEType() instanceof EDataType) {
+					throwQVTException(new QvtRuntimeException(EvaluationMessages.QvtOperationalEvaluationVisitorImpl_UndefinedConstructor));
 				}
 			}
 			
@@ -1687,7 +1689,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 						exception.getMessage(), exception.getQvtStackTrace());
 			}
 			else {
-				ExceptionClassInstance exceptionImpl = (ExceptionClassInstance) createInstance(exception.getExceptionType(), null);
+				ExceptionClassInstance exceptionImpl = (ExceptionClassInstance) createInstance(exception.getExceptionType(), null, Collections.emptyList());
 				exceptionImpl.setArgument(exception.getMessage());
 				exceptionImpl.setStackElements(exception.getQvtStackTrace());
 				excObject = exceptionImpl;
@@ -1824,7 +1826,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	
         	if (isUndefined(result)) {
         		if (false == varParam.getEType() instanceof VoidType<?>) {
-                    result = createInstance(varParam.getEType(), ((MappingParameter) varParam).getExtent());
+                    result = createInstance(varParam.getEType(), ((MappingParameter) varParam).getExtent(), Collections.emptyList());
                     replaceInEnv(varParam.getName(), result, varParam.getEType());
                 } 
         	}
@@ -1846,7 +1848,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
             VarParameter param = (VarParameter) nextParam;
             Object paramValue = getRuntimeValue(param.getName());
             if (isUndefined(paramValue) && param.getKind() == DirectionKind.OUT) {
-            	paramValue = createInstance(param.getType(), ((MappingParameter) param).getExtent());
+            	paramValue = createInstance(param.getType(), ((MappingParameter) param).getExtent(), Collections.emptyList());
                 replaceInEnv(param.getName(), paramValue, param.getType());
             }
         }
@@ -2280,7 +2282,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	            }
         	}
         } else {
-        	owner = createInstance(objectExp.getType(), (ModelParameter) objectExp.getExtent());
+        	owner = createInstance(objectExp.getType(), (ModelParameter) objectExp.getExtent(), Collections.emptyList());
         	if(objectExp.getName() != null) {
         		getOperationalEvaluationEnv().replace(objectExp.getName(), owner);
         	}
@@ -2318,7 +2320,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					}
 				}
 				
-				propVal = createInstance(tupleProp.getEType(), extent);
+				propVal = createInstance(tupleProp.getEType(), extent, Collections.emptyList());
 			}
 			values.put(tupleProp, propVal);
 			evalEnv.replace(tupleProp.getName(), propVal, tupleProp.getEType());
@@ -2513,13 +2515,31 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     /**
 	* Wraps the environment's createInstance() and transforms failures to QVT exception
 	*/    
-	protected Object createInstance(EClassifier type, ModelParameter extent) throws QvtRuntimeException {
+	protected Object createInstance(EClassifier type, ModelParameter extent, List<Object> arguments) throws QvtRuntimeException {
 		Object newInstance = null;
 		try {			
 			if(type instanceof CollectionType<?, ?>) {
 				@SuppressWarnings("unchecked")
 				CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>)type;
 				newInstance = EvaluationUtil.createNewCollection(collectionType);
+			} else if (type instanceof EDataType) {
+				if (arguments.size() == 1 && arguments.get(0) instanceof String) {
+					try {
+						newInstance = type.getEPackage().getEFactoryInstance().createFromString((EDataType) type, (String) arguments.get(0));
+					}
+					catch (Exception e) {
+						throwQVTException(new QvtRuntimeException(
+								NLS.bind(EvaluationMessages.QvtOperationalEvaluationVisitorImpl_FailedToInstantiateDatatype,
+										QvtOperationalParserUtil.safeGetQualifiedName(getUMLReflection(), type, "")), //$NON-NLS-1$
+								e));
+					}
+				}
+				else {
+					throwQVTException(new QvtRuntimeException(
+							NLS.bind(ValidationMessages.QvtOperationalValidationVisitor_invalidParamsForDatatypeInstantiation,
+									arguments, QvtOperationalParserUtil.safeGetQualifiedName(getUMLReflection(), type, "")) //$NON-NLS-1$
+					));
+				}
 			} else {
 				newInstance = getOperationalEvaluationEnv().createInstance(type, extent);
 

@@ -41,6 +41,8 @@ public class EvaluationMessages extends NLS {
 	public static String IteratorNotImpl;
 	
 	public static String QvtOperationalEvaluationVisitorImpl_EvaluationFailed;
+	public static String QvtOperationalEvaluationVisitorImpl_UndefinedConstructor;
+	public static String QvtOperationalEvaluationVisitorImpl_FailedToInstantiateDatatype;
     
     static {
         // initialize resource bundle

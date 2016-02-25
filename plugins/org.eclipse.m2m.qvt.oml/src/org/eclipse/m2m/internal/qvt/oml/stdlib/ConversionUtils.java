@@ -83,7 +83,7 @@ public class ConversionUtils {
 		return type instanceof org.eclipse.ocl.ecore.PrimitiveType && PrimitiveType.BOOLEAN_NAME.equals(((org.eclipse.ocl.ecore.PrimitiveType) type).getName());
 	}
 
-	static boolean isStringType(final EClassifier type) {
+	public static boolean isStringType(final EClassifier type) {
 		return type instanceof org.eclipse.ocl.ecore.PrimitiveType && PrimitiveType.STRING_NAME.equals(((org.eclipse.ocl.ecore.PrimitiveType) type).getName());
 	}
 	
