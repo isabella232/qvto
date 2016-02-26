@@ -239,7 +239,7 @@ public class VariableFinder {
 	}
 	
 	private VMVariable createCollectionElementVar(int elementIndex, Object element, EClassifier elementType, String uri) {
-		String varName = "[" + elementIndex + "]"; //$NON-NLS-1$ //$NON-NLS-2$
+		String varName = "[" + (elementIndex+1) + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 		int kind = VMVariable.COLLECTION_ELEMENT;
 		return createVariable(varName, kind, elementType, element, uri);
 	}
