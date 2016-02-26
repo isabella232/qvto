@@ -619,11 +619,13 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 					// so we do not care about the return statement
 					int bodySize = content.size();
 					if((bodySize == 0 && !operation.isIsBlackbox()) || 
-						(bodySize > 1 && content.get(bodySize - 1) instanceof ReturnExp == false)) {
+						(bodySize > 1 && !QvtOperationalVisitorCS.isOclExpDeterministic(content.get(bodySize-1)))) {
 						// Note: every single expression is OK from the AST point of view as
 						// it corresponds to a single expression query
 						String message = ValidationMessages.useReturnExpForOperationResult;
-						fEnv.reportWarning(message, operation.getStartPosition(), operationBody.getStartPosition());
+						int endPos = operation.getResult().isEmpty() ? operationBody.getStartPosition() 
+								: operation.getResult().get(operation.getResult().size()-1).getEndPosition();
+						fEnv.reportWarning(message, operation.getStartPosition(), endPos);
 					}
 				}
 			}

@@ -121,7 +121,7 @@ public class TestQvtParser extends TestCase {
 		        new TestData("imp", 0), //$NON-NLS-1$ // TODO: independent parsing for imports
 		        new TestData("imp2", 0), //$NON-NLS-1$
 		        new TestData("imp3", 0), //$NON-NLS-1$
-		        TestData.createSourceChecked("impError", 3, 0), //$NON-NLS-1$        
+		        TestData.createSourceChecked("impError", 2, 0), //$NON-NLS-1$        
 		        new TestData("assignereadonlyprop", 1), //$NON-NLS-1$
 		        new TestData("nonbooleanguard", 1), //$NON-NLS-1$
 		        TestData.createSourceChecked("sameparamname", 2, 0), //$NON-NLS-1$
@@ -216,6 +216,7 @@ public class TestQvtParser extends TestCase {
 		    	new TestData("bug486810", 0), //$NON-NLS-1$
 		    	TestData.createSourceChecked("bug475907", 1, 0), //$NON-NLS-1$
 		    	TestData.createSourceChecked("bug484020", 14, 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug473151", 0, 5), //$NON-NLS-1$
 			}
 		);
 	}

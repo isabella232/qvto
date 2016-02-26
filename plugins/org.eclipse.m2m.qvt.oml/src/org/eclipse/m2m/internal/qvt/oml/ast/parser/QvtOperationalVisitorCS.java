@@ -3856,18 +3856,6 @@ public class QvtOperationalVisitorCS
 		if (mappingBodyCS != null) {
             body = visitMappingBodyCS(mappingBodyCS, newEnv, methodCS);
 			if (body != null) {
-				EClassifier returnType = operation.getEType();
-				EClassifier bodyType = (body.getContent().size() == 1
-						&& body.getContent().get(0) instanceof ObjectExp ? body.getContent().get(0).getType()
-						: null);
-                // TODO : Rewrite this when re-implementing ObjectExp
-				if (bodyType != null && !QvtOperationalParserUtil.isAssignableToFrom(env, bodyType, returnType)) {
-					/* checked by validation
-					newEnv.reportError(NLS.bind(ValidationMessages.bodyTypeNotCompatibleWithReturnTypeError,
-							new Object[] { QvtOperationalTypesUtil.getTypeFullName(bodyType), QvtOperationalTypesUtil.getTypeFullName(returnType) }),
-						methodCS.getMappingDeclarationCS());
-						*/
-				}
 				body.setStartPosition(methodCS.getMappingBody().getStartOffset());
 				body.setEndPosition(methodCS.getMappingBody().getEndOffset());
 			}
@@ -3964,12 +3952,14 @@ public class QvtOperationalVisitorCS
         
 		if (helper.getResult().size() <= 1) {
 			EClassifier returnType = (helper.getResult().isEmpty() ? helper.getEType() : helper.getResult().get(0).getEType());
-			EClassifier helperType = helper.getBody() != null && !helper.getBody().getContent().isEmpty() ? helper.getBody()
-					.getContent().get(helper.getBody().getContent().size() - 1).getType() : null;
+			OCLExpression<EClassifier> helperLastExp = helper.getBody() != null && !helper.getBody().getContent().isEmpty() 
+					? helper.getBody().getContent().get(helper.getBody().getContent().size()-1) : null;
+			EClassifier helperType = helperLastExp != null ? helperLastExp.getType() : null;
 			if (returnType == env.getOCLStandardLibrary().getOclVoid()) {
 				// OK
 			}
-			else  if (helperType != null && !QvtOperationalParserUtil.isAssignableToFrom(env, returnType, helperType)) {
+			else if (helperType != null && !QvtOperationalParserUtil.isAssignableToFrom(env, returnType, helperType)
+					&& !isOclExpDeterministic(helperLastExp)) {
 				env.reportError(NLS.bind(ValidationMessages.bodyTypeNotCompatibleWithReturnTypeError, new Object[] {
 				        QvtOperationalTypesUtil.getTypeFullName(helperType), 
 				        QvtOperationalTypesUtil.getTypeFullName(returnType) 
@@ -3987,12 +3977,44 @@ public class QvtOperationalVisitorCS
 		// => query foo() : String = 'foo'; 
  		if(!methodCS.isIsSimpleDefinition() && helper.getResult().size() == 1 && helper.getBody() != null) {
  			EList<org.eclipse.ocl.ecore.OCLExpression> contents = helper.getBody().getContent(); 			
- 			if(contents.size() == 1 && contents.get(0) instanceof ReturnExp == false) {
+ 			if(contents.size() == 1 && !isOclExpDeterministic(contents.get(0))) {
  				env.reportWarning(ValidationMessages.useReturnExpForOperationResult, methodCS.getMappingDeclarationCS()); 				
  			}
 		}		
 	}
 	
+	static boolean isOclExpDeterministic(org.eclipse.ocl.expressions.OCLExpression<EClassifier> exp) {
+		return exp instanceof ReturnExp
+				|| exp instanceof RaiseExp
+				|| (exp instanceof BlockExp && isBlockExpDeterministic((BlockExp) exp))
+				|| (exp instanceof org.eclipse.ocl.ecore.IfExp && isIfExpDeterministic((org.eclipse.ocl.ecore.IfExp) exp))
+				|| (exp instanceof SwitchExp && isSwitchExpDeterministic((SwitchExp) exp))
+				|| (exp instanceof ComputeExp && isOclExpDeterministic(((ComputeExp) exp).getBody()))
+				;
+	}
+	
+	private static boolean isBlockExpDeterministic(BlockExp exp) {
+		return exp.getBody().size() == 1
+			&& isOclExpDeterministic(exp.getBody().get(0));
+	}
+
+	private static boolean isIfExpDeterministic(org.eclipse.ocl.ecore.IfExp exp) {
+		return isOclExpDeterministic(exp.getThenExpression())
+				&& isOclExpDeterministic(exp.getElseExpression());
+	}
+
+	private static boolean isSwitchExpDeterministic(SwitchExp exp) {
+		if (!isOclExpDeterministic(exp.getElsePart())) {
+			return false;
+		}
+		for (AltExp altExp : exp.getAlternativePart()) {
+			if (!isOclExpDeterministic(altExp.getBody())) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * TODO - make a common resolution operation, reusable in for ResolveInExp too. 
 	 */

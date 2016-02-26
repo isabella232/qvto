@@ -1,0 +1,122 @@
+transformation bug473151();
+
+main() {
+
+}
+
+query simpleQuery() : String = 'foo';
+
+
+query OclAny::someQuery1() : Boolean
+{
+    raise 'error';
+}
+
+query OclAny::someQuery2() : Boolean
+{
+	do {
+    	raise 'error';
+    }
+}
+
+query OclAny::someQuery3() : Boolean
+{
+	raise 'error';
+    raise 'error';
+}
+
+query OclAny::someQuery4() : Boolean
+{
+	compute (x : String) {
+		return true
+    }
+}
+
+query OclAny::someQuery5() : Boolean
+{
+    if (true) {
+   		return true;
+    }
+    else {
+    	return false;
+    }
+}
+
+query OclAny::someQuery6() : Boolean
+{
+    if (true) {
+    	do {
+    		return true;
+    	}
+    }
+    else {
+    	return false;
+    }
+}
+
+query OclAny::someQuery7() : Boolean
+{
+    if (true) {
+    	return true
+    }
+    else {
+    	raise 'error'
+    }
+}
+
+query OclAny::someQuery8() : Boolean
+{
+	switch {
+		case (1)  { return true }
+		case (2)  { return true }
+		else      { return true }
+	}
+}
+
+query OclAny::someQuery9() : Boolean
+{
+    if true then return true else return false endif;
+}
+
+query OclAny::someQuery10() : Boolean
+{
+    if true then { return true } else { return false } endif; 
+}
+
+/*<warn>*/query OclAny::emptyQuery() : Boolean/*</warn>*/
+{
+    // empty
+}
+
+/*<warn>*/query OclAny::someQuery20() : Boolean/*</warn>*/
+{
+	compute (x : Boolean) {
+    }
+}
+
+/*<warn>*/query OclAny::someQuery21() : Boolean/*</warn>*/
+{
+    if (true) {
+    	return true
+    }
+    else {
+    }
+}
+
+/*<warn>*/query OclAny::someQuery22() : Boolean/*</warn>*/
+{
+	switch {
+		case (1)  { return true }
+		case (2)  { return true }
+		else      { }
+	}
+}
+
+/*<warn>*/query OclAny::someQuery23() : Boolean/*</warn>*/
+{
+	switch {
+		case (1)  { return true }
+		case (2)  { return true }
+	}
+}
+
