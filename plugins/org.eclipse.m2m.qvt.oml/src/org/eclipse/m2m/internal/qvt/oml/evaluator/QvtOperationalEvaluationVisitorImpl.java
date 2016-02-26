@@ -2518,10 +2518,19 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 	protected Object createInstance(EClassifier type, ModelParameter extent, List<Object> arguments) throws QvtRuntimeException {
 		Object newInstance = null;
 		try {			
-			if(type instanceof CollectionType<?, ?>) {
-				@SuppressWarnings("unchecked")
-				CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>)type;
-				newInstance = EvaluationUtil.createNewCollection(collectionType);
+			if(type instanceof CollectionType) {
+				if (type.getInstanceClass() == null
+						|| type.getInstanceClass() == java.util.Collection.class) {
+					throwQVTException(new QvtRuntimeException(
+							NLS.bind(ValidationMessages.QvtOperationalVisitorCS_canNotInstantiateAbstractType,
+									QvtOperationalParserUtil.safeGetQualifiedName(getUMLReflection(), type, "")) //$NON-NLS-1$
+					));
+				}
+				else {
+					@SuppressWarnings("unchecked")
+					CollectionType<EClassifier, EOperation> collectionType = (CollectionType<EClassifier, EOperation>)type;
+					newInstance = EvaluationUtil.createNewCollection(collectionType);
+				}
 			} else if (type instanceof EDataType) {
 				if (arguments.size() == 1 && arguments.get(0) instanceof String) {
 					try {

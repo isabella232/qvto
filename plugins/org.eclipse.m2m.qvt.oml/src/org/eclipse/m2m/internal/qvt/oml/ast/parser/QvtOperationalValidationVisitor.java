@@ -322,7 +322,15 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 			EClassifier type = referredObject != null ? referredObject.getType() : instantiationExp.getType();
 			if(type != null)	{
 				if(type instanceof org.eclipse.ocl.types.CollectionType) {
-					// OK to try to instantiate
+					if (type.getInstanceClass() == null
+							|| type.getInstanceClass() == java.util.Collection.class) {
+						QvtOperationalUtil.reportError(fEnv,
+								NLS.bind(ValidationMessages.QvtOperationalVisitorCS_canNotInstantiateAbstractType, 
+										QvtOperationalParserUtil.safeGetQualifiedName(fEnv, type)), 
+								instantiationExp.getStartPosition(), 
+								instantiationExp.getEndPosition());
+						result = Boolean.FALSE;
+					}
 				}
 				else if (type instanceof EDataType) {
 					if (instantiationExp.getArgument().size() != 1

@@ -30,5 +30,13 @@ main() {
 	/*<error>*/new ECORE::EString()/*</error>*/;
 	/*<error>*/new ECORE::EString('', '')/*</error>*/;
    
+	var cc1 := /*<error>*/new Collection(String) ()/*</error>*/;
+	var cc2 := new List(String) (); 
+	var cc3 := new Sequence(String) (); 
+	var cc4 := new Set(String) (); 
+	var cc5 := new OrderedSet(String) (); 
+	var cc6 := new Bag(String) (); 
+	var cc7 := new Dict(String, String) (); 
+
 }
 
