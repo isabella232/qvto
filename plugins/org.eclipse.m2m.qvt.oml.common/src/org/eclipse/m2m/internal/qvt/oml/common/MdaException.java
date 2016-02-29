@@ -55,8 +55,8 @@ public class MdaException extends Exception {
 	public String getMessage() {
 		String msg = super.getMessage();
 		String statusMsg = getStatusMessage(myStatus);
-		if (msg.equals(statusMsg)) {
-			return msg;
+		if (statusMsg.startsWith(msg)) {
+			return statusMsg;
 		}
 		return msg + " [" + statusMsg + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 	}

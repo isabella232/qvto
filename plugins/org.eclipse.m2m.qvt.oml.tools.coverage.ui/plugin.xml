@@ -15,8 +15,9 @@
 <extension point="org.eclipse.debug.core.launchDelegates">
   <launchDelegate
        id="org.eclipse.m2m.qvt.oml.tools.coverageLaunchDelegate"
-       name="%launchDelegate.name"
+       name="%launchDelegate.junit.name"
        delegate="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching.JUnitCoverageLaunchDelegate"
+       delegateDescription="%launchDelegate.junit.description"
        type="org.eclipse.jdt.junit.launchconfig"
        modes="run">
   </launchDelegate>
