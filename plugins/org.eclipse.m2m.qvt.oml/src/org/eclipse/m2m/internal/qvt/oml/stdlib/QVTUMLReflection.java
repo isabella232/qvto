@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 302594, 310991
+ *     Christopher Gerking - bugs 302594, 310991, 488742
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
@@ -116,14 +116,12 @@ public class QVTUMLReflection
 	}
 	
 	public Collection<? extends EClassifier> getAllSupertypes(EClassifier classifier) {
-		Collection<? extends EClassifier> result = fUmlReflection.getAllSupertypes(classifier);
+		Collection<EClassifier> allSuperTypes = new ArrayList<EClassifier>(fUmlReflection.getAllSupertypes(classifier));		
 		if(isUserModelElement(classifier)) {
 			// considered to be a model element
-			ArrayList<EClassifier> allSuperTupes = new ArrayList<EClassifier>(result.size() + 1);
-			allSuperTupes.addAll(result);
-			allSuperTupes.add(QvtOperationalStdLibrary.INSTANCE.getElementType());
+			allSuperTypes.add(QvtOperationalStdLibrary.INSTANCE.getElementType());
 		}
-		return result;
+		return allSuperTypes;
 	}
 	
 	public int getRelationship(EClassifier type1, EClassifier type2) {
