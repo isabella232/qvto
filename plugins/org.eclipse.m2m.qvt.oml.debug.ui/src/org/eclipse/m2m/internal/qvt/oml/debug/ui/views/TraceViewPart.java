@@ -38,6 +38,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchActionConstants;
 
 public class TraceViewPart extends AbstractDebugView implements IDebugContextListener {
+
+	public static final String ID = "org.eclipse.m2m.internal.qvt.oml.debug.ui.views.trace"; //$NON-NLS-1$
+	
 	
     @Override
 	protected Viewer createViewer(Composite parent) {
@@ -160,8 +163,6 @@ public class TraceViewPart extends AbstractDebugView implements IDebugContextLis
         }
     }
 
-	private static final String ID = "org.eclipse.m2m.internal.qvt.oml.debug.ui.views.trace"; //$NON-NLS-1$
-	
     private final TraceWorkbenchPart myTraceWorkbenchPart = new TraceWorkbenchPart(this);
     private final TraceActionBarContributor myTraceActionBarContributor = new TraceActionBarContributor();
 

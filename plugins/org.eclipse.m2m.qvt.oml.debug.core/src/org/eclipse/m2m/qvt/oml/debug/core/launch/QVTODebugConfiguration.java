@@ -24,6 +24,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.ITerminate;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -65,6 +66,20 @@ public class QVTODebugConfiguration extends QvtLaunchConfigurationDelegate {
 		Diagnostic initDiagnostic = runner.initialize();
 		if(initDiagnostic.getSeverity() == Diagnostic.ERROR) {
 			throw new CoreException(BasicDiagnostic.toIStatus(initDiagnostic));			
+		}
+		
+		if (QvtLaunchUtil.shouldGenerateTraceFile(configuration)
+				|| QvtLaunchUtil.isIncrementalUpdate(configuration)) {
+			IStatus showTraceViewStatus = QVTODebugCore.createError("", 400, null); //$NON-NLS-1$
+
+			IStatusHandler handler = DebugPlugin.getDefault().getStatusHandler(showTraceViewStatus);
+			if(handler != null) {
+				try {
+					handler.handleStatus(showTraceViewStatus, null);
+				} catch (CoreException e) {
+					QVTODebugCore.log(e.getStatus());
+				}
+			}
 		}
 		
 		DebuggableExecutorAdapter executable = runner.createDebuggableAdapter(context);
