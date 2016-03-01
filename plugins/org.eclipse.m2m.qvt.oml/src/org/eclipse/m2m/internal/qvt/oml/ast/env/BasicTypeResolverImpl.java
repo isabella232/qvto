@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ast.env;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.eclipse.m2m.internal.qvt.oml.common.project.Pair;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.DictionaryType;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLFactory;
@@ -50,13 +52,12 @@ import org.eclipse.ocl.utilities.UMLReflection;
  */
 class BasicTypeResolverImpl
 	extends AbstractTypeResolver<EPackage, EClassifier, EOperation, EStructuralFeature, EParameter> {
-
-	BasicTypeResolverImpl(QvtEnvironmentBase env) {
-		super(env);
-	}
 	
+	private final Map<Pair<CollectionKind, EClassifier>, CollectionType<EClassifier, EOperation>> fCollectionTypes;
+
 	BasicTypeResolverImpl(QvtEnvironmentBase env, Resource resource) {
 		super(env, resource);
+		fCollectionTypes = new HashMap<Pair<CollectionKind,EClassifier>, CollectionType<EClassifier,EOperation>>();
 	}
     
 	@Override
@@ -126,6 +127,12 @@ class BasicTypeResolverImpl
 	
 	@Override
 	protected CollectionType<EClassifier, EOperation> findCollectionType(CollectionKind kind, EClassifier elementType) {
+		Pair<CollectionKind, EClassifier> key = new Pair<CollectionKind, EClassifier>(kind, elementType);
+		CollectionType<EClassifier, EOperation> collectionType = fCollectionTypes.get(key);
+		if (collectionType != null) {
+			return collectionType;
+		}
+		
 		for (EClassifier next : getEnvironment().getUMLReflection().getClassifiers(getCollectionPackage())) {
 	        if (next instanceof CollectionType<?, ?>) {
 	        	if(next.eClass() == ImperativeOCLPackage.eINSTANCE.getDictionaryType() ||
@@ -141,6 +148,7 @@ class BasicTypeResolverImpl
 				}
 				
 				if (exactCollectionTypeMatch(type.getElementType(), elementType)) {
+					fCollectionTypes.put(key, type);
 					return type;
 				}
 	        }

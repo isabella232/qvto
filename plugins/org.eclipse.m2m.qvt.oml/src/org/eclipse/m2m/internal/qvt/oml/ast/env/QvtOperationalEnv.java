@@ -90,6 +90,8 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 	
 	private final Map<String, ModelType> myModelTypeRegistry;
 	
+	private final Map<List<String>, EClassifier> fRegisteredClassifiers;
+	
     private final Map<MappingsMapKey, List<MappingOperation>> myMappingsMap = new HashMap<MappingsMapKey, List<MappingOperation>>();
     private final Map<ResolveInExp, MappingsMapKey> myResolveInExps = new HashMap<ResolveInExp, MappingsMapKey>();
     
@@ -117,12 +119,14 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 		
 		myModelTypeRegistry = parent.myModelTypeRegistry;
 		myCompilerOptions = parent.myCompilerOptions;
+		fRegisteredClassifiers = parent.fRegisteredClassifiers;
 	}
 	
 	protected QvtOperationalEnv(EPackage.Registry packageRegistry, Resource resource) {
 		super(packageRegistry, resource);
 		myPackageRegistry = packageRegistry;
 		myModelTypeRegistry = new LinkedHashMap<String, ModelType>(1);
+		fRegisteredClassifiers = new HashMap<List<String>, EClassifier>();
 	}
 	
 	/**
@@ -504,12 +508,24 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 
 		return implicitSource;
 	}
-	
+
 	@Override
 	public EClassifier lookupClassifier(List<String> names) {
 		if(names.isEmpty()) {
 			return null;
 		}
+
+		if (fRegisteredClassifiers.containsKey(names)) {
+			return fRegisteredClassifiers.get(names);
+		}
+
+		EClassifier eClassifier = lookupClassifierImpl(names);
+		fRegisteredClassifiers.put(names, eClassifier);
+		
+		return eClassifier;
+	}
+	
+	private EClassifier lookupClassifierImpl(List<String> names) {
 		String firstName = names.get(0);
 		
 		if (names.size() == 1) {

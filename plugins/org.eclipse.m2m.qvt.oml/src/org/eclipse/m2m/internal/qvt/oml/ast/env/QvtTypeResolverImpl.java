@@ -78,7 +78,7 @@ public class QvtTypeResolverImpl implements QVTOTypeResolver {
 		return fDelegate;
 	}
 	
-	protected BasicTypeResolverImpl createDelegate() {
+	private BasicTypeResolverImpl createDelegate() {
 		return new BasicTypeResolverImpl(getOwner(), fResource);
 	}
 	

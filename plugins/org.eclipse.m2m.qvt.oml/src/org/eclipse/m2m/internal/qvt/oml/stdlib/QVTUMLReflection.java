@@ -116,11 +116,15 @@ public class QVTUMLReflection
 	}
 	
 	public Collection<? extends EClassifier> getAllSupertypes(EClassifier classifier) {
-		Collection<EClassifier> allSuperTypes = new ArrayList<EClassifier>(fUmlReflection.getAllSupertypes(classifier));		
-		if(isUserModelElement(classifier)) {
-			// considered to be a model element
-			allSuperTypes.add(QvtOperationalStdLibrary.INSTANCE.getElementType());
+		Collection<? extends EClassifier> result = fUmlReflection.getAllSupertypes(classifier);
+		if(!isUserModelElement(classifier)) {
+			return result;
 		}
+		
+		// considered to be a model element
+		ArrayList<EClassifier> allSuperTypes = new ArrayList<EClassifier>(result.size() + 1);
+		allSuperTypes.addAll(result);
+		allSuperTypes.add(QvtOperationalStdLibrary.INSTANCE.getElementType());
 		return allSuperTypes;
 	}
 	

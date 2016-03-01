@@ -99,6 +99,8 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 	private final QvtOperationalModuleEnv fEnv;
 	private final Map<String, EClassifier> fTypeAliasMap;
 	
+	private final Map<List<String>, EClassifier> fRegisteredClassifiers;
+	
 
 	private QvtOperationalStdLibrary() {
 		fStdlibModule = createLibrary(QVT_STDLIB_MODULE_NAME);
@@ -127,6 +129,8 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		COMMON_T = createTemplateParameter("CommonT"); //$NON-NLS-1$
 		
 		fTypeAliasMap = createTypeAliasMap(fEnv);		
+		
+		fRegisteredClassifiers = new HashMap<List<String>, EClassifier>();
 		
 		// register stdlib package  
 		EPackage.Registry.INSTANCE.put(fStdlibModule.getNsURI(), fStdlibModule);
@@ -302,21 +306,32 @@ public class QvtOperationalStdLibrary extends AbstractQVTStdlib implements QVTOS
 		
 		return transf;
 	}
+
+	public EClassifier lookupClassifier(List<String> names) {	
+		if (fRegisteredClassifiers.containsKey(names)) {
+			return fRegisteredClassifiers.get(names);
+		}
+
+		EClassifier eClassifier = lookupClassifierImpl(names);
+		fRegisteredClassifiers.put(names, eClassifier);
 		
-	public EClassifier lookupClassifier(List<String> nameElements) {	
-		int size = nameElements.size();
+		return eClassifier;
+	}
+	
+	private EClassifier lookupClassifierImpl(List<String> names) {	
+		int size = names.size();
 		if(size == 0 || size > 2) {
 			return null;
 		}
 		
-		if(size == 1 || QVT_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
-			String typeName = nameElements.get(size - 1);
+		if(size == 1 || QVT_STDLIB_MODULE_NAME.equals(names.get(0))) {
+			String typeName = names.get(size - 1);
 			EClassifier aliasedType = getTypeAlias(typeName);
 			return (aliasedType != null) ? aliasedType : fStdlibModule.getEClassifier(typeName);
 		}
 		
-		if(size == 2 && OCL_STDLIB_MODULE_NAME.equals(nameElements.get(0))) {
-			String typeName = nameElements.get(size - 1);
+		if(size == 2 && OCL_STDLIB_MODULE_NAME.equals(names.get(0))) {
+			String typeName = names.get(size - 1);
 			return ECORE_OCL_LIB.getEClassifier(typeName);
 		}
 		
