@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage;
+package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
