@@ -25,9 +25,9 @@ public class QVTOSourceLookupDirector extends AbstractSourceLookupDirector {
 	
 	private static final String PDE_SOURCE_LOOKUP_DIRECTOR_ID = "org.eclipse.pde.ui.launcher.PDESourceLookupDirector";
 	
-	private ISourceLookupDirector fPDEdelegate;
+	private static ISourceLookupDirector fPDEdelegate;
 	
-	public QVTOSourceLookupDirector() {
+	static {
 		try {
 			IPersistableSourceLocator newSourceLocator = DebugPlugin.getDefault().getLaunchManager()
 				.newSourceLocator(PDE_SOURCE_LOOKUP_DIRECTOR_ID);

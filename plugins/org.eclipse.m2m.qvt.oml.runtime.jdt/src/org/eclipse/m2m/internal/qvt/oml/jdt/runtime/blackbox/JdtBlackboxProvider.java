@@ -8,7 +8,7 @@
  * Contributors:
  *     Christopher Gerking - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.runtime.jdt.blackbox;
+package org.eclipse.m2m.internal.qvt.oml.jdt.runtime.blackbox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

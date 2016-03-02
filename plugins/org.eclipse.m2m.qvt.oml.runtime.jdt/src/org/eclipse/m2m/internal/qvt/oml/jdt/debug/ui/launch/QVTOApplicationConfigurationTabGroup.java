@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.debug.ui.launch;
+package org.eclipse.m2m.internal.qvt.oml.jdt.debug.ui.launch;
 
 import org.eclipse.debug.ui.CommonTab;
 import org.eclipse.debug.ui.EnvironmentTab;
@@ -18,15 +18,15 @@ import org.eclipse.jdt.debug.ui.launchConfigurations.JavaArgumentsTab;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.launch.QvtLaunchConfigurationTabGroup;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.launch.QvtLauncherTab;
 import org.eclipse.m2m.internal.qvt.oml.runtime.ui.launch.QvtTransformationConfigurationTab;
-import org.eclipse.m2m.qvt.oml.debug.core.app.QVTODebugApplication;
+import org.eclipse.m2m.qvt.oml.debug.core.app.QVTOApplication;
 import org.eclipse.pde.ui.launcher.ConfigurationTab;
 import org.eclipse.pde.ui.launcher.PluginsTab;
 import org.eclipse.pde.ui.launcher.TracingTab;
 
 
-public class QVTODebugApplicationConfigurationTabGroup extends QvtLaunchConfigurationTabGroup {
+public class QVTOApplicationConfigurationTabGroup extends QvtLaunchConfigurationTabGroup {
 	
-	public QVTODebugApplicationConfigurationTabGroup() {
+	public QVTOApplicationConfigurationTabGroup() {
     	super();
 	}
 
@@ -37,7 +37,7 @@ public class QVTODebugApplicationConfigurationTabGroup extends QvtLaunchConfigur
                 new QVTOMainTab() {
                 	@Override
                 	protected String getAppId() {
-                		return QVTODebugApplication.ID;
+                		return QVTOApplication.ID;
                 	}
                 },
                 new JavaArgumentsTab(), 

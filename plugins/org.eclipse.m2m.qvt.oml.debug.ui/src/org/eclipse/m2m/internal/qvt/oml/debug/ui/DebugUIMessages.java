@@ -47,8 +47,6 @@ public class DebugUIMessages extends NLS {
     public static String QVTOLineBreakpointPage_LineNumber;
     public static String QVTOLineBreakpointPage_SuspendCondition;
 
-	public static String QVTOMainTab_mustRunAsQVTApp;
-
 	public static String QVTORunToLineAdapter_invalidLocation;
 
 	public static String QVTORunToLineAdapter_runFailed;

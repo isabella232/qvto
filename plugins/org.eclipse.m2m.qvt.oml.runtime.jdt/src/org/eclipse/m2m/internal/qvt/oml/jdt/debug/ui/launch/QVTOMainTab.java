@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.debug.ui.launch;
+package org.eclipse.m2m.internal.qvt.oml.jdt.debug.ui.launch;
 
 
 import org.eclipse.core.runtime.CoreException;
@@ -18,7 +18,6 @@ import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.NLS;
-import org.eclipse.m2m.internal.qvt.oml.debug.ui.DebugUIMessages;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.eclipse.pde.launching.IPDELauncherConstants;
@@ -136,7 +135,7 @@ public abstract class QVTOMainTab implements ILaunchConfigurationTab {
 	protected abstract String getAppId();
 	
 	private void setBadApplicationError() {
-		setErrorMessage(NLS.bind(DebugUIMessages.QVTOMainTab_mustRunAsQVTApp, getAppId()));
+		setErrorMessage(NLS.bind(DebugPDEMessages.QVTOMainTab_mustRunAsQVTApp, getAppId()));
 	}
 	
 	private void setErrorMessage(String message) {
