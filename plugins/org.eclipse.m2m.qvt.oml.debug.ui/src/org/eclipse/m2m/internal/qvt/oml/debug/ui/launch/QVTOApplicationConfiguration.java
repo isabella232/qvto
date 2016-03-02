@@ -8,7 +8,7 @@
  * Contributors:
  *     Radek Dvorak - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.qvt.oml.debug.core.launch;
+package org.eclipse.m2m.internal.qvt.oml.debug.ui.launch;
 
 import java.util.ArrayList;
 import java.util.Arrays;

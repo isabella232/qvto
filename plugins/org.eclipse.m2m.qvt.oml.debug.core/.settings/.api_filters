@@ -23,11 +23,4 @@
             </message_arguments>
         </filter>
     </resource>
-    <resource path="src/org/eclipse/m2m/qvt/oml/debug/core/launch/QVTOApplicationConfiguration.java" type="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration">
-        <filter id="1227882500">
-            <message_arguments>
-                <message_argument value="reset()"/>
-            </message_arguments>
-        </filter>
-    </resource>
 </component>
