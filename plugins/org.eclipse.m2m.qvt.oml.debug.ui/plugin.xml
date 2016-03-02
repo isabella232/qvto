@@ -147,23 +147,8 @@
 	</extension> 
 
    <extension point="org.eclipse.debug.core.launchDelegates">
-       <launchDelegate
-             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTODebugConfiguration"
-             id="org.eclipse.m2m.qvt.oml.debug.ui.DebugLaunchDelegate"
-             modes="debug"
-             name="%QVTODebugLaunchDelegate.name"
-             sourceLocatorId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourceLookupDirector"
-             sourcePathComputerId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourcePathComputer"
-             type="org.eclipse.m2m.qvt.oml.QvtTransformation">
-             
-          <modeCombination
-                modes="debug"
-                perspective="org.eclipse.debug.ui.DebugPerspective">
-          </modeCombination>
-       </launchDelegate>
-   
        <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTODebugApplicationDelegate"            
-             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTODebugApplicationConfiguration"
+             delegate="org.eclipse.m2m.internal.qvt.oml.debug.ui.launch.QVTODebugApplicationConfiguration"
              modes="debug"
              name="%QVTOAppLaunchConfig.name"
              sourceLocatorId="org.eclipse.m2m.qvt.oml.debug.srclookup.QVTOSourceLookupDirector"
@@ -176,7 +161,7 @@
        </launchDelegate>
    
        <launchDelegate id="org.eclipse.m2m.qvt.oml.debug.core.QVTOApplicationDelegate"            
-             delegate="org.eclipse.m2m.qvt.oml.debug.core.launch.QVTOApplicationConfiguration"
+             delegate="org.eclipse.m2m.internal.qvt.oml.debug.ui.launch.QVTOApplicationConfiguration"
              modes="run"
              name="%QVTOAppLaunchConfig.name"
              type="org.eclipse.m2m.qvt.oml.QVTOApplicationConfiguration">

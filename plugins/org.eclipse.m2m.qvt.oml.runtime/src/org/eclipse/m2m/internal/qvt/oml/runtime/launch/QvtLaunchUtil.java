@@ -273,7 +273,11 @@ public class QvtLaunchUtil {
 	}
 
 	private static URI toUri(String uriString) throws MdaException {
-	    URI uri = EmfUtil.makeUri(uriString);  
+        if(uriString == null || uriString.length() == 0) {
+            return null;
+        }
+
+        URI uri = EmfUtil.makeUri(uriString);  
 	    if(uri == null) {
 	        throw new MdaException(NLS.bind(Messages.QvtValidator_InvalidUri, uriString));
 	    }
