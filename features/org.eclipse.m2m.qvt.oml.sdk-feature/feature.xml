@@ -59,11 +59,13 @@
 
    <includes
          id="org.eclipse.m2m.qvt.oml.tools.coverage"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="org.eclipse.m2m.qvt.oml.tools.coverage.source"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <plugin
          id="org.eclipse.m2m.qvt.oml.ui"
