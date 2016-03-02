@@ -77,6 +77,7 @@ qvto-releng.psf
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,doc/org.eclipse.m2m.qvt.oml.doc"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,doc/org.eclipse.m2m.qvt.oml.doc-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,features/org.eclipse.m2m.qvt.oml.editor.feature"/>
+<project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,features/org.eclipse.m2m.qvt.oml.editor.jdt-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,examples/org.eclipse.m2m.qvt.oml.examples-feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,features/org.eclipse.m2m.qvt.oml.feature"/>
 <project reference="1.0,http://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git,master,features/org.eclipse.m2m.qvt.oml.runtime.feature"/>
@@ -101,6 +102,7 @@ qvto-releng.psf
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvto.releng" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.qvto.oomph" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.qvt.oml.editor.feature" type="4"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.qvt.oml.editor.jdt-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.qvt.oml.examples-feature" type="4"/>
 <item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.m2m.qvt.oml.doc-feature" type="4"/>
 </workingSets>
