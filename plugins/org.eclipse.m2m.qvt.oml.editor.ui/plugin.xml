@@ -205,6 +205,12 @@
             description="%command.showOutline.description"
             categoryId="org.eclipse.ui.category.navigate">
       </command>
+      <command
+            id="org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"
+            name="%command.toggleComment.name"
+            description="%command.toggleComment.description"
+            categoryId="org.eclipse.jdt.ui.category.source">
+      </command>
 	</extension>
     
     <extension point="org.eclipse.ui.bindings">
@@ -218,6 +224,21 @@
 			contextId="org.eclipse.m2m.qvt.oml.editor.ui.context"
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
 			sequence="M1+O"/>
+		<key
+			commandId="org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"
+			contextId="org.eclipse.m2m.qvt.oml.editor.ui.context"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+/"/>
+		<key
+			commandId="org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"
+			contextId="org.eclipse.m2m.qvt.oml.editor.ui.context"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+7"/>
+		<key
+			commandId="org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"
+			contextId="org.eclipse.m2m.qvt.oml.editor.ui.context"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+M2+C"/>
     </extension>
     
     <extension point="org.eclipse.ui.contexts">

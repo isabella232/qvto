@@ -101,6 +101,11 @@ public class QvtConfiguration extends TextSourceViewerConfiguration {
             QvtPartitionScanner.QVT_STRING };
     }
     
+	@Override
+	public String[] getDefaultPrefixes(ISourceViewer sourceViewer, String contentType) {
+		return new String[] { "//", "" }; //$NON-NLS-1$ //$NON-NLS-2$
+	}
+    
     @Override
 	public ITextDoubleClickStrategy getDoubleClickStrategy(ISourceViewer sourceViewer, 
     		String contentType) {

@@ -33,6 +33,7 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IOverviewRuler;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
@@ -42,6 +43,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.actions.OpenDeclarationAction;
+import org.eclipse.m2m.internal.qvt.oml.editor.ui.actions.ToggleCommentAction;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.colorer.QVTColorManager;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.colorer.SemanticHighlightingManager;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.outline.QvtOutlineContentProvider;
@@ -445,14 +447,25 @@ public class QvtEditor extends TextEditor implements IQVTReconcilingListener {
         action.setActionDefinitionId(ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS);
         setAction("ContentAssistProposal", action); //$NON-NLS-1$
 		markAsStateDependentAction("ContentAssistProposal", true); //$NON-NLS-1$
+
+		registerToggleCommentAction(this, getSourceViewer(), getSourceViewerConfiguration());
 		
 		action = new OpenDeclarationAction(ActionMessages.getResourceBundle(), "OpenDeclaration.", this); //$NON-NLS-1$
- 
-		setAction(action.getActionDefinitionId(), action);
+ 		setAction(action.getActionDefinitionId(), action);
     }
     
     
-    private void refresh(final CompiledUnit unit) {
+    private void registerToggleCommentAction(QvtEditor editor, ISourceViewer sourceViewer, SourceViewerConfiguration configuration) {
+		ToggleCommentAction action = new ToggleCommentAction(ActionMessages.getResourceBundle(),
+				ToggleCommentAction.TOGGLE_COMMENT_NAME + '.', editor);
+		action.setActionDefinitionId(ToggleCommentAction.TOGGLE_COMMENT_ID);
+		editor.setAction(ToggleCommentAction.TOGGLE_COMMENT_NAME, action);
+		editor.markAsStateDependentAction(ToggleCommentAction.TOGGLE_COMMENT_NAME, true);
+
+		action.configure(sourceViewer, configuration);
+	}
+
+	private void refresh(final CompiledUnit unit) {
         IWorkbenchPartSite s = getSite();
         if (s == null) {
             return;
