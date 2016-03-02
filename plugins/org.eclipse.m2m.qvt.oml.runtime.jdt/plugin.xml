@@ -9,4 +9,13 @@
       </provider>
    </extension>
 
+    <extension
+          point="org.eclipse.debug.core.statusHandlers">
+       <statusHandler
+             class="org.eclipse.m2m.internal.qvt.oml.runtime.jdt.blackbox.NavigateToJavaElementHandler"
+             code="500"
+             id="org.eclipse.m2m.qvt.oml.runtime.jdt.navigateToJavaElementHandler"
+             plugin="org.eclipse.m2m.qvt.oml.editor.ui"/>       
+    </extension>    
+
 </plugin>

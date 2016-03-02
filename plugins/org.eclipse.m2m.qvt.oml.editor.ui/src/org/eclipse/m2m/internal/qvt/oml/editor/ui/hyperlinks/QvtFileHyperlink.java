@@ -12,13 +12,18 @@
 package org.eclipse.m2m.internal.qvt.oml.editor.ui.hyperlinks;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.editor.ui.Activator;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.QvtEditor;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
-import org.eclipse.m2m.internal.qvt.oml.runtime.jdt.blackbox.JdtBlackboxHelper;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
@@ -83,7 +88,18 @@ public class QvtFileHyperlink extends AbstractHyperlink {
 			if(file == null) {
 				if (BlackboxUnitResolver.isBlackboxUnitURI(myDestinationURI)) {
 					FileEditorInput editorInput = (FileEditorInput) activePage.getActiveEditor().getEditorInput();
-					JdtBlackboxHelper.navigateToJavaElement(editorInput.getURI(), myDestinationURI.segment(0), myDestinationElement);
+					
+					IStatus navigateToJavaElement = new Status(IStatus.INFO, Activator.PLUGIN_ID, 500, "", null); //$NON-NLS-1$
+
+					IStatusHandler handler = DebugPlugin.getDefault().getStatusHandler(navigateToJavaElement);
+					if (handler != null) {
+						try {
+							handler.handleStatus(navigateToJavaElement,
+									new Object[] { editorInput.getURI(), myDestinationURI.segment(0), myDestinationElement });
+						} catch (CoreException e) {
+							Activator.log(e.getStatus());
+						}
+					}
 				}
 				return;
 			}

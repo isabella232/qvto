@@ -32,7 +32,6 @@ import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.CompletionProposalU
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionData;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionProposal;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
-import org.eclipse.m2m.internal.qvt.oml.runtime.jdt.blackbox.JdtBlackboxHelper;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformationRegistry;
 
 import lpg.runtime.IToken;
@@ -58,14 +57,17 @@ public class ImportModuleCollector extends AbstractCollector {
         for (AbstractCompilationUnitDescriptor unitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
             String proposalString = unitDescriptor.getQualifiedName();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, 
-            		JdtBlackboxHelper.isJdtUnitUri(unitDescriptor.getURI()) ? CategoryImageConstants.PACKAGE : CategoryImageConstants.MAPPING,
-            				data);
+            		isJdtUnitUri(unitDescriptor.getURI()) ? CategoryImageConstants.PACKAGE : CategoryImageConstants.MAPPING, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);        	
 		}        
         
     }
 
-    private void addLocalModulesProposals(
+    private static boolean isJdtUnitUri(URI uri) {
+		return "jdt".equals(uri.query()); //$NON-NLS-1$
+	}
+
+	private void addLocalModulesProposals(
             Collection<ICompletionProposal> proposals, QvtCompletionData data) {
         UnitProxy unit = data.getCFile();
 		URI compiledFileURI = unit.getURI();
