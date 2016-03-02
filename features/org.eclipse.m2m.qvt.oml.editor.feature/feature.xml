@@ -18,7 +18,7 @@
    </copyright>
 
    <includes
-         id="org.eclipse.m2m.qvt.oml.runtime.jdt"
+         id="org.eclipse.m2m.qvt.oml.editor.jdt"
          version="0.0.0"
          optional="true"/>
 
