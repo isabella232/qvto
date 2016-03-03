@@ -209,7 +209,7 @@
             id="org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"
             name="%command.toggleComment.name"
             description="%command.toggleComment.description"
-            categoryId="org.eclipse.jdt.ui.category.source">
+            categoryId="org.eclipse.ui.category.edit">
       </command>
 	</extension>
     
