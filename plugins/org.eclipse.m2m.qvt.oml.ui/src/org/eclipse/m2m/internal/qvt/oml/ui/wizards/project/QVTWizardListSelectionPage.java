@@ -37,7 +37,6 @@ import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.IWizardNode;
 import org.eclipse.jface.wizard.WizardSelectionPage;
 import org.eclipse.m2m.internal.qvt.oml.ui.QVTUIPlugin;
-import org.eclipse.pde.ui.IPluginContentWizard;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -208,13 +207,6 @@ class QVTWizardListSelectionPage extends WizardSelectionPage implements ISelecti
 			}
 		});
 		myUseTransformation.setSelection(false);
-	}	
-	
-	protected IPluginContentWizard getSelectedWizard() {
-		IWizardNode node = getSelectedNode();
-		if (node != null)
-			return (IPluginContentWizard)node.getWizard();
-		return null;
 	}	
 	
 	private void updateControl() {

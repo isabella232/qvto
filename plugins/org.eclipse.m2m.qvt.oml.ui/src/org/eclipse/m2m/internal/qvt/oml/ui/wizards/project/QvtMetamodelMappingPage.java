@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
@@ -26,7 +27,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.StatusDialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -246,9 +246,8 @@ public class QvtMetamodelMappingPage extends PropertyPage {
         Object element = getElement();
         if(element instanceof IProject) {
             return (IProject)element;
-        } else if(element instanceof IJavaProject) {
-            IJavaProject javaProject = (IJavaProject)element;
-            return javaProject.getProject();
+        } else if(element instanceof IAdaptable) {
+            return ((IAdaptable) element).getAdapter(IProject.class);
         } else {
             return null;
         }
@@ -620,7 +619,6 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 		
 		@Override
 		protected Control createContents(Composite parent) {
-			// TODO Auto-generated method stub
 			Control control = super.createContents(parent);
 			updateStatus(getStatus());
 			return control;

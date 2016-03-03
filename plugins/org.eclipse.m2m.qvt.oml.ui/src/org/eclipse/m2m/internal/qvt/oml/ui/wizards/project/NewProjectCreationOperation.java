@@ -49,7 +49,6 @@ import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.m2m.internal.qvt.oml.ui.QVTUIPlugin;
-import org.eclipse.pde.core.plugin.IPluginReference;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 class NewProjectCreationOperation extends WorkspaceModifyOperation {
@@ -137,12 +136,12 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 		wr.append("Bundle-Version: ").println(fData.getVersion()); //$NON-NLS-1$
 		wr.append("Bundle-Vendor: ").println(fData.getProviderName()); //$NON-NLS-1$
 
-		IPluginReference[] dependencies = getDependencies();
+		PluginReference[] dependencies = getDependencies();
 		if (dependencies.length > 0) {
 			wr.append("Require-Bundle:"); //$NON-NLS-1$
 
 			int i = 0;
-			for (IPluginReference pluginReference : dependencies) {
+			for (PluginReference pluginReference : dependencies) {
 				if (i++ > 0) {
 					wr.println(',');
 				}
@@ -183,9 +182,9 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 		monitor.done();
 	}
 
-	private IPluginReference[] getDependencies() {
+	private PluginReference[] getDependencies() {
 		if (fGenerator == null) {
-			return new IPluginReference[0];
+			return new PluginReference[0];
 		}
 		return fGenerator.getDependencies();
 	}
