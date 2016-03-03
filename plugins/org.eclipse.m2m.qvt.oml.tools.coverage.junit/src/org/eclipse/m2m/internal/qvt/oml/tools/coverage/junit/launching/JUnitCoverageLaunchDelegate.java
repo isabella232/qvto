@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.junit.launching;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,6 +27,7 @@ import org.eclipse.jdt.internal.junit.JUnitCorePlugin;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jdt.junit.launcher.JUnitLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
+import org.eclipse.m2m.qvt.oml.tools.coverage.junit.Shell;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.osgi.framework.Bundle;
 
@@ -44,14 +45,14 @@ public class JUnitCoverageLaunchDelegate extends JUnitLaunchConfigurationDelegat
 
     @Override
     public String verifyMainTypeName(ILaunchConfiguration configuration) throws CoreException {
-        return CoveragePlugin.PLUGIN_ID + ".Shell"; //$NON-NLS-1$
+        return Shell.JUNIT_PLUGIN_ID + ".Shell"; //$NON-NLS-1$
     }
 
     @Override
     public String[] getClasspath(ILaunchConfiguration configuration) throws CoreException {
         String[] cp = super.getClasspath(configuration);
 
-        String[] bundles = new String[] { CoveragePlugin.PLUGIN_ID, CoveragePlugin.UI_PLUGIN_ID, };
+        String[] bundles = new String[] { CoveragePlugin.PLUGIN_ID, CoveragePlugin.UI_PLUGIN_ID, Shell.JUNIT_PLUGIN_ID };
 
         List<String> classList = new ArrayList<String>(Arrays.asList(cp));
 

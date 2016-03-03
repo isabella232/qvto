@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching;
+package org.eclipse.m2m.internal.qvt.oml.tools.coverage.junit.launching;
 
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jdt.junit.TestRunListener;

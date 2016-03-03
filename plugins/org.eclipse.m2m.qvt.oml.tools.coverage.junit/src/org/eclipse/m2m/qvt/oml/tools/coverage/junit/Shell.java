@@ -10,7 +10,7 @@
  *  ASML Netherlands B.V. - Initial API and implementation
  *
  *****************************************************************************/
-package org.eclipse.m2m.qvt.oml.tools.coverage.ui;
+package org.eclipse.m2m.qvt.oml.tools.coverage.junit;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -26,6 +26,9 @@ import org.eclipse.m2m.qvt.oml.util.ISessionData.SimpleEntry;
 
 @SuppressWarnings("restriction")
 public class Shell {
+	
+	public static final String JUNIT_PLUGIN_ID = "org.eclipse.m2m.qvt.oml.tools.coverage.junit"; //$NON-NLS-1$
+	
 
     public static void main(String[] args) {
 
@@ -36,10 +39,10 @@ public class Shell {
                 visitorDecorators);
 
         try {
-            Field field = QVTEvaluationOptions.class.getField("VISITOR_DECORATORS");
+            Field field = QVTEvaluationOptions.class.getField("VISITOR_DECORATORS"); //$NON-NLS-1$
             field.setAccessible(true);
 
-            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            Field modifiersField = Field.class.getDeclaredField("modifiers"); //$NON-NLS-1$
             modifiersField.setAccessible(true);
             modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
 

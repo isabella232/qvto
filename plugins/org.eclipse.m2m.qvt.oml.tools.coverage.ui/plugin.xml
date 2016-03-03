@@ -12,17 +12,6 @@
       </page>
    </extension>
 
-<extension point="org.eclipse.debug.core.launchDelegates">
-  <launchDelegate
-       id="org.eclipse.m2m.qvt.oml.tools.coverageLaunchDelegate"
-       name="%launchDelegate.junit.name"
-       delegate="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.launching.JUnitCoverageLaunchDelegate"
-       delegateDescription="%launchDelegate.junit.description"
-       type="org.eclipse.jdt.junit.launchconfig"
-       modes="run">
-  </launchDelegate>
- </extension>
- 
  <extension point="org.eclipse.ui.views">
         <view
               class="org.eclipse.m2m.internal.qvt.oml.tools.coverage.ui.CoverageView"
