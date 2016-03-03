@@ -302,7 +302,7 @@ public class NewQVTProjectContentPage extends WizardPage {
 			if ((myChangedGroups & PROPERTIES_GROUP) == 0) {
 				int oldChanged = myChangedGroups;				
 				myIdText.setText(id);
-				myVersionText.setText("1.0.0"); //$NON-NLS-1$
+				myVersionText.setText("0.1.0.qualifier"); //$NON-NLS-1$
 				presetNameField(id);
 				presetProviderField(id);
 				myChangedGroups = oldChanged;
