@@ -8,5 +8,10 @@
 	<topic label="Importing compilation units" href="references/importing.html"/>
 	<topic label="Breaking Changes In QVTO Implementation" href="references/breakingChangesInQVTOImplementation.html"/>	
 	<topic label="Ant tasks support" href="references/anttasks.html"/>
-	<topic label="Reference" href="references/reference.html"/>	
+	<topic label="Reference" href="references/reference.html"/>
+	
+	<topic label="QVT Operational Developer Tools Guide">
+	    <anchor id="org.eclipse.m2m.qvt.oml.tools.doc.anchor"/>
+	</topic>
+		
 </toc>

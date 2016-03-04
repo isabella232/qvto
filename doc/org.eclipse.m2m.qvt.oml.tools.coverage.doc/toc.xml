@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="Code Coverage Tool" link_to="../org.eclipse.m2m.qvt.oml.tools.doc/toc.xml#org.eclipse.m2m.qvt.oml.tools.doc.anchor">
+<toc label="Code Coverage Tool" link_to="../org.eclipse.m2m.qvt.oml.doc/toc.xml#org.eclipse.m2m.qvt.oml.tools.doc.anchor">
 	<topic label="Code Coverage Tool">
     <topic href="html/launch-delegate.html" label="Operational QVT Coverage Launch Delegate">
     </topic>
