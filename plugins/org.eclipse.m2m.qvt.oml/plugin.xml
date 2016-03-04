@@ -32,6 +32,7 @@
            target="platform:/plugin/org.eclipse.m2m.qvt.oml/model/Stdlib.xmi">
      </mapping>
   </extension>
+  
   <extension
         point="org.eclipse.emf.ecore.protocol_parser">
      <parser
@@ -40,6 +41,10 @@
      </parser>
   </extension>
   
+  <extension point="org.eclipse.team.core.fileTypes">
+     <fileTypes extension="qvto" type="text" />
+  </extension>
+     
   <extension point="org.eclipse.emf.ecore.extension_parser">
      <parser type="qvtox" class="org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMIResource$Factory"/>    
   </extension> 
