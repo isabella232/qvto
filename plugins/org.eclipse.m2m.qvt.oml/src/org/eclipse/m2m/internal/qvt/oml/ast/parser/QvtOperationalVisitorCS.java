@@ -144,6 +144,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.EntryOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsFactory;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
+import org.eclipse.m2m.internal.qvt.oml.expressions.Helper;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeCallExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImportKind;
@@ -2272,7 +2273,11 @@ public class QvtOperationalVisitorCS
 				operation = ExpressionsFactory.eINSTANCE.createEntryOperation();
 			}
 			else {
-				operation = ExpressionsFactory.eINSTANCE.createHelper();
+				Helper helper = ExpressionsFactory.eINSTANCE.createHelper();
+				if (methodCS.getMappingDeclarationCS() != null) {
+					helper.setIsQuery(methodCS.getMappingDeclarationCS().isIsQuery());
+				}
+				operation = helper;
 			}
 			
 			methodCS.setAst(operation);
