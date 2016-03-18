@@ -185,10 +185,10 @@ Workflow {
 	// CS2AS Components
 	bean = org.eclipse.emf.ecore.resource.impl.ResourceSetImpl : resourceSet {}
 	// bean = utilities.EcoreGenModelSetup { resourceSet = resourceSet }
-	component = @GenerateCGedQVTiTransformation { 
+	component = utilities.GenerateCGedQVTiTransformation { 
 		resourceSet = resourceSet
-		// oclFileURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
-		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
+		// oclDocURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
+		oclDocURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
 		// FIXME the following only work if the output project are in the same FS folder. Better use a projectName and improve generator 
 		javaFolder = "../${projectName}/src-gen"
 		javaPackage = "${projectName}.cs2as"

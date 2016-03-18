@@ -34,10 +34,10 @@ Workflow {
     bean = utilities.ProjectMapSetup { resourceSet = resourceSet  }
     
     //  CS2AS components
-   	component = @GenerateCGedQVTiTransformation { 
-		resourceSet = resourceSet
+   	component = utilities.GenerateCGedQVTiTransformation {
+   		resourceSet = resourceSet
 		// oclFileURI = "${runtimeProject}/model/QVTOperationalCS2AS.ocl" // FIXME using relative URI, OCL Imports are not properly solved
-		oclFileURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
+		oclDocURI = "platform:/resource/${projectName}/model/QVTOperationalCS2AS.ocl"
 		// FIXME the following only work if the output project are in the same FS folder. Better use a projectName and improve generator 
 		javaFolder = "../${projectName}/src-gen"
 		javaPackage = "${projectName}.cs2as"
