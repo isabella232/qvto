@@ -82,7 +82,10 @@ public class ResourceSourceChooser extends ChooserAdapter implements ISourceChoo
 
 	public static IStructuredSelection createSelectionForUri(URI uri, IFile file) {
 		StructuredSelection initialSelection;
-		if(!uri.hasFragment()) {
+		if (!file.exists()) {
+			initialSelection = new StructuredSelection(file.getParent());
+		}
+		else if(!uri.hasFragment()) {
             initialSelection = new StructuredSelection(file);
         }
         else {
