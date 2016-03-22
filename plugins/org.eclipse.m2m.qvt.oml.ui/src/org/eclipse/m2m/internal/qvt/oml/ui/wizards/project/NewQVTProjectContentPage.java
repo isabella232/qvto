@@ -11,12 +11,19 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ui.wizards.project;
 
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jdt.core.JavaConventions;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.corext.util.JavaModelUtil;
+import org.eclipse.jdt.launching.IVMInstall;
+import org.eclipse.jdt.launching.IVMInstall2;
+import org.eclipse.jdt.launching.JavaRuntime;
+import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jface.dialogs.IMessageProvider;
+import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -27,6 +34,7 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -49,6 +57,7 @@ public class NewQVTProjectContentPage extends WizardPage {
 	private Text myVersionText;
 	private Text myNameText;
 	private Text myProviderText;
+	private Combo myExecEnvCombo;
 	private Button myGenerateClass;
 	private Label myClassLabel;
 	private Text myClassText;
@@ -84,6 +93,17 @@ public class NewQVTProjectContentPage extends WizardPage {
 		return text;
 	}
 	
+	protected Combo createCombo(Composite parent, int style, int hspan) {
+		Combo c = new Combo(parent, style);
+		c.setFont(parent.getFont());
+		GridData gd = new GridData(GridData.FILL_HORIZONTAL);
+		gd.horizontalSpan = hspan;
+		c.setLayoutData(gd);
+		// Some platforms open up combos in bad sizes without this, see bug 245569
+		c.setVisibleItemCount(30);
+		return c;
+	}
+	
 	private void createPluginPropertiesGroup(Composite container) {
 		ModifyListener propertiesListener = new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
@@ -113,6 +133,12 @@ public class NewQVTProjectContentPage extends WizardPage {
 		label = new Label(propertiesGroup, SWT.NONE);
 		label.setText(Messages.ContentPage_pprovider); 
 		myProviderText = createText(propertiesGroup, propertiesListener);
+		
+		label = new Label(propertiesGroup, SWT.NONE);
+		label.setText(Messages.ContentPage_executionenv); 
+		myExecEnvCombo = createCombo(propertiesGroup, SWT.READ_ONLY | SWT.BORDER, 1);
+		
+		fillExecutionEnvironments(myExecEnvCombo);
 	}
 
 	private void createPluginClassGroup(Composite container) {
@@ -232,6 +258,7 @@ public class NewQVTProjectContentPage extends WizardPage {
 		myData.setVersion(myVersionText.getText().trim());
 		myData.setName(myNameText.getText().trim());
 		myData.setProviderName(myProviderText.getText().trim());
+		myData.setfExecutionEnv(myExecEnvCombo.getText().trim());
 
 		myData.setClassName(myClassText.getText().trim());
 		myData.setDoGenerateClass(myGenerateClass.isEnabled() && myGenerateClass.getSelection());
@@ -355,5 +382,47 @@ public class NewQVTProjectContentPage extends WizardPage {
 	
 	private static IStatus validateJavaTypeName(String name) {
 		return JavaConventions.validateJavaTypeName(name, JavaCore.VERSION_1_3, JavaCore.VERSION_1_3);
-	}	
+	}
+
+	private void fillExecutionEnvironments(Combo combo) {
+		IExecutionEnvironment[] fInstalledEEs = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments();
+		Arrays.sort(fInstalledEEs, new java.util.Comparator<IExecutionEnvironment>() {
+			public int compare(IExecutionEnvironment arg0, IExecutionEnvironment arg1) {
+				return Policy.getComparator().compare(arg0.getId(), arg1.getId());
+			}
+		});
+
+		String[] eeLabels = new String[fInstalledEEs.length];
+		for (int i = 0; i < fInstalledEEs.length; i++) {
+			eeLabels[i] = fInstalledEEs[i].getId();
+		}
+		combo.setItems(eeLabels);
+		combo.setText(getDefaultEEName());
+	}
+	
+	private String getDefaultEEName() {
+		IVMInstall defaultVM = JavaRuntime.getDefaultVMInstall();
+
+		IExecutionEnvironment[] environments = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments();
+		if (defaultVM != null) {
+			for (int i = 0; i < environments.length; i++) {
+				IVMInstall eeDefaultVM = environments[i].getDefaultVM();
+				if (eeDefaultVM != null && defaultVM.getId().equals(eeDefaultVM.getId()))
+					return environments[i].getId();
+			}
+		}
+
+		String defaultCC = JavaModelUtil.VERSION_LATEST;
+		if (defaultVM instanceof IVMInstall2)
+			defaultCC = JavaModelUtil.getCompilerCompliance((IVMInstall2) defaultVM, defaultCC);
+
+		for (int i = 0; i < environments.length; i++) {
+			String eeCompliance = JavaModelUtil.getExecutionEnvironmentCompliance(environments[i]);
+			if (defaultCC.endsWith(eeCompliance))
+				return environments[i].getId();
+		}
+
+		return "JavaSE-1.7"; //$NON-NLS-1$
+	}
+
 }

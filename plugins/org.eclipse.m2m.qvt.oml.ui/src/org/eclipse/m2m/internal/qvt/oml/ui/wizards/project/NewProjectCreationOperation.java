@@ -53,8 +53,6 @@ import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
 class NewProjectCreationOperation extends WorkspaceModifyOperation {
 
-	private static final String BUNDLE_EXEC_ENV = "J2SE-1.5"; //$NON-NLS-1$
-
 	private static final String BUILD_FILENAME_DESCRIPTOR = "build.properties"; //$NON-NLS-1$
 	
 	private static final IPath REQUIRED_PLUGINS_CONTAINER_PATH = new Path("org.eclipse.pde.core.requiredPlugins"); //$NON-NLS-1$
@@ -151,8 +149,8 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 			wr.println();
 		}
 
-		if (fData.isCreateJava() && getEEnv(BUNDLE_EXEC_ENV) != null) {
-			wr.append("Bundle-RequiredExecutionEnvironment: ").println(BUNDLE_EXEC_ENV); //$NON-NLS-1$
+		if (fData.isCreateJava() && getEEnv(fData.getfExecutionEnv()) != null) {
+			wr.append("Bundle-RequiredExecutionEnvironment: ").println(fData.getfExecutionEnv()); //$NON-NLS-1$
 		}
 
 		wr.flush();
@@ -202,7 +200,7 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 		
 		IClasspathEntry[] entries = new IClasspathEntry[pde ? 3 : 1];
 		if (pde) {			
-			String executionEnvironment = BUNDLE_EXEC_ENV;
+			String executionEnvironment = fData.getfExecutionEnv();
 			setComplianceOptions(javaProject, executionEnvironment, true);
 			entries[0] = createJREEntry(executionEnvironment);
 			entries[1] = createContainerEntry();

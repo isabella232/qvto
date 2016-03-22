@@ -89,6 +89,7 @@ public class Messages extends NLS {
 	public static String ContentPage_pversion;
 	public static String ContentPage_pname;
 	public static String ContentPage_pprovider;
+	public static String ContentPage_executionenv;
 	public static String ProjectStructurePage_library;
 	public static String ContentPage_pClassGroup;
 	public static String ContentPage_generate;

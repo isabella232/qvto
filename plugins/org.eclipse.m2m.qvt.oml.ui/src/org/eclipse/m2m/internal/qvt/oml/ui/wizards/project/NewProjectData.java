@@ -40,6 +40,8 @@ class NewProjectData {
 	
 	private IPath fLocation;
 	
+	private String fExecutionEnv;
+	
 	public NewProjectData() {
 		super();
 	}
@@ -138,5 +140,13 @@ class NewProjectData {
 
 	public void setLocation(IPath location) {
 		fLocation = location;
+	}
+
+	public String getfExecutionEnv() {
+		return fExecutionEnv;
+	}
+
+	public void setfExecutionEnv(String executionEnv) {
+		fExecutionEnv = executionEnv;
 	}
 }
