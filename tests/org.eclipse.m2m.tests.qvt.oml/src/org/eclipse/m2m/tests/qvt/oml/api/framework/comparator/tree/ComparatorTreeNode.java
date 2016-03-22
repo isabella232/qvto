@@ -95,7 +95,7 @@ public abstract class ComparatorTreeNode {
 	
 	public TreeEdit getCumulativeInsertEdit() {
 		if(myCumulativeInsertEdits == null) {
-			List<TreeEdit> edits = new ArrayList<TreeEdit>();
+			List<TreeEdit> edits = new ArrayList<TreeEdit>(getChildren().size()+1);
 			edits.add(getInsertEdit());
 			for(ComparatorTreeNode child : getChildren()) {
 				edits.add(child.getCumulativeInsertEdit());
@@ -107,7 +107,7 @@ public abstract class ComparatorTreeNode {
 	
 	public TreeEdit getCumulativeDeleteEdit() {
 		if(myCumulativeDeleteEdits == null) {
-			List<TreeEdit> edits = new ArrayList<TreeEdit>();
+			List<TreeEdit> edits = new ArrayList<TreeEdit>(getChildren().size()+1);
 			for(ComparatorTreeNode child : getChildren()) {
 				edits.add(child.getCumulativeDeleteEdit());
 			}

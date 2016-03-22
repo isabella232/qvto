@@ -75,12 +75,7 @@ public class EmfContainmentComparatorTreeNode extends ComparatorTreeNode {
 		}
 		
 		EmfContainmentComparatorTreeNode emfTo = (EmfContainmentComparatorTreeNode)to;
-
-		if(!myRef.equals(emfTo.myRef)) {
-			return new EmfReferenceContentChange(myRef, emfTo.myRef); 
-		}
-		
-		return ContentChange.NULL_CHANGE;
+		return new EmfReferenceContentChange(myRef, emfTo.myRef); 
 	}
 
 	@Override
@@ -95,8 +90,7 @@ public class EmfContainmentComparatorTreeNode extends ComparatorTreeNode {
 		}
 		
 		EmfContainmentComparatorTreeNode node = (EmfContainmentComparatorTreeNode)o;
-		boolean eq = myRef.equals(node.myRef);
-		return eq;
+		return myRef.equals(node.myRef);
 		
 	}
 	

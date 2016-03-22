@@ -56,8 +56,7 @@ public class EmfObjectComparatorTreeNode extends ComparatorTreeNode {
 	
 	private List<ComparatorTreeNode> getRefs(boolean containment) {
 		List<ComparatorTreeNode> children = new ArrayList<ComparatorTreeNode>();
-		for(Iterator<?> refIt = myNode.eClass().getEAllReferences().iterator(); refIt.hasNext(); ) {
-			EReference ref = (EReference)refIt.next();
+		for(EReference ref : myNode.eClass().getEAllReferences()) {
 			if(ref.isDerived()) {
 				continue;
 			}
@@ -82,8 +81,7 @@ public class EmfObjectComparatorTreeNode extends ComparatorTreeNode {
     
     private List<EmfFeatureMapReferenceComparatorTreeNode> getFeatureMapRefs() {
         List<EmfFeatureMapReferenceComparatorTreeNode> children = new ArrayList<EmfFeatureMapReferenceComparatorTreeNode>();
-        for(Iterator<?> attrIt = myNode.eClass().getEAllAttributes().iterator(); attrIt.hasNext(); ) {
-            EAttribute attr = (EAttribute)attrIt.next();
+        for(EAttribute attr : myNode.eClass().getEAllAttributes()) {
             if(attr.isDerived()) {
                 continue;
             }
@@ -101,11 +99,7 @@ public class EmfObjectComparatorTreeNode extends ComparatorTreeNode {
 	@Override
 	public ContentChange compareClassesImpl(ComparatorTreeNode to) {
 		EmfObjectComparatorTreeNode emfTo = (EmfObjectComparatorTreeNode)to;
-		if(!myNode.eClass().getName().equals(emfTo.myNode.eClass().getName())) {
-			return new EClassContentChange(myNode.eClass(), emfTo.myNode.eClass());
-		}
-		
-		return ContentChange.NULL_CHANGE;
+		return new EClassContentChange(myNode.eClass(), emfTo.myNode.eClass());
 	}
 
 	@Override
@@ -113,8 +107,7 @@ public class EmfObjectComparatorTreeNode extends ComparatorTreeNode {
 		EmfObjectComparatorTreeNode emfTo = (EmfObjectComparatorTreeNode)to;
 		EClass metaclass = myNode.eClass();
 		
-		for(Iterator<?> attrIt = metaclass.getEAllAttributes().iterator(); attrIt.hasNext(); ) {
-			EAttribute attr = (EAttribute)attrIt.next();
+		for(EAttribute attr : metaclass.getEAllAttributes()) {
             Object leftValue = myNode.eGet(attr);
             Object rightValue = emfTo.myNode.eGet(attr);
             ContentChange change = compareAttributeValues(attr, leftValue, rightValue);

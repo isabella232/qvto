@@ -21,33 +21,25 @@ import org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.tree.ContentChange
  */
 public class RefContentChange extends ContentChange.Adapter {
 	public RefContentChange(EObject obj, EReference ref, Object left, Object right, final int cmp) {
-		this(obj, ref, left, right, new ContentChange.Adapter () {
-			public int getCmp() { return cmp;}
-			@Override
-			public String toString() { return "FixedCostChange:" + cmp; } //$NON-NLS-1$
-		});
-	}
-	
-	public RefContentChange(EObject obj, EReference ref, Object left, Object right, ContentChange change) {
 		myObj = obj;
 		myRef = ref;
 		myLeft = left;
 		myRight = right;
-		myChange = change;
+		myCmp = cmp;
 	}
 	
 	public int getCmp() {
-		return myChange.getCmp();
+		return myCmp;
 	}
 	
 	@Override
 	public String toString() {
-		return "RefContentChange:obj=" + myObj.eClass().getName() + ",ref=" + myRef.getName() + ",change=" + myChange + " (" + myLeft + "->" + myRight + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$ //$NON-NLS-6$
+		return "RefContentChange:obj=" + myObj.eClass().getName() + ",ref=" + myRef.getName() + ",change= (" + myLeft + "->" + myRight + ")"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$ //$NON-NLS-5$
 	}
 	
-	private final EObject      myObj;
-	private final EReference   myRef;
-	private final Object       myLeft;
-	private final Object       myRight;
-	private final ContentChange  myChange;
+	private final EObject       myObj;
+	private final EReference    myRef;
+	private final Object        myLeft;
+	private final Object        myRight;
+	private final int           myCmp;
 }

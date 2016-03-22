@@ -12,39 +12,46 @@
 package org.eclipse.m2m.tests.qvt.oml.api.framework.comparator.edit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
 /** @author pkobiakov */
 public class CompositeEdit implements TreeEdit {
-	public CompositeEdit(TreeEdit[] edits) {
-		this(new ArrayList<TreeEdit>(Arrays.asList(edits)));
-	}
 	
 	public CompositeEdit(List<TreeEdit> edits) {
-		myEdits = new ArrayList<TreeEdit>();
+		myEdits = new ArrayList<TreeEdit>(edits.size());
 		
 		for(TreeEdit edit : edits) {
-			if(edit.getCost() > 0) {
-				if(edit instanceof CompositeEdit) {
-					CompositeEdit compositeEdit = (CompositeEdit)edit;
-					myEdits.addAll(compositeEdit.myEdits);
-				}
-				else {
-					myEdits.add(edit);
-				}
-			}
+			addTreeEdit(edit);
 		}
 		
 		myCumulativeCost = -1;
 	}
 	
+	public CompositeEdit(TreeEdit first, TreeEdit second) {
+		myEdits = new ArrayList<TreeEdit>(2);
+		
+		addTreeEdit(first);
+		addTreeEdit(second);
+		
+		myCumulativeCost = -1;
+	}
+
+	private void addTreeEdit(TreeEdit second) {
+		if(second.getCost() > 0) {
+			if(second instanceof CompositeEdit) {
+				myEdits.addAll(((CompositeEdit)second).myEdits);
+			}
+			else {
+				myEdits.add(second);
+			}
+		}
+	}
+	
 	public int getCost() {
 		if(myCumulativeCost == -1) {
 			myCumulativeCost = 0;
-			for(Iterator<?> editIt = myEdits.iterator(); editIt.hasNext(); ) {
-				TreeEdit edit = (TreeEdit)editIt.next();
+			for(TreeEdit edit : myEdits) {
 				myCumulativeCost += edit.getCost();
 			}
 		}

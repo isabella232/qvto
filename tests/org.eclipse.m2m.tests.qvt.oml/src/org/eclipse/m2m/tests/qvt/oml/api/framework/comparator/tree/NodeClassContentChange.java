@@ -20,11 +20,11 @@ public class NodeClassContentChange extends ContentChange.Adapter {
 	public NodeClassContentChange(ComparatorTreeNode left, ComparatorTreeNode right) {
 		myLeft = left;
 		myRight = right;
+		myCmp = myLeft.getClass().getName().compareTo(myRight.getClass().getName()) * TreeEdit.UNWANTED_CHANGE_COST;
 	}
 	
 	public int getCmp() {
-		int cmp = myLeft.getClass().getName().compareTo(myRight.getClass().getName());
-		return cmp*TreeEdit.UNWANTED_CHANGE_COST;
+		return myCmp;
 	}
 	
 	@Override
@@ -34,4 +34,5 @@ public class NodeClassContentChange extends ContentChange.Adapter {
 
 	private final ComparatorTreeNode myLeft;
 	private final ComparatorTreeNode myRight;
+	private final int myCmp;
 }

@@ -20,10 +20,11 @@ public class RefContentChange extends ContentChange.Adapter {
 		myLeft = left;
 		myRight = right;
 		myChange = change;
+		myCmp = myChange.getCmp()*2;
 	}
 	
 	public int getCmp() {
-		return myChange.getCmp()*2;
+		return myCmp;
 	}
 	
 	@Override
@@ -36,4 +37,5 @@ public class RefContentChange extends ContentChange.Adapter {
 	private final ComparatorTreeNode myLeft;
 	private final ComparatorTreeNode myRight;
 	private final ContentChange myChange;
+	private final int myCmp;
 }

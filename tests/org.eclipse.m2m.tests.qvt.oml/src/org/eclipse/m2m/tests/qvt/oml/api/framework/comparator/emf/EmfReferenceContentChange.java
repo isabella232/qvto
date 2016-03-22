@@ -23,11 +23,11 @@ public class EmfReferenceContentChange extends ContentChange.Adapter {
 	public EmfReferenceContentChange(EReference left, EReference right) {
 		myLeft = left;
 		myRight = right;
+		myCmp = myLeft.getName().compareTo(myRight.getName()) * TreeEdit.UNWANTED_CHANGE_COST;
 	}
 	
 	public int getCmp() {
-		int cmp = myLeft.getName().compareTo(myRight.getName());
-		return cmp*TreeEdit.UNWANTED_CHANGE_COST;
+		return myCmp;
 	}
 	
 	@Override
@@ -37,4 +37,5 @@ public class EmfReferenceContentChange extends ContentChange.Adapter {
 	
 	private final EReference myLeft;
 	private final EReference myRight;
+	private final int myCmp;
 }

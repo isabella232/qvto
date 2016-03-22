@@ -23,11 +23,11 @@ public class EClassContentChange extends ContentChange.Adapter {
 	public EClassContentChange(EClass left, EClass right) {
 		myLeft = left;
 		myRight = right;
+		myCmp = myLeft.getName().compareTo(myRight.getName()) * TreeEdit.UNWANTED_CHANGE_COST;
 	}
 	
 	public int getCmp() {
-		int cmp = myLeft.getName().compareTo(myRight.getName());
-		return cmp*TreeEdit.UNWANTED_CHANGE_COST;
+		return myCmp;
 	}
 	
 	@Override
@@ -37,4 +37,5 @@ public class EClassContentChange extends ContentChange.Adapter {
 	
 	private final EClass myLeft;
 	private final EClass myRight;
+	private final int myCmp;
 }

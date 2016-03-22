@@ -56,23 +56,23 @@ public class TreeComparator {
 		registerEdit(left, right, edits[0][0]);
 		
 		for(int i = 1; i <= numLeftChildren; i++) {
-			ComparatorTreeNode leftChild = (ComparatorTreeNode)left.getChildren().get(i-1);
-			edits[i][0] = new CompositeEdit(new TreeEdit[] {edits[i-1][0], leftChild.getCumulativeDeleteEdit()});
+			ComparatorTreeNode leftChild = left.getChildren().get(i-1);
+			edits[i][0] = new CompositeEdit(edits[i-1][0], leftChild.getCumulativeDeleteEdit());
 		}
 		
 		for(int j = 1; j <= numRightChildren; j++) {
-			ComparatorTreeNode rightChild = (ComparatorTreeNode)right.getChildren().get(j-1);
-			edits[0][j] = new CompositeEdit(new TreeEdit[] {edits[0][j-1], rightChild.getCumulativeInsertEdit()});
+			ComparatorTreeNode rightChild = right.getChildren().get(j-1);
+			edits[0][j] = new CompositeEdit(edits[0][j-1], rightChild.getCumulativeInsertEdit());
 		}
 		
 		for(int i = 1; i <= numLeftChildren; i++) {
-			ComparatorTreeNode leftChild = (ComparatorTreeNode)left.getChildren().get(i-1);
+			ComparatorTreeNode leftChild = left.getChildren().get(i-1);
 			for(int j = 1; j <= numRightChildren; j++) {
-				ComparatorTreeNode rightChild = (ComparatorTreeNode)right.getChildren().get(j-1);
+				ComparatorTreeNode rightChild = right.getChildren().get(j-1);
 				
-				TreeEdit change = new CompositeEdit(new TreeEdit[] {edits[i-1][j-1], compareStructure(leftChild, rightChild)});
-				TreeEdit delete = new CompositeEdit(new TreeEdit[] {edits[i-1][j], leftChild.getCumulativeDeleteEdit()});
-				TreeEdit insert = new CompositeEdit(new TreeEdit[] {edits[i][j-1], rightChild.getCumulativeInsertEdit()});
+				TreeEdit change = new CompositeEdit(edits[i-1][j-1], compareStructure(leftChild, rightChild));
+				TreeEdit delete = new CompositeEdit(edits[i-1][j], leftChild.getCumulativeDeleteEdit());
+				TreeEdit insert = new CompositeEdit(edits[i][j-1], rightChild.getCumulativeInsertEdit());
 				
 				if(change.getCost() <= delete.getCost() && change.getCost() <= insert.getCost()) {
 					edits[i][j] = change;
@@ -93,16 +93,16 @@ public class TreeComparator {
 	private TreeEdit compareReferences(ComparatorTreeNode left, ComparatorTreeNode right) {
 		class RefTraverser {
 			TreeEdit compareReferences(ComparatorTreeNode left, ComparatorTreeNode right) {
-				List<?> leftRefs = left.getNoncontainmentReferences();
-				List<?> rightRefs = right.getNoncontainmentReferences();
+				List<ComparatorTreeNode> leftRefs = left.getNoncontainmentReferences();
+				List<ComparatorTreeNode> rightRefs = right.getNoncontainmentReferences();
 				if(leftRefs.size() != rightRefs.size()) {
 					ContentChangeEdit edit = new ContentChangeEdit(left, right, new RefSizeContentChange(left, leftRefs, rightRefs, leftRefs.size() - rightRefs.size()));
 					return edit;
 				}
 				
 				for(int i = 0; i < leftRefs.size(); i++) {
-					ComparatorTreeNode leftRef = (ComparatorTreeNode)leftRefs.get(i);
-					ComparatorTreeNode rightRef = (ComparatorTreeNode)rightRefs.get(i);
+					ComparatorTreeNode leftRef = leftRefs.get(i);
+					ComparatorTreeNode rightRef = rightRefs.get(i);
 					
 					TreeEdit edit = getEdit(leftRef, rightRef);
 					if(edit.getCost() != 0) {
@@ -111,8 +111,8 @@ public class TreeComparator {
 				}
 				
 				for(int i = 0; i < left.getChildren().size(); i++) {
-					ComparatorTreeNode leftChild = (ComparatorTreeNode)left.getChildren().get(i);
-					ComparatorTreeNode rightChild = (ComparatorTreeNode)right.getChildren().get(i);
+					ComparatorTreeNode leftChild = left.getChildren().get(i);
+					ComparatorTreeNode rightChild = right.getChildren().get(i);
 					
 					TreeEdit edit = compareReferences(leftChild, rightChild);
 					if(edit.getCost() != 0) {
@@ -132,7 +132,7 @@ public class TreeComparator {
 	}
 	
 	private TreeEdit getEdit(ComparatorTreeNode left, ComparatorTreeNode right) {
-		TreeEdit edit = (TreeEdit)myCmp.get(new ObjectPair(left, right));
+		TreeEdit edit = myCmp.get(new ObjectPair(left, right));
 		if(edit == null) {
 			// must be something outside our tree, like PrimitiveType
 			edit = left.equals(right) ? TreeEdit.NULL_EDIT : new ChangeNodeEdit(left, right);
@@ -146,7 +146,7 @@ public class TreeComparator {
 }
 
 class ObjectPair {
-	public ObjectPair(Object first, Object second) {
+	public ObjectPair(ComparatorTreeNode first, ComparatorTreeNode second) {
 		myFirst = first;
 		mySecond = second;
 	}
@@ -166,6 +166,6 @@ class ObjectPair {
 		return 17 + myFirst.hashCode()*37 + mySecond.hashCode(); 
 	}
 	
-	private final Object myFirst;
-	private final Object mySecond;
+	private final ComparatorTreeNode myFirst;
+	private final ComparatorTreeNode mySecond;
 }
