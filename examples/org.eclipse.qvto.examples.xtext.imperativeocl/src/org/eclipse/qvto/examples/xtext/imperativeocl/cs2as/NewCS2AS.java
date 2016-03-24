@@ -46,7 +46,7 @@ public class NewCS2AS extends CS2ASConversion {
 					outputResource = rSet.createResource(asModelURI);
 				}
 				outputResource.getContents().clear();
-				outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+				outputResource.getContents().addAll(tx.getRootEObjects("rightAS"));
 				outputResource.save(null); // FIXME
 			}
 			return true;

@@ -162,15 +162,33 @@ in  if foundModelType->isEmpty()
 	endif
 
 -- FIXME manually added
-def : lookupModelType(typedRef : qvtoperationalcs::TypedTypeRef2CS) : qvtoperational::ModelType[?] =
-	let pathSeq = typedRef.ownedPathName.ownedPathElements2 -- FIXME, safe-navigation produce CollectionValues instead of Ecore_Collections
-	in
-		if pathSeq <> null
-		then -- TODO What if there is more than one ?
-			_lookupModelType(pathSeq->last().name)
-		else null
-		endif
 
+def : lookupModelType(aPathElementCS : qvtoperationalcs::PathElement2CS) : qvtoperational::ModelType[?] =
+   _lookupModelType(aPathElementCS.name)
+   
 
+-- QN Package lookup
+def : lookupModelType(aPathNameCS : qvtoperationalcs::PathName2CS) : qvtoperational::ModelType[?] =
+   lookupModelType(aPathNameCS .ownedPathElements2)
+
+def : lookupModelType(segments : OrderedSet(qvtoperationalcs::PathElement2CS)) : qvtoperational::ModelType[?] =
+   if segments->size() = 1
+   then lookupModelType(segments->first())
+   else lookupModelType(segments->last()) -- TODO what if there is more than one?
+--   		let qualifierSegments = segments->subOrderedSet(1,segments->size()-1),
+--            qualifier = lookupPackage(qualifierSegments)
+--        in qualifier?.lookupQualifiedModelType(segments->last())
+   endif
+        
+--def : lookupModelType(typedRef : qvtoperationalcs::TypedTypeRef2CS) : qvtoperational::ModelType[?] =
+--	lookupModelTlet pathSeq = typedRef.ownedPathName -- FIXME, safe-navigation produce CollectionValues instead of Ecore_Collections
+--	in
+--		if pathSeq <> null
+--		then -- TODO What if there is more than one ?
+--			_lookupModelType(pathSeq->last().name)
+--		else null
+--		endif
+
+-- ENDOF manual add
 
 endpackage
