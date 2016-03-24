@@ -3453,6 +3453,15 @@ public interface ImperativeOCLPackage extends EPackage {
 	int LOG_EXP__IS_PRE = PivotPackage.OPERATION_CALL_EXP__IS_PRE;
 
 	/**
+	 * The feature id for the '<em><b>Is Virtual</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOG_EXP__IS_VIRTUAL = PivotPackage.OPERATION_CALL_EXP__IS_VIRTUAL;
+
+	/**
 	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

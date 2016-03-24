@@ -2576,6 +2576,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP__IS_PRE = PivotPackage.OPERATION_CALL_EXP__IS_PRE;
 
 	/**
+	 * The feature id for the '<em><b>Is Virtual</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_CALL_EXP__IS_VIRTUAL = PivotPackage.OPERATION_CALL_EXP__IS_VIRTUAL;
+
+	/**
 	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2594,22 +2603,13 @@ public interface QVTOperationalPackage extends EPackage {
 	int IMPERATIVE_CALL_EXP__REFERRED_OPERATION = PivotPackage.OPERATION_CALL_EXP__REFERRED_OPERATION;
 
 	/**
-	 * The feature id for the '<em><b>Is Virtual</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_CALL_EXP__IS_VIRTUAL = PivotPackage.OPERATION_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Imperative Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_CALL_EXP_FEATURE_COUNT = PivotPackage.OPERATION_CALL_EXP_FEATURE_COUNT + 1;
+	int IMPERATIVE_CALL_EXP_FEATURE_COUNT = PivotPackage.OPERATION_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>All Owned Elements</em>' operation.
@@ -3615,6 +3615,15 @@ public interface QVTOperationalPackage extends EPackage {
 	int MAPPING_CALL_EXP__IS_PRE = IMPERATIVE_CALL_EXP__IS_PRE;
 
 	/**
+	 * The feature id for the '<em><b>Is Virtual</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_EXP__IS_VIRTUAL = IMPERATIVE_CALL_EXP__IS_VIRTUAL;
+
+	/**
 	 * The feature id for the '<em><b>Owned Arguments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3631,15 +3640,6 @@ public interface QVTOperationalPackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL_EXP__REFERRED_OPERATION = IMPERATIVE_CALL_EXP__REFERRED_OPERATION;
-
-	/**
-	 * The feature id for the '<em><b>Is Virtual</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_EXP__IS_VIRTUAL = IMPERATIVE_CALL_EXP__IS_VIRTUAL;
 
 	/**
 	 * The feature id for the '<em><b>Is Strict</b></em>' attribute.
@@ -6553,17 +6553,6 @@ public interface QVTOperationalPackage extends EPackage {
 	EClass getImperativeCallExp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#isIsVirtual <em>Is Virtual</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Virtual</em>'.
-	 * @see org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeCallExp#isIsVirtual()
-	 * @see #getImperativeCallExp()
-	 * @generated
-	 */
-	EAttribute getImperativeCallExp_IsVirtual();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvto.examples.pivot.qvtoperational.ImperativeOperation <em>Imperative Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7469,14 +7458,6 @@ public interface QVTOperationalPackage extends EPackage {
 		 * @generated
 		 */
 		EClass IMPERATIVE_CALL_EXP = eINSTANCE.getImperativeCallExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Virtual</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute IMPERATIVE_CALL_EXP__IS_VIRTUAL = eINSTANCE.getImperativeCallExp_IsVirtual();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvto.examples.pivot.qvtoperational.impl.ImperativeOperationImpl <em>Imperative Operation</em>}' class.

@@ -442,15 +442,6 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getImperativeCallExp_IsVirtual() {
-		return (EAttribute)imperativeCallExpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getImperativeOperation() {
 		return imperativeOperationEClass;
 	}
@@ -1134,7 +1125,6 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 		createEAttribute(helperEClass, HELPER__IS_QUERY);
 
 		imperativeCallExpEClass = createEClass(IMPERATIVE_CALL_EXP);
-		createEAttribute(imperativeCallExpEClass, IMPERATIVE_CALL_EXP__IS_VIRTUAL);
 
 		imperativeOperationEClass = createEClass(IMPERATIVE_OPERATION);
 		createEReference(imperativeOperationEClass, IMPERATIVE_OPERATION__BODY);
@@ -1311,7 +1301,6 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 		initEAttribute(getHelper_IsQuery(), thePivotPackage.getBoolean(), "isQuery", null, 0, 1, Helper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeCallExpEClass, ImperativeCallExp.class, "ImperativeCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getImperativeCallExp_IsVirtual(), thePivotPackage.getBoolean(), "isVirtual", "true", 0, 1, ImperativeCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(imperativeOperationEClass, ImperativeOperation.class, "ImperativeOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getImperativeOperation_Body(), this.getOperationBody(), this.getOperationBody_Operation(), "body", null, 0, 1, ImperativeOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
