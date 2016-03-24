@@ -39,9 +39,7 @@
     <genClasses ecoreClass="QVTOperational.ecore#QVTOperational.Helper">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTOperational.ecore#QVTOperational.Helper.isQuery"/>
     </genClasses>
-    <genClasses ecoreClass="QVTOperational.ecore#QVTOperational.ImperativeCallExp">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTOperational.ecore#QVTOperational.ImperativeCallExp.isVirtual"/>
-    </genClasses>
+    <genClasses ecoreClass="QVTOperational.ecore#QVTOperational.ImperativeCallExp"/>
     <genClasses ecoreClass="QVTOperational.ecore#QVTOperational.ImperativeOperation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperational.ecore#QVTOperational.ImperativeOperation.body"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTOperational.ecore#QVTOperational.ImperativeOperation.context"/>
