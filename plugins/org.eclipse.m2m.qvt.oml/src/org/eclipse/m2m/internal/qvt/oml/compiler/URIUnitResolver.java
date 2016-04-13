@@ -28,11 +28,8 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 
 	private final class Unit extends UnitProxy {
 
-		private final URI fURI;
-
 		private Unit(String namespace, String unitName, URI unitURI) {
 			super(namespace, unitName, unitURI);
-			this.fURI = unitURI;
 		}
 		
 		@Override
@@ -44,7 +41,7 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 		public UnitContents getContents() throws IOException {
 			return new UnitContents.CSTContents() {
 				public Reader getContents() throws IOException {
-					InputStream is = URIConverter.INSTANCE.createInputStream(fURI);
+					InputStream is = URIConverter.INSTANCE.createInputStream(getURI());
 					return new InputStreamReader(is, "UTF-8"); //$NON-NLS-1$
 				}
 			};

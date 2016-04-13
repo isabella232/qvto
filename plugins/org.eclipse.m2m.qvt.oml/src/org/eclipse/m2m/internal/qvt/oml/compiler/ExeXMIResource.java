@@ -11,6 +11,9 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +39,7 @@ import org.eclipse.emf.ecore.xmi.impl.XMISaveImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.IModuleSourceInfo;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.ExecutableXMIHelper;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMIExtensionEncoder.CorruptedExtensionData;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
@@ -355,6 +359,18 @@ public class ExeXMIResource extends XMIResourceImpl implements Resource {
 
 	protected XMLHelper createXMLHelper() {
 		return new _XMIHelper(this);
+	}
+	
+	@Override
+	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
+		ExecutableXMIHelper.fixResourceOnSave(this);
+		super.doSave(outputStream, options);
+	}
+	
+	@Override
+	public void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+		super.doLoad(inputStream, options);
+		ExecutableXMIHelper.fixResourceOnLoad(this);
 	}
 
 	private Map<URI, URI> getPackage2HREFMap() {

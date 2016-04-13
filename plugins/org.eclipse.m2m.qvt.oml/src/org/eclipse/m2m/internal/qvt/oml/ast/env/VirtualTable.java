@@ -16,7 +16,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -41,7 +40,6 @@ import org.eclipse.ocl.ecore.SendSignalAction;
  */
 public abstract class VirtualTable implements IVirtualOperationTable {
 	private List<EOperation> fOperations;
-	private Map<Module, List<EOperation>> fModule2OperationsMap;
 	
 	protected VirtualTable() {
 	}
@@ -96,17 +94,6 @@ public abstract class VirtualTable implements IVirtualOperationTable {
 			return formalOperation;
 		}
 		
-		// check we can lookup operation directly for the actual type
-		if(scope != null) {
-			for (EOperation nextOperation : getModuleScopeOperations(scope)) {
-				if(env.getUMLReflection().getOwningClassifier(nextOperation) == actualContextType) {
-					if(isOperationInScope(nextOperation, evalEnv)) {
-						return nextOperation;
-					}
-				}
-			}
-		}
-		
 		Collection<EOperation> candidateOperations = QvtOperationalUtil.filterOverriddenOperations(getOperations());	
 		for (EOperation nextOperation : candidateOperations) {
 			if(env.getUMLReflection().getOwningClassifier(nextOperation) == actualContextType) {
@@ -129,13 +116,6 @@ public abstract class VirtualTable implements IVirtualOperationTable {
 		return null;
 	}
 
-	private List<EOperation> getModuleScopeOperations(Module module) {
-		if(module == null || fModule2OperationsMap == null || fModule2OperationsMap.containsKey(module) == false) {
-			return Collections.emptyList();
-		}
-		return fModule2OperationsMap.get(module); 
-	}
-	
 	public Collection<EOperation> getOperations() {
 		return fOperations != null ? fOperations : Collections.<EOperation>emptySet();
 	}

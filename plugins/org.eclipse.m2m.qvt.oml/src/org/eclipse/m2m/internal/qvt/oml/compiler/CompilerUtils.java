@@ -122,13 +122,19 @@ public class CompilerUtils {
     public static ResourceSet cloneResourceSet(URI context, ResourceSet parentRs) {
 		ResourceSetImpl resSet = (ResourceSetImpl) createResourceSet();
 		
+		EPackage.Registry packageRegistry = null;
+		
 		IResource contextResource = URIUtils.getResource(context);
 		if (contextResource != null) {
-			EPackage.Registry packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(contextResource.getProject(), parentRs);
-			resSet.setPackageRegistry(packageRegistry);
+			packageRegistry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(contextResource.getProject(), parentRs);
 		}
-		else if (parentRs != null) {
-			resSet.setPackageRegistry(parentRs.getPackageRegistry());
+
+		if (packageRegistry == null && parentRs != null) {
+			packageRegistry = parentRs.getPackageRegistry();
+		}
+
+		if (packageRegistry != null) {
+			resSet.setPackageRegistry(packageRegistry);
 		}
 		
 		if (parentRs instanceof ResourceSetImpl) {

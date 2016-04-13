@@ -344,7 +344,7 @@ public class QvtOperationalVisitorCS
 			}
 			
 			if (lookupOperation instanceof Constructor) {
-				instantiationExp.eAdapters().add(new ConstructorOperationAdapter((Constructor) lookupOperation));
+				ASTBindingHelper.setConstructorOperation(instantiationExp, (Constructor) lookupOperation);
 			} else if(lookupOperation == null && QvtOperationalUtil.isInstantiable(type)) {
 				if(newCallExp.getArguments().isEmpty()) {
 					// we try to call a default constructor defined explicitly
@@ -5309,6 +5309,8 @@ public class QvtOperationalVisitorCS
 				mappingCallExp.setSource(operationCallExp.getSource());
 				mappingCallExp.setType(operationCallExp.getType());
 				mappingCallExp.setIsStrict(expressionCS.isStrict());
+				
+				mappingCallExp.setOperationCode(operationCallExp.getOperationCode());
 				
 				mappingCallExp.setPropertyStartPosition(operationCallExp.getPropertyStartPosition());
 				mappingCallExp.setPropertyEndPosition(operationCallExp.getPropertyEndPosition());				

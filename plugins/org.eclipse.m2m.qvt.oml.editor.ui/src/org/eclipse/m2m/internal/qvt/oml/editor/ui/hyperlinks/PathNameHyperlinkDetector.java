@@ -15,17 +15,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import lpg.runtime.IPrsStream;
-import lpg.runtime.IToken;
-
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.ENamedElement;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
@@ -33,7 +28,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTSyntheticNode;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTSyntheticNodeAccess;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ConstructorOperationAdapter;
 import org.eclipse.m2m.internal.qvt.oml.cst.ClassifierDefCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.InstantiationExpCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingModuleCS;
@@ -44,6 +38,9 @@ import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.InstantiationExp;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.cst.PathNameCS;
 import org.eclipse.ocl.cst.SimpleNameCS;
+
+import lpg.runtime.IPrsStream;
+import lpg.runtime.IToken;
 
 
 /**
@@ -165,8 +162,7 @@ public class PathNameHyperlinkDetector implements IHyperlinkDetectorHelper {
 			return false;
 		}
 		InstantiationExp instExp = (InstantiationExp) constructorCS.getAst();
-		Adapter adapter = EcoreUtil.getAdapter(instExp.eAdapters(), ConstructorOperationAdapter.class);
-		return adapter != null && ((ConstructorOperationAdapter) adapter).getReferredConstructor() != null;
+		return ASTBindingHelper.getConstructorOperation(instExp) != null;
 	}
 
 	

@@ -18,6 +18,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnumLiteral;
@@ -26,12 +27,16 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.common.util.LineNumberProvider;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingModuleCS;
+import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.CatchExp;
+import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.InstantiationExp;
 import org.eclipse.ocl.Environment;
 import org.eclipse.ocl.cst.CSTNode;
 import org.eclipse.ocl.ecore.CallOperationAction;
@@ -333,38 +338,54 @@ public class ASTBindingHelper {
 		}
 	}
 	
+	public static Variable getCatchVariable(CatchExp catchExp) {
+		EAnnotation annotation = catchExp.getEAnnotation(CATCH_VAR_SOURCE);
+		if (annotation == null) {
+			return null;
+		}
+		if (annotation.getContents().isEmpty() || false == annotation.getContents().get(0) instanceof Variable) {
+			return null;
+		}
+		return (Variable) annotation.getContents().get(0);
+	}
+
 	public static void setCatchVariable(CatchExp catchExp, Variable catchVar) {
-		Adapter adapter = EcoreUtil.getAdapter(catchExp.eAdapters(), CatchVariableAdapter.class);
-		if(adapter != null) {
-			catchExp.eAdapters().remove(adapter);
+		EAnnotation annot = catchExp.getEAnnotation(CATCH_VAR_SOURCE);
+		if (annot == null) {
+			annot = EcoreFactory.eINSTANCE.createEAnnotation();
+			annot.setSource(CATCH_VAR_SOURCE);
+			catchExp.getEAnnotations().add(annot);
 		}
 		
-		catchExp.eAdapters().add(new CatchVariableAdapter(catchVar));
+		annot.getContents().clear();
+		annot.getContents().add(catchVar);
 	}
 	
-	public static Variable getCatchVariable(CatchExp catchExp) {
-		Adapter adapter = EcoreUtil.getAdapter(catchExp.eAdapters(), CatchVariableAdapter.class);
-		if(adapter instanceof CatchVariableAdapter) {
-			return ((CatchVariableAdapter) adapter).getCatchVar();
+	public static Constructor getConstructorOperation(InstantiationExp instExp) {
+		EAnnotation annot = instExp.getEAnnotation(CONSTRUCTOR_SOURCE);
+		if(annot != null && !annot.getReferences().isEmpty()) {
+			EObject refObj = annot.getReferences().get(0);
+			if(refObj instanceof Constructor) {
+				return (Constructor) refObj;
+			}
 		}
 		return null;
 	}
 	
-	private static class CatchVariableAdapter extends AdapterImpl {
-		
-		private final Variable catchVariable;
-		
-		CatchVariableAdapter(Variable var) {
-			catchVariable = var;
+	public static void setConstructorOperation(InstantiationExp instExp, Constructor constructorOp) {
+		EAnnotation annot = instExp.getEAnnotation(CONSTRUCTOR_SOURCE);
+		if (annot == null) {
+    		annot = EcoreFactory.eINSTANCE.createEAnnotation();
+    		annot.setSource(CONSTRUCTOR_SOURCE);
+    		instExp.getEAnnotations().add(annot);
 		}
-		
-		Variable getCatchVar() {
-			return catchVariable;
-		}
-		
-		@Override
-		public boolean isAdapterForType(Object type) {
-			return type == CatchVariableAdapter.class;
-		}
+
+   		annot.getReferences().clear();
+   		annot.getReferences().add(constructorOp);
 	}
+	
+	
+	private static final String CATCH_VAR_SOURCE = QvtOperationalParserUtil.QVT_NAMESPACE_URI + "/catchVar"; //$NON-NLS-1$
+	private static final String CONSTRUCTOR_SOURCE = QvtOperationalParserUtil.QVT_NAMESPACE_URI + "/constructor"; //$NON-NLS-1$
+	
 }

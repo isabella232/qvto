@@ -14,15 +14,19 @@ package org.eclipse.m2m.internal.qvt.oml.runtime.resource;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.DOMHandler;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
+import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtModule;
@@ -46,7 +50,6 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
     @Override
     public void load(Map<?, ?> options) throws IOException {
     	if (!isLoaded()) {
-    		Notification notification = null;
     		isLoading = true;
 
 			if (errors != null) {
@@ -58,7 +61,8 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
     		
             try {
             	URI normalizedUri = getURIConverter().normalize(getURI());
-            	QvtModule qvtModule = TransformationUtil.getQvtModule(normalizedUri);
+            	EPackage.Registry packageRegistry = getResourceSet() != null ? getResourceSet().getPackageRegistry() : null;
+            	QvtModule qvtModule = TransformationUtil.getQvtModule(normalizedUri, packageRegistry);
 
             	QvtCompilerOptions qvtOptions = new QvtCompilerOptions();
             	qvtOptions.setModuleWithErrorAllowed(true);
@@ -72,8 +76,22 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
     						normalizedUri, unit.getProblems()));
     			}
 
-        		notification = setLoaded(true);
-    			getContents().addAll(unit.getModules());
+        		getContents().addAll(unit.getModules());
+    			
+    			if (getResourceSet() != null) {
+	    			HashSet<CompiledUnit> allUnits = new HashSet<CompiledUnit>();		
+	    			QvtOperationalParserUtil.collectAllImports(unit, allUnits);
+	    			for (CompiledUnit nextUnit : allUnits) {
+	    				URI nextUri = nextUnit.getURI();
+	    				if (BlackboxUnitResolver.isBlackboxUnitURI(nextUri)) {
+	    					continue;
+	    				}
+	    				Resource resource = getResourceSet().getResource(nextUri, false);
+	    				if (resource == null) {
+	    					getResourceSet().getResources().add(confineInResource(nextUnit));
+	    				}
+	    			}
+    			}
             }
             catch (MdaException e) {
 				throw new IOWrappedException(e);
@@ -81,6 +99,7 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
             finally {
 				isLoading = false;
 				
+	    		Notification notification = setLoaded(true);
 				if (notification != null) {
 					eNotify(notification);
 				}
@@ -90,7 +109,19 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
     	}
     }
     
-    private void fillCompilationDiagnostic(CompiledUnit unit, URI uri) {
+	private static Resource confineInResource(CompiledUnit unit) {
+		QvtOperationalResourceImpl rs = new QvtOperationalResourceImpl(unit.getURI());
+		rs.getContents().addAll(unit.getModules());
+		
+		rs.fillCompilationDiagnostic(unit, unit.getURI());
+
+		rs.setLoaded(true);
+		rs.setModified(false);
+		
+		return rs;
+	}
+
+	private void fillCompilationDiagnostic(CompiledUnit unit, URI uri) {
     	warnings = getWarnings();
 		for (QvtMessage msg : unit.getWarnings()) {
 			warnings.add(new Diagnostic(msg.getMessage(), uri.toString(), msg.getLineNum()));

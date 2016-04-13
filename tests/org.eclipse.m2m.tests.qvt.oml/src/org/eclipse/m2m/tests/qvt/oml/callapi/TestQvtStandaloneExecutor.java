@@ -92,10 +92,6 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(name);
 		}
 		
-		URI getTraceUri() {
-			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(getName()).appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
-		}
-		
 	}
 	
 }

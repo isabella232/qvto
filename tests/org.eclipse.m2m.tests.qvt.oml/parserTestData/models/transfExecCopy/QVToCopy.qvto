@@ -1,0 +1,13 @@
+modeltype qvto uses "http://www.eclipse.org/QVT/1.0.0/Operational";
+
+transformation QVToCopy(in qvtoIn : qvto, out qvtoOut : qvto);
+
+main() {
+	qvtoIn.rootObjects()[qvto::expressions::Module]->map theMap();
+}
+
+mapping qvto::expressions::Module::theMap() : qvto::expressions::Module {
+	init {
+		result := self.deepclone().oclAsType(qvto::expressions::Module);
+	}
+}

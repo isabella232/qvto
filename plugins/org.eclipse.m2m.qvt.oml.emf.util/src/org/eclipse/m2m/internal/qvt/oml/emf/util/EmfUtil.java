@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -441,6 +443,10 @@ public class EmfUtil {
 		
 		List<Resource> resCopy = new ArrayList<Resource>(rs.getResources()); 
 		for (Resource res : resCopy) {
+			if (res.eAdapters().contains(RESOURCE_PERSISTED_ADAPTER)) {
+				continue;
+			}
+			
 //			for (TreeIterator<EObject> it = res.getAllContents(); it.hasNext();) {
 //				EObject eObject = it.next();
 //				eObject.eAdapters().clear();				
@@ -468,6 +474,8 @@ public class EmfUtil {
 		return isUriExistsAsEObject(uri, rs, validateNonEmpty);
 	}
 	
+	
+	public static final Adapter RESOURCE_PERSISTED_ADAPTER = new AdapterImpl();
 	
     public static final Map<Object, Object> DEFAULT_SAVE_OPTIONS = new HashMap<Object, Object>();
     static {

@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
@@ -51,6 +52,10 @@ public class TransformationUtil {
     }
     
 	public static QvtModule getQvtModule(final URI uriTransf) throws MdaException {
+		return getQvtModule(uriTransf, null);
+	}
+	
+	public static QvtModule getQvtModule(final URI uriTransf, EPackage.Registry packageRegistry) throws MdaException {
 		if (uriTransf == null) {
 			throw new MdaException(NLS.bind(Messages.TransformationUtil_InvalidUri, uriTransf));
 		}
@@ -60,7 +65,7 @@ public class TransformationUtil {
 			return new WorkspaceQvtModule(ifile);
 		}
 		
-		return new DeployedQvtModule(uriTransf);
+		return new DeployedQvtModule(uriTransf, packageRegistry);
 	}
 	
 	public static String getTransformationFqn(QvtTransformation transformation) {

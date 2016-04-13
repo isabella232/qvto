@@ -84,9 +84,7 @@ public abstract class TransformationExecutorTest extends TestCase {
 		}
 		
 		URI getTraceUri() {
-			return URI.createPlatformPluginURI(getBundle() + IPath.SEPARATOR + getTestDataFolder() + IPath.SEPARATOR
-					+ ModelTestData.MODEL_FOLDER + IPath.SEPARATOR + getName() + IPath.SEPARATOR + getName()
-					+ MDAConstants.QVTO_TRACEFILE_EXTENSION_WITH_DOT, true);
+			return getTransformationUri().trimFileExtension().appendFileExtension(MDAConstants.QVTO_TRACEFILE_EXTENSION);
 		}
 		
 	}

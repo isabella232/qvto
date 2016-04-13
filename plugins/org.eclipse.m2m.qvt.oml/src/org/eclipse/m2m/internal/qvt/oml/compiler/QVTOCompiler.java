@@ -161,7 +161,7 @@ public class QVTOCompiler {
 		
 		return new CompiledUnit[0];
 	}
-        
+
     public QVTOCompiler(IMetamodelRegistryProvider metamodelRegistryProvider) {
         fMetamodelRegistryProvider = metamodelRegistryProvider;
         
@@ -732,7 +732,7 @@ public class QVTOCompiler {
 		return createStandaloneMetamodelRegistryProvider(packageRegistry);
 	}
 	
-	private static IMetamodelRegistryProvider createStandaloneMetamodelRegistryProvider(final EPackage.Registry packageRegistry) {
+	public static IMetamodelRegistryProvider createStandaloneMetamodelRegistryProvider(final EPackage.Registry packageRegistry) {
 		return new IMetamodelRegistryProvider() {
 			public MetamodelRegistry getRegistry(IRepositoryContext context) {
 				return new MetamodelRegistry(packageRegistry);

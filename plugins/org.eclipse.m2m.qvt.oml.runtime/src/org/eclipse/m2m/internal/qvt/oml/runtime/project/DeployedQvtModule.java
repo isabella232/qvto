@@ -13,6 +13,7 @@ package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
@@ -31,18 +32,23 @@ public class DeployedQvtModule extends QvtModule {
     
 	private Module myModule;
 	private CompiledUnit myUnit;
-    private ResourceSet myResourceSet;
-	private URI moduleUri;
+    private ResourceSet myCompilationRs;
+	private final URI moduleUri;
+	private final EPackage.Registry packageRegistry;
 	
-	public DeployedQvtModule(URI qvtModuleUri) throws MdaException {
+	public DeployedQvtModule(URI qvtModuleUri, EPackage.Registry packageRegistry) throws MdaException {
 		if(qvtModuleUri == null || qvtModuleUri.segmentCount() == 0) {
 			throw new MdaException(NLS.bind(Messages.TransformationUtil_InvalidUri, 
 					qvtModuleUri == null ? String.valueOf(null) : qvtModuleUri.toString()));
 		}
 		this.moduleUri = qvtModuleUri;
+		this.packageRegistry = packageRegistry;
     }
 	
 	protected IMetamodelRegistryProvider creatMetamodelRegistryProvider() {
+		if (packageRegistry != null) {
+			return QVTOCompiler.createStandaloneMetamodelRegistryProvider(packageRegistry);
+		}
 		return new MetamodelRegistryProvider();
 	}
 	
@@ -51,7 +57,7 @@ public class DeployedQvtModule extends QvtModule {
         if (myModule == null) {
         	UnitProxy srcUnit = UnitResolverFactory.Registry.INSTANCE.getUnit(moduleUri);
         	if (srcUnit == null) {
-        		throw new MdaException(NLS.bind(CompilerMessages.importedModuleNotFound, moduleUri));
+        		throw new MdaException(NLS.bind(CompilerMessages.moduleNotFound, moduleUri));
         	}
         	
             QVTOCompiler qvtCompiler = new QVTOCompiler(creatMetamodelRegistryProvider());
@@ -70,21 +76,21 @@ public class DeployedQvtModule extends QvtModule {
             
             // FIXME - we should add support of uri fragment, being the name of the referred module
             myModule = myUnit.getModules().get(0);
-            myResourceSet = qvtCompiler.getResourceSet();
+            myCompilationRs = qvtCompiler.getResourceSet();
         }
         
         return myModule;
     }
-    
+
 	@Override
 	public ResourceSet getResourceSet() {
-		return myResourceSet;
+		return myCompilationRs;
 	}
 	
 	@Override
 	public void cleanup() {
-		if (myResourceSet != null) {
-			EmfUtil.cleanupResourceSet(myResourceSet);
+		if (myCompilationRs != null) {
+			EmfUtil.cleanupResourceSet(myCompilationRs);
 		}
 	}
 	

@@ -64,6 +64,9 @@ public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
 		}
 		
 		IResource resource = URIUtils.getResource(uri);
+		if (resource == null) {
+			return null;
+		}
 		
 		try {
 			IContainer sourceContainer = QVTOBuilderConfig.getConfig(resource.getProject()).getSourceContainer();
@@ -72,7 +75,10 @@ public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
 			assert (relativeUri.isRelative());
 			
 			// exclude first segment which is the source container itself
-			return ResolverUtils.toQualifiedName(relativeUri.segments(), 1, relativeUri.segmentCount()-1);
+			String[] segments = relativeUri.segments();
+			if(segments.length > 1) {
+				return ResolverUtils.toQualifiedName(segments, 1, segments.length-1);
+			}
 		}
 		catch(CoreException e) {
 			QVTOProjectPlugin.log(e.getStatus());

@@ -28,6 +28,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
+import org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMISerializer;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
@@ -61,6 +62,10 @@ public class CstTransformation implements Transformation {
 	}
 	
 	protected CompiledUnit getCompiledUnit(IProgressMonitor monitor) throws MdaException {			
+		if (ExeXMISerializer.COMPILED_XMI_FILE_EXTENSION.equals(fURI.fileExtension())) {
+			return new CompiledUnit(fURI, getResourceSet());
+		}
+
 		UnitProxy proxy = UnitResolverFactory.Registry.INSTANCE.getUnit(fURI);
 		if (proxy == null) {
 			fLoadDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR,

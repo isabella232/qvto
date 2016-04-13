@@ -35,8 +35,13 @@ public abstract class UnitResolverFactory {
 
 	
 	private UnitProxy findUnit(URI uri) {
+		String qualifiedName = getQualifiedName(uri);
+		if (qualifiedName == null) {
+			return null;
+		}
+		
 		UnitResolver resolver = getResolver(uri);
-		return resolver != null ? resolver.resolveUnit(getQualifiedName(uri)) : null;
+		return resolver != null ? resolver.resolveUnit(qualifiedName) : null;
 	}
 	
 	

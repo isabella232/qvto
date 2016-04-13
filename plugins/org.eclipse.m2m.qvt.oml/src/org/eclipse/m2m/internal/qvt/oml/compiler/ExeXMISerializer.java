@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ExecutableXMIHelper;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 
 public class ExeXMISerializer {
@@ -62,8 +61,6 @@ public class ExeXMISerializer {
 				Resource unitResource = nextModuleEnv.getTypeResolver().getResource();
 				unitResource.setURI(xmiUnitURI);
 				
-				ExecutableXMIHelper.fixResourceOnSave(unitResource);
-
 				xmiUnitResource.getContents().addAll(unitResource.getContents());
 			}
 		}
@@ -91,6 +88,6 @@ public class ExeXMISerializer {
 		}
 	}
 
-	static final String COMPILED_XMI_FILE_EXTENSION = "qvtox"; //$NON-NLS-1$ 
+	public static final String COMPILED_XMI_FILE_EXTENSION = "qvtox"; //$NON-NLS-1$ 
 	
 }

@@ -21,6 +21,7 @@ import org.eclipse.m2m.tests.qvt.oml.ant.TestQvtAntScript;
 import org.eclipse.m2m.tests.qvt.oml.callapi.AllCallAPITests;
 import org.eclipse.m2m.tests.qvt.oml.callapi.DebugExecutorTest;
 import org.eclipse.m2m.tests.qvt.oml.callapi.SourceContainerTests;
+import org.eclipse.m2m.tests.qvt.oml.callapi.TestExecutableTransfCopy;
 import org.eclipse.m2m.tests.qvt.oml.callapi.TestQvtExecutor;
 import org.eclipse.m2m.tests.qvt.oml.compile.AllCompileTests;
 import org.eclipse.m2m.tests.qvt.oml.emf.TestEmfUtil;
@@ -71,6 +72,7 @@ import junit.framework.TestCase;
 	        DebugExecutorTest.class,
 	        TransformManyModelTests.class,
 	        QvtoTransfHelperTests.class,
+			TestExecutableTransfCopy.class,
 	        
 	        TestQvtBuilder.class,        
 	        TestSamples.class,

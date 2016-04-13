@@ -27,6 +27,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents.ModelContents;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 
 public class BlackboxResourceFactory implements Resource.Factory {
 	
@@ -49,6 +50,8 @@ public class BlackboxResourceFactory implements Resource.Factory {
 					}
 
 					setLoaded(true);
+					
+					eAdapters().add(EmfUtil.RESOURCE_PERSISTED_ADAPTER);
 				}
 			}
 			@Override

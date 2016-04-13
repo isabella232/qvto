@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.InternalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.ModelParameterExtent;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.ExecutableXMIHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.EvaluationUtil;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
@@ -108,9 +109,13 @@ public class ElementOperations extends AbstractContextualOperations {
 			if(source instanceof EObject) {
 				EObject eObject = (EObject) source;
 				EcoreUtil.Copier copier = new IntermediatePropertyCopier(evalEnv);
+				
+				ExecutableXMIHelper.fixEObjectOnSave(eObject);
 			    
 			    EObject result = copier.copy(eObject);
 			    copier.copyReferences();
+			    
+			    ExecutableXMIHelper.fixEObjectOnLoad(result);
 
 				ModelParameterExtent extent = evalEnv.getDefaultInstantiationExtent(eObject.eClass());
 				if(extent != null) {

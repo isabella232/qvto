@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -43,7 +42,6 @@ import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
@@ -57,7 +55,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ConstructorOperationAdapter;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.IntermediateClassFactory.ExceptionClassInstance;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
@@ -987,10 +984,8 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 
 	        Object owner = createInstance(objectExp.getType(), (ModelParameter) objectExp.getExtent(), actualArguments);
 			
-			Adapter constructorOperationAdapter = EcoreUtil.getAdapter(objectExp.eAdapters(), ConstructorOperationAdapter.class);
-			if (constructorOperationAdapter != null) {
-				Constructor constructorOp = ((ConstructorOperationAdapter) constructorOperationAdapter).getReferredConstructor();
-				
+	        Constructor constructorOp = ASTBindingHelper.getConstructorOperation(objectExp);
+			if (constructorOp != null) {
 				ImperativeOperation overriding = EvaluationUtil.getOverridingOperation(getOperationalEvaluationEnv(), constructorOp);
 	    		if (overriding instanceof Constructor) {
 	    			constructorOp = (Constructor) overriding;

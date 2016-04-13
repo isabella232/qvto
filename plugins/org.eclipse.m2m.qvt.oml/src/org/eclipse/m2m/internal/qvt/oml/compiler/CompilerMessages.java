@@ -20,8 +20,7 @@ public class CompilerMessages extends NLS {
 	public static String importedCompilationUnitNotFound;
 	public static String compilationUnitAlreadyImported;	
 	public static String cyclicImportError;
-	public static String moduleAlreadyImported;
-	public static String importedModuleNotFound;	
+	public static String moduleNotFound;	
 	
 	public static String importHasCompilationError;
 	public static String emptyImport;	

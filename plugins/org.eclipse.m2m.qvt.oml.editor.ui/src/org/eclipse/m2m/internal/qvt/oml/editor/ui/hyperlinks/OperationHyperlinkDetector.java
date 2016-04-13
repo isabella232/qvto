@@ -11,16 +11,13 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.editor.ui.hyperlinks;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.IModuleSourceInfo;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ConstructorOperationAdapter;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.cst.InstantiationExpCS;
@@ -49,11 +46,10 @@ public class OperationHyperlinkDetector implements IHyperlinkDetectorHelper {
 				return null;
 			}
 			InstantiationExp instExp = (InstantiationExp) syntaxElement.getAst();
-			Adapter adapter = EcoreUtil.getAdapter(instExp.eAdapters(), ConstructorOperationAdapter.class);
-			if (adapter == null) {
+			Constructor constructor = ASTBindingHelper.getConstructorOperation(instExp);
+			if (constructor == null) {
 				return null;
 			}
-			Constructor constructor = ((ConstructorOperationAdapter) adapter).getReferredConstructor();
 			CSTNode resultCS = ASTBindingHelper.resolveCSTNode(constructor);
 			CSTNode nameCS = (InstantiationExpCS) syntaxElement;//((InstantiationExpCS) syntaxElement).getTypeSpecCS();
 			if (resultCS instanceof MappingMethodCS) {

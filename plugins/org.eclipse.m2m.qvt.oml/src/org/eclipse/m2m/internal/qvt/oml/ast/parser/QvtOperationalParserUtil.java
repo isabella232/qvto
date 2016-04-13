@@ -701,7 +701,7 @@ public class QvtOperationalParserUtil {
 		operation.getEAnnotations().add(annotation);
 	}
 	
-	static boolean isAbstractOperation(ImperativeOperation operation) {
+	public static boolean isAbstractOperation(ImperativeOperation operation) {
 		EAnnotation annotation = operation.getEAnnotation(QVT_NAMESPACE_URI);
 		if(annotation != null) {
 			String value = annotation.getDetails().get(QVT_IS_ABSTRACT);

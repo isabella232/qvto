@@ -25,6 +25,8 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
@@ -78,6 +80,7 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 		}
 
 		JavaModuleLoader javaModuleLoader = createJavaModuleLoader();
+		Resource unitResource = new EcoreResourceFactoryImpl().createResource(descriptor.getURI());
 
 		BasicDiagnostic errors = null;
 		List<QvtOperationalModuleEnv> loadedModules = new LinkedList<QvtOperationalModuleEnv>();
@@ -90,7 +93,9 @@ public abstract class JavaBlackboxProvider extends AbstractBlackboxProvider {
 				nextModuleEnv.getTypeResolver().getResource().setURI(descriptor.getURI());
 				ASTBindingHelper.createModuleSourceBinding(nextModuleEnv.getModuleContextType(), descriptor.getURI(),
 						new StringLineNumberProvider("")); //$NON-NLS-1$
+
 				loadedModules.add(nextModuleEnv);
+				unitResource.getContents().add(nextModuleEnv.getModuleContextType());
 
 				if (diagnostic.getSeverity() != Diagnostic.OK) {
 					QvtPlugin.logDiagnostic(diagnostic);

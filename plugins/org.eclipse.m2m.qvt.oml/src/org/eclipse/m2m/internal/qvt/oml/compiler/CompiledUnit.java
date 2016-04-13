@@ -40,7 +40,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalFileEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ExecutableXMIHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory;
 import org.eclipse.m2m.internal.qvt.oml.cst.UnitCS;
@@ -89,15 +88,7 @@ public class CompiledUnit {
 	}
 	
 	static ResourceSetImpl createResourceSet(EPackage.Registry registry) {		
-		ResourceSetImpl rs = new ResourceSetImpl() {			
-			@Override
-			protected void demandLoad(Resource resource) throws java.io.IOException {
-				super.demandLoad(resource);
-				if(ExeXMISerializer.COMPILED_XMI_FILE_EXTENSION.equals(resource.getURI().fileExtension())) {
-					ExecutableXMIHelper.fixResourceOnLoad(resource);
-				}
-			}
-		};
+		ResourceSetImpl rs = new ResourceSetImpl();
 		
 		if(registry != null) {
 			rs.setPackageRegistry(registry);

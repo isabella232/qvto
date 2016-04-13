@@ -18,7 +18,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -30,8 +29,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
+import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
@@ -283,10 +282,8 @@ public class QvtOperationalValidationVisitor extends QvtOperationalAstWalker {
 		}
 		
 		// declared constructors
-		Adapter adapter = EcoreUtil.getAdapter(instantiationExp.eAdapters(), ConstructorOperationAdapter.class);
-		if (adapter != null) {
-			assert ((ConstructorOperationAdapter) adapter).getReferredConstructor() != null;
-			
+		Constructor constructorOp = ASTBindingHelper.getConstructorOperation(instantiationExp);
+		if (constructorOp != null) {
 			if (instantiatedClass != null 
 					&& (instantiatedClass.isAbstract() || instantiatedClass.isInterface())) {
 				
