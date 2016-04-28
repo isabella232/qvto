@@ -9,7 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
-package org.eclipse.m2m.internal.qvt.oml.runtime.generator;
+package org.eclipse.m2m.internal.qvt.oml;
 
 import java.util.ArrayList;
 import java.util.HashMap;

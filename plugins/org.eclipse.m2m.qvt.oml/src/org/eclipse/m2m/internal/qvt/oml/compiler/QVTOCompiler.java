@@ -471,7 +471,9 @@ public class QVTOCompiler {
 	    	return result;
 	    	
     	} finally {
-    		fDependencyWalkPath.pop();   		
+    		if (!fDependencyWalkPath.empty()) {
+    			fDependencyWalkPath.pop();
+    		}
     		
     		monitor.done();
     	}

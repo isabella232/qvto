@@ -11,10 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicDiagnostic;
@@ -22,11 +19,9 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor.TracesAwareExecutor;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnvFactory;
+import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.ModelContent;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
@@ -203,7 +198,7 @@ public class TransformationRunner  {
 			}
 
 			// can continue and save output
-			Diagnostic saveExtentsDiagnostic = fExtentHelper.saveExtents();
+			Diagnostic saveExtentsDiagnostic = fExtentHelper.saveExtents(context.getSessionData().getValue(QVTEvaluationOptions.FLAG_QVTO_UNPARSE_ENABLED));
 			handleSaveExtents(saveExtentsDiagnostic);
 			
 			if(!isSuccess(saveExtentsDiagnostic)) {
@@ -223,13 +218,9 @@ public class TransformationRunner  {
 	
 	private Diagnostic saveTraces(Trace trace) { 
 		if(fTraceFileURI != null && fIsSaveTrace) {
-			Resource resource = new ResourceSetImpl().createResource(fTraceFileURI);
-			resource.getContents().add(trace);
 			try {
-		        Map<String, String> options = new HashMap<String, String>();
-		        options.put(XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD);
-				resource.save(options);
-			} catch (IOException e) {
+				new TraceSerializer(trace).saveTraceModel(fTraceFileURI);
+			} catch (MdaException e) {
 				String message = NLS.bind("Failed to save trace model uri={0}", fTraceFileURI);
 				return new BasicDiagnostic(Diagnostic.ERROR, QvtPlugin.ID, 0,
 						message, new Object[] { e });

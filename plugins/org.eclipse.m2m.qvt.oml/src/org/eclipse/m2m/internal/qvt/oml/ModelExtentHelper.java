@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.internal.qvt.oml.evaluator.QVTEvaluationOptions;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -77,7 +78,7 @@ public class ModelExtentHelper {
 		return fResourceSet;
 	};
 	
-	public Diagnostic saveExtents() {
+	public Diagnostic saveExtents(Boolean isQvtoUnparseEnabled) {
 		BasicDiagnostic diagnostic = QvtPlugin.createDiagnostic("Save model param extents diagnostic");
 		
 		Set<Resource> resources = new HashSet<Resource>();		
@@ -89,9 +90,12 @@ public class ModelExtentHelper {
 			}
 		}
 		
+		Map<Object, Object> options = new LinkedHashMap<Object, Object>(EmfUtil.DEFAULT_SAVE_OPTIONS);
+		options.put(QVTEvaluationOptions.FLAG_QVTO_UNPARSE_ENABLED, isQvtoUnparseEnabled);
+		
 		for (Resource outExtent : resources) {
 			try {
-				EmfUtil.saveModel(outExtent, EmfUtil.DEFAULT_SAVE_OPTIONS);
+				EmfUtil.saveModel(outExtent, options);
 			}
 			catch (EmfException e) {
 				diagnostic.add(QvtPlugin.createErrorDiagnostic(
