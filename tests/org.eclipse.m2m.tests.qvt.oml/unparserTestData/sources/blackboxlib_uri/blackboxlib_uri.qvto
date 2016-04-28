@@ -1,0 +1,10 @@
+import library TestBlackboxLibrary;
+
+
+modeltype ECORE "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
+
+transformation blackboxlib_uri(in model : ECORE, out modelOut : ECORE)
+extends library TestBlackboxLibrary;
+
+main() {
+}
