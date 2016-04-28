@@ -94,4 +94,30 @@ public class QVTEvaluationOptions {
 	 */
 	public static final ISessionData.SimpleEntry<Trace> INCREMENTAL_UPDATE_TRACE = new ISessionData.SimpleEntry<Trace>();
 
+	/**
+	 * This flag controls the capability to save a QVTO Operational transformation model in textual concrete syntax.
+	 * <p>
+	 * There are three possible syntaxes for QVTo model interchange (created for example by QVTo transformation):
+	 * <ul>
+	 * <li/>
+	 *  .xmi - model is stored in XMI syntax (by means of org.eclipse.emf.ecore.xmi.XMIResourceImpl)
+	 * <li/>
+	 *  .qvtox - model is stored in XMI syntax with addition annotations (by means of 
+	 *           org.eclipse.m2m.internal.qvt.oml.compiler.ExeXMIResource). 
+	 *           These annotations contain compile-time details for the model.
+	 * <li>
+	 *  .qvto - model is stored in textual concrete syntax (by means of 
+	 *          org.eclipse.m2m.internal.qvt.oml.runtime.resource.QvtOperationalResourceImpl).
+	 *          This opportunity is enabled by default. In order to disable it one should set FLAG_QVTO_UNPARSE_ENABLED option 
+	 *          like:
+	 * <p> <blockquote><pre>
+	 * ExecutionContextImpl context = new ExecutionContextImpl();
+	 * context.getSessionData().setValue(QVTEvaluationOptions.FLAG_QVTO_UNPARSE_ENABLED, Boolean.FALSE);
+	 * </pre></blockquote>
+	 * 
+	 * </ul>
+	 * 
+	 */
+	public static final ISessionData.SimpleEntry<Boolean> FLAG_QVTO_UNPARSE_ENABLED = new ISessionData.SimpleEntry<Boolean>();
+	
 }
