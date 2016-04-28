@@ -1,28 +1,30 @@
-modeltype UML "strict" uses uml('http://www.eclipse.org/uml2/3.0.0/UML');
+modeltype UML "strict" uses simpleuml('http://www.eclipse.org/qvt/1.0.0/Operational/examples/simpleuml');
 
 transformation UMLFoo(inout uml : UML);
 
 main() {
 	var c := uml.objects()![Class];
-	var p := c._package;
+	var p := c.owner;
 
-	var i := object UML::Interface {
+	var i := object UML::Class {
 		name := "I" + c.name;
-		ownedOperation := c.ownedOperation[visibility = VisibilityKind::public];
+		attributes := c.attributes[name = "foo"];
 	};
 
-	p.ownedType += i;
+	p.ownedElements += i;
 	
-	c.interfaceRealization += object InterfaceRealization {
-		contract := i;
-		implementingClassifier := c;
+	c.generalizations += object Generalization {
+		isSubstitutable := false;
+		general := c;
 	};
 
-	(uml.objects()[TypedElement])[type = c]->map updateReferredType(i);
+	(uml.objects()[ModelElement])[stereotype->includes('stereo')]->map updateReferredType(i);
 	
 	c.name := c.name + "Impl";
 }
 
-mapping inout TypedElement::updateReferredType(in newType : Interface) {
-	type := newType; 
+mapping inout ModelElement::updateReferredType(in newType : Type) {
+	taggedValue += object TaggedValue {
+		value := newType.stereotype->any(true)
+	} 
 }

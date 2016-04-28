@@ -138,7 +138,6 @@ public class DebugExecutorTest extends TestCase {
         if (myDestFolder.exists()) {
             FileUtil.delete(myDestFolder);
         }
-        myProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
     	myData = null;
 	}
 	

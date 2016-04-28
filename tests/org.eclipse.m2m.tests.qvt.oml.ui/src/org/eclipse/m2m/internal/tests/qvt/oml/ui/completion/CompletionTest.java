@@ -100,6 +100,8 @@ public class CompletionTest extends AbstractCompletionTest {
                 }
             }
         }
+        
+        FileUtil.delete(getTransfromationContainer().getRawLocation().toFile());
     }
 
     @Override
@@ -118,9 +120,6 @@ public class CompletionTest extends AbstractCompletionTest {
 	
 	protected void initializeProject() throws Exception {
 		myTestProject = new TestProject("CompletionTest", new String[] {}); //$NON-NLS-1$
-        File srcFolder = TestUtil.getPluginRelativeFile(BUNDLE, ICompletionTestConstants.COMPLETION_TEST_FOLDER);
-        FileUtil.copyFolder(srcFolder, myTestProject.getProject().getLocation().toFile());
-		myTestProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
 	}
 	
 	protected void initializeProposalProvider() throws Exception {
@@ -211,6 +210,13 @@ public class CompletionTest extends AbstractCompletionTest {
 	}
 
 	protected void createTransformation() throws Exception {
+		// copy test folder to destination test project
+        File srcFolder = TestUtil.getPluginRelativeFile(BUNDLE, ICompletionTestConstants.COMPLETION_TEST_FOLDER + '/' + myFolder);
+        File destFolder = myTestProject.getProject().getLocation().append(myFolder).toFile();
+        destFolder.mkdirs();
+        FileUtil.copyFolder(srcFolder, destFolder);
+		myTestProject.getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
+
 		InputStream inputStream = new FileInputStream(getAnnotatedTransformationFile());
 		try {
 			// read annotated transformation contents

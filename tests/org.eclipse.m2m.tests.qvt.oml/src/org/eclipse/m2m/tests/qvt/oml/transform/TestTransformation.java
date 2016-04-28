@@ -182,7 +182,6 @@ public abstract class TestTransformation extends TestCase {
         if (myDestFolder.exists()) {
             FileUtil.delete(myDestFolder);
         }
-        getProject().refreshLocal(IResource.DEPTH_INFINITE, null);
     	myData = null;
     }
     
