@@ -1,5 +1,5 @@
 modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
-modeltype UML uses 'http://www.eclipse.org/uml2/2.0.0/UML';
+modeltype UML uses 'http://www.eclipse.org/m2m/qvt/oml/testqvt';
 
 
 transformation Ecore2Uml(
