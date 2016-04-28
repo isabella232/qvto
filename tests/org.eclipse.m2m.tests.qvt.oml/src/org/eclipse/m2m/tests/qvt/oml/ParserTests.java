@@ -13,6 +13,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.URI;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -33,6 +37,12 @@ public class ParserTests {
             usesSourceAnnotations = false;
         }
         
+        public TestData includeMetamodel(String relativePath) {
+        	URI relativeURI = URI.createURI(relativePath);
+        	ecoreFileMetamodels.add(relativeURI);
+        	return this;
+        }
+        
         public String getDir() { return myDir; }
         public int getErrCount() { return myErrCount; }
         public int getWarnCount() { return myWarnCount; }
@@ -45,6 +55,10 @@ public class ParserTests {
         	return usesSourceAnnotations;
 		}
         
+        public List<URI> getMetamodels() {
+        	return ecoreFileMetamodels;
+        }
+        
         @Override
         public String toString() {
         	return getDir();
@@ -53,6 +67,7 @@ public class ParserTests {
         private final String myDir;
         private final int myErrCount;
         private final int myWarnCount;
+        protected final List<URI> ecoreFileMetamodels = new ArrayList<URI>();
         private boolean usesSourceAnnotations;
 
         /**

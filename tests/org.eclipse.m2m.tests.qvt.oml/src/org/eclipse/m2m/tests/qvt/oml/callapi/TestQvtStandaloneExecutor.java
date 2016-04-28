@@ -88,7 +88,7 @@ public class TestQvtStandaloneExecutor extends TestQvtExecutor {
 			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(getName()).appendFileExtension(MDAConstants.QVTO_FILE_EXTENSION);
 		}
 		
-		URI getModelUri(String name) {
+		public URI getModelUri(String name) {
 			return URI.createFileURI(new File("").getAbsolutePath()).appendSegment(getTestDataFolder()).appendSegment(ModelTestData.MODEL_FOLDER).appendSegment(getName()).appendSegment(name);
 		}
 		

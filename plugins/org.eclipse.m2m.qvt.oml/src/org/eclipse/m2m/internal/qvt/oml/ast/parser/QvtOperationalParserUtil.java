@@ -337,8 +337,8 @@ public class QvtOperationalParserUtil {
 		
 		// FIXME - better be handled in OCL itself
 		// check was added due to https://bugs.eclipse.org/bugs/show_bug.cgi?id=275824
-		if (variableType instanceof EDataType && initialiserType instanceof EDataType && variableType instanceof PredefinedType<?> == false) {
-			if (((EDataType) variableType).getInstanceClass() == ((EDataType) initialiserType).getInstanceClass()) {
+		if (variableType instanceof EDataType && initialiserType instanceof EDataType && variableType instanceof PredefinedType == false) {
+			if (variableType.getInstanceClass() == initialiserType.getInstanceClass() && variableType.getInstanceClass() != null) {
 				return true;
 			}
 			if (initialiserType instanceof EEnum &&
@@ -447,7 +447,7 @@ public class QvtOperationalParserUtil {
 				actualType = ((CollectionType) actualType).getElementType();
 			}
 
-			if (!QvtOperationalParserUtil.isAssignableToFrom(env, baseType, actualType)) {
+			if (!isAssignableToFrom(env, baseType, actualType)) {
 				QvtOperationalUtil.reportError(env, NLS.bind(ValidationMessages.SemanticUtil_5, 
 						new Object[] { leftName, QvtOperationalTypesUtil.getTypeFullName(baseType),
 							QvtOperationalTypesUtil.getTypeFullName(actualType) }), rValueCS);
@@ -461,7 +461,7 @@ public class QvtOperationalParserUtil {
 				actualType = ((CollectionType) actualType).getElementType();
 			}
 
-			if (!QvtOperationalParserUtil.isAssignableToFrom(env, baseType, actualType)) {
+			if (!isAssignableToFrom(env, baseType, actualType)) {
 				QvtOperationalUtil.reportError(env, NLS.bind(ValidationMessages.SemanticUtil_5, 
 						new Object[] { leftName, QvtOperationalTypesUtil.getTypeFullName(baseType),
 							QvtOperationalTypesUtil.getTypeFullName(actualType) }), rValueCS);
@@ -469,7 +469,7 @@ public class QvtOperationalParserUtil {
 			}
 		}
 		else {
-			if (!QvtOperationalParserUtil.isAssignableToFrom(env, leftType, rightType)) {
+			if (!isAssignableToFrom(env, leftType, rightType)) {
 				QvtOperationalUtil.reportError(env, NLS.bind(ValidationMessages.SemanticUtil_8, new Object[] { leftName,
 				        QvtOperationalTypesUtil.getTypeFullName(leftType),
 				        QvtOperationalTypesUtil.getTypeFullName(rightType) }), rValueCS);

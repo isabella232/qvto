@@ -32,11 +32,13 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.URIUtil;
 import org.eclipse.emf.common.util.BasicMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
-import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
@@ -218,6 +220,7 @@ public class TestQvtParser extends TestCase {
 		    	TestData.createSourceChecked("bug484020", 14, 0), //$NON-NLS-1$
 		    	TestData.createSourceChecked("bug473151", 0, 5), //$NON-NLS-1$
 		    	new TestData("bug488742", 0), //$NON-NLS-1$
+		    	TestData.createSourceChecked("bug490424", 4, 0).includeMetamodel("test1.ecore"), //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		);
 	}
@@ -257,10 +260,17 @@ public class TestQvtParser extends TestCase {
 	public void runTest() throws Exception {
 		copyData("sources/" + myData.getDir(), "parserTestData/sources/" + myData.getDir()); //$NON-NLS-1$ //$NON-NLS-2$
 		
-        File folder = getDestinationFolder(); //$NON-NLS-1$
+        final File folder = getDestinationFolder();
 		assertTrue("Invalid folder " + folder, folder.exists() && folder.isDirectory()); //$NON-NLS-1$
 		
-		//System.err.println("testParsing: " + folder.getName()); //$NON-NLS-1$
+		resSet = TestUtil.getMetamodelResolutionRS(new ResourceSetImpl(), myData.getMetamodels(), new TestUtil.UriProvider() {
+			
+			public URI getModelUri(String model) {
+				String absolutePath = getFile(folder, model).getAbsolutePath();
+				return URI.createFileURI(absolutePath);
+			}
+		});
+
 		myCompiled = compile(folder);
 		
 		assertTrue("No results", myCompiled.length > 0); //$NON-NLS-1$
@@ -368,7 +378,7 @@ public class TestQvtParser extends TestCase {
 		final String topName = folder.getName() + MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT;
 		getFile(folder, topName);
 		WorkspaceUnitResolver resolver = new WorkspaceUnitResolver(Collections.singletonList(getIFolder(folder)));
-		QVTOCompiler compiler = CompilerUtils.createCompiler();
+		QVTOCompiler compiler = QVTOCompiler.createCompiler(resSet.getPackageRegistry());
 		
         QvtCompilerOptions options = new QvtCompilerOptions();
         options.setGenerateCompletionData(false);
@@ -405,4 +415,5 @@ public class TestQvtParser extends TestCase {
     private final TestData myData;
 	private TestProject myProject;
 	private CompiledUnit[] myCompiled;
+	private ResourceSet resSet;
 }

@@ -26,9 +26,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -215,41 +212,12 @@ public class DebugExecutorTest extends TestCase {
     }
     
     protected ResourceSet getMetamodelResolutionRS() {
-    	ResourceSet resSet = new ResourceSetImpl();
-    	
-    	if (myData.getEcoreMetamodels().isEmpty()) {
-    		return resSet;
-    	}
-    	
-    	EPackage.Registry packageRegistry = resSet.getPackageRegistry();
-    	
-    	for (URI ecoreFileURI : myData.getEcoreMetamodels()) { 
-    		URI absoluteURI = ecoreFileURI;
-    		if(ecoreFileURI.isRelative()) {
-        		 absoluteURI = getModelUri(ecoreFileURI.toString());  
-    		}
-        	
-        	EPackage metamodelPackage = null;
-        	try {
-        		Resource ecoreResource = resSet.getResource(absoluteURI, true);
-            	if(!ecoreResource.getContents().isEmpty()) {
-            		EObject obj = ecoreResource.getContents().get(0);
-            		if(obj instanceof EPackage) {
-            			metamodelPackage = (EPackage) obj;
-            		}
-            	}
-        	} catch (WrappedException e) {
-        		TestCase.fail("Failed to load metamodel EPackage. " + e.getMessage()); //$NON-NLS-1$
+    	return TestUtil.getMetamodelResolutionRS(new ResourceSetImpl(), myData.getEcoreMetamodels(), new TestUtil.UriProvider() {
+			
+			public URI getModelUri(String model) {
+				return DebugExecutorTest.this.getModelUri(model);
 			}
-        	
-        	if(metamodelPackage == null) {
-        		TestCase.fail("No metamodel EPackage available in " + absoluteURI); //$NON-NLS-1$
-        	}
-        	
-        	packageRegistry.put(metamodelPackage.getNsURI(), metamodelPackage);
-		}
-    	
-    	return resSet;
+		});
     }
 
     private void copyModelData() throws Exception {

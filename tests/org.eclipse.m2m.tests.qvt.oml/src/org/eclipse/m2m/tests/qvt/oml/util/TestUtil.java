@@ -42,7 +42,11 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
@@ -310,4 +314,48 @@ public class TestUtil extends Assert {
 		catch (ClassNotFoundException e) {
 		}
 	}
+
+	
+	public interface UriProvider {
+		
+		URI getModelUri(String model);
+		
+	}
+	
+    public static ResourceSet getMetamodelResolutionRS(ResourceSet resSet, List<URI> metamodels, UriProvider uriProv) {
+    	if (metamodels.isEmpty()) {
+    		return resSet;
+    	}
+    	
+    	EPackage.Registry packageRegistry = resSet.getPackageRegistry();
+    	
+    	for (URI ecoreFileURI : metamodels) { 
+    		URI absoluteURI = ecoreFileURI;
+    		if(ecoreFileURI.isRelative()) {
+        		 absoluteURI = uriProv.getModelUri(ecoreFileURI.toString());  
+    		}
+        	
+        	EPackage metamodelPackage = null;
+        	try {
+        		Resource ecoreResource = resSet.getResource(absoluteURI, true);
+            	if(!ecoreResource.getContents().isEmpty()) {
+            		EObject obj = ecoreResource.getContents().get(0);
+            		if(obj instanceof EPackage) {
+            			metamodelPackage = (EPackage) obj;
+            		}
+            	}
+        	} catch (WrappedException e) {
+        		TestCase.fail("Failed to load metamodel EPackage. " + e.getMessage()); //$NON-NLS-1$
+			}
+        	
+        	if(metamodelPackage == null) {
+        		TestCase.fail("No metamodel EPackage available in " + absoluteURI); //$NON-NLS-1$
+        	}
+        	
+        	packageRegistry.put(metamodelPackage.getNsURI(), metamodelPackage);
+		}
+    	
+    	return resSet;
+    }
+
 }

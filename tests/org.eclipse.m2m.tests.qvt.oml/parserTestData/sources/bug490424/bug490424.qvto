@@ -1,0 +1,18 @@
+modeltype test1 "strict" uses "http://example.org/test1";
+modeltype imperativeOCL "strict" uses "http://www.eclipse.org/qvt/1.0/ImperativeOCL";
+
+transformation bug490424;
+
+main() {
+    object XExpression {
+        operator := test1::XOperator::DoX;
+        operator := /*<error>*/test1::YOperator::DoY/*</error>*/;
+        operator := /*<error>*/imperativeOCL::SeverityKind::error/*</error>*/;
+    };
+
+    object YExpression {
+        operator := /*<error>*/test1::XOperator::DoX/*</error>*/;
+        operator := test1::YOperator::DoY;
+        operator := /*<error>*/imperativeOCL::SeverityKind::error/*</error>*/;
+    };
+}

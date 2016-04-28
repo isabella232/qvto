@@ -21,9 +21,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -45,6 +42,7 @@ import org.eclipse.m2m.qvt.oml.TransformationExecutor;
 import org.eclipse.m2m.qvt.oml.util.Trace;
 import org.eclipse.m2m.tests.qvt.oml.transform.FileToFileData;
 import org.eclipse.m2m.tests.qvt.oml.transform.ModelTestData;
+import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -67,7 +65,7 @@ public abstract class TransformationExecutorTest extends TestCase {
 	ResourceSet resSet;
 	
 
-	static class UriCreator extends FileToFileData {
+	static class UriCreator extends FileToFileData implements TestUtil.UriProvider {
 		UriCreator(String name) {
 			super(name);
 		}
@@ -78,7 +76,7 @@ public abstract class TransformationExecutorTest extends TestCase {
 					+ MDAConstants.QVTO_FILE_EXTENSION_WITH_DOT, true);
 		}
 		
-		URI getModelUri(String name) {
+		public URI getModelUri(String name) {
 			return URI.createPlatformPluginURI(getBundle() + IPath.SEPARATOR + getTestDataFolder() + IPath.SEPARATOR
 					+ ModelTestData.MODEL_FOLDER + IPath.SEPARATOR + getName() + IPath.SEPARATOR + name, true);
 		}
@@ -206,41 +204,7 @@ public abstract class TransformationExecutorTest extends TestCase {
     }
     
     protected ResourceSet getMetamodelResolutionRS() {
-    	ResourceSet resSet = createResourceSet();
-    	
-    	if (getEcoreMetamodels().isEmpty()) {
-    		return resSet;
-    	}
-    	
-    	EPackage.Registry packageRegistry = resSet.getPackageRegistry();
-    	
-    	for (URI ecoreFileURI : getEcoreMetamodels()) { 
-    		URI absoluteURI = ecoreFileURI;
-    		if(ecoreFileURI.isRelative()) {
-        		 absoluteURI = uriCreator.getModelUri(ecoreFileURI.toString());  
-    		}
-        	
-        	EPackage metamodelPackage = null;
-        	try {
-        		Resource ecoreResource = resSet.getResource(absoluteURI, true);
-            	if(!ecoreResource.getContents().isEmpty()) {
-            		EObject obj = ecoreResource.getContents().get(0);
-            		if(obj instanceof EPackage) {
-            			metamodelPackage = (EPackage) obj;
-            		}
-            	}
-        	} catch (WrappedException e) {
-        		TestCase.fail("Failed to load metamodel EPackage. " + e.getMessage()); //$NON-NLS-1$
-			}
-        	
-        	if(metamodelPackage == null) {
-        		TestCase.fail("No metamodel EPackage available in " + absoluteURI); //$NON-NLS-1$
-        	}
-        	
-        	packageRegistry.put(metamodelPackage.getNsURI(), metamodelPackage);
-		}
-    	
-    	return resSet;
+    	return TestUtil.getMetamodelResolutionRS(createResourceSet(), getEcoreMetamodels(), uriCreator);
     }
 	
 }
