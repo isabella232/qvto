@@ -15,6 +15,7 @@ perform -DtargetPlatformPath="${checkout.location}/buildroot/target.platform" --
 
 junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.AllTests.launch" --flatXML --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.AllTests.xml"
 junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.launch" --flatXML --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.xml"
+junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.UnparserTests.launch" --flatXML --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.UnparserTests.xml"
 junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.launch" --flatXML --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.xml"
 #junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.launch" --flatXML --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.xml"
 
