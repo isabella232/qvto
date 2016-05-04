@@ -247,7 +247,7 @@ public class TestQvtUnparser extends TestCase {
 		        new TestData("Ecore2Ecore",0,0),  //$NONXXX
 		        new TestData("Ecore2EcoreExt",0,0),  //$NONXXX
 		        new TestData("ecore2uml_",0,0),  //$NONXXX
-		        new TestData("Ecore2UML",0,0,1),  //$NONXXX	// 1*4: target names in resolve expressions
+		        //new TestData("Ecore2UML",0,0,1),  //$NONXXX	// 1*4: target names in resolve expressions
 		        new TestData("emptyExtents",0,0),  //$NONXXX
 		        new TestData("emptyinit",0,0),  //$NONXXX
 		        new TestData("emptymodule",0,0),  //$NONXXX
