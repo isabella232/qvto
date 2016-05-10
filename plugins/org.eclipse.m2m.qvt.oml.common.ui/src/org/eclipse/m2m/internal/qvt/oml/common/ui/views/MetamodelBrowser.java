@@ -26,7 +26,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IPath;
-import org.eclipse.emf.common.ui.CommonUIPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -38,7 +37,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IMenuListener;
@@ -61,6 +59,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.m2m.internal.qvt.oml.common.CommonPlugin;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.CommonPluginImages;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.dialogs.ComplexClassifierProvider;
 import org.eclipse.m2m.internal.qvt.oml.common.ui.dialogs.OpenClassifierDialog;
@@ -515,7 +514,7 @@ public class MetamodelBrowser  implements IAdaptable {
                 	}
                 }
             } catch (EmfException ignore) {
-    			CommonUIPlugin.getPlugin().log(ignore);            	
+    			CommonPlugin.log(ignore);            	
             }	
         }
  
@@ -760,7 +759,7 @@ public class MetamodelBrowser  implements IAdaptable {
         return false;
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object getAdapter(Class key) {
         if (key.equals(IPropertySheetPage.class)) {
             return getPropertySheetPage();
@@ -772,7 +771,7 @@ public class MetamodelBrowser  implements IAdaptable {
     public IPropertySheetPage getPropertySheetPage() {
         if (myPropertySheetPage == null) {
             myPropertySheetPage = new PropertySheetPage();
-            final AdapterFactoryContentProvider provider = EMFProviderUtil.createAdapterFactoryContentProvider();
+            final IPropertySourceProvider provider = EMFProviderUtil.createAdapterFactoryContentProvider();
             myPropertySheetPage.setPropertySourceProvider(new IPropertySourceProvider() {
                 public IPropertySource getPropertySource(Object object) {
                 	IPropertySource source = null;
@@ -805,7 +804,7 @@ public class MetamodelBrowser  implements IAdaptable {
 				}
 			}, IResource.NONE);
 		} catch (CoreException e) {
-			CommonUIPlugin.getPlugin().log(e.getStatus());
+			CommonPlugin.log(e.getStatus());
 		}
 		
 		return result;

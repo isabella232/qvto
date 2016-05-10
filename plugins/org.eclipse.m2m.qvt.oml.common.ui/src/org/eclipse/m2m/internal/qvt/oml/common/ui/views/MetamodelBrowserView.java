@@ -18,7 +18,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.emf.common.ui.CommonUIPlugin;
 import org.eclipse.emf.ecore.EModelElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.action.IToolBarManager;
@@ -51,7 +50,7 @@ public class MetamodelBrowserView extends ViewPart implements IResourceChangeLis
     	try {
     		handleResourceChanged(event);
     	} catch (Exception e) {
-    		CommonUIPlugin.getPlugin().log(e);
+    		CommonPlugin.log(e);
 		}
     }
     
@@ -128,7 +127,7 @@ public class MetamodelBrowserView extends ViewPart implements IResourceChangeLis
         }
     }
 
-    @SuppressWarnings({ "rawtypes" })
+    @SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public Object getAdapter(Class key) {
         Object adaptedObject = browser != null ? browser.getAdapter(key) : null;

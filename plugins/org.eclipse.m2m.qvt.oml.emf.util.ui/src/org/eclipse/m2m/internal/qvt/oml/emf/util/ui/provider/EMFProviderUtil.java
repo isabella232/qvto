@@ -23,6 +23,7 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.ui.views.properties.IPropertySourceProvider;
 
 
 /**
@@ -37,7 +38,7 @@ public class EMFProviderUtil {
         return new AdapterFactoryContentProvider(ourAdapterFactory);
     }
     
-    public static AdapterFactoryContentProvider createAdapterFactoryContentProvider() {
+    public static IPropertySourceProvider createAdapterFactoryContentProvider() {
         return new AdapterFactoryContentProvider(ourAdapterFactory);
     }
     
