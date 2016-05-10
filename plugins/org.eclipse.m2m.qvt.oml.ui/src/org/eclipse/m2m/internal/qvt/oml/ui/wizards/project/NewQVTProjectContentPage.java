@@ -11,19 +11,10 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ui.wizards.project;
 
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.jdt.core.JavaConventions;
-import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.internal.corext.util.JavaModelUtil;
-import org.eclipse.jdt.launching.IVMInstall;
-import org.eclipse.jdt.launching.IVMInstall2;
-import org.eclipse.jdt.launching.JavaRuntime;
-import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jface.dialogs.IMessageProvider;
-import org.eclipse.jface.util.Policy;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -42,8 +33,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.PlatformUI;
 import org.osgi.framework.Version;
 
-import com.ibm.icu.lang.UCharacter;
-
 
 public class NewQVTProjectContentPage extends WizardPage {
 
@@ -58,6 +47,7 @@ public class NewQVTProjectContentPage extends WizardPage {
 	private Text myNameText;
 	private Text myProviderText;
 	private Combo myExecEnvCombo;
+	private Label myExecEnvLabel;
 	private Button myGenerateClass;
 	private Label myClassLabel;
 	private Text myClassText;
@@ -134,11 +124,14 @@ public class NewQVTProjectContentPage extends WizardPage {
 		label.setText(Messages.ContentPage_pprovider); 
 		myProviderText = createText(propertiesGroup, propertiesListener);
 		
-		label = new Label(propertiesGroup, SWT.NONE);
-		label.setText(Messages.ContentPage_executionenv); 
+		myExecEnvLabel = new Label(propertiesGroup, SWT.NONE);
+		myExecEnvLabel.setText(Messages.ContentPage_executionenv); 
 		myExecEnvCombo = createCombo(propertiesGroup, SWT.READ_ONLY | SWT.BORDER, 1);
 		
-		fillExecutionEnvironments(myExecEnvCombo);
+		myExecEnvLabel.setEnabled(JdtProjectIntegrationHelper.isJdtIntegration());
+		myExecEnvCombo.setEnabled(JdtProjectIntegrationHelper.isJdtIntegration());
+		
+		JdtProjectIntegrationHelper.fillExecutionEnvironments(myExecEnvCombo);
 	}
 
 	private void createPluginClassGroup(Composite container) {
@@ -199,42 +192,6 @@ public class NewQVTProjectContentPage extends WizardPage {
 		}
 	}
 
-	private void presetClassField(Text text, String id, String suffix) {
-		StringBuffer buffer = new StringBuffer();
-        IStatus status;
-		for (int i = 0; i < id.length(); i++) {
-			char ch = id.charAt(i);
-			if (buffer.length() == 0) {
-				if (UCharacter.isJavaIdentifierStart(ch)) {
-					buffer.append(Character.toLowerCase(ch));
-				}
-			} else {
-				if (UCharacter.isJavaIdentifierPart(ch)) {
-                    buffer.append(ch);
-				}
-                else if (ch == '.'){
-                    status = validatePackageName(buffer.toString());
-                    if (status.getSeverity() == IStatus.ERROR) {
-                        buffer.append(suffix.toLowerCase());
-                    }
-					buffer.append(ch);
-                }
-			}
-		}
-		StringTokenizer tok = new StringTokenizer(buffer.toString(), "."); //$NON-NLS-1$
-		while (tok.hasMoreTokens()) {
-			String token = tok.nextToken();
-			if (!tok.hasMoreTokens()){
-                status = validatePackageName(buffer.toString());
-                if (status.getSeverity() == IStatus.ERROR) {
-                    buffer.append(suffix.toLowerCase());
-                }
-				buffer.append("." + Character.toUpperCase(token.charAt(0)) + token.substring(1) + suffix); //$NON-NLS-1$ 
-            }
-		}
-		text.setText(buffer.toString());
-	}
-	
 	private void presetProviderField(String id) {
 		StringTokenizer tok = new StringTokenizer(id, "."); //$NON-NLS-1$
 		int count = tok.countTokens();
@@ -269,7 +226,7 @@ public class NewQVTProjectContentPage extends WizardPage {
 		String errorMessage = validateProperties();
 
 		if (errorMessage == null && myGenerateClass.isEnabled() && myGenerateClass.getSelection()) {
-			IStatus status = validateJavaTypeName(myClassText.getText().trim());
+			IStatus status = JdtProjectIntegrationHelper.validateJavaTypeName(myClassText.getText());
 			if (status.getSeverity() == IStatus.ERROR) {
 				errorMessage = status.getMessage();
 			} else if (status.getSeverity() == IStatus.WARNING) {
@@ -336,7 +293,8 @@ public class NewQVTProjectContentPage extends WizardPage {
 			}
 			if ((myChangedGroups & CLASS_GROUP) == 0) {
 				int oldChanged = myChangedGroups;
-				presetClassField(myClassText, computeId(), "Activator"); //$NON-NLS-1$
+				String clsField = JdtProjectIntegrationHelper.getClassField(computeId(), "Activator"); //$NON-NLS-1$
+				myClassText.setText(clsField);
 				myChangedGroups = oldChanged;
 			}
 			
@@ -353,8 +311,10 @@ public class NewQVTProjectContentPage extends WizardPage {
 			}
 			
 			myGenerateClass.setEnabled(isGenerateClassAllowed);
-			myClassText.setEnabled(isGenerateClassAllowed);
-			myClassLabel.setEnabled(isGenerateClassAllowed);
+			myClassText.setEnabled(isGenerateClassAllowed && myGenerateClass.getSelection());
+			myClassLabel.setEnabled(isGenerateClassAllowed && myGenerateClass.getSelection());
+			myExecEnvCombo.setEnabled(isGenerateClassAllowed);
+			myExecEnvLabel.setEnabled(isGenerateClassAllowed);
 			
 			myIdText.setFocus();
 		} 
@@ -376,53 +336,4 @@ public class NewQVTProjectContentPage extends WizardPage {
 		return true;
 	}
 	
-	private static IStatus validatePackageName(String name) {
-		return JavaConventions.validatePackageName(name, JavaCore.VERSION_1_3, JavaCore.VERSION_1_3);
-	}
-	
-	private static IStatus validateJavaTypeName(String name) {
-		return JavaConventions.validateJavaTypeName(name, JavaCore.VERSION_1_3, JavaCore.VERSION_1_3);
-	}
-
-	private void fillExecutionEnvironments(Combo combo) {
-		IExecutionEnvironment[] fInstalledEEs = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments();
-		Arrays.sort(fInstalledEEs, new java.util.Comparator<IExecutionEnvironment>() {
-			public int compare(IExecutionEnvironment arg0, IExecutionEnvironment arg1) {
-				return Policy.getComparator().compare(arg0.getId(), arg1.getId());
-			}
-		});
-
-		String[] eeLabels = new String[fInstalledEEs.length];
-		for (int i = 0; i < fInstalledEEs.length; i++) {
-			eeLabels[i] = fInstalledEEs[i].getId();
-		}
-		combo.setItems(eeLabels);
-		combo.setText(getDefaultEEName());
-	}
-	
-	private String getDefaultEEName() {
-		IVMInstall defaultVM = JavaRuntime.getDefaultVMInstall();
-
-		IExecutionEnvironment[] environments = JavaRuntime.getExecutionEnvironmentsManager().getExecutionEnvironments();
-		if (defaultVM != null) {
-			for (int i = 0; i < environments.length; i++) {
-				IVMInstall eeDefaultVM = environments[i].getDefaultVM();
-				if (eeDefaultVM != null && defaultVM.getId().equals(eeDefaultVM.getId()))
-					return environments[i].getId();
-			}
-		}
-
-		String defaultCC = JavaModelUtil.VERSION_LATEST;
-		if (defaultVM instanceof IVMInstall2)
-			defaultCC = JavaModelUtil.getCompilerCompliance((IVMInstall2) defaultVM, defaultCC);
-
-		for (int i = 0; i < environments.length; i++) {
-			String eeCompliance = JavaModelUtil.getExecutionEnvironmentCompliance(environments[i]);
-			if (defaultCC.endsWith(eeCompliance))
-				return environments[i].getId();
-		}
-
-		return "JavaSE-1.7"; //$NON-NLS-1$
-	}
-
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.eclipse.m2m.qvt.oml.runtime.jdt">
+   <implementation class="org.eclipse.m2m.internal.qvt.oml.jdt.ui.wizard.project.JdtProjectIntegrationImpl"/>
+   <service>
+      <provide interface="org.eclipse.m2m.internal.qvt.oml.ui.wizards.project.JdtProjectIntegration"/>
+   </service>
+</scr:component>

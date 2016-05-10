@@ -206,6 +206,8 @@ public class NewQVTProjectCreationPage extends WizardNewProjectCreationPage {
         
         fJavaPlugin.setLayoutData(gd);
         
+        fJavaPlugin.setEnabled(JdtProjectIntegrationHelper.isJdtIntegration());
+        
         fJavaSettingsGroup = new Group(projectTypeGroup, SWT.NONE);
         fJavaSettingsGroup.setText(Messages.ProjectStructurePage_JavaProjectSettings); 
 		GridLayout layout = new GridLayout();		
@@ -229,11 +231,11 @@ public class NewQVTProjectCreationPage extends WizardNewProjectCreationPage {
         fCreationData.setPlugin(fJavaPlugin.getSelection());
         fCreationData.setCreateJava(fJavaPlugin.getSelection());
         
-        fJavaSettingsGroup.setEnabled(fJavaPlugin.getSelection());
         fSourceLabel.setEnabled(fJavaPlugin.getSelection());
         fSourceText.setEnabled(fJavaPlugin.getSelection());
         fOutputLabel.setEnabled(fJavaPlugin.getSelection());
         fOutputText.setEnabled(fJavaPlugin.getSelection());        
+        fJavaSettingsGroup.setEnabled(fJavaPlugin.getSelection());
     }
 
     private Label createLabel(Composite container, String text) {
