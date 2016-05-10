@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2009 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,11 +22,12 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.emf.common.ui.dialogs.WorkspaceResourceDialog;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.StatusDialog;
 import org.eclipse.jface.viewers.ColumnWeightData;
@@ -40,7 +41,11 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TableLayout;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.m2m.internal.qvt.oml.common.ui.launch.UriChooserListener;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.WorkspaceMetamodelProvider;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ui.choosers.ISourceChooser;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.ui.choosers.ResourceSourceChooser;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MModelURIMapFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MModelURIMapPackage;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MappingContainer;
@@ -77,6 +82,7 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 	private TableViewer myTableViewer;
 	
     private IProject myProject;
+    private final ResourceSet rs;
 
     private Button addButton;
     private Button removeButton;
@@ -90,6 +96,7 @@ public class QvtMetamodelMappingPage extends PropertyPage {
     
     public QvtMetamodelMappingPage() {
     	super();
+    	rs = new ResourceSetImpl();
 	}
             
     @Override
@@ -131,6 +138,12 @@ public class QvtMetamodelMappingPage extends PropertyPage {
     	if(uriMap != null) {
     		load();    		
     	}
+    }
+    
+    @Override
+    public void dispose() {
+    	super.dispose();
+    	EmfUtil.cleanupResourceSet(rs);
     }
     
     protected boolean doValidatePage() {
@@ -253,9 +266,9 @@ public class QvtMetamodelMappingPage extends PropertyPage {
         }
     }
     
-    private static EPackage loadEPackage(String uriStr) {    	
+    private EPackage loadEPackage(String uriStr) {    	
 		try {
-			return WorkspaceMetamodelProvider.loadResourceMetamodel(uriStr);
+			return WorkspaceMetamodelProvider.loadResourceMetamodel(uriStr, rs);
 		} catch (RuntimeException exc) {
 			// do nothing here
 		}
@@ -353,7 +366,7 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 		return Status.OK_STATUS;
 	}
 	
-	private static IStatus validateTargetMappingURI(String uriStr) {
+	private IStatus validateTargetMappingURI(String uriStr) {
 		IStatus status = validateURI(uriStr, Messages.QvtMetamodelMappingPage_targetURILabel);
 		if(status.isOK()) {
 			URI targetUri = URI.createURI(uriStr);			
@@ -365,7 +378,8 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 		}
 		
 		if(status.isOK()) {
-			if(loadEPackage(uriStr) == null) {
+			EPackage loadEPackage = loadEPackage(uriStr);
+			if(loadEPackage == null || loadEPackage.getNsURI() == null) {
 				String message = NLS.bind(Messages.QvtMetamodelMappingPage_loadResourceMetamodelError, uriStr);				
 		 		status = new Status(IStatus.ERROR, QVTUIPlugin.PLUGIN_ID, message);
 			}
@@ -685,6 +699,9 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 						}
 						status = validateSourceURI();
 					}
+					else {
+						modelURIText.setText(""); //$NON-NLS-1$
+					}
 					updateStatus(status);
 				}
 			});	
@@ -700,20 +717,8 @@ public class QvtMetamodelMappingPage extends PropertyPage {
 			browse.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
-					IFile[] files = WorkspaceResourceDialog.openFileSelection(getShell(), null, null, false, null, null);
-					
-					if(files != null && files.length > 0) {
-						URI uri = URI.createPlatformResourceURI(files[0].getFullPath().toString(), false);
-						targetURIText.setText(uri.toString());
-						// if source URI not defined yet, take it from the resource's EPackage
-						String srcURI = modelURIText.getText();
-						if(srcURI == null || srcURI.trim().length() == 0) {
-							EPackage ePackage = loadEPackage(uri.toString());
-							if(ePackage != null) {
-								modelURIText.setText(ePackage.getNsURI());
-							}
-						}
-					}
+					ISourceChooser sourceChooser = new ResourceSourceChooser(false, rs);
+					new UriChooserListener(targetURIText, sourceChooser, getShell()).widgetSelected(e);
 				}
 			});		
 		}		
