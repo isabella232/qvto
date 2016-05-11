@@ -69,9 +69,22 @@ public class Activator implements BundleActivator {
 		private static final String JUNIT_PREFERRED_DELEGATE_VALUE = JUNIT_LAUNCH_CONFIGURATION_ID + ',' + LAUNCH_MODE + ",;"; //$NON-NLS-1$
 
 		
+		@SuppressWarnings("deprecation")
 		@Override
 		public void earlyStartup() {
-			IEclipsePreferences node = DefaultScope.INSTANCE.getNode(DEBUG_PLUGIN_ID);
+			IEclipsePreferences node = null;
+			
+			try {
+				if (DefaultScope.class.getDeclaredField("INSTANCE") != null) { //$NON-NLS-1$
+					node = DefaultScope.INSTANCE.getNode(DEBUG_PLUGIN_ID);
+				}
+			} catch (Exception e) {
+			}
+			finally {
+				if (node == null) {
+					node = new DefaultScope().getNode(DEBUG_PLUGIN_ID);
+				}
+			}
 
 			String preferredDelegate = node.get(QVTO_PREFERRED_DELEGATE_KEY, QVTO_PREFERRED_DELEGATE_VALUE);
 			node.put(QVTO_PREFERRED_DELEGATE_KEY, preferredDelegate);
