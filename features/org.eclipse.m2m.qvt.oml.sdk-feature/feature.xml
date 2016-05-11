@@ -63,6 +63,10 @@
          version="0.0.0"/>
 
    <includes
+         id="org.eclipse.m2m.qvt.oml.examples.source"
+         version="0.0.0"/>
+
+   <includes
          id="org.eclipse.m2m.qvt.oml.debug.source"
          version="0.0.0"/>
 
@@ -77,6 +81,13 @@
 
    <plugin
          id="org.eclipse.m2m.qvt.oml.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.m2m.qvt.oml.ui.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
