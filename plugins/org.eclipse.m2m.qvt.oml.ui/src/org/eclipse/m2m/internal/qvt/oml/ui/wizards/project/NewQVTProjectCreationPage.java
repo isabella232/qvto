@@ -47,7 +47,7 @@ public class NewQVTProjectCreationPage extends WizardNewProjectCreationPage {
     private Text fOutputText;
     private Button fSimpleProject;
     private Button fSimplePlugin;
-    private Button fJavaPlugin = null;    
+    private Button fJavaPlugin;    
     private Group fJavaSettingsGroup;
     private Label fSourceLabel;
     private Label fOutputLabel;	
@@ -193,7 +193,13 @@ public class NewQVTProjectCreationPage extends WizardNewProjectCreationPage {
 		fSimplePlugin.setLayoutData(gd);
 		
 		// select simple plugin type by default
-		fSimplePlugin.setSelection(true);		
+		if (JdtProjectIntegrationHelper.isJdtIntegration()) {
+			fSimplePlugin.setSelection(true);
+		}
+		else {
+			fSimpleProject.setSelection(true);
+			fSimplePlugin.setEnabled(false);
+		}
 		
 		fJavaPlugin = new Button(projectTypeGroup, SWT.RADIO);		
         fJavaPlugin.setText(Messages.ProjectStructurePage_createJavaPluginProject);
