@@ -31,7 +31,7 @@ public class JdtProjectIntegrationHelper {
 			ServiceReference<JdtProjectIntegration> serviceReference = bundleContext.getServiceReference(JdtProjectIntegration.class);
 			return serviceReference == null ? null : bundleContext.getService(serviceReference);
 		}
-		catch (Exception e) {
+		catch (Throwable e) {
 			return null;
 		}
 	}
