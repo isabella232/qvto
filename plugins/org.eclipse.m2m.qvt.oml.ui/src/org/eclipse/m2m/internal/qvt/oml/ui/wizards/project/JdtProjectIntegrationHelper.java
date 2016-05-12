@@ -32,8 +32,9 @@ public class JdtProjectIntegrationHelper {
 			return serviceReference == null ? null : bundleContext.getService(serviceReference);
 		}
 		catch (Throwable e) {
-			return null;
+			QVTUIPlugin.log(e);
 		}
+		return null;
 	}
 
 

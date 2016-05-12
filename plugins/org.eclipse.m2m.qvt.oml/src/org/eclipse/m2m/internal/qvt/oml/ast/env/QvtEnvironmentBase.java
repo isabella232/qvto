@@ -118,28 +118,22 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 	protected QvtEnvironmentBase(QvtEnvironmentBase parent) {
 		super(parent);
 		setOption(ParsingOptions.USE_BACKSLASH_ESCAPE_PROCESSING, true);
-		
-		try {
-			if (ParsingOptions.class.getDeclaredField("USE_LONG_INTEGERS") != null) { //$NON-NLS-1$
-				setOption(ParsingOptions.USE_LONG_INTEGERS, true);
-			}
-		} catch (Exception e) {
-			// simply skip
-		}
+		setLongIntOption();
 	}
 
 	@SuppressWarnings("deprecation")
 	protected QvtEnvironmentBase(EPackage.Registry reg, Resource resource) {
 		super(reg, resource);
 		setOption(ParsingOptions.USE_BACKSLASH_ESCAPE_PROCESSING, true);
-		
+		setLongIntOption();
+	}
+
+	private void setLongIntOption() {
 		try {
 			if (ParsingOptions.class.getDeclaredField("USE_LONG_INTEGERS") != null) { //$NON-NLS-1$
 				setOption(ParsingOptions.USE_LONG_INTEGERS, true);
 			}
-		} catch (Exception e) {
-			// simply skip
-		}
+		} catch (Exception e) {}
 	}
 
 	protected QvtEnvironmentBase(EPackage.Registry reg) {

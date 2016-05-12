@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.editor.ui.colorer;
 
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.preference.PreferencePage;
@@ -83,12 +84,23 @@ public class QVTColorsPreferencePage extends PreferencePage implements IWorkbenc
 	public boolean performOk() {
 		fOverlayStore.propagate();
 		try {
-			InstanceScope.INSTANCE.getNode(Activator.PLUGIN_ID).flush();			
+			getInstanceScope().getNode(Activator.PLUGIN_ID).flush();
 		} catch (BackingStoreException e) {
 			Activator.log(e);
 		}
 		
 		return true;
+	}
+	
+	@SuppressWarnings("deprecation")
+	private IScopeContext getInstanceScope() {
+		try {
+			if (InstanceScope.class.getDeclaredField("INSTANCE") != null) { //$NON-NLS-1$
+				return InstanceScope.INSTANCE;
+			}
+		} catch (Exception e) {}
+		
+		return new InstanceScope();
 	}
 
 	@Override

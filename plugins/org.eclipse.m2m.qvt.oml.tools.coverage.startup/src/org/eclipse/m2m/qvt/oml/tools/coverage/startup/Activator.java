@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchDelegate;
@@ -69,23 +70,10 @@ public class Activator implements BundleActivator {
 		private static final String JUNIT_PREFERRED_DELEGATE_VALUE = JUNIT_LAUNCH_CONFIGURATION_ID + ',' + LAUNCH_MODE + ",;"; //$NON-NLS-1$
 
 		
-		@SuppressWarnings("deprecation")
 		@Override
 		public void earlyStartup() {
-			IEclipsePreferences node = null;
+			IEclipsePreferences node = getDefaultScope().getNode(DEBUG_PLUGIN_ID);
 			
-			try {
-				if (DefaultScope.class.getDeclaredField("INSTANCE") != null) { //$NON-NLS-1$
-					node = DefaultScope.INSTANCE.getNode(DEBUG_PLUGIN_ID);
-				}
-			} catch (Exception e) {
-			}
-			finally {
-				if (node == null) {
-					node = new DefaultScope().getNode(DEBUG_PLUGIN_ID);
-				}
-			}
-
 			String preferredDelegate = node.get(QVTO_PREFERRED_DELEGATE_KEY, QVTO_PREFERRED_DELEGATE_VALUE);
 			node.put(QVTO_PREFERRED_DELEGATE_KEY, preferredDelegate);
 
@@ -123,6 +111,17 @@ public class Activator implements BundleActivator {
 			} catch (Exception e) {
 			}
 
+		}
+		
+		@SuppressWarnings("deprecation")
+		private IScopeContext getDefaultScope() {
+			try {
+				if (DefaultScope.class.getDeclaredField("INSTANCE") != null) { //$NON-NLS-1$
+					return DefaultScope.INSTANCE;
+				}
+			} catch (Exception e) {}
+			
+			return new DefaultScope();
 		}
 
 	}
