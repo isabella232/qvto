@@ -35,6 +35,7 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.launch.QvtLaunchUtil;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtInterpretedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.QvtTransformation;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.QVTOCoverageDecorator;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageData;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.eclipse.m2m.qvt.oml.util.WriterLog;
@@ -72,14 +73,17 @@ public class QvtLaunchConfigurationCoverageDelegate extends QvtLaunchConfigurati
                     ArrayList<Class<? extends QvtGenericVisitorDecorator>> decorators = new ArrayList<Class<? extends QvtGenericVisitorDecorator>>();
                     decorators.add(QVTOCoverageDecorator.class);
                     context.getSessionData().setValue(QVTEvaluationOptions.VISITOR_DECORATORS, decorators);
+                    
+                    // Create coverage data private for this run
+                    CoverageData data = new CoverageData();
+                    context.getSessionData().setValue(QVTOCoverageDecorator.COVERAGE_DATA, data);
 
                     QvtLaunchUtil.doLaunch(qvtTransformation, configuration, context);
 
                     qvtTransformation.cleanup();
 
-                    // Save the collected coverage data to disk and activate the coverage view
-                    CoveragePlugin.getDefault().showCoverageView(QVTOCoverageDecorator.data);
-                    QVTOCoverageDecorator.data.clear();
+                    // Activate the coverage view
+                    CoveragePlugin.getDefault().showCoverageView(data);
                 }
             };
 

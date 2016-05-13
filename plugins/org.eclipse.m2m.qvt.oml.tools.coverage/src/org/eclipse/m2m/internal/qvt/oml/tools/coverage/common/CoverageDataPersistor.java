@@ -25,10 +25,12 @@ public class CoverageDataPersistor {
     private static final String DIR_SEP = System.getProperty("file.separator");
     private static final String TMP_DIR = System.getProperty("java.io.tmpdir");
     private static final String DIR_PATH = TMP_DIR + DIR_SEP + "CoverageData" + DIR_SEP;
+    
+    private CoverageDataPersistor() {
+    }
 
-	public CoverageData load() {
+	public static CoverageData load() {
         try {
-
             CoverageData data = new CoverageData();
 
             // Since transDatas were saved separately, reattach them now
@@ -47,30 +49,40 @@ public class CoverageDataPersistor {
         return null;
     }
 
-	public void save(CoverageData data) {
+	public static void save(CoverageData data) {
         try {
             prepareDirectories();
 
             // Save any transdatas in a new file
             for (TransformationCoverageData transData : data.getData()) {
+            	if (!transData.isModified()) {
+            		continue;
+            	}
+            	
                 ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(DIR_PATH + transData.hashCode()));
                 os.writeObject(transData);
                 os.close();
+                
+                transData.setModified(false);
             }
         } catch (Exception e) {
         	Activator.error("Failed to persist coverage data", e);
         }
     }
 
-    private void prepareDirectories() {
-        // First make sure directory exists, and if not, create it
+    public static void cleanupDirectories() {
+    	prepareDirectories();
+    	
+        for (File file : new File(DIR_PATH).listFiles()) {
+            file.delete();
+        }
+    }
+
+    private static void prepareDirectories() {
+        // Make sure directory exists, and if not, create it
         File dir = new File(DIR_PATH);
         if (!dir.exists()) {
             dir.mkdirs();
-        }
-
-        for (File file : dir.listFiles()) {
-            file.delete();
         }
     }
 

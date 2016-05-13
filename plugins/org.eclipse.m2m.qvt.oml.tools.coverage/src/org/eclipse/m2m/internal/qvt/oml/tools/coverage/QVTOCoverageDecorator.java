@@ -25,18 +25,25 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageData;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageDataPersistor;
 import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.TransformationCoverageData;
+import org.eclipse.m2m.qvt.oml.util.ISessionData;
 import org.eclipse.ocl.utilities.ASTNode;
 
 @SuppressWarnings("restriction")
 public class QVTOCoverageDecorator extends QvtGenericVisitorDecorator {
 
-    public static CoverageData data = null;
+	public static final ISessionData.SimpleEntry<CoverageData> COVERAGE_DATA = new ISessionData.SimpleEntry<CoverageData>(new CoverageData());
+	
+    private final CoverageData data;
 
     public QVTOCoverageDecorator(InternalEvaluator qvtExtVisitor) {
         super(qvtExtVisitor);
-        data = new CoverageData();
+        data = getCoverageResource();
     }
 
+    private CoverageData getCoverageResource() {
+    	return getContext().getSessionData().getValue(COVERAGE_DATA);
+    }
+    
     @Override
     protected Object genericPreVisitAST(ASTNode element) {
         TransformationCoverageData data = getTransformationCoverageData();
@@ -51,12 +58,13 @@ public class QVTOCoverageDecorator extends QvtGenericVisitorDecorator {
     // somehow not invoked.
     @Override
     public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
-        Object ret = super.execute(transformation);
-
-        // Save after each execution
-        CoverageDataPersistor persistor = new CoverageDataPersistor();
-        persistor.save(data);
-        return ret;
+    	try {
+        	return super.execute(transformation);
+    	}
+    	finally {
+	        // Save after each execution
+	        CoverageDataPersistor.save(data);
+    	}
     }
 
     private TransformationCoverageData getTransformationCoverageData() {
@@ -82,8 +90,7 @@ public class QVTOCoverageDecorator extends QvtGenericVisitorDecorator {
             // Otherwise create a new one
             if (transformationData == null) {
                 transformationData = new TransformationCoverageData(uri);
-                // And store it in CoverageData, since that's what gets saved
-                // later.
+                // And store it in CoverageData, since that's what gets saved later.
                 data.add(transformationData);
             }
         }

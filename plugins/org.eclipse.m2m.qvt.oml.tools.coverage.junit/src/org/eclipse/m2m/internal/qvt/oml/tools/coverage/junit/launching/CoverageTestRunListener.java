@@ -28,7 +28,7 @@ public class CoverageTestRunListener extends TestRunListener {
     	JUnitCore.removeTestRunListener(INSTANCE);
 
         // Show view
-        CoverageData data = new CoverageDataPersistor().load();
+        CoverageData data = CoverageDataPersistor.load();
         if (data != null) {
         	CoveragePlugin.getDefault().showCoverageView(data);
         }

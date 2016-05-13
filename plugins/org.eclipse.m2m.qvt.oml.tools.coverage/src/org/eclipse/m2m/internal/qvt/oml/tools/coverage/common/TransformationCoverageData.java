@@ -46,10 +46,12 @@ public class TransformationCoverageData implements Serializable {
 
     private final String transfUri; // not an URI Object to allow serialize
     private final HashSet<NodeData> touched;
+    private transient boolean isModified;
 
     public TransformationCoverageData(URI uri) {
         transfUri = uri.toString();
         touched = new HashSet<NodeData>();
+        isModified = true;
     }
 
     public URI getURI() {
@@ -63,7 +65,16 @@ public class TransformationCoverageData implements Serializable {
     public void touch(ASTNode element) {
         if (isIncluded(element)) {
             touched.add(new NodeData(element));
+            isModified = true;
         }
+    }
+    
+    public boolean isModified() {
+    	return isModified;
+    }
+
+    public void setModified(boolean modified) {
+    	isModified = modified;
     }
 
 }

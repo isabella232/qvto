@@ -27,6 +27,7 @@ import org.eclipse.jdt.internal.junit.JUnitCorePlugin;
 import org.eclipse.jdt.junit.JUnitCore;
 import org.eclipse.jdt.junit.launcher.JUnitLaunchConfigurationDelegate;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.StatusUtil;
+import org.eclipse.m2m.internal.qvt.oml.tools.coverage.common.CoverageDataPersistor;
 import org.eclipse.m2m.qvt.oml.tools.coverage.junit.Shell;
 import org.eclipse.m2m.qvt.oml.tools.coverage.ui.CoveragePlugin;
 import org.osgi.framework.Bundle;
@@ -40,6 +41,9 @@ public class JUnitCoverageLaunchDelegate extends JUnitLaunchConfigurationDelegat
 
         // Add test listener
         JUnitCore.addTestRunListener(CoverageTestRunListener.INSTANCE);
+        
+        CoverageDataPersistor.cleanupDirectories();
+        
         super.launch(configuration, mode, launch, monitor);
     }
 
