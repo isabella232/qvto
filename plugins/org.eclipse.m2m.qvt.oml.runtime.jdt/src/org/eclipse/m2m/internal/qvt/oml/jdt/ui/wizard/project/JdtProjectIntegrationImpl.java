@@ -196,9 +196,7 @@ public class JdtProjectIntegrationImpl implements JdtProjectIntegration {
 		}
 		
 		IFolder folder = project.getFolder(folderName);
-		if(!folder.exists()) {
-			folder.create(true, true, monitor);
-		}
+		org.eclipse.jdt.internal.ui.util.CoreUtility.createFolder(folder, true, true, monitor);
 		return folder;
 	}	
 
