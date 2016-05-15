@@ -350,11 +350,13 @@ public class QvtEditor extends TextEditor implements IQVTReconcilingListener {
                 myTreeViewer.getControl().addDisposeListener(new DisposeListener() {
 				
 					public void widgetDisposed(DisposeEvent e) {
-						myTreeViewer.removeSelectionChangedListener(myOutlineSelectionListener);
-						myTreeViewer.removeDoubleClickListener(myOutlineSelectionListener);
-						myTreeViewer = null;
-						myOutlineSelectionListener = null;
-						myOutlineSelector = null;
+						if (myTreeViewer != null) {
+							myTreeViewer.removeSelectionChangedListener(myOutlineSelectionListener);
+							myTreeViewer.removeDoubleClickListener(myOutlineSelectionListener);
+							myTreeViewer = null;
+							myOutlineSelectionListener = null;
+							myOutlineSelector = null;
+						}
 					}
 				
 				});
