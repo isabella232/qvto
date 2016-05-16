@@ -1194,7 +1194,9 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         }
         
         if(operation.getResult().size() > 1) {
-        	return createTupleResult(operation);
+        	if (false == result instanceof Tuple) {
+        		return createTupleResult(operation);
+        	}
         }
         return result;
     }

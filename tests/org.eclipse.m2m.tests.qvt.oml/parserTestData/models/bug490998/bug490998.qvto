@@ -1,0 +1,31 @@
+transformation bug490998;
+
+main() {
+    var t1 = helper1();
+    assert fatal (t1.i = 1);
+    assert fatal (t1.s = 'a');
+
+    var t2 = helper2();
+    assert fatal (t2.i = 2);
+    assert fatal (t2.s = 'b');
+
+    var t3 = helper3();
+    assert fatal (not t3.oclIsUndefined());
+    assert fatal (t3.i.oclIsUndefined());
+    assert fatal (t3.s.oclIsUndefined());
+}
+
+helper helper1(): i : Integer, s : String {
+    i := 1;
+    s := 'a';
+}
+
+helper helper2(): i : Integer, s : String {
+    return Tuple {
+        i = 2,
+        s = "b"
+    };
+}
+
+helper helper3(): i : Integer, s : String {
+}
