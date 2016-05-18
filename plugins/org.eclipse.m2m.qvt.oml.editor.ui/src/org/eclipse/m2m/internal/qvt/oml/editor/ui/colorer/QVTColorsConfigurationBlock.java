@@ -20,6 +20,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -199,8 +200,7 @@ class QVTColorsConfigurationBlock {
 			if(color != null) {
 				fColorList.add(color);
 			} else {
-				// FIXME - go to error log
-				System.err.println("Missing syntax color key: " + nextKey); //$NON-NLS-1$
+				Activator.log(Activator.createStatus(IStatus.ERROR, "Missing syntax color key: " + nextKey, null)); //$NON-NLS-1$
 			}
 		}
 		

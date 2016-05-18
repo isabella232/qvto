@@ -409,8 +409,6 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 		}
 		parent.myWarningSet.add(new QvtMessage(message, QvtMessage.SEVERITY_WARNING, startOffset, endOffset-startOffset+1, getLineNum(parent, startOffset)));
 
-		// TODO #199408  Use traces in QVTParser instead of System.xxx output facilities
-		//System.err.println("Warning: " + message + ", Pos: " + startOffset + "-" + endOffset);
 	}
 	
 	public void reportError(String message, CSTNode node) {

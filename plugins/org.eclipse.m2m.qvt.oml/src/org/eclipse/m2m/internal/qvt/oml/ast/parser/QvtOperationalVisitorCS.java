@@ -2617,10 +2617,6 @@ public class QvtOperationalVisitorCS
 				}
 			}
 			
-//			org.eclipse.emf.common.util.Diagnostic validate = new org.eclipse.emf.ecore.util.Diagnostician().validate(nextClass);
-//			if (validate.getSeverity() != org.eclipse.emf.common.util.Diagnostic.OK) {
-//				System.err.println(validate.getMessage());
-//			}
 		}
 		
 	}
