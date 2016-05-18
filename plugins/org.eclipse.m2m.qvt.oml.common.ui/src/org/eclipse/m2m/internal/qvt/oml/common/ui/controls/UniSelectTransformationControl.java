@@ -560,13 +560,12 @@ public class UniSelectTransformationControl extends Composite {
 	
 	    		workspaceContentProviderFactory = new IAdapterFactory() {
 	    			
-	    			@SuppressWarnings("rawtypes")
+					@SuppressWarnings({ "unchecked", "rawtypes" })
 					public Object getAdapter(Object adaptableObject, Class adapterType) {
 	    				return workspaceContentAdapter;
 	    			}
 	
-	    			@SuppressWarnings("rawtypes")
-					public Class[] getAdapterList() {
+					public Class<?>[] getAdapterList() {
 	    		        return new Class[] { IWorkbenchAdapter.class, IDeferredWorkbenchAdapter.class };
 	    			}			
 	    		};
@@ -688,13 +687,12 @@ public class UniSelectTransformationControl extends Composite {
 	
 	    		deployedTransformationProviderFactory = new IAdapterFactory() {
 	
-	    			@SuppressWarnings("rawtypes")
+	    			@SuppressWarnings({ "rawtypes", "unchecked" })
 					public Object getAdapter(Object adaptableObject, Class adapterType) {
 	    				return deployedTransformationAdapter;
 	    			}
 	
-	    			@SuppressWarnings("rawtypes")
-					public Class[] getAdapterList() {
+					public Class<?>[] getAdapterList() {
 	    		        return new Class[] { IWorkbenchAdapter.class, IDeferredWorkbenchAdapter.class };
 	    			}			
 	    		};

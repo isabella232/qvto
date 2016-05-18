@@ -61,7 +61,6 @@ public class NatureUtils {
                 String[] newNatures = new String[natures.length - 1];
                 System.arraycopy(natures, 0, newNatures, 0, i);
                 System.arraycopy(natures, i+1 , newNatures,i,natures.length-i-1);
-                //System.out.println("Remove natures "+Arrays.asList(natures)+" to "+Arrays.asList(newNatures));
                 description.setNatureIds(newNatures);
                 return;
             }

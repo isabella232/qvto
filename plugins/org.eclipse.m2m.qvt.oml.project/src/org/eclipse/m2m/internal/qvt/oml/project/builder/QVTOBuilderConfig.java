@@ -190,15 +190,14 @@ public class QVTOBuilderConfig {
         return (String) myCommand.getArguments().get(name);
     }
     
-    @SuppressWarnings("unchecked")
 	private void setBuildCommandArgument(String name, String value) {
     	assert myCommand != null;
     	
     	if(myCommand == null) return;
     	
-        Map arguments = myCommand.getArguments();
+        Map<String, String> arguments = myCommand.getArguments();
         if(arguments == null) {
-            arguments = new HashMap();
+            arguments = new HashMap<String, String>();
         }
         
         arguments.put(name, value);
