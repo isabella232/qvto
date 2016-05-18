@@ -1,0 +1,63 @@
+modeltype ECORE uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation bug492966;
+
+main() {
+
+    var a := object EClass {  name := 'aSrc'; };
+
+    var a1 := a.map chainedDisjunctMapping('a1_chained');
+    assert fatal (a1.oclIsTypeOf(EReference)); 
+
+
+    var b := object EClass {  name := 'bSrc'; };
+
+    var b1 := b.map chainedDisjunctMapping2('b1_chained');
+    assert fatal (b1.oclIsTypeOf(EReference));
+    
+    var c := object EClass {  name := 'cSrc'; };
+    var c1 := c.map disjunctMapping('c1_chained');    
+    assert fatal (c1.oclIsUndefined());
+    
+    
+    var exLog1 = '';
+    
+	try { 
+	    var c2 := c.xmap disjunctMapping('c1_chained');        		
+	}	
+	except (ex:Exception) {
+		exLog1 := ex.getArgument();
+	};
+	assert fatal (exLog1 = "Precondition failed in mapping 'disjunctMapping'");
+
+}
+
+abstract mapping EModelElement::chainedDisjunctMapping(in strPar1 : String) : EModelElement
+    disjuncts EClass::toEReference, EClass::toEAnnotation, ENamedElement::disjunctMapping 
+{} 
+
+abstract mapping EModelElement::chainedDisjunctMapping2(in strPar1 : String) : EModelElement
+    disjuncts  ENamedElement::disjunctMapping, EClass::toEReference, EClass::toEAnnotation 
+{} 
+
+mapping EClass::toEAnnotation(in sourceSuffix : String) : EAnnotation
+when { true } {
+    source := self.name + '_EClass::toEAnnotation_' + sourceSuffix;
+}
+
+mapping EClass::toEReference(in xx : String) : EReference 
+when { self.name <> null } {
+    name := self.name + '_' + xx;
+}
+
+abstract mapping ENamedElement::disjunctMapping(in strPar1 : String) : ETypedElement
+    disjuncts EAttribute::disjunctedMapping1, EParameter::disjunctedMapping2
+{}
+
+mapping EAttribute::disjunctedMapping1(in strPar1 : String) : EAttribute {
+    name := self.name + '_' + strPar1;  
+}
+
+mapping EParameter::disjunctedMapping2(in strPar1 : String) : EParameter {
+    name := self.name + '_' + strPar1;
+}

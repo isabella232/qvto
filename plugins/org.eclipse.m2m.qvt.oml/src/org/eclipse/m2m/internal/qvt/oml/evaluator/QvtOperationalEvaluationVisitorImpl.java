@@ -732,7 +732,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 				OperationCallResult opResult = executeImperativeOperation(method, source, args, false);
 				if (operationCallExp instanceof MappingCallExp && opResult instanceof MappingCallResult
 						&& method instanceof MappingOperation) {
-					if (((MappingCallExp) operationCallExp).isIsStrict() && ((MappingCallResult) opResult).isPreconditionFailed()) {
+					if (((MappingCallExp) operationCallExp).isIsStrict() && ((MappingCallResult) opResult).isFailed()) {
 						throwQVTException(new QvtAssertionFailed(NLS.bind(EvaluationMessages.MappingPreconditionFailed,
 								method.getName())));
 					}
@@ -1931,9 +1931,10 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 		}
     	
     	boolean isMappingExecuted() { return myStatus == Status.MAPPING_EXECUTED; }
-    	boolean isPreconditionFailed() { return myStatus == Status.PRECOND_FAILED; };
-    	//boolean isFetchedFromTrace() { return myStatus == Status.FETCHED_FROM_TRACE; };
-    	//boolean isNoDisjunctSelected() { return myStatus == Status.NO_DISJUCT_SELECTED; };    	
+    	boolean isPreconditionFailed() { return myStatus == Status.PRECOND_FAILED; }
+    	//boolean isFetchedFromTrace() { return myStatus == Status.FETCHED_FROM_TRACE; }
+    	boolean isNoDisjunctSelected() { return myStatus == Status.NO_DISJUNCT_SELECTED; }
+    	boolean isFailed() { return isPreconditionFailed() || isNoDisjunctSelected(); }
     }
     
     private OperationCallResult executeImperativeOperation(ImperativeOperation method, Object source, List<Object> args, boolean isReusingMappingCall) {    	
@@ -2032,7 +2033,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     		}
 
     		MappingCallResult result = (MappingCallResult) executeImperativeOperation(nextDisjunct, source, args, false);
-    		if(!result.isPreconditionFailed()) {
+    		if(!result.isFailed()) {
     			// precondition holds, mapping either executed, fetched from trace, or disjuncted
     			result.myStatus = MappingCallResult.Status.MAPPING_EXECUTED; // from disjuncting mapping consider as executed
     			
