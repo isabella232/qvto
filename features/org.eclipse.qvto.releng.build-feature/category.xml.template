@@ -3,7 +3,7 @@
    <feature id="org.eclipse.qvto.examples" version="0.0.0">
       <category name="mmt.qvto"/>
    </feature>
-   <feature id="org.eclipse.qvto.master" version="0.0.0">
+   <feature id="org.eclipse.m2m.qvt.oml.tools.coverage" version="0.0.0">
       <category name="mmt.qvto"/>
    </feature>
    <feature id="org.eclipse.m2m.qvt.oml.sdk" version="0.0.0">
