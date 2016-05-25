@@ -45,6 +45,13 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.eclipse.m2m.qvt.oml.tools.coverage.junit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
    <!--plugin
          id="com.google.guava"
          download-size="0"
