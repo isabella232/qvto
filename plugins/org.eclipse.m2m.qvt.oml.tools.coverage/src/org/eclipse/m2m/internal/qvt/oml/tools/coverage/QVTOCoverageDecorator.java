@@ -62,8 +62,10 @@ public class QVTOCoverageDecorator extends QvtGenericVisitorDecorator {
         	return super.execute(transformation);
     	}
     	finally {
-	        // Save after each execution
-	        CoverageDataPersistor.save(data);
+	        // Save only for JUnit execution
+    		if (getCoverageResource() == COVERAGE_DATA.defaultValue()) {
+    			CoverageDataPersistor.save(data);
+    		}
     	}
     }
 

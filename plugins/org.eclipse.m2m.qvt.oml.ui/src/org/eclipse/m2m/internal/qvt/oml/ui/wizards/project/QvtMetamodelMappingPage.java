@@ -258,9 +258,9 @@ public class QvtMetamodelMappingPage extends PropertyPage {
     private IProject getSelectedProject() {
         Object element = getElement();
         if(element instanceof IProject) {
-            return (IProject)element;
+            return (IProject) element;
         } else if(element instanceof IAdaptable) {
-            return ((IAdaptable) element).getAdapter(IProject.class);
+            return (IProject) ((IAdaptable) element).getAdapter(IProject.class);
         } else {
             return null;
         }
