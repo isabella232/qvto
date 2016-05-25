@@ -9,7 +9,7 @@
    <feature id="org.eclipse.m2m.qvt.oml.sdk" version="0.0.0">
       <category name="mmt.qvto"/>
    </feature>
-   <category-def name="mmt.qvto" label="QVTo${package.qualifier}">
+   <category-def name="mmt.qvto" label="QVTo">
       <description>
          Eclipse QVTo features.
       </description>
