@@ -9,9 +9,9 @@
    <feature id="org.eclipse.m2m.qvt.oml.sdk" version="0.0.0">
       <category name="mmt.qvto"/>
    </feature>
-   <category-def name="mmt.qvto" label="QVTo">
+   <category-def name="mmt.qvto" label="QVT Operational">
       <description>
-         Eclipse QVTo features.
+         QVT Operational SDK (parser, interpreter with support for BlackBox libraries and JDT integartion, tooling with the editor and debugger) and QVTo Tooling (Code Coverage tooling with JUnit integration support)
       </description>
    </category-def>
 </site>
