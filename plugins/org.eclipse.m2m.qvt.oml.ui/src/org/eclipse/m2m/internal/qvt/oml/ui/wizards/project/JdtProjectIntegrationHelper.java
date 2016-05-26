@@ -28,7 +28,9 @@ public class JdtProjectIntegrationHelper {
 	private static JdtProjectIntegration getJdtProjectIntegration() {
 		try {
 			BundleContext bundleContext = QVTUIPlugin.getDefault().getBundle().getBundleContext();
-			ServiceReference<JdtProjectIntegration> serviceReference = bundleContext.getServiceReference(JdtProjectIntegration.class);
+			@SuppressWarnings("unchecked")
+			ServiceReference<JdtProjectIntegration> serviceReference =
+				(ServiceReference<JdtProjectIntegration>) bundleContext.getServiceReference(JdtProjectIntegration.class.getName());
 			return serviceReference == null ? null : bundleContext.getService(serviceReference);
 		}
 		catch (Throwable e) {
