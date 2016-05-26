@@ -274,7 +274,13 @@ public class JdtProjectIntegrationImpl implements JdtProjectIntegration {
 			}
 		}
 
-		String defaultCC = JavaModelUtil.VERSION_LATEST;
+		String defaultCC = "1.5"; //$NON-NLS-1$
+		try {
+			if (JavaModelUtil.class.getDeclaredField("VERSION_LATEST") != null) { //$NON-NLS-1$
+				defaultCC = JavaModelUtil.VERSION_LATEST;
+			}
+		} catch (Exception e) {}
+		
 		if (defaultVM instanceof IVMInstall2)
 			defaultCC = JavaModelUtil.getCompilerCompliance((IVMInstall2) defaultVM, defaultCC);
 
@@ -284,7 +290,7 @@ public class JdtProjectIntegrationImpl implements JdtProjectIntegration {
 				return environments[i].getId();
 		}
 
-		return "JavaSE-1.7"; //$NON-NLS-1$
+		return "J2SE-1.5";//"JavaSE-1.7"; //$NON-NLS-1$
 	}
 
 }

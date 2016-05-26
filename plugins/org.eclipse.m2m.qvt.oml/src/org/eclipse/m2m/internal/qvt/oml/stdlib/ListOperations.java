@@ -39,6 +39,9 @@ public class ListOperations extends AbstractContextualOperations {
 	static final String REMOVE_LAST_NAME = "removeLast"; //$NON-NLS-1$
 	static final String JOINFIELDS_NAME = "joinfields"; //$NON-NLS-1$
 	
+	static final String SELECT_BY_TYPE_NAME = "selectByType"; //$NON-NLS-1$
+	static final String SELECT_BY_KIND_NAME = "selectByKind"; //$NON-NLS-1$
+
 	
 	public ListOperations(AbstractQVTStdlib library) {
 		super(library, library.getList());
@@ -81,9 +84,9 @@ public class ListOperations extends AbstractContextualOperations {
 					new String[] { "List(T)::deepclone() is not supported yet" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getList()),
 
-			new OperationProvider(SELECT_BY_TYPE, PredefinedType.SELECT_BY_TYPE_NAME, new String[] { "type" }, //$NON-NLS-1$ //$NON-NLS-2$
+			new OperationProvider(SELECT_BY_TYPE, SELECT_BY_TYPE_NAME, new String[] { "type" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getList(), oclStdlib.getOclType()),
-			new OperationProvider(SELECT_BY_KIND, PredefinedType.SELECT_BY_KIND_NAME, new String[] { "type" }, //$NON-NLS-1$ //$NON-NLS-2$
+			new OperationProvider(SELECT_BY_KIND, SELECT_BY_KIND_NAME, new String[] { "type" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getList(), oclStdlib.getOclType()),
 			new OperationProvider(SUB_SEQUENCE, PredefinedType.SUB_SEQUENCE_NAME, new String[] { "lower", "upper" }, //$NON-NLS-1$ //$NON-NLS-2$
 					getStdlib().getList(), oclStdlib.getInteger(), oclStdlib.getInteger()),
