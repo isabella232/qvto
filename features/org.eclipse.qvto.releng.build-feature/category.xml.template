@@ -11,7 +11,7 @@
    </feature>
    <category-def name="mmt.qvto" label="QVT Operational">
       <description>
-         QVT Operational SDK (parser, interpreter with support for BlackBox libraries and JDT integartion, tooling with the editor and debugger) and QVTo Tooling (Code Coverage tooling with JUnit integration support)
+         QVT Operational SDK (interpreter with support for BlackBox libraries, editor with JDT integration, debugger, metamodel browser, Ant support) and QVTo Tooling (Code coverage with JUnit integration support)
       </description>
    </category-def>
 </site>

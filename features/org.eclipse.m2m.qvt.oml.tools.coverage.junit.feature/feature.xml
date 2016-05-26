@@ -23,4 +23,11 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.eclipse.m2m.qvt.oml.tools.coverage.junit.source"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>
