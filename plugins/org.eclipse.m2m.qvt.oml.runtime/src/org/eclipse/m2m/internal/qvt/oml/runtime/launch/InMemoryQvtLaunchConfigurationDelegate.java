@@ -17,10 +17,12 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.IStatusHandler;
+import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.common.launch.EmptyDebugTarget;
@@ -123,6 +125,12 @@ public class InMemoryQvtLaunchConfigurationDelegate extends QvtLaunchConfigurati
 						MiscUtil.makeErrorStatus("Transformation '" + TransformationUtil.getTransformationFqn(qvtTransformation) + "' " + reason, e)); //$NON-NLS-1$ //$NON-NLS-2$
 			} finally {
 				actualMonitor.done();
+
+				try {
+					launch.terminate();
+				} catch (DebugException e) {
+					QvtPlugin.getDefault().log(e.getStatus());
+				}
 			}
         }
     }
@@ -149,7 +157,14 @@ public class InMemoryQvtLaunchConfigurationDelegate extends QvtLaunchConfigurati
 					return MiscUtil.makeErrorStatus("Transformation '" + TransformationUtil.getTransformationFqn(transformation) + "' " + reason, e); //$NON-NLS-1$ //$NON-NLS-2$
 				} finally {
 					monitor.done();
+
+					try {
+						process.getLaunch().terminate();
+					} catch (DebugException e) {
+						QvtPlugin.getDefault().log(e.getStatus());
+					}
 				}
+
 				return Status.OK_STATUS;
 			}
 			
