@@ -165,14 +165,43 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 	
 	private class JdtDescriptor extends JavaBlackboxProvider.JavaUnitDescriptor {
 		
+		private final Class<?> fModuleJavaClass;
+		private volatile int hashCode;
+		
 		public JdtDescriptor(String unitQualifiedName, Class<?> moduleJavaClass) {
 			super(unitQualifiedName);
 			addModuleHandle(new JdtModuleHandle(unitQualifiedName, moduleJavaClass));
+			
+			fModuleJavaClass = moduleJavaClass;
 		}
 		
 		@Override
 		protected String getUnitQuery() {
 			return URI_BLACKBOX_JDT_QUERY;
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			if (obj instanceof JdtDescriptor == false) {
+				return false;
+			}
+			
+			JdtDescriptor other = (JdtDescriptor) obj;
+
+			return getQualifiedName().equals(other.getQualifiedName())
+					&& fModuleJavaClass.getName().equals(other.fModuleJavaClass.getName());
+		}
+		
+		@Override
+		public int hashCode() {
+			int result = hashCode;
+			if (result == 0) {
+				result = 17;
+				result = 31 * result + getQualifiedName().hashCode();
+				result = 31 * result + fModuleJavaClass.getName().hashCode();
+				hashCode = result;
+			}			
+			return result;
 		}
 	}
 
