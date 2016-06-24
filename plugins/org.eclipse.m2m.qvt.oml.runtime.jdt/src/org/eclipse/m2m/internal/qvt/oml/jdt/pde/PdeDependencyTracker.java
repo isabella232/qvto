@@ -1,4 +1,4 @@
-package org.eclipse.m2m.internal.qvt.oml.pde;
+package org.eclipse.m2m.internal.qvt.oml.jdt.pde;
 
 import java.util.Collections;
 import java.util.HashSet;
