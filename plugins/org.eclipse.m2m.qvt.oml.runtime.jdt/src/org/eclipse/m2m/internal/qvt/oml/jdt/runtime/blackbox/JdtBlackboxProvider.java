@@ -10,15 +10,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.jdt.runtime.blackbox;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -26,7 +23,6 @@ import org.eclipse.core.resources.IResourceProxy;
 import org.eclipse.core.resources.IResourceProxyVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IPath;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -35,6 +31,7 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescript
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.java.JavaBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.ProjectDependencyTracker;
 
 public class JdtBlackboxProvider extends JavaBlackboxProvider {
 
@@ -47,13 +44,11 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			return Collections.emptyList();			
 		}
 		
-		List<IProject> projects = new ArrayList<IProject>();
+		Set<IProject> referencedProjects = ProjectDependencyTracker.getAllReferencedProjects(project, true);
+		
+		List<IProject> projects = new ArrayList<IProject>(referencedProjects.size() + 1);
 		projects.add(project);
-		try {
-			projects.addAll(Arrays.asList(project.getReferencedProjects()));
-		} catch (CoreException e) {
-			// ignore
-		}
+		projects.addAll(referencedProjects);
 
 		List<AbstractCompilationUnitDescriptor> descriptors = new ArrayList<AbstractCompilationUnitDescriptor>();
 		for (IProject p : projects) {
@@ -81,39 +76,29 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 	}
 
 	private AbstractCompilationUnitDescriptor getJdtUnitDescriptor(IProject project, String qualifiedName) {
-		URLClassLoader loader = null;
+		final IJavaProject javaProject = JavaCore.create(project);
 		try {
-			final IJavaProject javaProject = JavaCore.create(project);
-			IPath projectRelativeOutputPath = javaProject.getOutputLocation().removeFirstSegments(1);
-
-			IPath outputPath = project.getLocation().append(projectRelativeOutputPath);
-			URL outputUrl = outputPath.addTrailingSeparator().toFile().toURI().toURL();
-
-			loader = new URLClassLoader(new URL[] { outputUrl }, this.getClass().getClassLoader());
-
-			Class<?> moduleJavaClass = loader.loadClass(qualifiedName);
-			return new JdtDescriptor(qualifiedName, moduleJavaClass) {
-				@Override
-				protected String getFragment() {
-					return javaProject.getElementName();
-				}
-			};
+			ClassLoader loader = ProjectClassLoader.getProjectClassLoader(javaProject);
+			
+			try {
+				Class<?> moduleJavaClass = loader.loadClass(qualifiedName);
+						
+				return new JdtDescriptor(qualifiedName, moduleJavaClass) {
+					@Override
+					protected String getFragment() {
+						return javaProject.getElementName();
+					}
+				};
+			}
+			catch (ClassNotFoundException e) {
+				return null;
+			}
 
 		} catch (JavaModelException e) {
-			// ignore
+			QvtPlugin.error(e);
 		} catch (MalformedURLException e) {
 			QvtPlugin.error(e);
-		} catch (ClassNotFoundException e) {
-			// ignore
-		} finally {
-			try {
-				if (loader != null) {
-					loader.close();
-				}
-			} catch (IOException e) {
-				QvtPlugin.error(e);
-			}
-		}
+		} 
 
 		return null;
 	}
@@ -189,7 +174,8 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			JdtDescriptor other = (JdtDescriptor) obj;
 
 			return getQualifiedName().equals(other.getQualifiedName())
-					&& fModuleJavaClass.getName().equals(other.fModuleJavaClass.getName());
+					&& (fModuleJavaClass.getName().equals(other.fModuleJavaClass.getName())
+					&& (fModuleJavaClass.equals(other.fModuleJavaClass)));
 		}
 		
 		@Override
@@ -197,8 +183,9 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			int result = hashCode;
 			if (result == 0) {
 				result = 17;
-				result = 31 * result + getQualifiedName().hashCode();
-				result = 31 * result + fModuleJavaClass.getName().hashCode();
+				result = 31 * result + getQualifiedName().hashCode();				
+				result = 31 * result + fModuleJavaClass.hashCode();
+				
 				hashCode = result;
 			}			
 			return result;

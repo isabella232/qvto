@@ -54,6 +54,15 @@
             
           <launchMode mode="run"/>
         </launchConfigurationTabGroup>
+    </extension>
+    <extension
+          point="org.eclipse.jdt.core.compilationParticipant">
+       <compilationParticipant
+             class="org.eclipse.m2m.internal.qvt.oml.jdt.runtime.blackbox.ClassReloadEnforcer"
+             createsProblems="false"
+             id="org.eclipse.m2m.internal.qvt.oml.jdt.runtime.blackbox.ClassReloadEnforcer"
+             modifiesEnvironment="true">
+       </compilationParticipant>
     </extension>        
     
 </plugin>
