@@ -31,7 +31,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.URIUtil;
-import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -384,7 +383,7 @@ public class TestQvtParser extends TestCase {
         options.setGenerateCompletionData(false);
         
         UnitProxy unit = resolver.resolveUnit(folder.getName());
-		return new CompiledUnit[] { compiler.compile(unit, options, new BasicMonitor()) };
+		return new CompiledUnit[] { compiler.compile(unit, options, null) };
 	}
 	
 	private static File getFile(File folder, final String expectedName) {
