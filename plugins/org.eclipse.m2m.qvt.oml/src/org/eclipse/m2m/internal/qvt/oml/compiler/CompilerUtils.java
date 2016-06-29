@@ -35,21 +35,6 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelpe
 
 public class CompilerUtils {
 
-	public static Diagnostic createProblemDiagnostic(URI uri, QvtMessage problem) {
-		int qvtSeverity = problem.getSeverity();
-		int diagnosticSeverity = qvtSeverity == QvtMessage.SEVERITY_ERROR ? Diagnostic.ERROR
-				: Diagnostic.WARNING;
-
-		String source = uri.toString();
-		String message = problem.getMessage();
-		// add the line number info if any
-		if (problem.getLineNum() >= 0) {
-			message = message + " (at:" + problem.getLineNum() + ")"; //$NON-NLS-1$ //$NON-NLS-2$ 
-		}
-
-		return new BasicDiagnostic(diagnosticSeverity, source, 0, message, null);
-	}
-
 	public static Diagnostic createUnitProblemDiagnostic(CompiledUnit unit) {
 		if(unit.getProblems().isEmpty()) {
 			return Diagnostic.OK_INSTANCE;
@@ -67,8 +52,8 @@ public class CompilerUtils {
 				errorCount++;
 			} else if(problem.getSeverity() == QvtMessage.SEVERITY_WARNING) {
 				warnCount++;
-			}			
-			children.add(createProblemDiagnostic(uri, problem));
+			}
+			children.add(problem);
 		}
 
 		String mainMessage = NLS.bind(CompilerMessages.unitDiagnostic, errorCount, warnCount);

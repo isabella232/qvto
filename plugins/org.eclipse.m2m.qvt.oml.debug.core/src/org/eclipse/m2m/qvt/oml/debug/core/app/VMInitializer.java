@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.qvt.oml.ExecutionContext;
 import org.eclipse.m2m.qvt.oml.debug.core.QVTODebugCore;
 import org.eclipse.m2m.qvt.oml.debug.core.vm.IQVTOVirtualMachineShell;
@@ -104,7 +105,7 @@ class VMInitializer implements VMProvider {
 		try {
 			diagnostic = fRunner.initialize();
 			
-			if(QvtPlugin.isSuccess(diagnostic)) {
+			if(EmfUtilPlugin.isSuccess(diagnostic)) {
 				vm = new QVTOVirtualMachine(fRunner.createDebuggableAdapter(fExecContext)); 
 			}
 			

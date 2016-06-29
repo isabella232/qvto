@@ -258,7 +258,7 @@ public class InternalTransformationExecutor {
 		Trace traces = evaluationEnv.getAdapter(InternalEvaluationEnv.class).getTraces();
 		handleExecutionTraces(traces);
 		
-		return ExecutionDiagnostic.OK_INSTANCE;
+		return ExecutionDiagnosticImpl.createOkInstance();
 	}
 	
 	protected void handleExecutionTraces(Trace traces) {
@@ -283,7 +283,7 @@ public class InternalTransformationExecutor {
 							args.length, modelParameters.size()));
 		}
 
-		ExecutionDiagnostic result = ExecutionDiagnostic.OK_INSTANCE;
+		ExecutionDiagnostic result = ExecutionDiagnosticImpl.createOkInstance();
 		List<ModelParameterExtent> extents = new ArrayList<ModelParameterExtent>(modelParameters.size());
 
 		int argCount = 0;

@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.Position;
@@ -112,15 +111,15 @@ public class ProblemUpdater implements IQVTReconcilingListener {
 	}
 	
 	private Annotation createProblemAnnotation(QvtMessage problem) {
-		return new Annotation(getAnnotationType(problem.getSeverity()), true, problem.getMessage());
+		return new Annotation(getAnnotationType(problem), true, problem.getMessage());
 	}
 	
-	private String getAnnotationType(int severity) {
-		switch (severity) {
-		case IMarker.SEVERITY_ERROR:
-			return IQvtAnnotationTypes.ERROR;
-		case IMarker.SEVERITY_WARNING:
-			return IQvtAnnotationTypes.WARNING;
+	private String getAnnotationType(QvtMessage message) {
+		switch (message.getSeverity()) {
+			case QvtMessage.SEVERITY_ERROR:
+				return IQvtAnnotationTypes.ERROR;
+			case QvtMessage.SEVERITY_WARNING:
+				return IQvtAnnotationTypes.WARNING;
 		}
 		throw new IllegalArgumentException();
 	}

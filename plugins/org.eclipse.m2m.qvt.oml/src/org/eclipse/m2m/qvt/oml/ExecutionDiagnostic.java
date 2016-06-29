@@ -16,7 +16,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
-import org.eclipse.m2m.internal.qvt.oml.ExecutionDiagnosticImpl;
 
 /**
  * A diagnostic interface representing the result status of a transformation
@@ -48,9 +47,7 @@ public interface ExecutionDiagnostic extends Diagnostic, DiagnosticChain {
 
 	public static final String SOURCE = "org.eclipse.m2m.qvt.oml.execution"; //$NON-NLS-1$
 
-	
-	public static final ExecutionDiagnostic OK_INSTANCE = ExecutionDiagnosticImpl.OK_INSTANCE;
-	
+		
 	/**
 	 * Gets the stack trace that resulted from interrupted execution either by
 	 * user termination request or exception thrown

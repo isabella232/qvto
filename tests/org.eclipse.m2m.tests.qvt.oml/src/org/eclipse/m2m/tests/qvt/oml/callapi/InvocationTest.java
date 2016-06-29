@@ -215,7 +215,6 @@ public class InvocationTest extends TestCase {
 		assertEquals(Diagnostic.ERROR, diagnostic.getSeverity());
 		assertEquals(ExecutionDiagnostic.VALIDATION, diagnostic.getCode());
 		assertFalse(diagnostic.getChildren().isEmpty());
-		assertTrue(diagnostic.getChildren().get(0).getMessage().contains("(at:")); //$NON-NLS-1$		
 		
 		assertUnchangedInput();
 		assertTrue(fOutput.getContents().isEmpty());

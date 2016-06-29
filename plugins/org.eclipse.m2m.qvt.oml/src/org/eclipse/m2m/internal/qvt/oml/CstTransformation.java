@@ -94,7 +94,7 @@ public class CstTransformation implements Transformation {
 	}
 	
 	private void doLoad(IProgressMonitor monitor) {
-		fLoadDiagnostic = ExecutionDiagnostic.OK_INSTANCE;
+		fLoadDiagnostic = ExecutionDiagnosticImpl.createOkInstance();
 		
 		try {
 			fCompiledUnit = getCompiledUnit(monitor);
@@ -103,26 +103,46 @@ public class CstTransformation implements Transformation {
 					ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS.bind(
 							Messages.FailedToCompileUnitError, fURI));
 
-			fLoadDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+			fLoadDiagnostic.merge(BasicDiagnostic.toDiagnostic(e.getStatus()));
 		}
-
-		if (fCompiledUnit != null
-				&& isSuccess(fLoadDiagnostic)) {
-			//fCompilationRs = getCompiler().getResourceSet();
-			fLoadDiagnostic = createCompilationDiagnostic(fCompiledUnit);
+		
+		if (fCompiledUnit != null && isSuccess(fLoadDiagnostic)) {
 			
+			ExecutionDiagnostic compilationDiagnostic = createCompilationDiagnostic(fCompiledUnit);
+			
+			if (isSuccess(compilationDiagnostic)) {
+				fLoadDiagnostic.addAll(compilationDiagnostic);
+			}
+			else {
+				compilationDiagnostic.addAll(fLoadDiagnostic);
+				fLoadDiagnostic = compilationDiagnostic;
+				
+				return;
+			}
+						
 			fTransformation = doGetTransformation();
+			
 			if (fTransformation == null) {
-				fLoadDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR,
-						ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, NLS
-								.bind(Messages.NotTransformationInUnitError,
-										fURI));
+				ExecutionDiagnostic transformationDiagnostic = new ExecutionDiagnosticImpl(
+					Diagnostic.ERROR,
+					ExecutionDiagnostic.TRANSFORMATION_LOAD_FAILED, 
+					NLS.bind(Messages.NotTransformationInUnitError,
+					fURI)
+				);
+				transformationDiagnostic.addAll(fLoadDiagnostic);
+				fLoadDiagnostic = transformationDiagnostic;
+				
 				return;
 			}
 			
-			ExecutionDiagnostic validForExecution = checkIsExecutable(fTransformation);
-			if (!isSuccess(validForExecution)) {
-				fLoadDiagnostic = validForExecution;
+			ExecutionDiagnostic executabilityDiagnostic = checkIsExecutable(fTransformation);
+			
+			if (isSuccess(executabilityDiagnostic)) {
+				fLoadDiagnostic.addAll(executabilityDiagnostic);
+			}
+			else {
+				executabilityDiagnostic.addAll(fLoadDiagnostic);
+				fLoadDiagnostic = executabilityDiagnostic;
 			}
 		}
 	}
@@ -145,21 +165,26 @@ public class CstTransformation implements Transformation {
 	
 	private static ExecutionDiagnostic createCompilationDiagnostic(
 			CompiledUnit compiledUnit) {
-		List<QvtMessage> errors = compiledUnit.getErrors();
-		if (errors.isEmpty()) {
-			return ExecutionDiagnostic.OK_INSTANCE;
+		
+		ExecutionDiagnostic mainDiagnostic = ExecutionDiagnosticImpl.createOkInstance();
+				
+		if (!compiledUnit.getErrors().isEmpty()) {
+			
+			URI uri = compiledUnit.getURI();
+			
+			mainDiagnostic = new ExecutionDiagnosticImpl(
+					Diagnostic.ERROR, ExecutionDiagnostic.VALIDATION, NLS.bind(
+							Messages.CompilationErrorsFoundInUnit, uri.toString()));
+			
+			for (Diagnostic error : compiledUnit.getErrors()) {
+				mainDiagnostic.add(error);
+			}		
 		}
-
-		URI uri = compiledUnit.getURI();
-		ExecutionDiagnosticImpl mainDiagnostic = new ExecutionDiagnosticImpl(
-				Diagnostic.ERROR, ExecutionDiagnostic.VALIDATION, NLS.bind(
-						Messages.CompilationErrorsFoundInUnit, uri.toString()));
-
-		for (QvtMessage message : errors) {
-			// FIXME - we should include warnings as well
-			mainDiagnostic.add(CompilerUtils.createProblemDiagnostic(uri, message));
+		
+		for (Diagnostic warning : compiledUnit.getWarnings()) {
+			mainDiagnostic.add(warning);
 		}
-
+		
 		return mainDiagnostic;
 	}
 		
@@ -173,14 +198,14 @@ public class CstTransformation implements Transformation {
 			OperationalTransformation transformation) {
 		
 		if (transformation.isIsBlackbox()) {
-			return ExecutionDiagnostic.OK_INSTANCE;
+			return ExecutionDiagnosticImpl.createOkInstance();
 		}
 		
 		EList<EOperation> operations = transformation.getEOperations();
 		for (EOperation oper : operations) {
 			if (oper instanceof ImperativeOperation
 					&& QvtOperationalEnv.MAIN.equals(oper.getName())) {
-				return ExecutionDiagnostic.OK_INSTANCE;
+				return ExecutionDiagnosticImpl.createOkInstance();
 			}
 		}
 

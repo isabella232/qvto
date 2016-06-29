@@ -11,20 +11,21 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml;
 
-
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 
 /**
  * @author feldman
  */
-public class QvtMessage {
+public class QvtMessage extends BasicDiagnostic {
 	
-	public static final int SEVERITY_ERROR = 2; //IMarker.SEVERITY_ERROR;
+	public static final int SEVERITY_ERROR = Diagnostic.ERROR;
 	
-	public static final int SEVERITY_WARNING = 1; //IMarker.SEVERITY_WARNING;
+	public static final int SEVERITY_WARNING = Diagnostic.WARNING;
 	
 	public QvtMessage(final String message, final int severity, final int offset, final int length, int lineNum) {
-		myMessage = message;
-		mySeverity = severity;
+		super(severity, QvtPlugin.ID, 0, message, new Object[] {});
+
 		myPos = new TextPositionsImpl(offset, length);
 		this.myLineNum = lineNum;
 	}
@@ -44,14 +45,6 @@ public class QvtMessage {
 	public int getLength() {
 		return myPos.getLength();
 	}
-
-	public String getMessage() {
-		return myMessage;
-	}
-	
-	public int getSeverity() {
-		return mySeverity;
-	}
 	
 	public int getLineNum() {
 		return myLineNum;
@@ -59,7 +52,7 @@ public class QvtMessage {
 	
 	@Override
 	public String toString() {
-		return (getLineNum() > 0 ? "Line " + getLineNum() + ':' : myPos.toString()) + " " + myMessage; //$NON-NLS-1$ //$NON-NLS-2$
+		return (getLineNum() > 0 ? "Line " + getLineNum() + ':' : myPos.toString()) + " " + getMessage(); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	@Override
@@ -70,11 +63,11 @@ public class QvtMessage {
 		
 		QvtMessage other = (QvtMessage)o;
 		
-		if(mySeverity != other.mySeverity) {
+		if(getSeverity() != other.getSeverity()) {
 			return false;
 		}
 		
-		if (myMessage == null ? other.myMessage != null : !myMessage.equals(other.myMessage)) {
+		if (getMessage() == null ? other.getMessage() != null : !getMessage().equals(other.getMessage())) {
 			return false;
 		}
 		
@@ -88,10 +81,10 @@ public class QvtMessage {
 	@Override
 	public int hashCode() {
 		int hash = 17;
-		hash = hash*37 + mySeverity;
+		hash = hash*37 + getSeverity();
 		
-		if (myMessage != null) {
-			hash = hash*37 + myMessage.hashCode();
+		if (getMessage() != null) {
+			hash = hash*37 + getMessage().hashCode();
 		}
 		
 		if (myPos != null) {
@@ -145,7 +138,5 @@ public class QvtMessage {
 	}
 	
 	private final int myLineNum;
-	private final int mySeverity;
-	private final String myMessage;
 	private final TextPositionsImpl myPos;
 }

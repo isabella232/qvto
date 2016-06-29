@@ -161,7 +161,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
 			IStatus status = e.getStatus();
     		
     		myDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR, status.getCode(), status.getMessage());
-			myDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+			myDiagnostic.addAll(BasicDiagnostic.toDiagnostic(status));
     		    		
 			return null;
 		}
@@ -259,7 +259,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
     private final QvtModule myModule;
     private QvtOperationalEnvFactory myEnvFactory;
     
-    private ExecutionDiagnostic myDiagnostic = ExecutionDiagnostic.OK_INSTANCE;
+    private ExecutionDiagnostic myDiagnostic = ExecutionDiagnosticImpl.createOkInstance();
         
     public OperationalTransformation getTransformation(IProgressMonitor monitor) {
     	try {
@@ -271,7 +271,7 @@ public class QvtInterpretedTransformation implements QvtTransformation {
     		IStatus status = e.getStatus();
     		
     		myDiagnostic = new ExecutionDiagnosticImpl(Diagnostic.ERROR, status.getCode(), status.getMessage());
-			myDiagnostic.merge(BasicDiagnostic.toDiagnostic(e));
+			myDiagnostic.addAll(BasicDiagnostic.toDiagnostic(status));
     		    		
 			return null;
     	}

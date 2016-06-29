@@ -74,10 +74,18 @@ public class EmfUtilPlugin extends Plugin {
 		return new BasicDiagnostic(Diagnostic.ERROR, ID, 0, message, null);
 	}	
 
+	/**
+	 * Indicates that the given diagnostic is neither error or canceled.
+	 * 
+	 * @param diagnostic
+	 *            the diagnostic to test
+	 * @return <code>true</code> in case of success, <code>false</code>
+	 *         otherwise
+	 */
 	public static boolean isSuccess(Diagnostic diagnostic) {
 		int severity = diagnostic.getSeverity();
-		return severity == Diagnostic.OK || severity == Diagnostic.WARNING || severity == Diagnostic.INFO;
-	}	
-	
+		return severity != Diagnostic.ERROR && severity != Diagnostic.CANCEL;
+	}
+		
 	public static final String ID = "org.eclipse.m2m.qvt.oml.emf.util"; //$NON-NLS-1$
 }

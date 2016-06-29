@@ -416,7 +416,8 @@ public class QVTOCompiler {
         				String errorInImportMessage = NLS.bind(CompilerMessages.importHasCompilationError, 
         						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));	        				
         				env.reportError(errorInImportMessage, nextImportCS.getPathNameCS());
-    				} else {
+    				}
+    				else {
     					String rootMessage = compiledImport.getErrors().get(0).getMessage();
 						env.reportError(rootMessage, nextImportCS.getPathNameCS());
     				}

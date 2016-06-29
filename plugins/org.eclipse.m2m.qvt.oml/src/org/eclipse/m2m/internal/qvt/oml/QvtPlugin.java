@@ -225,18 +225,5 @@ public class QvtPlugin extends EMFPlugin {
 	
 	public static Diagnostic createWarnDiagnostic(String message) {
 		return new BasicDiagnostic(Diagnostic.WARNING, ID, 0, message, null);
-	}	
-
-	/**
-	 * Indicates that the given diagnostic is neither error or canceled.
-	 * 
-	 * @param diagnostic
-	 *            the diagnostic to test
-	 * @return <code>true</code> in case of success, <code>false</code>
-	 *         otherwise
-	 */
-	public static boolean isSuccess(Diagnostic diagnostic) {
-		int severity = diagnostic.getSeverity();
-		return severity != Diagnostic.ERROR && severity != Diagnostic.CANCEL;
 	}
 }

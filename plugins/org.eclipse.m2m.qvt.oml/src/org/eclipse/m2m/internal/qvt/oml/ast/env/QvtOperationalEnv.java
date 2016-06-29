@@ -367,9 +367,9 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
         return result;
     }
     
-	public void reportError(String message, int startOffset, int endOffset) {
+	public QvtMessage reportError(String message, int startOffset, int endOffset) {
 		if ((myCompilerOptions != null) && !myCompilerOptions.isReportErrors()) {
-			return;
+			return null;
 		}
 				
 		QvtOperationalEnv parent = this;
@@ -386,19 +386,23 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 			for (QvtMessage msg : parent.myErrorSet) {
 				if (msg.getOffset() == startOffset && msg.getLength() == msgLength) {
 					foundSameLocation = true;
-					break;
+					return msg;
 				}
 			}
 		}
 		
+		QvtMessage error = new QvtMessage(message, QvtMessage.SEVERITY_ERROR, startOffset, msgLength, getLineNum(parent, startOffset));
+		
 		if (!foundSameLocation) {
-			parent.myErrorSet.add(new QvtMessage(message, QvtMessage.SEVERITY_ERROR, startOffset, msgLength, getLineNum(parent, startOffset)));
+			parent.myErrorSet.add(error);
 		}
+		
+		return error;
 	}
 
-	public void reportWarning(String message, int startOffset, int endOffset) {
+	public QvtMessage reportWarning(String message, int startOffset, int endOffset) {
         if ((myCompilerOptions != null) && !myCompilerOptions.isReportErrors()) {
-			return;
+			return null;
 		}
 		QvtOperationalEnv parent = this;
 		while (parent.getInternalParent() != null) {
@@ -407,20 +411,21 @@ public class QvtOperationalEnv extends QvtEnvironmentBase { //EcoreEnvironment {
 		if (parent instanceof QvtOperationalModuleEnv && ((QvtOperationalModuleEnv)parent).getFileParent() != null) {
 			parent = ((QvtOperationalModuleEnv)parent).getFileParent();
 		}
-		parent.myWarningSet.add(new QvtMessage(message, QvtMessage.SEVERITY_WARNING, startOffset, endOffset-startOffset+1, getLineNum(parent, startOffset)));
-
+		QvtMessage warning = new QvtMessage(message, QvtMessage.SEVERITY_WARNING, startOffset, endOffset-startOffset+1, getLineNum(parent, startOffset));
+		parent.myWarningSet.add(warning);
+		return warning;
 	}
 	
-	public void reportError(String message, CSTNode node) {
+	public QvtMessage reportError(String message, CSTNode node) {
 		int startOffset = (node != null) ? node.getStartOffset() : 0;
 		int endOffset = (node != null) ? node.getEndOffset() : 0;
-		reportError(message, startOffset, endOffset);
+		return reportError(message, startOffset, endOffset);
 	}
 
-	public void reportWarning(String message, CSTNode node) {
+	public QvtMessage reportWarning(String message, CSTNode node) {
 		int startOffset = (node != null) ? node.getStartOffset() : 0;
 		int endOffset = (node != null) ? node.getEndOffset() : 0;
-		reportWarning(message, startOffset, endOffset);
+		return reportWarning(message, startOffset, endOffset);
 	}
 
 	public boolean hasErrors() {

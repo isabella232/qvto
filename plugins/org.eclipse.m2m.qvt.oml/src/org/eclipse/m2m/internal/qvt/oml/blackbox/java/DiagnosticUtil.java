@@ -23,12 +23,7 @@ class DiagnosticUtil {
 	private DiagnosticUtil() {
 		super();
 	}
-	
-	public static boolean isSuccess(Diagnostic diagnostic) {
-		int severity = diagnostic.getSeverity();
-		return severity == Diagnostic.OK || severity == Diagnostic.WARNING || severity == Diagnostic.INFO;
-	}
-		
+			
 	public static BasicDiagnostic createRootDiagnostic(String message) {
 		return new BasicDiagnostic(DIAGNOSTIC_SOURCE, 0, message, null);
 	}

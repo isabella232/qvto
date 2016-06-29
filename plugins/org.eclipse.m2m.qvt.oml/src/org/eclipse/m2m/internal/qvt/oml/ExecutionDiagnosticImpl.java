@@ -31,9 +31,6 @@ import org.eclipse.m2m.qvt.oml.ExecutionStackTraceElement;
  */
 public final class ExecutionDiagnosticImpl extends BasicDiagnostic implements ExecutionDiagnostic {
 	
-	public static final ExecutionDiagnosticImpl OK_INSTANCE = new ExecutionDiagnosticImpl(
-			Diagnostic.OK, 0, "OK", null); //$NON-NLS-1$
-
 	// instance fields
 
 	private List<ExecutionStackTraceElement> fStackTrace;
@@ -124,5 +121,9 @@ public final class ExecutionDiagnosticImpl extends BasicDiagnostic implements Ex
 		}
 
 		return result.toString();
+	}
+	
+	public static ExecutionDiagnosticImpl createOkInstance() {
+		return new ExecutionDiagnosticImpl(Diagnostic.OK, 0, "OK", null); //$NON-NLS-1$
 	}
 }

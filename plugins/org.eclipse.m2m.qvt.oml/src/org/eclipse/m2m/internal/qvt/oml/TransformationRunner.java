@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml;
 
+import static org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin.isSuccess;
+
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -228,13 +230,6 @@ public class TransformationRunner  {
 		}
 		
 		return Diagnostic.OK_INSTANCE;
-	}
-	
-	/**
-	 * Successfully finished execution, no errors and user interruption 
-	 */
-	private static boolean isSuccess(Diagnostic diagnostic) {
-		return QvtPlugin.isSuccess(diagnostic);
 	}
 		
 }

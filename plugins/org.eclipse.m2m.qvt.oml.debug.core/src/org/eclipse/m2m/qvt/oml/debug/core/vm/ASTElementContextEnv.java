@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EParameter;
+import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalAstWalker;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
@@ -220,14 +221,16 @@ class ASTElementContextEnv extends QvtOperationalEnv {
 	}
 
 	@Override
-	public void reportError(String message, int startOffset, int endOffset) {
+	public QvtMessage reportError(String message, int startOffset, int endOffset) {
 		// do not propagate fErrors to the root environment
 		fErrors.append(message).append('\n');
+		return null;
 	}
 
 	@Override
-	public void reportWarning(String message, int startOffset, int endOffset) {
+	public QvtMessage reportWarning(String message, int startOffset, int endOffset) {
 		// not important
+		return null;
 	}
 
 	private void initializeContextVariables(final EObject astContext) {

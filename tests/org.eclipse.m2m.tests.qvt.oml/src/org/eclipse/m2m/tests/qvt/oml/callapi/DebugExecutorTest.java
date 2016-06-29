@@ -31,10 +31,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.InternalTransformationExecutor;
-import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.TransformationRunner;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
 import org.eclipse.m2m.internal.qvt.oml.common.io.FileUtil;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -191,7 +191,7 @@ public class DebugExecutorTest extends TestCase {
 				resSet.getPackageRegistry());
 
 		Diagnostic loadDiagnostic = executor.loadTransformation(new NullProgressMonitor());
-		if (!QvtPlugin.isSuccess(loadDiagnostic)) {
+		if (!EmfUtilPlugin.isSuccess(loadDiagnostic)) {
 			return Collections.emptyList();
 		}
 

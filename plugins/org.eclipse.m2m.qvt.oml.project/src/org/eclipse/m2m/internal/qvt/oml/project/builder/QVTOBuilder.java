@@ -34,6 +34,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
@@ -269,7 +270,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
         attributes.put(IMarker.CHAR_START, Integer.valueOf(e.getOffset()));
         attributes.put(IMarker.CHAR_END, Integer.valueOf(e.getOffset() + e.getLength()));
         attributes.put(IMarker.MESSAGE, e.getMessage());
-        attributes.put(IMarker.SEVERITY, Integer.valueOf(e.getSeverity()));
+        attributes.put(IMarker.SEVERITY, Integer.valueOf(convertSeverity(e)));
         if (e.getLineNum() >= 0) {
         	attributes.put(IMarker.LINE_NUMBER, Integer.valueOf(e.getLineNum()));
         }
@@ -280,6 +281,20 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
         catch (CoreException e1) {
             Logger.getLogger().log(Logger.WARNING, "QVTOBuilder: failed to create marker", e1);//$NON-NLS-1$
         }                   
+    }
+    
+    private int convertSeverity(Diagnostic diagnostic) {
+    	
+    	switch (diagnostic.getSeverity()) {
+			case Diagnostic.ERROR:
+				return IMarker.SEVERITY_ERROR;
+			case Diagnostic.INFO:
+				return IMarker.SEVERITY_INFO;
+			case Diagnostic.WARNING:
+				return IMarker.SEVERITY_WARNING;
+			default:
+				throw new IllegalArgumentException();
+		}
     }
 
 
