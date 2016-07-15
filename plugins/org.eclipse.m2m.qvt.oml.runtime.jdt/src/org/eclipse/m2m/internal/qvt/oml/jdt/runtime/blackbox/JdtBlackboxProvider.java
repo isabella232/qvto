@@ -174,8 +174,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			JdtDescriptor other = (JdtDescriptor) obj;
 
 			return getQualifiedName().equals(other.getQualifiedName())
-					&& (fModuleJavaClass.getName().equals(other.fModuleJavaClass.getName())
-					&& (fModuleJavaClass.equals(other.fModuleJavaClass)));
+					&& fModuleJavaClass.equals(other.fModuleJavaClass);
 		}
 		
 		@Override
@@ -183,9 +182,8 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			int result = hashCode;
 			if (result == 0) {
 				result = 17;
-				result = 31 * result + getQualifiedName().hashCode();				
+				result = 31 * result + getQualifiedName().hashCode();
 				result = 31 * result + fModuleJavaClass.hashCode();
-				
 				hashCode = result;
 			}			
 			return result;
