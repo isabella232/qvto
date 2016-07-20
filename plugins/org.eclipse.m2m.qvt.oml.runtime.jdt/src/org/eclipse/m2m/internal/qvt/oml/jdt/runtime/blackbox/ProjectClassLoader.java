@@ -78,13 +78,13 @@ public class ProjectClassLoader extends URLClassLoader {
 	}
 		
 	private static URL getProjectOutputURL(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
-		
+				
 		IPath projectRelativeOutputPath = javaProject.getOutputLocation().removeFirstSegments(1);
 		IPath outputPath = javaProject.getProject().getLocation().append(projectRelativeOutputPath);
 		
 		return outputPath.addTrailingSeparator().toFile().toURI().toURL();
 	}
-	
+		
 	private static List<ClassLoader> getReferencedProjectLoaders(IJavaProject javaProject) {
 		
 		Set<IProject> referencedProjects = ProjectDependencyTracker.getAllReferencedProjects(javaProject.getProject(), false);

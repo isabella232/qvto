@@ -35,6 +35,6 @@ public interface UnitContents {
 		Diagnostic getProblems();
 
 		// TODO - pass options in a map for more flexibility
-		List<EObject> loadElements(EPackage.Registry packageRegistry);
+		List<? extends EObject> loadElements(EPackage.Registry packageRegistry);
 	}
 }

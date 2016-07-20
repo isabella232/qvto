@@ -61,10 +61,10 @@ public class BlackboxResourceFactory implements Resource.Factory {
 		};
 	}
 
-    private List<EObject> loadBlackboxUnit(UnitProxy unit, ResourceSet rs) throws IOException {    	
+    private List<? extends EObject> loadBlackboxUnit(UnitProxy unit, ResourceSet rs) throws IOException {    	
     	ModelContents contents = (ModelContents) unit.getContents();
 
-    	List<EObject> topElements = contents.loadElements(rs.getPackageRegistry());
+    	List<? extends EObject> topElements = contents.loadElements(rs.getPackageRegistry());
 //    	List<QvtOperationalModuleEnv> modelEnvs = new ArrayList<QvtOperationalModuleEnv>(topElements.size());
     	
     	for (EObject nextElement : topElements) {

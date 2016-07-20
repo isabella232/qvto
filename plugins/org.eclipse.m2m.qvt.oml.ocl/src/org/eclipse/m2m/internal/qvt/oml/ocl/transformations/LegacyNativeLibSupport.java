@@ -26,7 +26,7 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
@@ -55,7 +55,7 @@ public class LegacyNativeLibSupport {
 		// FIXME - set isBlackBox=TRUE, as soon is it gets into the AST metamodel
 				
         QvtOperationalModuleEnv libEnv = initLibEnvironment(lib, libModule);
-        URI libUri = URI.createHierarchicalURI(AbstractCompilationUnitDescriptor.URI_QVTO_SCHEME, AbstractCompilationUnitDescriptor.URI_BLACKBOX_AUTHORITY,
+        URI libUri = URI.createHierarchicalURI(BlackboxUnitDescriptor.URI_QVTO_SCHEME, BlackboxUnitDescriptor.URI_BLACKBOX_AUTHORITY,
         		null, new String[] {lib.getId()}, null, null);
 		libModule.eResource().setURI(libUri);
 

@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.CompilationUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
@@ -103,10 +103,10 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		try {
 			ResolutionContext resolutionContext = new ResolutionContextImpl(compileModules.iterator().next().getURI());
 			// import "Strings" black-box library
-			AbstractCompilationUnitDescriptor abstractCompilationUnitDescriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor("Strings", resolutionContext);
+			BlackboxUnitDescriptor abstractCompilationUnitDescriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor("Strings", resolutionContext);
 			assertNotNull("descriptor must be found", abstractCompilationUnitDescriptor); //$NON-NLS-1$
 			LoadContext loadContext = new LoadContext(EPackage.Registry.INSTANCE);
-			CompilationUnit loadCompilationUnit = BlackboxRegistry.INSTANCE.loadCompilationUnit(abstractCompilationUnitDescriptor, loadContext);
+			BlackboxUnit loadCompilationUnit = abstractCompilationUnitDescriptor.load(loadContext); //BlackboxRegistry.INSTANCE.loadCompilationUnit(abstractCompilationUnitDescriptor, loadContext);
 			modules.add(loadCompilationUnit.getElements().get(0).getModuleContextType());
 
 		} catch (Exception e) {

@@ -11,30 +11,31 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
+import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.CompilationUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents.ModelContents;
+import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 
 public class BlackboxUnitResolver implements UnitResolver {
@@ -51,13 +52,13 @@ public class BlackboxUnitResolver implements UnitResolver {
 	}
 	
 	public static boolean isBlackboxUnitURI(URI uri) {
-		return AbstractCompilationUnitDescriptor.URI_QVTO_SCHEME.equals(uri.scheme()) && 
-			AbstractCompilationUnitDescriptor.URI_BLACKBOX_AUTHORITY.equals(uri.authority());
+		return BlackboxUnitDescriptor.URI_QVTO_SCHEME.equals(uri.scheme()) && 
+			BlackboxUnitDescriptor.URI_BLACKBOX_AUTHORITY.equals(uri.authority());
 	}
 		
 	public UnitProxy resolveUnit(String qualifiedName) {
 		
-		AbstractCompilationUnitDescriptor descriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor(qualifiedName, fContext);
+		BlackboxUnitDescriptor descriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor(qualifiedName, fContext);
 		
 		if (descriptor != null) {
 			int namePos = qualifiedName.lastIndexOf('.');
@@ -76,46 +77,74 @@ public class BlackboxUnitResolver implements UnitResolver {
 				namespace = null;
 			}
 			
-			return new BBoxUnit(namespace, name, descriptor);
+			return new BlackboxUnitProxy(namespace, name, descriptor);
 		}
 
 		return null;
 	}
 
 
-	class BBoxUnit extends UnitProxy {
+	class BlackboxUnitProxy extends UnitProxy {
 
-		private AbstractCompilationUnitDescriptor fDescriptor;
+		private BlackboxUnitDescriptor fDescriptor;
 		
-		BBoxUnit(String namespace, String name, AbstractCompilationUnitDescriptor descriptor) {
+		BlackboxUnitProxy(String namespace, String name, BlackboxUnitDescriptor descriptor) {
 			super(namespace, name, descriptor.getURI());
 			
 			fDescriptor = descriptor;
 		}
-
+		
 		@Override
 		public int getContentType() {
 			return UnitProxy.TYPE_MODEL;
 		}
 		
 		@Override
-		public UnitContents getContents() throws IOException {
-			return new BBoxUnitContents(fDescriptor);
+		public BlackboxUnitContents getContents() {
+			return new BlackboxUnitContents(fDescriptor);
 		}
 
 		@Override
 		public UnitResolver getResolver() {
 			return BlackboxUnitResolver.this;
 		}
+		
+		public CompiledUnit load(IMetamodelRegistryProvider provider) {
+			BlackboxUnitContents contents = getContents();
+	    	
+	    	List<Module> modules = contents.loadElements(CompilerUtils.getEPackageRegistry(getURI(), provider));
+	    	List<QvtOperationalModuleEnv> modelEnvs = new ArrayList<QvtOperationalModuleEnv>(modules.size());
+	    	
+	    	for (Module nextModule : modules) {
+	    		QvtOperationalModuleEnv nextEnv = ASTBindingHelper.getEnvironment(nextModule, QvtOperationalModuleEnv.class);
+	    		if(nextEnv != null) {
+	    			// FIXME -
+	    			// clear the environment problems, for now we do not consider errors
+	    			// like duplicate operation definitions to cause the importing unit to fail
+	    			nextEnv.clearProblems();
+	    			
+	    			modelEnvs.add(nextEnv);
+	    		}
+			}
+
+	    	
+	    	CompiledUnit compiledUnit = new CompiledUnit(Arrays.asList(ResolverUtils.getNameSegments(getQualifiedName())), getURI(), modelEnvs);
+	    	Diagnostic loadProblems = contents.getProblems();
+			if(loadProblems != null) {
+	    		compiledUnit.addProblem(new QvtMessage(loadProblems.getMessage()));
+	    	}
+	    	
+			return compiledUnit;
+		}
 	}
 	
-	class BBoxUnitContents implements ModelContents {
+	class BlackboxUnitContents implements ModelContents {
 		
-		private AbstractCompilationUnitDescriptor fDescriptor;
+		private BlackboxUnitDescriptor fDescriptor;
 		private Diagnostic fProblems;
 		
 		
-		BBoxUnitContents(AbstractCompilationUnitDescriptor descriptor) {
+		BlackboxUnitContents(BlackboxUnitDescriptor descriptor) {
 			assert descriptor != null;
 			fDescriptor = descriptor;
 		}
@@ -124,11 +153,11 @@ public class BlackboxUnitResolver implements UnitResolver {
 			return fProblems;
 		}
 		
-		public List<EObject> loadElements(Registry packageRegistry) {
+		public List<Module> loadElements(Registry packageRegistry) {
 			LoadContext loadContext = new LoadContext(packageRegistry);
-			CompilationUnit cunit = null;
+			BlackboxUnit cunit = null;
 			try {
-				cunit = BlackboxRegistry.INSTANCE.loadCompilationUnit(fDescriptor, loadContext);
+				cunit = fDescriptor.load(loadContext);
 				if (cunit.getDiagnostic().getSeverity() == Diagnostic.ERROR) {
 					String errMessage = NLS.bind(ValidationMessages.FailedToLoadUnit, fDescriptor.getQualifiedName());
 					fProblems = new BasicDiagnostic(cunit.getDiagnostic().getSource(), cunit.getDiagnostic().getCode(), 
@@ -153,7 +182,7 @@ public class BlackboxUnitResolver implements UnitResolver {
 			}
 			
 			List<QvtOperationalModuleEnv> elementEnvs = cunit.getElements();			
-			List<EObject> unitElements = new ArrayList<EObject>(elementEnvs.size());
+			List<Module> unitElements = new ArrayList<Module>(elementEnvs.size());
 						
 			for (QvtOperationalModuleEnv nextEnv : elementEnvs) {
 				Module module = nextEnv.getModuleContextType();

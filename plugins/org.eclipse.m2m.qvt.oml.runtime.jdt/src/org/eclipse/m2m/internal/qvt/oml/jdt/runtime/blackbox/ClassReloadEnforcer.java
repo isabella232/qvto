@@ -18,6 +18,8 @@ public class ClassReloadEnforcer extends CompilationParticipant {
 	@Override
 	public void buildFinished(IJavaProject project) {	
 		ProjectClassLoader.resetProjectClassLoader(project);
+		
+		JdtBlackboxProvider.clearDescriptors(project.getProject());
 	}
 	
 	@Override

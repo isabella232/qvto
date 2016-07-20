@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 
-public interface CompilationUnit {
+public interface BlackboxUnit {
 	List<QvtOperationalModuleEnv> getElements();
 	Diagnostic getDiagnostic();
 }

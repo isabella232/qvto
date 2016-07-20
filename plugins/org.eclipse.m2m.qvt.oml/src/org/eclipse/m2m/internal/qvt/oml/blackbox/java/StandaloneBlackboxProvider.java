@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 
@@ -29,7 +29,7 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	private Map<String, JavaUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	
 	@Override
-	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) { 
+	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) { 
 		try {
 			JavaUnitDescriptor d = fDescriptorMap.get(qualifiedName);
 			if (d == null) {
@@ -57,7 +57,7 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 			d.addModuleHandle(
 				new StandaloneModuleHandle(cls.getName(), moduleName) {
 					@Override
-					public Class<?> getModuleJavaClass() throws ClassNotFoundException {
+					public Class<?> getModuleJavaClass() {
 						return cls;
 					}
 					
@@ -73,13 +73,12 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	}
 
 	@Override
-	public Collection<JavaUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
+	public Collection<JavaUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
 		return fDescriptorMap.values();
 	}
 
 	@Override
 	public void cleanup() {
-		super.cleanup();
 		fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	}
 	

@@ -34,7 +34,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
-public abstract class AbstractBlackboxProvider {
+public abstract class BlackboxProvider {
 		
 	private static final ResolutionContext GLOBAL_RESOLUTION_CONTEXT = new ResolutionContextImpl(BlackboxUnitResolver.GLOBAL_CONTEXT);
 
@@ -42,18 +42,18 @@ public abstract class AbstractBlackboxProvider {
 		Object createAdapter(EObject moduleInstance);
 	}
 
-	protected AbstractBlackboxProvider() {
+	protected BlackboxProvider() {
 		super();
 	}
 
-	protected CompilationUnit createCompilationUnit(
+	protected BlackboxUnit createBlackboxUnit(
 			QvtOperationalModuleEnv moduleEnv) {
-		return createCompilationUnit(Collections.singletonList(moduleEnv));
+		return createBlackboxUnit(Collections.singletonList(moduleEnv));
 	}
 
-	protected CompilationUnit createCompilationUnit(
+	protected BlackboxUnit createBlackboxUnit(
 			final List<QvtOperationalModuleEnv> loadedModules) {
-		return new CompilationUnit() {
+		return new BlackboxUnit() {
 			public List<QvtOperationalModuleEnv> getElements() {
 				return Collections.unmodifiableList(loadedModules);
 			}
@@ -93,19 +93,15 @@ public abstract class AbstractBlackboxProvider {
 		CallHandlerAdapter.attach(operation, actualHandler);
 	}
 
-	public abstract Collection<? extends AbstractCompilationUnitDescriptor> getModuleDescriptors(
+	public abstract Collection<? extends BlackboxUnitDescriptor> getUnitDescriptors(
 			ResolutionContext resolutionContext);
 
-	public abstract AbstractCompilationUnitDescriptor getModuleDescriptor(
+	public abstract BlackboxUnitDescriptor getUnitDescriptor(
 			String qualifiedName, ResolutionContext resolutionContext);
-
-	public abstract CompilationUnit loadCompilationUnit(
-			AbstractCompilationUnitDescriptor descriptor,
-			LoadContext loadContext) throws BlackboxException;
 	
 	public abstract void cleanup();
 	
-	private void handleBlackboxException(BlackboxException e, AbstractCompilationUnitDescriptor descriptor) {
+	private void handleBlackboxException(BlackboxException e, BlackboxUnitDescriptor descriptor) {
 		
 		Diagnostic diagnostic = e.getDiagnostic();
 		if(diagnostic != null) {
@@ -119,10 +115,10 @@ public abstract class AbstractBlackboxProvider {
 	
 	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractCompilationUnitDescriptor d : getModuleDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
+		for (BlackboxUnitDescriptor d : getUnitDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
 			if (env.getImportedNativeLibs().isEmpty()) {
 				try {
-					loadCompilationUnit(d, new LoadContext(env.getEPackageRegistry()));
+					d.load(new LoadContext(env.getEPackageRegistry()));
 				} catch (BlackboxException e) {
 					handleBlackboxException(e, d);
 					
@@ -148,10 +144,10 @@ public abstract class AbstractBlackboxProvider {
 	
 	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractCompilationUnitDescriptor d : getModuleDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
+		for (BlackboxUnitDescriptor d : getUnitDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
 			if (env.getImportedNativeLibs().isEmpty()) {
 				try {
-					loadCompilationUnit(d, new LoadContext(env.getEPackageRegistry()));
+					d.load(new LoadContext(env.getEPackageRegistry()));
 				} catch (BlackboxException e) {
 					handleBlackboxException(e, d);
 					

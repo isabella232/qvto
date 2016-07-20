@@ -38,19 +38,19 @@ public class BlackboxRegistry {
 			: new BlackboxRegistry();
 
 	private final StandaloneBlackboxProvider fStandaloneProvider = new StandaloneBlackboxProvider();
-	private final List<AbstractBlackboxProvider> fProviders;
+	private final List<BlackboxProvider> fProviders;
 
 	public BlackboxRegistry() {
-		fProviders = Collections.<AbstractBlackboxProvider>singletonList(fStandaloneProvider);
+		fProviders = Collections.<BlackboxProvider>singletonList(fStandaloneProvider);
 	}
 
-	protected List<? extends AbstractBlackboxProvider> getProviders() {
+	protected List<? extends BlackboxProvider> getProviders() {
 		return fProviders;
 	}
 
-	public AbstractCompilationUnitDescriptor getCompilationUnitDescriptor(String qualifiedName, ResolutionContext context) {
-		for (AbstractBlackboxProvider provider : getProviders()) {
-			AbstractCompilationUnitDescriptor descriptor = provider.getModuleDescriptor(qualifiedName, context);
+	public BlackboxUnitDescriptor getCompilationUnitDescriptor(String qualifiedName, ResolutionContext context) {
+		for (BlackboxProvider provider : getProviders()) {
+			BlackboxUnitDescriptor descriptor = provider.getUnitDescriptor(qualifiedName, context);
 			if (descriptor != null) {
 				return descriptor;
 			}
@@ -58,20 +58,10 @@ public class BlackboxRegistry {
 		return null;
 	}
 
-	public CompilationUnit loadCompilationUnit(AbstractCompilationUnitDescriptor descriptor, LoadContext loadContext)
-			throws BlackboxException {
-		if (descriptor == null) {
-			throw new IllegalArgumentException("Null blackbox descriptor"); //$NON-NLS-1$
-		}
-
-		AbstractBlackboxProvider provider = descriptor.getProvider();
-		return provider.loadCompilationUnit(descriptor, loadContext);
-	}
-
-	public List<AbstractCompilationUnitDescriptor> getCompilationUnitDescriptors(ResolutionContext loadContext) {
-		ArrayList<AbstractCompilationUnitDescriptor> result = new ArrayList<AbstractCompilationUnitDescriptor>();
-		for (AbstractBlackboxProvider provider : getProviders()) {
-			for (AbstractCompilationUnitDescriptor abstractCompilationUnitDescriptor : provider.getModuleDescriptors(loadContext)) {
+	public List<BlackboxUnitDescriptor> getCompilationUnitDescriptors(ResolutionContext loadContext) {
+		ArrayList<BlackboxUnitDescriptor> result = new ArrayList<BlackboxUnitDescriptor>();
+		for (BlackboxProvider provider : getProviders()) {
+			for (BlackboxUnitDescriptor abstractCompilationUnitDescriptor : provider.getUnitDescriptors(loadContext)) {
 				result.add(abstractCompilationUnitDescriptor);
 			}
 		}
@@ -79,14 +69,14 @@ public class BlackboxRegistry {
 	}
 
 	public void cleanup() {
-		for (AbstractBlackboxProvider provider : getProviders()) {
+		for (BlackboxProvider provider : getProviders()) {
 			provider.cleanup();
 		}
 	}
 
 	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractBlackboxProvider provider : getProviders()) {
+		for (BlackboxProvider provider : getProviders()) {
 			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(operation, env);
 			if (!handlers.isEmpty()) {
 				if (result.isEmpty()) {
@@ -100,7 +90,7 @@ public class BlackboxRegistry {
 
 	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (AbstractBlackboxProvider provider : getProviders()) {
+		for (BlackboxProvider provider : getProviders()) {
 			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(transformation, env);
 			if (!handlers.isEmpty()) {
 				if (result.isEmpty()) {
@@ -125,20 +115,20 @@ public class BlackboxRegistry {
 
 		private static final String BLACKBOX_PROVIDER_EXTENSION = "blackboxProvider"; //$NON-NLS-1$
 
-		private final List<AbstractBlackboxProvider> fProviders;
+		private final List<BlackboxProvider> fProviders;
 
 		@Override
-		protected List<? extends AbstractBlackboxProvider> getProviders() {
+		protected List<? extends BlackboxProvider> getProviders() {
 			return fProviders;
 		}
 
 		Eclipse() {
-			fProviders = new LinkedList<AbstractBlackboxProvider>();
+			fProviders = new LinkedList<BlackboxProvider>();
 			readProviders(fProviders);
 			fProviders.addAll(super.getProviders());
 		}
 
-		private void readProviders(List<AbstractBlackboxProvider> providers) {
+		private void readProviders(List<BlackboxProvider> providers) {
 			IConfigurationElement[] configs = Platform.getExtensionRegistry().getConfigurationElementsFor(QvtPlugin.ID,
 					BLACKBOX_PROVIDER_EXTENSION);
 
@@ -146,12 +136,12 @@ public class BlackboxRegistry {
 				try {
 					if (element.getName().equals(PROVIDER_ELEMENT)) {
 						Object extension = element.createExecutableExtension(CLASS_ATTR);
-						if (extension instanceof AbstractBlackboxProvider == false) {
+						if (extension instanceof BlackboxProvider == false) {
 							QvtPlugin.error("Provider must implement AbstractBlackboxProvider interface: " + extension); //$NON-NLS-1$
 							continue;
 						}
 
-						providers.add((AbstractBlackboxProvider) extension);
+						providers.add((BlackboxProvider) extension);
 					}
 				} catch (CoreException e) {
 					QvtPlugin.getDefault().log(e.getStatus());

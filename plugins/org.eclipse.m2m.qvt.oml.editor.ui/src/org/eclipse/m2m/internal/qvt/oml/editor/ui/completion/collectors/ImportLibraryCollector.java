@@ -12,17 +12,17 @@ package org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.collectors;
 
 import java.util.Collection;
 
-import lpg.runtime.IToken;
-
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.QVTOParsersym;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.CategoryImageConstants;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.CompletionProposalUtil;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionData;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.completion.QvtCompletionProposal;
+
+import lpg.runtime.IToken;
 
 /**
  * @author aigdalov
@@ -53,7 +53,7 @@ public class ImportLibraryCollector extends AbstractCollector {
 //        }
         
         final ResolutionContextImpl loadContext = new ResolutionContextImpl(data.getCFile().getURI());
-        for (AbstractCompilationUnitDescriptor abstractCompilationUnitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
+        for (BlackboxUnitDescriptor abstractCompilationUnitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
             String proposalString = abstractCompilationUnitDescriptor.getQualifiedName();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, CategoryImageConstants.MAPPING, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);        	

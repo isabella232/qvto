@@ -22,10 +22,10 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractBlackboxProvider;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxProvider;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.CompilationUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.OperationMatcher;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
@@ -35,60 +35,39 @@ import org.eclipse.m2m.internal.qvt.oml.ocl.OclQvtoPlugin;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
-public class LegacyNativeLibraryProviderAdapter extends AbstractBlackboxProvider {
+public class LegacyNativeLibraryProviderAdapter extends BlackboxProvider {
 	
-	private Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap;
-	private final Map<LibraryDescriptor, CompilationUnit> fBlackboxUnits = new LinkedHashMap<LibraryDescriptor, CompilationUnit>();
+	private Map<String, BlackboxUnitDescriptor> fDescriptorMap;
+	private final Map<LibraryDescriptor, BlackboxUnit> fBlackboxUnits = new LinkedHashMap<LibraryDescriptor, BlackboxUnit>();
 	
 	public LegacyNativeLibraryProviderAdapter() {
 		super();
 	}
 
 	@Override
-	public Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext loadContext) {
+	public Collection<BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext loadContext) {
 		return getDescriptorMap().values();
 	}
 	
 	@Override
-	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
+	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
 		return getDescriptorMap().get(qualifiedName);		
 	}
-	
-	@Override
-	public CompilationUnit loadCompilationUnit(AbstractCompilationUnitDescriptor descriptor, LoadContext loadContext) throws BlackboxException {
-		if(descriptor instanceof LibraryDescriptor == false) {
-			throw new IllegalArgumentException("Descriptor not recognized by provider"); //$NON-NLS-1$
-		}
-		LibraryDescriptor libDescriptor = (LibraryDescriptor) descriptor;
 		
-		if (fBlackboxUnits.containsKey(libDescriptor)) {
-			return fBlackboxUnits.get(libDescriptor);
-		}
-		
-		try {
-			CompilationUnit compilationUnit = createCompilationUnit(LegacyNativeLibSupport.INSTANCE.defineLibrary(libDescriptor.fLibrary, libDescriptor.fDefinedOperations));			
-			fBlackboxUnits.put(libDescriptor, compilationUnit);
-			return compilationUnit;
-		} catch (LibraryCreationException e) {
-			fBlackboxUnits.put(libDescriptor, null);
-			throw new BlackboxException(e.getMessage(), e);			
-		}
-	}
-	
 	@Override
 	public void cleanup() {
 		fBlackboxUnits.clear();
 		fDescriptorMap = null;
 	}
 	
-	private Map<String, AbstractCompilationUnitDescriptor> getDescriptorMap() {
+	private Map<String, BlackboxUnitDescriptor> getDescriptorMap() {
 		if (fDescriptorMap != null) {
 			return fDescriptorMap;
 		}
 		
 		LibrariesRegistry registry = OclQvtoPlugin.getDefault().getLibrariesRegistry();
 
-		fDescriptorMap = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>(registry.getLibraries().size());
+		fDescriptorMap = new LinkedHashMap<String, BlackboxUnitDescriptor>(registry.getLibraries().size());
 		for (final Library lib : registry.getLibraries()) {
 			fDescriptorMap.put(lib.getId(), new LibraryDescriptor(lib));			
 		}
@@ -97,7 +76,7 @@ public class LegacyNativeLibraryProviderAdapter extends AbstractBlackboxProvider
 	}
 	
 	
-	private class LibraryDescriptor extends AbstractCompilationUnitDescriptor {
+	private class LibraryDescriptor extends BlackboxUnitDescriptor {
 
 		private final Library fLibrary;
 		private final Map<String, List<EOperation>> fDefinedOperations;
@@ -163,6 +142,23 @@ public class LegacyNativeLibraryProviderAdapter extends AbstractBlackboxProvider
 			}
 			
 			return result;
+		}
+		
+		@Override
+		public BlackboxUnit load(LoadContext context) throws BlackboxException {
+			
+			if (fBlackboxUnits.containsKey(this)) {
+				return fBlackboxUnits.get(this);
+			}
+			
+			try {
+				BlackboxUnit compilationUnit = createBlackboxUnit(LegacyNativeLibSupport.INSTANCE.defineLibrary(fLibrary, fDefinedOperations));			
+				fBlackboxUnits.put(this, compilationUnit);
+				return compilationUnit;
+			} catch (LibraryCreationException e) {
+				fBlackboxUnits.put(this, null);
+				throw new BlackboxException(e.getMessage(), e);			
+			}
 		}
 		
 	}	

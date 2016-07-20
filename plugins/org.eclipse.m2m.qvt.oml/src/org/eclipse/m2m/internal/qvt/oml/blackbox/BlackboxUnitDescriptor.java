@@ -21,7 +21,7 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 
 
-public abstract class AbstractCompilationUnitDescriptor {
+public abstract class BlackboxUnitDescriptor {
 	
 	public static final String URI_QVTO_SCHEME = "qvto"; //$NON-NLS-1$
 	public static final String URI_BLACKBOX_AUTHORITY = "blackbox"; //$NON-NLS-1$	
@@ -29,12 +29,12 @@ public abstract class AbstractCompilationUnitDescriptor {
 	private URI fURI;
 	private String fQualifiedName;
 	private String fDescription;
-	private AbstractBlackboxProvider fProvider;
+	private BlackboxProvider fProvider;
 	
 	/**
 	 * @throws IllegalArgumentException
 	 */
-	protected AbstractCompilationUnitDescriptor(AbstractBlackboxProvider provider, String qualifiedName, String... uriSegments) {
+	protected BlackboxUnitDescriptor(BlackboxProvider provider, String qualifiedName, String... uriSegments) {
 		if(provider == null || qualifiedName == null) {
 			throw new IllegalArgumentException("null 'qualified name' or 'provider'"); //$NON-NLS-1$
 		}
@@ -57,11 +57,11 @@ public abstract class AbstractCompilationUnitDescriptor {
 		return null;
 	}
 
-	protected AbstractCompilationUnitDescriptor(AbstractBlackboxProvider provider, String qualifiedName) {
+	protected BlackboxUnitDescriptor(BlackboxProvider provider, String qualifiedName) {
 		this(provider, qualifiedName, qualifiedName);
 	}
 		
-	protected AbstractBlackboxProvider getProvider() {
+	protected BlackboxProvider getProvider() {
 		return fProvider;
 	}
 	
@@ -85,6 +85,8 @@ public abstract class AbstractCompilationUnitDescriptor {
 	public String toString() {
 		return "Descriptor: " + fQualifiedName + " - " + getProvider().toString(); //$NON-NLS-1$ //$NON-NLS-2$ 
 	}
+	
+	public abstract BlackboxUnit load(LoadContext context) throws BlackboxException;
 	
 	public abstract Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env);
 	

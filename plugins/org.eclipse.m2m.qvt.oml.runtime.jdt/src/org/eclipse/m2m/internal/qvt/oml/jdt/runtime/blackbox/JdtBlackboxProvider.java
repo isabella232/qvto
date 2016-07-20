@@ -14,7 +14,9 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
@@ -27,7 +29,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.java.JavaBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
@@ -35,10 +37,12 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.ProjectDependencyTracker
 
 public class JdtBlackboxProvider extends JavaBlackboxProvider {
 
-	public static final String URI_BLACKBOX_JDT_QUERY = "jdt"; //$NON-NLS-1$	
+	public static final String URI_BLACKBOX_JDT_QUERY = "jdt"; //$NON-NLS-1$
+	
+	private static Map<IProject, List<JdtDescriptor>> descriptors = new HashMap<IProject, List<JdtDescriptor>>();
 	
 	@Override
-	public Collection<? extends AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
+	public Collection<? extends BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
 		IProject project = getProject(resolutionContext);
 		if (project == null) {
 			return Collections.emptyList();			
@@ -50,12 +54,12 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		projects.add(project);
 		projects.addAll(referencedProjects);
 
-		List<AbstractCompilationUnitDescriptor> descriptors = new ArrayList<AbstractCompilationUnitDescriptor>();
+		List<BlackboxUnitDescriptor> descriptors = new ArrayList<BlackboxUnitDescriptor>();
 		for (IProject p : projects) {
 			final List<String> classes = getAllClasses(p);
 			
 			for (String qualifiedName : classes) {
-				AbstractCompilationUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(p, qualifiedName);
+				BlackboxUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(p, qualifiedName);
 				if (jdtUnitDescriptor != null) {
 					descriptors.add(jdtUnitDescriptor);
 				}
@@ -66,7 +70,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 	}
 
 	@Override
-	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
+	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
 		IProject project = getProject(resolutionContext);
 		if (project == null) {
 			return null;			
@@ -75,7 +79,22 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		return getJdtUnitDescriptor(project, qualifiedName);
 	}
 
-	private AbstractCompilationUnitDescriptor getJdtUnitDescriptor(IProject project, String qualifiedName) {
+	private BlackboxUnitDescriptor getJdtUnitDescriptor(IProject project, String qualifiedName) {
+		
+		List<JdtDescriptor> projectDescriptors = descriptors.get(project);
+		
+		if (projectDescriptors != null) {
+			for (JdtDescriptor descriptor : projectDescriptors) {
+				if (descriptor.getQualifiedName().equals(qualifiedName)) {
+					return descriptor;
+				}
+			}
+		}
+		else {
+			projectDescriptors = new ArrayList<JdtBlackboxProvider.JdtDescriptor>(1);
+			descriptors.put(project, projectDescriptors);
+		}
+				
 		final IJavaProject javaProject = JavaCore.create(project);
 		try {
 			ClassLoader loader = ProjectClassLoader.getProjectClassLoader(javaProject);
@@ -83,12 +102,16 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			try {
 				Class<?> moduleJavaClass = loader.loadClass(qualifiedName);
 						
-				return new JdtDescriptor(qualifiedName, moduleJavaClass) {
+				JdtDescriptor descriptor = new JdtDescriptor(qualifiedName, moduleJavaClass) {
 					@Override
 					protected String getFragment() {
 						return javaProject.getElementName();
 					}
 				};
+				
+				projectDescriptors.add(descriptor);
+				
+				return descriptor;
 			}
 			catch (ClassNotFoundException e) {
 				return null;
@@ -98,8 +121,8 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 			QvtPlugin.error(e);
 		} catch (MalformedURLException e) {
 			QvtPlugin.error(e);
-		} 
-
+		}
+		
 		return null;
 	}
 
@@ -148,6 +171,15 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		return classes;
 	}
 	
+	@Override
+	public void cleanup() {
+		descriptors.clear();		
+	}
+	
+	public static void clearDescriptors(IProject project) {
+		descriptors.remove(project);
+	}
+	
 	private class JdtDescriptor extends JavaBlackboxProvider.JavaUnitDescriptor {
 		
 		private final Class<?> fModuleJavaClass;
@@ -185,7 +217,8 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 				result = 31 * result + getQualifiedName().hashCode();
 				result = 31 * result + fModuleJavaClass.hashCode();
 				hashCode = result;
-			}			
+			}
+						
 			return result;
 		}
 	}

@@ -24,7 +24,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 
@@ -42,13 +42,13 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	private static final String METAMODEL_ELEM = "metamodel"; //$NON-NLS-1$
 	private static final String NSURI_ATTR = "nsURI"; //$NON-NLS-1$
 	
-	private Map<String, AbstractCompilationUnitDescriptor> fDescriptorMap;
+	private Map<String, BlackboxUnitDescriptor> fDescriptorMap;
 		
 	public BundleBlackboxProvider() {
 	}	
 
-	private Map<String, AbstractCompilationUnitDescriptor> readDescriptors() {
-    	Map<String, AbstractCompilationUnitDescriptor> descriptors = new LinkedHashMap<String, AbstractCompilationUnitDescriptor>();
+	private Map<String, BlackboxUnitDescriptor> readDescriptors() {
+    	Map<String, BlackboxUnitDescriptor> descriptors = new LinkedHashMap<String, BlackboxUnitDescriptor>();
         
         IConfigurationElement[] configs = Platform.getExtensionRegistry()
         		.getConfigurationElementsFor(QvtPlugin.ID, EXTENSION_POINT);
@@ -104,24 +104,23 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	}
 	
 	@Override
-	public AbstractCompilationUnitDescriptor getModuleDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
+	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
 		// TODO - Should we necessarily be available in all contexts ? 
 		return getDescriptorMap().get(qualifiedName);
 	}
 
 	@Override
-	public Collection<AbstractCompilationUnitDescriptor> getModuleDescriptors(ResolutionContext resolutionContext) {
+	public Collection<BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
 		// TODO - Should we necessarily be available in all contexts ?
 		return getDescriptorMap().values();
 	}
 	
 	@Override
 	public void cleanup() {
-		super.cleanup();
 		fDescriptorMap = null;
 	}
 	
-	private Map<String, AbstractCompilationUnitDescriptor> getDescriptorMap() {
+	private Map<String, BlackboxUnitDescriptor> getDescriptorMap() {
 		if (fDescriptorMap != null) {
 			return fDescriptorMap;
 		}

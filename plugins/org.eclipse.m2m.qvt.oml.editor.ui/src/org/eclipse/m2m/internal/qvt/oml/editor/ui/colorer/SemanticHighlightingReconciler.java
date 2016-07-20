@@ -22,7 +22,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.jface.text.source.SourceViewer;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.CompilationUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.Activator;
 import org.eclipse.m2m.internal.qvt.oml.editor.ui.IQVTReconcilingListener;
@@ -204,11 +204,11 @@ class SemanticHighlightingReconciler implements IQVTReconcilingListener, ITextIn
 	private boolean fIsReconciling = false;
 
 	/**
-	 * The semantic highlighting presenter - cache for background thread, only valid during {@link #reconciled(CompilationUnit, boolean, IProgressMonitor)}
+	 * The semantic highlighting presenter - cache for background thread, only valid during {@link #reconciled(BlackboxUnit, boolean, IProgressMonitor)}
 	 */
 	private SemanticHighlightingPresenter fJobPresenter;
 	/**
-	 * Semantic highlightings - cache for background thread, only valid during {@link #reconciled(CompilationUnit, boolean, IProgressMonitor)}
+	 * Semantic highlightings - cache for background thread, only valid during {@link #reconciled(BlackboxUnit, boolean, IProgressMonitor)}
 	 */
 	private ColorDescriptor[] fJobSemanticHighlightings;
 

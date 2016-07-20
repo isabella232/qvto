@@ -19,8 +19,8 @@ import java.util.List;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractCompilationUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContextImpl;
 import org.eclipse.m2m.internal.qvt.oml.common.project.DeployedTransformation;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProvider;
@@ -54,7 +54,7 @@ public class ImportModuleCollector extends AbstractCollector {
         addLocalModulesProposals(proposals, data);
         addDeployedModulesProposals(proposals, data);
         final ResolutionContextImpl loadContext = new ResolutionContextImpl(data.getCFile().getURI());
-        for (AbstractCompilationUnitDescriptor unitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
+        for (BlackboxUnitDescriptor unitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
             String proposalString = unitDescriptor.getQualifiedName();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, 
             		isJdtUnitUri(unitDescriptor.getURI()) ? CategoryImageConstants.PACKAGE : CategoryImageConstants.MAPPING, data);

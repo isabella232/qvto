@@ -28,7 +28,6 @@ import java.util.Stack;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -42,7 +41,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
-import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QVTParsingOptions;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase;
@@ -56,8 +54,8 @@ import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalValidationVisitor;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalVisitorCS;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
+import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver.BlackboxUnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils.Eclipse;
-import org.eclipse.m2m.internal.qvt.oml.compiler.UnitContents.ModelContents;
 import org.eclipse.m2m.internal.qvt.oml.cst.ImportCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.UnitCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.parser.AbstractQVTParser;
@@ -321,14 +319,11 @@ public class QVTOCompiler {
 			Throwable cause = e.getCause() != null ? e.getCause() : e;
 			throw new MdaException(cause);
 		}
-		catch (IOException e) {
-			throw new MdaException(e);			
-		}
                 
         return nextResult;        
     }
 		
-    private CompiledUnit doCompile(final UnitProxy source, QvtCompilerOptions options, Monitor monitor) throws ParserException, IOException {
+    private CompiledUnit doCompile(final UnitProxy source, QvtCompilerOptions options, Monitor monitor) throws ParserException {
     	try {
         	monitor.beginTask('\'' + source.getURI().toString() + '\'', 3);
         	monitor.subTask(""); //$NON-NLS-1$
@@ -350,13 +345,13 @@ public class QVTOCompiler {
 	        	}
         	}
         	
-        	if(source.getContentType() != UnitProxy.TYPE_CST_STREAM) {
-        		CompiledUnit loadBlackboxUnit = loadBlackboxUnit(source);        		
-        		fSource2Compiled.put(source.getURI(), loadBlackboxUnit);
+        	if(source instanceof BlackboxUnitProxy) {
+        		CompiledUnit blackbox = ((BlackboxUnitProxy) source).load(fMetamodelRegistryProvider);        		
+        		fSource2Compiled.put(source.getURI(), blackbox);
 
-				return loadBlackboxUnit;
+				return blackbox;
         	}
-        	
+        	        	
         	// perform to syntax parsing
 	    	CSTParseResult parseResult = parse(source, options);
 	    	monitor.worked(1);
@@ -546,45 +541,7 @@ public class QVTOCompiler {
     	}
     	return null;
     }
-    
-//    private UnitProxy getImportedFile(final UnitProxy source, final String qualifiedName) {
-//    	UnitProxy importSource = getImportResolver().resolveUnit(qualifiedName);
-// FIXME -
-// This used to be introduced as part of a bug fix, ask Sergey    	
-//    	if (importSource == null) {
-//    		importSource = getImportResolver().resolveImport(source, qualifiedName);
-//    	}
-//    	return importSource;
-//    }
-
-    private CompiledUnit loadBlackboxUnit(UnitProxy unit) throws IOException {
-    	ModelContents contents = (ModelContents) unit.getContents();
-    	
-    	List<EObject> topElements = contents.loadElements(getEPackageRegistry(unit.getURI()));
-    	List<QvtOperationalModuleEnv> modelEnvs = new ArrayList<QvtOperationalModuleEnv>(topElements.size());
-    	
-    	for (EObject nextElement : topElements) {
-    		QvtOperationalModuleEnv nextEnv = ASTBindingHelper.getEnvironment(nextElement, QvtOperationalModuleEnv.class);
-    		if(nextEnv != null) {
-    			// FIXME -
-    			// clear the environment problems, for now we do not consider errors
-    			// like duplicate operation definitions to cause the importing unit to fail
-    			nextEnv.clearProblems();
-    			
-    			modelEnvs.add(nextEnv);
-    		}
-		}
-
-    	
-    	CompiledUnit compiledUnit = new CompiledUnit(getQualifiedNameSegments(unit), unit.getURI(), modelEnvs);
-    	Diagnostic loadProblems = contents.getProblems();
-		if(loadProblems != null) {
-    		compiledUnit.addProblem(new QvtMessage(loadProblems.getMessage()));
-    	}
-    	
-		return compiledUnit;
-    }    
-    
+        
     private QvtCompilerOptions getDefaultOptions() {
     	QvtCompilerOptions options = new QvtCompilerOptions();
     	options.setGenerateCompletionData(false);
