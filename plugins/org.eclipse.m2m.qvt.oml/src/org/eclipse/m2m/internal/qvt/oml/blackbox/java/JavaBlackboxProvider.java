@@ -182,60 +182,61 @@ public abstract class JavaBlackboxProvider extends BlackboxProvider {
 		@Override
 		public BlackboxUnit load(LoadContext context) throws BlackboxException {
 						
-			if (unit == null) {
+			if (unit != null) {
+				return unit;
+			}
 
-				JavaModuleLoader javaModuleLoader = createJavaModuleLoader();
-				Resource unitResource = new EcoreResourceFactoryImpl().createResource(getURI());
-	
-				BasicDiagnostic errors = null;
-				List<QvtOperationalModuleEnv> loadedModules = new LinkedList<QvtOperationalModuleEnv>();
-	
-				for (Map.Entry<ModuleHandle, Map<String, List<EOperation>>> nextEntry : fModules.entrySet()) {
-					Diagnostic diagnostic = javaModuleLoader.loadModule(nextEntry.getKey(), nextEntry.getValue(), context);
-	
-					if (DiagnosticUtil.isSuccess(diagnostic)) {
-						QvtOperationalModuleEnv nextModuleEnv = javaModuleLoader.getLoadedModule();
-						nextModuleEnv.getTypeResolver().getResource().setURI(getURI());
-						ASTBindingHelper.createModuleSourceBinding(nextModuleEnv.getModuleContextType(), getURI(),
-								new StringLineNumberProvider("")); //$NON-NLS-1$
-	
-						loadedModules.add(nextModuleEnv);
-						unitResource.getContents().add(nextModuleEnv.getModuleContextType());
-	
-						if (diagnostic.getSeverity() != Diagnostic.OK) {
-							QvtPlugin.logDiagnostic(diagnostic);
-						}
-					} else {
-						if (errors == null) {
-							String message = NLS.bind(JavaBlackboxMessages.BlackboxUnitLoadFailed, getQualifiedName());
-							errors = DiagnosticUtil.createErrorDiagnostic(message);
-						}
-	
-						errors.add(diagnostic);
+			JavaModuleLoader javaModuleLoader = createJavaModuleLoader();
+			Resource unitResource = new EcoreResourceFactoryImpl().createResource(getURI());
+
+			BasicDiagnostic errors = null;
+			List<QvtOperationalModuleEnv> loadedModules = new LinkedList<QvtOperationalModuleEnv>();
+
+			for (Map.Entry<ModuleHandle, Map<String, List<EOperation>>> nextEntry : fModules.entrySet()) {
+				Diagnostic diagnostic = javaModuleLoader.loadModule(nextEntry.getKey(), nextEntry.getValue(), context);
+
+				if (DiagnosticUtil.isSuccess(diagnostic)) {
+					QvtOperationalModuleEnv nextModuleEnv = javaModuleLoader.getLoadedModule();
+					nextModuleEnv.getTypeResolver().getResource().setURI(getURI());
+					ASTBindingHelper.createModuleSourceBinding(nextModuleEnv.getModuleContextType(), getURI(),
+							new StringLineNumberProvider("")); //$NON-NLS-1$
+
+					loadedModules.add(nextModuleEnv);
+					unitResource.getContents().add(nextModuleEnv.getModuleContextType());
+
+					if (diagnostic.getSeverity() != Diagnostic.OK) {
+						QvtPlugin.logDiagnostic(diagnostic);
 					}
+				} else {
+					if (errors == null) {
+						String message = NLS.bind(JavaBlackboxMessages.BlackboxUnitLoadFailed, getQualifiedName());
+						errors = DiagnosticUtil.createErrorDiagnostic(message);
+					}
+
+					errors.add(diagnostic);
 				}
-	
-				if (errors != null) {
-					final Diagnostic failDiagnostic = errors;
+			}
+
+			if (errors != null) {
+				final Diagnostic failDiagnostic = errors;
+				
+				unit = new BlackboxUnit() {
+
+					public List<QvtOperationalModuleEnv> getElements() {
+						return Collections.emptyList();
+					}
+
+					public Diagnostic getDiagnostic() {
+						return failDiagnostic;
+					}
 					
-					unit = new BlackboxUnit() {
-	
-						public List<QvtOperationalModuleEnv> getElements() {
-							return Collections.emptyList();
-						}
-	
-						public Diagnostic getDiagnostic() {
-							return failDiagnostic;
-						}
-						
-					};
-					
-					assert errors.getSeverity() == Diagnostic.ERROR;
-					throw new BlackboxException(errors);
-				}
-	
-				unit = createBlackboxUnit(loadedModules);
-			};
+				};
+				
+				assert errors.getSeverity() == Diagnostic.ERROR;
+				throw new BlackboxException(errors);
+			}
+
+			unit = createBlackboxUnit(loadedModules);
 			
 			return unit;
 		}
