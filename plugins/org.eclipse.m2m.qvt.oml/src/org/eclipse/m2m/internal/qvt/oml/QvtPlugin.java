@@ -97,7 +97,7 @@ public class QvtPlugin extends EMFPlugin {
 	}	
 
 	public static void error(Throwable throwable) {
-		error("", throwable); //$NON-NLS-1$
+		error(throwable.getMessage(), throwable);
 	}
 	
 	public static void error(String message) {

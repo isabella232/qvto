@@ -39,7 +39,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 
 	public static final String URI_BLACKBOX_JDT_QUERY = "jdt"; //$NON-NLS-1$
 	
-	private static Map<IProject, List<JdtDescriptor>> descriptors = new HashMap<IProject, List<JdtDescriptor>>();
+	private static Map<IProject, Map<String, JdtDescriptor>> descriptors = new HashMap<IProject, Map<String, JdtDescriptor>>();
 	
 	@Override
 	public Collection<? extends BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
@@ -81,20 +81,23 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 
 	private BlackboxUnitDescriptor getJdtUnitDescriptor(IProject project, String qualifiedName) {
 		
-		List<JdtDescriptor> projectDescriptors = descriptors.get(project);
+		Map<String, JdtDescriptor> projectDescriptors = descriptors.get(project);
 		
 		if (projectDescriptors != null) {
-			for (JdtDescriptor descriptor : projectDescriptors) {
-				if (descriptor.getQualifiedName().equals(qualifiedName)) {
-					return descriptor;
-				}
-			}
+			return projectDescriptors.get(qualifiedName);
 		}
-		else {
-			projectDescriptors = new ArrayList<JdtBlackboxProvider.JdtDescriptor>(1);
-			descriptors.put(project, projectDescriptors);
-		}
+
+		projectDescriptors = new HashMap<String, JdtBlackboxProvider.JdtDescriptor>();
+		descriptors.put(project, projectDescriptors);
 				
+		try {
+			if (!project.hasNature(JavaCore.NATURE_ID)) {
+				return null;
+			}
+		} catch (CoreException e) {
+			return null;
+		}
+		
 		final IJavaProject javaProject = JavaCore.create(project);
 		try {
 			ClassLoader loader = ProjectClassLoader.getProjectClassLoader(javaProject);
@@ -109,7 +112,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 					}
 				};
 				
-				projectDescriptors.add(descriptor);
+				projectDescriptors.put(qualifiedName, descriptor);
 				
 				return descriptor;
 			}
