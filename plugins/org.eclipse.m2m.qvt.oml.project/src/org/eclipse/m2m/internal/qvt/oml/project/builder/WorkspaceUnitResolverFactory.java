@@ -16,12 +16,15 @@ import java.util.Collections;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.compiler.ResolverUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
+import org.eclipse.m2m.internal.qvt.oml.project.Messages;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 
 public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
@@ -46,6 +49,13 @@ public class WorkspaceUnitResolverFactory extends UnitResolverFactory {
 		try {	
 			IContainer sourceContainer = QVTOBuilderConfig.getConfig(file.getProject()).getSourceContainer();
 			if(sourceContainer != null) {
+				if (!sourceContainer.exists()) {
+					QVTOProjectPlugin.log(QVTOProjectPlugin.createStatus(IStatus.ERROR,
+							NLS.bind(Messages.InvalidSourceContainer, sourceContainer), null));
+					
+					return null;
+				}
+				
 				return new WorkspaceUnitResolver(Collections.singletonList(sourceContainer));
 			}
 		}
