@@ -62,12 +62,16 @@ public class QvtSettingsPropertyPage extends PropertyPage {
 
     @Override
 	protected void performApply() {
-    	fSrcContainerBlock.performApply();
+    	if (fSrcContainerBlock != null) {
+    		fSrcContainerBlock.performApply();
+    	}
     }
 
     @Override
 	protected void performDefaults() {
-    	fSrcContainerBlock.performDefaults();
+    	if (fSrcContainerBlock != null) {
+    		fSrcContainerBlock.performDefaults();
+    	}
     }
     
     private IStatusChangeListener createStatusListener() {
@@ -76,7 +80,7 @@ public class QvtSettingsPropertyPage extends PropertyPage {
     			setMessage(null);
     			setErrorMessage(null);
 
-    			setValid(fSrcContainerBlock.isValid());    			
+    			setValid(fSrcContainerBlock != null ? fSrcContainerBlock.isValid() : false);
     			if(!status.isOK()) {
     				setMessage(status.getMessage(), Util.getIMessageProviderSeverity(status));
     			}
