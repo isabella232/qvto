@@ -4320,6 +4320,14 @@ public class QvtOperationalVisitorCS
 	                    lValueCS);
 	            return null;
 	        }
+	        else {
+	        	Variable<EClassifier, EParameter> implicitSource = env.lookupImplicitSourceForProperty(referredVariableName);
+	        	if (implicitSource != null) {
+	        		String typeName = implicitSource.getType() != null ? implicitSource.getType().getName() : ""; //$NON-NLS-1$"
+					QvtOperationalUtil.reportWarning(env, NLS.bind(ValidationMessages.HidingVariable,
+							new Object[] { referredVariableName, typeName }), lValueCS);
+	        	}
+	        }
 		    
 		    if (Environment.RESULT_VARIABLE_NAME.equals(referredVariableName)) {
 		    	if (!isInsideMappintInitSection(expressionCS)) {

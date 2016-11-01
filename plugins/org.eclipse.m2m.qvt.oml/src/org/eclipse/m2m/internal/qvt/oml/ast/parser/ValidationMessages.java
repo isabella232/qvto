@@ -203,6 +203,7 @@ public final class ValidationMessages extends NLS {
 	public static String InvalidClassifierForExtend;
 	public static String CycleInIntermHierarchy;
 	public static String HidingProperty;
+	public static String HidingVariable;
 	public static String HidingStdlibOperationDiscouraged;
 
     public static String LibOperationAnalyser_ParametersOsReturnTypeNotFound;

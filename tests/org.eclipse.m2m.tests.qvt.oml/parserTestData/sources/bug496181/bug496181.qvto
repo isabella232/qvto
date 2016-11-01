@@ -1,0 +1,27 @@
+transformation bug496181;
+
+intermediate class MyClass {
+	x: Integer;
+}
+
+intermediate class MyClass2 {
+	x: Integer;
+	cls : MyClass;
+}
+ 
+main() {
+	var x: String := 'foo';
+	
+	var m := object MyClass {
+		/*<warn>*/x/*</warn>*/ := 'bar';
+		var y : String := x;
+	};
+
+	var m2 := object MyClass2 {
+		/*<warn>*/x/*</warn>*/ := 'bar';
+		cls := object MyClass {
+			/*<warn>*/x/*</warn>*/ := 'bar';
+		}
+	};
+
+}
