@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,13 +13,9 @@
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -31,24 +27,19 @@ import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.OperationMatcher;
 import org.eclipse.m2m.internal.qvt.oml.common.util.StringLineNumberProvider;
 import org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
-import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
-import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
 public abstract class JavaBlackboxProvider extends BlackboxProvider {
 
 	public static final String CLASS_NAME_SEPARATOR = "."; //$NON-NLS-1$
+	
 	static InstanceAdapterFactory createInstanceAdapterFactory(final Class<?> javaModuleClass) {
 		return new InstanceAdapterFactory() {
 			public Object createAdapter(EObject moduleInstance) {
@@ -88,100 +79,23 @@ public abstract class JavaBlackboxProvider extends BlackboxProvider {
 			}
 		};
 	}
-
-	protected static String getPackageNameFromJavaClass(String className) {
-		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
-		if (lastSeparatorPos < 0) {
-			return null;
-		}
-
-		return className.substring(0, lastSeparatorPos);
-	}
-
-	protected static String getSimpleNameFromJavaClass(String className) {
-		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
-		if (lastSeparatorPos < 0) {
-			return className;
-		}
-
-		return className.substring(lastSeparatorPos + 1);
-	}
-
+	
 	public abstract class JavaUnitDescriptor extends BlackboxUnitDescriptor {
 
-		private BlackboxUnit unit;
+		public BlackboxUnit unit;
 		
-		private Map<ModuleHandle, Map<String, List<EOperation>>> fModules = new LinkedHashMap<ModuleHandle, Map<String, List<EOperation>>>();
-
+		private List<ModuleHandle> fModules = new LinkedList<ModuleHandle>();
+		
 		public JavaUnitDescriptor(String unitQualifiedName) {
 			super(JavaBlackboxProvider.this, unitQualifiedName);
 		}
 
 		protected void addModuleHandle(ModuleHandle moduleHandle) {
-			fModules.put(moduleHandle, new LinkedHashMap<String, List<EOperation>>());
+			fModules.add(moduleHandle);
 		}
 
-		public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation imperativeOp, QvtOperationalModuleEnv env) {
-			Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-			Collection<CallHandler> result = Collections.emptyList();
-
-			for (Map.Entry<ModuleHandle, Map<String, List<EOperation>>> nextEntry : fModules.entrySet()) {
-				if (!env.getImportedNativeLibs().isEmpty()) {
-					if (!importedLibs.contains(nextEntry.getKey().getModuleName())) {
-						continue;
-					}
-				}
-
-				List<EOperation> listOp = nextEntry.getValue().get(imperativeOp.getName());
-				if (listOp == null) {
-					continue;
-				}
-
-				for (EOperation libraryOp : listOp) {
-					if (OperationMatcher.matchOperation(env, imperativeOp, libraryOp)) {
-						if (result.isEmpty()) {
-							result = new LinkedList<CallHandler>();
-						}
-						result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-					}
-				}
-			}
-
-			return result;
-		}
-
-		public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation,
-				QvtOperationalModuleEnv env) {
-			Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-			Collection<CallHandler> result = Collections.emptyList();
-
-			for (Map.Entry<ModuleHandle, Map<String, List<EOperation>>> nextEntry : fModules.entrySet()) {
-				if (!env.getImportedNativeLibs().isEmpty()) {
-					if (!importedLibs.contains(nextEntry.getKey().getModuleName())) {
-						continue;
-					}
-				}
-
-				List<EOperation> listOp = nextEntry.getValue().get(transformation.getName());
-				if (listOp == null) {
-					continue;
-				}
-
-				for (EOperation libraryOp : listOp) {
-					if (OperationMatcher.matchOperation(env, transformation, libraryOp)) {
-						if (result.isEmpty()) {
-							result = new LinkedList<CallHandler>();
-						}
-						result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-					}
-				}
-			}
-
-			return result;
-		}
-		
 		@Override
-		public BlackboxUnit load(LoadContext context) throws BlackboxException {
+		public BlackboxUnit load(LoadContext context) {
 						
 			if (unit != null) {
 				return unit;
@@ -193,8 +107,8 @@ public abstract class JavaBlackboxProvider extends BlackboxProvider {
 			BasicDiagnostic errors = null;
 			List<QvtOperationalModuleEnv> loadedModules = new LinkedList<QvtOperationalModuleEnv>();
 
-			for (Map.Entry<ModuleHandle, Map<String, List<EOperation>>> nextEntry : fModules.entrySet()) {
-				Diagnostic diagnostic = javaModuleLoader.loadModule(nextEntry.getKey(), nextEntry.getValue(), context);
+			for (ModuleHandle moduleHandle : fModules) {
+				Diagnostic diagnostic = javaModuleLoader.loadModule(moduleHandle, context);
 
 				if (EmfUtilPlugin.isSuccess(diagnostic)) {
 					QvtOperationalModuleEnv nextModuleEnv = javaModuleLoader.getLoadedModule();
@@ -233,15 +147,16 @@ public abstract class JavaBlackboxProvider extends BlackboxProvider {
 					
 				};
 				
-				assert errors.getSeverity() == Diagnostic.ERROR;
-				throw new BlackboxException(errors);
+				handleBlackboxError(failDiagnostic);
 			}
-
-			unit = createBlackboxUnit(loadedModules);
+			else {
+				unit = createBlackboxUnit(loadedModules);
+			}
 			
 			return unit;
 		}
 		
+		protected void handleBlackboxError(Diagnostic diagnostic) {};
 	}
 
 }

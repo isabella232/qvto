@@ -2056,11 +2056,11 @@ public class QvtOperationalVisitorCS
 			importsCS(moduleCS, unit, module, moduleEnvsMap.get(moduleCS), importResolver);
 			subMonitor.worked(1);
 		}
-		List<MappingModuleCS> sortedModuless = checkModuleLoops(unitCS, fileEnv);
+		List<MappingModuleCS> sortedModules = checkModuleLoops(unitCS, fileEnv);
 		
 		// 3nd pass: intermediate Classes, module tags & renamings
 		subMonitor.subTask("Visit intermediate classes, tags and renamings");
-		for(MappingModuleCS moduleCS : sortedModuless) {
+		for(MappingModuleCS moduleCS : sortedModules) {
 			Module module = (Module) moduleCS.getAst();
 			QvtOperationalModuleEnv moduleEnv = moduleEnvsMap.get(moduleCS);
 			visitIntermediateClassesCS(moduleEnv, moduleCS, module);
@@ -2076,7 +2076,7 @@ public class QvtOperationalVisitorCS
 		// 4th pass: method headers
 		subMonitor.subTask("Visit operation headers");
 		HashMap<MappingModuleCS, HashMap<MappingMethodCS, ImperativeOperation>> methodMaps = new HashMap<MappingModuleCS, HashMap<MappingMethodCS, ImperativeOperation>>(); 
-		for(MappingModuleCS moduleCS : sortedModuless) {
+		for(MappingModuleCS moduleCS : sortedModules) {
 			HashMap<MappingMethodCS, ImperativeOperation> methodMap = visitMethodHeaders(moduleCS, moduleEnvsMap.get(moduleCS));
 			methodMaps.put(moduleCS, methodMap);
 			subMonitor.worked(1);
@@ -2084,7 +2084,7 @@ public class QvtOperationalVisitorCS
 
 		// 5rd pass: properties
 		subMonitor.subTask("Visit properties");
-		for(MappingModuleCS moduleCS : sortedModuless) {
+		for(MappingModuleCS moduleCS : sortedModules) {
 			Module module = (Module) moduleCS.getAst();
 			createModuleProperties(module, moduleCS, moduleEnvsMap.get(moduleCS));
 			subMonitor.worked(1);
@@ -2092,7 +2092,7 @@ public class QvtOperationalVisitorCS
 		
 		// 6th pass: method bodies
 		subMonitor.subTask("Visit operation bodies");
-		for(MappingModuleCS moduleCS : sortedModuless) {
+		for(MappingModuleCS moduleCS : sortedModules) {
 			visitMethodBodies(moduleCS, methodMaps.get(moduleCS), moduleEnvsMap.get(moduleCS));
 			subMonitor.worked(1);
 		}
@@ -2928,7 +2928,7 @@ public class QvtOperationalVisitorCS
 			}
 			
 			for (QvtOperationalModuleEnv nextImportedEnv : moduleEnvironments) {
-				URI sourceURI = getSourceURI(nextImportedEnv);
+				URI sourceURI = QvtOperationalParserUtil.getSourceURI(nextImportedEnv);
 				nextImportedCS.setAst(sourceURI);
 				nextImportedCS.getPathNameCS().setAst(sourceURI);
 			}
@@ -3309,7 +3309,7 @@ public class QvtOperationalVisitorCS
 			}
 			
 			if (transformation.isIsBlackbox()) {
-				Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler((OperationalTransformation) module, env);
+				Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandlers((OperationalTransformation) module, env);
 				if (handlers.isEmpty()) {
 					String warning = NLS.bind(ValidationMessages.QvtOperationalVisitorCS_noBlackboxImplementationFound,
 							QvtOperationalParserUtil.getMappingModuleQualifiedName(moduleCS.getHeaderCS()));
@@ -3732,7 +3732,7 @@ public class QvtOperationalVisitorCS
 		} 
 		
 		if(declaredOperation.isIsBlackbox() && !QvtOperationalParserUtil.isDisjunctiveMappingOperation(methodCS)) {
-			Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(declaredOperation, env);
+			Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandlers(declaredOperation, env);
 			if (handlers.isEmpty()) {
 				String warning = NLS.bind(ValidationMessages.QvtOperationalVisitorCS_noBlackboxImplementationFound,
 						QvtOperationalParserUtil.getMappingStringRepresentation(methodCS));
@@ -5968,20 +5968,5 @@ public class QvtOperationalVisitorCS
 		annotation.getReferences().add(element);
 		return annotation;
 	}
-	
-	private static URI getSourceURI(QvtOperationalModuleEnv env) {
-		if(env instanceof QvtOperationalFileEnv) {
-			QvtOperationalFileEnv fileEnv = (QvtOperationalFileEnv) env;
-			return fileEnv.getFile();
-		}
-		else if (env.getFileParent() instanceof QvtOperationalFileEnv) {
-			QvtOperationalFileEnv fileEnv = (QvtOperationalFileEnv) env.getFileParent();
-			return fileEnv.getFile();
-		}
-		else if (env.getModuleContextType() != null) {
-			return env.getModuleContextType().eResource().getURI();
-		}
-		return null;
-	}
-	
+		
 }

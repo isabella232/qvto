@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxProvider;
@@ -92,74 +93,78 @@ public class LegacyNativeLibraryProviderAdapter extends BlackboxProvider {
 			return fLibrary.getLibraryClassName();
 		}
 		
-		public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation imperativeOp, QvtOperationalModuleEnv env) {
-			if (!env.getImportedNativeLibs().isEmpty()) {
-				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-				if (!importedLibs.contains(fLibrary.getId())) {
-					return Collections.emptyList();
-				}
-			}
-			
-			List<EOperation> listOp = fDefinedOperations.get(imperativeOp.getName());
-			if (listOp == null) {
-				return Collections.emptyList();
-			}
-			
-			Collection<CallHandler> result = Collections.emptyList();
-			for (EOperation libraryOp : listOp) {
-				if (OperationMatcher.matchOperation(env, imperativeOp, libraryOp)) {
-					if (result.isEmpty()) {
-						result = new LinkedList<CallHandler>();
-					}
-					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-				}
-			}
-			
-			return result;
-		}
+//		public Collection<CallHandler> getBlackboxCallHandlers(ImperativeOperation imperativeOp, QvtOperationalModuleEnv env) {
+//			if (!env.getImportedNativeLibs().isEmpty()) {
+//				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
+//				if (!importedLibs.contains(fLibrary.getId())) {
+//					return Collections.emptyList();
+//				}
+//			}
+//			
+//			List<EOperation> listOp = fDefinedOperations.get(imperativeOp.getName());
+//			if (listOp == null) {
+//				return Collections.emptyList();
+//			}
+//			
+//			Collection<CallHandler> result = Collections.emptyList();
+//			for (EOperation libraryOp : listOp) {
+//				if (OperationMatcher.matchOperation(env, imperativeOp, libraryOp)) {
+//					if (result.isEmpty()) {
+//						result = new LinkedList<CallHandler>();
+//					}
+//					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
+//				}
+//			}
+//			
+//			return result;
+//		}
 		
-		public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation operationalTrans, QvtOperationalModuleEnv env) {
-			if (!env.getImportedNativeLibs().isEmpty()) {
-				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-				if (!importedLibs.contains(fLibrary.getId())) {
-					return Collections.emptyList();
-				}
-			}
-			
-			List<EOperation> listOp = fDefinedOperations.get(operationalTrans.getName());
-			if (listOp == null) {
-				return Collections.emptyList();
-			}
-			
-			Collection<CallHandler> result = Collections.emptyList();
-			for (EOperation libraryOp : listOp) {
-				if (OperationMatcher.matchOperation(env, operationalTrans, libraryOp)) {
-					if (result.isEmpty()) {
-						result = new LinkedList<CallHandler>();
-					}
-					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-				}
-			}
-			
-			return result;
-		}
+//		public Collection<CallHandler> getBlackboxCallHandlers(OperationalTransformation operationalTrans, QvtOperationalModuleEnv env) {
+//			if (!env.getImportedNativeLibs().isEmpty()) {
+//				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
+//				if (!importedLibs.contains(fLibrary.getId())) {
+//					return Collections.emptyList();
+//				}
+//			}
+//			
+//			List<EOperation> listOp = fDefinedOperations.get(operationalTrans.getName());
+//			if (listOp == null) {
+//				return Collections.emptyList();
+//			}
+//			
+//			Collection<CallHandler> result = Collections.emptyList();
+//			for (EOperation libraryOp : listOp) {
+//				if (OperationMatcher.matchOperation(env, operationalTrans, libraryOp)) {
+//					if (result.isEmpty()) {
+//						result = new LinkedList<CallHandler>();
+//					}
+//					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
+//				}
+//			}
+//			
+//			return result;
+//		}
 		
 		@Override
-		public BlackboxUnit load(LoadContext context) throws BlackboxException {
+		public BlackboxUnit load(LoadContext context) { // throws BlackboxException {
 			
 			if (fBlackboxUnits.containsKey(this)) {
 				return fBlackboxUnits.get(this);
 			}
 			
 			try {
-				BlackboxUnit compilationUnit = createBlackboxUnit(LegacyNativeLibSupport.INSTANCE.defineLibrary(fLibrary, fDefinedOperations));			
+				BlackboxUnit compilationUnit = createBlackboxUnit(Collections.singletonList(LegacyNativeLibSupport.INSTANCE.defineLibrary(fLibrary, fDefinedOperations)));			
 				fBlackboxUnits.put(this, compilationUnit);
 				return compilationUnit;
 			} catch (LibraryCreationException e) {
 				fBlackboxUnits.put(this, null);
-				throw new BlackboxException(e.getMessage(), e);			
+				
+				OclQvtoPlugin.getDefault().getLog().log(BasicDiagnostic.toIStatus(BasicDiagnostic.toDiagnostic(e)));
+				
+				return null;
+				
+//				throw new BlackboxException(e.getMessage(), e);			
 			}
 		}
-		
 	}	
 }

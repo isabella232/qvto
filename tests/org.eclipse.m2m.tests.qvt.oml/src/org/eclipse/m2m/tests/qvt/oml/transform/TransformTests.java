@@ -55,11 +55,9 @@ public class TransformTests extends TestCase {
         		new FilesToFilesData("dicttype"), //$NON-NLS-1$
         		new FileToFileData("transf_inheritance") { //$NON-NLS-1$
         			@Override
-        			public List<? extends EPackage> getUsedPackages() {
+        			public List<? extends EPackage> getUsedPackages() {  				
         				List<EPackage> packages = new ArrayList<EPackage>(super.getUsedPackages());
-        				packages.add(SimpleumlPackage.eINSTANCE);
-        				packages.add(ExpressionsPackage.eINSTANCE);	
-        				packages.add(GenericsPackage.eINSTANCE);
+        				packages.addAll(Arrays.asList(SimpleumlPackage.eINSTANCE, ExpressionsPackage.eINSTANCE, GenericsPackage.eINSTANCE));
         				return packages;
         			}
         			

@@ -16,15 +16,13 @@ import org.eclipse.jdt.core.compiler.CompilationParticipant;
 public class ClassReloadEnforcer extends CompilationParticipant {
 		
 	@Override
-	public void buildFinished(IJavaProject project) {	
-		ProjectClassLoader.resetProjectClassLoader(project);
-		
-		JdtBlackboxProvider.clearDescriptors(project.getProject());
+	public void buildFinished(IJavaProject project) {		
+		JdtBlackboxProvider.clear(project);
 	}
-	
+		
 	@Override
 	public boolean isActive(IJavaProject project) {
-	    return ProjectClassLoader.isProjectClassLoaderExisting(project);
+	    return true;
 	}
 	
 }

@@ -20,7 +20,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.BundleUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,11 +31,11 @@ import junit.framework.TestCase;
 /**
  * @author dvorak
  */
-public class PlatformPluginUnitResolverTest extends TestCase {
+public class BundleUnitResolverTest extends TestCase {
 
 	private Bundle fBundle;
 	
-	public PlatformPluginUnitResolverTest(String name) {
+	public BundleUnitResolverTest(String name) {
 		super(name);
 	}
 	
@@ -50,7 +50,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 	
 	@Test
 	public void testInRootUnitResolver() throws Exception {
-		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle);
+		BundleUnitResolver resolver = new BundleUnitResolver(fBundle);
 		UnitProxy unit = resolver.resolveUnit("deployed.org.eclipse.Foo");
 		assertResolvedCompiledUnit(unit);
 		
@@ -63,7 +63,7 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 	
 	@Test
 	public void testInContainerUnitResolver() throws Exception {
-		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
+		BundleUnitResolver resolver = new BundleUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo");
 		assertResolvedCompiledUnit(unit);
 		
@@ -76,14 +76,14 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 
 	@Test
 	public void testUnresolvedUnit() throws Exception {
-		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
+		BundleUnitResolver resolver = new BundleUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo_xxxxxxx");
 		assertNull(unit);
 	}	
 	
 	@Test
 	public void testDefaultNSUnitResolver() throws Exception {
-		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed/org/eclipse"));
+		BundleUnitResolver resolver = new BundleUnitResolver(fBundle, new Path("deployed/org/eclipse"));
 		UnitProxy unit = resolver.resolveUnit("Foo"); //$NON-NLS-1$
 		assertResolvedCompiledUnit(unit);
 		
@@ -96,8 +96,8 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 	
 	@Test
 	public void testCrossNSUnitResolver() throws Exception {
-		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("/deployed"));
-		PlatformPluginUnitResolver.setupResolver(resolver, true, true);
+		BundleUnitResolver resolver = new BundleUnitResolver(fBundle, new Path("/deployed"));
+		BundleUnitResolver.setupResolver(resolver, true, true);
 		
 		UnitProxy unit = resolver.resolveUnit("a.b.Foo"); //$NON-NLS-1$
 		assertResolvedCompiledUnit(unit);

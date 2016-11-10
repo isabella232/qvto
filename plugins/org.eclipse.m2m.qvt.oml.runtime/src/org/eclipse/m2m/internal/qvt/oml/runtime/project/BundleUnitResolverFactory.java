@@ -21,7 +21,7 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolverFactory;
 import org.osgi.framework.Bundle;
 
-public class PlatformPluginUnitResolverFactory extends UnitResolverFactory {
+public class BundleUnitResolverFactory extends UnitResolverFactory {
 
 	@Override
 	public boolean accepts(URI uri) {
@@ -40,18 +40,18 @@ public class PlatformPluginUnitResolverFactory extends UnitResolverFactory {
 			return null;
 		}
 				
-		PlatformPluginUnitResolver resolver;
+		BundleUnitResolver resolver;
 	
 		URI sourceFolderURI = ResolverUtils.getSourceFolderURI(uri);		
 		
 		if(sourceFolderURI != null && sourceFolderURI.segmentCount() > 2) {
 			IPath pluginRelativePath = new Path(sourceFolderURI.toPlatformString(true)).removeFirstSegments(1);
-			resolver = new PlatformPluginUnitResolver(bundle, pluginRelativePath);
+			resolver = new BundleUnitResolver(bundle, pluginRelativePath);
 		} else {
-			resolver = new PlatformPluginUnitResolver(bundle);
+			resolver = new BundleUnitResolver(bundle);
 		}
 		
-		PlatformPluginUnitResolver.setupResolver(resolver, true, true);
+		BundleUnitResolver.setupResolver(resolver, true, true);
 		return resolver;
 	}
 
@@ -80,7 +80,7 @@ public class PlatformPluginUnitResolverFactory extends UnitResolverFactory {
 			/**
 			 * In case passed URI contains full path then truncate it related to specified source container.
 			 */
-			for (IPath sourceContainer : PlatformPluginUnitResolver.getSourceContainers(bundle)) {
+			for (IPath sourceContainer : BundleUnitResolver.getSourceContainers(bundle)) {
 				int matchCount = qualifiedName.matchingFirstSegments(sourceContainer);
 				if (matchCount > 0) {
 					qualifiedName = qualifiedName.removeFirstSegments(matchCount);

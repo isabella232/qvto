@@ -47,8 +47,7 @@ public class LegacyNativeLibSupport {
 
 	public static final LegacyNativeLibSupport INSTANCE = createInstance(); 
 	
-	private LegacyNativeLibSupport() {
-	}
+	private LegacyNativeLibSupport() {}
 	
 	public QvtOperationalModuleEnv defineLibrary(Library lib, Map<String, List<EOperation>> definedOperations) throws LibraryCreationException {
 		org.eclipse.m2m.internal.qvt.oml.expressions.Library libModule = QvtOperationalStdLibrary.createLibrary(lib.getId());		

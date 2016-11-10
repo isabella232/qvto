@@ -13,10 +13,10 @@ package org.eclipse.m2m.internal.qvt.oml.compiler;
 
 import java.util.Arrays;
 
-import lpg.runtime.IntSegmentedTuple;
-
 import org.eclipse.m2m.internal.qvt.oml.common.util.LineNumberProvider;
 import org.eclipse.ocl.lpg.AbstractLexer;
+
+import lpg.runtime.IntSegmentedTuple;
 
 /**
  * Implements quick search of a line number for a given position within a string

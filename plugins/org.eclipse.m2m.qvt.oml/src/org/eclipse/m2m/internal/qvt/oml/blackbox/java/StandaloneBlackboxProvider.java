@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -14,11 +14,11 @@ package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
@@ -29,16 +29,32 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	private Map<String, JavaUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	
 	@Override
-	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) { 
+	public BlackboxUnitDescriptor getUnitDescriptor(final String qualifiedName, ResolutionContext resolutionContext) { 
 		try {
 			JavaUnitDescriptor d = fDescriptorMap.get(qualifiedName);
+			
 			if (d == null) {
-				d = new StandaloneDescriptor(qualifiedName);
-				fDescriptorMap.put(qualifiedName, d);
+				try {
+					Class<?> c = Class.forName(qualifiedName);
+					
+					d = new JavaUnitDescriptor(qualifiedName) {
+						
+						@Override
+						protected void handleBlackboxError(Diagnostic diagnostic) {
+							QvtPlugin.logDiagnostic(diagnostic);
+						}	
+					};
+					
+					d.addModuleHandle(new ClassModuleHandle(c));
+					
+					fDescriptorMap.put(qualifiedName, d);
+				}
+				catch (ClassNotFoundException e) {
+					return null;
+				}
 			}
+			
 			return d;
-		} catch(ClassNotFoundException e) {
-			return null;
 		}
 		catch(RuntimeException e) {
 			return null;
@@ -49,27 +65,26 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		JavaUnitDescriptor d = fDescriptorMap.get(unitQualifiedName);
 		
 		if (d == null) {
-			d = new JavaUnitDescriptor(unitQualifiedName) {};
+			d = new JavaUnitDescriptor(unitQualifiedName) {
+				
+				@Override
+				protected void handleBlackboxError(Diagnostic diagnostic) {
+					QvtPlugin.logDiagnostic(diagnostic);
+				}
+				
+			};
 			fDescriptorMap.put(unitQualifiedName, d);
 		}
-		
-		try {
-			d.addModuleHandle(
-				new StandaloneModuleHandle(cls.getName(), moduleName) {
-					@Override
-					public Class<?> getModuleJavaClass() {
-						return cls;
-					}
-					
-					@Override
-					public List<String> getUsedPackages() {
-						return Arrays.asList(packageURIs);
-					}
+
+		d.addModuleHandle(
+			new ClassModuleHandle(cls, moduleName) {
+									
+				@Override
+				public List<String> getUsedPackages() {
+					return Arrays.asList(packageURIs);
 				}
-			);
-		} catch (ClassNotFoundException e) {
-			QvtPlugin.error(e);
-		}
+			}
+		);
 	}
 
 	@Override
@@ -79,23 +94,6 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 
 	@Override
 	public void cleanup() {
-		fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
+		fDescriptorMap.clear();
 	}
-	
-	private class StandaloneDescriptor extends JavaUnitDescriptor {		
-				
-		StandaloneDescriptor(String unitQualifiedName) throws ClassNotFoundException {
-			this(unitQualifiedName, Collections.singletonList(getSimpleNameFromJavaClass(unitQualifiedName))); 
-		}
-		
-		StandaloneDescriptor(String unitQualifiedName, List<String> moduleNames) throws ClassNotFoundException {
-			super(unitQualifiedName); 
-			
-			for(String moduleName : moduleNames) {
-				addModuleHandle(new StandaloneModuleHandle(unitQualifiedName, moduleName));
-			}
-		}
-						
-	}
-
 }

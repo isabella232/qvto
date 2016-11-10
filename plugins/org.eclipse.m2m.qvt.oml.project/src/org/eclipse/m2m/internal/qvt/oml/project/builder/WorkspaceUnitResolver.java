@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
@@ -44,6 +45,9 @@ import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.DeployedImportResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.BundleUnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
+import org.osgi.framework.Bundle;
 
 
 
@@ -90,31 +94,43 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 					DeployedImportResolver.INSTANCE));
 	}
 	
-	private UnitResolver getReferencedProjectsResolver(IProject project, Map<IProject, UnitResolver> analizedProjects) {
-		analizedProjects.put(project, this);
+	private UnitResolver getReferencedProjectsResolver(IProject project, Map<IProject, UnitResolver> analyzedProjects) {
+		analyzedProjects.put(project, this);
 
 		List<UnitResolver> resolvers = Collections.emptyList();
 		try {
-			IProject[] referencedProjects = project.getReferencedProjects();
-			resolvers = new ArrayList<UnitResolver>(referencedProjects.length);
+			Set<IProject> referencedProjects = DependencyTracker.findReferencedProjects(project, false);
+			Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
+			
+			resolvers = new ArrayList<UnitResolver>(referencedProjects.size() + requiredBundles.size());
 
 			for (IProject referenced : referencedProjects) {
-				if (analizedProjects.containsKey(referenced)) {
-					resolvers.add(analizedProjects.get(referenced));
+				if (analyzedProjects.containsKey(referenced)) {
+					resolvers.add(analyzedProjects.get(referenced));
 					continue;
 				}
 				
-				if (referenced == null || !referenced.isAccessible()) {
-					continue;
-				}
-
 				IContainer sourceContainer = QVTOBuilderConfig.getConfig(referenced).getSourceContainer();
 				if (sourceContainer == null || !sourceContainer.exists()) {
 					continue;
 				}
 
-				resolvers.add(new WorkspaceUnitResolver(sourceContainer, analizedProjects));
+				resolvers.add(new WorkspaceUnitResolver(sourceContainer, analyzedProjects));
 			}
+			
+			for (Bundle required : requiredBundles) {
+
+				// XXX
+//				if (analyzedProjects.containsKey(referenced)) {
+//					resolvers.add(analyzedProjects.get(referenced));
+//					continue;
+//				}
+				
+				if (required != null && required.getBundleContext() != null) {		
+					resolvers.add(new BundleUnitResolver(required));
+				}
+			}
+			
 		} catch (CoreException e) {
 			QVTOProjectPlugin.log(e.getStatus());
 		}

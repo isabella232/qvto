@@ -10,40 +10,43 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.jdt.pde;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.ProjectDependencyTracker;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
+import org.eclipse.osgi.service.resolver.BundleDescription;
 import org.eclipse.pde.core.plugin.IPluginImport;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
+import org.osgi.framework.Bundle;
 
-public class PdeDependencyTracker extends ProjectDependencyTracker {
-	
-	public PdeDependencyTracker() {}
-	
-	public Set<IProject> getReferencedProjects(IProject project, boolean recursive) {
+public class PdeDependencyTracker extends DependencyTracker {
 		
-		IPluginModelBase plugin = findPluginModelByProject(project);
+	@Override
+	protected boolean accepts(IProject project) {
+		return isPluginProject(project);
+	}
+	
+	@Override
+	public Collection<IProject> getLocalReferencedProjects(IProject project) {
 		
-		if(plugin != null) {		
+		IPluginModelBase plugin = PluginRegistry.findModel(project);
+		
+		if(plugin != null) {
 			IPluginImport[] imports = plugin.getPluginBase().getImports();
 		
 			Set<IProject> referencedProjects = new HashSet<IProject>(imports.length);
 				
-			for (IPluginImport nextImport : imports) {
-				String importID = nextImport.getId();
-				IPluginModelBase depPlugin = findPluginModelByID(importID);
+			for (IPluginImport nextImport : imports) {				
+				BundleDescription description = nextImport.getPluginModel().getBundleDescription();
+				IPluginModelBase depPlugin = PluginRegistry.findModel(description);
 				if(depPlugin != null && depPlugin.getUnderlyingResource() != null) {
 					IProject projectDep = depPlugin.getUnderlyingResource().getProject();
 					
 					referencedProjects.add(projectDep);
-					
-					if(recursive) {
-						referencedProjects.addAll(getReferencedProjects(projectDep, true));
-					}
 				}
 			}
 			
@@ -51,15 +54,32 @@ public class PdeDependencyTracker extends ProjectDependencyTracker {
 		}
 		
 		return Collections.emptySet();
+		
 	}
 	
-	
-	private static IPluginModelBase findPluginModelByProject(IProject project) {
-		return PluginRegistry.findModel(project);
+	@Override
+	protected Collection<Bundle> getLocalRequiredBundles(IProject project) {
+				
+		IPluginModelBase plugin = PluginRegistry.findModel(project);
+		
+		if(plugin != null) {		
+			IPluginImport[] imports = plugin.getPluginBase().getImports();
+		
+			Set<Bundle> requiredBundles = new HashSet<Bundle>(imports.length);
+				
+			for (IPluginImport nextImport : imports) {
+				BundleDescription description = nextImport.getPluginModel().getBundleDescription();
+				IPluginModelBase depPlugin = PluginRegistry.findModel(description);
+				if(depPlugin != null) {
+					Bundle requiredBundle = description.getBundle();
+					
+					requiredBundles.add(requiredBundle);
+				}
+			}
+			
+			return requiredBundles;
+		}
+		
+		return Collections.emptySet();
 	}
-
-	private static IPluginModelBase findPluginModelByID(String importID) {
-		return PluginRegistry.findModel(importID);
-	}
-
 }

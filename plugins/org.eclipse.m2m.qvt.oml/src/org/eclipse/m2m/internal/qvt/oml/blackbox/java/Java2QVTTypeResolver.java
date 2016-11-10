@@ -98,7 +98,6 @@ class Java2QVTTypeResolver {
 			OCLStandardLibrary<EClassifier> stdLib = fEnv.getOCLStandardLibrary();
 			if(stdLib.getT().getName().equals(typeVariable.getName())) {
 				return getEnvironment().getOCLStandardLibrary().getT();
-				//return paramType;
 			} else if(stdLib.getT2().getName().equals(typeVariable.getName())) {
 				return getEnvironment().getOCLStandardLibrary().getT();			
 			} else if(QvtOperationalStdLibrary.INSTANCE.getKeyT().getName().equals(typeVariable.getName())) {

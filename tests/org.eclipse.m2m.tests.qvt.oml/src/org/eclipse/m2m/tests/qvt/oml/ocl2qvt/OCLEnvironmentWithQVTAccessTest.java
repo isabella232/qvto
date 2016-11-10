@@ -103,7 +103,7 @@ public class OCLEnvironmentWithQVTAccessTest extends TestCase {
 		try {
 			ResolutionContext resolutionContext = new ResolutionContextImpl(compileModules.iterator().next().getURI());
 			// import "Strings" black-box library
-			BlackboxUnitDescriptor abstractCompilationUnitDescriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor("Strings", resolutionContext);
+			BlackboxUnitDescriptor abstractCompilationUnitDescriptor = BlackboxRegistry.INSTANCE.getBlackboxUnitDescriptor("Strings", resolutionContext);
 			assertNotNull("descriptor must be found", abstractCompilationUnitDescriptor); //$NON-NLS-1$
 			LoadContext loadContext = new LoadContext(EPackage.Registry.INSTANCE);
 			BlackboxUnit loadCompilationUnit = abstractCompilationUnitDescriptor.load(loadContext); //BlackboxRegistry.INSTANCE.loadCompilationUnit(abstractCompilationUnitDescriptor, loadContext);

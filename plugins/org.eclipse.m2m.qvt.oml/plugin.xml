@@ -6,12 +6,12 @@
    <extension-point id="blackboxProvider" name="Black box provider" schema="schema/blackboxProviders.exsd"/>
    <extension-point id="javaBlackboxUnits" name="Java blackbox compilation units" schema="schema/javaBlackboxUnits.exsd"/>
     
- <extension name="Java bundle blackbox implementation provider" point="org.eclipse.m2m.qvt.oml.blackboxProvider">
+ <extension name="Java deployed blackbox implementation provider" point="org.eclipse.m2m.qvt.oml.blackboxProvider">
     <provider
-          class="org.eclipse.m2m.internal.qvt.oml.blackbox.java.BundleBlackboxProvider">
+          class="org.eclipse.m2m.internal.qvt.oml.blackbox.java.RegisteredBlackboxProvider">
     </provider>
  </extension>
- 
+  
  <extension point="org.eclipse.emf.ecore.generated_package">
    <package 
       uri = "http:///www.eclipse.org/m2m/qvt/operational/trace.ecore" 

@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({PlatformPluginUnitResolverTest.class, UnitResolverFactoryTest.class, QVTOCompilerTest.class, URIUnitResolverTest.class})
+@SuiteClasses({BundleUnitResolverTest.class, UnitResolverFactoryTest.class, QVTOCompilerTest.class, URIUnitResolverTest.class})
 public class AllCompileTests {
 	
 }

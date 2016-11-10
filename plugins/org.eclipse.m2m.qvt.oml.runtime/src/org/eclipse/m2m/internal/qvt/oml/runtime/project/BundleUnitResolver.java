@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -43,7 +43,7 @@ import org.osgi.framework.Bundle;
 /**
  * @author dvorak
  */
-public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
+public class BundleUnitResolver extends DelegatingUnitResolver {
 	
     private static final String SOURCE_CONTAINER_POINT = QvtRuntimePlugin.ID + ".qvtTransformationContainer"; //$NON-NLS-1$
     private static final String SOURCE_CONTAINER = "sourceContainer"; //$NON-NLS-1$
@@ -53,11 +53,11 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 	private final List<IPath> fSrcContainers;
     private static final Map<String, Set<IPath>> ourPluginSourceContainers = loadPluginSourceContainers();
 
-	public PlatformPluginUnitResolver(Bundle bundle) {
+	public BundleUnitResolver(Bundle bundle) {
 		this(bundle, getSourceContainers(bundle));
 	}
 	
-	public PlatformPluginUnitResolver(Bundle bundle, IPath... sourceContainers) {
+	public BundleUnitResolver(Bundle bundle, IPath... sourceContainers) {
 		if (bundle == null) {
 			throw new IllegalArgumentException("null bundle"); //$NON-NLS-1$
 		}
@@ -72,8 +72,21 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 		}
 		
 		fBundle = bundle;
-		fSrcContainers = new ArrayList<IPath>(containers);		
-	}	
+		fSrcContainers = new ArrayList<IPath>(containers);
+	}
+	
+	private static UnitResolver getRequiredBundlesResolver(Bundle bundle) {
+		
+		List<UnitResolver> resolvers = new ArrayList<UnitResolver>();
+		
+		Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(bundle, false);
+		
+		for (Bundle requiredBundle : requiredBundles) {
+			resolvers.add(new BundleUnitResolver(requiredBundle));
+		}
+		
+		return new CompositeUnitResolver(resolvers.toArray(new UnitResolver[] {}));
+	}
 
 	@Override
 	public UnitProxy doResolveUnit(String qualifiedName) {
@@ -102,14 +115,22 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 		return null;
 	}
 
-	public static void setupResolver(PlatformPluginUnitResolver resolver, boolean useBlackbox, boolean useDeployed) {
+	public static void setupResolver(BundleUnitResolver resolver, boolean useBlackbox, boolean useDeployed) {
 		if(useBlackbox && !useDeployed) {
-			resolver.setParent(BlackboxUnitResolver.DEFAULT);
+			resolver.setParent(new CompositeUnitResolver(
+					getRequiredBundlesResolver(resolver.fBundle),
+					new BlackboxUnitResolver(URI.createPlatformPluginURI(resolver.fBundle.getSymbolicName(), true))));
+					
+			
 		} else if(useBlackbox && useDeployed) {
 			resolver.setParent(new CompositeUnitResolver(
-					DeployedImportResolver.INSTANCE, 
-					BlackboxUnitResolver.DEFAULT));
-		}		
+					getRequiredBundlesResolver(resolver.fBundle),
+					DeployedImportResolver.INSTANCE,
+					new BlackboxUnitResolver(URI.createPlatformPluginURI(resolver.fBundle.getSymbolicName(), true))));
+		} else {
+			resolver.setParent(getRequiredBundlesResolver(resolver.fBundle));
+		}
+		
 	}
 	
 	private static Map<String, Set<IPath>> loadPluginSourceContainers() {
@@ -177,7 +198,7 @@ public class PlatformPluginUnitResolver extends DelegatingUnitResolver {
 
 		@Override
 		public UnitResolver getResolver() {
-			return PlatformPluginUnitResolver.this;
+			return BundleUnitResolver.this;
 		}
 	}
 }

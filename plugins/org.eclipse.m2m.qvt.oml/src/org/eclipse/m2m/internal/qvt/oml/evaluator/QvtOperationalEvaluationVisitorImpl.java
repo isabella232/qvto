@@ -537,7 +537,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
     	    	
     	QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(operation.eContainer());
     	    	
-		Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(operation, moduleEnv);
+		Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandlers(operation, moduleEnv);
     	if (handlers.isEmpty()) {
         	throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
         			QvtOperationalParserUtil.safeGetMappingQualifiedName(getOperationalEnv(), operation))));
@@ -1056,7 +1056,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
 					if (transformation.isIsBlackbox()) {
 						QvtOperationalModuleEnv moduleEnv = ASTBindingHelper.resolveModuleEnvironment(transformationInstance.getModule());
 						
-						Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandler(
+						Collection<CallHandler> handlers = BlackboxRegistry.INSTANCE.getBlackboxCallHandlers(
 								transformation, moduleEnv);
 						if (handlers.isEmpty()) { 
 							throwQVTException(new QvtRuntimeException(NLS.bind(EvaluationMessages.NoBlackboxOperationFound,
