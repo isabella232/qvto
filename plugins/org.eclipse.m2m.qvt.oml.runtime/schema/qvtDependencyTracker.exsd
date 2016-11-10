@@ -3,7 +3,7 @@
 <schema targetNamespace="org.eclipse.m2m.qvt.oml.runtime" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="org.eclipse.m2m.qvt.oml.runtime" id="qvtProjectDependencyTracker" name="QVTo Project Dependency Tracker"/>
+         <meta.schema plugin="org.eclipse.m2m.qvt.oml.runtime" id="qvtDependencyTracker" name="QVTo Dependency Tracker"/>
       </appInfo>
       <documentation>
          [Enter description of this extension point.]
@@ -55,7 +55,7 @@
                   
                </documentation>
                <appInfo>
-                  <meta.attribute kind="java" basedOn="org.eclipse.m2m.internal.qvt.oml.project.ProjectDependencyTracker:"/>
+                  <meta.attribute kind="java" basedOn="org.eclipse.m2m.internal.qvt.oml.runtime.util.DependencyTracker:"/>
                </appInfo>
             </annotation>
          </attribute>

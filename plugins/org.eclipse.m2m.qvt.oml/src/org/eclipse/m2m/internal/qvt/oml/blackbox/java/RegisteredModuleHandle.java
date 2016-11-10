@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2014 R.Dvorak and others.
+ * Copyright (c) 2009, 2016 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,17 +11,20 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.core.runtime.Platform;
 import org.osgi.framework.Bundle;
 
-class BundleModuleHandle extends ModuleHandle {
+class RegisteredModuleHandle extends ModuleHandle {
 
 	private final String bundleId;
-	private final List<String> usedPackages;		
+	private final List<String> usedPackages;
 	
-	BundleModuleHandle(String bundleId, String className, String moduleName, List<String> usedPackages) {
+	RegisteredModuleHandle(String bundleId, String className, String moduleName, List<String> usedPackages) {
 		super(className, moduleName);
 		
 		if(bundleId == null || usedPackages == null) {
@@ -32,10 +35,15 @@ class BundleModuleHandle extends ModuleHandle {
 		this.usedPackages = usedPackages;
 	}
 	
+	@Override
 	public List<String> getUsedPackages() {
-		return usedPackages;
+		
+		Set<String> packages = new HashSet<String>(super.getUsedPackages());
+		packages.addAll(usedPackages);
+		
+		return new ArrayList<String>(packages);
 	}
-	
+		
 	@Override
 	public Class<?> getModuleJavaClass() throws ClassNotFoundException {
 		Bundle bundle = Platform.getBundle(bundleId);

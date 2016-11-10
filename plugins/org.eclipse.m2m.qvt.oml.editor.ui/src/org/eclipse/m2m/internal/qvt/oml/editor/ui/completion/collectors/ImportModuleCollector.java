@@ -54,7 +54,7 @@ public class ImportModuleCollector extends AbstractCollector {
         addLocalModulesProposals(proposals, data);
         addDeployedModulesProposals(proposals, data);
         final ResolutionContextImpl loadContext = new ResolutionContextImpl(data.getCFile().getURI());
-        for (BlackboxUnitDescriptor unitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
+        for (BlackboxUnitDescriptor unitDescriptor : BlackboxRegistry.INSTANCE.getBlackboxUnitDescriptors(loadContext)) {
             String proposalString = unitDescriptor.getQualifiedName();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, 
             		isJdtUnitUri(unitDescriptor.getURI()) ? CategoryImageConstants.PACKAGE : CategoryImageConstants.MAPPING, data);

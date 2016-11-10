@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -13,6 +13,7 @@
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -24,6 +25,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.java.RegisteredBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.java.StandaloneBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
@@ -48,7 +50,7 @@ public class BlackboxRegistry {
 		return fProviders;
 	}
 
-	public BlackboxUnitDescriptor getCompilationUnitDescriptor(String qualifiedName, ResolutionContext context) {
+	public BlackboxUnitDescriptor getBlackboxUnitDescriptor(String qualifiedName, ResolutionContext context) {
 		for (BlackboxProvider provider : getProviders()) {
 			BlackboxUnitDescriptor descriptor = provider.getUnitDescriptor(qualifiedName, context);
 			if (descriptor != null) {
@@ -58,12 +60,10 @@ public class BlackboxRegistry {
 		return null;
 	}
 
-	public List<BlackboxUnitDescriptor> getCompilationUnitDescriptors(ResolutionContext loadContext) {
+	public List<BlackboxUnitDescriptor> getBlackboxUnitDescriptors(ResolutionContext loadContext) {
 		ArrayList<BlackboxUnitDescriptor> result = new ArrayList<BlackboxUnitDescriptor>();
 		for (BlackboxProvider provider : getProviders()) {
-			for (BlackboxUnitDescriptor abstractCompilationUnitDescriptor : provider.getUnitDescriptors(loadContext)) {
-				result.add(abstractCompilationUnitDescriptor);
-			}
+			result.addAll(provider.getUnitDescriptors(loadContext));
 		}
 		return result;
 	}
@@ -74,35 +74,29 @@ public class BlackboxRegistry {
 		}
 	}
 
-	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
-		Collection<CallHandler> result = Collections.emptyList();
+	public Collection<CallHandler> getBlackboxCallHandlers(ImperativeOperation operation, QvtOperationalModuleEnv env) {
 		for (BlackboxProvider provider : getProviders()) {
-			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(operation, env);
+			Collection<CallHandler> handlers = provider.getBlackboxCallHandlers(operation, env);
 			if (!handlers.isEmpty()) {
-				if (result.isEmpty()) {
-					result = new LinkedList<CallHandler>();
-				}
-				result.addAll(handlers);
+				return handlers;
 			}
 		}
-		return result;
+		
+		return Collections.emptyList();
 	}
 
-	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
-		Collection<CallHandler> result = Collections.emptyList();
+	public Collection<CallHandler> getBlackboxCallHandlers(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
 		for (BlackboxProvider provider : getProviders()) {
-			Collection<CallHandler> handlers = provider.getBlackboxCallHandler(transformation, env);
-			if (!handlers.isEmpty()) {
-				if (result.isEmpty()) {
-					result = new LinkedList<CallHandler>();
-				}
-				result.addAll(handlers);
+			Collection<CallHandler> handlers = provider.getBlackboxCallHandlers(transformation, env);
+			if (!handlers.isEmpty()) {			
+				return handlers;
 			}
 		}
-		return result;
+		
+		return Collections.emptyList();
 	}
 	
-	public void addStandaloneModule(Class<?> cls, String unitQualifiedName, String moduleName, String[] packageURIs) {
+	public void addStandaloneModule(Class<?> cls, String unitQualifiedName, String moduleName, String... packageURIs) {
 		fStandaloneProvider.registerDescriptor(cls, unitQualifiedName, moduleName, packageURIs);
 	}
 
@@ -148,6 +142,10 @@ public class BlackboxRegistry {
 				} catch (RuntimeException e) {
 					QvtPlugin.error(e);
 				}
+			}
+			
+			if (providers.isEmpty()) {
+				providers.addAll(Arrays.asList(new RegisteredBlackboxProvider()));
 			}
 		}
 	}

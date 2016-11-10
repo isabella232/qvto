@@ -37,11 +37,11 @@ public class BlackboxModuleStandaloneSetupTest extends TransformationExecutorTes
 			}
 		);
     }
-	
+		
 	@Override
 	@Before
 	public void setUp() {
-		TransformationExecutor.BlackboxRegistry.INSTANCE.registerModules(StandaloneBBoxModule2.class);
+		TransformationExecutor.BlackboxRegistry.INSTANCE.registerModule(StandaloneBBoxModule2.class);
 		super.setUp();
 	}	
 }

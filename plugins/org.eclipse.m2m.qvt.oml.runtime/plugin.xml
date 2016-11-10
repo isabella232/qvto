@@ -5,7 +5,7 @@
     <extension-point id="qvtTransformation" name="%qvtTransformation" schema="schema/qvtTransformation.exsd"/>
     <extension-point id="qvtTransformationContainer" name="%qvtTransformationContainer" schema="schema/qvtTransformationContainer.exsd"/>
     <extension-point id="qvtTransformationImplFactory" name="%qvtTransformationImplFactory" schema="schema/qvtTransformationImplFactory.exsd"/>
-    <extension-point id="qvtProjectDependencyTracker" name="QVTo Project Dependency Tracker" schema="schema/qvtProjectDependencyTracker.exsd"/>
+    <extension-point id="qvtDependencyTracker" name="QVTo Dependency Tracker" schema="schema/qvtDependencyTracker.exsd"/>
                     
 	<extension point="org.eclipse.core.resources.markers"
 		id="qvtBuilderMarker" name="%qvtBuilderTransformation">
@@ -74,11 +74,15 @@
 	 </extension>
 	 
 	 <extension point="org.eclipse.m2m.qvt.oml.unitResolverFactory">
-		<factory class="org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolverFactory"/>
+		<factory class="org.eclipse.m2m.internal.qvt.oml.runtime.project.BundleUnitResolverFactory"/>
  	 </extension>
  	 
  	 <extension point="org.eclipse.m2m.qvt.oml.unitResolverFactory">
 		<factory class="org.eclipse.m2m.internal.qvt.oml.runtime.project.DeployedImportResolverFactory"/>
  	 </extension>
+ 	 
+ 	  <extension name="Java bundle blackbox implementation provider" point="org.eclipse.m2m.qvt.oml.blackboxProvider">
+    	<provider class="org.eclipse.m2m.internal.qvt.oml.runtime.project.BundleBlackboxProvider"/>
+ 	  </extension>
 
 </plugin>

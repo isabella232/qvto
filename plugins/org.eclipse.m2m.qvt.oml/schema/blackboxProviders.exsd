@@ -2,9 +2,9 @@
 <!-- Schema file written by PDE -->
 <schema targetNamespace="org.eclipse.m2m.qvt.oml" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
-      <appinfo>
+      <appInfo>
          <meta.schema plugin="org.eclipse.m2m.qvt.oml" id="blackboxProviders" name="Black box provider"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          This in an internal extension point that allows to plug-in spefic providers of blackbox implementations
       </documentation>
@@ -12,9 +12,9 @@
 
    <element name="extension">
       <annotation>
-         <appinfo>
+         <appInfo>
             <meta.element internal="true" />
-         </appinfo>
+         </appInfo>
       </annotation>
       <complexType>
          <sequence minOccurs="1" maxOccurs="unbounded">
@@ -39,9 +39,9 @@
                <documentation>
                   
                </documentation>
-               <appinfo>
+               <appInfo>
                   <meta.attribute translatable="true"/>
-               </appinfo>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
@@ -59,45 +59,45 @@
                <documentation>
                   The class representing a concrete QVT blackbox provider implementation
                </documentation>
-               <appinfo>
-                  <meta.attribute kind="java" basedOn=":org.eclipse.m2m.internal.qvt.oml.blackbox.AbstractBlackboxProvider"/>
-               </appinfo>
+               <appInfo>
+                  <meta.attribute kind="java" basedOn="org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxProvider:"/>
+               </appInfo>
             </annotation>
          </attribute>
       </complexType>
    </element>
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="since"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          [Enter the first release in which this extension point appears.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="examples"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          [Enter extension point usage example here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="apiinfo"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          [Enter API information here.]
       </documentation>
    </annotation>
 
    <annotation>
-      <appinfo>
+      <appInfo>
          <meta.section type="implementation"/>
-      </appinfo>
+      </appInfo>
       <documentation>
          [Enter information about supplied implementation of this extension point.]
       </documentation>

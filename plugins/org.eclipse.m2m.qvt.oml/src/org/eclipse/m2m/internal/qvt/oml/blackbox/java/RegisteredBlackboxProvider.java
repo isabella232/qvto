@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,13 +22,15 @@ import java.util.Map;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 
-public class BundleBlackboxProvider extends JavaBlackboxProvider {
+public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 	
 	private static final String EXTENSION_POINT = "javaBlackboxUnits"; //$NON-NLS-1$
 		
@@ -44,8 +46,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 	
 	private Map<String, BlackboxUnitDescriptor> fDescriptorMap;
 		
-	public BundleBlackboxProvider() {
-	}	
+	public RegisteredBlackboxProvider() {}	
 
 	private Map<String, BlackboxUnitDescriptor> readDescriptors() {
     	Map<String, BlackboxUnitDescriptor> descriptors = new LinkedHashMap<String, BlackboxUnitDescriptor>();
@@ -55,7 +56,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 
         for (IConfigurationElement element : configs) {
             try {
-            	BundleDescriptor descriptor = createDescriptor(element);
+            	RegisteredUnitDescriptor descriptor = createDescriptor(element);
         		String id = descriptor.getQualifiedName();            	
             	if(!descriptors.containsKey(id)) {
 					descriptors.put(id, descriptor);
@@ -71,7 +72,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
         return descriptors;
     }
         
-	private BundleDescriptor createDescriptor(IConfigurationElement configurationElement) throws IllegalArgumentException {
+	private RegisteredUnitDescriptor createDescriptor(IConfigurationElement configurationElement) throws IllegalArgumentException {
 		if(UNIT_ELEM.equals(configurationElement.getName())) {
 			String name = configurationElement.getAttribute(NAME_ATTR);
 			String namespace = configurationElement.getAttribute(NAMESPACE_ATTR);		
@@ -81,9 +82,9 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 			
 			String description = configurationElement.getAttribute(DESC_ATTR);		
 			String qualifiedName = namespace.length() == 0 ? name : namespace + CLASS_NAME_SEPARATOR + name;
-			return new BundleDescriptor(configurationElement, qualifiedName, description);
+			return new RegisteredUnitDescriptor(configurationElement, qualifiedName, description);
 		} else if(LIBRARY_ELEM.equals(configurationElement.getName())) {
-			return new BundleDescriptor(configurationElement, deriveQualifiedNameFromSimpleDefinition(configurationElement), null);
+			return new RegisteredUnitDescriptor(configurationElement, deriveQualifiedNameFromSimpleDefinition(configurationElement), null);
 		}
 		
 		throw new IllegalArgumentException("Unsupported configuration element " + configurationElement); //$NON-NLS-1$		
@@ -134,14 +135,31 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 		return fDescriptorMap;
 	}
 	
-	private class BundleDescriptor extends JavaUnitDescriptor {		
+	private static String getPackageNameFromJavaClass(String className) {
+		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
+		if (lastSeparatorPos < 0) {
+			return null;
+		}
+
+		return className.substring(0, lastSeparatorPos);
+	}
+
+	private static String getSimpleNameFromJavaClass(String className) {
+		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
+		if (lastSeparatorPos < 0) {
+			return className;
+		}
+
+		return className.substring(lastSeparatorPos + 1);
+	}
+	
+	private class RegisteredUnitDescriptor extends JavaUnitDescriptor {		
 		
 		private String fContributingBundleId; 
 
-		BundleDescriptor(IConfigurationElement configurationElement, String unitQualifiedName, String description) {
-			super(unitQualifiedName 
-					//, configurationElement.getContributor().getName(), 
-			);
+		RegisteredUnitDescriptor(IConfigurationElement configurationElement, String unitQualifiedName, String description) {
+			super(unitQualifiedName);
+			
 			fContributingBundleId = configurationElement.getContributor().getName();
 			
 			if(configurationElement.getName().equals(LIBRARY_ELEM)) {
@@ -167,7 +185,7 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 				moduleName = getSimpleNameFromJavaClass(className);
 			}
 			
-			ModuleHandle moduleHandle = new BundleModuleHandle(bundleId, className, moduleName, readUsedPackagesNsURIs(moduleElement));
+			ModuleHandle moduleHandle = new RegisteredModuleHandle(bundleId, className, moduleName, readUsedPackagesNsURIs(moduleElement));
 			addModuleHandle(moduleHandle);
 		}
 		
@@ -181,6 +199,16 @@ public class BundleBlackboxProvider extends JavaBlackboxProvider {
 			}
 			
 			return uris;
+		}
+		
+		@Override
+		protected void handleBlackboxError(Diagnostic diagnostic) {
+			if(diagnostic != null) {
+				QvtPlugin.logDiagnostic(diagnostic);					
+			} else {
+				QvtPlugin.error(NLS.bind(ValidationMessages.FailedToLoadUnit, 
+						new Object[] { getQualifiedName() }));
+			}
 		}
 			
 	}

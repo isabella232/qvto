@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -41,6 +42,8 @@ import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTSyntheticNode;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTSyntheticNodeAccess;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtEnvironmentBase;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalFileEnv;
+import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
 import org.eclipse.m2m.internal.qvt.oml.cst.ConstructorCS;
@@ -912,6 +915,21 @@ public class QvtOperationalParserUtil {
 		}
 		
 		return false;
+	}
+	
+	public static URI getSourceURI(QvtOperationalModuleEnv env) {
+		if(env instanceof QvtOperationalFileEnv) {
+			QvtOperationalFileEnv fileEnv = (QvtOperationalFileEnv) env;
+			return fileEnv.getFile();
+		}
+		else if (env.getFileParent() instanceof QvtOperationalFileEnv) {
+			QvtOperationalFileEnv fileEnv = (QvtOperationalFileEnv) env.getFileParent();
+			return fileEnv.getFile();
+		}
+		else if (env.getModuleContextType() != null) {
+			return env.getModuleContextType().eResource().getURI();
+		}
+		return null;
 	}
 
 }

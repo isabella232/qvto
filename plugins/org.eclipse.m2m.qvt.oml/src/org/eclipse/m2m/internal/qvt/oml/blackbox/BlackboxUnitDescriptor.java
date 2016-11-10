@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -12,13 +12,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
-import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
 
 
 public abstract class BlackboxUnitDescriptor {
@@ -86,10 +85,17 @@ public abstract class BlackboxUnitDescriptor {
 		return "Descriptor: " + fQualifiedName + " - " + getProvider().toString(); //$NON-NLS-1$ //$NON-NLS-2$ 
 	}
 	
-	public abstract BlackboxUnit load(LoadContext context) throws BlackboxException;
+	protected final BlackboxUnit createBlackboxUnit(
+			final List<QvtOperationalModuleEnv> loadedModules) {
+		return new BlackboxUnit() {
+			public List<QvtOperationalModuleEnv> getElements() {
+				return Collections.unmodifiableList(loadedModules);
+			}
+			public Diagnostic getDiagnostic() {
+				return Diagnostic.OK_INSTANCE;
+			}
+		};
+	}
 	
-	public abstract Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env);
-	
-	public abstract Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env);
-
+	public abstract BlackboxUnit load(LoadContext context);
 }

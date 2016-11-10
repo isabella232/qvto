@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -22,12 +22,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
-import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalParserUtil;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxRegistry;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
@@ -58,7 +56,7 @@ public class BlackboxUnitResolver implements UnitResolver {
 		
 	public UnitProxy resolveUnit(String qualifiedName) {
 		
-		BlackboxUnitDescriptor descriptor = BlackboxRegistry.INSTANCE.getCompilationUnitDescriptor(qualifiedName, fContext);
+		BlackboxUnitDescriptor descriptor = BlackboxRegistry.INSTANCE.getBlackboxUnitDescriptor(qualifiedName, fContext);
 		
 		if (descriptor != null) {
 			int namePos = qualifiedName.lastIndexOf('.');
@@ -155,32 +153,21 @@ public class BlackboxUnitResolver implements UnitResolver {
 		
 		public List<Module> loadElements(Registry packageRegistry) {
 			LoadContext loadContext = new LoadContext(packageRegistry);
-			BlackboxUnit cunit = null;
-			try {
-				cunit = fDescriptor.load(loadContext);
-				if (cunit.getDiagnostic().getSeverity() == Diagnostic.ERROR) {
-					String errMessage = NLS.bind(ValidationMessages.FailedToLoadUnit, fDescriptor.getQualifiedName());
-					fProblems = new BasicDiagnostic(cunit.getDiagnostic().getSource(), cunit.getDiagnostic().getCode(), 
-							QvtOperationalParserUtil.wrappInSeeErrorLogMessage(errMessage), null);
-				}
-			} catch (BlackboxException e) {
-				Diagnostic diagnostic = e.getDiagnostic();
-				if(diagnostic != null) {
-					QvtPlugin.logDiagnostic(diagnostic);					
-				} else {
-					QvtPlugin.error(NLS.bind(ValidationMessages.FailedToLoadUnit, 
-							new Object[] { fDescriptor.getQualifiedName() }), e);
-				}
 
-				String errMessage = NLS.bind(ValidationMessages.FailedToLoadUnit, fDescriptor.getQualifiedName());
-				fProblems = new BasicDiagnostic(diagnostic.getSource(), diagnostic.getCode(), 
-						QvtOperationalParserUtil.wrappInSeeErrorLogMessage(errMessage), null);
-			}
+			BlackboxUnit cunit = fDescriptor.load(loadContext);
 			
 			if(cunit == null) {
 				return Collections.emptyList();
 			}
 			
+			Diagnostic diagnostic = cunit.getDiagnostic();
+			
+			if (diagnostic != null && diagnostic.getSeverity() == Diagnostic.ERROR) {
+				String errMessage = NLS.bind(ValidationMessages.FailedToLoadUnit, fDescriptor.getQualifiedName());
+				fProblems = new BasicDiagnostic(Diagnostic.ERROR, cunit.getDiagnostic().getSource(), cunit.getDiagnostic().getCode(), 
+						QvtOperationalParserUtil.wrappInSeeErrorLogMessage(errMessage), null);
+			}
+						
 			List<QvtOperationalModuleEnv> elementEnvs = cunit.getElements();			
 			List<Module> unitElements = new ArrayList<Module>(elementEnvs.size());
 						

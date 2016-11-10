@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -16,13 +16,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
@@ -36,7 +31,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Library;
-import org.eclipse.m2m.qvt.oml.blackbox.java.Module;
 
 abstract class JavaModuleLoader {
 	
@@ -56,7 +50,7 @@ abstract class JavaModuleLoader {
 		return (fDiagnostics != null) ? fDiagnostics : Diagnostic.OK_INSTANCE;
 	}
 	
-	public Diagnostic loadModule(ModuleHandle moduleHandle, Map<String, List<EOperation>> definedOperations, LoadContext loadContext) {
+	public Diagnostic loadModule(ModuleHandle moduleHandle, LoadContext loadContext) {
 		fDiagnostics = DiagnosticUtil.createRootDiagnostic(NLS.bind(JavaBlackboxMessages.LoadModuleDiagnostics, moduleHandle));
 		Class<?> javaClass;
 		try {
@@ -78,15 +72,9 @@ abstract class JavaModuleLoader {
 		Library module = QvtOperationalStdLibrary.createLibrary(moduleHandle.getModuleName());		
 		fEnv = new QvtOperationalEnvFactory(loadContext.getMetamodelRegistry()).createModuleEnvironment(module);
 		loadModule(fEnv, javaClass);
-		
-		Set<String> usedPackages = new LinkedHashSet<String>(moduleHandle.getUsedPackages());
-		Module annotation = javaClass.getAnnotation(Module.class);
-		if (annotation != null) {
-			usedPackages.addAll(Arrays.asList(annotation.packageURIs()));
-		}
-		
+				
 		Java2QVTTypeResolver typeResolver = new Java2QVTTypeResolver(fEnv, 
-				resolvePackages(usedPackages, fDiagnostics));
+				resolvePackages(moduleHandle.getUsedPackages(), fDiagnostics));
 		
 		fOperBuilder = new OperationBuilder(typeResolver);
 		
@@ -102,13 +90,6 @@ abstract class JavaModuleLoader {
 				Diagnostic operationStatus = fOperBuilder.getDiagnostics();
 				if(EmfUtilPlugin.isSuccess(operationStatus)) {
 					loadOperation(operation, method);
-					
-					List<EOperation> listOp = definedOperations.get(operation.getName());
-					if (listOp == null) {
-						listOp = new LinkedList<EOperation>();
-						definedOperations.put(operation.getName(), listOp);
-					}
-					listOp.add(operation);
 				}
 	
 				if(operationStatus.getSeverity() != Diagnostic.OK) {

@@ -18,7 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitResolver;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.PlatformPluginUnitResolver;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.BundleUnitResolver;
 import org.eclipse.m2m.tests.qvt.oml.AllTests;
 import org.osgi.framework.Bundle;
 
@@ -50,7 +50,7 @@ public class TestModuleResolver implements UnitResolver {
 		
 		fBasePath = new Path(sourceContainerPath).makeAbsolute();
 		
-		fPluginResolver = new PlatformPluginUnitResolver(bundle, fBasePath) {
+		fPluginResolver = new BundleUnitResolver(bundle, fBasePath) {
 			UnitResolver fBlackboxResolver = new BlackboxUnitResolver(URI.createPlatformPluginURI(bundleSymbolicName, false));
 
 			@Override

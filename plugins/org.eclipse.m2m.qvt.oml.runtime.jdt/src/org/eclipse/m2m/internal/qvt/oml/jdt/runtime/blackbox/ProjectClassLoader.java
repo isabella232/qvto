@@ -15,6 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,28 +23,41 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
-import org.eclipse.m2m.internal.qvt.oml.runtime.project.ProjectDependencyTracker;
+import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.wiring.BundleWiring;
 
 public class ProjectClassLoader extends URLClassLoader {
 			
 	private static Map<IJavaProject, ProjectClassLoader> loadersMap = new HashMap<IJavaProject, ProjectClassLoader>();
 	
-	ProjectClassLoader(IProject project) throws JavaModelException, MalformedURLException {
+	private IJavaProject javaProject;
+	
+	private ProjectClassLoader(IProject project) throws JavaModelException, MalformedURLException {
 		this(JavaCore.create(project));
 	}
 	
-	ProjectClassLoader(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
+	private ProjectClassLoader(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
 		super(new URL[] {getProjectOutputURL(javaProject)}, getParentLoader(javaProject));
-						
+		
+		this.javaProject = javaProject;
+		
 		loadersMap.put(javaProject, this);
 	}
-		
-	static synchronized boolean isProjectClassLoaderExisting(IJavaProject javaProject) {
-		return loadersMap.containsKey(javaProject);
+	
+	@Override
+	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+		if (javaProject.hasBuildState()) {
+			return super.loadClass(name, resolve);
+		}
+		else {
+			throw new ClassNotFoundException(name);
+		}
 	}
 	
 	static synchronized ProjectClassLoader getProjectClassLoader(IProject project) throws JavaModelException, MalformedURLException {
@@ -51,7 +65,6 @@ public class ProjectClassLoader extends URLClassLoader {
 	}
 	
 	static synchronized ProjectClassLoader getProjectClassLoader(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
-		
 		ProjectClassLoader loader = loadersMap.get(javaProject);
 		
 		if (loader == null) {
@@ -87,31 +100,41 @@ public class ProjectClassLoader extends URLClassLoader {
 		
 	private static List<ClassLoader> getReferencedProjectLoaders(IJavaProject javaProject) {
 		
-		Set<IProject> referencedProjects = ProjectDependencyTracker.getAllReferencedProjects(javaProject.getProject(), false);
-						
-		List<ClassLoader> referencedLoaders = new ArrayList<ClassLoader>(referencedProjects.size());
-							
-		for(IProject referencedProject : referencedProjects) {
+		if (javaProject.hasBuildState()) {
+				
+			Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(javaProject.getProject(), false);
+			Set<IProject> referencedProjects = DependencyTracker.findReferencedProjects(javaProject.getProject(), false);
 			
-			try {			
-				referencedLoaders.add(ProjectClassLoader.getProjectClassLoader(referencedProject));
+			List<ClassLoader> referencedLoaders = new ArrayList<ClassLoader>();
+			
+			for (Bundle requiredBundle : requiredBundles) {
+				referencedLoaders.add(requiredBundle.adapt(BundleWiring.class).getClassLoader());
 			}
-			catch(JavaModelException e) {
-				QvtPlugin.error(e);
+																	
+			for(IProject referencedProject : referencedProjects) {
+				
+				try {			
+					referencedLoaders.add(ProjectClassLoader.getProjectClassLoader(referencedProject));
+				}
+				catch(JavaModelException e) {
+					QvtPlugin.logDiagnostic(BasicDiagnostic.toDiagnostic(e.getStatus()));
+				}
+				catch(MalformedURLException e) {
+					QvtPlugin.error(e);
+				}
 			}
-			catch(MalformedURLException e) {
-				QvtPlugin.error(e);
-			}
+			
+			return referencedLoaders;
 		}
 		
-		return referencedLoaders;
+		return Collections.emptyList();
 	}
 	
 	private static ClassLoader getParentLoader(IJavaProject javaProject) {
 		
 		List<ClassLoader> referencedLoaders = getReferencedProjectLoaders(javaProject);
 		
-		return referencedLoaders.isEmpty() ? ProjectClassLoader.class.getClassLoader() : new CompositeClassLoader(referencedLoaders);
+		return referencedLoaders.isEmpty() ? getSystemClassLoader() : new CompositeClassLoader(referencedLoaders);
 	}
 	
 	private static class CompositeClassLoader extends ClassLoader {

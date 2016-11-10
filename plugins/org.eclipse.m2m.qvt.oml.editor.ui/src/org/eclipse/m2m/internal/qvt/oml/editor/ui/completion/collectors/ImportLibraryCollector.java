@@ -53,7 +53,7 @@ public class ImportLibraryCollector extends AbstractCollector {
 //        }
         
         final ResolutionContextImpl loadContext = new ResolutionContextImpl(data.getCFile().getURI());
-        for (BlackboxUnitDescriptor abstractCompilationUnitDescriptor : BlackboxRegistry.INSTANCE.getCompilationUnitDescriptors(loadContext)) {
+        for (BlackboxUnitDescriptor abstractCompilationUnitDescriptor : BlackboxRegistry.INSTANCE.getBlackboxUnitDescriptors(loadContext)) {
             String proposalString = abstractCompilationUnitDescriptor.getQualifiedName();
             QvtCompletionProposal info = CompletionProposalUtil.createCompletionProposal(proposalString, CategoryImageConstants.MAPPING, data);
             CompletionProposalUtil.addProposalIfNecessary(proposals, info, data);        	
