@@ -13,11 +13,11 @@ build
 
 perform -DtargetPlatformPath="${checkout.location}/buildroot/target.platform" --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvto.releng.buckminster:buckminster#create.javadoc"
 
-#junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.AllTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.AllTests.xml"
-#junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.xml"
-#junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.UnparserTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.UnparserTests.xml"
-#junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.xml"
-##junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.xml"
+junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.AllTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.AllTests.xml"
+junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.StandaloneTests.xml"
+junit --launch "org.eclipse.m2m.tests.qvt.oml/org.eclipse.m2m.tests.qvt.oml.UnparserTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.UnparserTests.xml"
+junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTests.xml"
+#junit --launch "org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.launch" --flatXML --maxTimeAwaitJunitReport 60 --output "${checkout.location}/MMT-QVTo.test.results/org.eclipse.m2m.tests.qvt.oml.ui/org.eclipse.m2m.internal.tests.qvt.oml.ui.AllTest_disabled_asserts.xml"
 
 perform -DtargetPlatformPath="${checkout.location}/buildroot/target.platform" --properties "${checkout.location}/buildroot/build.properties" "-Dbuckminster.reference.repository=${reference.repository}" "org.eclipse.qvto.releng.build:eclipse.feature#build"
 perform -DtargetPlatformPath="${checkout.location}/buildroot/target.platform" --properties "${checkout.location}/buildroot/build.properties" "org.eclipse.qvto.releng.buckminster:buckminster#setup.promoter"
