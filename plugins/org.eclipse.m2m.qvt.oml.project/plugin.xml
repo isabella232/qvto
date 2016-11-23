@@ -30,7 +30,7 @@
  <extension
         point="org.eclipse.m2m.qvt.oml.runtime.qvtDependencyTracker">
      <provider
-           class="org.eclipse.m2m.internal.qvt.oml.project.EclipseProjectDependencyTracker">
+           class="org.eclipse.m2m.internal.qvt.oml.project.EclipseDependencyTracker">
      </provider>
  </extension>
 

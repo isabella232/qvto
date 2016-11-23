@@ -21,7 +21,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
 import org.osgi.framework.Bundle;
 
-public class EclipseProjectDependencyTracker extends DependencyTracker {
+public class EclipseDependencyTracker extends DependencyTracker {
 	
 	@Override
 	protected boolean accepts(IProject project) {

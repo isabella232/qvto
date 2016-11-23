@@ -1,9 +1,5 @@
 /*******************************************************************************
-<<<<<<< HEAD
- * Copyright (c) 2008, 2016 Borland Software Corporation and others.
-=======
- * Copyright (c) 2008, 2015 Borland Software Corporation and others.
->>>>>>> branch 'cgerking/507955' of ssh://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git
+ * Copyright (c) 2009, 2016 Christopher Gerking and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -11,8 +7,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *   
  * Contributors:
- *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bug 326871
+ *     Christopher Gerking - initial API and implementation
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
