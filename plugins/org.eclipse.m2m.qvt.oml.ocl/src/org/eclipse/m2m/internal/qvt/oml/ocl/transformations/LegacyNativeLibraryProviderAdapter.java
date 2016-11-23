@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -15,26 +15,17 @@ package org.eclipse.m2m.internal.qvt.oml.ocl.transformations;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxProvider;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxException;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnit;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.LoadContext;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.OperationMatcher;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
-import org.eclipse.m2m.internal.qvt.oml.expressions.ImperativeOperation;
-import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
 import org.eclipse.m2m.internal.qvt.oml.ocl.OclQvtoPlugin;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandler;
-import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
 public class LegacyNativeLibraryProviderAdapter extends BlackboxProvider {
 	
@@ -87,66 +78,9 @@ public class LegacyNativeLibraryProviderAdapter extends BlackboxProvider {
 			fLibrary = library;
 			fDefinedOperations = new LinkedHashMap<String, List<EOperation>>();
 		}
-				
+										
 		@Override
-		public String getDescription() {
-			return fLibrary.getLibraryClassName();
-		}
-		
-//		public Collection<CallHandler> getBlackboxCallHandlers(ImperativeOperation imperativeOp, QvtOperationalModuleEnv env) {
-//			if (!env.getImportedNativeLibs().isEmpty()) {
-//				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-//				if (!importedLibs.contains(fLibrary.getId())) {
-//					return Collections.emptyList();
-//				}
-//			}
-//			
-//			List<EOperation> listOp = fDefinedOperations.get(imperativeOp.getName());
-//			if (listOp == null) {
-//				return Collections.emptyList();
-//			}
-//			
-//			Collection<CallHandler> result = Collections.emptyList();
-//			for (EOperation libraryOp : listOp) {
-//				if (OperationMatcher.matchOperation(env, imperativeOp, libraryOp)) {
-//					if (result.isEmpty()) {
-//						result = new LinkedList<CallHandler>();
-//					}
-//					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-//				}
-//			}
-//			
-//			return result;
-//		}
-		
-//		public Collection<CallHandler> getBlackboxCallHandlers(OperationalTransformation operationalTrans, QvtOperationalModuleEnv env) {
-//			if (!env.getImportedNativeLibs().isEmpty()) {
-//				Set<String> importedLibs = env.getImportedNativeLibs().get(getURI());
-//				if (!importedLibs.contains(fLibrary.getId())) {
-//					return Collections.emptyList();
-//				}
-//			}
-//			
-//			List<EOperation> listOp = fDefinedOperations.get(operationalTrans.getName());
-//			if (listOp == null) {
-//				return Collections.emptyList();
-//			}
-//			
-//			Collection<CallHandler> result = Collections.emptyList();
-//			for (EOperation libraryOp : listOp) {
-//				if (OperationMatcher.matchOperation(env, operationalTrans, libraryOp)) {
-//					if (result.isEmpty()) {
-//						result = new LinkedList<CallHandler>();
-//					}
-//					result.add(CallHandlerAdapter.getDispatcher(libraryOp));
-//				}
-//			}
-//			
-//			return result;
-//		}
-		
-		@Override
-		public BlackboxUnit load(LoadContext context) { // throws BlackboxException {
+		public BlackboxUnit load(LoadContext context) {
 			
 			if (fBlackboxUnits.containsKey(this)) {
 				return fBlackboxUnits.get(this);
@@ -160,10 +94,8 @@ public class LegacyNativeLibraryProviderAdapter extends BlackboxProvider {
 				fBlackboxUnits.put(this, null);
 				
 				OclQvtoPlugin.getDefault().getLog().log(BasicDiagnostic.toIStatus(BasicDiagnostic.toDiagnostic(e)));
-				
+
 				return null;
-				
-//				throw new BlackboxException(e.getMessage(), e);			
 			}
 		}
 	}	

@@ -27,7 +27,6 @@ public abstract class BlackboxUnitDescriptor {
 	
 	private URI fURI;
 	private String fQualifiedName;
-	private String fDescription;
 	private BlackboxProvider fProvider;
 	
 	/**
@@ -64,17 +63,9 @@ public abstract class BlackboxUnitDescriptor {
 		return fProvider;
 	}
 	
-	protected void setDescription(String description) {
-		fDescription = description;
-	}
-
 	public final URI getURI() {
 		return fURI;
-	}	
-	
-	public String getDescription() {
-		return fDescription; 
-	}	
+	}
 	
 	public String getQualifiedName() {
 		return fQualifiedName;
@@ -85,7 +76,7 @@ public abstract class BlackboxUnitDescriptor {
 		return "Descriptor: " + fQualifiedName + " - " + getProvider().toString(); //$NON-NLS-1$ //$NON-NLS-2$ 
 	}
 	
-	protected final BlackboxUnit createBlackboxUnit(
+	protected static BlackboxUnit createBlackboxUnit(
 			final List<QvtOperationalModuleEnv> loadedModules) {
 		return new BlackboxUnit() {
 			public List<QvtOperationalModuleEnv> getElements() {

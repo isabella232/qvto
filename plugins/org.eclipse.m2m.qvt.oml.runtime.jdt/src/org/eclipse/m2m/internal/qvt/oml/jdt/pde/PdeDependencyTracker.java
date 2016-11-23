@@ -1,12 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2016 Christopher Gerking and others.
+ * Copyright (c) 2007, 2016 Borland Software Corporation and others.
+ * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
+ *   
  * Contributors:
- *     Christopher Gerking - initial API and implementation
+ *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bugs 474603, 507955
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.jdt.pde;
 
@@ -16,9 +18,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
 import org.eclipse.osgi.service.resolver.BundleDescription;
-import org.eclipse.pde.core.plugin.IPluginImport;
 import org.eclipse.pde.core.plugin.IPluginModelBase;
 import org.eclipse.pde.core.plugin.PluginRegistry;
 import org.osgi.framework.Bundle;
@@ -36,13 +38,14 @@ public class PdeDependencyTracker extends DependencyTracker {
 		IPluginModelBase plugin = PluginRegistry.findModel(project);
 		
 		if(plugin != null) {
-			IPluginImport[] imports = plugin.getPluginBase().getImports();
+
+			BundleDescription[] imports = plugin.getBundleDescription().getResolvedRequires();
 		
 			Set<IProject> referencedProjects = new HashSet<IProject>(imports.length);
-				
-			for (IPluginImport nextImport : imports) {				
-				BundleDescription description = nextImport.getPluginModel().getBundleDescription();
-				IPluginModelBase depPlugin = PluginRegistry.findModel(description);
+			
+			for (BundleDescription nextImport : imports) {
+				IPluginModelBase depPlugin = PluginRegistry.findModel(nextImport);
+			
 				if(depPlugin != null && depPlugin.getUnderlyingResource() != null) {
 					IProject projectDep = depPlugin.getUnderlyingResource().getProject();
 					
@@ -54,7 +57,6 @@ public class PdeDependencyTracker extends DependencyTracker {
 		}
 		
 		return Collections.emptySet();
-		
 	}
 	
 	@Override
@@ -63,17 +65,17 @@ public class PdeDependencyTracker extends DependencyTracker {
 		IPluginModelBase plugin = PluginRegistry.findModel(project);
 		
 		if(plugin != null) {		
-			IPluginImport[] imports = plugin.getPluginBase().getImports();
+			BundleDescription[] imports = plugin.getBundleDescription().getResolvedRequires();
 		
 			Set<Bundle> requiredBundles = new HashSet<Bundle>(imports.length);
 				
-			for (IPluginImport nextImport : imports) {
-				BundleDescription description = nextImport.getPluginModel().getBundleDescription();
-				IPluginModelBase depPlugin = PluginRegistry.findModel(description);
+			for (BundleDescription nextImport : imports) {				
+				IPluginModelBase depPlugin = PluginRegistry.findModel(nextImport);
+				
 				if(depPlugin != null) {
-					Bundle requiredBundle = description.getBundle();
+					Bundle requiredBundle = Platform.getBundle(nextImport.getName());
 					
-					requiredBundles.add(requiredBundle);
+					if (requiredBundle != null) requiredBundles.add(requiredBundle);
 				}
 			}
 			

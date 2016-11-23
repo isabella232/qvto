@@ -119,16 +119,7 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 			}
 			
 			for (Bundle required : requiredBundles) {
-
-				// XXX
-//				if (analyzedProjects.containsKey(referenced)) {
-//					resolvers.add(analyzedProjects.get(referenced));
-//					continue;
-//				}
-				
-				if (required != null && required.getBundleContext() != null) {		
-					resolvers.add(new BundleUnitResolver(required));
-				}
+				resolvers.add(new BundleUnitResolver(required));
 			}
 			
 		} catch (CoreException e) {
@@ -176,7 +167,7 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 				
 				resourceToVisit.accept(resourceVisitor, IResource.NONE);
 			} catch(CoreException e) {				
-				// FIXME - log the problem
+				QVTOProjectPlugin.log(e.getStatus());
 			}
 		}
 	}

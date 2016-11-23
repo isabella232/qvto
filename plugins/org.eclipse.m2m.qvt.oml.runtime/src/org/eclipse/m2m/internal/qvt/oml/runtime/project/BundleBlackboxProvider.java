@@ -1,5 +1,9 @@
 /*******************************************************************************
+<<<<<<< HEAD
+ * Copyright (c) 2008, 2016 Borland Software Corporation and others.
+=======
  * Copyright (c) 2008, 2015 Borland Software Corporation and others.
+>>>>>>> branch 'cgerking/507955' of ssh://git.eclipse.org/gitroot/mmt/org.eclipse.qvto.git
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0

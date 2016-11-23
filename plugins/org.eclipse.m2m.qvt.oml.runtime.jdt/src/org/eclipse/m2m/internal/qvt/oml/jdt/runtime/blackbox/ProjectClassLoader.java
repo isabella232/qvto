@@ -101,16 +101,12 @@ public class ProjectClassLoader extends URLClassLoader {
 	private static List<ClassLoader> getReferencedProjectLoaders(IJavaProject javaProject) {
 		
 		if (javaProject.hasBuildState()) {
-				
-			Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(javaProject.getProject(), false);
+
 			Set<IProject> referencedProjects = DependencyTracker.findReferencedProjects(javaProject.getProject(), false);
-			
-			List<ClassLoader> referencedLoaders = new ArrayList<ClassLoader>();
-			
-			for (Bundle requiredBundle : requiredBundles) {
-				referencedLoaders.add(requiredBundle.adapt(BundleWiring.class).getClassLoader());
-			}
-																	
+			Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(javaProject.getProject(), false);
+						
+			List<ClassLoader> referencedLoaders = new ArrayList<ClassLoader>(referencedProjects.size() + requiredBundles.size());
+																				
 			for(IProject referencedProject : referencedProjects) {
 				
 				try {			
@@ -123,9 +119,13 @@ public class ProjectClassLoader extends URLClassLoader {
 					QvtPlugin.error(e);
 				}
 			}
+
+			for (Bundle requiredBundle : requiredBundles) {
+				referencedLoaders.add(requiredBundle.adapt(BundleWiring.class).getClassLoader());
+			}
 			
 			return referencedLoaders;
-		}
+		}	
 		
 		return Collections.emptyList();
 	}

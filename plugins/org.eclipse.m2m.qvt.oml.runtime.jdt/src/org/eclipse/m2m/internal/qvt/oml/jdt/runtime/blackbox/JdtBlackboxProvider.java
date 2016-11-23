@@ -160,6 +160,8 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 					if (proxy.getType() == IResource.FILE) {
 						IPath filePath = proxy.requestFullPath();						
 						if (filePath.getFileExtension().equals("class")) {
+							filePath = filePath.removeFileExtension();
+
 							if (folderPath.isPrefixOf(filePath)) {
 								filePath = filePath.makeRelativeTo(folderPath);
 							}
