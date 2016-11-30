@@ -11,10 +11,15 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.URI;
 
 public interface ResolutionContext {
 	
 	public URI getURI();
+	
+	public Map<URI, Set<String>> getDeclaredLibraries();
 	
 }

@@ -100,7 +100,7 @@ public class WorkspaceUnitResolver extends DelegatingUnitResolver implements Uni
 		List<UnitResolver> resolvers = Collections.emptyList();
 		try {
 			Set<IProject> referencedProjects = DependencyTracker.findReferencedProjects(project, false);
-			Set<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
+			Set<Bundle> requiredBundles = Collections.emptySet();//DependencyTracker.findRequiredBundles(project, false);
 			
 			resolvers = new ArrayList<UnitResolver>(referencedProjects.size() + requiredBundles.size());
 

@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.java.StandaloneBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.OCLEnvironmentWithQVTAccessFactory;
@@ -95,7 +96,7 @@ public class OCLEnvironmentWithQVTAccessByURITest extends OCLEnvironmentWithQVTA
 				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/FooLib.qvto", false).appendQuery("ns=."),
 				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/org/q1.qvto", false).appendQuery("ns=org"),
 				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/org/q2.qvto", false).appendQuery("ns=org"),
-				URI.createURI("qvto://blackbox/Strings", false)
+				URI.createURI("qvto://blackbox/Strings", false).appendQuery(StandaloneBlackboxProvider.URI_BLACKBOX_STANDALONE_QUERY)
 		);
 		
 		return new OCLEnvironmentWithQVTAccessFactory(uris, getEPackageRegistry());

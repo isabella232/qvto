@@ -11,11 +11,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.ocl2qvt;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.m2m.internal.qvt.oml.blackbox.java.StandaloneBlackboxProvider;
 import org.eclipse.m2m.internal.qvt.oml.runtime.util.OCLEnvironmentWithQVTAccessFactory;
 import org.junit.Test;
 
@@ -30,39 +31,37 @@ public class OCLEnvWithQVTAccessDiagnosticTest extends TestCase {
 	@Test
 	public void testCSTAndBlackboxSuccess() throws Exception {
 		Diagnostic diagnostic = createFactoryDiagnostic(
-			"qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary",
-			"qvto://blackbox/org.bar.Foo",
-			"platform:/plugin/org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/successLib.qvto");
+				URI.createURI("qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary")
+					.appendQuery(StandaloneBlackboxProvider.URI_BLACKBOX_STANDALONE_QUERY),
+				URI.createURI("qvto://blackbox/org.bar.Foo"),
+				URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/successLib.qvto", false));
 		assertTrue(diagnostic.getSeverity() == Diagnostic.OK);
 	}
 	
 	@Test
 	public void testCompilationErrors() throws Exception {
-		String uri = "platform:/plugin/org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/errorsLib.qvto";
+		URI uri = URI.createPlatformPluginURI("org.eclipse.m2m.tests.qvt.oml/parserTestData/externlib/errorsLib.qvto", false);
 		Diagnostic diagnostic = createFactoryDiagnostic(uri);
 		assertTrue(diagnostic.getSeverity() == Diagnostic.ERROR);
 		List<Diagnostic> children = diagnostic.getChildren();
 		assertFalse(children.isEmpty());
-		assertEquals(uri, children.get(0).getSource());
+		assertEquals(uri.toString(), children.get(0).getSource());
 	}
 	
 	@Test
 	public void testUnresolved() throws Exception {
-		String badURI = "platform:/plugin/never.exist";
-		String okURI = "qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary";
+		URI badURI = URI.createURI("platform:/plugin/never.exist");
+		URI okURI = URI.createURI("qvto://blackbox/org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary")
+				.appendQuery(StandaloneBlackboxProvider.URI_BLACKBOX_STANDALONE_QUERY);
 		Diagnostic diagnostic = createFactoryDiagnostic(okURI, badURI);
 		assertTrue(diagnostic.getSeverity() == Diagnostic.ERROR);
 		List<Diagnostic> children = diagnostic.getChildren();
 		assertEquals(1, children.size());
-		assertEquals(badURI, children.get(0).getData().get(0).toString());
+		assertEquals(badURI.toString(), children.get(0).getData().get(0).toString());
 	}	
 	
 	
-	private static Diagnostic createFactoryDiagnostic(String... uriStr) {
-		List<URI> uris = new ArrayList<URI>();
-		for (String string : uriStr) {
-			uris.add(URI.createURI(string));
-		}
-		return new OCLEnvironmentWithQVTAccessFactory(uris).getDiagnostic();
+	private static Diagnostic createFactoryDiagnostic(URI... uris) {
+		return new OCLEnvironmentWithQVTAccessFactory(Arrays.asList(uris)).getDiagnostic();
 	}
 }

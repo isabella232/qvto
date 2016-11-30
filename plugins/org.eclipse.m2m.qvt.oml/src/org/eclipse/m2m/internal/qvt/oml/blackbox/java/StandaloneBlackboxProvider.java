@@ -14,22 +14,26 @@ package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 
 public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 	
+	public static final String URI_BLACKBOX_STANDALONE_QUERY = "standalone"; //$NON-NLS-1$
+	
 	private Map<String, JavaUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, JavaUnitDescriptor>();
 	
 	@Override
-	public BlackboxUnitDescriptor getUnitDescriptor(final String qualifiedName, ResolutionContext resolutionContext) { 
+	public JavaUnitDescriptor getUnitDescriptor(final String qualifiedName, ResolutionContext resolutionContext) { 
 		try {
 			JavaUnitDescriptor d = fDescriptorMap.get(qualifiedName);
 			
@@ -38,6 +42,11 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 					Class<?> c = Class.forName(qualifiedName);
 					
 					d = new JavaUnitDescriptor(qualifiedName) {
+						
+						@Override
+						protected String getUnitQuery() {
+							return URI_BLACKBOX_STANDALONE_QUERY;
+						}
 						
 						@Override
 						protected void handleBlackboxError(Diagnostic diagnostic) {
@@ -61,11 +70,45 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		}
 	}
 	
+	@Override
+	public Collection<JavaUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
+		List<JavaUnitDescriptor> result = Collections.emptyList();
+
+		if (resolutionContext.getDeclaredLibraries().isEmpty()) {
+			return fDescriptorMap.values();
+		}
+		else {
+			for (URI libraryUri : resolutionContext.getDeclaredLibraries().keySet()) {
+				if (URI_BLACKBOX_STANDALONE_QUERY.equals(libraryUri.query())) {
+					JavaUnitDescriptor descriptor = getUnitDescriptor(libraryUri.segment(0), resolutionContext);
+					if (descriptor != null) {
+						if (result.isEmpty()) {
+							result = new LinkedList<JavaUnitDescriptor>();
+						}
+						result.add(descriptor);
+					}
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void cleanup() {
+		fDescriptorMap.clear();
+	}
+
 	public void registerDescriptor(final Class<?> cls, String unitQualifiedName, String moduleName, final String[] packageURIs) {
 		JavaUnitDescriptor d = fDescriptorMap.get(unitQualifiedName);
 		
 		if (d == null) {
 			d = new JavaUnitDescriptor(unitQualifiedName) {
+				
+				@Override
+				protected String getUnitQuery() {
+					return URI_BLACKBOX_STANDALONE_QUERY;
+				}
 				
 				@Override
 				protected void handleBlackboxError(Diagnostic diagnostic) {
@@ -87,13 +130,4 @@ public class StandaloneBlackboxProvider extends JavaBlackboxProvider {
 		);
 	}
 
-	@Override
-	public Collection<JavaUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
-		return fDescriptorMap.values();
-	}
-
-	@Override
-	public void cleanup() {
-		fDescriptorMap.clear();
-	}
 }

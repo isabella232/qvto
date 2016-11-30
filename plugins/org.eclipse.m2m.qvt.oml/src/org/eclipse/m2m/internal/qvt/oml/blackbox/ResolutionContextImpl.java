@@ -11,18 +11,28 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
+
 import org.eclipse.emf.common.util.URI;
 
 public class ResolutionContextImpl implements ResolutionContext {
 	
 	private final URI fURI;	
+	private final Map<URI, Set<String>> fDeclaredLibraries;
 	
-	public ResolutionContextImpl(URI contextURI) {
+	public ResolutionContextImpl(URI contextURI, Map<URI, Set<String>> declaredLibraries) {
 		if(contextURI == null) {
 			throw new IllegalArgumentException();
 		}
 		
 		fURI = contextURI;
+		fDeclaredLibraries = declaredLibraries;
+	}
+	
+	public ResolutionContextImpl(URI contextURI) {
+		this(contextURI, Collections.<URI, Set<String>>emptyMap());
 	}
 
 	@Override
@@ -33,4 +43,9 @@ public class ResolutionContextImpl implements ResolutionContext {
 	public URI getURI() {
 		return fURI;
 	}			
+	
+	public Map<URI, Set<String>> getDeclaredLibraries() {
+		return fDeclaredLibraries;
+	}
+	
 }

@@ -16,13 +16,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
@@ -32,6 +33,8 @@ import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
 
 public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 	
+	private static final String URI_BLACKBOX_REGISTERED_QUERY = "registered"; //$NON-NLS-1$
+
 	private static final String EXTENSION_POINT = "javaBlackboxUnits"; //$NON-NLS-1$
 		
 	private static final String UNIT_ELEM = "unit";	//$NON-NLS-1$
@@ -44,123 +47,72 @@ public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 	private static final String METAMODEL_ELEM = "metamodel"; //$NON-NLS-1$
 	private static final String NSURI_ATTR = "nsURI"; //$NON-NLS-1$
 	
-	private Map<String, BlackboxUnitDescriptor> fDescriptorMap;
+	private final Map<String, BlackboxUnitDescriptor> fDescriptorMap = new LinkedHashMap<String, BlackboxUnitDescriptor>();
+	private Map<String, JavaBlackboxUnitDescription> fDescriptions;
 		
 	public RegisteredBlackboxProvider() {}	
 
-	private Map<String, BlackboxUnitDescriptor> readDescriptors() {
-    	Map<String, BlackboxUnitDescriptor> descriptors = new LinkedHashMap<String, BlackboxUnitDescriptor>();
-        
-        IConfigurationElement[] configs = Platform.getExtensionRegistry()
-        		.getConfigurationElementsFor(QvtPlugin.ID, EXTENSION_POINT);
-
-        for (IConfigurationElement element : configs) {
-            try {
-            	RegisteredUnitDescriptor descriptor = createDescriptor(element);
-        		String id = descriptor.getQualifiedName();            	
-            	if(!descriptors.containsKey(id)) {
-					descriptors.put(id, descriptor);
-            	} else {
-            		String message = NLS.bind(JavaBlackboxMessages.UnitAlreadyRegisteredContributionIgnored, id, descriptor.getContributorId());
-					QvtPlugin.error(message);
-            	}
-            } catch (IllegalArgumentException e) {
-            	QvtPlugin.error("Failed to read java black-box definition: " + e.getMessage()); //$NON-NLS-1$
-            }
-        }
-
-        return descriptors;
-    }
-        
-	private RegisteredUnitDescriptor createDescriptor(IConfigurationElement configurationElement) throws IllegalArgumentException {
-		if(UNIT_ELEM.equals(configurationElement.getName())) {
-			String name = configurationElement.getAttribute(NAME_ATTR);
-			String namespace = configurationElement.getAttribute(NAMESPACE_ATTR);		
-			if(namespace == null) {
-				namespace = configurationElement.getContributor().getName();
-			}
-			
-			String description = configurationElement.getAttribute(DESC_ATTR);		
-			String qualifiedName = namespace.length() == 0 ? name : namespace + CLASS_NAME_SEPARATOR + name;
-			return new RegisteredUnitDescriptor(configurationElement, qualifiedName, description);
-		} else if(LIBRARY_ELEM.equals(configurationElement.getName())) {
-			return new RegisteredUnitDescriptor(configurationElement, deriveQualifiedNameFromSimpleDefinition(configurationElement), null);
-		}
-		
-		throw new IllegalArgumentException("Unsupported configuration element " + configurationElement); //$NON-NLS-1$		
-	}
-    		
-	private static String deriveQualifiedNameFromSimpleDefinition(IConfigurationElement moduleElement) {
-		String className = moduleElement.getAttribute(CLASS_ATTR);		
-		String name = moduleElement.getAttribute(NAME_ATTR);				
-		if(name == null) {
-			return className;
-		}
-		// name overridden in descriptor
-		String packageName = getPackageNameFromJavaClass(className);
-		if(packageName == null) {
-			return name; // default package
-		}
-		return packageName + CLASS_NAME_SEPARATOR + name;
-	}
-	
 	@Override
 	public BlackboxUnitDescriptor getUnitDescriptor(String qualifiedName, ResolutionContext resolutionContext) {
-		// TODO - Should we necessarily be available in all contexts ? 
-		return getDescriptorMap().get(qualifiedName);
+		JavaBlackboxUnitDescription description = getDescriptions().get(qualifiedName);
+		if (description == null) {
+			return null;
+		}
+		
+		BlackboxUnitDescriptor descriptor = fDescriptorMap.get(qualifiedName);
+		if (descriptor == null) {
+			descriptor = new RegisteredUnitDescriptor(description.fConfigurationElement, description.fQualifiedName, description.fDescription);
+			fDescriptorMap.put(qualifiedName, descriptor);
+		}
+		
+		return descriptor;
 	}
 
 	@Override
 	public Collection<BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
-		// TODO - Should we necessarily be available in all contexts ?
-		return getDescriptorMap().values();
+		List<BlackboxUnitDescriptor> result = Collections.emptyList();
+
+		if (resolutionContext.getDeclaredLibraries().isEmpty()) {
+			result = new LinkedList<BlackboxUnitDescriptor>();
+
+			for (String libId : getDescriptions().keySet()) {
+				result.add(getUnitDescriptor(libId, resolutionContext));
+			}
+		}
+		else {
+			for (URI libraryUri : resolutionContext.getDeclaredLibraries().keySet()) {
+				if (URI_BLACKBOX_REGISTERED_QUERY.equals(libraryUri.query())) {
+					BlackboxUnitDescriptor descriptor = getUnitDescriptor(libraryUri.segment(0), resolutionContext);
+					if (descriptor != null) {
+						if (result.isEmpty()) {
+							result = new LinkedList<BlackboxUnitDescriptor>();
+						}
+						result.add(descriptor);
+					}
+				}
+			}
+		}
+		
+		return result;
 	}
 	
 	@Override
 	public void cleanup() {
-		fDescriptorMap = null;
+		fDescriptorMap.clear();
 	}
 	
-	private Map<String, BlackboxUnitDescriptor> getDescriptorMap() {
-		if (fDescriptorMap != null) {
-			return fDescriptorMap;
+	private Map<String, JavaBlackboxUnitDescription> getDescriptions() {
+		if (fDescriptions == null) {
+			fDescriptions = readDescriptions();
 		}
-
-		if(EMFPlugin.IS_ECLIPSE_RUNNING) {
-			fDescriptorMap = readDescriptors();
-		} else {
-			fDescriptorMap = Collections.emptyMap();
-		}
-		
-		return fDescriptorMap;
+		return fDescriptions;
 	}
 	
-	private static String getPackageNameFromJavaClass(String className) {
-		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
-		if (lastSeparatorPos < 0) {
-			return null;
-		}
 
-		return className.substring(0, lastSeparatorPos);
-	}
-
-	private static String getSimpleNameFromJavaClass(String className) {
-		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
-		if (lastSeparatorPos < 0) {
-			return className;
-		}
-
-		return className.substring(lastSeparatorPos + 1);
-	}
-	
 	private class RegisteredUnitDescriptor extends JavaUnitDescriptor {		
 		
-		private String fContributingBundleId; 
-
 		RegisteredUnitDescriptor(IConfigurationElement configurationElement, String unitQualifiedName, String description) {
 			super(unitQualifiedName);
-			
-			fContributingBundleId = configurationElement.getContributor().getName();
 			
 			if(configurationElement.getName().equals(LIBRARY_ELEM)) {
 				addModuleHandle(configurationElement);				
@@ -170,10 +122,6 @@ public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 					addModuleHandle(moduleElement);
 				}
 			}
-		}
-		
-		String getContributorId() {
-			return fContributingBundleId;
 		}
 		
 		private void addModuleHandle(IConfigurationElement moduleElement) {
@@ -202,6 +150,11 @@ public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 		}
 		
 		@Override
+		protected String getUnitQuery() {
+			return URI_BLACKBOX_REGISTERED_QUERY;
+		}
+		
+		@Override
 		protected void handleBlackboxError(Diagnostic diagnostic) {
 			if(diagnostic != null) {
 				QvtPlugin.logDiagnostic(diagnostic);					
@@ -212,5 +165,89 @@ public class RegisteredBlackboxProvider extends JavaBlackboxProvider {
 		}
 			
 	}
+	
+	private static String getPackageNameFromJavaClass(String className) {
+		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
+		if (lastSeparatorPos < 0) {
+			return null;
+		}
 
+		return className.substring(0, lastSeparatorPos);
+	}
+
+	private static String getSimpleNameFromJavaClass(String className) {
+		int lastSeparatorPos = className.lastIndexOf(CLASS_NAME_SEPARATOR);
+		if (lastSeparatorPos < 0) {
+			return className;
+		}
+
+		return className.substring(lastSeparatorPos + 1);
+	}
+	
+	
+	static class JavaBlackboxUnitDescription {
+		final IConfigurationElement fConfigurationElement;
+		final String fQualifiedName;
+		final String fDescription;
+		
+		JavaBlackboxUnitDescription(IConfigurationElement configurationElement, String unitQualifiedName, String description) {
+			fConfigurationElement = configurationElement;
+			fQualifiedName = unitQualifiedName;
+			fDescription = description;
+		}
+	}
+
+	private static Map<String, JavaBlackboxUnitDescription> readDescriptions() {
+		Map<String, JavaBlackboxUnitDescription> descriptions = new LinkedHashMap<String, JavaBlackboxUnitDescription>();
+        
+        for (IConfigurationElement elem : Platform.getExtensionRegistry().getConfigurationElementsFor(QvtPlugin.ID, EXTENSION_POINT)) {
+            try {
+            	JavaBlackboxUnitDescription descriptor = createDescription(elem);
+            	if(!descriptions.containsKey(descriptor.fQualifiedName)) {
+					descriptions.put(descriptor.fQualifiedName, descriptor);
+            	} else {
+            		String message = NLS.bind(JavaBlackboxMessages.UnitAlreadyRegisteredContributionIgnored,
+            				descriptor.fQualifiedName, elem.getContributor().getName());
+					QvtPlugin.error(message);
+            	}
+            } catch (IllegalArgumentException e) {
+            	QvtPlugin.error("Failed to read java black-box definition: " + e.getMessage()); //$NON-NLS-1$
+            }
+        }
+
+        return descriptions;
+    }
+        
+	private static JavaBlackboxUnitDescription createDescription(IConfigurationElement configurationElement) throws IllegalArgumentException {
+		if(UNIT_ELEM.equals(configurationElement.getName())) {
+			String name = configurationElement.getAttribute(NAME_ATTR);
+			String namespace = configurationElement.getAttribute(NAMESPACE_ATTR);		
+			if(namespace == null) {
+				namespace = configurationElement.getContributor().getName();
+			}
+			
+			String description = configurationElement.getAttribute(DESC_ATTR);		
+			String qualifiedName = namespace.length() == 0 ? name : namespace + CLASS_NAME_SEPARATOR + name;
+			return new JavaBlackboxUnitDescription(configurationElement, qualifiedName, description);
+		} else if(LIBRARY_ELEM.equals(configurationElement.getName())) {
+			return new JavaBlackboxUnitDescription(configurationElement, deriveQualifiedNameFromSimpleDefinition(configurationElement), null);
+		}
+		
+		throw new IllegalArgumentException("Unsupported configuration element " + configurationElement); //$NON-NLS-1$		
+	}
+    		
+	private static String deriveQualifiedNameFromSimpleDefinition(IConfigurationElement moduleElement) {
+		String className = moduleElement.getAttribute(CLASS_ATTR);		
+		String name = moduleElement.getAttribute(NAME_ATTR);				
+		if(name == null) {
+			return className;
+		}
+		// name overridden in descriptor
+		String packageName = getPackageNameFromJavaClass(className);
+		if(packageName == null) {
+			return name; // default package
+		}
+		return packageName + CLASS_NAME_SEPARATOR + name;
+	}
+	
 }

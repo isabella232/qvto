@@ -11,11 +11,11 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ocl.transformations;
 
-import java.util.Collection;
+import java.util.Map;
 
 
 public interface LibrariesRegistry {
-	Collection<Library> getLibraries();
 
-	Library getLibrary(String id);
+	Map<String, Library> getLibraries();
+
 }

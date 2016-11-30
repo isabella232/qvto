@@ -119,7 +119,7 @@ public class BlackboxRegistry {
 		Eclipse() {
 			fProviders = new LinkedList<BlackboxProvider>();
 			readProviders(fProviders);
-			fProviders.addAll(super.getProviders());
+			fProviders.addAll(0, super.getProviders());
 		}
 
 		private void readProviders(List<BlackboxProvider> providers) {

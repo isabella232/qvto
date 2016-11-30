@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -27,6 +27,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
@@ -52,31 +53,46 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 	
 	@Override
 	protected Collection<? extends BlackboxUnitDescriptor> getLocalUnitDescriptors(ResolutionContext resolutionContext) {
+		List<BlackboxUnitDescriptor> descriptors = Collections.emptyList();
 		
-		IProject project = getProject(resolutionContext);
-		if (project == null) {
-			return Collections.emptyList();			
-		}
-		
-		Set<IProject> referencedProjects = DependencyTracker.findReferencedProjects(project, true);
-		
-		List<IProject> projects = new ArrayList<IProject>(referencedProjects.size() + 1);
-		projects.add(project);
-		projects.addAll(referencedProjects);
-
-		List<BlackboxUnitDescriptor> descriptors = new ArrayList<BlackboxUnitDescriptor>();
-		for (IProject p : projects) {
-			final List<String> classes = getAllClasses(p);
-			
-			for (String qualifiedName : classes) {
-				BlackboxUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(p, qualifiedName);
-				if (jdtUnitDescriptor != null) {
-					descriptors.add(jdtUnitDescriptor);
+		if (resolutionContext.getDeclaredLibraries().isEmpty()) {
+			IProject project = getProject(resolutionContext);
+			if (project != null) {
+				descriptors = new ArrayList<BlackboxUnitDescriptor>();
+				getProjectDescriptors(project, descriptors);
+				
+				for (IProject p : DependencyTracker.findReferencedProjects(project, true)) {
+					getProjectDescriptors(p, descriptors);
 				}
 			}
 		}
-		
-		return descriptors;		
+		else {
+			for (URI libraryUri : resolutionContext.getDeclaredLibraries().keySet()) {
+				if (URI_BLACKBOX_JDT_QUERY.equals(libraryUri.query())) {
+					IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject(libraryUri.fragment());
+					if (project != null) {
+						BlackboxUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(project, libraryUri.segment(0));
+						if (jdtUnitDescriptor != null) {
+							if (descriptors.isEmpty()) {
+								descriptors = new LinkedList<BlackboxUnitDescriptor>();
+							}
+							descriptors.add(jdtUnitDescriptor);
+						}
+					}
+				}
+			}
+		}
+
+		return descriptors;
+	}
+
+	private void getProjectDescriptors(IProject p, List<BlackboxUnitDescriptor> descriptors) {
+		for (String qualifiedName : getAllClasses(p)) {
+			BlackboxUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(p, qualifiedName);
+			if (jdtUnitDescriptor != null) {
+				descriptors.add(jdtUnitDescriptor);
+			}
+		}
 	}
 	
 	@Override

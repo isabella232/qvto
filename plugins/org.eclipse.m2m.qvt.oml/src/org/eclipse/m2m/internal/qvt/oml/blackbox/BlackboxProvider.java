@@ -39,8 +39,6 @@ import org.eclipse.m2m.internal.qvt.oml.stdlib.CallHandlerAdapter;
 
 public abstract class BlackboxProvider {
 		
-	private static final ResolutionContext GLOBAL_RESOLUTION_CONTEXT = new ResolutionContextImpl(BlackboxUnitResolver.GLOBAL_CONTEXT);
-
 	public interface InstanceAdapterFactory {
 		Object createAdapter(EObject moduleInstance);
 	}
@@ -88,88 +86,91 @@ public abstract class BlackboxProvider {
 	public Collection<CallHandler> getBlackboxCallHandlers(ImperativeOperation operation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
 				
-		URI fileUri = QvtOperationalParserUtil.getSourceURI(env);
-						
-		ResolutionContext context = (fileUri == null) ? GLOBAL_RESOLUTION_CONTEXT : new ResolutionContextImpl(fileUri);
+		ResolutionContext context = createLookupContext(env);
 		
 		for (BlackboxUnitDescriptor descriptor : getUnitDescriptors(context)) {
 			
-			if (env.getImportedNativeLibs().isEmpty() || env.getImportedNativeLibs().containsKey(descriptor.getURI())) {		
-				Set<String> importedLibs = env.getImportedNativeLibs().get(descriptor.getURI());
+			assert (env.getImportedNativeLibs().isEmpty() || env.getImportedNativeLibs().containsKey(descriptor.getURI()));
+			
+			BlackboxUnit unit = descriptor.load(new LoadContext(env.getEPackageRegistry()));
+			
+			IStatus status = BasicDiagnostic.toIStatus(unit.getDiagnostic());
+			if (!status.isOK()) {
+				continue;
+			}
+			
+			for (QvtOperationalModuleEnv blackboxEnv : unit.getElements()) {
 				
-				BlackboxUnit unit = descriptor.load(new LoadContext(env.getEPackageRegistry()));
+				Module blackboxModule = blackboxEnv.getModuleContextType();
 				
-				IStatus status = BasicDiagnostic.toIStatus(unit.getDiagnostic());
+				if (!env.getImportedNativeLibs().isEmpty()) {
+					Set<String> importedLibs = env.getImportedNativeLibs().get(descriptor.getURI());
+					if (!importedLibs.contains(blackboxModule.getName())) {
+						continue;
+					}
+				}
 				
-				if (status.isOK()) {
-				
-					for (QvtOperationalModuleEnv blackboxEnv : unit.getElements()) {
-						
-						Module blackboxModule = blackboxEnv.getModuleContextType();
-						
-						if (!env.getImportedNativeLibs().isEmpty()) {
-							if (!importedLibs.contains(blackboxModule.getName())) {
-								continue;
-							}
+				for(EOperation blackboxOperation : blackboxModule.getEOperations()) {
+					
+					if (OperationMatcher.matchOperation(env, operation, blackboxOperation)) {
+						if (result.isEmpty()) {
+							result = new LinkedList<CallHandler>();
 						}
-						
-						for(EOperation blackboxOperation : blackboxModule.getEOperations()) {
-							
-							if (OperationMatcher.matchOperation(env, operation, blackboxOperation)) {
-								if (result.isEmpty()) {
-									result = new LinkedList<CallHandler>();
-								}
-								result.add(CallHandlerAdapter.getDispatcher(blackboxOperation));
-							}
-						}
-						
+						result.add(CallHandlerAdapter.getDispatcher(blackboxOperation));
 					}
 				}
 			}
-		}		
+		}
+		
 		return result;
 	}
-	
+
 	public Collection<CallHandler> getBlackboxCallHandlers(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
 		
-		URI fileUri = QvtOperationalParserUtil.getSourceURI(env);
-						
-		ResolutionContext context = (fileUri == null) ? GLOBAL_RESOLUTION_CONTEXT : new ResolutionContextImpl(fileUri);
+		ResolutionContext context = createLookupContext(env);
 		
 		for (BlackboxUnitDescriptor descriptor : getUnitDescriptors(context)) {
 			
-			if (env.getImportedNativeLibs().isEmpty() || env.getImportedNativeLibs().containsKey(descriptor.getURI())) {		
-				Set<String> importedLibs = env.getImportedNativeLibs().get(descriptor.getURI());
+			assert (env.getImportedNativeLibs().isEmpty() || env.getImportedNativeLibs().containsKey(descriptor.getURI()));
+			
+			BlackboxUnit unit = descriptor.load(new LoadContext(env.getEPackageRegistry()));
+			
+			for (QvtOperationalModuleEnv blackboxEnv : unit.getElements()) {
 				
-				BlackboxUnit unit = descriptor.load(new LoadContext(env.getEPackageRegistry()));
+				Module blackboxModule = blackboxEnv.getModuleContextType();
 				
-				for (QvtOperationalModuleEnv blackboxEnv : unit.getElements()) {
-					
-					Module blackboxModule = blackboxEnv.getModuleContextType();
-					
-					if (!env.getImportedNativeLibs().isEmpty()) {
-						if (!importedLibs.contains(blackboxModule.getName())) {
-							continue;
-						}
+				if (!env.getImportedNativeLibs().isEmpty()) {
+					Set<String> importedLibs = env.getImportedNativeLibs().get(descriptor.getURI());
+					if (!importedLibs.contains(blackboxModule.getName())) {
+						continue;
 					}
-					
-					for(EOperation blackboxOperation : blackboxModule.getEOperations()) {
-						
-						if (OperationMatcher.matchOperation(env, transformation, blackboxOperation)) {
-							if (result.isEmpty()) {
-								result = new LinkedList<CallHandler>();
-							}
-							result.add(CallHandlerAdapter.getDispatcher(blackboxOperation));
-						}
-					}
-					
 				}
+				
+				for(EOperation blackboxOperation : blackboxModule.getEOperations()) {
+					
+					if (OperationMatcher.matchOperation(env, transformation, blackboxOperation)) {
+						if (result.isEmpty()) {
+							result = new LinkedList<CallHandler>();
+						}
+						result.add(CallHandlerAdapter.getDispatcher(blackboxOperation));
+					}
+				}
+				
 			}
-		}		
+		}
+		
 		return result;
 	}
 		
+	private ResolutionContext createLookupContext(QvtOperationalModuleEnv env) {
+		URI fileUri = QvtOperationalParserUtil.getSourceURI(env);
+		ResolutionContext context = (fileUri == null) 
+				? new ResolutionContextImpl(BlackboxUnitResolver.GLOBAL_CONTEXT, env.getImportedNativeLibs()) 
+				: new ResolutionContextImpl(fileUri, env.getImportedNativeLibs());
+		return context;
+	}
+	
 	protected static IProject getProject(ResolutionContext resolutionContext) {
 		IResource resource = URIUtils.getResource(resolutionContext.getURI());
 

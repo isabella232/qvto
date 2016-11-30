@@ -12,6 +12,7 @@
 package org.eclipse.m2m.internal.qvt.oml.blackbox.java;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public abstract class DelegatingJavaBlackboxProvider extends JavaBlackboxProvide
 	@Override
 	public final Collection<? extends BlackboxUnitDescriptor> getUnitDescriptors(ResolutionContext resolutionContext) {
 		
-		Collection<? extends BlackboxUnitDescriptor> parentDescriptors = parent.getUnitDescriptors(resolutionContext);
+		Collection<? extends BlackboxUnitDescriptor> parentDescriptors = Collections.emptyList();//parent.getUnitDescriptors(resolutionContext);
 		
 		Map<String, BlackboxUnitDescriptor> descriptors = new HashMap<String, BlackboxUnitDescriptor>(parentDescriptors.size());
 		for(BlackboxUnitDescriptor parentDescriptor : parentDescriptors) {
@@ -55,7 +56,7 @@ public abstract class DelegatingJavaBlackboxProvider extends JavaBlackboxProvide
 		
 		BlackboxUnitDescriptor descriptor = getLocalUnitDescriptor(qualifiedName, resolutionContext);
 		
-		if (descriptor == null) descriptor = parent.getUnitDescriptor(qualifiedName, resolutionContext);
+		//if (descriptor == null) descriptor = parent.getUnitDescriptor(qualifiedName, resolutionContext);
 		
 		return descriptor;
 	}

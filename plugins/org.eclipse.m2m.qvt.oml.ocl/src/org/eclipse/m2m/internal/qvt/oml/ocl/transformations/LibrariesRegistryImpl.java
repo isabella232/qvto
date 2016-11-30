@@ -14,11 +14,9 @@
  */
 package org.eclipse.m2m.internal.qvt.oml.ocl.transformations;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.m2m.internal.qvt.oml.ocl.Logger;
@@ -28,46 +26,35 @@ public class LibrariesRegistryImpl implements LibrariesRegistry {
 
     private static final String LIBRARY_TAG = "library"; //$NON-NLS-1$
 
-    private final Collection<Library> myLibraries;
+    private final Map<String, Library> myLibraries;
 
     public LibrariesRegistryImpl(IConfigurationElement[] configurations) {
-        myLibraries = Collections.unmodifiableCollection(load(configurations));
+        myLibraries = Collections.unmodifiableMap(load(configurations));
     }
 
-    public Collection<Library> getLibraries() {
+    public Map<String, Library> getLibraries() {
         return myLibraries;
     }
     
-    public Library getLibrary(String id) {
-        for (Library lib : getLibraries()) {
-            if (lib.getId().equals(id)) {
-                return lib;
-            }
-        }
+    private static Map<String, Library> load(IConfigurationElement[] configurations) {
+        Map<String, Library> libraries = new LinkedHashMap<String, Library>(configurations.length);
         
-        return null;
-    }
-    
-    private static Collection<Library> load(IConfigurationElement[] configurations) {
-        Set<Class<?>> registeredLibraryClasses = new HashSet<Class<?>>();
-        Collection<Library> libraries = new LinkedList<Library>();
         for (int i = 0; i < configurations.length; i++) {
             if (!LIBRARY_TAG.equals(configurations[i].getName())) {
                 Logger.getLogger().log(Logger.WARNING,
-                        "Unrecognized tag passed into" //$NON-NLS-1$
-                                + " TransformationConfigurationReader: " //$NON-NLS-1$
+                        "Unrecognized tag : " //$NON-NLS-1$
                                 + configurations[i].getName());
                 continue;
             }
+            
             try {
-                Library nextLibrary = new LibraryImpl(configurations[i]);
-                if (!registeredLibraryClasses.contains(nextLibrary
-                        .getLibraryClass())) {
-					libraries.add(nextLibrary);
-                    registeredLibraryClasses.add(nextLibrary.getLibraryClass());
+                Library lib = new LibraryImpl(configurations[i]);
+                
+                if (!libraries.containsKey(lib.getId())) {
+					libraries.put(lib.getId(), lib);
                 } else {
                     Logger.getLogger().log(Logger.SEVERE,
-                            "Same library with the same class was registered twice. Skipping: " //$NON-NLS-1$
+                            "Library with the same Id was already registered. Skipping: " //$NON-NLS-1$
                                     + configurations[i].getNamespaceIdentifier());
                 }
             } catch (LibraryCreationException e) {

@@ -15,9 +15,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
@@ -33,6 +36,8 @@ import org.osgi.framework.wiring.BundleWiring;
 
 public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 	
+	private static final String URI_BLACKBOX_BUNDLE_QUERY = "bundle"; //$NON-NLS-1$
+	
 	private final Map<Bundle, Collection<BlackboxUnitDescriptor>> bundleDescriptors = new HashMap<Bundle, Collection<BlackboxUnitDescriptor>>();
 		
 	public BundleBlackboxProvider() {
@@ -47,50 +52,74 @@ public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 		if (bundle != null) {
 			return getDescriptor(bundle, qualifiedName);
 		}
-		else {
-			
-			IProject project = getProject(resolutionContext);
-			
-			if (project != null) {
-				Collection<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
-								
-				for (Bundle requiredBundle : requiredBundles) {
-					BlackboxUnitDescriptor descriptor = getDescriptor(requiredBundle, qualifiedName);
-					
-					if (descriptor != null) return descriptor;
-				}
-			}
-		}
+//		else {
+//			
+//			IProject project = getProject(resolutionContext);
+//			
+//			if (project != null) {
+//				Collection<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
+//								
+//				for (Bundle requiredBundle : requiredBundles) {
+//					BlackboxUnitDescriptor descriptor = getDescriptor(requiredBundle, qualifiedName);
+//					
+//					if (descriptor != null) return descriptor;
+//				}
+//			}
+//		}
 		
 		return null;
 	}
 	
 	@Override
 	public Collection<BlackboxUnitDescriptor> getLocalUnitDescriptors(ResolutionContext resolutionContext) {
+		List<BlackboxUnitDescriptor> descriptors = Collections.emptyList();
 		
-		Bundle bundle = getBundle(resolutionContext);
-		
-		if (bundle != null) {
-			return getDescriptors(bundle);
-		}
-		else {
-			IProject project = getProject(resolutionContext);
-			
-			if (project != null) {
-			
-				Collection<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
-				
-				Collection<BlackboxUnitDescriptor> descriptors = new ArrayList<BlackboxUnitDescriptor>();
-				
-				for (Bundle requiredBundle : requiredBundles) {
-					descriptors.addAll(getDescriptors(requiredBundle));
-				}
-				
-				return descriptors;
+		if (resolutionContext.getDeclaredLibraries().isEmpty()) {
+			Bundle bundle = getBundle(resolutionContext);
+			if (bundle != null) {
+				return getDescriptors(bundle);
 			}
 		}
-			
-		return Collections.emptyList();
+		else {
+			for (URI libraryUri : resolutionContext.getDeclaredLibraries().keySet()) {
+				if (URI_BLACKBOX_BUNDLE_QUERY.equals(libraryUri.query())) {
+					Bundle bundle = Platform.getBundle(libraryUri.fragment());
+					if (bundle != null) {
+						BlackboxUnitDescriptor unitDescriptor = getDescriptor(bundle, libraryUri.segment(0));
+						if (unitDescriptor != null) {
+							if (descriptors.isEmpty()) {
+								descriptors = new LinkedList<BlackboxUnitDescriptor>();
+							}
+							descriptors.add(unitDescriptor);
+						}
+					}
+				}
+			}
+		}
+
+		return descriptors;
+		
+//		if (bundle != null) {
+//			return getDescriptors(bundle);
+//		}
+//		else {
+//			IProject project = getProject(resolutionContext);
+//			
+//			if (project != null) {
+//			
+//				Collection<Bundle> requiredBundles = DependencyTracker.findRequiredBundles(project, false);
+//				
+//				Collection<BlackboxUnitDescriptor> descriptors = new ArrayList<BlackboxUnitDescriptor>();
+//				
+//				for (Bundle requiredBundle : requiredBundles) {
+//					descriptors.addAll(getDescriptors(requiredBundle));
+//				}
+//				
+//				return descriptors;
+//			}
+//		}
+//			
+//		return Collections.emptyList();
 	}
 	
 	private static Bundle getBundle(ResolutionContext resolutionContext) {
@@ -104,7 +133,7 @@ public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 		}
 	}
 	
-	private Collection<BlackboxUnitDescriptor> getDescriptors(Bundle bundle) {
+	private Collection<BlackboxUnitDescriptor> getDescriptors(final Bundle bundle) {
 		
 		if (bundleDescriptors.containsKey(bundle)) {
 			return bundleDescriptors.get(bundle);
@@ -138,7 +167,12 @@ public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 		    		}
 		    	}
 		    				    	
-		        descriptors.add(new BundleUnitDescriptor(cls, bundle, className));
+		        descriptors.add(new BundleUnitDescriptor(cls, bundle, className) {
+		        	@Override
+		        	protected String getFragment() {
+		        		return bundle.getSymbolicName();
+		        	}
+		        });
 			}
 			
 			bundleDescriptors.put(bundle, descriptors);
@@ -147,12 +181,17 @@ public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 		}
 	}
 	
-	private BlackboxUnitDescriptor getDescriptor(Bundle bundle, String qualifiedName) {
+	private BlackboxUnitDescriptor getDescriptor(final Bundle bundle, String qualifiedName) {
 		
 		try {
 			Class<?> cls = bundle.loadClass(qualifiedName);
 		
-			return new BundleUnitDescriptor(cls, bundle, qualifiedName);
+			return new BundleUnitDescriptor(cls, bundle, qualifiedName) {
+				@Override
+				protected String getFragment() {
+					return bundle.getSymbolicName();
+				}
+			};
 		}
 		catch(ClassNotFoundException e) {
 			return null;
@@ -172,10 +211,16 @@ public class BundleBlackboxProvider extends DelegatingJavaBlackboxProvider {
 			addModuleHandle(new ClassModuleHandle(cls) {
 				@Override
 				public String toString() {			
-					return super.toString() + ", bundle: " + bundle.getBundleId(); //$NON-NLS-1$
+					return super.toString() + ", bundle: " + bundle.getSymbolicName(); //$NON-NLS-1$
 				}
 			});
-		}		
+		}
+		
+		@Override
+		protected String getUnitQuery() {
+			return URI_BLACKBOX_BUNDLE_QUERY;
+		}
+		
 	}
 
 }

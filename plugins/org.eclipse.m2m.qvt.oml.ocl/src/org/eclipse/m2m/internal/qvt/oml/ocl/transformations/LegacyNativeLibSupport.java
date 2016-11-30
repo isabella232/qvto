@@ -11,13 +11,8 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.ocl.transformations;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
@@ -26,7 +21,6 @@ import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalStdLibrary;
 import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
-import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.cst.CSTFactory;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
@@ -49,29 +43,19 @@ public class LegacyNativeLibSupport {
 	
 	private LegacyNativeLibSupport() {}
 	
-	public QvtOperationalModuleEnv defineLibrary(Library lib, Map<String, List<EOperation>> definedOperations) throws LibraryCreationException {
+	public QvtOperationalModuleEnv defineLibrary(Library lib, URI libraryUri) throws LibraryCreationException {
 		org.eclipse.m2m.internal.qvt.oml.expressions.Library libModule = QvtOperationalStdLibrary.createLibrary(lib.getId());		
 		// FIXME - set isBlackBox=TRUE, as soon is it gets into the AST metamodel
 				
         QvtOperationalModuleEnv libEnv = initLibEnvironment(lib, libModule);
-        URI libUri = URI.createHierarchicalURI(BlackboxUnitDescriptor.URI_QVTO_SCHEME, BlackboxUnitDescriptor.URI_BLACKBOX_AUTHORITY,
-        		null, new String[] {lib.getId()}, null, null);
-		libModule.eResource().setURI(libUri);
+		libModule.eResource().setURI(libraryUri);
 
 		org.eclipse.m2m.internal.qvt.oml.expressions.Library opModule = QvtOperationalStdLibrary.createLibrary(lib.getId());
 		QvtOperationalModuleEnv opEnv = initLibEnvironment(lib, opModule);
 		
 		for (LibraryOperation libOp : lib.getLibraryOperations()) {
 	        Helper helper = defineOperation(opModule, opEnv, libOp); 
-	        
 			libEnv.defineImperativeOperation(helper, false, true);
-			
-			List<EOperation> listOp = definedOperations.get(helper.getName());
-			if (listOp == null) {
-				listOp = new LinkedList<EOperation>();
-				definedOperations.put(helper.getName(), listOp);
-			}
-			listOp.add(helper);
 		}
 		
 		// FIXME - workaround to make Environment available with the module

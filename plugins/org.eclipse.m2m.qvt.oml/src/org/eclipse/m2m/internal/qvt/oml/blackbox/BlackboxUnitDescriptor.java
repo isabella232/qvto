@@ -25,9 +25,9 @@ public abstract class BlackboxUnitDescriptor {
 	public static final String URI_QVTO_SCHEME = "qvto"; //$NON-NLS-1$
 	public static final String URI_BLACKBOX_AUTHORITY = "blackbox"; //$NON-NLS-1$	
 	
-	private URI fURI;
-	private String fQualifiedName;
-	private BlackboxProvider fProvider;
+	private final URI fURI;
+	private final String fQualifiedName;
+	private final BlackboxProvider fProvider;
 	
 	/**
 	 * @throws IllegalArgumentException

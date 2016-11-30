@@ -383,7 +383,7 @@ public class UnparsingQVTOVisitor implements QVTOperationalVisitor<Object>
 		String libraryName = library.getName();
 
 		Resource resource = library.eResource();
-		String resourceURI = resource.getURI().toString();
+		String resourceURI = resource.getURI().trimQuery().toString();
 		
 		if (resourceURI.startsWith("qvto://blackbox/"))
 		{
@@ -407,7 +407,7 @@ public class UnparsingQVTOVisitor implements QVTOperationalVisitor<Object>
 		String transformationName = transformation.getName();
 
 		Resource resource = transformation.eResource();
-		String resourceURI = resource.getURI().toString();
+		String resourceURI = resource.getURI().trimQuery().toString();
 		
 		if (resourceURI.startsWith("qvto://blackbox/"))
 		{
