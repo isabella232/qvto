@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2017 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -9,7 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Alex Paperno - bugs 416584
- *     Christopher Gerking - bugs 326871, 391289, 431082
+ *     Christopher Gerking - bugs 326871, 391289, 431082, 486487
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
@@ -30,6 +30,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -412,15 +414,15 @@ public class QVTOCompiler {
         		CompiledUnit compiledImport = doCompile(importedUnit, options, subMonitor.newChild(1, SubMonitor.SUPPRESS_NONE));
             		
     			if(!compiledImport.getErrors().isEmpty()) {
-    				if(importedUnit.getContentType() == UnitProxy.TYPE_CST_STREAM) {
-        				String errorInImportMessage = NLS.bind(CompilerMessages.importHasCompilationError, 
-        						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));	        				
-        				env.reportError(errorInImportMessage, nextImportCS.getPathNameCS());
-    				}
-    				else {
-    					String rootMessage = compiledImport.getErrors().get(0).getMessage();
-						env.reportError(rootMessage, nextImportCS.getPathNameCS());
-    				}
+    				
+    				String errorMessage	= NLS.bind(CompilerMessages.importHasCompilationError, 
+    						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));
+    				
+    				DiagnosticChain error = env.reportError(errorMessage, nextImportCS.getPathNameCS());
+    				
+    				for (Diagnostic importError : compiledImport.getErrors()) {
+    					error.add(importError);
+    				}   				
     			}
     				        				        			
     			if(compiledImports == null) {
