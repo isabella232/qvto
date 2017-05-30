@@ -3537,7 +3537,7 @@ public class UnparsingQVTOVisitor implements QVTOperationalVisitor<Object>
 	
 	private void addText(String text)
 	{
-		if ( text == null || text.isEmpty() ) return;
+		if ( text == null || text.length() == 0 ) return;
 		
 		if ( currentLine.length() == 0 )
 		{

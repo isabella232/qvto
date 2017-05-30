@@ -64,14 +64,14 @@ public class MdaException extends Exception {
 	private static String getStatusMessage(IStatus status) {
 		String children = "";
 		for (IStatus childStatus : status.getChildren()) {
-			if (!children.isEmpty())  {
+			if (children.length() > 0)  {
 				children += ',';
 			}
 			children += getStatusMessage(childStatus);
 		}
 
 		String msg = status.getMessage();
-		if (!children.isEmpty())  {
+		if (children.length() > 0)  {
 			msg += " [" + children + "]"; //$NON-NLS-1$ //$NON-NLS-2$
 		}
 		return msg;

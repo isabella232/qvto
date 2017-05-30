@@ -185,7 +185,7 @@ public class QvtOperationalResourceImpl extends XMIResourceImpl {
 			if ( string != null )
 			{
 				writer.write(string);
-				writer.write(System.lineSeparator());
+				writer.write(System.getProperty("line.separator")); //$NON-NLS-1$
 			}
 		}
 		
