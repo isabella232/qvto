@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Christopher Gerking and others.
+ * Copyright (c) 2016, 2017 Christopher Gerking and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,13 +16,13 @@ import org.eclipse.jdt.core.compiler.CompilationParticipant;
 public class ClassReloadEnforcer extends CompilationParticipant {
 		
 	@Override
-	public void buildFinished(IJavaProject project) {		
-		JdtBlackboxProvider.clear(project);
+	public void buildFinished(IJavaProject project) {
+		JdtBlackboxProvider.INSTANCE.clear(project);
 	}
 		
 	@Override
 	public boolean isActive(IJavaProject project) {
-	    return true;
+	    return JdtBlackboxProvider.INSTANCE != null;
 	}
 	
 }

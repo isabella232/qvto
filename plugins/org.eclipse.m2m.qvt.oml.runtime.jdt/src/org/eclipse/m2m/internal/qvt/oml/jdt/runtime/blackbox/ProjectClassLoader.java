@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Christopher Gerking and others.
+ * Copyright (c) 2016, 2017 Christopher Gerking and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,10 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
@@ -32,32 +36,65 @@ import org.eclipse.m2m.internal.qvt.oml.runtime.project.DependencyTracker;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.wiring.BundleWiring;
 
-public class ProjectClassLoader extends URLClassLoader {
+public class ProjectClassLoader extends ClassLoader {
 			
 	private static Map<IJavaProject, ProjectClassLoader> loadersMap = new HashMap<IJavaProject, ProjectClassLoader>();
 	
 	private IJavaProject javaProject;
 	
+	private URLClassLoader internalClassLoader;
+	
 	private ProjectClassLoader(IProject project) throws JavaModelException, MalformedURLException {
 		this(JavaCore.create(project));
 	}
 	
-	private ProjectClassLoader(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
-		super(new URL[] {getProjectOutputURL(javaProject)}, getParentLoader(javaProject));
-		
+	private ProjectClassLoader(IJavaProject javaProject) throws JavaModelException, MalformedURLException {		
 		this.javaProject = javaProject;
+		
+		reset();
 		
 		loadersMap.put(javaProject, this);
 	}
 	
+	synchronized void reset() throws JavaModelException, MalformedURLException {		
+		try {
+			if (internalClassLoader != null) internalClassLoader.close();
+		}
+		catch(IOException e) {
+			QvtPlugin.error(e);
+		};
+		
+		internalClassLoader = new URLClassLoader(new URL[] {getProjectOutputURL(javaProject)}, getParentLoader(javaProject));
+	}
+	
 	@Override
-	protected Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+	protected synchronized Class<?> loadClass(String name, boolean resolve) throws ClassNotFoundException {
+				
 		if (javaProject.hasBuildState()) {
-			return super.loadClass(name, resolve);
+			
+			try {
+				IType type = javaProject.findType(name);
+				
+				if (type != null && !hasCompileErrors(type)) {
+					
+					Class<?> c = internalClassLoader.loadClass(name);
+					
+					if (resolve) {
+						resolveClass(c);
+					}
+					
+					return c;
+				}
+			} catch(CoreException e) {
+				QvtPlugin.logDiagnostic(BasicDiagnostic.toDiagnostic(e.getStatus()));
+			}
 		}
-		else {
-			throw new ClassNotFoundException(name);
-		}
+				
+		throw new ClassNotFoundException(name);
+	}
+	
+	private static boolean hasCompileErrors(IType type) throws CoreException {
+		return type.getResource().findMaxProblemSeverity(null, true, IResource.DEPTH_ZERO) >= IMarker.SEVERITY_ERROR;
 	}
 	
 	static synchronized ProjectClassLoader getProjectClassLoader(IProject project) throws JavaModelException, MalformedURLException {
@@ -74,22 +111,10 @@ public class ProjectClassLoader extends URLClassLoader {
 		return loader;		
 	}
 	
-	static synchronized void resetProjectClassLoader(IJavaProject javaProject) {
-		
-		ProjectClassLoader loader = loadersMap.get(javaProject);
-		
-		if (loader != null) {
-			try {
-				loader.close();
-			}
-			catch(IOException e) {
-				QvtPlugin.error(e);
-			};
-			
-			loadersMap.remove(javaProject);
-		}
+	static synchronized boolean isProjectClassLoaderExisting(IJavaProject javaProject) {
+		return loadersMap.containsKey(javaProject);
 	}
-		
+			
 	private static URL getProjectOutputURL(IJavaProject javaProject) throws JavaModelException, MalformedURLException {
 				
 		IPath projectRelativeOutputPath = javaProject.getOutputLocation().removeFirstSegments(1);
@@ -142,7 +167,7 @@ public class ProjectClassLoader extends URLClassLoader {
 		private List<? extends ClassLoader> composedLoaders;
 		
 		public CompositeClassLoader(List<? extends ClassLoader> composedLoaders) {
-			this.composedLoaders = composedLoaders;
+			this.composedLoaders = Collections.unmodifiableList(composedLoaders);
 		}
 		
 		@Override

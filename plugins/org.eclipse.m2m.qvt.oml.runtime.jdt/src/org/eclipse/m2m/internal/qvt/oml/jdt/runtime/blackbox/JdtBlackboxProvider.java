@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Christopher Gerking and others.
+ * Copyright (c) 2016, 2017 Christopher Gerking and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -45,10 +45,16 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 
 	public static final String URI_BLACKBOX_JDT_QUERY = "jdt"; //$NON-NLS-1$
 	
-	private static Map<IProject, Map<String, JdtDescriptor>> descriptors = new HashMap<IProject, Map<String, JdtDescriptor>>();
+	private Map<IProject, Map<String, JdtUnitDescriptor>> descriptors = new HashMap<IProject, Map<String, JdtUnitDescriptor>>();
+	
+	static JdtBlackboxProvider INSTANCE;
 	
 	public JdtBlackboxProvider() {
 		super(new BundleBlackboxProvider());
+		
+		assert (INSTANCE == null);
+		
+		INSTANCE = this;
 	}
 	
 	@Override
@@ -107,14 +113,14 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 
 	private BlackboxUnitDescriptor getJdtUnitDescriptor(IProject project, String qualifiedName) {
 				
-		Map<String, JdtDescriptor> projectDescriptors = descriptors.get(project);
+		Map<String, JdtUnitDescriptor> projectDescriptors = descriptors.get(project);
 		
 		if (projectDescriptors == null) {
-			projectDescriptors = new HashMap<String, JdtDescriptor>();
+			projectDescriptors = new HashMap<String, JdtUnitDescriptor>();
 			descriptors.put(project, projectDescriptors);
 		}
 		
-		JdtDescriptor descriptor = projectDescriptors.get(qualifiedName);
+		JdtUnitDescriptor descriptor = projectDescriptors.get(qualifiedName);
 		
 		if (descriptor == null) {
 		
@@ -136,7 +142,7 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 				try {
 					Class<?> moduleJavaClass = loader.loadClass(qualifiedName);
 							
-					descriptor = new JdtDescriptor(qualifiedName, moduleJavaClass) {
+					descriptor = new JdtUnitDescriptor(qualifiedName, moduleJavaClass) {
 						@Override
 						protected String getFragment() {
 							return javaProject.getElementName();
@@ -194,24 +200,34 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 
 		return classes;
 	}
-	
+		
 	@Override
 	public void cleanup() {
 		descriptors.clear();		
 	}
 	
-	static void clear(IJavaProject project) {		
-		ProjectClassLoader.resetProjectClassLoader(project);
+	void clear(IJavaProject project) {		
+		try {
+			if (ProjectClassLoader.isProjectClassLoaderExisting(project)) {
+				ProjectClassLoader.getProjectClassLoader(project).reset();
+			}
+		}
+		catch(JavaModelException jme) {
+			QvtPlugin.logDiagnostic(BasicDiagnostic.toDiagnostic(jme.getStatus()));
+		}
+		catch(MalformedURLException mue) {
+			QvtPlugin.error(mue);
+		}
 		
 		descriptors.remove(project.getProject());
 	}
 	
-	private class JdtDescriptor extends JavaBlackboxProvider.JavaUnitDescriptor {
+	private class JdtUnitDescriptor extends JavaBlackboxProvider.JavaUnitDescriptor {
 		
 		private final Class<?> fModuleJavaClass;
 		private volatile int hashCode;
 		
-		public JdtDescriptor(String unitQualifiedName, Class<?> moduleJavaClass) {
+		public JdtUnitDescriptor(String unitQualifiedName, Class<?> moduleJavaClass) {
 			super(unitQualifiedName);
 			addModuleHandle(new ClassModuleHandle(moduleJavaClass, unitQualifiedName));
 			
@@ -225,11 +241,11 @@ public class JdtBlackboxProvider extends DelegatingJavaBlackboxProvider {
 		
 		@Override
 		public boolean equals(Object obj) {
-			if (obj instanceof JdtDescriptor == false) {
+			if (obj instanceof JdtUnitDescriptor == false) {
 				return false;
 			}
 			
-			JdtDescriptor other = (JdtDescriptor) obj;
+			JdtUnitDescriptor other = (JdtUnitDescriptor) obj;
 
 			return getQualifiedName().equals(other.getQualifiedName())
 					&& fModuleJavaClass.equals(other.fModuleJavaClass);
