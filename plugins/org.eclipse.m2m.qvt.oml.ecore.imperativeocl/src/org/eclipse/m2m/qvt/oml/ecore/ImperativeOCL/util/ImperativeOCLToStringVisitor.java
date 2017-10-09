@@ -4,10 +4,10 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Adolfo Sanchez-Barbudo Herrera - initial API and implementation
- * 
+ *
  * $Id: ImperativeOCLToStringVisitor.java,v 1.3 2009/05/15 16:14:34 radvorak Exp $
  */
 package org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.util;
@@ -51,26 +51,27 @@ import org.eclipse.ocl.util.ToStringVisitor;
 import org.eclipse.ocl.utilities.TypedElement;
 
 /**
- * Implementation of {@link ImperativeOCLVisitor} to have the String representation of a {@link ImperativeExpression ImperativeOCL expression} 
- *  
+ * Implementation of {@link ImperativeOCLVisitor} to have the String representation of a {@link ImperativeExpression ImperativeOCL expression}
+ *
  * @author Adolfo Sánchez-Barbudo Herrera (adolfosbh)
  *
  */
 public class ImperativeOCLToStringVisitor extends  ToStringVisitor<EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint>
-				implements ImperativeOCLVisitor<String>{
-	
+implements ImperativeOCLVisitor<String>{
+
 	private static final String NOT_IMPLEMENTED = "<not-implemented-in-string-visitor>"; //$NON-NLS-1$
-	
-	
-	public static ImperativeOCLToStringVisitor getInstance(TypedElement<EClassifier> element) {
+
+
+	@SuppressWarnings("unchecked")
+	public static <C, O, P, EL, PM, S, COA, SSA, CT> ToStringVisitor<C, O, P, EL, PM, S, COA, SSA, CT> getInstance(TypedElement<C> element) {
 		Environment<?, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, ?, ?> env = Environment.Registry.INSTANCE.getEnvironmentFor(element);
-		return new ImperativeOCLToStringVisitor(env);
+		return (ToStringVisitor<C, O, P, EL, PM, S, COA, SSA, CT>) new ImperativeOCLToStringVisitor(env);
 	}
 	protected ImperativeOCLToStringVisitor(
 			Environment<?, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, Constraint, ?, ?> env) {
-		super(env);		
+		super(env);
 	}
-	public String visitAltExp(AltExp astNode) {		
+	public String visitAltExp(AltExp astNode) {
 		return NOT_IMPLEMENTED;
 	}
 	public String visitAssertExp(AssertExp astNode) {
