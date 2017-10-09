@@ -6,8 +6,8 @@
       provider-name="%providerName"
       plugin="org.eclipse.m2m.qvt.oml.tools.coverage"
       image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.qvto.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
 
    <description url="http://www.eclipse.org/mmt/qvto">
       %description
@@ -16,6 +16,11 @@
    <copyright url="http://www.eclipse.org/legal/epl-v10.html">
       %copyright
    </copyright>
+
+   <includes
+         id="org.eclipse.m2m.qvt.oml.tools.coverage.junit"
+         version="0.0.0"
+         optional="true"/>
 
    <plugin
          id="org.eclipse.m2m.qvt.oml.tools.coverage"
@@ -44,31 +49,5 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.eclipse.m2m.qvt.oml.tools.coverage.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.m2m.qvt.oml.tools.coverage.ui.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <includes
-         id="org.eclipse.m2m.qvt.oml.tools.coverage.junit"
-         version="0.0.0"
-         optional="true"/>
-
-   <!--plugin
-         id="com.google.guava"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/-->
 
 </feature>

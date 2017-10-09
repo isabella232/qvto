@@ -6,8 +6,8 @@
       provider-name="%providerName"
       plugin="org.eclipse.m2m.qvt.oml.runtime"
       image="eclipse_update_120.jpg"
-      license-feature="org.eclipse.qvto.license"
-      license-feature-version="1.0.0.qualifier">
+      license-feature="org.eclipse.license"
+      license-feature-version="0.0.0">
 
    <description url="http://www.eclipse.org/mmt/qvto">
       %description
