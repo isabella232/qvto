@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.qvto-doc</groupId>
+  <artifactId>org.eclipse.qvto.doc-folder</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <parent>
+    <groupId>org.eclipse.qvto</groupId>
+    <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+    <version>3.8.0-SNAPSHOT</version>
+    <relativePath>../releng/org.eclipse.qvto.releng.tycho</relativePath>
+  </parent>
+  <modules>
+    <module>org.eclipse.m2m.qvt.oml.doc</module>
+    <module>org.eclipse.m2m.qvt.oml.tools.coverage.doc</module>
+    <module>org.eclipse.m2m.qvt.oml.tools.doc</module>
+  </modules>
+</project>

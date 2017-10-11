@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <!--feature id="org.eclipse.qvto.examples" version="0.0.0">
+      <category name="mmt.qvto"/>
+   </feature-->
+   <feature id="org.eclipse.m2m.qvt.oml.tools.coverage" version="0.0.0">
+      <category name="mmt.qvto"/>
+   </feature>
+   <feature id="org.eclipse.m2m.qvt.oml.sdk" version="0.0.0">
+      <category name="mmt.qvto"/>
+   </feature>
+   <feature id="org.eclipse.m2m.qvt.oml.tools.source" version="0.0.0">
+      <category name="mmt.qvto"/>
+   </feature>
+   <feature id="org.eclipse.m2m.qvt.oml.sdk.source" version="0.0.0">
+      <category name="mmt.qvto"/>
+   </feature>
+   <category-def name="mmt.qvto" label="QVT Operational">
+      <description>
+         QVT Operational SDK (interpreter with support for BlackBox libraries, editor with JDT integration, debugger, metamodel browser, Ant support) and QVTo Tooling (Code coverage with JUnit integration support)
+      </description>
+   </category-def>
+</site>
