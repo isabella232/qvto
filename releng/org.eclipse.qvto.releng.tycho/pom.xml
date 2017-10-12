@@ -10,6 +10,9 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <prerequisites>
+    <maven>3.0</maven>
+  </prerequisites>
   <groupId>org.eclipse.qvto</groupId>
   <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
   <version>3.8.0-SNAPSHOT</version>
@@ -70,6 +73,9 @@
   </modules>
 
   <build>
+   <!-- This is for checkstyle and PMD -->
+   <sourceDirectory>src</sourceDirectory>
+
     <plugins>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
@@ -77,92 +83,13 @@
         <version>${tycho-version}</version>
         <extensions>true</extensions>
       </plugin>
-
-      <!-- Generate source bundles (exclude target so we don't enter
-           an infinite loop for binary-only plugins, which have itself
-           as the source). -->
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-source-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <executions>
-          <execution>
-            <id>plugin-source</id>
-            <goals>
-              <goal>plugin-source</goal>
-            </goals>
-          <!--   <configuration>
-              <excludes>
-                <exclude>target/**</exclude>
-              </excludes>
-            </configuration>-->
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho.extras</groupId>
-        <artifactId>tycho-source-feature-plugin</artifactId>
-        <version>${tycho-version}</version>
-    <!--   <configuration>
-      <archive>
-        <addMavenDescriptor>false</addMavenDescriptor>
-      </archive>
-        </configuration>-->
-        <executions>
-          <execution>
-            <id>source-feature</id>
-            <goals>
-              <goal>source-feature</goal>
-            </goals>
-            <configuration>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-         <groupId>org.eclipse.tycho</groupId>
-         <artifactId>tycho-packaging-plugin</artifactId>
-         <version>${tycho-version}</version>
-         <configuration>
-            <sourceReferences>
-              <generate>true</generate>
-            </sourceReferences>
-         </configuration>
-         <dependencies>
-            <dependency>
-              <groupId>org.eclipse.tycho.extras</groupId>
-              <artifactId>tycho-sourceref-jgit</artifactId>
-              <version>${tycho-extras-version}</version>
-            </dependency>
-         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-p2-plugin</artifactId>
-        <version>${tycho-version}</version>
-        <executions>
-          <execution>
-            <id>attached-p2-metadata</id>
-            <phase>package</phase>
-            <goals>
-              <goal>p2-metadata</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>target-platform-configuration</artifactId>
-        <version>${tycho-version}</version>
         <configuration>
+          <includePackedArtifacts>true</includePackedArtifacts>
+          <resolver>p2</resolver>
           <!-->executionEnvironment>JavaSE-1.8</executionEnvironment-->
-          <target>
-            <artifact>
-            <groupId>org.eclipse.qvto</groupId>
-            <artifactId>org.eclipse.qvto.releng.targetplatform</artifactId>
-            <version>3.8.0-SNAPSHOT</version>
-            </artifact>
-          </target>
           <dependency-resolution>
             <extraRequirements>
               <requirement>
@@ -179,23 +106,23 @@
           </dependency-resolution>
           <environments>
             <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
+              <os>win32</os>
+              <ws>win32</ws>
               <arch>x86</arch>
             </environment>
             <environment>
-              <os>linux</os>
-              <ws>gtk</ws>
+              <os>win32</os>
+              <ws>win32</ws>
               <arch>x86_64</arch>
             </environment>
             <environment>
-              <os>win32</os>
-              <ws>win32</ws>
+              <os>linux</os>
+              <ws>gtk</ws>
               <arch>x86</arch>
             </environment>
             <environment>
-              <os>win32</os>
-              <ws>win32</ws>
+              <os>linux</os>
+              <ws>gtk</ws>
               <arch>x86_64</arch>
             </environment>
             <environment>
@@ -206,39 +133,366 @@
           </environments>
         </configuration>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire-version}</version>
-      </plugin>
+
+      <!-- Generate source bundles (exclude target so we don't enter
+           an infinite loop for binary-only plugins, which have itself
+           as the source). -->
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
-         <artifactId>tycho-surefire-plugin</artifactId>
-         <version>${tycho-version}</version>
-         <configuration>
-           <argLine>${tycho.testArgLine} -Xms40m -Xmx1G ${os-jvm-flags}</argLine>
-           <failIfNoTests>false</failIfNoTests>
-           <!--  
-              <testSuite></testSuite>
-              <testClass></testClass>
-              -->
-         </configuration>
+        <artifactId>tycho-source-plugin</artifactId>
+        <version>${tycho-version}</version>
+        <configuration>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
+        </configuration>
+        <executions>
+          <execution>
+            <id>plugin-source</id>
+            <goals>
+              <goal>plugin-source</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.10.3</version>
+        <groupId>org.eclipse.tycho.extras</groupId>
+        <artifactId>tycho-source-feature-plugin</artifactId>
+        <version>${tycho-extras-version}</version>
         <configuration>
-          <sourceFileIncludes>
-            <sourceFileInclude>org/eclipse/m2m/qvt/oml/**/*.java</sourceFileInclude>
-          </sourceFileIncludes>
-          <doctitle>QVTo Interim API</doctitle>
+          <archive>
+            <addMavenDescriptor>false</addMavenDescriptor>
+          </archive>
         </configuration>
+        <executions>
+          <execution>
+            <id>source-feature</id>
+            <phase>package</phase>
+            <goals>
+              <goal>source-feature</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-maven-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+           <groupId>org.eclipse.tycho</groupId>
+           <artifactId>tycho-packaging-plugin</artifactId>
+           <version>${tycho-version}</version>
+           <configuration>
+            <archive>
+              <addMavenDescriptor>false</addMavenDescriptor>
+            </archive>
+              <sourceReferences>
+                <generate>true</generate>
+              </sourceReferences>
+           </configuration>
+           <dependencies>
+              <dependency>
+                <groupId>org.eclipse.tycho.extras</groupId>
+                <artifactId>tycho-sourceref-jgit</artifactId>
+                <version>${tycho-extras-version}</version>
+              </dependency>
+           </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-compiler-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <!--configuration>
+            <encoding>${java-source-encoding}</encoding>
+            <source>${source-java-version}</source>
+            <target>${target-java-version}</target>
+            <showWarnings>true</showWarnings>
+          </configuration-->
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-plugin</artifactId>
+          <version>${tycho-version}</version>
+          <executions>
+            <execution>
+              <id>attached-p2-metadata</id>
+              <phase>package</phase>
+              <goals>
+                <goal>p2-metadata</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+           <artifactId>tycho-surefire-plugin</artifactId>
+           <version>${tycho-version}</version>
+           <configuration>
+             <argLine>${tycho.testArgLine} -Xms40m -Xmx1G ${os-jvm-flags}</argLine>
+             <failIfNoTests>false</failIfNoTests>
+           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-publisher-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-p2-repository-plugin</artifactId>
+          <version>${tycho-version}</version>
+        </plugin>
+        <plugin>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-pack200a-plugin</artifactId>
+            <version>${tycho-extras-version}</version>
+        </plugin>
+        <plugin>
+            <groupId>org.eclipse.tycho.extras</groupId>
+            <artifactId>tycho-pack200b-plugin</artifactId>
+            <version>${tycho-extras-version}</version>
+        </plugin>
+        <plugin>
+            <groupId>org.eclipse.cbi.maven.plugins</groupId>
+            <artifactId>eclipse-jarsigner-plugin</artifactId>
+            <version>${eclipse-jarsigner-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-version}</version>
+          <configuration>
+            <encoding>${resource-encoding}</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>${maven-antrun-version}</version>
+        </plugin>
+        <!--plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>${findbugs-maven-version}</version>
+        </plugin-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-pmd-plugin</artifactId>
+          <version>${maven-pmd-version}</version>
+          <configuration>
+            <sourceEncoding>${java-source-encoding}</sourceEncoding>
+            <targetJdk>${target-java-version}</targetJdk>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven-checkstyle-version}</version>
+          <configuration>
+            <encoding>${java-source-encoding}</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>exec-maven-plugin</artifactId>
+          <version>${exec-maven-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco-maven-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>${maven-site-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>${maven-jxr-version}</version>
+        </plugin>
+        <!--plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>2.10.3</version>
+          <configuration>
+            <sourceFileIncludes>
+              <sourceFileInclude>org/eclipse/m2m/qvt/oml/**/*.java</sourceFileInclude>
+            </sourceFileIncludes>
+            <doctitle>QVTo Interim API</doctitle>
+          </configuration>
+        </plugin-->
+      </plugins>
+    </pluginManagement>
   </build>
   
   <profiles>
+    <!-- Target platforms are located in org.eclipse.qvto.releng.tycho/targetPlatforms. -->
+    <profile>
+      <id>nightly</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvto</groupId>
+                  <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+                  <version>3.8.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/nightly</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>interim</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvto</groupId>
+                  <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+                  <version>3.8.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/interim</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>stable</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvto</groupId>
+                  <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+                  <version>3.8.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/stable</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>oxygen</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvto</groupId>
+                  <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+                  <version>3.8.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/oxygen</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>photon</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <target>
+                <artifact>
+                  <groupId>org.eclipse.qvto</groupId>
+                  <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
+                  <version>3.8.0-SNAPSHOT</version>
+                  <classifier>targetPlatforms/photon</classifier>
+                </artifact>
+              </target>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
     <profile>
       <id>sign</id>
       <activation>

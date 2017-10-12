@@ -15,6 +15,5 @@
 
   <modules>
     <module>org.eclipse.qvto.releng.build-site</module> 
-    <module>org.eclipse.qvto.releng.targetplatform</module>
   </modules>
 </project>
