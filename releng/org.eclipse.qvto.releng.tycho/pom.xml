@@ -62,6 +62,8 @@
     <jacoco-maven-version>0.7.1.201405082137</jacoco-maven-version>
     <eclipse-jarsigner-version>1.1.2</eclipse-jarsigner-version>
     <maven-jxr-version>2.3</maven-jxr-version>
+    
+    <BUILD_ALIAS></BUILD_ALIAS>
   </properties>
   
   <modules>
@@ -378,6 +380,9 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+        <BUILD_T>N</BUILD_T>
+      </properties>
       <build>
         <plugins>
           <plugin>
@@ -402,6 +407,9 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+        <BUILD_T>I</BUILD_T>
+      </properties>
       <build>
         <plugins>
           <plugin>
@@ -426,6 +434,9 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+        <BUILD_T>S</BUILD_T>
+      </properties>
       <build>
         <plugins>
           <plugin>
@@ -450,6 +461,9 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+        <BUILD_T></BUILD_T>
+      </properties>
       <build>
         <plugins>
           <plugin>
@@ -474,6 +488,9 @@
       <activation>
         <activeByDefault>false</activeByDefault>
       </activation>
+      <properties>
+        <BUILD_T></BUILD_T>
+      </properties>
       <build>
         <plugins>
           <plugin>
