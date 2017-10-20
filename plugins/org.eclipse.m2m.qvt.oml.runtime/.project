@@ -10,7 +10,7 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<!--buildCommand>
+		<buildCommand>
 			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
 			<arguments>
 				<dictionary>
@@ -18,8 +18,8 @@
 					<value>&lt;project&gt;/.externalToolBuilders/AntTasksBuilder.launch</value>
 				</dictionary>
 			</arguments>
-		</buildCommand-->
-		<buildCommand>
+		</buildCommand>
+		<!--buildCommand>
 			<name>org.eclipse.buckminster.ant.AntBuilder</name>
 			<arguments>
 				<dictionary>
@@ -31,7 +31,7 @@
 					<value>post_build.xml</value>
 				</dictionary>
 			</arguments>
-		</buildCommand>
+		</buildCommand-->
 		<buildCommand>
 			<name>org.eclipse.pde.ManifestBuilder</name>
 			<arguments>
