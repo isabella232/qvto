@@ -18,7 +18,7 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.target.platform"
-      defaultValue="Neon"
+      defaultValue="Photon"
       storageURI="scope://Workspace"/>
   <setupTask
       xsi:type="git:GitCloneTask"
@@ -77,6 +77,16 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <repositoryList
+            name="Photon">
+          <repository
+              url="http://download.eclipse.org/releases/photon"/>
+        </repositoryList>
+        <repositoryList
+            name="Oxygen">
+          <repository
+              url="http://download.eclipse.org/releases/oxygen"/>
+        </repositoryList>
+        <repositoryList
             name="Neon">
           <repository
               url="http://download.eclipse.org/releases/neon"/>
@@ -115,7 +125,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      name="Mylin IDE">
+      name="Mylyn IDE">
     <setupTask
         xsi:type="setup.p2:P2Task"
         label="Mylyn Tools">
@@ -160,6 +170,8 @@
         userID="${bugzilla.id}"
         password="${eclipse.user.password}">
       <buildPlan
+          name="qvto-photon-master"/>
+      <buildPlan
           name="qvto-neon-master"/>
       <buildPlan
           name="qvto-mars-master"/>
@@ -199,7 +211,7 @@
     <setupTask
         xsi:type="setup.workingsets:WorkingSetTask">
       <workingSet
-          name="QVTo Plugins + Tests">
+          name="QVTo Plugins">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml"/>
@@ -239,6 +251,21 @@
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.trace.edit"/>
+      </workingSet>
+      <workingSet
+          name="QVTo Features + Doc">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.m2m.qvt.oml.*-feature"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.m2m.qvt.oml.*\.feature"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.m2m.qvt.oml.*\.doc"/>
+      </workingSet>
+      <workingSet
+          name="QVTo Tests">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.*.ui"/>
@@ -251,9 +278,6 @@
       </workingSet>
       <workingSet
           name="QVTo Examples">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvto.examples.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.examples.blackbox"/>
@@ -285,40 +309,13 @@
             xsi:type="predicates:NamePredicate"
             pattern="qvto.uml2xhtml.model"/>
       </workingSet>
-      <workingSet
-          name="QVTo Features + Doc">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvto.license-feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.*-feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.*\.feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.*\.doc"/>
-      </workingSet>
     </setupTask>
     <stream
         name="master"
-        label="Master (Neon)"/>
+        label="Master"/>
     <description>The development environment for the QVTo project</description>
   </project>
   <project name="Releng">
-    <setupTask
-        xsi:type="setup.p2:P2Task"
-        label="Releng Tools">
-      <requirement
-          name="org.eclipse.buckminster.core.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.buckminster.git.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.buckminster.pde.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/tools/buckminster/updates-4.4"/>
-    </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
         id="simrel.git.clone"
@@ -363,9 +360,6 @@
             pattern="org.eclipse.qvto.releng.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvto.*build-feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.simrel.build"/>
         <predicate
             xsi:type="predicates:NamePredicate"
@@ -374,12 +368,32 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Neon)">
+        label="Master">
       <setupTask
           xsi:type="setup:VariableTask"
           name="simrel.branch"
           value="master"/>
     </stream>
+    <description>The release engineering for the QVTo project</description>
+  </project>
+  <project name="Pivot">
+    <setupTask
+        xsi:type="projects:ProjectsImportTask">
+      <sourceLocator
+          rootFolder="${qvto.git.clone.location/examples}"
+          locateNestedProjects="true"/>
+      <description>Development Projects</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.workingsets:WorkingSetTask">
+      <workingSet
+          name="QVTo Pivot WIP">
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvto.examples.*"/>
+      </workingSet>
+    </setupTask>
+    <description>The experimental Pivot-based development environment for the QVTo project.</description>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
