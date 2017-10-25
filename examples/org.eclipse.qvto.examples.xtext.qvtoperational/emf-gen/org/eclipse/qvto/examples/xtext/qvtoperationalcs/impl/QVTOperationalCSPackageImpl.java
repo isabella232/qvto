@@ -9,8 +9,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.qvto.examples.pivot.imperativeocl.ImperativeOCLPackage;
 import org.eclipse.qvto.examples.pivot.qvtoperational.QVTOperationalPackage;
 import org.eclipse.qvto.examples.xtext.imperativeoclcs.ImperativeOCLCSPackage;
 import org.eclipse.qvto.examples.xtext.qvtoperationalcs.ClassifierPropertyCS;
@@ -411,7 +413,7 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTOperationalCSPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -425,14 +427,19 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		if (isInited) return (QVTOperationalCSPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalCSPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTOperationalCSPackageImpl theQVTOperationalCSPackage = (QVTOperationalCSPackageImpl)(ePackage instanceof QVTOperationalCSPackageImpl ? ePackage : new QVTOperationalCSPackageImpl());
+		Object registeredQVTOperationalCSPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTOperationalCSPackageImpl theQVTOperationalCSPackage = registeredQVTOperationalCSPackage instanceof QVTOperationalCSPackageImpl ? (QVTOperationalCSPackageImpl)registeredQVTOperationalCSPackage : new QVTOperationalCSPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
+		ImperativeOCLPackage.eINSTANCE.eClass();
 		ImperativeOCLCSPackage.eINSTANCE.eClass();
+		PivotPackage.eINSTANCE.eClass();
 		QVTOperationalPackage.eINSTANCE.eClass();
+		BaseCSPackage.eINSTANCE.eClass();
+		EssentialOCLCSPackage.eINSTANCE.eClass();
+		EcorePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theQVTOperationalCSPackage.createPackageContents();
@@ -443,7 +450,6 @@ public class QVTOperationalCSPackageImpl extends EPackageImpl implements QVTOper
 		// Mark meta-data to indicate it can't be changed
 		theQVTOperationalCSPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTOperationalCSPackage.eNS_URI, theQVTOperationalCSPackage);
 		return theQVTOperationalCSPackage;

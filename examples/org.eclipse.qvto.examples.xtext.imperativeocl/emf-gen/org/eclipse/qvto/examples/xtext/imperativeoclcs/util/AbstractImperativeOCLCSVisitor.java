@@ -21,7 +21,7 @@ public abstract class AbstractImperativeOCLCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractImperativeOCLCSVisitor(C context) {

@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingQVTOperationalCSVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, D extends QVTOperationalCSVisitor<R>>
+public abstract class AbstractDelegatingQVTOperationalCSVisitor<R, C, @NonNull D extends QVTOperationalCSVisitor<R>>
 	extends org.eclipse.qvto.examples.xtext.imperativeoclcs.util.AbstractDelegatingImperativeOCLCSVisitor<R, C, D>
 	implements QVTOperationalCSVisitor<R>
 {

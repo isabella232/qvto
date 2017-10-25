@@ -13,6 +13,7 @@ package	org.eclipse.qvto.examples.xtext.qvtoperationalcs.util;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface QVTOperationalCSVisitor<R> extends org.eclipse.qvto.examples.xtext.imperativeoclcs.util.ImperativeOCLCSVisitor<R>
 {

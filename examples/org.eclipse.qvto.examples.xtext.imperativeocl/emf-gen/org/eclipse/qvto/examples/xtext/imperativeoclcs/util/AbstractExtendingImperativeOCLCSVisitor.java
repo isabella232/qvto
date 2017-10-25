@@ -25,12 +25,12 @@ public abstract class AbstractExtendingImperativeOCLCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingImperativeOCLCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitAssertExpCS(org.eclipse.qvto.examples.xtext.imperativeoclcs.@NonNull AssertExpCS object) {

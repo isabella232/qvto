@@ -84,34 +84,34 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImperativeOCLCSPackage.ASSERT_EXP_CS: return createAssertExpCS();
-			case ImperativeOCLCSPackage.ASSIGN_EXP_CS: return createAssignExpCS();
-			case ImperativeOCLCSPackage.BREAK_EXP_CS: return createBreakExpCS();
-			case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS: return createDictLiteralExpCS();
-			case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS: return createDictLiteralPartCS();
-			case ImperativeOCLCSPackage.DICT_TYPE_CS: return createDictTypeCS();
-			case ImperativeOCLCSPackage.COMPUTE_EXP_CS: return createComputeExpCS();
-			case ImperativeOCLCSPackage.CONTINUE_EXP_CS: return createContinueExpCS();
-			case ImperativeOCLCSPackage.IMPERATIVE_ITERATE_EXP_CS: return createImperativeIterateExpCS();
-			case ImperativeOCLCSPackage.IMPERATIVE_LOOP_EXP_CS: return createImperativeLoopExpCS();
-			case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS: return createInstantiationExpCS();
-			case ImperativeOCLCSPackage.CATCH_EXP_CS: return createCatchExpCS();
-			case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS: return createExpressionBlockCS();
-			case ImperativeOCLCSPackage.EXTENT_REF_CS: return createExtentRefCS();
-			case ImperativeOCLCSPackage.FOR_EXP_CS: return createForExpCS();
-			case ImperativeOCLCSPackage.LIST_TYPE_CS: return createListTypeCS();
-			case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS: return createListLiteralExpCS();
-			case ImperativeOCLCSPackage.LOG_EXP_CS: return createLogExpCS();
-			case ImperativeOCLCSPackage.RAISE_EXP_CS: return createRaiseExpCS();
-			case ImperativeOCLCSPackage.RETURN_EXP_CS: return createReturnExpCS();
-			case ImperativeOCLCSPackage.SWITCH_ALT_CS: return createSwitchAltCS();
-			case ImperativeOCLCSPackage.SWITCH_EXP_CS: return createSwitchExpCS();
-			case ImperativeOCLCSPackage.TRY_EXP_CS: return createTryExpCS();
-			case ImperativeOCLCSPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
-			case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS: return createVarsInitializationCS();
-			case ImperativeOCLCSPackage.WHILE_EXP_CS: return createWhileExpCS();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case ImperativeOCLCSPackage.ASSERT_EXP_CS: return createAssertExpCS();
+		case ImperativeOCLCSPackage.ASSIGN_EXP_CS: return createAssignExpCS();
+		case ImperativeOCLCSPackage.BREAK_EXP_CS: return createBreakExpCS();
+		case ImperativeOCLCSPackage.DICT_LITERAL_EXP_CS: return createDictLiteralExpCS();
+		case ImperativeOCLCSPackage.DICT_LITERAL_PART_CS: return createDictLiteralPartCS();
+		case ImperativeOCLCSPackage.DICT_TYPE_CS: return createDictTypeCS();
+		case ImperativeOCLCSPackage.COMPUTE_EXP_CS: return createComputeExpCS();
+		case ImperativeOCLCSPackage.CONTINUE_EXP_CS: return createContinueExpCS();
+		case ImperativeOCLCSPackage.IMPERATIVE_ITERATE_EXP_CS: return createImperativeIterateExpCS();
+		case ImperativeOCLCSPackage.IMPERATIVE_LOOP_EXP_CS: return createImperativeLoopExpCS();
+		case ImperativeOCLCSPackage.INSTANTIATION_EXP_CS: return createInstantiationExpCS();
+		case ImperativeOCLCSPackage.CATCH_EXP_CS: return createCatchExpCS();
+		case ImperativeOCLCSPackage.EXPRESSION_BLOCK_CS: return createExpressionBlockCS();
+		case ImperativeOCLCSPackage.EXTENT_REF_CS: return createExtentRefCS();
+		case ImperativeOCLCSPackage.FOR_EXP_CS: return createForExpCS();
+		case ImperativeOCLCSPackage.LIST_TYPE_CS: return createListTypeCS();
+		case ImperativeOCLCSPackage.LIST_LITERAL_EXP_CS: return createListLiteralExpCS();
+		case ImperativeOCLCSPackage.LOG_EXP_CS: return createLogExpCS();
+		case ImperativeOCLCSPackage.RAISE_EXP_CS: return createRaiseExpCS();
+		case ImperativeOCLCSPackage.RETURN_EXP_CS: return createReturnExpCS();
+		case ImperativeOCLCSPackage.SWITCH_ALT_CS: return createSwitchAltCS();
+		case ImperativeOCLCSPackage.SWITCH_EXP_CS: return createSwitchExpCS();
+		case ImperativeOCLCSPackage.TRY_EXP_CS: return createTryExpCS();
+		case ImperativeOCLCSPackage.VAR_DECLARATION_CS: return createVarDeclarationCS();
+		case ImperativeOCLCSPackage.VARS_INITIALIZATION_CS: return createVarsInitializationCS();
+		case ImperativeOCLCSPackage.WHILE_EXP_CS: return createWhileExpCS();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -123,14 +123,14 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImperativeOCLCSPackage.ASSIGN_OP_CS:
-				return createAssignOpCSFromString(eDataType, initialValue);
-			case ImperativeOCLCSPackage.INIT_OP_CS:
-				return createInitOpCSFromString(eDataType, initialValue);
-			case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
-				return createSeverityKindCSFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case ImperativeOCLCSPackage.ASSIGN_OP_CS:
+			return createAssignOpCSFromString(eDataType, initialValue);
+		case ImperativeOCLCSPackage.INIT_OP_CS:
+			return createInitOpCSFromString(eDataType, initialValue);
+		case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
+			return createSeverityKindCSFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -142,14 +142,14 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImperativeOCLCSPackage.ASSIGN_OP_CS:
-				return convertAssignOpCSToString(eDataType, instanceValue);
-			case ImperativeOCLCSPackage.INIT_OP_CS:
-				return convertInitOpCSToString(eDataType, instanceValue);
-			case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
-				return convertSeverityKindCSToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case ImperativeOCLCSPackage.ASSIGN_OP_CS:
+			return convertAssignOpCSToString(eDataType, instanceValue);
+		case ImperativeOCLCSPackage.INIT_OP_CS:
+			return convertInitOpCSToString(eDataType, instanceValue);
+		case ImperativeOCLCSPackage.SEVERITY_KIND_CS:
+			return convertSeverityKindCSToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -158,6 +158,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssertExpCS createAssertExpCS() {
 		AssertExpCSImpl assertExpCS = new AssertExpCSImpl();
 		return assertExpCS;
@@ -168,6 +169,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssignExpCS createAssignExpCS() {
 		AssignExpCSImpl assignExpCS = new AssignExpCSImpl();
 		return assignExpCS;
@@ -178,6 +180,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BreakExpCS createBreakExpCS() {
 		BreakExpCSImpl breakExpCS = new BreakExpCSImpl();
 		return breakExpCS;
@@ -188,6 +191,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictLiteralExpCS createDictLiteralExpCS() {
 		DictLiteralExpCSImpl dictLiteralExpCS = new DictLiteralExpCSImpl();
 		return dictLiteralExpCS;
@@ -198,6 +202,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictLiteralPartCS createDictLiteralPartCS() {
 		DictLiteralPartCSImpl dictLiteralPartCS = new DictLiteralPartCSImpl();
 		return dictLiteralPartCS;
@@ -208,6 +213,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictTypeCS createDictTypeCS() {
 		DictTypeCSImpl dictTypeCS = new DictTypeCSImpl();
 		return dictTypeCS;
@@ -218,6 +224,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComputeExpCS createComputeExpCS() {
 		ComputeExpCSImpl computeExpCS = new ComputeExpCSImpl();
 		return computeExpCS;
@@ -228,6 +235,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ContinueExpCS createContinueExpCS() {
 		ContinueExpCSImpl continueExpCS = new ContinueExpCSImpl();
 		return continueExpCS;
@@ -238,6 +246,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeIterateExpCS createImperativeIterateExpCS() {
 		ImperativeIterateExpCSImpl imperativeIterateExpCS = new ImperativeIterateExpCSImpl();
 		return imperativeIterateExpCS;
@@ -248,6 +257,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeLoopExpCS createImperativeLoopExpCS() {
 		ImperativeLoopExpCSImpl imperativeLoopExpCS = new ImperativeLoopExpCSImpl();
 		return imperativeLoopExpCS;
@@ -258,6 +268,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InstantiationExpCS createInstantiationExpCS() {
 		InstantiationExpCSImpl instantiationExpCS = new InstantiationExpCSImpl();
 		return instantiationExpCS;
@@ -268,6 +279,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CatchExpCS createCatchExpCS() {
 		CatchExpCSImpl catchExpCS = new CatchExpCSImpl();
 		return catchExpCS;
@@ -278,6 +290,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExpressionBlockCS createExpressionBlockCS() {
 		ExpressionBlockCSImpl expressionBlockCS = new ExpressionBlockCSImpl();
 		return expressionBlockCS;
@@ -288,6 +301,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ExtentRefCS createExtentRefCS() {
 		ExtentRefCSImpl extentRefCS = new ExtentRefCSImpl();
 		return extentRefCS;
@@ -298,6 +312,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForExpCS createForExpCS() {
 		ForExpCSImpl forExpCS = new ForExpCSImpl();
 		return forExpCS;
@@ -308,6 +323,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ListTypeCS createListTypeCS() {
 		ListTypeCSImpl listTypeCS = new ListTypeCSImpl();
 		return listTypeCS;
@@ -318,6 +334,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ListLiteralExpCS createListLiteralExpCS() {
 		ListLiteralExpCSImpl listLiteralExpCS = new ListLiteralExpCSImpl();
 		return listLiteralExpCS;
@@ -328,6 +345,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogExpCS createLogExpCS() {
 		LogExpCSImpl logExpCS = new LogExpCSImpl();
 		return logExpCS;
@@ -338,6 +356,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RaiseExpCS createRaiseExpCS() {
 		RaiseExpCSImpl raiseExpCS = new RaiseExpCSImpl();
 		return raiseExpCS;
@@ -348,6 +367,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReturnExpCS createReturnExpCS() {
 		ReturnExpCSImpl returnExpCS = new ReturnExpCSImpl();
 		return returnExpCS;
@@ -358,6 +378,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SwitchAltCS createSwitchAltCS() {
 		SwitchAltCSImpl switchAltCS = new SwitchAltCSImpl();
 		return switchAltCS;
@@ -368,6 +389,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SwitchExpCS createSwitchExpCS() {
 		SwitchExpCSImpl switchExpCS = new SwitchExpCSImpl();
 		return switchExpCS;
@@ -378,6 +400,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TryExpCS createTryExpCS() {
 		TryExpCSImpl tryExpCS = new TryExpCSImpl();
 		return tryExpCS;
@@ -388,6 +411,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarDeclarationCS createVarDeclarationCS() {
 		VarDeclarationCSImpl varDeclarationCS = new VarDeclarationCSImpl();
 		return varDeclarationCS;
@@ -398,6 +422,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarsInitializationCS createVarsInitializationCS() {
 		VarsInitializationCSImpl varsInitializationCS = new VarsInitializationCSImpl();
 		return varsInitializationCS;
@@ -408,6 +433,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WhileExpCS createWhileExpCS() {
 		WhileExpCSImpl whileExpCS = new WhileExpCSImpl();
 		return whileExpCS;
@@ -478,6 +504,7 @@ public class ImperativeOCLCSFactoryImpl extends EFactoryImpl implements Imperati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeOCLCSPackage getImperativeOCLCSPackage() {
 		return (ImperativeOCLCSPackage)getEPackage();
 	}

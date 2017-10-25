@@ -145,336 +145,336 @@ public class QVTOperationalCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTOperationalCSSwitch<@Nullable Adapter> modelSwitch =
-		new QVTOperationalCSSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter casePathName2CS(PathName2CS object) {
-				return createPathName2CSAdapter();
-			}
-			@Override
-			public Adapter casePathElement2CS(PathElement2CS object) {
-				return createPathElement2CSAdapter();
-			}
-			@Override
-			public Adapter caseTypedTypeRef2CS(TypedTypeRef2CS object) {
-				return createTypedTypeRef2CSAdapter();
-			}
-			@Override
-			public Adapter caseTopLevelCS(TopLevelCS object) {
-				return createTopLevelCSAdapter();
-			}
-			@Override
-			public Adapter caseClassifierPropertyCS(ClassifierPropertyCS object) {
-				return createClassifierPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseConstructorOperationCS(ConstructorOperationCS object) {
-				return createConstructorOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseConfigurationPropertyCS(ConfigurationPropertyCS object) {
-				return createConfigurationPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseContextualPropertyCS(ContextualPropertyCS object) {
-				return createContextualPropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseEntryOperationCS(EntryOperationCS object) {
-				return createEntryOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseExceptionCS(ExceptionCS object) {
-				return createExceptionCSAdapter();
-			}
-			@Override
-			public Adapter caseHelperOperationCS(HelperOperationCS object) {
-				return createHelperOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseImperativeOperationCS(ImperativeOperationCS object) {
-				return createImperativeOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseInitPartCS(InitPartCS object) {
-				return createInitPartCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingBodyCS(MappingBodyCS object) {
-				return createMappingBodyCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingCallExpCS(MappingCallExpCS object) {
-				return createMappingCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseMappingOperationCS(MappingOperationCS object) {
-				return createMappingOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseMetamodelCS(MetamodelCS object) {
-				return createMetamodelCSAdapter();
-			}
-			@Override
-			public Adapter caseModelTypeCS(ModelTypeCS object) {
-				return createModelTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseModelTypeRefCS(ModelTypeRefCS object) {
-				return createModelTypeRefCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleCS(ModuleCS object) {
-				return createModuleCSAdapter();
-			}
-			@Override
-			public Adapter caseModulePropertyCS(ModulePropertyCS object) {
-				return createModulePropertyCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleRefCS(ModuleRefCS object) {
-				return createModuleRefCSAdapter();
-			}
-			@Override
-			public Adapter caseModuleUsageCS(ModuleUsageCS object) {
-				return createModuleUsageCSAdapter();
-			}
-			@Override
-			public Adapter caseObjectExpCS(ObjectExpCS object) {
-				return createObjectExpCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationBodyCS(OperationBodyCS object) {
-				return createOperationBodyCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationRefCS(OperationRefCS object) {
-				return createOperationRefCSAdapter();
-			}
-			@Override
-			public Adapter casePackageRefCS(PackageRefCS object) {
-				return createPackageRefCSAdapter();
-			}
-			@Override
-			public Adapter caseParameterDeclarationCS(ParameterDeclarationCS object) {
-				return createParameterDeclarationCSAdapter();
-			}
-			@Override
-			public Adapter casePrimitiveTypeCS(PrimitiveTypeCS object) {
-				return createPrimitiveTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseQVToClassCS(QVToClassCS object) {
-				return createQVToClassCSAdapter();
-			}
-			@Override
-			public Adapter caseQVToImportCS(QVToImportCS object) {
-				return createQVToImportCSAdapter();
-			}
-			@Override
-			public Adapter caseQVToLibraryCS(QVToLibraryCS object) {
-				return createQVToLibraryCSAdapter();
-			}
-			@Override
-			public Adapter caseQVToOperationCS(QVToOperationCS object) {
-				return createQVToOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveExpCS(ResolveExpCS object) {
-				return createResolveExpCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveByTypeExpCS(ResolveByTypeExpCS object) {
-				return createResolveByTypeExpCSAdapter();
-			}
-			@Override
-			public Adapter caseResolveByMappingExpCS(ResolveByMappingExpCS object) {
-				return createResolveByMappingExpCSAdapter();
-			}
-			@Override
-			public Adapter caseStereotypeQualifierCS(StereotypeQualifierCS object) {
-				return createStereotypeQualifierCSAdapter();
-			}
-			@Override
-			public Adapter caseTagCS(TagCS object) {
-				return createTagCSAdapter();
-			}
-			@Override
-			public Adapter caseTransformationCS(TransformationCS object) {
-				return createTransformationCSAdapter();
-			}
-			@Override
-			public Adapter caseUnitRefCS(UnitRefCS object) {
-				return createUnitRefCSAdapter();
-			}
-			@Override
-			public Adapter caseVisitableCS(VisitableCS object) {
-				return createVisitableCSAdapter();
-			}
-			@Override
-			public Adapter caseElementCS(ElementCS object) {
-				return createElementCSAdapter();
-			}
-			@Override
-			public Adapter casePivotable(Pivotable object) {
-				return createPivotableAdapter();
-			}
-			@Override
-			public Adapter casePivotableElementCS(PivotableElementCS object) {
-				return createPivotableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseElementRefCS(ElementRefCS object) {
-				return createElementRefCSAdapter();
-			}
-			@Override
-			public Adapter caseTypeRefCS(TypeRefCS object) {
-				return createTypeRefCSAdapter();
-			}
-			@Override
-			public Adapter caseTypedRefCS(TypedRefCS object) {
-				return createTypedRefCSAdapter();
-			}
-			@Override
-			public Adapter caseModelElementCS(ModelElementCS object) {
-				return createModelElementCSAdapter();
-			}
-			@Override
-			public Adapter casePackageOwnerCS(PackageOwnerCS object) {
-				return createPackageOwnerCSAdapter();
-			}
-			@Override
-			public Adapter caseRootCS(RootCS object) {
-				return createRootCSAdapter();
-			}
-			@Override
-			public Adapter caseRootPackageCS(RootPackageCS object) {
-				return createRootPackageCSAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElementCS(NamedElementCS object) {
-				return createNamedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseTypedElementCS(TypedElementCS object) {
-				return createTypedElementCSAdapter();
-			}
-			@Override
-			public Adapter caseFeatureCS(FeatureCS object) {
-				return createFeatureCSAdapter();
-			}
-			@Override
-			public Adapter caseStructuralFeatureCS(StructuralFeatureCS object) {
-				return createStructuralFeatureCSAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
-				return createTemplateableElementCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationCS(OperationCS object) {
-				return createOperationCSAdapter();
-			}
-			@Override
-			public Adapter caseTypeCS(TypeCS object) {
-				return createTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseClassCS(ClassCS object) {
-				return createClassCSAdapter();
-			}
-			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
-			public Adapter caseAbstractNameExpCS(AbstractNameExpCS object) {
-				return createAbstractNameExpCSAdapter();
-			}
-			@Override
-			public Adapter caseCallExpCS(CallExpCS object) {
-				return createCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseAssociationClassCallExpCS(AssociationClassCallExpCS object) {
-				return createAssociationClassCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseShadowExpCS(ShadowExpCS object) {
-				return createShadowExpCSAdapter();
-			}
-			@Override
-			public Adapter caseIterationCallExpCS(IterationCallExpCS object) {
-				return createIterationCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseIterateCallExpCS(IterateCallExpCS object) {
-				return createIterateCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseOperationCallExpCS(OperationCallExpCS object) {
-				return createOperationCallExpCSAdapter();
-			}
-			@Override
-			public Adapter casePropertyCallExpCS(PropertyCallExpCS object) {
-				return createPropertyCallExpCSAdapter();
-			}
-			@Override
-			public Adapter caseVariableExpCS(VariableExpCS object) {
-				return createVariableExpCSAdapter();
-			}
-			@Override
-			public Adapter caseNameExpCS(NameExpCS object) {
-				return createNameExpCSAdapter();
-			}
-			@Override
-			public Adapter caseNamespaceCS(NamespaceCS object) {
-				return createNamespaceCSAdapter();
-			}
-			@Override
-			public Adapter casePackageCS(PackageCS object) {
-				return createPackageCSAdapter();
-			}
-			@Override
-			public Adapter caseParameterCS(ParameterCS object) {
-				return createParameterCSAdapter();
-			}
-			@Override
-			public Adapter caseStructuredClassCS(StructuredClassCS object) {
-				return createStructuredClassCSAdapter();
-			}
-			@Override
-			public Adapter caseStatementCS(StatementCS object) {
-				return createStatementCSAdapter();
-			}
-			@Override
-			public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
-				return createExpressionBlockCSAdapter();
-			}
-			@Override
-			public Adapter caseDataTypeCS(DataTypeCS object) {
-				return createDataTypeCSAdapter();
-			}
-			@Override
-			public Adapter caseImportCS(ImportCS object) {
-				return createImportCSAdapter();
-			}
-			@Override
-			public Adapter caseAnnotationElementCS(AnnotationElementCS object) {
-				return createAnnotationElementCSAdapter();
-			}
-			@Override
-			public Adapter caseAnnotationCS(AnnotationCS object) {
-				return createAnnotationCSAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+			new QVTOperationalCSSwitch<@Nullable Adapter>() {
+		@Override
+		public Adapter casePathName2CS(PathName2CS object) {
+			return createPathName2CSAdapter();
+		}
+		@Override
+		public Adapter casePathElement2CS(PathElement2CS object) {
+			return createPathElement2CSAdapter();
+		}
+		@Override
+		public Adapter caseTypedTypeRef2CS(TypedTypeRef2CS object) {
+			return createTypedTypeRef2CSAdapter();
+		}
+		@Override
+		public Adapter caseTopLevelCS(TopLevelCS object) {
+			return createTopLevelCSAdapter();
+		}
+		@Override
+		public Adapter caseClassifierPropertyCS(ClassifierPropertyCS object) {
+			return createClassifierPropertyCSAdapter();
+		}
+		@Override
+		public Adapter caseConstructorOperationCS(ConstructorOperationCS object) {
+			return createConstructorOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseConfigurationPropertyCS(ConfigurationPropertyCS object) {
+			return createConfigurationPropertyCSAdapter();
+		}
+		@Override
+		public Adapter caseContextualPropertyCS(ContextualPropertyCS object) {
+			return createContextualPropertyCSAdapter();
+		}
+		@Override
+		public Adapter caseEntryOperationCS(EntryOperationCS object) {
+			return createEntryOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseExceptionCS(ExceptionCS object) {
+			return createExceptionCSAdapter();
+		}
+		@Override
+		public Adapter caseHelperOperationCS(HelperOperationCS object) {
+			return createHelperOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseImperativeOperationCS(ImperativeOperationCS object) {
+			return createImperativeOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseInitPartCS(InitPartCS object) {
+			return createInitPartCSAdapter();
+		}
+		@Override
+		public Adapter caseMappingBodyCS(MappingBodyCS object) {
+			return createMappingBodyCSAdapter();
+		}
+		@Override
+		public Adapter caseMappingCallExpCS(MappingCallExpCS object) {
+			return createMappingCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseMappingOperationCS(MappingOperationCS object) {
+			return createMappingOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseMetamodelCS(MetamodelCS object) {
+			return createMetamodelCSAdapter();
+		}
+		@Override
+		public Adapter caseModelTypeCS(ModelTypeCS object) {
+			return createModelTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseModelTypeRefCS(ModelTypeRefCS object) {
+			return createModelTypeRefCSAdapter();
+		}
+		@Override
+		public Adapter caseModuleCS(ModuleCS object) {
+			return createModuleCSAdapter();
+		}
+		@Override
+		public Adapter caseModulePropertyCS(ModulePropertyCS object) {
+			return createModulePropertyCSAdapter();
+		}
+		@Override
+		public Adapter caseModuleRefCS(ModuleRefCS object) {
+			return createModuleRefCSAdapter();
+		}
+		@Override
+		public Adapter caseModuleUsageCS(ModuleUsageCS object) {
+			return createModuleUsageCSAdapter();
+		}
+		@Override
+		public Adapter caseObjectExpCS(ObjectExpCS object) {
+			return createObjectExpCSAdapter();
+		}
+		@Override
+		public Adapter caseOperationBodyCS(OperationBodyCS object) {
+			return createOperationBodyCSAdapter();
+		}
+		@Override
+		public Adapter caseOperationRefCS(OperationRefCS object) {
+			return createOperationRefCSAdapter();
+		}
+		@Override
+		public Adapter casePackageRefCS(PackageRefCS object) {
+			return createPackageRefCSAdapter();
+		}
+		@Override
+		public Adapter caseParameterDeclarationCS(ParameterDeclarationCS object) {
+			return createParameterDeclarationCSAdapter();
+		}
+		@Override
+		public Adapter casePrimitiveTypeCS(PrimitiveTypeCS object) {
+			return createPrimitiveTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseQVToClassCS(QVToClassCS object) {
+			return createQVToClassCSAdapter();
+		}
+		@Override
+		public Adapter caseQVToImportCS(QVToImportCS object) {
+			return createQVToImportCSAdapter();
+		}
+		@Override
+		public Adapter caseQVToLibraryCS(QVToLibraryCS object) {
+			return createQVToLibraryCSAdapter();
+		}
+		@Override
+		public Adapter caseQVToOperationCS(QVToOperationCS object) {
+			return createQVToOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseResolveExpCS(ResolveExpCS object) {
+			return createResolveExpCSAdapter();
+		}
+		@Override
+		public Adapter caseResolveByTypeExpCS(ResolveByTypeExpCS object) {
+			return createResolveByTypeExpCSAdapter();
+		}
+		@Override
+		public Adapter caseResolveByMappingExpCS(ResolveByMappingExpCS object) {
+			return createResolveByMappingExpCSAdapter();
+		}
+		@Override
+		public Adapter caseStereotypeQualifierCS(StereotypeQualifierCS object) {
+			return createStereotypeQualifierCSAdapter();
+		}
+		@Override
+		public Adapter caseTagCS(TagCS object) {
+			return createTagCSAdapter();
+		}
+		@Override
+		public Adapter caseTransformationCS(TransformationCS object) {
+			return createTransformationCSAdapter();
+		}
+		@Override
+		public Adapter caseUnitRefCS(UnitRefCS object) {
+			return createUnitRefCSAdapter();
+		}
+		@Override
+		public Adapter caseVisitableCS(VisitableCS object) {
+			return createVisitableCSAdapter();
+		}
+		@Override
+		public Adapter caseElementCS(ElementCS object) {
+			return createElementCSAdapter();
+		}
+		@Override
+		public Adapter casePivotable(Pivotable object) {
+			return createPivotableAdapter();
+		}
+		@Override
+		public Adapter casePivotableElementCS(PivotableElementCS object) {
+			return createPivotableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseElementRefCS(ElementRefCS object) {
+			return createElementRefCSAdapter();
+		}
+		@Override
+		public Adapter caseTypeRefCS(TypeRefCS object) {
+			return createTypeRefCSAdapter();
+		}
+		@Override
+		public Adapter caseTypedRefCS(TypedRefCS object) {
+			return createTypedRefCSAdapter();
+		}
+		@Override
+		public Adapter caseModelElementCS(ModelElementCS object) {
+			return createModelElementCSAdapter();
+		}
+		@Override
+		public Adapter casePackageOwnerCS(PackageOwnerCS object) {
+			return createPackageOwnerCSAdapter();
+		}
+		@Override
+		public Adapter caseRootCS(RootCS object) {
+			return createRootCSAdapter();
+		}
+		@Override
+		public Adapter caseRootPackageCS(RootPackageCS object) {
+			return createRootPackageCSAdapter();
+		}
+		@Override
+		public Adapter caseNameable(Nameable object) {
+			return createNameableAdapter();
+		}
+		@Override
+		public Adapter caseNamedElementCS(NamedElementCS object) {
+			return createNamedElementCSAdapter();
+		}
+		@Override
+		public Adapter caseTypedElementCS(TypedElementCS object) {
+			return createTypedElementCSAdapter();
+		}
+		@Override
+		public Adapter caseFeatureCS(FeatureCS object) {
+			return createFeatureCSAdapter();
+		}
+		@Override
+		public Adapter caseStructuralFeatureCS(StructuralFeatureCS object) {
+			return createStructuralFeatureCSAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
+			return createTemplateableElementCSAdapter();
+		}
+		@Override
+		public Adapter caseOperationCS(OperationCS object) {
+			return createOperationCSAdapter();
+		}
+		@Override
+		public Adapter caseTypeCS(TypeCS object) {
+			return createTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseClassCS(ClassCS object) {
+			return createClassCSAdapter();
+		}
+		@Override
+		public Adapter caseExpCS(ExpCS object) {
+			return createExpCSAdapter();
+		}
+		@Override
+		public Adapter caseAbstractNameExpCS(AbstractNameExpCS object) {
+			return createAbstractNameExpCSAdapter();
+		}
+		@Override
+		public Adapter caseCallExpCS(CallExpCS object) {
+			return createCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseAssociationClassCallExpCS(AssociationClassCallExpCS object) {
+			return createAssociationClassCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseShadowExpCS(ShadowExpCS object) {
+			return createShadowExpCSAdapter();
+		}
+		@Override
+		public Adapter caseIterationCallExpCS(IterationCallExpCS object) {
+			return createIterationCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseIterateCallExpCS(IterateCallExpCS object) {
+			return createIterateCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseOperationCallExpCS(OperationCallExpCS object) {
+			return createOperationCallExpCSAdapter();
+		}
+		@Override
+		public Adapter casePropertyCallExpCS(PropertyCallExpCS object) {
+			return createPropertyCallExpCSAdapter();
+		}
+		@Override
+		public Adapter caseVariableExpCS(VariableExpCS object) {
+			return createVariableExpCSAdapter();
+		}
+		@Override
+		public Adapter caseNameExpCS(NameExpCS object) {
+			return createNameExpCSAdapter();
+		}
+		@Override
+		public Adapter caseNamespaceCS(NamespaceCS object) {
+			return createNamespaceCSAdapter();
+		}
+		@Override
+		public Adapter casePackageCS(PackageCS object) {
+			return createPackageCSAdapter();
+		}
+		@Override
+		public Adapter caseParameterCS(ParameterCS object) {
+			return createParameterCSAdapter();
+		}
+		@Override
+		public Adapter caseStructuredClassCS(StructuredClassCS object) {
+			return createStructuredClassCSAdapter();
+		}
+		@Override
+		public Adapter caseStatementCS(StatementCS object) {
+			return createStatementCSAdapter();
+		}
+		@Override
+		public Adapter caseExpressionBlockCS(ExpressionBlockCS object) {
+			return createExpressionBlockCSAdapter();
+		}
+		@Override
+		public Adapter caseDataTypeCS(DataTypeCS object) {
+			return createDataTypeCSAdapter();
+		}
+		@Override
+		public Adapter caseImportCS(ImportCS object) {
+			return createImportCSAdapter();
+		}
+		@Override
+		public Adapter caseAnnotationElementCS(AnnotationElementCS object) {
+			return createAnnotationElementCSAdapter();
+		}
+		@Override
+		public Adapter caseAnnotationCS(AnnotationCS object) {
+			return createAnnotationCSAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

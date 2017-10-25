@@ -25,12 +25,12 @@ public abstract class AbstractExtendingQVTOperationalCSVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTOperationalCSVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitClassifierPropertyCS(org.eclipse.qvto.examples.xtext.qvtoperationalcs.@NonNull ClassifierPropertyCS object) {

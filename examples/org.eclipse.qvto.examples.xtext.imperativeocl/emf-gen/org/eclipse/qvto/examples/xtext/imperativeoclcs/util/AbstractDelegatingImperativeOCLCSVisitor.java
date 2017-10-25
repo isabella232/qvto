@@ -15,7 +15,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingImperativeOCLCSVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingImperativeOCLCSVisitor<R, C, D extends ImperativeOCLCSVisitor<R>>
+public abstract class AbstractDelegatingImperativeOCLCSVisitor<R, C, @NonNull D extends ImperativeOCLCSVisitor<R>>
 	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractDelegatingEssentialOCLCSVisitor<R, C, D>
 	implements ImperativeOCLCSVisitor<R>
 {
