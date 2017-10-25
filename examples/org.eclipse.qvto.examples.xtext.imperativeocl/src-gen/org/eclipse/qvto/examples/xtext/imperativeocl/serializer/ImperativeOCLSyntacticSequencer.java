@@ -26,7 +26,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected AbstractElementAlias match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q;
 	protected AbstractElementAlias match_SwitchExpCS_EndifKeyword_0_4_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
-	
+
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (ImperativeOCLGrammarAccess) access;
@@ -36,28 +36,28 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 		match_SwitchExpCS_EndifKeyword_0_4_q = new TokenAlias(false, true, grammarAccess.getSwitchExpCSAccess().getEndifKeyword_0_4());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
-	
+
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		return "";
 	}
-	
-	
+
+
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ExpressionBlockCS_DoKeyword_1_q.equals(syntax))
+			if (match_ExpressionBlockCS_DoKeyword_1_q.equals(syntax))
 				emit_ExpressionBlockCS_DoKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ExpressionStatementCS_SemicolonKeyword_1_q.equals(syntax))
+			else if (match_ExpressionStatementCS_SemicolonKeyword_1_q.equals(syntax))
 				emit_ExpressionStatementCS_SemicolonKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
+			else if (match_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q.equals(syntax))
 				emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SwitchExpCS_EndifKeyword_0_4_q.equals(syntax))
+			else if (match_SwitchExpCS_EndifKeyword_0_4_q.equals(syntax))
 				emit_SwitchExpCS_EndifKeyword_0_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
+			else if (match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
@@ -75,7 +75,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void emit_ExpressionBlockCS_DoKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -140,7 +140,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void emit_ExpressionStatementCS_SemicolonKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     '|?'?
@@ -155,7 +155,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void emit_MultiplicityCS_VerticalLineQuestionMarkKeyword_2_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     'endif'?
@@ -169,7 +169,7 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void emit_SwitchExpCS_EndifKeyword_0_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
@@ -181,5 +181,5 @@ public class ImperativeOCLSyntacticSequencer extends AbstractSyntacticSequencer 
 	protected void emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 }

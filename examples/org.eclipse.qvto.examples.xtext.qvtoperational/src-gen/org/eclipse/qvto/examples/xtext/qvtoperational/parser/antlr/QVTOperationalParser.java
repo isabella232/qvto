@@ -9,31 +9,31 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.qvto.examples.xtext.qvtoperational.services.QVTOperationalGrammarAccess;
 
 public class QVTOperationalParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
-	
+
 	@Inject
 	private QVTOperationalGrammarAccess grammarAccess;
-	
+
 	@Override
 	protected void setInitialHiddenTokens(XtextTokenStream tokenStream) {
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 	}
-	
+
 	@Override
 	protected org.eclipse.qvto.examples.xtext.qvtoperational.parser.antlr.internal.InternalQVTOperationalParser createParser(XtextTokenStream stream) {
 		return new org.eclipse.qvto.examples.xtext.qvtoperational.parser.antlr.internal.InternalQVTOperationalParser(stream, getGrammarAccess());
 	}
-	
-	@Override 
+
+	@Override
 	protected String getDefaultRuleName() {
 		return "TopLevelCS";
 	}
-	
+
 	public QVTOperationalGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
-	
+
 	public void setGrammarAccess(QVTOperationalGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
-	
+
 }

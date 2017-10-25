@@ -23,16 +23,16 @@ public abstract class AbstractImperativeOCLRuntimeModule extends org.eclipse.xte
 		properties = tryBindProperties(binder, "org/eclipse/qvto/examples/xtext/imperativeocl/ImperativeOCL.properties");
 		super.configure(binder);
 	}
-	
+
 	public void configureLanguageName(Binder binder) {
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance("org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL");
 	}
-	
+
 	public void configureFileExtensions(Binder binder) {
 		if (properties == null || properties.getProperty(Constants.FILE_EXTENSIONS) == null)
 			binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("iocl");
 	}
-	
+
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public java.lang.ClassLoader bindClassLoaderToInstance() {
 		return getClass().getClassLoader();

@@ -17,13 +17,13 @@ import org.eclipse.ocl.xtext.base.services.BaseGrammarAccess;
 
 @Singleton
 public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
-	
-	
+
+
 	public class GrammmarCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GrammmarCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.GrammmarCS");
 		private final RuleCall cImperativeOCLExpCSParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
-		//GrammmarCS returns essentialocl::ExpCS:
+
+		//GrammmarCS essentialocl::ExpCS:
 		//	ImperativeOCLExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -32,9 +32,9 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ImperativeOCLExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImperativeOCLExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ImperativeOCLExpCS");
 		private final RuleCall cExpCSParserRuleCall = (RuleCall)rule.eContents().get(1);
-		
+
 		////ImperativeOCLReservedKeyword:
 		// //	'default'
 		// //	| 'elif'
@@ -62,7 +62,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		// //NavigationOperator:
 		//
 		////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-		// ImperativeOCLExpCS returns essentialocl::ExpCS:
+		// ImperativeOCLExpCS essentialocl::ExpCS:
 		//	ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -71,7 +71,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class TypeLiteralCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeLiteralCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.TypeLiteralCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cPrimitiveTypeCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cCollectionTypeCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -79,12 +79,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTupleTypeCSParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cListTypeCSParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cDictTypeCSParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		
+
 		//// ********* ImperativeOCL Types *********
 		// // TypeLiteralCS redefined to include the new List and Dict types
 		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		// TypeLiteralCS returns base::TypedRefCS:
+		// TypeLiteralCS base::TypedRefCS:
 		//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 		@Override public ParserRule getRule() { return rule; }
 
@@ -111,25 +111,25 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ListTypeCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ListTypeCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ListTypeCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cListKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedTypeRefAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedTypeRefTypeExpCSParserRuleCall_2_0 = (RuleCall)cOwnedTypeRefAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
-		
+
 		//ListTypeCS:
-		//	"List" "(" ownedTypeRef=TypeExpCS ")";
+		//	'List' '(' ownedTypeRef=TypeExpCS ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"List" "(" ownedTypeRef=TypeExpCS ")"
+		//'List' '(' ownedTypeRef=TypeExpCS ')'
 		public Group getGroup() { return cGroup; }
 
-		//"List"
+		//'List'
 		public Keyword getListKeyword_0() { return cListKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//ownedTypeRef=TypeExpCS
@@ -138,12 +138,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedTypeRefTypeExpCSParserRuleCall_2_0() { return cOwnedTypeRefTypeExpCSParserRuleCall_2_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class DictTypeCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DictTypeCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.DictTypeCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDictKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -153,18 +153,18 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedValueTypeRefAssignment_4 = (Assignment)cGroup.eContents().get(4);
 		private final RuleCall cOwnedValueTypeRefTypeExpCSParserRuleCall_4_0 = (RuleCall)cOwnedValueTypeRefAssignment_4.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		
+
 		//DictTypeCS:
-		//	"Dict" "(" ownedKeyTypeRef=TypeExpCS "," ownedValueTypeRef=TypeExpCS ")";
+		//	'Dict' '(' ownedKeyTypeRef=TypeExpCS ',' ownedValueTypeRef=TypeExpCS ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Dict" "(" ownedKeyTypeRef=TypeExpCS "," ownedValueTypeRef=TypeExpCS ")"
+		//'Dict' '(' ownedKeyTypeRef=TypeExpCS ',' ownedValueTypeRef=TypeExpCS ')'
 		public Group getGroup() { return cGroup; }
 
-		//"Dict"
+		//'Dict'
 		public Keyword getDictKeyword_0() { return cDictKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//ownedKeyTypeRef=TypeExpCS
@@ -173,7 +173,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedKeyTypeRefTypeExpCSParserRuleCall_2_0() { return cOwnedKeyTypeRefTypeExpCSParserRuleCall_2_0; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3() { return cCommaKeyword_3; }
 
 		//ownedValueTypeRef=TypeExpCS
@@ -182,12 +182,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedValueTypeRefTypeExpCSParserRuleCall_4_0() { return cOwnedValueTypeRefTypeExpCSParserRuleCall_4_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class PrimaryExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PrimaryExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.PrimaryExpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cNestedExpCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cIfExpCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -199,25 +199,25 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cLambdaLiteralExpCSParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		private final RuleCall cImperativeExpCSParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		private final RuleCall cNameExpCSParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
-		
+
 		//// Typedef is deprecated
 		// // ********* ImperativeOCL Expressions *********
 		//
 		//// PrimaryExpCS redefined to include the new List and Dict literal expressions
 		//
 		//// FIXME refactor its definition in EssentialOCL to allow extension
-		// // These rules are ordered most rejectable first
-		//
-		//PrimaryExpCS returns essentialocl::ExpCS:
+		// PrimaryExpCS essentialocl::ExpCS:
 		//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 		//	CollectionLiteralExpCS | LambdaLiteralExpCS | ImperativeExpCS | NameExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS | CollectionLiteralExpCS
-		//| LambdaLiteralExpCS | ImperativeExpCS | NameExpCS
+		//// These rules are ordered most rejectable first
+		// NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS |
+		//TupleLiteralExpCS | MapLiteralExpCS | CollectionLiteralExpCS | LambdaLiteralExpCS | ImperativeExpCS | NameExpCS
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//NestedExpCS
+		//// These rules are ordered most rejectable first
+		// NestedExpCS
 		public RuleCall getNestedExpCSParserRuleCall_0() { return cNestedExpCSParserRuleCall_0; }
 
 		//IfExpCS
@@ -249,7 +249,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ImperativeExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImperativeExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ImperativeExpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cExpressionBlockCSParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cAssertExpCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
@@ -270,8 +270,8 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSwitchExpCSParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
 		private final RuleCall cAssignExpCSParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
 		private final RuleCall cTryExpCSParserRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
-		
-		//ImperativeExpCS returns essentialocl::ExpCS:
+
+		//ImperativeExpCS essentialocl::ExpCS:
 		//	ExpressionBlockCS | AssertExpCS | BreakExpCS | ContinueExpCS | InstantiationExpCS | LogExpCS | RaiseExpCS |
 		//	VarsInitializationCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS | ComputeExpCS | ForExpCS
 		//	| WhileExpCS | ImperativeIterateExpCS | SwitchExpCS | AssignExpCS | TryExpCS;
@@ -341,7 +341,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class AssertExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssertExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.AssertExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cAssertKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cSeverityAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -352,15 +352,15 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cWithKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cOwnedLogAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cOwnedLogLogExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedLogAssignment_3_1.eContents().get(0);
-		
+
 		//AssertExpCS:
-		//	"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
+		//	'assert' severity=SeverityKindCS? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?
+		//'assert' severity=SeverityKindCS? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?
 		public Group getGroup() { return cGroup; }
 
-		//"assert"
+		//'assert'
 		public Keyword getAssertKeyword_0() { return cAssertKeyword_0; }
 
 		//severity=SeverityKindCS?
@@ -375,10 +375,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedAssertionExpCSParserRuleCall_2_0() { return cOwnedAssertionExpCSParserRuleCall_2_0; }
 
-		//("with" ownedLog=LogExpCS)?
+		//('with' ownedLog=LogExpCS)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"with"
+		//'with'
 		public Keyword getWithKeyword_3_0() { return cWithKeyword_3_0; }
 
 		//ownedLog=LogExpCS
@@ -389,7 +389,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class AssignExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AssignExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.AssignExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cOwnedLeftAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cOwnedLeftNameExpCSParserRuleCall_0_0 = (RuleCall)cOwnedLeftAssignment_0.eContents().get(0);
@@ -401,12 +401,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cDefaultKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cOwnedDefaultAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cOwnedDefaultExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedDefaultAssignment_3_1.eContents().get(0);
-		
+
 		//AssignExpCS:
-		//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
+		//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ('default' ownedDefault=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?
+		//ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ('default' ownedDefault=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//ownedLeft=NameExpCS
@@ -427,10 +427,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedValueExpCSParserRuleCall_2_0() { return cOwnedValueExpCSParserRuleCall_2_0; }
 
-		//("default" ownedDefault=ExpCS)?
+		//('default' ownedDefault=ExpCS)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"default"
+		//'default'
 		public Keyword getDefaultKeyword_3_0() { return cDefaultKeyword_3_0; }
 
 		//ownedDefault=ExpCS
@@ -441,27 +441,27 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class BreakExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BreakExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.BreakExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBreakExpCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cBreakKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
+
 		//BreakExpCS:
-		//	{BreakExpCS} "break";
+		//	{BreakExpCS} 'break';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BreakExpCS} "break"
+		//{BreakExpCS} 'break'
 		public Group getGroup() { return cGroup; }
 
 		//{BreakExpCS}
 		public Action getBreakExpCSAction_0() { return cBreakExpCSAction_0; }
 
-		//"break"
+		//'break'
 		public Keyword getBreakKeyword_1() { return cBreakKeyword_1; }
 	}
 
 	public class CatchExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CatchExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.CatchExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cExceptKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -480,23 +480,23 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedExpsAssignment_7 = (Assignment)cGroup.eContents().get(7);
 		private final RuleCall cOwnedExpsExpCSParserRuleCall_7_0 = (RuleCall)cOwnedExpsAssignment_7.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
-		
+
 		//CatchExpCS:
-		//	"except" "(" (varName=UnrestrictedName ":")? ownedExceptionRefs+=TypeExpCS ("," ownedExceptionRefs+=TypeExpCS)* ")"
-		//	"{" ownedExps+=ExpCS* "}";
+		//	'except' '(' (varName=UnrestrictedName ':')? ownedExceptionRefs+=TypeExpCS (',' ownedExceptionRefs+=TypeExpCS)* ')'
+		//	'{' ownedExps+=ExpCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"except" "(" (varName=UnrestrictedName ":")? ownedExceptionRefs+=TypeExpCS ("," ownedExceptionRefs+=TypeExpCS)* ")" "{"
-		//ownedExps+=ExpCS* "}"
+		//'except' '(' (varName=UnrestrictedName ':')? ownedExceptionRefs+=TypeExpCS (',' ownedExceptionRefs+=TypeExpCS)* ')' '{'
+		//ownedExps+=ExpCS* '}'
 		public Group getGroup() { return cGroup; }
 
-		//"except"
+		//'except'
 		public Keyword getExceptKeyword_0() { return cExceptKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(varName=UnrestrictedName ":")?
+		//(varName=UnrestrictedName ':')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//varName=UnrestrictedName
@@ -505,7 +505,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getVarNameUnrestrictedNameParserRuleCall_2_0_0() { return cVarNameUnrestrictedNameParserRuleCall_2_0_0; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_2_1() { return cColonKeyword_2_1; }
 
 		//ownedExceptionRefs+=TypeExpCS
@@ -514,10 +514,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedExceptionRefsTypeExpCSParserRuleCall_3_0() { return cOwnedExceptionRefsTypeExpCSParserRuleCall_3_0; }
 
-		//("," ownedExceptionRefs+=TypeExpCS)*
+		//(',' ownedExceptionRefs+=TypeExpCS)*
 		public Group getGroup_4() { return cGroup_4; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
 		//ownedExceptionRefs+=TypeExpCS
@@ -526,10 +526,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedExceptionRefsTypeExpCSParserRuleCall_4_1_0() { return cOwnedExceptionRefsTypeExpCSParserRuleCall_4_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_6() { return cLeftCurlyBracketKeyword_6; }
 
 		//ownedExps+=ExpCS*
@@ -538,12 +538,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedExpsExpCSParserRuleCall_7_0() { return cOwnedExpsExpCSParserRuleCall_7_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class ComputeExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ComputeExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ComputeExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cComputeKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -554,18 +554,18 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedExpsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cOwnedExpsExpressionStatementCSParserRuleCall_5_0 = (RuleCall)cOwnedExpsAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
-		
+
 		//ComputeExpCS:
-		//	"compute" "(" ownedResultVar=VarDeclarationCS ")" "{" ownedExps+=ExpressionStatementCS "}";
+		//	'compute' '(' ownedResultVar=VarDeclarationCS ')' '{' ownedExps+=ExpressionStatementCS '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"compute" "(" ownedResultVar=VarDeclarationCS ")" "{" ownedExps+=ExpressionStatementCS "}"
+		//'compute' '(' ownedResultVar=VarDeclarationCS ')' '{' ownedExps+=ExpressionStatementCS '}'
 		public Group getGroup() { return cGroup; }
 
-		//"compute"
+		//'compute'
 		public Keyword getComputeKeyword_0() { return cComputeKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//ownedResultVar=VarDeclarationCS
@@ -574,10 +574,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationCS
 		public RuleCall getOwnedResultVarVarDeclarationCSParserRuleCall_2_0() { return cOwnedResultVarVarDeclarationCSParserRuleCall_2_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
 		//ownedExps+=ExpressionStatementCS
@@ -586,32 +586,32 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpressionStatementCS
 		public RuleCall getOwnedExpsExpressionStatementCSParserRuleCall_5_0() { return cOwnedExpsExpressionStatementCSParserRuleCall_5_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class ContinueExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ContinueExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ContinueExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cContinueExpCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cContinueKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
+
 		//ContinueExpCS:
-		//	{ContinueExpCS} "continue";
+		//	{ContinueExpCS} 'continue';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ContinueExpCS} "continue"
+		//{ContinueExpCS} 'continue'
 		public Group getGroup() { return cGroup; }
 
 		//{ContinueExpCS}
 		public Action getContinueExpCSAction_0() { return cContinueExpCSAction_0; }
 
-		//"continue"
+		//'continue'
 		public Keyword getContinueKeyword_1() { return cContinueKeyword_1; }
 	}
 
 	public class DictLiteralExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DictLiteralExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.DictLiteralExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cDictKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -624,24 +624,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedPartsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cOwnedPartsDictLiteralPartCSParserRuleCall_3_1_1_0 = (RuleCall)cOwnedPartsAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
+
 		//DictLiteralExpCS:
-		//	"Dict" "{" {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS ("," ownedParts+=DictLiteralPartCS)*)? "}";
+		//	'Dict' '{' {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS (',' ownedParts+=DictLiteralPartCS)*)? '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"Dict" "{" {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS ("," ownedParts+=DictLiteralPartCS)*)? "}"
+		//'Dict' '{' {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS (',' ownedParts+=DictLiteralPartCS)*)? '}'
 		public Group getGroup() { return cGroup; }
 
-		//"Dict"
+		//'Dict'
 		public Keyword getDictKeyword_0() { return cDictKeyword_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//{DictLiteralExpCS}
 		public Action getDictLiteralExpCSAction_2() { return cDictLiteralExpCSAction_2; }
 
-		//(ownedParts+=DictLiteralPartCS ("," ownedParts+=DictLiteralPartCS)*)?
+		//(ownedParts+=DictLiteralPartCS (',' ownedParts+=DictLiteralPartCS)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//ownedParts+=DictLiteralPartCS
@@ -650,10 +650,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//DictLiteralPartCS
 		public RuleCall getOwnedPartsDictLiteralPartCSParserRuleCall_3_0_0() { return cOwnedPartsDictLiteralPartCSParserRuleCall_3_0_0; }
 
-		//("," ownedParts+=DictLiteralPartCS)*
+		//(',' ownedParts+=DictLiteralPartCS)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
 		//ownedParts+=DictLiteralPartCS
@@ -662,24 +662,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//DictLiteralPartCS
 		public RuleCall getOwnedPartsDictLiteralPartCSParserRuleCall_3_1_1_0() { return cOwnedPartsDictLiteralPartCSParserRuleCall_3_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class DictLiteralPartCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DictLiteralPartCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.DictLiteralPartCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cOwnedKeyAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cOwnedKeyPrimitiveLiteralExpCSParserRuleCall_0_0 = (RuleCall)cOwnedKeyAssignment_0.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cOwnedValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedValueExpCSParserRuleCall_2_0 = (RuleCall)cOwnedValueAssignment_2.eContents().get(0);
-		
+
 		//DictLiteralPartCS:
-		//	ownedKey=PrimitiveLiteralExpCS "=" ownedValue=ExpCS;
+		//	ownedKey=PrimitiveLiteralExpCS '=' ownedValue=ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ownedKey=PrimitiveLiteralExpCS "=" ownedValue=ExpCS
+		//ownedKey=PrimitiveLiteralExpCS '=' ownedValue=ExpCS
 		public Group getGroup() { return cGroup; }
 
 		//ownedKey=PrimitiveLiteralExpCS
@@ -688,7 +688,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//PrimitiveLiteralExpCS
 		public RuleCall getOwnedKeyPrimitiveLiteralExpCSParserRuleCall_0_0() { return cOwnedKeyPrimitiveLiteralExpCSParserRuleCall_0_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsSignKeyword_1() { return cEqualsSignKeyword_1; }
 
 		//ownedValue=ExpCS
@@ -699,7 +699,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ExpressionBlockCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionBlockCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ExpressionBlockCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cExpressionBlockCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cDoKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -707,21 +707,21 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedExpsAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOwnedExpsExpressionStatementCSParserRuleCall_3_0 = (RuleCall)cOwnedExpsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
+
 		//ExpressionBlockCS:
-		//	{ExpressionBlockCS} "do"? "{" ownedExps+=ExpressionStatementCS* "}";
+		//	{ExpressionBlockCS} 'do'? '{' ownedExps+=ExpressionStatementCS* '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//{ExpressionBlockCS} "do"? "{" ownedExps+=ExpressionStatementCS* "}"
+		//{ExpressionBlockCS} 'do'? '{' ownedExps+=ExpressionStatementCS* '}'
 		public Group getGroup() { return cGroup; }
 
 		//{ExpressionBlockCS}
 		public Action getExpressionBlockCSAction_0() { return cExpressionBlockCSAction_0; }
 
-		//"do"?
+		//'do'?
 		public Keyword getDoKeyword_1() { return cDoKeyword_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
 		//ownedExps+=ExpressionStatementCS*
@@ -730,35 +730,35 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpressionStatementCS
 		public RuleCall getOwnedExpsExpressionStatementCSParserRuleCall_3_0() { return cOwnedExpsExpressionStatementCSParserRuleCall_3_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class ExpressionStatementCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpressionStatementCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ExpressionStatementCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final RuleCall cExpCSParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Keyword cSemicolonKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//ExpressionStatementCS returns essentialocl::ExpCS:
-		//	ExpCS ";"?;
+
+		//ExpressionStatementCS essentialocl::ExpCS:
+		//	ExpCS ';'?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//ExpCS ";"?
+		//ExpCS ';'?
 		public Group getGroup() { return cGroup; }
 
 		//ExpCS
 		public RuleCall getExpCSParserRuleCall_0() { return cExpCSParserRuleCall_0; }
 
-		//";"?
+		//';'?
 		public Keyword getSemicolonKeyword_1() { return cSemicolonKeyword_1; }
 	}
 
 	public class ExtentRefCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExtentRefCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ExtentRefCS");
 		private final Assignment cOwnedPathNameAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cOwnedPathNamePathNameCSParserRuleCall_0 = (RuleCall)cOwnedPathNameAssignment.eContents().get(0);
-		
+
 		//ExtentRefCS:
 		//	ownedPathName=PathNameCS;
 		@Override public ParserRule getRule() { return rule; }
@@ -771,7 +771,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ForExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ForExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ForExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Alternatives cAlternatives_0 = (Alternatives)cGroup.eContents().get(0);
 		private final Keyword cForEachKeyword_0_0 = (Keyword)cAlternatives_0.eContents().get(0);
@@ -791,33 +791,33 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Assignment cOwnedBodyAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cOwnedBodyExpCSParserRuleCall_6_0 = (RuleCall)cOwnedBodyAssignment_6.eContents().get(0);
-		
+
 		//// FIXME align with NameExpCS
 		// ForExpCS:
-		//	("forEach" | isOne?="forOne") "(" (ownedTarget=VarDeclarationCS ";")? ownedIterator=VarDeclarationNoInitCS ("|"
-		//	ownedCondition=ExpCS)? ")" ownedBody=ExpCS;
+		//	('forEach' | isOne?='forOne') '(' (ownedTarget=VarDeclarationCS ';')? ownedIterator=VarDeclarationNoInitCS ('|'
+		//	ownedCondition=ExpCS)? ')' ownedBody=ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//("forEach" | isOne?="forOne") "(" (ownedTarget=VarDeclarationCS ";")? ownedIterator=VarDeclarationNoInitCS ("|"
-		//ownedCondition=ExpCS)? ")" ownedBody=ExpCS
+		//('forEach' | isOne?='forOne') '(' (ownedTarget=VarDeclarationCS ';')? ownedIterator=VarDeclarationNoInitCS ('|'
+		//ownedCondition=ExpCS)? ')' ownedBody=ExpCS
 		public Group getGroup() { return cGroup; }
 
-		//"forEach" | isOne?="forOne"
+		//'forEach' | isOne?='forOne'
 		public Alternatives getAlternatives_0() { return cAlternatives_0; }
 
-		//"forEach"
+		//'forEach'
 		public Keyword getForEachKeyword_0_0() { return cForEachKeyword_0_0; }
 
-		//isOne?="forOne"
+		//isOne?='forOne'
 		public Assignment getIsOneAssignment_0_1() { return cIsOneAssignment_0_1; }
 
-		//"forOne"
+		//'forOne'
 		public Keyword getIsOneForOneKeyword_0_1_0() { return cIsOneForOneKeyword_0_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(ownedTarget=VarDeclarationCS ";")?
+		//(ownedTarget=VarDeclarationCS ';')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//ownedTarget=VarDeclarationCS
@@ -826,7 +826,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationCS
 		public RuleCall getOwnedTargetVarDeclarationCSParserRuleCall_2_0_0() { return cOwnedTargetVarDeclarationCSParserRuleCall_2_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 
 		//ownedIterator=VarDeclarationNoInitCS
@@ -835,10 +835,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationNoInitCS
 		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_3_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_3_0; }
 
-		//("|" ownedCondition=ExpCS)?
+		//('|' ownedCondition=ExpCS)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_4_0() { return cVerticalLineKeyword_4_0; }
 
 		//ownedCondition=ExpCS
@@ -847,7 +847,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedConditionExpCSParserRuleCall_4_1_0() { return cOwnedConditionExpCSParserRuleCall_4_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
 		//ownedBody=ExpCS
@@ -858,7 +858,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class ImperativeIterateExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ImperativeIterateExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ImperativeIterateExpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cNameAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -903,34 +903,34 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedConditionAssignment_2_7 = (Assignment)cGroup_2.eContents().get(7);
 		private final RuleCall cOwnedConditionExpCSParserRuleCall_2_7_0 = (RuleCall)cOwnedConditionAssignment_2_7.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_8 = (Keyword)cGroup_2.eContents().get(8);
-		
+
 		//// FIXME align with NameExpCS
 		// ImperativeIterateExpCS:
-		//	name="xcollect" "(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedBody=ExpCS ")" | name=("xselect" | "xselectOne")
-		//	"(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedCondition=ExpCS ")" | name=("xcollectselect" |
-		//	"xcollectselectOne") "(" (ownedIterator=VarDeclarationNoInitCS ";")? ownedTarget=VarDeclarationCS ":="
-		//	ownedBody=ExpCS "|" ownedCondition=ExpCS ")";
+		//	name='xcollect' '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedBody=ExpCS ')' | name=('xselect' | 'xselectOne')
+		//	'(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedCondition=ExpCS ')' | name=('xcollectselect' |
+		//	'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')? ownedTarget=VarDeclarationCS ':='
+		//	ownedBody=ExpCS '|' ownedCondition=ExpCS ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//name="xcollect" "(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedBody=ExpCS ")" | name=("xselect" | "xselectOne")
-		//"(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedCondition=ExpCS ")" | name=("xcollectselect" |
-		//"xcollectselectOne") "(" (ownedIterator=VarDeclarationNoInitCS ";")? ownedTarget=VarDeclarationCS ":=" ownedBody=ExpCS
-		//"|" ownedCondition=ExpCS ")"
+		//name='xcollect' '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedBody=ExpCS ')' | name=('xselect' | 'xselectOne')
+		//'(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedCondition=ExpCS ')' | name=('xcollectselect' |
+		//'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')? ownedTarget=VarDeclarationCS ':=' ownedBody=ExpCS
+		//'|' ownedCondition=ExpCS ')'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//name="xcollect" "(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedBody=ExpCS ")"
+		//name='xcollect' '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedBody=ExpCS ')'
 		public Group getGroup_0() { return cGroup_0; }
 
-		//name="xcollect"
+		//name='xcollect'
 		public Assignment getNameAssignment_0_0() { return cNameAssignment_0_0; }
 
-		//"xcollect"
+		//'xcollect'
 		public Keyword getNameXcollectKeyword_0_0_0() { return cNameXcollectKeyword_0_0_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0_1() { return cLeftParenthesisKeyword_0_1; }
 
-		//(ownedIterator=VarDeclarationNoInitCS "|")?
+		//(ownedIterator=VarDeclarationNoInitCS '|')?
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//ownedIterator=VarDeclarationNoInitCS
@@ -939,7 +939,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationNoInitCS
 		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_0_2_0_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_0_2_0_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_0_2_1() { return cVerticalLineKeyword_0_2_1; }
 
 		//ownedBody=ExpCS
@@ -948,28 +948,28 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedBodyExpCSParserRuleCall_0_3_0() { return cOwnedBodyExpCSParserRuleCall_0_3_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_0_4() { return cRightParenthesisKeyword_0_4; }
 
-		//name=("xselect" | "xselectOne") "(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedCondition=ExpCS ")"
+		//name=('xselect' | 'xselectOne') '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedCondition=ExpCS ')'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//name=("xselect" | "xselectOne")
+		//name=('xselect' | 'xselectOne')
 		public Assignment getNameAssignment_1_0() { return cNameAssignment_1_0; }
 
-		//"xselect" | "xselectOne"
+		//('xselect' | 'xselectOne')
 		public Alternatives getNameAlternatives_1_0_0() { return cNameAlternatives_1_0_0; }
 
-		//"xselect"
+		//'xselect'
 		public Keyword getNameXselectKeyword_1_0_0_0() { return cNameXselectKeyword_1_0_0_0; }
 
-		//"xselectOne"
+		//'xselectOne'
 		public Keyword getNameXselectOneKeyword_1_0_0_1() { return cNameXselectOneKeyword_1_0_0_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_1() { return cLeftParenthesisKeyword_1_1; }
 
-		//(ownedIterator=VarDeclarationNoInitCS "|")?
+		//(ownedIterator=VarDeclarationNoInitCS '|')?
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//ownedIterator=VarDeclarationNoInitCS
@@ -978,7 +978,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationNoInitCS
 		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_2_0_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_2_0_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_1_2_1() { return cVerticalLineKeyword_1_2_1; }
 
 		//ownedCondition=ExpCS
@@ -987,29 +987,29 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedConditionExpCSParserRuleCall_1_3_0() { return cOwnedConditionExpCSParserRuleCall_1_3_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_4() { return cRightParenthesisKeyword_1_4; }
 
-		//name=("xcollectselect" | "xcollectselectOne") "(" (ownedIterator=VarDeclarationNoInitCS ";")?
-		//ownedTarget=VarDeclarationCS ":=" ownedBody=ExpCS "|" ownedCondition=ExpCS ")"
+		//name=('xcollectselect' | 'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')?
+		//ownedTarget=VarDeclarationCS ':=' ownedBody=ExpCS '|' ownedCondition=ExpCS ')'
 		public Group getGroup_2() { return cGroup_2; }
 
-		//name=("xcollectselect" | "xcollectselectOne")
+		//name=('xcollectselect' | 'xcollectselectOne')
 		public Assignment getNameAssignment_2_0() { return cNameAssignment_2_0; }
 
-		//"xcollectselect" | "xcollectselectOne"
+		//('xcollectselect' | 'xcollectselectOne')
 		public Alternatives getNameAlternatives_2_0_0() { return cNameAlternatives_2_0_0; }
 
-		//"xcollectselect"
+		//'xcollectselect'
 		public Keyword getNameXcollectselectKeyword_2_0_0_0() { return cNameXcollectselectKeyword_2_0_0_0; }
 
-		//"xcollectselectOne"
+		//'xcollectselectOne'
 		public Keyword getNameXcollectselectOneKeyword_2_0_0_1() { return cNameXcollectselectOneKeyword_2_0_0_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2_1() { return cLeftParenthesisKeyword_2_1; }
 
-		//(ownedIterator=VarDeclarationNoInitCS ";")?
+		//(ownedIterator=VarDeclarationNoInitCS ';')?
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
 		//ownedIterator=VarDeclarationNoInitCS
@@ -1018,7 +1018,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationNoInitCS
 		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_2_2_0_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_2_2_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_2_1() { return cSemicolonKeyword_2_2_1; }
 
 		//ownedTarget=VarDeclarationCS
@@ -1027,7 +1027,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationCS
 		public RuleCall getOwnedTargetVarDeclarationCSParserRuleCall_2_3_0() { return cOwnedTargetVarDeclarationCSParserRuleCall_2_3_0; }
 
-		//":="
+		//':='
 		public Keyword getColonEqualsSignKeyword_2_4() { return cColonEqualsSignKeyword_2_4; }
 
 		//ownedBody=ExpCS
@@ -1036,7 +1036,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedBodyExpCSParserRuleCall_2_5_0() { return cOwnedBodyExpCSParserRuleCall_2_5_0; }
 
-		//"|"
+		//'|'
 		public Keyword getVerticalLineKeyword_2_6() { return cVerticalLineKeyword_2_6; }
 
 		//ownedCondition=ExpCS
@@ -1045,12 +1045,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedConditionExpCSParserRuleCall_2_7_0() { return cOwnedConditionExpCSParserRuleCall_2_7_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2_8() { return cRightParenthesisKeyword_2_8; }
 	}
 
 	public class InstantiationExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InstantiationExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.InstantiationExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cNewKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOwnedClassRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1068,19 +1068,19 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedArgumentsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
 		private final RuleCall cOwnedArgumentsExpCSParserRuleCall_4_1_1_0 = (RuleCall)cOwnedArgumentsAssignment_4_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		
+
 		//// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
 		//
 		//InstantiationExpCS:
-		//	"new" ownedClassRef=TypeExpCS ("@" ownedExtentRef=TypeNameExpCS)? "(" (ownedArguments+=ExpCS (","
-		//	ownedArguments+=ExpCS)*)? ")";
+		//	'new' ownedClassRef=TypeExpCS ('@' ownedExtentRef=TypeNameExpCS)? '(' (ownedArguments+=ExpCS (','
+		//	ownedArguments+=ExpCS)*)? ')';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"new" ownedClassRef=TypeExpCS ("@" ownedExtentRef=TypeNameExpCS)? "(" (ownedArguments+=ExpCS (","
-		//ownedArguments+=ExpCS)*)? ")"
+		//'new' ownedClassRef=TypeExpCS ('@' ownedExtentRef=TypeNameExpCS)? '(' (ownedArguments+=ExpCS (','
+		//ownedArguments+=ExpCS)*)? ')'
 		public Group getGroup() { return cGroup; }
 
-		//"new"
+		//'new'
 		public Keyword getNewKeyword_0() { return cNewKeyword_0; }
 
 		//ownedClassRef=TypeExpCS
@@ -1089,10 +1089,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedClassRefTypeExpCSParserRuleCall_1_0() { return cOwnedClassRefTypeExpCSParserRuleCall_1_0; }
 
-		//("@" ownedExtentRef=TypeNameExpCS)?
+		//('@' ownedExtentRef=TypeNameExpCS)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//"@"
+		//'@'
 		public Keyword getCommercialAtKeyword_2_0() { return cCommercialAtKeyword_2_0; }
 
 		//ownedExtentRef=TypeNameExpCS
@@ -1101,10 +1101,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeNameExpCS
 		public RuleCall getOwnedExtentRefTypeNameExpCSParserRuleCall_2_1_0() { return cOwnedExtentRefTypeNameExpCSParserRuleCall_2_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//(ownedArguments+=ExpCS ("," ownedArguments+=ExpCS)*)?
+		//(ownedArguments+=ExpCS (',' ownedArguments+=ExpCS)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//ownedArguments+=ExpCS
@@ -1113,10 +1113,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedArgumentsExpCSParserRuleCall_4_0_0() { return cOwnedArgumentsExpCSParserRuleCall_4_0_0; }
 
-		//("," ownedArguments+=ExpCS)*
+		//(',' ownedArguments+=ExpCS)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
 		//ownedArguments+=ExpCS
@@ -1125,12 +1125,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedArgumentsExpCSParserRuleCall_4_1_1_0() { return cOwnedArgumentsExpCSParserRuleCall_4_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class ListLiteralExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ListLiteralExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ListLiteralExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cListKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1143,24 +1143,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedPartsAssignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
 		private final RuleCall cOwnedPartsCollectionLiteralPartCSParserRuleCall_3_1_1_0 = (RuleCall)cOwnedPartsAssignment_3_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
-		
+
 		//ListLiteralExpCS:
-		//	"List" "{" {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}";
+		//	'List' '{' {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)? '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"List" "{" {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}"
+		//'List' '{' {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)? '}'
 		public Group getGroup() { return cGroup; }
 
-		//"List"
+		//'List'
 		public Keyword getListKeyword_0() { return cListKeyword_0; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
 		//{ListLiteralExpCS}
 		public Action getListLiteralExpCSAction_2() { return cListLiteralExpCSAction_2; }
 
-		//(ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)?
+		//(ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//ownedParts+=CollectionLiteralPartCS
@@ -1169,10 +1169,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//CollectionLiteralPartCS
 		public RuleCall getOwnedPartsCollectionLiteralPartCSParserRuleCall_3_0_0() { return cOwnedPartsCollectionLiteralPartCSParserRuleCall_3_0_0; }
 
-		//("," ownedParts+=CollectionLiteralPartCS)*
+		//(',' ownedParts+=CollectionLiteralPartCS)*
 		public Group getGroup_3_1() { return cGroup_3_1; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_1_0() { return cCommaKeyword_3_1_0; }
 
 		//ownedParts+=CollectionLiteralPartCS
@@ -1181,12 +1181,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//CollectionLiteralPartCS
 		public RuleCall getOwnedPartsCollectionLiteralPartCSParserRuleCall_3_1_1_0() { return cOwnedPartsCollectionLiteralPartCSParserRuleCall_3_1_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
 	public class LogExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "LogExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.LogExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLogKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1205,24 +1205,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cWhenKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
 		private final Assignment cOwnedConditionAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
 		private final RuleCall cOwnedConditionExpCSParserRuleCall_6_1_0 = (RuleCall)cOwnedConditionAssignment_6_1.eContents().get(0);
-		
+
 		//// FIXME align with NameExpCS
 		// // FIXME severity -> enum
 		//
 		//// Improve spec: result.log("message", severity) when condition
 		// LogExpCS:
-		//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
+		//	'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS)? (',' severity=SeverityKindCS)? ')' ('when'
 		//	ownedCondition=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
+		//'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS)? (',' severity=SeverityKindCS)? ')' ('when'
 		//ownedCondition=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
-		//"log"
+		//'log'
 		public Keyword getLogKeyword_0() { return cLogKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
 		//ownedMessage=StringLiteralExpCS
@@ -1231,10 +1231,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//StringLiteralExpCS
 		public RuleCall getOwnedMessageStringLiteralExpCSParserRuleCall_2_0() { return cOwnedMessageStringLiteralExpCSParserRuleCall_2_0; }
 
-		//("," ownedElement=ExpCS)?
+		//(',' ownedElement=ExpCS)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_3_0() { return cCommaKeyword_3_0; }
 
 		//ownedElement=ExpCS
@@ -1243,10 +1243,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedElementExpCSParserRuleCall_3_1_0() { return cOwnedElementExpCSParserRuleCall_3_1_0; }
 
-		//("," severity=SeverityKindCS)?
+		//(',' severity=SeverityKindCS)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
 		//severity=SeverityKindCS
@@ -1255,13 +1255,13 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//SeverityKindCS
 		public RuleCall getSeveritySeverityKindCSEnumRuleCall_4_1_0() { return cSeveritySeverityKindCSEnumRuleCall_4_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 
-		//("when" ownedCondition=ExpCS)?
+		//('when' ownedCondition=ExpCS)?
 		public Group getGroup_6() { return cGroup_6; }
 
-		//"when"
+		//'when'
 		public Keyword getWhenKeyword_6_0() { return cWhenKeyword_6_0; }
 
 		//ownedCondition=ExpCS
@@ -1272,7 +1272,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class RaiseExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RaiseExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.RaiseExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cRaiseKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOwnedExceptionRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1285,16 +1285,17 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedArgumentsAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
 		private final RuleCall cOwnedArgumentsExpCSParserRuleCall_4_1_0 = (RuleCall)cOwnedArgumentsAssignment_4_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
-		
-		//// FIXME OMG: should support several arguments
-		// RaiseExpCS:
-		//	"raise" ownedExceptionRef=TypeExpCS "(" ownedArguments+=ExpCS ("," ownedArguments+=ExpCS)* ")";
+
+		//RaiseExpCS:
+		//	'raise' ownedExceptionRef=TypeExpCS '(' ownedArguments+=ExpCS (',' ownedArguments+=ExpCS)* ')'
+		//	// FIXME OMG: should support several arguments
+		//;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"raise" ownedExceptionRef=TypeExpCS "(" ownedArguments+=ExpCS ("," ownedArguments+=ExpCS)* ")"
+		//'raise' ownedExceptionRef=TypeExpCS '(' ownedArguments+=ExpCS (',' ownedArguments+=ExpCS)* ')'
 		public Group getGroup() { return cGroup; }
 
-		//"raise"
+		//'raise'
 		public Keyword getRaiseKeyword_0() { return cRaiseKeyword_0; }
 
 		//ownedExceptionRef=TypeExpCS
@@ -1303,7 +1304,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//TypeExpCS
 		public RuleCall getOwnedExceptionRefTypeExpCSParserRuleCall_1_0() { return cOwnedExceptionRefTypeExpCSParserRuleCall_1_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_2() { return cLeftParenthesisKeyword_2; }
 
 		//ownedArguments+=ExpCS
@@ -1312,10 +1313,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedArgumentsExpCSParserRuleCall_3_0() { return cOwnedArgumentsExpCSParserRuleCall_3_0; }
 
-		//("," ownedArguments+=ExpCS)*
+		//(',' ownedArguments+=ExpCS)*
 		public Group getGroup_4() { return cGroup_4; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
 		//ownedArguments+=ExpCS
@@ -1324,26 +1325,26 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedArgumentsExpCSParserRuleCall_4_1_0() { return cOwnedArgumentsExpCSParserRuleCall_4_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
 	}
 
 	public class ReturnExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReturnExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.ReturnExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cReturnKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Action cReturnExpCSAction_1 = (Action)cGroup.eContents().get(1);
 		private final Assignment cOwnedValueAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedValueExpCSParserRuleCall_2_0 = (RuleCall)cOwnedValueAssignment_2.eContents().get(0);
-		
+
 		//ReturnExpCS:
-		//	"return" {ReturnExpCS} ownedValue=ExpCS?;
+		//	'return' {ReturnExpCS} ownedValue=ExpCS?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"return" {ReturnExpCS} ownedValue=ExpCS?
+		//'return' {ReturnExpCS} ownedValue=ExpCS?
 		public Group getGroup() { return cGroup; }
 
-		//"return"
+		//'return'
 		public Keyword getReturnKeyword_0() { return cReturnKeyword_0; }
 
 		//{ReturnExpCS}
@@ -1357,11 +1358,11 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class StringLiteralElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StringLiteral");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.StringLiteral");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cSINGLE_QUOTED_STRINGTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cDOUBLE_QUOTED_STRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
+
 		//StringLiteral:
 		//	SINGLE_QUOTED_STRING | DOUBLE_QUOTED_STRING;
 		@Override public ParserRule getRule() { return rule; }
@@ -1377,7 +1378,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class SwitchExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SwitchExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.SwitchExpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
 		private final Assignment cIfSyntaxAssignment_0_0 = (Assignment)cGroup_0.eContents().get(0);
@@ -1410,27 +1411,27 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedElsePartAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
 		private final RuleCall cOwnedElsePartExpCSParserRuleCall_1_4_1_0 = (RuleCall)cOwnedElsePartAssignment_1_4_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_5 = (Keyword)cGroup_1.eContents().get(5);
-		
-		//// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+
+		//// FIXME OMG issue: list->swith(i) {...} syntax ?????
 		// // FIXME SwitchExpCS should probably be a CallExp
 		// SwitchExpCS:
-		//	ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
-		//	| "switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
-		//	ownedElsePart=ExpCS)? "}";
+		//	ifSyntax?='if' ownedAltParts+=SwitchAltCS ('elif' ownedAltParts+=SwitchAltCS)* ('else' ownedElsePart=ExpCS)? 'endif'?
+		//	| 'switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' ('case' ownedAltParts+=SwitchAltCS)+ ('else'
+		//	ownedElsePart=ExpCS)? '}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"? |
-		//"switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
-		//ownedElsePart=ExpCS)? "}"
+		//ifSyntax?='if' ownedAltParts+=SwitchAltCS ('elif' ownedAltParts+=SwitchAltCS)* ('else' ownedElsePart=ExpCS)? 'endif'? |
+		//'switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' ('case' ownedAltParts+=SwitchAltCS)+ ('else'
+		//ownedElsePart=ExpCS)? '}'
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
+		//ifSyntax?='if' ownedAltParts+=SwitchAltCS ('elif' ownedAltParts+=SwitchAltCS)* ('else' ownedElsePart=ExpCS)? 'endif'?
 		public Group getGroup_0() { return cGroup_0; }
 
-		//ifSyntax?="if"
+		//ifSyntax?='if'
 		public Assignment getIfSyntaxAssignment_0_0() { return cIfSyntaxAssignment_0_0; }
 
-		//"if"
+		//'if'
 		public Keyword getIfSyntaxIfKeyword_0_0_0() { return cIfSyntaxIfKeyword_0_0_0; }
 
 		//ownedAltParts+=SwitchAltCS
@@ -1439,10 +1440,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//SwitchAltCS
 		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_0_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_0_1_0; }
 
-		//("elif" ownedAltParts+=SwitchAltCS)*
+		//('elif' ownedAltParts+=SwitchAltCS)*
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
-		//"elif"
+		//'elif'
 		public Keyword getElifKeyword_0_2_0() { return cElifKeyword_0_2_0; }
 
 		//ownedAltParts+=SwitchAltCS
@@ -1451,10 +1452,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//SwitchAltCS
 		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_0_2_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_0_2_1_0; }
 
-		//("else" ownedElsePart=ExpCS)?
+		//('else' ownedElsePart=ExpCS)?
 		public Group getGroup_0_3() { return cGroup_0_3; }
 
-		//"else"
+		//'else'
 		public Keyword getElseKeyword_0_3_0() { return cElseKeyword_0_3_0; }
 
 		//ownedElsePart=ExpCS
@@ -1463,20 +1464,20 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedElsePartExpCSParserRuleCall_0_3_1_0() { return cOwnedElsePartExpCSParserRuleCall_0_3_1_0; }
 
-		//"endif"?
+		//'endif'?
 		public Keyword getEndifKeyword_0_4() { return cEndifKeyword_0_4; }
 
-		//"switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
-		//ownedElsePart=ExpCS)? "}"
+		//'switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' ('case' ownedAltParts+=SwitchAltCS)+ ('else'
+		//ownedElsePart=ExpCS)? '}'
 		public Group getGroup_1() { return cGroup_1; }
 
-		//"switch"
+		//'switch'
 		public Keyword getSwitchKeyword_1_0() { return cSwitchKeyword_1_0; }
 
-		//("(" ownedIterator=VarDeclarationNoInitCS ")")?
+		//('(' ownedIterator=VarDeclarationNoInitCS ')')?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1_1_0() { return cLeftParenthesisKeyword_1_1_0; }
 
 		//ownedIterator=VarDeclarationNoInitCS
@@ -1485,16 +1486,16 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationNoInitCS
 		public RuleCall getOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_1_1_0() { return cOwnedIteratorVarDeclarationNoInitCSParserRuleCall_1_1_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_1_1_2() { return cRightParenthesisKeyword_1_1_2; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_1_2() { return cLeftCurlyBracketKeyword_1_2; }
 
-		//("case" ownedAltParts+=SwitchAltCS)+
+		//('case' ownedAltParts+=SwitchAltCS)+
 		public Group getGroup_1_3() { return cGroup_1_3; }
 
-		//"case"
+		//'case'
 		public Keyword getCaseKeyword_1_3_0() { return cCaseKeyword_1_3_0; }
 
 		//ownedAltParts+=SwitchAltCS
@@ -1503,10 +1504,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//SwitchAltCS
 		public RuleCall getOwnedAltPartsSwitchAltCSParserRuleCall_1_3_1_0() { return cOwnedAltPartsSwitchAltCSParserRuleCall_1_3_1_0; }
 
-		//("else" ownedElsePart=ExpCS)?
+		//('else' ownedElsePart=ExpCS)?
 		public Group getGroup_1_4() { return cGroup_1_4; }
 
-		//"else"
+		//'else'
 		public Keyword getElseKeyword_1_4_0() { return cElseKeyword_1_4_0; }
 
 		//ownedElsePart=ExpCS
@@ -1515,12 +1516,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedElsePartExpCSParserRuleCall_1_4_1_0() { return cOwnedElsePartExpCSParserRuleCall_1_4_1_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_5() { return cRightCurlyBracketKeyword_1_5; }
 	}
 
 	public class SwitchAltCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SwitchAltCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.SwitchAltCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOwnedConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1528,15 +1529,15 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cOwnedBodyAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOwnedBodyExpCSParserRuleCall_3_0 = (RuleCall)cOwnedBodyAssignment_3.eContents().get(0);
-		
+
 		//SwitchAltCS:
-		//	"(" ownedCondition=ExpCS ")" ownedBody=ExpCS;
+		//	'(' ownedCondition=ExpCS ')' ownedBody=ExpCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"(" ownedCondition=ExpCS ")" ownedBody=ExpCS
+		//'(' ownedCondition=ExpCS ')' ownedBody=ExpCS
 		public Group getGroup() { return cGroup; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
 
 		//ownedCondition=ExpCS
@@ -1545,7 +1546,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedConditionExpCSParserRuleCall_1_0() { return cOwnedConditionExpCSParserRuleCall_1_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
 
 		//ownedBody=ExpCS
@@ -1556,7 +1557,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class TryExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TryExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.TryExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cTryExpCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTryKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1566,22 +1567,23 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cOwnedCatchsAssignment_5 = (Assignment)cGroup.eContents().get(5);
 		private final RuleCall cOwnedCatchsCatchExpCSParserRuleCall_5_0 = (RuleCall)cOwnedCatchsAssignment_5.eContents().get(0);
-		
-		//// FIXME in the AS there should be at least one CatchExp
-		// TryExpCS:
-		//	{TryExpCS} "try" "{" ownedExps+=ExpCS* "}" ownedCatchs+=CatchExpCS+;
+
+		//TryExpCS:
+		//	{TryExpCS} 'try' '{' ownedExps+=ExpCS* '}' ownedCatchs+=CatchExpCS+
+		//	// FIXME in the AS there should be at least one CatchExp
+		//;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{TryExpCS} "try" "{" ownedExps+=ExpCS* "}" ownedCatchs+=CatchExpCS+
+		//{TryExpCS} 'try' '{' ownedExps+=ExpCS* '}' ownedCatchs+=CatchExpCS+
 		public Group getGroup() { return cGroup; }
 
 		//{TryExpCS}
 		public Action getTryExpCSAction_0() { return cTryExpCSAction_0; }
 
-		//"try"
+		//'try'
 		public Keyword getTryKeyword_1() { return cTryKeyword_1; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
 		//ownedExps+=ExpCS*
@@ -1590,7 +1592,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedExpsExpCSParserRuleCall_3_0() { return cOwnedExpsExpCSParserRuleCall_3_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 
 		//ownedCatchs+=CatchExpCS+
@@ -1601,7 +1603,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class VarDeclarationCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarDeclarationCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.VarDeclarationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -1614,15 +1616,15 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInitOpInitOpCSEnumRuleCall_2_0_0 = (RuleCall)cInitOpAssignment_2_0.eContents().get(0);
 		private final Assignment cOwnedInitExpressionAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_2_1_0 = (RuleCall)cOwnedInitExpressionAssignment_2_1.eContents().get(0);
-		
+
 		//// FIXME there should be additional disambiguation between NameExpCS and UnlinkExp
 		//
 		//// UnlinkExpCS returns essentialocl::NameExpCS:
 		// VarDeclarationCS:
-		//	name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
+		//	name=UnrestrictedName (':' ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?
+		//name=UnrestrictedName (':' ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -1631,10 +1633,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getNameUnrestrictedNameParserRuleCall_0_0() { return cNameUnrestrictedNameParserRuleCall_0_0; }
 
-		//(":" ownedType=TypeExpCS)?
+		//(':' ownedType=TypeExpCS)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
 		//ownedType=TypeExpCS
@@ -1660,7 +1662,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class VarDeclarationNoInitCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarDeclarationNoInitCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.VarDeclarationNoInitCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameUnrestrictedNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -1668,12 +1670,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cOwnedTypeAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cOwnedTypeTypeExpCSParserRuleCall_1_1_0 = (RuleCall)cOwnedTypeAssignment_1_1.eContents().get(0);
-		
-		//VarDeclarationNoInitCS returns VarDeclarationCS:
-		//	name=UnrestrictedName (":" ownedType=TypeExpCS)?;
+
+		//VarDeclarationNoInitCS VarDeclarationCS:
+		//	name=UnrestrictedName (':' ownedType=TypeExpCS)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName (":" ownedType=TypeExpCS)?
+		//name=UnrestrictedName (':' ownedType=TypeExpCS)?
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -1682,10 +1684,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getNameUnrestrictedNameParserRuleCall_0_0() { return cNameUnrestrictedNameParserRuleCall_0_0; }
 
-		//(":" ownedType=TypeExpCS)?
+		//(':' ownedType=TypeExpCS)?
 		public Group getGroup_1() { return cGroup_1; }
 
-		//":"
+		//':'
 		public Keyword getColonKeyword_1_0() { return cColonKeyword_1_0; }
 
 		//ownedType=TypeExpCS
@@ -1696,7 +1698,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class VarsInitializationCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VarsInitializationCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.VarsInitializationCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cVarKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cOwnedVarDeclarationsAssignment_1 = (Assignment)cGroup.eContents().get(1);
@@ -1705,15 +1707,15 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCommaKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cOwnedVarDeclarationsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cOwnedVarDeclarationsVarDeclarationCSParserRuleCall_2_1_0 = (RuleCall)cOwnedVarDeclarationsAssignment_2_1.eContents().get(0);
-		
+
 		//VarsInitializationCS:
-		//	"var" ownedVarDeclarations+=VarDeclarationCS ("," ownedVarDeclarations+=VarDeclarationCS)*;
+		//	'var' ownedVarDeclarations+=VarDeclarationCS (',' ownedVarDeclarations+=VarDeclarationCS)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//"var" ownedVarDeclarations+=VarDeclarationCS ("," ownedVarDeclarations+=VarDeclarationCS)*
+		//'var' ownedVarDeclarations+=VarDeclarationCS (',' ownedVarDeclarations+=VarDeclarationCS)*
 		public Group getGroup() { return cGroup; }
 
-		//"var"
+		//'var'
 		public Keyword getVarKeyword_0() { return cVarKeyword_0; }
 
 		//ownedVarDeclarations+=VarDeclarationCS
@@ -1722,10 +1724,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationCS
 		public RuleCall getOwnedVarDeclarationsVarDeclarationCSParserRuleCall_1_0() { return cOwnedVarDeclarationsVarDeclarationCSParserRuleCall_1_0; }
 
-		//("," ownedVarDeclarations+=VarDeclarationCS)*
+		//(',' ownedVarDeclarations+=VarDeclarationCS)*
 		public Group getGroup_2() { return cGroup_2; }
 
-		//","
+		//','
 		public Keyword getCommaKeyword_2_0() { return cCommaKeyword_2_0; }
 
 		//ownedVarDeclarations+=VarDeclarationCS
@@ -1736,7 +1738,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	public class WhileExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WhileExpCS");
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.WhileExpCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cWhileKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
@@ -1751,22 +1753,22 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedExpsAssignment_6 = (Assignment)cGroup.eContents().get(6);
 		private final RuleCall cOwnedExpsExpressionStatementCSParserRuleCall_6_0 = (RuleCall)cOwnedExpsAssignment_6.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
-		
+
 		//WhileExpCS:
-		//	"while" "(" (ownedResultVar=VarDeclarationCS ";")? ownedCondition=ExpCS ")" "{" ownedExps+=ExpressionStatementCS*
-		//	"}";
+		//	'while' '(' (ownedResultVar=VarDeclarationCS ';')? ownedCondition=ExpCS ')' '{' ownedExps+=ExpressionStatementCS*
+		//	'}';
 		@Override public ParserRule getRule() { return rule; }
 
-		//"while" "(" (ownedResultVar=VarDeclarationCS ";")? ownedCondition=ExpCS ")" "{" ownedExps+=ExpressionStatementCS* "}"
+		//'while' '(' (ownedResultVar=VarDeclarationCS ';')? ownedCondition=ExpCS ')' '{' ownedExps+=ExpressionStatementCS* '}'
 		public Group getGroup() { return cGroup; }
 
-		//"while"
+		//'while'
 		public Keyword getWhileKeyword_0() { return cWhileKeyword_0; }
 
-		//"("
+		//'('
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//(ownedResultVar=VarDeclarationCS ";")?
+		//(ownedResultVar=VarDeclarationCS ';')?
 		public Group getGroup_2() { return cGroup_2; }
 
 		//ownedResultVar=VarDeclarationCS
@@ -1775,7 +1777,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationCS
 		public RuleCall getOwnedResultVarVarDeclarationCSParserRuleCall_2_0_0() { return cOwnedResultVarVarDeclarationCSParserRuleCall_2_0_0; }
 
-		//";"
+		//';'
 		public Keyword getSemicolonKeyword_2_1() { return cSemicolonKeyword_2_1; }
 
 		//ownedCondition=ExpCS
@@ -1784,10 +1786,10 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpCS
 		public RuleCall getOwnedConditionExpCSParserRuleCall_3_0() { return cOwnedConditionExpCSParserRuleCall_3_0; }
 
-		//")"
+		//')'
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 
-		//"{"
+		//'{'
 		public Keyword getLeftCurlyBracketKeyword_5() { return cLeftCurlyBracketKeyword_5; }
 
 		//ownedExps+=ExpressionStatementCS*
@@ -1796,13 +1798,13 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//ExpressionStatementCS
 		public RuleCall getOwnedExpsExpressionStatementCSParserRuleCall_6_0() { return cOwnedExpsExpressionStatementCSParserRuleCall_6_0; }
 
-		//"}"
+		//'}'
 		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
-	
-	
+
+
 	public class SeverityKindCSElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "SeverityKindCS");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.SeverityKindCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cErrorEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cErrorErrorKeyword_0_0 = (Keyword)cErrorEnumLiteralDeclaration_0.eContents().get(0);
@@ -1810,7 +1812,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cWarningWarningKeyword_1_0 = (Keyword)cWarningEnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cFatalEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cFatalFatalKeyword_2_0 = (Keyword)cFatalEnumLiteralDeclaration_2.eContents().get(0);
-		
+
 		//enum SeverityKindCS:
 		//	error | warning | fatal;
 		public EnumRule getRule() { return rule; }
@@ -1821,24 +1823,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		//error
 		public EnumLiteralDeclaration getErrorEnumLiteralDeclaration_0() { return cErrorEnumLiteralDeclaration_0; }
 
-		//"error"
+		//'error'
 		public Keyword getErrorErrorKeyword_0_0() { return cErrorErrorKeyword_0_0; }
 
 		//warning
 		public EnumLiteralDeclaration getWarningEnumLiteralDeclaration_1() { return cWarningEnumLiteralDeclaration_1; }
 
-		//"warning"
+		//'warning'
 		public Keyword getWarningWarningKeyword_1_0() { return cWarningWarningKeyword_1_0; }
 
 		//fatal
 		public EnumLiteralDeclaration getFatalEnumLiteralDeclaration_2() { return cFatalEnumLiteralDeclaration_2; }
 
-		//"fatal"
+		//'fatal'
 		public Keyword getFatalFatalKeyword_2_0() { return cFatalFatalKeyword_2_0; }
 	}
 
 	public class InitOpCSElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "InitOpCS");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.InitOpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cEqualsEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cEqualsEqualsSignKeyword_0_0 = (Keyword)cEqualsEnumLiteralDeclaration_0.eContents().get(0);
@@ -1846,35 +1848,35 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cColonEqualsColonEqualsSignKeyword_1_0 = (Keyword)cColonEqualsEnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cColonColonEqualsEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cColonColonEqualsColonColonEqualsSignKeyword_2_0 = (Keyword)cColonColonEqualsEnumLiteralDeclaration_2.eContents().get(0);
-		
+
 		//enum InitOpCS:
-		//	Equals="=" | ColonEquals=":=" | ColonColonEquals="::=";
+		//	Equals='=' | ColonEquals=':=' | ColonColonEquals='::=';
 		public EnumRule getRule() { return rule; }
 
-		//Equals="=" | ColonEquals=":=" | ColonColonEquals="::="
+		//Equals='=' | ColonEquals=':=' | ColonColonEquals='::='
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//Equals="="
+		//Equals='='
 		public EnumLiteralDeclaration getEqualsEnumLiteralDeclaration_0() { return cEqualsEnumLiteralDeclaration_0; }
 
-		//"="
+		//'='
 		public Keyword getEqualsEqualsSignKeyword_0_0() { return cEqualsEqualsSignKeyword_0_0; }
 
-		//ColonEquals=":="
+		//ColonEquals=':='
 		public EnumLiteralDeclaration getColonEqualsEnumLiteralDeclaration_1() { return cColonEqualsEnumLiteralDeclaration_1; }
 
-		//":="
+		//':='
 		public Keyword getColonEqualsColonEqualsSignKeyword_1_0() { return cColonEqualsColonEqualsSignKeyword_1_0; }
 
-		//ColonColonEquals="::="
+		//ColonColonEquals='::='
 		public EnumLiteralDeclaration getColonColonEqualsEnumLiteralDeclaration_2() { return cColonColonEqualsEnumLiteralDeclaration_2; }
 
-		//"::="
+		//'::='
 		public Keyword getColonColonEqualsColonColonEqualsSignKeyword_2_0() { return cColonColonEqualsColonColonEqualsSignKeyword_2_0; }
 	}
 
 	public class AssignOpCSElements extends AbstractEnumRuleElementFinder {
-		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "AssignOpCS");
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL.AssignOpCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final EnumLiteralDeclaration cSingleEnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
 		private final Keyword cSingleColonEqualsSignKeyword_0_0 = (Keyword)cSingleEnumLiteralDeclaration_0.eContents().get(0);
@@ -1882,37 +1884,37 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cMultiWithResetColonColonEqualsSignKeyword_1_0 = (Keyword)cMultiWithResetEnumLiteralDeclaration_1.eContents().get(0);
 		private final EnumLiteralDeclaration cMultiWithoutResetEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cMultiWithoutResetPlusSignEqualsSignKeyword_2_0 = (Keyword)cMultiWithoutResetEnumLiteralDeclaration_2.eContents().get(0);
-		
+
 		//enum AssignOpCS:
-		//	Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+=";
+		//	Single=':=' | MultiWithReset='::=' | MultiWithoutReset='+=';
 		public EnumRule getRule() { return rule; }
 
-		//Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+="
+		//Single=':=' | MultiWithReset='::=' | MultiWithoutReset='+='
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//Single=":="
+		//Single=':='
 		public EnumLiteralDeclaration getSingleEnumLiteralDeclaration_0() { return cSingleEnumLiteralDeclaration_0; }
 
-		//":="
+		//':='
 		public Keyword getSingleColonEqualsSignKeyword_0_0() { return cSingleColonEqualsSignKeyword_0_0; }
 
-		//MultiWithReset="::="
+		//MultiWithReset='::='
 		public EnumLiteralDeclaration getMultiWithResetEnumLiteralDeclaration_1() { return cMultiWithResetEnumLiteralDeclaration_1; }
 
-		//"::="
+		//'::='
 		public Keyword getMultiWithResetColonColonEqualsSignKeyword_1_0() { return cMultiWithResetColonColonEqualsSignKeyword_1_0; }
 
-		//MultiWithoutReset="+="
+		//MultiWithoutReset='+='
 		public EnumLiteralDeclaration getMultiWithoutResetEnumLiteralDeclaration_2() { return cMultiWithoutResetEnumLiteralDeclaration_2; }
 
-		//"+="
+		//'+='
 		public Keyword getMultiWithoutResetPlusSignEqualsSignKeyword_2_0() { return cMultiWithoutResetPlusSignEqualsSignKeyword_2_0; }
 	}
-	
+
 	private final GrammmarCSElements pGrammmarCS;
-	private final SeverityKindCSElements unknownRuleSeverityKindCS;
-	private final InitOpCSElements unknownRuleInitOpCS;
-	private final AssignOpCSElements unknownRuleAssignOpCS;
+	private final SeverityKindCSElements eSeverityKindCS;
+	private final InitOpCSElements eInitOpCS;
+	private final AssignOpCSElements eAssignOpCS;
 	private final ImperativeOCLExpCSElements pImperativeOCLExpCS;
 	private final TypeLiteralCSElements pTypeLiteralCS;
 	private final ListTypeCSElements pListTypeCS;
@@ -1945,20 +1947,24 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	private final VarDeclarationNoInitCSElements pVarDeclarationNoInitCS;
 	private final VarsInitializationCSElements pVarsInitializationCS;
 	private final WhileExpCSElements pWhileExpCS;
-	
+
 	private final Grammar grammar;
 
 	private final EssentialOCLGrammarAccess gaEssentialOCL;
 
+	private final BaseGrammarAccess gaBase;
+
 	@Inject
 	public ImperativeOCLGrammarAccess(GrammarProvider grammarProvider,
-		EssentialOCLGrammarAccess gaEssentialOCL) {
+		EssentialOCLGrammarAccess gaEssentialOCL,
+		BaseGrammarAccess gaBase) {
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaEssentialOCL = gaEssentialOCL;
+		this.gaBase = gaBase;
 		this.pGrammmarCS = new GrammmarCSElements();
-		this.unknownRuleSeverityKindCS = new SeverityKindCSElements();
-		this.unknownRuleInitOpCS = new InitOpCSElements();
-		this.unknownRuleAssignOpCS = new AssignOpCSElements();
+		this.eSeverityKindCS = new SeverityKindCSElements();
+		this.eInitOpCS = new InitOpCSElements();
+		this.eAssignOpCS = new AssignOpCSElements();
 		this.pImperativeOCLExpCS = new ImperativeOCLExpCSElements();
 		this.pTypeLiteralCS = new TypeLiteralCSElements();
 		this.pListTypeCS = new ListTypeCSElements();
@@ -1992,7 +1998,7 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		this.pVarsInitializationCS = new VarsInitializationCSElements();
 		this.pWhileExpCS = new WhileExpCSElements();
 	}
-	
+
 	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
 		Grammar grammar = grammarProvider.getGrammar(this);
 		while (grammar != null) {
@@ -2008,24 +2014,28 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 		}
 		return grammar;
 	}
-	
+
 	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}
-	
+
 
 	public EssentialOCLGrammarAccess getEssentialOCLGrammarAccess() {
 		return gaEssentialOCL;
 	}
 
-	
-	//GrammmarCS returns essentialocl::ExpCS:
+	public BaseGrammarAccess getBaseGrammarAccess() {
+		return gaBase;
+	}
+
+
+	//GrammmarCS essentialocl::ExpCS:
 	//	ImperativeOCLExpCS;
 	public GrammmarCSElements getGrammmarCSAccess() {
 		return pGrammmarCS;
 	}
-	
+
 	public ParserRule getGrammmarCSRule() {
 		return getGrammmarCSAccess().getRule();
 	}
@@ -2033,29 +2043,29 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//enum SeverityKindCS:
 	//	error | warning | fatal;
 	public SeverityKindCSElements getSeverityKindCSAccess() {
-		return unknownRuleSeverityKindCS;
+		return eSeverityKindCS;
 	}
-	
+
 	public EnumRule getSeverityKindCSRule() {
 		return getSeverityKindCSAccess().getRule();
 	}
 
 	//enum InitOpCS:
-	//	Equals="=" | ColonEquals=":=" | ColonColonEquals="::=";
+	//	Equals='=' | ColonEquals=':=' | ColonColonEquals='::=';
 	public InitOpCSElements getInitOpCSAccess() {
-		return unknownRuleInitOpCS;
+		return eInitOpCS;
 	}
-	
+
 	public EnumRule getInitOpCSRule() {
 		return getInitOpCSAccess().getRule();
 	}
 
 	//enum AssignOpCS:
-	//	Single=":=" | MultiWithReset="::=" | MultiWithoutReset="+=";
+	//	Single=':=' | MultiWithReset='::=' | MultiWithoutReset='+=';
 	public AssignOpCSElements getAssignOpCSAccess() {
-		return unknownRuleAssignOpCS;
+		return eAssignOpCS;
 	}
-	
+
 	public EnumRule getAssignOpCSRule() {
 		return getAssignOpCSAccess().getRule();
 	}
@@ -2087,12 +2097,12 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	// //NavigationOperator:
 	//
 	////	EssentialOCLNavigationOperator | QVToNavigationOperator;
-	// ImperativeOCLExpCS returns essentialocl::ExpCS:
+	// ImperativeOCLExpCS essentialocl::ExpCS:
 	//	ExpCS;
 	public ImperativeOCLExpCSElements getImperativeOCLExpCSAccess() {
 		return pImperativeOCLExpCS;
 	}
-	
+
 	public ParserRule getImperativeOCLExpCSRule() {
 		return getImperativeOCLExpCSAccess().getRule();
 	}
@@ -2101,32 +2111,32 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	// // TypeLiteralCS redefined to include the new List and Dict types
 	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	// TypeLiteralCS returns base::TypedRefCS:
+	// TypeLiteralCS base::TypedRefCS:
 	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS | ListTypeCS | DictTypeCS;
 	public TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return pTypeLiteralCS;
 	}
-	
+
 	public ParserRule getTypeLiteralCSRule() {
 		return getTypeLiteralCSAccess().getRule();
 	}
 
 	//ListTypeCS:
-	//	"List" "(" ownedTypeRef=TypeExpCS ")";
+	//	'List' '(' ownedTypeRef=TypeExpCS ')';
 	public ListTypeCSElements getListTypeCSAccess() {
 		return pListTypeCS;
 	}
-	
+
 	public ParserRule getListTypeCSRule() {
 		return getListTypeCSAccess().getRule();
 	}
 
 	//DictTypeCS:
-	//	"Dict" "(" ownedKeyTypeRef=TypeExpCS "," ownedValueTypeRef=TypeExpCS ")";
+	//	'Dict' '(' ownedKeyTypeRef=TypeExpCS ',' ownedValueTypeRef=TypeExpCS ')';
 	public DictTypeCSElements getDictTypeCSAccess() {
 		return pDictTypeCS;
 	}
-	
+
 	public ParserRule getDictTypeCSRule() {
 		return getDictTypeCSAccess().getRule();
 	}
@@ -2137,128 +2147,126 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//// PrimaryExpCS redefined to include the new List and Dict literal expressions
 	//
 	//// FIXME refactor its definition in EssentialOCL to allow extension
-	// // These rules are ordered most rejectable first
-	//
-	//PrimaryExpCS returns essentialocl::ExpCS:
+	// PrimaryExpCS essentialocl::ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
 	//	CollectionLiteralExpCS | LambdaLiteralExpCS | ImperativeExpCS | NameExpCS;
 	public PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return pPrimaryExpCS;
 	}
-	
+
 	public ParserRule getPrimaryExpCSRule() {
 		return getPrimaryExpCSAccess().getRule();
 	}
 
-	//ImperativeExpCS returns essentialocl::ExpCS:
+	//ImperativeExpCS essentialocl::ExpCS:
 	//	ExpressionBlockCS | AssertExpCS | BreakExpCS | ContinueExpCS | InstantiationExpCS | LogExpCS | RaiseExpCS |
 	//	VarsInitializationCS | ListLiteralExpCS | DictLiteralExpCS | TypeLiteralExpCS | ReturnExpCS | ComputeExpCS | ForExpCS
 	//	| WhileExpCS | ImperativeIterateExpCS | SwitchExpCS | AssignExpCS | TryExpCS;
 	public ImperativeExpCSElements getImperativeExpCSAccess() {
 		return pImperativeExpCS;
 	}
-	
+
 	public ParserRule getImperativeExpCSRule() {
 		return getImperativeExpCSAccess().getRule();
 	}
 
 	//AssertExpCS:
-	//	"assert" severity=SeverityKindCS? ownedAssertion=ExpCS ("with" ownedLog=LogExpCS)?;
+	//	'assert' severity=SeverityKindCS? ownedAssertion=ExpCS ('with' ownedLog=LogExpCS)?;
 	public AssertExpCSElements getAssertExpCSAccess() {
 		return pAssertExpCS;
 	}
-	
+
 	public ParserRule getAssertExpCSRule() {
 		return getAssertExpCSAccess().getRule();
 	}
 
 	//AssignExpCS:
-	//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ("default" ownedDefault=ExpCS)?;
+	//	ownedLeft=NameExpCS assignOp=AssignOpCS ownedValue=ExpCS ('default' ownedDefault=ExpCS)?;
 	public AssignExpCSElements getAssignExpCSAccess() {
 		return pAssignExpCS;
 	}
-	
+
 	public ParserRule getAssignExpCSRule() {
 		return getAssignExpCSAccess().getRule();
 	}
 
 	//BreakExpCS:
-	//	{BreakExpCS} "break";
+	//	{BreakExpCS} 'break';
 	public BreakExpCSElements getBreakExpCSAccess() {
 		return pBreakExpCS;
 	}
-	
+
 	public ParserRule getBreakExpCSRule() {
 		return getBreakExpCSAccess().getRule();
 	}
 
 	//CatchExpCS:
-	//	"except" "(" (varName=UnrestrictedName ":")? ownedExceptionRefs+=TypeExpCS ("," ownedExceptionRefs+=TypeExpCS)* ")"
-	//	"{" ownedExps+=ExpCS* "}";
+	//	'except' '(' (varName=UnrestrictedName ':')? ownedExceptionRefs+=TypeExpCS (',' ownedExceptionRefs+=TypeExpCS)* ')'
+	//	'{' ownedExps+=ExpCS* '}';
 	public CatchExpCSElements getCatchExpCSAccess() {
 		return pCatchExpCS;
 	}
-	
+
 	public ParserRule getCatchExpCSRule() {
 		return getCatchExpCSAccess().getRule();
 	}
 
 	//ComputeExpCS:
-	//	"compute" "(" ownedResultVar=VarDeclarationCS ")" "{" ownedExps+=ExpressionStatementCS "}";
+	//	'compute' '(' ownedResultVar=VarDeclarationCS ')' '{' ownedExps+=ExpressionStatementCS '}';
 	public ComputeExpCSElements getComputeExpCSAccess() {
 		return pComputeExpCS;
 	}
-	
+
 	public ParserRule getComputeExpCSRule() {
 		return getComputeExpCSAccess().getRule();
 	}
 
 	//ContinueExpCS:
-	//	{ContinueExpCS} "continue";
+	//	{ContinueExpCS} 'continue';
 	public ContinueExpCSElements getContinueExpCSAccess() {
 		return pContinueExpCS;
 	}
-	
+
 	public ParserRule getContinueExpCSRule() {
 		return getContinueExpCSAccess().getRule();
 	}
 
 	//DictLiteralExpCS:
-	//	"Dict" "{" {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS ("," ownedParts+=DictLiteralPartCS)*)? "}";
+	//	'Dict' '{' {DictLiteralExpCS} (ownedParts+=DictLiteralPartCS (',' ownedParts+=DictLiteralPartCS)*)? '}';
 	public DictLiteralExpCSElements getDictLiteralExpCSAccess() {
 		return pDictLiteralExpCS;
 	}
-	
+
 	public ParserRule getDictLiteralExpCSRule() {
 		return getDictLiteralExpCSAccess().getRule();
 	}
 
 	//DictLiteralPartCS:
-	//	ownedKey=PrimitiveLiteralExpCS "=" ownedValue=ExpCS;
+	//	ownedKey=PrimitiveLiteralExpCS '=' ownedValue=ExpCS;
 	public DictLiteralPartCSElements getDictLiteralPartCSAccess() {
 		return pDictLiteralPartCS;
 	}
-	
+
 	public ParserRule getDictLiteralPartCSRule() {
 		return getDictLiteralPartCSAccess().getRule();
 	}
 
 	//ExpressionBlockCS:
-	//	{ExpressionBlockCS} "do"? "{" ownedExps+=ExpressionStatementCS* "}";
+	//	{ExpressionBlockCS} 'do'? '{' ownedExps+=ExpressionStatementCS* '}';
 	public ExpressionBlockCSElements getExpressionBlockCSAccess() {
 		return pExpressionBlockCS;
 	}
-	
+
 	public ParserRule getExpressionBlockCSRule() {
 		return getExpressionBlockCSAccess().getRule();
 	}
 
-	//ExpressionStatementCS returns essentialocl::ExpCS:
-	//	ExpCS ";"?;
+	//ExpressionStatementCS essentialocl::ExpCS:
+	//	ExpCS ';'?;
 	public ExpressionStatementCSElements getExpressionStatementCSAccess() {
 		return pExpressionStatementCS;
 	}
-	
+
 	public ParserRule getExpressionStatementCSRule() {
 		return getExpressionStatementCSAccess().getRule();
 	}
@@ -2268,33 +2276,33 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public ExtentRefCSElements getExtentRefCSAccess() {
 		return pExtentRefCS;
 	}
-	
+
 	public ParserRule getExtentRefCSRule() {
 		return getExtentRefCSAccess().getRule();
 	}
 
 	//// FIXME align with NameExpCS
 	// ForExpCS:
-	//	("forEach" | isOne?="forOne") "(" (ownedTarget=VarDeclarationCS ";")? ownedIterator=VarDeclarationNoInitCS ("|"
-	//	ownedCondition=ExpCS)? ")" ownedBody=ExpCS;
+	//	('forEach' | isOne?='forOne') '(' (ownedTarget=VarDeclarationCS ';')? ownedIterator=VarDeclarationNoInitCS ('|'
+	//	ownedCondition=ExpCS)? ')' ownedBody=ExpCS;
 	public ForExpCSElements getForExpCSAccess() {
 		return pForExpCS;
 	}
-	
+
 	public ParserRule getForExpCSRule() {
 		return getForExpCSAccess().getRule();
 	}
 
 	//// FIXME align with NameExpCS
 	// ImperativeIterateExpCS:
-	//	name="xcollect" "(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedBody=ExpCS ")" | name=("xselect" | "xselectOne")
-	//	"(" (ownedIterator=VarDeclarationNoInitCS "|")? ownedCondition=ExpCS ")" | name=("xcollectselect" |
-	//	"xcollectselectOne") "(" (ownedIterator=VarDeclarationNoInitCS ";")? ownedTarget=VarDeclarationCS ":="
-	//	ownedBody=ExpCS "|" ownedCondition=ExpCS ")";
+	//	name='xcollect' '(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedBody=ExpCS ')' | name=('xselect' | 'xselectOne')
+	//	'(' (ownedIterator=VarDeclarationNoInitCS '|')? ownedCondition=ExpCS ')' | name=('xcollectselect' |
+	//	'xcollectselectOne') '(' (ownedIterator=VarDeclarationNoInitCS ';')? ownedTarget=VarDeclarationCS ':='
+	//	ownedBody=ExpCS '|' ownedCondition=ExpCS ')';
 	public ImperativeIterateExpCSElements getImperativeIterateExpCSAccess() {
 		return pImperativeIterateExpCS;
 	}
-	
+
 	public ParserRule getImperativeIterateExpCSRule() {
 		return getImperativeIterateExpCSAccess().getRule();
 	}
@@ -2302,22 +2310,22 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//// FIXME if a new parameter can specify modelExtent, then it should probably belong to QVTOperational package rather than ImperativeOCL
 	//
 	//InstantiationExpCS:
-	//	"new" ownedClassRef=TypeExpCS ("@" ownedExtentRef=TypeNameExpCS)? "(" (ownedArguments+=ExpCS (","
-	//	ownedArguments+=ExpCS)*)? ")";
+	//	'new' ownedClassRef=TypeExpCS ('@' ownedExtentRef=TypeNameExpCS)? '(' (ownedArguments+=ExpCS (','
+	//	ownedArguments+=ExpCS)*)? ')';
 	public InstantiationExpCSElements getInstantiationExpCSAccess() {
 		return pInstantiationExpCS;
 	}
-	
+
 	public ParserRule getInstantiationExpCSRule() {
 		return getInstantiationExpCSAccess().getRule();
 	}
 
 	//ListLiteralExpCS:
-	//	"List" "{" {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}";
+	//	'List' '{' {ListLiteralExpCS} (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)? '}';
 	public ListLiteralExpCSElements getListLiteralExpCSAccess() {
 		return pListLiteralExpCS;
 	}
-	
+
 	public ParserRule getListLiteralExpCSRule() {
 		return getListLiteralExpCSAccess().getRule();
 	}
@@ -2327,33 +2335,34 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//// Improve spec: result.log("message", severity) when condition
 	// LogExpCS:
-	//	"log" "(" ownedMessage=StringLiteralExpCS ("," ownedElement=ExpCS)? ("," severity=SeverityKindCS)? ")" ("when"
+	//	'log' '(' ownedMessage=StringLiteralExpCS (',' ownedElement=ExpCS)? (',' severity=SeverityKindCS)? ')' ('when'
 	//	ownedCondition=ExpCS)?;
 	public LogExpCSElements getLogExpCSAccess() {
 		return pLogExpCS;
 	}
-	
+
 	public ParserRule getLogExpCSRule() {
 		return getLogExpCSAccess().getRule();
 	}
 
-	//// FIXME OMG: should support several arguments
-	// RaiseExpCS:
-	//	"raise" ownedExceptionRef=TypeExpCS "(" ownedArguments+=ExpCS ("," ownedArguments+=ExpCS)* ")";
+	//RaiseExpCS:
+	//	'raise' ownedExceptionRef=TypeExpCS '(' ownedArguments+=ExpCS (',' ownedArguments+=ExpCS)* ')'
+	//	// FIXME OMG: should support several arguments
+	//;
 	public RaiseExpCSElements getRaiseExpCSAccess() {
 		return pRaiseExpCS;
 	}
-	
+
 	public ParserRule getRaiseExpCSRule() {
 		return getRaiseExpCSAccess().getRule();
 	}
 
 	//ReturnExpCS:
-	//	"return" {ReturnExpCS} ownedValue=ExpCS?;
+	//	'return' {ReturnExpCS} ownedValue=ExpCS?;
 	public ReturnExpCSElements getReturnExpCSAccess() {
 		return pReturnExpCS;
 	}
-	
+
 	public ParserRule getReturnExpCSRule() {
 		return getReturnExpCSAccess().getRule();
 	}
@@ -2363,42 +2372,43 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public StringLiteralElements getStringLiteralAccess() {
 		return pStringLiteral;
 	}
-	
+
 	public ParserRule getStringLiteralRule() {
 		return getStringLiteralAccess().getRule();
 	}
 
-	//// FIXME OMG issue: list->swith(i) {...} syntax ????? 
+	//// FIXME OMG issue: list->swith(i) {...} syntax ?????
 	// // FIXME SwitchExpCS should probably be a CallExp
 	// SwitchExpCS:
-	//	ifSyntax?="if" ownedAltParts+=SwitchAltCS ("elif" ownedAltParts+=SwitchAltCS)* ("else" ownedElsePart=ExpCS)? "endif"?
-	//	| "switch" ("(" ownedIterator=VarDeclarationNoInitCS ")")? "{" ("case" ownedAltParts+=SwitchAltCS)+ ("else"
-	//	ownedElsePart=ExpCS)? "}";
+	//	ifSyntax?='if' ownedAltParts+=SwitchAltCS ('elif' ownedAltParts+=SwitchAltCS)* ('else' ownedElsePart=ExpCS)? 'endif'?
+	//	| 'switch' ('(' ownedIterator=VarDeclarationNoInitCS ')')? '{' ('case' ownedAltParts+=SwitchAltCS)+ ('else'
+	//	ownedElsePart=ExpCS)? '}';
 	public SwitchExpCSElements getSwitchExpCSAccess() {
 		return pSwitchExpCS;
 	}
-	
+
 	public ParserRule getSwitchExpCSRule() {
 		return getSwitchExpCSAccess().getRule();
 	}
 
 	//SwitchAltCS:
-	//	"(" ownedCondition=ExpCS ")" ownedBody=ExpCS;
+	//	'(' ownedCondition=ExpCS ')' ownedBody=ExpCS;
 	public SwitchAltCSElements getSwitchAltCSAccess() {
 		return pSwitchAltCS;
 	}
-	
+
 	public ParserRule getSwitchAltCSRule() {
 		return getSwitchAltCSAccess().getRule();
 	}
 
-	//// FIXME in the AS there should be at least one CatchExp
-	// TryExpCS:
-	//	{TryExpCS} "try" "{" ownedExps+=ExpCS* "}" ownedCatchs+=CatchExpCS+;
+	//TryExpCS:
+	//	{TryExpCS} 'try' '{' ownedExps+=ExpCS* '}' ownedCatchs+=CatchExpCS+
+	//	// FIXME in the AS there should be at least one CatchExp
+	//;
 	public TryExpCSElements getTryExpCSAccess() {
 		return pTryExpCS;
 	}
-	
+
 	public ParserRule getTryExpCSRule() {
 		return getTryExpCSAccess().getRule();
 	}
@@ -2407,97 +2417,97 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//// UnlinkExpCS returns essentialocl::NameExpCS:
 	// VarDeclarationCS:
-	//	name=UnrestrictedName (":" ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
+	//	name=UnrestrictedName (':' ownedType=TypeExpCS)? (initOp=InitOpCS ownedInitExpression=ExpCS)?;
 	public VarDeclarationCSElements getVarDeclarationCSAccess() {
 		return pVarDeclarationCS;
 	}
-	
+
 	public ParserRule getVarDeclarationCSRule() {
 		return getVarDeclarationCSAccess().getRule();
 	}
 
-	//VarDeclarationNoInitCS returns VarDeclarationCS:
-	//	name=UnrestrictedName (":" ownedType=TypeExpCS)?;
+	//VarDeclarationNoInitCS VarDeclarationCS:
+	//	name=UnrestrictedName (':' ownedType=TypeExpCS)?;
 	public VarDeclarationNoInitCSElements getVarDeclarationNoInitCSAccess() {
 		return pVarDeclarationNoInitCS;
 	}
-	
+
 	public ParserRule getVarDeclarationNoInitCSRule() {
 		return getVarDeclarationNoInitCSAccess().getRule();
 	}
 
 	//VarsInitializationCS:
-	//	"var" ownedVarDeclarations+=VarDeclarationCS ("," ownedVarDeclarations+=VarDeclarationCS)*;
+	//	'var' ownedVarDeclarations+=VarDeclarationCS (',' ownedVarDeclarations+=VarDeclarationCS)*;
 	public VarsInitializationCSElements getVarsInitializationCSAccess() {
 		return pVarsInitializationCS;
 	}
-	
+
 	public ParserRule getVarsInitializationCSRule() {
 		return getVarsInitializationCSAccess().getRule();
 	}
 
 	//WhileExpCS:
-	//	"while" "(" (ownedResultVar=VarDeclarationCS ";")? ownedCondition=ExpCS ")" "{" ownedExps+=ExpressionStatementCS*
-	//	"}";
+	//	'while' '(' (ownedResultVar=VarDeclarationCS ';')? ownedCondition=ExpCS ')' '{' ownedExps+=ExpressionStatementCS*
+	//	'}';
 	public WhileExpCSElements getWhileExpCSAccess() {
 		return pWhileExpCS;
 	}
-	
+
 	public ParserRule getWhileExpCSRule() {
 		return getWhileExpCSAccess().getRule();
 	}
 
 	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
-	// Model returns ContextCS:
+	// Model ContextCS:
 	//	ownedExpression=ExpCS;
 	public EssentialOCLGrammarAccess.ModelElements getModelAccess() {
 		return gaEssentialOCL.getModelAccess();
 	}
-	
+
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
 	}
 
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
 	//EssentialOCLReservedKeyword:
-	//	"and" | "else" | "endif" | "if" | "implies" | "in" | "let" | "not" | "or" | "then" | "xor";
+	//	'and' | 'else' | 'endif' | 'if' | 'implies' | 'in' | 'let' | 'not' | 'or' | 'then' | 'xor';
 	public EssentialOCLGrammarAccess.EssentialOCLReservedKeywordElements getEssentialOCLReservedKeywordAccess() {
 		return gaEssentialOCL.getEssentialOCLReservedKeywordAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLReservedKeywordRule() {
 		return getEssentialOCLReservedKeywordAccess().getRule();
 	}
 
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
 	//EssentialOCLUnaryOperatorName:
-	//	"-" | "not";
+	//	'-' | 'not';
 	public EssentialOCLGrammarAccess.EssentialOCLUnaryOperatorNameElements getEssentialOCLUnaryOperatorNameAccess() {
 		return gaEssentialOCL.getEssentialOCLUnaryOperatorNameAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLUnaryOperatorNameRule() {
 		return getEssentialOCLUnaryOperatorNameAccess().getRule();
 	}
 
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
 	//EssentialOCLInfixOperatorName:
-	//	"*" | "/" | "+" | "-" | ">" | "<" | ">=" | "<=" | "=" | "<>" | "and" | "or" | "xor" | "implies";
+	//	'*' | '/' | '+' | '-' | '>' | '<' | '>=' | '<=' | '=' | '<>' | 'and' | 'or' | 'xor' | 'implies';
 	public EssentialOCLGrammarAccess.EssentialOCLInfixOperatorNameElements getEssentialOCLInfixOperatorNameAccess() {
 		return gaEssentialOCL.getEssentialOCLInfixOperatorNameAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLInfixOperatorNameRule() {
 		return getEssentialOCLInfixOperatorNameAccess().getRule();
 	}
 
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
 	//EssentialOCLNavigationOperatorName:
-	//	"." | "->" | "?." | "?->";
+	//	'.' | '->' | '?.' | '?->';
 	public EssentialOCLGrammarAccess.EssentialOCLNavigationOperatorNameElements getEssentialOCLNavigationOperatorNameAccess() {
 		return gaEssentialOCL.getEssentialOCLNavigationOperatorNameAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLNavigationOperatorNameRule() {
 		return getEssentialOCLNavigationOperatorNameAccess().getRule();
 	}
@@ -2507,40 +2517,37 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public EssentialOCLGrammarAccess.BinaryOperatorNameElements getBinaryOperatorNameAccess() {
 		return gaEssentialOCL.getBinaryOperatorNameAccess();
 	}
-	
+
 	public ParserRule getBinaryOperatorNameRule() {
 		return getBinaryOperatorNameAccess().getRule();
 	}
 
-	//// Intended to be overrideable
-	// InfixOperatorName:
+	//InfixOperatorName:
 	//	EssentialOCLInfixOperatorName;
 	public EssentialOCLGrammarAccess.InfixOperatorNameElements getInfixOperatorNameAccess() {
 		return gaEssentialOCL.getInfixOperatorNameAccess();
 	}
-	
+
 	public ParserRule getInfixOperatorNameRule() {
 		return getInfixOperatorNameAccess().getRule();
 	}
 
-	//// Intended to be overrideable
-	// NavigationOperatorName:
+	//NavigationOperatorName:
 	//	EssentialOCLNavigationOperatorName;
 	public EssentialOCLGrammarAccess.NavigationOperatorNameElements getNavigationOperatorNameAccess() {
 		return gaEssentialOCL.getNavigationOperatorNameAccess();
 	}
-	
+
 	public ParserRule getNavigationOperatorNameRule() {
 		return getNavigationOperatorNameAccess().getRule();
 	}
 
-	//// Intended to be overrideable
-	// UnaryOperatorName:
+	//UnaryOperatorName:
 	//	EssentialOCLUnaryOperatorName;
 	public EssentialOCLGrammarAccess.UnaryOperatorNameElements getUnaryOperatorNameAccess() {
 		return gaEssentialOCL.getUnaryOperatorNameAccess();
 	}
-	
+
 	public ParserRule getUnaryOperatorNameRule() {
 		return getUnaryOperatorNameAccess().getRule();
 	}
@@ -2550,67 +2557,65 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////---------------------------------------------------------------------
 	//
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
-	//EssentialOCLUnrestrictedName returns ecore::EString:
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
+	//EssentialOCLUnrestrictedName:
 	//	Identifier;
 	public EssentialOCLGrammarAccess.EssentialOCLUnrestrictedNameElements getEssentialOCLUnrestrictedNameAccess() {
 		return gaEssentialOCL.getEssentialOCLUnrestrictedNameAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLUnrestrictedNameRule() {
 		return getEssentialOCLUnrestrictedNameAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// UnrestrictedName returns ecore::EString:
+	//UnrestrictedName:
 	//	EssentialOCLUnrestrictedName;
 	public EssentialOCLGrammarAccess.UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return gaEssentialOCL.getUnrestrictedNameAccess();
 	}
-	
+
 	public ParserRule getUnrestrictedNameRule() {
 		return getUnrestrictedNameAccess().getRule();
 	}
 
-	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
-	//EssentialOCLUnreservedName returns ecore::EString:
-	//	UnrestrictedName | CollectionTypeIdentifier | PrimitiveTypeIdentifier | "Map" | "Tuple";
+	///** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> */
+	//EssentialOCLUnreservedName:
+	//	UnrestrictedName | CollectionTypeIdentifier | PrimitiveTypeIdentifier | 'Map' | 'Tuple';
 	public EssentialOCLGrammarAccess.EssentialOCLUnreservedNameElements getEssentialOCLUnreservedNameAccess() {
 		return gaEssentialOCL.getEssentialOCLUnreservedNameAccess();
 	}
-	
+
 	public ParserRule getEssentialOCLUnreservedNameRule() {
 		return getEssentialOCLUnreservedNameAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// UnreservedName returns ecore::EString:
+	//UnreservedName:
 	//	EssentialOCLUnreservedName;
 	public EssentialOCLGrammarAccess.UnreservedNameElements getUnreservedNameAccess() {
 		return gaEssentialOCL.getUnreservedNameAccess();
 	}
-	
+
 	public ParserRule getUnreservedNameRule() {
 		return getUnreservedNameAccess().getRule();
 	}
 
-	//URIPathNameCS returns base::PathNameCS:
-	//	ownedPathElements+=URIFirstPathElementCS ("::" ownedPathElements+=NextPathElementCS)*;
+	//URIPathNameCS base::PathNameCS:
+	//	ownedPathElements+=URIFirstPathElementCS ('::' ownedPathElements+=NextPathElementCS)*;
 	public EssentialOCLGrammarAccess.URIPathNameCSElements getURIPathNameCSAccess() {
 		return gaEssentialOCL.getURIPathNameCSAccess();
 	}
-	
+
 	public ParserRule getURIPathNameCSRule() {
 		return getURIPathNameCSAccess().getRule();
 	}
 
-	//URIFirstPathElementCS returns base::PathElementCS:
+	//URIFirstPathElementCS base::PathElementCS:
 	//	referredElement=[pivot::NamedElement|UnrestrictedName] | {base::PathElementWithURICS}
 	//	referredElement=[pivot::Namespace|URI];
 	public EssentialOCLGrammarAccess.URIFirstPathElementCSElements getURIFirstPathElementCSAccess() {
 		return gaEssentialOCL.getURIFirstPathElementCSAccess();
 	}
-	
+
 	public ParserRule getURIFirstPathElementCSRule() {
 		return getURIFirstPathElementCSAccess().getRule();
 	}
@@ -2620,71 +2625,72 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////---------------------------------------------------------------------
 	// PrimitiveTypeIdentifier:
-	//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
+	//	'Boolean' | 'Integer' | 'Real' | 'String' | 'UnlimitedNatural' | 'OclAny' | 'OclInvalid' | 'OclVoid';
 	public EssentialOCLGrammarAccess.PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
 		return gaEssentialOCL.getPrimitiveTypeIdentifierAccess();
 	}
-	
+
 	public ParserRule getPrimitiveTypeIdentifierRule() {
 		return getPrimitiveTypeIdentifierAccess().getRule();
 	}
 
-	//PrimitiveTypeCS returns base::PrimitiveTypeRefCS:
+	//PrimitiveTypeCS base::PrimitiveTypeRefCS:
 	//	name=PrimitiveTypeIdentifier;
 	public EssentialOCLGrammarAccess.PrimitiveTypeCSElements getPrimitiveTypeCSAccess() {
 		return gaEssentialOCL.getPrimitiveTypeCSAccess();
 	}
-	
+
 	public ParserRule getPrimitiveTypeCSRule() {
 		return getPrimitiveTypeCSAccess().getRule();
 	}
 
-	//CollectionTypeIdentifier returns ecore::EString:
-	//	"Set" | "Bag" | "Sequence" | "Collection" | "OrderedSet";
+	//CollectionTypeIdentifier:
+	//	'Set' | 'Bag' | 'Sequence' | 'Collection' | 'OrderedSet';
 	public EssentialOCLGrammarAccess.CollectionTypeIdentifierElements getCollectionTypeIdentifierAccess() {
 		return gaEssentialOCL.getCollectionTypeIdentifierAccess();
 	}
-	
+
 	public ParserRule getCollectionTypeIdentifierRule() {
 		return getCollectionTypeIdentifierAccess().getRule();
 	}
 
 	//CollectionTypeCS:
-	//	name=CollectionTypeIdentifier ("(" ownedType=TypeExpCS ")")?;
+	//	name=CollectionTypeIdentifier ('(' ownedType=TypeExpWithoutMultiplicityCS ownedCollectionMultiplicity=MultiplicityCS?
+	//	')')?;
 	public EssentialOCLGrammarAccess.CollectionTypeCSElements getCollectionTypeCSAccess() {
 		return gaEssentialOCL.getCollectionTypeCSAccess();
 	}
-	
+
 	public ParserRule getCollectionTypeCSRule() {
 		return getCollectionTypeCSAccess().getRule();
 	}
 
 	//MapTypeCS:
-	//	name="Map" ("(" ownedKeyType=TypeExpCS "," ownedValueType=TypeExpCS ")")?;
+	//	name='Map' ('(' ownedKeyType=TypeExpCS ',' ownedValueType=TypeExpCS ')')?;
 	public EssentialOCLGrammarAccess.MapTypeCSElements getMapTypeCSAccess() {
 		return gaEssentialOCL.getMapTypeCSAccess();
 	}
-	
+
 	public ParserRule getMapTypeCSRule() {
 		return getMapTypeCSAccess().getRule();
 	}
 
-	//TupleTypeCS returns base::TupleTypeCS:
-	//	name="Tuple" ("(" (ownedParts+=TuplePartCS ("," ownedParts+=TuplePartCS)*)? ")")?;
+	//TupleTypeCS base::TupleTypeCS:
+	//	name='Tuple' ('(' (ownedParts+=TuplePartCS (',' ownedParts+=TuplePartCS)*)? ')')?;
 	public EssentialOCLGrammarAccess.TupleTypeCSElements getTupleTypeCSAccess() {
 		return gaEssentialOCL.getTupleTypeCSAccess();
 	}
-	
+
 	public ParserRule getTupleTypeCSRule() {
 		return getTupleTypeCSAccess().getRule();
 	}
 
-	//TuplePartCS returns base::TuplePartCS:
-	//	name=UnrestrictedName ":" ownedType=TypeExpCS;
+	//TuplePartCS base::TuplePartCS:
+	//	name=UnrestrictedName ':' ownedType=TypeExpCS;
 	public EssentialOCLGrammarAccess.TuplePartCSElements getTuplePartCSAccess() {
 		return gaEssentialOCL.getTuplePartCSAccess();
 	}
-	
+
 	public ParserRule getTuplePartCSRule() {
 		return getTuplePartCSAccess().getRule();
 	}
@@ -2694,83 +2700,83 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////---------------------------------------------------------------------
 	// CollectionLiteralExpCS:
-	//	ownedType=CollectionTypeCS "{" (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}";
+	//	ownedType=CollectionTypeCS '{' (ownedParts+=CollectionLiteralPartCS (',' ownedParts+=CollectionLiteralPartCS)*)? '}';
 	public EssentialOCLGrammarAccess.CollectionLiteralExpCSElements getCollectionLiteralExpCSAccess() {
 		return gaEssentialOCL.getCollectionLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getCollectionLiteralExpCSRule() {
 		return getCollectionLiteralExpCSAccess().getRule();
 	}
 
 	//CollectionLiteralPartCS:
-	//	ownedExpression=ExpCS (".." ownedLastExpression=ExpCS)? | ownedExpression=PatternExpCS;
+	//	ownedExpression=ExpCS ('..' ownedLastExpression=ExpCS)? | ownedExpression=PatternExpCS;
 	public EssentialOCLGrammarAccess.CollectionLiteralPartCSElements getCollectionLiteralPartCSAccess() {
 		return gaEssentialOCL.getCollectionLiteralPartCSAccess();
 	}
-	
+
 	public ParserRule getCollectionLiteralPartCSRule() {
 		return getCollectionLiteralPartCSAccess().getRule();
 	}
 
 	//CollectionPatternCS:
-	//	ownedType=CollectionTypeCS "{" (ownedParts+=PatternExpCS ("," ownedParts+=PatternExpCS)* ("++"
-	//	restVariableName=Identifier))? "}";
+	//	ownedType=CollectionTypeCS '{' (ownedParts+=PatternExpCS (',' ownedParts+=PatternExpCS)* ('++'
+	//	restVariableName=Identifier))? '}';
 	public EssentialOCLGrammarAccess.CollectionPatternCSElements getCollectionPatternCSAccess() {
 		return gaEssentialOCL.getCollectionPatternCSAccess();
 	}
-	
+
 	public ParserRule getCollectionPatternCSRule() {
 		return getCollectionPatternCSAccess().getRule();
 	}
 
-	//// PatternPartCS
-	// ShadowPartCS:
-	//	referredProperty=[pivot::Property|UnrestrictedName] "=" ownedInitExpression=(ExpCS | PatternExpCS);
+	//ShadowPartCS:
+	//	referredProperty=[pivot::Property|UnrestrictedName] '=' ownedInitExpression=(ExpCS | PatternExpCS) |
+	//	ownedInitExpression=StringLiteralExpCS;
 	public EssentialOCLGrammarAccess.ShadowPartCSElements getShadowPartCSAccess() {
 		return gaEssentialOCL.getShadowPartCSAccess();
 	}
-	
+
 	public ParserRule getShadowPartCSRule() {
 		return getShadowPartCSAccess().getRule();
 	}
 
 	//PatternExpCS:
-	//	patternVariableName=UnrestrictedName? ":" ownedPatternType=TypeExpCS;
+	//	patternVariableName=UnrestrictedName? ':' ownedPatternType=TypeExpCS;
 	public EssentialOCLGrammarAccess.PatternExpCSElements getPatternExpCSAccess() {
 		return gaEssentialOCL.getPatternExpCSAccess();
 	}
-	
+
 	public ParserRule getPatternExpCSRule() {
 		return getPatternExpCSAccess().getRule();
 	}
 
 	//LambdaLiteralExpCS:
-	//	"Lambda" "{" ownedExpressionCS=ExpCS "}";
+	//	'Lambda' '{' ownedExpressionCS=ExpCS '}';
 	public EssentialOCLGrammarAccess.LambdaLiteralExpCSElements getLambdaLiteralExpCSAccess() {
 		return gaEssentialOCL.getLambdaLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getLambdaLiteralExpCSRule() {
 		return getLambdaLiteralExpCSAccess().getRule();
 	}
 
 	//MapLiteralExpCS:
-	//	ownedType=MapTypeCS "{" (ownedParts+=MapLiteralPartCS ("," ownedParts+=MapLiteralPartCS)*)? "}";
+	//	ownedType=MapTypeCS '{' (ownedParts+=MapLiteralPartCS (',' ownedParts+=MapLiteralPartCS)*)? '}';
 	public EssentialOCLGrammarAccess.MapLiteralExpCSElements getMapLiteralExpCSAccess() {
 		return gaEssentialOCL.getMapLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getMapLiteralExpCSRule() {
 		return getMapLiteralExpCSAccess().getRule();
 	}
 
 	//MapLiteralPartCS:
-	//	ownedKey=ExpCS "<-" ownedValue=ExpCS;
+	//	ownedKey=ExpCS '<-' ownedValue=ExpCS;
 	public EssentialOCLGrammarAccess.MapLiteralPartCSElements getMapLiteralPartCSAccess() {
 		return gaEssentialOCL.getMapLiteralPartCSAccess();
 	}
-	
+
 	public ParserRule getMapLiteralPartCSRule() {
 		return getMapLiteralPartCSAccess().getRule();
 	}
@@ -2781,27 +2787,27 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public EssentialOCLGrammarAccess.PrimitiveLiteralExpCSElements getPrimitiveLiteralExpCSAccess() {
 		return gaEssentialOCL.getPrimitiveLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getPrimitiveLiteralExpCSRule() {
 		return getPrimitiveLiteralExpCSAccess().getRule();
 	}
 
 	//TupleLiteralExpCS:
-	//	"Tuple" "{" ownedParts+=TupleLiteralPartCS ("," ownedParts+=TupleLiteralPartCS)* "}";
+	//	'Tuple' '{' ownedParts+=TupleLiteralPartCS (',' ownedParts+=TupleLiteralPartCS)* '}';
 	public EssentialOCLGrammarAccess.TupleLiteralExpCSElements getTupleLiteralExpCSAccess() {
 		return gaEssentialOCL.getTupleLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getTupleLiteralExpCSRule() {
 		return getTupleLiteralExpCSAccess().getRule();
 	}
 
 	//TupleLiteralPartCS:
-	//	name=UnrestrictedName (":" ownedType=TypeExpCS)? "=" ownedInitExpression=ExpCS;
+	//	name=UnrestrictedName (':' ownedType=TypeExpCS)? '=' ownedInitExpression=ExpCS;
 	public EssentialOCLGrammarAccess.TupleLiteralPartCSElements getTupleLiteralPartCSAccess() {
 		return gaEssentialOCL.getTupleLiteralPartCSAccess();
 	}
-	
+
 	public ParserRule getTupleLiteralPartCSRule() {
 		return getTupleLiteralPartCSAccess().getRule();
 	}
@@ -2811,67 +2817,67 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public EssentialOCLGrammarAccess.NumberLiteralExpCSElements getNumberLiteralExpCSAccess() {
 		return gaEssentialOCL.getNumberLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getNumberLiteralExpCSRule() {
 		return getNumberLiteralExpCSAccess().getRule();
 	}
 
 	//StringLiteralExpCS:
-	//	segments+=StringLiteral+;
+	//	segments+=super::StringLiteral+;
 	public EssentialOCLGrammarAccess.StringLiteralExpCSElements getStringLiteralExpCSAccess() {
 		return gaEssentialOCL.getStringLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getStringLiteralExpCSRule() {
 		return getStringLiteralExpCSAccess().getRule();
 	}
 
 	//BooleanLiteralExpCS:
-	//	symbol="true" | symbol="false";
+	//	symbol='true' | symbol='false';
 	public EssentialOCLGrammarAccess.BooleanLiteralExpCSElements getBooleanLiteralExpCSAccess() {
 		return gaEssentialOCL.getBooleanLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getBooleanLiteralExpCSRule() {
 		return getBooleanLiteralExpCSAccess().getRule();
 	}
 
 	//UnlimitedNaturalLiteralExpCS:
-	//	{UnlimitedNaturalLiteralExpCS} "*";
+	//	{UnlimitedNaturalLiteralExpCS} '*';
 	public EssentialOCLGrammarAccess.UnlimitedNaturalLiteralExpCSElements getUnlimitedNaturalLiteralExpCSAccess() {
 		return gaEssentialOCL.getUnlimitedNaturalLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getUnlimitedNaturalLiteralExpCSRule() {
 		return getUnlimitedNaturalLiteralExpCSAccess().getRule();
 	}
 
 	//InvalidLiteralExpCS:
-	//	{InvalidLiteralExpCS} "invalid";
+	//	{InvalidLiteralExpCS} 'invalid';
 	public EssentialOCLGrammarAccess.InvalidLiteralExpCSElements getInvalidLiteralExpCSAccess() {
 		return gaEssentialOCL.getInvalidLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getInvalidLiteralExpCSRule() {
 		return getInvalidLiteralExpCSAccess().getRule();
 	}
 
 	//NullLiteralExpCS:
-	//	{NullLiteralExpCS} "null";
+	//	{NullLiteralExpCS} 'null';
 	public EssentialOCLGrammarAccess.NullLiteralExpCSElements getNullLiteralExpCSAccess() {
 		return gaEssentialOCL.getNullLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getNullLiteralExpCSRule() {
 		return getNullLiteralExpCSAccess().getRule();
 	}
 
-	//TypeLiteralWithMultiplicityCS returns base::TypedRefCS:
-	//	TypeLiteralCS ownedMultiplicity=MultiplicityCS?;
+	//TypeLiteralWithMultiplicityCS base::TypedRefCS:
+	//	super::TypeLiteralCS ownedMultiplicity=MultiplicityCS?;
 	public EssentialOCLGrammarAccess.TypeLiteralWithMultiplicityCSElements getTypeLiteralWithMultiplicityCSAccess() {
 		return gaEssentialOCL.getTypeLiteralWithMultiplicityCSAccess();
 	}
-	
+
 	public ParserRule getTypeLiteralWithMultiplicityCSRule() {
 		return getTypeLiteralWithMultiplicityCSAccess().getRule();
 	}
@@ -2881,27 +2887,37 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	public EssentialOCLGrammarAccess.TypeLiteralExpCSElements getTypeLiteralExpCSAccess() {
 		return gaEssentialOCL.getTypeLiteralExpCSAccess();
 	}
-	
+
 	public ParserRule getTypeLiteralExpCSRule() {
 		return getTypeLiteralExpCSAccess().getRule();
 	}
 
 	//TypeNameExpCS:
-	//	ownedPathName=PathNameCS (ownedCurlyBracketedClause=CurlyBracketedClauseCS ("{" ownedPatternGuard=ExpCS "}")?)?;
+	//	ownedPathName=PathNameCS (ownedCurlyBracketedClause=CurlyBracketedClauseCS ('{' ownedPatternGuard=ExpCS '}')?)?;
 	public EssentialOCLGrammarAccess.TypeNameExpCSElements getTypeNameExpCSAccess() {
 		return gaEssentialOCL.getTypeNameExpCSAccess();
 	}
-	
+
 	public ParserRule getTypeNameExpCSRule() {
 		return getTypeNameExpCSAccess().getRule();
 	}
 
-	//TypeExpCS returns base::TypedRefCS:
-	//	(TypeNameExpCS | TypeLiteralCS | CollectionPatternCS) ownedMultiplicity=MultiplicityCS?;
+	//TypeExpWithoutMultiplicityCS base::TypedRefCS:
+	//	TypeNameExpCS | super::TypeLiteralCS | CollectionPatternCS;
+	public EssentialOCLGrammarAccess.TypeExpWithoutMultiplicityCSElements getTypeExpWithoutMultiplicityCSAccess() {
+		return gaEssentialOCL.getTypeExpWithoutMultiplicityCSAccess();
+	}
+
+	public ParserRule getTypeExpWithoutMultiplicityCSRule() {
+		return getTypeExpWithoutMultiplicityCSAccess().getRule();
+	}
+
+	//TypeExpCS base::TypedRefCS:
+	//	TypeExpWithoutMultiplicityCS ownedMultiplicity=MultiplicityCS?;
 	public EssentialOCLGrammarAccess.TypeExpCSElements getTypeExpCSAccess() {
 		return gaEssentialOCL.getTypeExpCSAccess();
 	}
-	
+
 	public ParserRule getTypeExpCSRule() {
 		return getTypeExpCSAccess().getRule();
 	}
@@ -2915,170 +2931,167 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	////  that let is right associative, whereas infix operators are left associative.
 	//
-	////   a = 64 / 16 / let b : Integer in 8 / let c : Integer in 4 
+	////   a = 64 / 16 / let b : Integer in 8 / let c : Integer in 4
 	// // is
 	//
 	////   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
 	//
-	/// * An expression elaborates a prefixed expression with zero or more binary operator and expression suffixes.
-	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.* /
+	///* An expression elaborates a prefixed expression with zero or more binary operator and expression suffixes.
+	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.*/
 	//ExpCS:
-	//	PrefixedPrimaryExpCS ({InfixExpCS.ownedLeft=current} name=BinaryOperatorName ownedRight=ExpCS)?
-	//	//	({InfixExpCS} ownedSource=PrefixedExpCS name=BinaryOperatorName ownedArgument=ExpCS)
-	// //| 	PrefixedExpCS
-	//
-	//	// the above takes exponential or worse time for backtracking, below is fast
-	// | PrefixedLetExpCS;
+	//	PrefixedPrimaryExpCS ({InfixExpCS.ownedLeft=current} name=BinaryOperatorName ownedRight=ExpCS)? | PrefixedLetExpCS;
 	public EssentialOCLGrammarAccess.ExpCSElements getExpCSAccess() {
 		return gaEssentialOCL.getExpCSAccess();
 	}
-	
+
 	public ParserRule getExpCSRule() {
 		return getExpCSAccess().getRule();
 	}
 
-	/// * A prefixed let expression elaborates a let expression with zero or more unary prefix operators. * / PrefixedLetExpCS
-	//returns ExpCS:
+	///* A prefixed let expression elaborates a let expression with zero or more unary prefix operators. */ PrefixedLetExpCS
+	//ExpCS:
 	//	{PrefixExpCS} name=UnaryOperatorName ownedRight=PrefixedLetExpCS | LetExpCS;
 	public EssentialOCLGrammarAccess.PrefixedLetExpCSElements getPrefixedLetExpCSAccess() {
 		return gaEssentialOCL.getPrefixedLetExpCSAccess();
 	}
-	
+
 	public ParserRule getPrefixedLetExpCSRule() {
 		return getPrefixedLetExpCSAccess().getRule();
 	}
 
-	/// * A prefixed primary expression elaborates a primary expression with zero or more unary prefix operators. * /
-	//PrefixedPrimaryExpCS returns ExpCS:
-	//	{PrefixExpCS} name=UnaryOperatorName ownedRight=PrefixedPrimaryExpCS | PrimaryExpCS;
+	///* A prefixed primary expression elaborates a primary expression with zero or more unary prefix operators. */
+	//PrefixedPrimaryExpCS ExpCS:
+	//	{PrefixExpCS} name=UnaryOperatorName ownedRight=PrefixedPrimaryExpCS | super::PrimaryExpCS;
 	public EssentialOCLGrammarAccess.PrefixedPrimaryExpCSElements getPrefixedPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrefixedPrimaryExpCSAccess();
 	}
-	
+
 	public ParserRule getPrefixedPrimaryExpCSRule() {
 		return getPrefixedPrimaryExpCSAccess().getRule();
 	}
 
-	/// * A name expression is a generalised rule for expressions that start with a name and which may be followed by square, round or
-	// * curly bracket clauses and optionally an @pre as well.* /
+	///* A name expression is a generalised rule for expressions that start with a name and which may be followed by square, round or
+	// * curly bracket clauses and optionally an @pre as well.*/
 	//NameExpCS:
 	//	ownedPathName=PathNameCS ownedSquareBracketedClauses+=SquareBracketedClauseCS*
-	//	ownedRoundBracketedClause=RoundBracketedClauseCS? ownedCurlyBracketedClause=CurlyBracketedClauseCS? (isPre?="@"
-	//	"pre")?;
+	//	ownedRoundBracketedClause=RoundBracketedClauseCS? ownedCurlyBracketedClause=CurlyBracketedClauseCS? (isPre?='@'
+	//	'pre')?;
 	public EssentialOCLGrammarAccess.NameExpCSElements getNameExpCSAccess() {
 		return gaEssentialOCL.getNameExpCSAccess();
 	}
-	
+
 	public ParserRule getNameExpCSRule() {
 		return getNameExpCSAccess().getRule();
 	}
 
-	/// * A curly bracket clause is a generalized rule for the literal arguments of collections, maps, tuples and shadows.* /
+	///* A curly bracket clause is a generalized rule for the literal arguments of collections, maps, tuples and shadows.*/
 	//CurlyBracketedClauseCS:
-	//	{CurlyBracketedClauseCS} "{" ((ownedParts+=ShadowPartCS ("," ownedParts+=ShadowPartCS)*)? | value=StringLiteral) "}";
+	//	{CurlyBracketedClauseCS} '{' (ownedParts+=ShadowPartCS (',' ownedParts+=ShadowPartCS)*)? '}';
 	public EssentialOCLGrammarAccess.CurlyBracketedClauseCSElements getCurlyBracketedClauseCSAccess() {
 		return gaEssentialOCL.getCurlyBracketedClauseCSAccess();
 	}
-	
+
 	public ParserRule getCurlyBracketedClauseCSRule() {
 		return getCurlyBracketedClauseCSAccess().getRule();
 	}
 
-	/// * A curly bracket clause is a generalized rule for template specialisations and operations arguments.* /
+	///* A curly bracket clause is a generalized rule for template specialisations and operations arguments.*/
 	//RoundBracketedClauseCS:
-	//	{RoundBracketedClauseCS} "(" (ownedArguments+=NavigatingArgCS ownedArguments+=NavigatingCommaArgCS*
+	//	{RoundBracketedClauseCS} '(' (ownedArguments+=NavigatingArgCS ownedArguments+=NavigatingCommaArgCS*
 	//	(ownedArguments+=NavigatingSemiArgCS ownedArguments+=NavigatingCommaArgCS*)? (ownedArguments+=NavigatingBarArgCS
-	//	ownedArguments+=NavigatingCommaArgCS*)*)? ")";
+	//	ownedArguments+=NavigatingCommaArgCS*)*)? ')';
 	public EssentialOCLGrammarAccess.RoundBracketedClauseCSElements getRoundBracketedClauseCSAccess() {
 		return gaEssentialOCL.getRoundBracketedClauseCSAccess();
 	}
-	
+
 	public ParserRule getRoundBracketedClauseCSRule() {
 		return getRoundBracketedClauseCSAccess().getRule();
 	}
 
-	/// * A square bracket clause is a generalized rule for association class qualifiers and roles.* / SquareBracketedClauseCS:
-	//	"[" ownedTerms+=ExpCS ("," ownedTerms+=ExpCS)* "]";
+	///* A square bracket clause is a generalized rule for association class qualifiers and roles.*/ SquareBracketedClauseCS:
+	//	'[' ownedTerms+=ExpCS (',' ownedTerms+=ExpCS)* ']';
 	public EssentialOCLGrammarAccess.SquareBracketedClauseCSElements getSquareBracketedClauseCSAccess() {
 		return gaEssentialOCL.getSquareBracketedClauseCSAccess();
 	}
-	
+
 	public ParserRule getSquareBracketedClauseCSRule() {
 		return getSquareBracketedClauseCSAccess().getRule();
 	}
 
-	/// * A navigating argument is a generalized rule for the first argument in a round bracket clause. This is typically the first operation
-	// * parameter or an iterator. * /
-	//// Type-less init is an illegal infix expression
-	// NavigatingArgCS:
-	//	ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)? | "in"
-	//	ownedInitExpression=ExpCS)? | ":" ownedType=TypeExpCS;
+	///* A navigating argument is a generalized rule for the first argument in a round bracket clause. This is typically the first operation
+	// * parameter or an iterator. */
+	//NavigatingArgCS:
+	//	ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | 'in'
+	//	ownedInitExpression=ExpCS)? | ':' ownedType=TypeExpCS;
 	public EssentialOCLGrammarAccess.NavigatingArgCSElements getNavigatingArgCSAccess() {
 		return gaEssentialOCL.getNavigatingArgCSAccess();
 	}
-	
+
 	public ParserRule getNavigatingArgCSRule() {
 		return getNavigatingArgCSAccess().getRule();
 	}
 
-	/// * A navigating bar argument is a generalized rule for a bar-prefixed argument in a round bracket clause. This is typically the body of an iteration. * /
 	//// Type-less init is an illegal infix expression
-	// NavigatingBarArgCS returns NavigatingArgCS:
-	//	prefix="|" ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)?)?;
+	//
+	///* A navigating bar argument is a generalized rule for a bar-prefixed argument in a round bracket clause. This is typically the body of an iteration. */
+	//NavigatingBarArgCS NavigatingArgCS:
+	//	prefix='|' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)?)?;
 	public EssentialOCLGrammarAccess.NavigatingBarArgCSElements getNavigatingBarArgCSAccess() {
 		return gaEssentialOCL.getNavigatingBarArgCSAccess();
 	}
-	
+
 	public ParserRule getNavigatingBarArgCSRule() {
 		return getNavigatingBarArgCSAccess().getRule();
 	}
 
-	/// * A navigating comma argument is a generalized rule for non-first argument in a round bracket clause. These are typically non-first operation
-	// * parameters or a second iterator. * /
 	//// Type-less init is an illegal infix expression
-	// NavigatingCommaArgCS returns NavigatingArgCS:
-	//	prefix="," ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)? | "in"
+	//
+	///* A navigating comma argument is a generalized rule for non-first argument in a round bracket clause. These are typically non-first operation
+	// * parameters or a second iterator. */
+	//NavigatingCommaArgCS NavigatingArgCS:
+	//	prefix=',' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)? | 'in'
 	//	ownedInitExpression=ExpCS)?;
 	public EssentialOCLGrammarAccess.NavigatingCommaArgCSElements getNavigatingCommaArgCSAccess() {
 		return gaEssentialOCL.getNavigatingCommaArgCSAccess();
 	}
-	
+
 	public ParserRule getNavigatingCommaArgCSRule() {
 		return getNavigatingCommaArgCSAccess().getRule();
 	}
 
-	/// * A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. * /
 	//// Type-less init is an illegal infix expression
-	// NavigatingSemiArgCS returns NavigatingArgCS:
-	//	prefix=";" ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)?)?;
+	//
+	///* A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. */
+	//NavigatingSemiArgCS NavigatingArgCS:
+	//	prefix=';' ownedNameExpression=NavigatingArgExpCS (':' ownedType=TypeExpCS ('=' ownedInitExpression=ExpCS)?)?;
 	public EssentialOCLGrammarAccess.NavigatingSemiArgCSElements getNavigatingSemiArgCSAccess() {
 		return gaEssentialOCL.getNavigatingSemiArgCSAccess();
 	}
-	
+
 	public ParserRule getNavigatingSemiArgCSRule() {
 		return getNavigatingSemiArgCSAccess().getRule();
 	}
 
-	//// Intended to be overridden
-	// //	'?'	-- defined by Complete OCL
-	// NavigatingArgExpCS returns ExpCS:
-	//	ExpCS;
+	//// Type-less init is an illegal infix expression
+	// NavigatingArgExpCS ExpCS:
+	//	ExpCS //	'?'	-- defined by Complete OCL
+	//;
 	public EssentialOCLGrammarAccess.NavigatingArgExpCSElements getNavigatingArgExpCSAccess() {
 		return gaEssentialOCL.getNavigatingArgExpCSAccess();
 	}
-	
+
 	public ParserRule getNavigatingArgExpCSRule() {
 		return getNavigatingArgExpCSAccess().getRule();
 	}
 
 	//IfExpCS:
-	//	"if" ownedCondition=(ExpCS | PatternExpCS) "then" ownedThenExpression=ExpCS //	ifThenExpressions+=IfThenExpCS
+	//	'if' ownedCondition=(ExpCS | PatternExpCS) 'then' ownedThenExpression=ExpCS //	ifThenExpressions+=IfThenExpCS
 	//
-	//	ownedIfThenExpressions+=ElseIfThenExpCS* "else" ownedElseExpression=ExpCS "endif";
+	//	ownedIfThenExpressions+=ElseIfThenExpCS* 'else' ownedElseExpression=ExpCS 'endif';
 	public EssentialOCLGrammarAccess.IfExpCSElements getIfExpCSAccess() {
 		return gaEssentialOCL.getIfExpCSAccess();
 	}
-	
+
 	public ParserRule getIfExpCSRule() {
 		return getIfExpCSAccess().getRule();
 	}
@@ -3088,124 +3101,124 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	// //	'then' thenExpression=ExpCS
 	// //;
 	// ElseIfThenExpCS
-	//returns IfThenExpCS:
-	//	"elseif" ownedCondition=ExpCS "then" ownedThenExpression=ExpCS;
+	//IfThenExpCS:
+	//	'elseif' ownedCondition=ExpCS 'then' ownedThenExpression=ExpCS;
 	public EssentialOCLGrammarAccess.ElseIfThenExpCSElements getElseIfThenExpCSAccess() {
 		return gaEssentialOCL.getElseIfThenExpCSAccess();
 	}
-	
+
 	public ParserRule getElseIfThenExpCSRule() {
 		return getElseIfThenExpCSAccess().getRule();
 	}
 
 	//LetExpCS:
-	//	"let" ownedVariables+=LetVariableCS ("," ownedVariables+=LetVariableCS)* "in" ownedInExpression=ExpCS;
+	//	'let' ownedVariables+=LetVariableCS (',' ownedVariables+=LetVariableCS)* 'in' ownedInExpression=ExpCS;
 	public EssentialOCLGrammarAccess.LetExpCSElements getLetExpCSAccess() {
 		return gaEssentialOCL.getLetExpCSAccess();
 	}
-	
+
 	public ParserRule getLetExpCSRule() {
 		return getLetExpCSAccess().getRule();
 	}
 
 	//LetVariableCS:
-	//	name=UnrestrictedName ownedRoundBracketedClause=RoundBracketedClauseCS? (":" ownedType=TypeExpCS)? "="
+	//	name=UnrestrictedName ownedRoundBracketedClause=RoundBracketedClauseCS? (':' ownedType=TypeExpCS)? '='
 	//	ownedInitExpression=ExpCS;
 	public EssentialOCLGrammarAccess.LetVariableCSElements getLetVariableCSAccess() {
 		return gaEssentialOCL.getLetVariableCSAccess();
 	}
-	
+
 	public ParserRule getLetVariableCSRule() {
 		return getLetVariableCSAccess().getRule();
 	}
 
 	//NestedExpCS:
-	//	"(" ownedExpression=ExpCS ")";
+	//	'(' ownedExpression=ExpCS ')';
 	public EssentialOCLGrammarAccess.NestedExpCSElements getNestedExpCSAccess() {
 		return gaEssentialOCL.getNestedExpCSAccess();
 	}
-	
+
 	public ParserRule getNestedExpCSRule() {
 		return getNestedExpCSAccess().getRule();
 	}
 
 	//SelfExpCS:
-	//	{SelfExpCS} "self";
+	//	{SelfExpCS} 'self';
 	public EssentialOCLGrammarAccess.SelfExpCSElements getSelfExpCSAccess() {
 		return gaEssentialOCL.getSelfExpCSAccess();
 	}
-	
+
 	public ParserRule getSelfExpCSRule() {
 		return getSelfExpCSAccess().getRule();
 	}
 
 	//MultiplicityBoundsCS:
-	//	lowerBound=LOWER (".." upperBound=UPPER)?;
+	//	lowerBound=LOWER ('..' upperBound=UPPER)?;
 	public BaseGrammarAccess.MultiplicityBoundsCSElements getMultiplicityBoundsCSAccess() {
-		return gaEssentialOCL.getMultiplicityBoundsCSAccess();
+		return gaBase.getMultiplicityBoundsCSAccess();
 	}
-	
+
 	public ParserRule getMultiplicityBoundsCSRule() {
 		return getMultiplicityBoundsCSAccess().getRule();
 	}
 
 	//MultiplicityCS:
-	//	"[" (MultiplicityBoundsCS | MultiplicityStringCS) ("|?" | isNullFree?="|1")? "]";
+	//	'[' (MultiplicityBoundsCS | MultiplicityStringCS) ('|?' | isNullFree?='|1')? ']';
 	public BaseGrammarAccess.MultiplicityCSElements getMultiplicityCSAccess() {
-		return gaEssentialOCL.getMultiplicityCSAccess();
+		return gaBase.getMultiplicityCSAccess();
 	}
-	
+
 	public ParserRule getMultiplicityCSRule() {
 		return getMultiplicityCSAccess().getRule();
 	}
 
 	//MultiplicityStringCS:
-	//	stringBounds=("*" | "+" | "?");
+	//	stringBounds=('*' | '+' | '?');
 	public BaseGrammarAccess.MultiplicityStringCSElements getMultiplicityStringCSAccess() {
-		return gaEssentialOCL.getMultiplicityStringCSAccess();
+		return gaBase.getMultiplicityStringCSAccess();
 	}
-	
+
 	public ParserRule getMultiplicityStringCSRule() {
 		return getMultiplicityStringCSAccess().getRule();
 	}
 
 	//PathNameCS:
-	//	ownedPathElements+=FirstPathElementCS ("::" ownedPathElements+=NextPathElementCS)*;
+	//	ownedPathElements+=FirstPathElementCS ('::' ownedPathElements+=NextPathElementCS)*;
 	public BaseGrammarAccess.PathNameCSElements getPathNameCSAccess() {
-		return gaEssentialOCL.getPathNameCSAccess();
+		return gaBase.getPathNameCSAccess();
 	}
-	
+
 	public ParserRule getPathNameCSRule() {
 		return getPathNameCSAccess().getRule();
 	}
 
-	//FirstPathElementCS returns PathElementCS:
-	//	referredElement=[pivot::NamedElement|UnrestrictedName];
+	//FirstPathElementCS PathElementCS:
+	//	referredElement=[pivot::NamedElement|super::UnrestrictedName];
 	public BaseGrammarAccess.FirstPathElementCSElements getFirstPathElementCSAccess() {
-		return gaEssentialOCL.getFirstPathElementCSAccess();
+		return gaBase.getFirstPathElementCSAccess();
 	}
-	
+
 	public ParserRule getFirstPathElementCSRule() {
 		return getFirstPathElementCSAccess().getRule();
 	}
 
-	//NextPathElementCS returns PathElementCS:
-	//	referredElement=[pivot::NamedElement|UnreservedName];
+	//NextPathElementCS PathElementCS:
+	//	referredElement=[pivot::NamedElement|super::UnreservedName];
 	public BaseGrammarAccess.NextPathElementCSElements getNextPathElementCSAccess() {
-		return gaEssentialOCL.getNextPathElementCSAccess();
+		return gaBase.getNextPathElementCSAccess();
 	}
-	
+
 	public ParserRule getNextPathElementCSRule() {
 		return getNextPathElementCSAccess().getRule();
 	}
 
 	//TemplateBindingCS:
-	//	ownedSubstitutions+=TemplateParameterSubstitutionCS ("," ownedSubstitutions+=TemplateParameterSubstitutionCS)*
+	//	ownedSubstitutions+=TemplateParameterSubstitutionCS (',' ownedSubstitutions+=TemplateParameterSubstitutionCS)*
 	//	ownedMultiplicity=MultiplicityCS?;
 	public BaseGrammarAccess.TemplateBindingCSElements getTemplateBindingCSAccess() {
-		return gaEssentialOCL.getTemplateBindingCSAccess();
+		return gaBase.getTemplateBindingCSAccess();
 	}
-	
+
 	public ParserRule getTemplateBindingCSRule() {
 		return getTemplateBindingCSAccess().getRule();
 	}
@@ -3213,29 +3226,29 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//TemplateParameterSubstitutionCS:
 	//	ownedActualParameter=TypeRefCS;
 	public BaseGrammarAccess.TemplateParameterSubstitutionCSElements getTemplateParameterSubstitutionCSAccess() {
-		return gaEssentialOCL.getTemplateParameterSubstitutionCSAccess();
+		return gaBase.getTemplateParameterSubstitutionCSAccess();
 	}
-	
+
 	public ParserRule getTemplateParameterSubstitutionCSRule() {
 		return getTemplateParameterSubstitutionCSAccess().getRule();
 	}
 
 	//TemplateSignatureCS:
-	//	"(" ownedParameters+=TypeParameterCS ("," ownedParameters+=TypeParameterCS)* ")";
+	//	'(' ownedParameters+=TypeParameterCS (',' ownedParameters+=TypeParameterCS)* ')';
 	public BaseGrammarAccess.TemplateSignatureCSElements getTemplateSignatureCSAccess() {
-		return gaEssentialOCL.getTemplateSignatureCSAccess();
+		return gaBase.getTemplateSignatureCSAccess();
 	}
-	
+
 	public ParserRule getTemplateSignatureCSRule() {
 		return getTemplateSignatureCSAccess().getRule();
 	}
 
 	//TypeParameterCS:
-	//	name=UnrestrictedName ("extends" ownedExtends+=TypedRefCS ("&&" ownedExtends+=TypedRefCS)*)?;
+	//	name=super::UnrestrictedName ('extends' ownedExtends+=TypedRefCS ('&&' ownedExtends+=TypedRefCS)*)?;
 	public BaseGrammarAccess.TypeParameterCSElements getTypeParameterCSAccess() {
-		return gaEssentialOCL.getTypeParameterCSAccess();
+		return gaBase.getTypeParameterCSAccess();
 	}
-	
+
 	public ParserRule getTypeParameterCSRule() {
 		return getTypeParameterCSAccess().getRule();
 	}
@@ -3243,9 +3256,9 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//TypeRefCS:
 	//	TypedRefCS | WildcardTypeRefCS;
 	public BaseGrammarAccess.TypeRefCSElements getTypeRefCSAccess() {
-		return gaEssentialOCL.getTypeRefCSAccess();
+		return gaBase.getTypeRefCSAccess();
 	}
-	
+
 	public ParserRule getTypeRefCSRule() {
 		return getTypeRefCSAccess().getRule();
 	}
@@ -3253,29 +3266,29 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//TypedRefCS:
 	//	TypedTypeRefCS;
 	public BaseGrammarAccess.TypedRefCSElements getTypedRefCSAccess() {
-		return gaEssentialOCL.getTypedRefCSAccess();
+		return gaBase.getTypedRefCSAccess();
 	}
-	
+
 	public ParserRule getTypedRefCSRule() {
 		return getTypedRefCSAccess().getRule();
 	}
 
 	//TypedTypeRefCS:
-	//	ownedPathName=PathNameCS ("(" ownedBinding=TemplateBindingCS ")")?;
+	//	ownedPathName=PathNameCS ('(' ownedBinding=TemplateBindingCS ')')?;
 	public BaseGrammarAccess.TypedTypeRefCSElements getTypedTypeRefCSAccess() {
-		return gaEssentialOCL.getTypedTypeRefCSAccess();
+		return gaBase.getTypedTypeRefCSAccess();
 	}
-	
+
 	public ParserRule getTypedTypeRefCSRule() {
 		return getTypedTypeRefCSAccess().getRule();
 	}
 
 	//WildcardTypeRefCS:
-	//	{WildcardTypeRefCS} "?" ("extends" ownedExtends=TypedRefCS)?;
+	//	{WildcardTypeRefCS} '?' ('extends' ownedExtends=TypedRefCS)?;
 	public BaseGrammarAccess.WildcardTypeRefCSElements getWildcardTypeRefCSAccess() {
-		return gaEssentialOCL.getWildcardTypeRefCSAccess();
+		return gaBase.getWildcardTypeRefCSAccess();
 	}
-	
+
 	public ParserRule getWildcardTypeRefCSRule() {
 		return getWildcardTypeRefCSAccess().getRule();
 	}
@@ -3283,9 +3296,9 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//ID:
 	//	SIMPLE_ID | ESCAPED_ID;
 	public BaseGrammarAccess.IDElements getIDAccess() {
-		return gaEssentialOCL.getIDAccess();
+		return gaBase.getIDAccess();
 	}
-	
+
 	public ParserRule getIDRule() {
 		return getIDAccess().getRule();
 	}
@@ -3293,50 +3306,46 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//Identifier:
 	//	ID;
 	public BaseGrammarAccess.IdentifierElements getIdentifierAccess() {
-		return gaEssentialOCL.getIdentifierAccess();
+		return gaBase.getIdentifierAccess();
 	}
-	
+
 	public ParserRule getIdentifierRule() {
 		return getIdentifierAccess().getRule();
 	}
 
-	/// * A lowerbounded integer is used to define the lowerbound of a collection multiplicity. The value may not be the unlimited value. * /
-	//LOWER returns ecore::EInt:
+	///* A lowerbounded integer is used to define the lowerbound of a collection multiplicity. The value may not be the unlimited value. */
+	//LOWER ecore::EInt:
 	//	INT;
 	public BaseGrammarAccess.LOWERElements getLOWERAccess() {
-		return gaEssentialOCL.getLOWERAccess();
+		return gaBase.getLOWERAccess();
 	}
-	
+
 	public ParserRule getLOWERRule() {
 		return getLOWERAccess().getRule();
 	}
 
-	/// * A number may be an integer or floating point value. The declaration here appears to be that for just an integer. This is to avoid
+	///* A number may be an integer or floating point value. The declaration here appears to be that for just an integer. This is to avoid
 	// * lookahead conflicts in simple lexers between a dot within a floating point number and the dot-dot in a CollectionLiteralPartCS. A
 	// * practical implementation should give high priority to a successful parse of INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)? than
 	// * to the unsuccessful partial parse of INT '..'. The type of the INT terminal is String to allow the floating point syntax to be used.
-	// * /
-	//// Not terminal to allow parser backtracking to sort out "5..7"
-	//
-	//// EssentialOCLTokenSource pieces this together ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?;
-	// NUMBER_LITERAL returns
-	//BigNumber:
+	// */
+	//NUMBER_LITERAL BigNumber:
 	//	INT;
 	public BaseGrammarAccess.NUMBER_LITERALElements getNUMBER_LITERALAccess() {
-		return gaEssentialOCL.getNUMBER_LITERALAccess();
+		return gaBase.getNUMBER_LITERALAccess();
 	}
-	
+
 	public ParserRule getNUMBER_LITERALRule() {
 		return getNUMBER_LITERALAccess().getRule();
 	}
 
-	/// * An upperbounded integer is used to define the upperbound of a collection multiplicity. The value may be the unlimited value. * /
-	//UPPER returns ecore::EInt:
-	//	INT | "*";
+	///* An upperbounded integer is used to define the upperbound of a collection multiplicity. The value may be the unlimited value. */
+	//UPPER ecore::EInt:
+	//	INT | '*';
 	public BaseGrammarAccess.UPPERElements getUPPERAccess() {
-		return gaEssentialOCL.getUPPERAccess();
+		return gaBase.getUPPERAccess();
 	}
-	
+
 	public ParserRule getUPPERRule() {
 		return getUPPERAccess().getRule();
 	}
@@ -3344,85 +3353,82 @@ public class ImperativeOCLGrammarAccess extends AbstractGrammarElementFinder {
 	//URI:
 	//	SINGLE_QUOTED_STRING;
 	public BaseGrammarAccess.URIElements getURIAccess() {
-		return gaEssentialOCL.getURIAccess();
+		return gaBase.getURIAccess();
 	}
-	
+
 	public ParserRule getURIRule() {
 		return getURIAccess().getRule();
 	}
 
 	//terminal fragment ESCAPED_CHARACTER:
-	//	"\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\");
+	//	'\\' ('b' | 't' | 'n' | 'f' | 'r' | 'u' | '"' | "'" | '\\');
 	public TerminalRule getESCAPED_CHARACTERRule() {
-		return gaEssentialOCL.getESCAPED_CHARACTERRule();
-	} 
+		return gaBase.getESCAPED_CHARACTERRule();
+	}
 
 	//terminal fragment LETTER_CHARACTER:
-	//	"a".."z" | "A".."Z" | "_";
+	//	'a'..'z' | 'A'..'Z' | '_';
 	public TerminalRule getLETTER_CHARACTERRule() {
-		return gaEssentialOCL.getLETTER_CHARACTERRule();
-	} 
+		return gaBase.getLETTER_CHARACTERRule();
+	}
 
 	//terminal DOUBLE_QUOTED_STRING:
-	//	"\"" (ESCAPED_CHARACTER | !("\\" | "\""))* "\"";
+	//	'"' (ESCAPED_CHARACTER | !('\\' | '"'))* '"';
 	public TerminalRule getDOUBLE_QUOTED_STRINGRule() {
-		return gaEssentialOCL.getDOUBLE_QUOTED_STRINGRule();
-	} 
+		return gaBase.getDOUBLE_QUOTED_STRINGRule();
+	}
 
 	//terminal SINGLE_QUOTED_STRING:
-	//	"\'" (ESCAPED_CHARACTER | !("\\" | "\'"))* "\'";
+	//	"'" (ESCAPED_CHARACTER | !('\\' | "'"))* "'";
 	public TerminalRule getSINGLE_QUOTED_STRINGRule() {
-		return gaEssentialOCL.getSINGLE_QUOTED_STRINGRule();
-	} 
+		return gaBase.getSINGLE_QUOTED_STRINGRule();
+	}
 
 	//terminal ML_SINGLE_QUOTED_STRING:
-	//	"/\'"->"\'/";
+	//	"/'"->"'/";
 	public TerminalRule getML_SINGLE_QUOTED_STRINGRule() {
-		return gaEssentialOCL.getML_SINGLE_QUOTED_STRINGRule();
-	} 
+		return gaBase.getML_SINGLE_QUOTED_STRINGRule();
+	}
 
 	//terminal SIMPLE_ID:
-	//	LETTER_CHARACTER (LETTER_CHARACTER | "0".."9")*;
+	//	LETTER_CHARACTER (LETTER_CHARACTER | '0'..'9')*;
 	public TerminalRule getSIMPLE_IDRule() {
-		return gaEssentialOCL.getSIMPLE_IDRule();
-	} 
+		return gaBase.getSIMPLE_IDRule();
+	}
 
 	//terminal ESCAPED_ID:
 	//	"_" SINGLE_QUOTED_STRING;
 	public TerminalRule getESCAPED_IDRule() {
-		return gaEssentialOCL.getESCAPED_IDRule();
-	} 
+		return gaBase.getESCAPED_IDRule();
+	}
 
-	//// String to allow diverse re-use
-	// // multiple leading zeroes occur as floating point fractional part
-	// terminal INT:
-	//	"0".."9"+;
+	//terminal INT:
+	//	'0'..'9'+;
 	public TerminalRule getINTRule() {
-		return gaEssentialOCL.getINTRule();
-	} 
+		return gaBase.getINTRule();
+	}
 
-	/// * A multi-line comment supports a comment that may span more than one line using familiar slash-star...star-slash comment delimiters * /
 	//terminal ML_COMMENT:
-	//	"/ *"->"* /";
+	//	'/*'->'*/';
 	public TerminalRule getML_COMMENTRule() {
-		return gaEssentialOCL.getML_COMMENTRule();
-	} 
+		return gaBase.getML_COMMENTRule();
+	}
 
-	/// * A single-line comment supports a comment that terminates at the end of the line * / terminal SL_COMMENT:
-	//	"--" !("\n" | "\r")* ("\r"? "\n")?;
+	//terminal SL_COMMENT:
+	//	'--' !('\n' | '\r')* ('\r'? '\n')?;
 	public TerminalRule getSL_COMMENTRule() {
-		return gaEssentialOCL.getSL_COMMENTRule();
-	} 
+		return gaBase.getSL_COMMENTRule();
+	}
 
-	/// * Whitespace may occur between any pair of tokens * / terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
+	//terminal WS:
+	//	' ' | '\t' | '\r' | '\n'+;
 	public TerminalRule getWSRule() {
-		return gaEssentialOCL.getWSRule();
-	} 
+		return gaBase.getWSRule();
+	}
 
 	//terminal ANY_OTHER:
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
-		return gaEssentialOCL.getANY_OTHERRule();
-	} 
+		return gaBase.getANY_OTHERRule();
+	}
 }

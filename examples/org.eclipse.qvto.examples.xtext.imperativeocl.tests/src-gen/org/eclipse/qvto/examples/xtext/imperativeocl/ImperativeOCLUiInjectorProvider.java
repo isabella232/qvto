@@ -8,10 +8,10 @@ import org.eclipse.xtext.junit4.IInjectorProvider;
 import com.google.inject.Injector;
 
 public class ImperativeOCLUiInjectorProvider implements IInjectorProvider {
-	
+
 	@Override
 	public Injector getInjector() {
 		return org.eclipse.qvto.examples.xtext.imperativeocl.ui.internal.ImperativeOCLActivator.getInstance().getInjector("org.eclipse.qvto.examples.xtext.imperativeocl.ImperativeOCL");
 	}
-	
+
 }

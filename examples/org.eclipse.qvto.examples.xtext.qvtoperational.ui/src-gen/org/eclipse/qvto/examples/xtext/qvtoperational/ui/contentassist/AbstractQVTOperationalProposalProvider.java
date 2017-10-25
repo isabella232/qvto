@@ -10,12 +10,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents a generated, default implementation of superclass {@link org.eclipse.qvto.examples.xtext.imperativeocl.ui.contentassist.ImperativeOCLProposalProvider}.
- * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
- * with a more concrete subtype. 
+ * Methods are dynamically dispatched on the first parameter, i.e., you can override them
+ * with a more concrete subtype.
  */
 @SuppressWarnings("all")
 public class AbstractQVTOperationalProposalProvider extends org.eclipse.qvto.examples.xtext.imperativeocl.ui.contentassist.ImperativeOCLProposalProvider {
-		
+
 	public void completeTopLevelCS_OwnedImports(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
@@ -440,7 +440,7 @@ public class AbstractQVTOperationalProposalProvider extends org.eclipse.qvto.exa
 	public void completeUnitRefCS_Segment(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-    
+
 	public void complete_TopLevelCS(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}

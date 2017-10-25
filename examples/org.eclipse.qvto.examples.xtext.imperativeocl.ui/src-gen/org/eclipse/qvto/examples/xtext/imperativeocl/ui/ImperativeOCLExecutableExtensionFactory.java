@@ -12,7 +12,7 @@ import org.eclipse.qvto.examples.xtext.imperativeocl.ui.internal.ImperativeOCLAc
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass. 
+ * introduced subclass.
  */
 public class ImperativeOCLExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -20,10 +20,10 @@ public class ImperativeOCLExecutableExtensionFactory extends AbstractGuiceAwareE
 	protected Bundle getBundle() {
 		return ImperativeOCLActivator.getInstance().getBundle();
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return ImperativeOCLActivator.getInstance().getInjector(ImperativeOCLActivator.ORG_ECLIPSE_QVTO_EXAMPLES_XTEXT_IMPERATIVEOCL_IMPERATIVEOCL);
 	}
-	
+
 }

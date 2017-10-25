@@ -12,7 +12,7 @@ import org.eclipse.qvto.examples.xtext.qvtoperational.ui.internal.QVTOperational
 
 /**
  * This class was generated. Customizations should only happen in a newly
- * introduced subclass. 
+ * introduced subclass.
  */
 public class QVTOperationalExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
@@ -20,10 +20,10 @@ public class QVTOperationalExecutableExtensionFactory extends AbstractGuiceAware
 	protected Bundle getBundle() {
 		return QVTOperationalActivator.getInstance().getBundle();
 	}
-	
+
 	@Override
 	protected Injector getInjector() {
 		return QVTOperationalActivator.getInstance().getInjector(QVTOperationalActivator.ORG_ECLIPSE_QVTO_EXAMPLES_XTEXT_QVTOPERATIONAL_QVTOPERATIONAL);
 	}
-	
+
 }

@@ -38,7 +38,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected AbstractElementAlias match_SwitchExpCS_EndifKeyword_0_4_q;
 	protected AbstractElementAlias match_TransformationDefCS_SemicolonKeyword_4_q;
 	protected AbstractElementAlias match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q;
-	
+
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (QVTOperationalGrammarAccess) access;
@@ -60,52 +60,52 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 		match_TransformationDefCS_SemicolonKeyword_4_q = new TokenAlias(false, true, grammarAccess.getTransformationDefCSAccess().getSemicolonKeyword_4());
 		match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getLeftParenthesisKeyword_1_0()), new TokenAlias(false, false, grammarAccess.getTupleTypeCSAccess().getRightParenthesisKeyword_1_2()));
 	}
-	
+
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		return "";
 	}
-	
-	
+
+
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_ClassCS_SemicolonKeyword_1_q.equals(syntax))
+			if (match_ClassCS_SemicolonKeyword_1_q.equals(syntax))
 				emit_ClassCS_SemicolonKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ClassifierPropertyCS_TildeKeyword_6_1_q.equals(syntax))
+			else if (match_ClassifierPropertyCS_TildeKeyword_6_1_q.equals(syntax))
 				emit_ClassifierPropertyCS_TildeKeyword_6_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ConstructorDefinitionCS_SemicolonKeyword_2_q.equals(syntax))
+			else if (match_ConstructorDefinitionCS_SemicolonKeyword_2_q.equals(syntax))
 				emit_ConstructorDefinitionCS_SemicolonKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_EntryOperationCS_SemicolonKeyword_4_q.equals(syntax))
+			else if (match_EntryOperationCS_SemicolonKeyword_4_q.equals(syntax))
 				emit_EntryOperationCS_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_EnumerationCS_SemicolonKeyword_3_q.equals(syntax))
+			else if (match_EnumerationCS_SemicolonKeyword_3_q.equals(syntax))
 				emit_EnumerationCS_SemicolonKeyword_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ExpressionBlockCS_DoKeyword_1_q.equals(syntax))
+			else if (match_ExpressionBlockCS_DoKeyword_1_q.equals(syntax))
 				emit_ExpressionBlockCS_DoKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ExpressionStatementCS_SemicolonKeyword_1_q.equals(syntax))
+			else if (match_ExpressionStatementCS_SemicolonKeyword_1_q.equals(syntax))
 				emit_ExpressionStatementCS_SemicolonKeyword_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_HelperCompoundDefinitionCS_SemicolonKeyword_2_q.equals(syntax))
+			else if (match_HelperCompoundDefinitionCS_SemicolonKeyword_2_q.equals(syntax))
 				emit_HelperCompoundDefinitionCS_SemicolonKeyword_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_LibraryDefCS_SemicolonKeyword_4_q.equals(syntax))
+			else if (match_LibraryDefCS_SemicolonKeyword_4_q.equals(syntax))
 				emit_LibraryDefCS_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MappingOperationHeaderCS___WhenKeyword_9_0_LeftCurlyBracketKeyword_9_1_RightCurlyBracketKeyword_9_3__q.equals(syntax))
+			else if (match_MappingOperationHeaderCS___WhenKeyword_9_0_LeftCurlyBracketKeyword_9_1_RightCurlyBracketKeyword_9_3__q.equals(syntax))
 				emit_MappingOperationHeaderCS___WhenKeyword_9_0_LeftCurlyBracketKeyword_9_1_RightCurlyBracketKeyword_9_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MappingOperationHeaderCS___WhereKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q.equals(syntax))
+			else if (match_MappingOperationHeaderCS___WhereKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q.equals(syntax))
 				emit_MappingOperationHeaderCS___WhereKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_MetamodelCS_SemicolonKeyword_5_q.equals(syntax))
+			else if (match_MetamodelCS_SemicolonKeyword_5_q.equals(syntax))
 				emit_MetamodelCS_SemicolonKeyword_5_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ModelTypeCS_SemicolonKeyword_6_2_2_q.equals(syntax))
+			else if (match_ModelTypeCS_SemicolonKeyword_6_2_2_q.equals(syntax))
 				emit_ModelTypeCS_SemicolonKeyword_6_2_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_3__q.equals(syntax))
+			else if (match_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_3__q.equals(syntax))
 				emit_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_3__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SwitchExpCS_EndifKeyword_0_4_q.equals(syntax))
+			else if (match_SwitchExpCS_EndifKeyword_0_4_q.equals(syntax))
 				emit_SwitchExpCS_EndifKeyword_0_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_TransformationDefCS_SemicolonKeyword_4_q.equals(syntax))
+			else if (match_TransformationDefCS_SemicolonKeyword_4_q.equals(syntax))
 				emit_TransformationDefCS_SemicolonKeyword_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
+			else if (match_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q.equals(syntax))
 				emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
@@ -125,7 +125,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ClassCS_SemicolonKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     '~'?
@@ -137,7 +137,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ClassifierPropertyCS_TildeKeyword_6_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -148,7 +148,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ConstructorDefinitionCS_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -159,7 +159,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_EntryOperationCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -170,7 +170,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_EnumerationCS_SemicolonKeyword_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     'do'?
@@ -183,7 +183,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ExpressionBlockCS_DoKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -248,7 +248,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ExpressionStatementCS_SemicolonKeyword_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -259,7 +259,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_HelperCompoundDefinitionCS_SemicolonKeyword_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -274,7 +274,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_LibraryDefCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('when' '{' '}')?
@@ -312,7 +312,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_MappingOperationHeaderCS___WhenKeyword_9_0_LeftCurlyBracketKeyword_9_1_RightCurlyBracketKeyword_9_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('where' '{' '}')?
@@ -346,7 +346,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_MappingOperationHeaderCS___WhereKeyword_10_0_LeftCurlyBracketKeyword_10_1_RightCurlyBracketKeyword_10_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -360,7 +360,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_MetamodelCS_SemicolonKeyword_5_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -371,7 +371,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ModelTypeCS_SemicolonKeyword_6_2_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('where' '{' '}')?
@@ -382,7 +382,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_ModelTypeCS___WhereKeyword_6_0_LeftCurlyBracketKeyword_6_1_RightCurlyBracketKeyword_6_3__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     'endif'?
@@ -396,7 +396,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_SwitchExpCS_EndifKeyword_0_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ';'?
@@ -412,7 +412,7 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_TransformationDefCS_SemicolonKeyword_4_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 	/**
 	 * Ambiguous syntax:
 	 *     ('(' ')')?
@@ -424,5 +424,5 @@ public class QVTOperationalSyntacticSequencer extends AbstractSyntacticSequencer
 	protected void emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
-	
+
 }

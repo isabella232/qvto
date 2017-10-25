@@ -11,12 +11,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  */
 @SuppressWarnings("all")
 public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
-	
+
 	public AbstractQVTOperationalUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
-	
+
+
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
@@ -75,16 +75,6 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
 	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.qvto.examples.xtext.qvtoperational.ui.labeling.QVTOperationalDescriptionLabelProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider> bindIOutlineTreeProvider() {
-		return org.eclipse.qvto.examples.xtext.qvtoperational.ui.outline.QVTOperationalOutlineTreeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineTreeProviderFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.impl.IOutlineTreeStructureProvider> bindIOutlineTreeStructureProvider() {
-		return org.eclipse.qvto.examples.xtext.qvtoperational.ui.outline.QVTOperationalOutlineTreeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.ContentAssistFragment
@@ -222,6 +212,11 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 		return org.eclipse.ocl.xtext.base.ui.model.BaseDocumentationProvider.class;
 	}
 
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
+		return org.eclipse.ocl.xtext.markup.ui.hover.MarkupCompositeHover.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public com.google.inject.Provider<org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
@@ -250,6 +245,11 @@ public abstract class AbstractQVTOperationalUiModule extends org.eclipse.xtext.u
 	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
 	public Class<? extends org.eclipse.compare.IViewerCreator> bindIViewerCreator() {
 		return org.eclipse.xtext.ui.compare.DefaultViewerCreator.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	public void configureCompareViewerTitle(com.google.inject.Binder binder) {
+		binder.bind(String.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.UIBindings.COMPARE_VIEWER_TITLE)).toInstance("QVTOperational Compare");
 	}
 
 

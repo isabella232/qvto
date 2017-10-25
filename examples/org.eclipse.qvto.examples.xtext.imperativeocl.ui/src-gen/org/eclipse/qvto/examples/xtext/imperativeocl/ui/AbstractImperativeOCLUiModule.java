@@ -11,12 +11,12 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
  */
 @SuppressWarnings("all")
 public abstract class AbstractImperativeOCLUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
-	
+
 	public AbstractImperativeOCLUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
 	}
-	
-	
+
+
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		return org.eclipse.xtext.ui.shared.Access.getJavaProjectsState();
@@ -222,6 +222,11 @@ public abstract class AbstractImperativeOCLUiModule extends org.eclipse.xtext.ui
 		return org.eclipse.ocl.xtext.base.ui.model.BaseDocumentationProvider.class;
 	}
 
+	// contributed by org.eclipse.ocl.examples.build.fragments.MarkupHoverFragment
+	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
+		return org.eclipse.ocl.xtext.markup.ui.hover.MarkupCompositeHover.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.templates.CodetemplatesGeneratorFragment
 	public com.google.inject.Provider<org.eclipse.xtext.ui.codetemplates.ui.preferences.TemplatesLanguageConfiguration> provideTemplatesLanguageConfiguration() {
 		return org.eclipse.xtext.ui.codetemplates.ui.AccessibleCodetemplatesActivator.getTemplatesLanguageConfigurationProvider();
@@ -250,6 +255,11 @@ public abstract class AbstractImperativeOCLUiModule extends org.eclipse.xtext.ui
 	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
 	public Class<? extends org.eclipse.compare.IViewerCreator> bindIViewerCreator() {
 		return org.eclipse.xtext.ui.compare.DefaultViewerCreator.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.compare.CompareFragment
+	public void configureCompareViewerTitle(com.google.inject.Binder binder) {
+		binder.bind(String.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.UIBindings.COMPARE_VIEWER_TITLE)).toInstance("ImperativeOCL Compare");
 	}
 
 
