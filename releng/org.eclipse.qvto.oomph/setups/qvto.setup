@@ -6,13 +6,14 @@
     xmlns:git="http://www.eclipse.org/oomph/setup/git/1.0"
     xmlns:jdt="http://www.eclipse.org/oomph/setup/jdt/1.0"
     xmlns:mylyn="http://www.eclipse.org/oomph/setup/mylyn/1.0"
+    xmlns:pde="http://www.eclipse.org/oomph/setup/pde/1.0"
     xmlns:predicates="http://www.eclipse.org/oomph/predicates/1.0"
     xmlns:projects="http://www.eclipse.org/oomph/setup/projects/1.0"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/setup/pde/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/PDE.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
     name="qvto"
     label="QVTo">
   <setupTask
@@ -182,20 +183,15 @@
     <setupTask
         xsi:type="projects:ProjectsImportTask">
       <sourceLocator
-          rootFolder="${qvto.git.clone.location/doc}"
-          locateNestedProjects="true"/>
+          rootFolder="${qvto.git.clone.location/doc}"/>
       <sourceLocator
-          rootFolder="${qvto.git.clone.location/plugins}"
-          locateNestedProjects="true"/>
+          rootFolder="${qvto.git.clone.location/plugins}"/>
       <sourceLocator
-          rootFolder="${qvto.git.clone.location/features}"
-          locateNestedProjects="true"/>
+          rootFolder="${qvto.git.clone.location/features}"/>
       <sourceLocator
-          rootFolder="${qvto.git.clone.location/tests}"
-          locateNestedProjects="true"/>
+          rootFolder="${qvto.git.clone.location/tests}"/>
       <sourceLocator
-          rootFolder="${qvto.git.clone.location/examples}"
-          locateNestedProjects="true">
+          rootFolder="${qvto.git.clone.location/examples}">
         <predicate
             xsi:type="predicates:NotPredicate">
           <operand
@@ -269,29 +265,20 @@
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.samples"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.ecore2uml"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.ecore2uml.invoke"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.explained"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.Uml2Xhtml"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.Uml2Xhtml.composite"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="qvto.uml2xhtml.model"/>
       </workingSet>
     </setupTask>
     <stream
         name="master"
-        label="Master"/>
+        label="Master">
+      <setupTask
+          xsi:type="pde:APIBaselineTask"
+          name="QVTo"
+          version="3.7.0"
+          location="${installation.location}/api/v3.7/"
+          remoteURI="http://download.eclipse.org/mmt/qvto/downloads/drops/3.7.0/R201706041316/mmt-qvto-Update-3.7.0.zip">
+        <description>Oxygen QVTo Baseline</description>
+      </setupTask>
+    </stream>
     <description>The development environment for the QVTo project</description>
   </project>
   <project name="Releng">
@@ -388,6 +375,8 @@
             name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
         <requirement
             name="org.eclipse.egit.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.language.sdk.feature.group"/>
         <description>Aditional IDE for QVTo Pivot Developers</description>
       </setupTask>
     </stream>
