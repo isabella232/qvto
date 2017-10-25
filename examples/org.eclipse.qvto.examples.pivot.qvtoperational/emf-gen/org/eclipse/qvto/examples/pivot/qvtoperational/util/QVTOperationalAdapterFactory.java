@@ -5,7 +5,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *   Adolfo Sanchez-Barbudo (University of York) - Bug397429
@@ -122,204 +122,204 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTOperationalSwitch<@Nullable Adapter> modelSwitch =
-		new QVTOperationalSwitch<@Nullable Adapter>() {
-			@Override
-			public Adapter caseConstructor(Constructor object) {
-				return createConstructorAdapter();
-			}
-			@Override
-			public Adapter caseConstructorBody(ConstructorBody object) {
-				return createConstructorBodyAdapter();
-			}
-			@Override
-			public Adapter caseContextualProperty(ContextualProperty object) {
-				return createContextualPropertyAdapter();
-			}
-			@Override
-			public Adapter caseDummyRelation(DummyRelation object) {
-				return createDummyRelationAdapter();
-			}
-			@Override
-			public Adapter caseDummyRelationDomain(DummyRelationDomain object) {
-				return createDummyRelationDomainAdapter();
-			}
-			@Override
-			public Adapter caseDummyRelationalTransformation(DummyRelationalTransformation object) {
-				return createDummyRelationalTransformationAdapter();
-			}
-			@Override
-			public Adapter caseEntryOperation(EntryOperation object) {
-				return createEntryOperationAdapter();
-			}
-			@Override
-			public Adapter caseHelper(Helper object) {
-				return createHelperAdapter();
-			}
-			@Override
-			public Adapter caseImperativeCallExp(ImperativeCallExp object) {
-				return createImperativeCallExpAdapter();
-			}
-			@Override
-			public Adapter caseImperativeOperation(ImperativeOperation object) {
-				return createImperativeOperationAdapter();
-			}
-			@Override
-			public Adapter caseLibrary(Library object) {
-				return createLibraryAdapter();
-			}
-			@Override
-			public Adapter caseMappingBody(MappingBody object) {
-				return createMappingBodyAdapter();
-			}
-			@Override
-			public Adapter caseMappingCallExp(MappingCallExp object) {
-				return createMappingCallExpAdapter();
-			}
-			@Override
-			public Adapter caseMappingOperation(MappingOperation object) {
-				return createMappingOperationAdapter();
-			}
-			@Override
-			public Adapter caseMappingParameter(MappingParameter object) {
-				return createMappingParameterAdapter();
-			}
-			@Override
-			public Adapter caseModelParameter(ModelParameter object) {
-				return createModelParameterAdapter();
-			}
-			@Override
-			public Adapter caseModelType(ModelType object) {
-				return createModelTypeAdapter();
-			}
-			@Override
-			public Adapter caseModule(Module object) {
-				return createModuleAdapter();
-			}
-			@Override
-			public Adapter caseModuleImport(ModuleImport object) {
-				return createModuleImportAdapter();
-			}
-			@Override
-			public Adapter caseObjectExp(ObjectExp object) {
-				return createObjectExpAdapter();
-			}
-			@Override
-			public Adapter caseOperationBody(OperationBody object) {
-				return createOperationBodyAdapter();
-			}
-			@Override
-			public Adapter caseOperationalTransformation(OperationalTransformation object) {
-				return createOperationalTransformationAdapter();
-			}
-			@Override
-			public Adapter caseResolveExp(ResolveExp object) {
-				return createResolveExpAdapter();
-			}
-			@Override
-			public Adapter caseResolveInExp(ResolveInExp object) {
-				return createResolveInExpAdapter();
-			}
-			@Override
-			public Adapter caseVarParameter(VarParameter object) {
-				return createVarParameterAdapter();
-			}
-			@Override
-			public Adapter caseTag(Tag object) {
-				return createTagAdapter();
-			}
-			@Override
-			public Adapter caseVisitable(Visitable object) {
-				return createVisitableAdapter();
-			}
-			@Override
-			public Adapter caseElement(Element object) {
-				return createElementAdapter();
-			}
-			@Override
-			public Adapter caseNameable(Nameable object) {
-				return createNameableAdapter();
-			}
-			@Override
-			public Adapter caseNamedElement(NamedElement object) {
-				return createNamedElementAdapter();
-			}
-			@Override
-			public Adapter caseTypedElement(TypedElement object) {
-				return createTypedElementAdapter();
-			}
-			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
-			}
-			@Override
-			public Adapter caseNamespace(Namespace object) {
-				return createNamespaceAdapter();
-			}
-			@Override
-			public Adapter caseTemplateableElement(TemplateableElement object) {
-				return createTemplateableElementAdapter();
-			}
-			@Override
-			public Adapter caseOperation(Operation object) {
-				return createOperationAdapter();
-			}
-			@Override
-			public Adapter caseProperty(Property object) {
-				return createPropertyAdapter();
-			}
-			@Override
-			public Adapter caseOCLExpression(OCLExpression object) {
-				return createOCLExpressionAdapter();
-			}
-			@Override
-			public Adapter caseCallExp(CallExp object) {
-				return createCallExpAdapter();
-			}
-			@Override
-			public Adapter caseFeatureCallExp(FeatureCallExp object) {
-				return createFeatureCallExpAdapter();
-			}
-			@Override
-			public Adapter caseReferringElement(ReferringElement object) {
-				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter caseOperationCallExp(OperationCallExp object) {
-				return createOperationCallExpAdapter();
-			}
-			@Override
-			public Adapter caseImperativeExpression(ImperativeExpression object) {
-				return createImperativeExpressionAdapter();
-			}
-			@Override
-			public Adapter caseType(Type object) {
-				return createTypeAdapter();
-			}
-			@Override
-			public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
-				return createClassAdapter();
-			}
-			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
-			}
-			@Override
-			public Adapter caseParameter(Parameter object) {
-				return createParameterAdapter();
-			}
-			@Override
-			public Adapter caseInstantiationExp(InstantiationExp object) {
-				return createInstantiationExpAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+			new QVTOperationalSwitch<@Nullable Adapter>() {
+		@Override
+		public Adapter caseConstructor(Constructor object) {
+			return createConstructorAdapter();
+		}
+		@Override
+		public Adapter caseConstructorBody(ConstructorBody object) {
+			return createConstructorBodyAdapter();
+		}
+		@Override
+		public Adapter caseContextualProperty(ContextualProperty object) {
+			return createContextualPropertyAdapter();
+		}
+		@Override
+		public Adapter caseDummyRelation(DummyRelation object) {
+			return createDummyRelationAdapter();
+		}
+		@Override
+		public Adapter caseDummyRelationDomain(DummyRelationDomain object) {
+			return createDummyRelationDomainAdapter();
+		}
+		@Override
+		public Adapter caseDummyRelationalTransformation(DummyRelationalTransformation object) {
+			return createDummyRelationalTransformationAdapter();
+		}
+		@Override
+		public Adapter caseEntryOperation(EntryOperation object) {
+			return createEntryOperationAdapter();
+		}
+		@Override
+		public Adapter caseHelper(Helper object) {
+			return createHelperAdapter();
+		}
+		@Override
+		public Adapter caseImperativeCallExp(ImperativeCallExp object) {
+			return createImperativeCallExpAdapter();
+		}
+		@Override
+		public Adapter caseImperativeOperation(ImperativeOperation object) {
+			return createImperativeOperationAdapter();
+		}
+		@Override
+		public Adapter caseLibrary(Library object) {
+			return createLibraryAdapter();
+		}
+		@Override
+		public Adapter caseMappingBody(MappingBody object) {
+			return createMappingBodyAdapter();
+		}
+		@Override
+		public Adapter caseMappingCallExp(MappingCallExp object) {
+			return createMappingCallExpAdapter();
+		}
+		@Override
+		public Adapter caseMappingOperation(MappingOperation object) {
+			return createMappingOperationAdapter();
+		}
+		@Override
+		public Adapter caseMappingParameter(MappingParameter object) {
+			return createMappingParameterAdapter();
+		}
+		@Override
+		public Adapter caseModelParameter(ModelParameter object) {
+			return createModelParameterAdapter();
+		}
+		@Override
+		public Adapter caseModelType(ModelType object) {
+			return createModelTypeAdapter();
+		}
+		@Override
+		public Adapter caseModule(Module object) {
+			return createModuleAdapter();
+		}
+		@Override
+		public Adapter caseModuleImport(ModuleImport object) {
+			return createModuleImportAdapter();
+		}
+		@Override
+		public Adapter caseObjectExp(ObjectExp object) {
+			return createObjectExpAdapter();
+		}
+		@Override
+		public Adapter caseOperationBody(OperationBody object) {
+			return createOperationBodyAdapter();
+		}
+		@Override
+		public Adapter caseOperationalTransformation(OperationalTransformation object) {
+			return createOperationalTransformationAdapter();
+		}
+		@Override
+		public Adapter caseResolveExp(ResolveExp object) {
+			return createResolveExpAdapter();
+		}
+		@Override
+		public Adapter caseResolveInExp(ResolveInExp object) {
+			return createResolveInExpAdapter();
+		}
+		@Override
+		public Adapter caseVarParameter(VarParameter object) {
+			return createVarParameterAdapter();
+		}
+		@Override
+		public Adapter caseTag(Tag object) {
+			return createTagAdapter();
+		}
+		@Override
+		public Adapter caseVisitable(Visitable object) {
+			return createVisitableAdapter();
+		}
+		@Override
+		public Adapter caseElement(Element object) {
+			return createElementAdapter();
+		}
+		@Override
+		public Adapter caseNameable(Nameable object) {
+			return createNameableAdapter();
+		}
+		@Override
+		public Adapter caseNamedElement(NamedElement object) {
+			return createNamedElementAdapter();
+		}
+		@Override
+		public Adapter caseTypedElement(TypedElement object) {
+			return createTypedElementAdapter();
+		}
+		@Override
+		public Adapter caseFeature(Feature object) {
+			return createFeatureAdapter();
+		}
+		@Override
+		public Adapter caseNamespace(Namespace object) {
+			return createNamespaceAdapter();
+		}
+		@Override
+		public Adapter caseTemplateableElement(TemplateableElement object) {
+			return createTemplateableElementAdapter();
+		}
+		@Override
+		public Adapter caseOperation(Operation object) {
+			return createOperationAdapter();
+		}
+		@Override
+		public Adapter caseProperty(Property object) {
+			return createPropertyAdapter();
+		}
+		@Override
+		public Adapter caseOCLExpression(OCLExpression object) {
+			return createOCLExpressionAdapter();
+		}
+		@Override
+		public Adapter caseCallExp(CallExp object) {
+			return createCallExpAdapter();
+		}
+		@Override
+		public Adapter caseFeatureCallExp(FeatureCallExp object) {
+			return createFeatureCallExpAdapter();
+		}
+		@Override
+		public Adapter caseReferringElement(ReferringElement object) {
+			return createReferringElementAdapter();
+		}
+		@Override
+		public Adapter caseOperationCallExp(OperationCallExp object) {
+			return createOperationCallExpAdapter();
+		}
+		@Override
+		public Adapter caseImperativeExpression(ImperativeExpression object) {
+			return createImperativeExpressionAdapter();
+		}
+		@Override
+		public Adapter caseType(Type object) {
+			return createTypeAdapter();
+		}
+		@Override
+		public Adapter caseClass(org.eclipse.ocl.pivot.Class object) {
+			return createClassAdapter();
+		}
+		@Override
+		public Adapter caseVariableDeclaration(VariableDeclaration object) {
+			return createVariableDeclarationAdapter();
+		}
+		@Override
+		public Adapter caseVariable(Variable object) {
+			return createVariableAdapter();
+		}
+		@Override
+		public Adapter caseParameter(Parameter object) {
+			return createParameterAdapter();
+		}
+		@Override
+		public Adapter caseInstantiationExp(InstantiationExp object) {
+			return createInstantiationExpAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

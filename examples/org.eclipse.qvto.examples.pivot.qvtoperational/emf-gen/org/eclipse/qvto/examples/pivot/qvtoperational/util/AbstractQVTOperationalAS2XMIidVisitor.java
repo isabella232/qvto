@@ -5,7 +5,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *   Adolfo Sanchez-Barbudo (University of York) - Bug397429
@@ -18,7 +18,6 @@
  *******************************************************************************/
 package	org.eclipse.qvto.examples.pivot.qvtoperational.util;
 
-import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
@@ -32,17 +31,17 @@ import org.eclipse.qvto.examples.pivot.imperativeocl.utilities.ImperativeOCLAS2X
  * suitable first super class, the method delegates to visiting().
  */
 public abstract class AbstractQVTOperationalAS2XMIidVisitor
-	extends ImperativeOCLAS2XMIidVisitor
-	implements QVTOperationalVisitor<Boolean>
+extends ImperativeOCLAS2XMIidVisitor
+implements QVTOperationalVisitor<Boolean>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTOperationalAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public @Nullable Boolean visitConstructor(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Constructor object) {

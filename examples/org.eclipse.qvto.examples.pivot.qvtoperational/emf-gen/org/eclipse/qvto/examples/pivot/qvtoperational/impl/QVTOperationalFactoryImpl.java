@@ -5,7 +5,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *   Adolfo Sanchez-Barbudo (University of York) - Bug397429
@@ -94,34 +94,34 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTOperationalPackage.CONSTRUCTOR: return createConstructor();
-			case QVTOperationalPackage.CONSTRUCTOR_BODY: return createConstructorBody();
-			case QVTOperationalPackage.CONTEXTUAL_PROPERTY: return createContextualProperty();
-			case QVTOperationalPackage.DUMMY_RELATION: return createDummyRelation();
-			case QVTOperationalPackage.DUMMY_RELATION_DOMAIN: return createDummyRelationDomain();
-			case QVTOperationalPackage.DUMMY_RELATIONAL_TRANSFORMATION: return createDummyRelationalTransformation();
-			case QVTOperationalPackage.ENTRY_OPERATION: return createEntryOperation();
-			case QVTOperationalPackage.HELPER: return createHelper();
-			case QVTOperationalPackage.IMPERATIVE_CALL_EXP: return createImperativeCallExp();
-			case QVTOperationalPackage.IMPERATIVE_OPERATION: return createImperativeOperation();
-			case QVTOperationalPackage.LIBRARY: return createLibrary();
-			case QVTOperationalPackage.MAPPING_BODY: return createMappingBody();
-			case QVTOperationalPackage.MAPPING_CALL_EXP: return createMappingCallExp();
-			case QVTOperationalPackage.MAPPING_OPERATION: return createMappingOperation();
-			case QVTOperationalPackage.MAPPING_PARAMETER: return createMappingParameter();
-			case QVTOperationalPackage.MODEL_PARAMETER: return createModelParameter();
-			case QVTOperationalPackage.MODEL_TYPE: return createModelType();
-			case QVTOperationalPackage.MODULE: return createModule();
-			case QVTOperationalPackage.MODULE_IMPORT: return createModuleImport();
-			case QVTOperationalPackage.OBJECT_EXP: return createObjectExp();
-			case QVTOperationalPackage.OPERATION_BODY: return createOperationBody();
-			case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION: return createOperationalTransformation();
-			case QVTOperationalPackage.RESOLVE_EXP: return createResolveExp();
-			case QVTOperationalPackage.RESOLVE_IN_EXP: return createResolveInExp();
-			case QVTOperationalPackage.VAR_PARAMETER: return createVarParameter();
-			case QVTOperationalPackage.TAG: return createTag();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case QVTOperationalPackage.CONSTRUCTOR: return createConstructor();
+		case QVTOperationalPackage.CONSTRUCTOR_BODY: return createConstructorBody();
+		case QVTOperationalPackage.CONTEXTUAL_PROPERTY: return createContextualProperty();
+		case QVTOperationalPackage.DUMMY_RELATION: return createDummyRelation();
+		case QVTOperationalPackage.DUMMY_RELATION_DOMAIN: return createDummyRelationDomain();
+		case QVTOperationalPackage.DUMMY_RELATIONAL_TRANSFORMATION: return createDummyRelationalTransformation();
+		case QVTOperationalPackage.ENTRY_OPERATION: return createEntryOperation();
+		case QVTOperationalPackage.HELPER: return createHelper();
+		case QVTOperationalPackage.IMPERATIVE_CALL_EXP: return createImperativeCallExp();
+		case QVTOperationalPackage.IMPERATIVE_OPERATION: return createImperativeOperation();
+		case QVTOperationalPackage.LIBRARY: return createLibrary();
+		case QVTOperationalPackage.MAPPING_BODY: return createMappingBody();
+		case QVTOperationalPackage.MAPPING_CALL_EXP: return createMappingCallExp();
+		case QVTOperationalPackage.MAPPING_OPERATION: return createMappingOperation();
+		case QVTOperationalPackage.MAPPING_PARAMETER: return createMappingParameter();
+		case QVTOperationalPackage.MODEL_PARAMETER: return createModelParameter();
+		case QVTOperationalPackage.MODEL_TYPE: return createModelType();
+		case QVTOperationalPackage.MODULE: return createModule();
+		case QVTOperationalPackage.MODULE_IMPORT: return createModuleImport();
+		case QVTOperationalPackage.OBJECT_EXP: return createObjectExp();
+		case QVTOperationalPackage.OPERATION_BODY: return createOperationBody();
+		case QVTOperationalPackage.OPERATIONAL_TRANSFORMATION: return createOperationalTransformation();
+		case QVTOperationalPackage.RESOLVE_EXP: return createResolveExp();
+		case QVTOperationalPackage.RESOLVE_IN_EXP: return createResolveInExp();
+		case QVTOperationalPackage.VAR_PARAMETER: return createVarParameter();
+		case QVTOperationalPackage.TAG: return createTag();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -133,12 +133,12 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTOperationalPackage.DIRECTION_KIND:
-				return createDirectionKindFromString(eDataType, initialValue);
-			case QVTOperationalPackage.IMPORT_KIND:
-				return createImportKindFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case QVTOperationalPackage.DIRECTION_KIND:
+			return createDirectionKindFromString(eDataType, initialValue);
+		case QVTOperationalPackage.IMPORT_KIND:
+			return createImportKindFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -150,12 +150,12 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case QVTOperationalPackage.DIRECTION_KIND:
-				return convertDirectionKindToString(eDataType, instanceValue);
-			case QVTOperationalPackage.IMPORT_KIND:
-				return convertImportKindToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case QVTOperationalPackage.DIRECTION_KIND:
+			return convertDirectionKindToString(eDataType, instanceValue);
+		case QVTOperationalPackage.IMPORT_KIND:
+			return convertImportKindToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -164,6 +164,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Constructor createConstructor() {
 		ConstructorImpl constructor = new ConstructorImpl();
 		return constructor;
@@ -174,6 +175,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ConstructorBody createConstructorBody() {
 		ConstructorBodyImpl constructorBody = new ConstructorBodyImpl();
 		return constructorBody;
@@ -184,6 +186,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ContextualProperty createContextualProperty() {
 		ContextualPropertyImpl contextualProperty = new ContextualPropertyImpl();
 		return contextualProperty;
@@ -194,6 +197,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DummyRelation createDummyRelation() {
 		DummyRelationImpl dummyRelation = new DummyRelationImpl();
 		return dummyRelation;
@@ -204,6 +208,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DummyRelationDomain createDummyRelationDomain() {
 		DummyRelationDomainImpl dummyRelationDomain = new DummyRelationDomainImpl();
 		return dummyRelationDomain;
@@ -214,6 +219,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DummyRelationalTransformation createDummyRelationalTransformation() {
 		DummyRelationalTransformationImpl dummyRelationalTransformation = new DummyRelationalTransformationImpl();
 		return dummyRelationalTransformation;
@@ -224,6 +230,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EntryOperation createEntryOperation() {
 		EntryOperationImpl entryOperation = new EntryOperationImpl();
 		return entryOperation;
@@ -234,6 +241,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Helper createHelper() {
 		HelperImpl helper = new HelperImpl();
 		return helper;
@@ -244,6 +252,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeCallExp createImperativeCallExp() {
 		ImperativeCallExpImpl imperativeCallExp = new ImperativeCallExpImpl();
 		return imperativeCallExp;
@@ -254,6 +263,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeOperation createImperativeOperation() {
 		ImperativeOperationImpl imperativeOperation = new ImperativeOperationImpl();
 		return imperativeOperation;
@@ -264,6 +274,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Library createLibrary() {
 		LibraryImpl library = new LibraryImpl();
 		return library;
@@ -274,6 +285,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingBody createMappingBody() {
 		MappingBodyImpl mappingBody = new MappingBodyImpl();
 		return mappingBody;
@@ -284,6 +296,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingCallExp createMappingCallExp() {
 		MappingCallExpImpl mappingCallExp = new MappingCallExpImpl();
 		return mappingCallExp;
@@ -294,6 +307,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingOperation createMappingOperation() {
 		MappingOperationImpl mappingOperation = new MappingOperationImpl();
 		return mappingOperation;
@@ -304,6 +318,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingParameter createMappingParameter() {
 		MappingParameterImpl mappingParameter = new MappingParameterImpl();
 		return mappingParameter;
@@ -314,6 +329,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ModelParameter createModelParameter() {
 		ModelParameterImpl modelParameter = new ModelParameterImpl();
 		return modelParameter;
@@ -324,6 +340,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ModelType createModelType() {
 		ModelTypeImpl modelType = new ModelTypeImpl();
 		return modelType;
@@ -334,6 +351,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Module createModule() {
 		ModuleImpl module = new ModuleImpl();
 		return module;
@@ -344,6 +362,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ModuleImport createModuleImport() {
 		ModuleImportImpl moduleImport = new ModuleImportImpl();
 		return moduleImport;
@@ -354,6 +373,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ObjectExp createObjectExp() {
 		ObjectExpImpl objectExp = new ObjectExpImpl();
 		return objectExp;
@@ -364,6 +384,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationBody createOperationBody() {
 		OperationBodyImpl operationBody = new OperationBodyImpl();
 		return operationBody;
@@ -374,6 +395,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationalTransformation createOperationalTransformation() {
 		OperationalTransformationImpl operationalTransformation = new OperationalTransformationImpl();
 		return operationalTransformation;
@@ -384,6 +406,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResolveExp createResolveExp() {
 		ResolveExpImpl resolveExp = new ResolveExpImpl();
 		return resolveExp;
@@ -394,6 +417,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ResolveInExp createResolveInExp() {
 		ResolveInExpImpl resolveInExp = new ResolveInExpImpl();
 		return resolveInExp;
@@ -404,6 +428,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VarParameter createVarParameter() {
 		VarParameterImpl varParameter = new VarParameterImpl();
 		return varParameter;
@@ -414,6 +439,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Tag createTag() {
 		TagImpl tag = new TagImpl();
 		return tag;
@@ -464,6 +490,7 @@ public class QVTOperationalFactoryImpl extends EFactoryImpl implements QVTOperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTOperationalPackage getQVTOperationalPackage() {
 		return (QVTOperationalPackage)getEPackage();
 	}

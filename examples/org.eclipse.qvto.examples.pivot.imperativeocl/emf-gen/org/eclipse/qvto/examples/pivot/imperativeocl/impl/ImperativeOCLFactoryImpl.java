@@ -5,7 +5,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *   Adolfo Sanchez-Barbudo (University of York) - Bug397429
@@ -96,37 +96,37 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case ImperativeOCLPackage.ALT_EXP: return createAltExp();
-			case ImperativeOCLPackage.ASSERT_EXP: return createAssertExp();
-			case ImperativeOCLPackage.ASSIGN_EXP: return createAssignExp();
-			case ImperativeOCLPackage.BLOCK_EXP: return createBlockExp();
-			case ImperativeOCLPackage.BREAK_EXP: return createBreakExp();
-			case ImperativeOCLPackage.CATCH_EXP: return createCatchExp();
-			case ImperativeOCLPackage.COMPUTE_EXP: return createComputeExp();
-			case ImperativeOCLPackage.CONTINUE_EXP: return createContinueExp();
-			case ImperativeOCLPackage.DICT_LITERAL_EXP: return createDictLiteralExp();
-			case ImperativeOCLPackage.DICT_LITERAL_PART: return createDictLiteralPart();
-			case ImperativeOCLPackage.DICTIONARY_TYPE: return createDictionaryType();
-			case ImperativeOCLPackage.FOR_EXP: return createForExp();
-			case ImperativeOCLPackage.IMPERATIVE_ITERATE_EXP: return createImperativeIterateExp();
-			case ImperativeOCLPackage.INSTANTIATION_EXP: return createInstantiationExp();
-			case ImperativeOCLPackage.LIST_LITERAL_EXP: return createListLiteralExp();
-			case ImperativeOCLPackage.LIST_TYPE: return createListType();
-			case ImperativeOCLPackage.LOG_EXP: return createLogExp();
-			case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_EXP: return createOrderedTupleLiteralExp();
-			case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_PART: return createOrderedTupleLiteralPart();
-			case ImperativeOCLPackage.ORDERED_TUPLE_TYPE: return createOrderedTupleType();
-			case ImperativeOCLPackage.RAISE_EXP: return createRaiseExp();
-			case ImperativeOCLPackage.RETURN_EXP: return createReturnExp();
-			case ImperativeOCLPackage.SWITCH_EXP: return createSwitchExp();
-			case ImperativeOCLPackage.TRY_EXP: return createTryExp();
-			case ImperativeOCLPackage.TYPEDEF: return createTypedef();
-			case ImperativeOCLPackage.UNLINK_EXP: return createUnlinkExp();
-			case ImperativeOCLPackage.UNPACK_EXP: return createUnpackExp();
-			case ImperativeOCLPackage.VARIABLE_INIT_EXP: return createVariableInitExp();
-			case ImperativeOCLPackage.WHILE_EXP: return createWhileExp();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+		case ImperativeOCLPackage.ALT_EXP: return createAltExp();
+		case ImperativeOCLPackage.ASSERT_EXP: return createAssertExp();
+		case ImperativeOCLPackage.ASSIGN_EXP: return createAssignExp();
+		case ImperativeOCLPackage.BLOCK_EXP: return createBlockExp();
+		case ImperativeOCLPackage.BREAK_EXP: return createBreakExp();
+		case ImperativeOCLPackage.CATCH_EXP: return createCatchExp();
+		case ImperativeOCLPackage.COMPUTE_EXP: return createComputeExp();
+		case ImperativeOCLPackage.CONTINUE_EXP: return createContinueExp();
+		case ImperativeOCLPackage.DICT_LITERAL_EXP: return createDictLiteralExp();
+		case ImperativeOCLPackage.DICT_LITERAL_PART: return createDictLiteralPart();
+		case ImperativeOCLPackage.DICTIONARY_TYPE: return createDictionaryType();
+		case ImperativeOCLPackage.FOR_EXP: return createForExp();
+		case ImperativeOCLPackage.IMPERATIVE_ITERATE_EXP: return createImperativeIterateExp();
+		case ImperativeOCLPackage.INSTANTIATION_EXP: return createInstantiationExp();
+		case ImperativeOCLPackage.LIST_LITERAL_EXP: return createListLiteralExp();
+		case ImperativeOCLPackage.LIST_TYPE: return createListType();
+		case ImperativeOCLPackage.LOG_EXP: return createLogExp();
+		case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_EXP: return createOrderedTupleLiteralExp();
+		case ImperativeOCLPackage.ORDERED_TUPLE_LITERAL_PART: return createOrderedTupleLiteralPart();
+		case ImperativeOCLPackage.ORDERED_TUPLE_TYPE: return createOrderedTupleType();
+		case ImperativeOCLPackage.RAISE_EXP: return createRaiseExp();
+		case ImperativeOCLPackage.RETURN_EXP: return createReturnExp();
+		case ImperativeOCLPackage.SWITCH_EXP: return createSwitchExp();
+		case ImperativeOCLPackage.TRY_EXP: return createTryExp();
+		case ImperativeOCLPackage.TYPEDEF: return createTypedef();
+		case ImperativeOCLPackage.UNLINK_EXP: return createUnlinkExp();
+		case ImperativeOCLPackage.UNPACK_EXP: return createUnpackExp();
+		case ImperativeOCLPackage.VARIABLE_INIT_EXP: return createVariableInitExp();
+		case ImperativeOCLPackage.WHILE_EXP: return createWhileExp();
+		default:
+			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -138,10 +138,10 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImperativeOCLPackage.SEVERITY_KIND:
-				return createSeverityKindFromString(eDataType, initialValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case ImperativeOCLPackage.SEVERITY_KIND:
+			return createSeverityKindFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -153,10 +153,10 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case ImperativeOCLPackage.SEVERITY_KIND:
-				return convertSeverityKindToString(eDataType, instanceValue);
-			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		case ImperativeOCLPackage.SEVERITY_KIND:
+			return convertSeverityKindToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
@@ -165,6 +165,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AltExp createAltExp() {
 		AltExpImpl altExp = new AltExpImpl();
 		return altExp;
@@ -175,6 +176,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssertExp createAssertExp() {
 		AssertExpImpl assertExp = new AssertExpImpl();
 		return assertExp;
@@ -185,6 +187,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public AssignExp createAssignExp() {
 		AssignExpImpl assignExp = new AssignExpImpl();
 		return assignExp;
@@ -195,6 +198,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BlockExp createBlockExp() {
 		BlockExpImpl blockExp = new BlockExpImpl();
 		return blockExp;
@@ -205,6 +209,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BreakExp createBreakExp() {
 		BreakExpImpl breakExp = new BreakExpImpl();
 		return breakExp;
@@ -215,6 +220,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CatchExp createCatchExp() {
 		CatchExpImpl catchExp = new CatchExpImpl();
 		return catchExp;
@@ -225,6 +231,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ComputeExp createComputeExp() {
 		ComputeExpImpl computeExp = new ComputeExpImpl();
 		return computeExp;
@@ -235,6 +242,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ContinueExp createContinueExp() {
 		ContinueExpImpl continueExp = new ContinueExpImpl();
 		return continueExp;
@@ -245,6 +253,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictLiteralExp createDictLiteralExp() {
 		DictLiteralExpImpl dictLiteralExp = new DictLiteralExpImpl();
 		return dictLiteralExp;
@@ -255,6 +264,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictLiteralPart createDictLiteralPart() {
 		DictLiteralPartImpl dictLiteralPart = new DictLiteralPartImpl();
 		return dictLiteralPart;
@@ -265,6 +275,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DictionaryType createDictionaryType() {
 		DictionaryTypeImpl dictionaryType = new DictionaryTypeImpl();
 		return dictionaryType;
@@ -275,6 +286,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ForExp createForExp() {
 		ForExpImpl forExp = new ForExpImpl();
 		return forExp;
@@ -285,6 +297,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeIterateExp createImperativeIterateExp() {
 		ImperativeIterateExpImpl imperativeIterateExp = new ImperativeIterateExpImpl();
 		return imperativeIterateExp;
@@ -295,6 +308,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public InstantiationExp createInstantiationExp() {
 		InstantiationExpImpl instantiationExp = new InstantiationExpImpl();
 		return instantiationExp;
@@ -305,6 +319,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ListLiteralExp createListLiteralExp() {
 		ListLiteralExpImpl listLiteralExp = new ListLiteralExpImpl();
 		return listLiteralExp;
@@ -315,6 +330,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ListType createListType() {
 		ListTypeImpl listType = new ListTypeImpl();
 		return listType;
@@ -325,6 +341,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public LogExp createLogExp() {
 		LogExpImpl logExp = new LogExpImpl();
 		return logExp;
@@ -335,6 +352,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OrderedTupleLiteralExp createOrderedTupleLiteralExp() {
 		OrderedTupleLiteralExpImpl orderedTupleLiteralExp = new OrderedTupleLiteralExpImpl();
 		return orderedTupleLiteralExp;
@@ -345,6 +363,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OrderedTupleLiteralPart createOrderedTupleLiteralPart() {
 		OrderedTupleLiteralPartImpl orderedTupleLiteralPart = new OrderedTupleLiteralPartImpl();
 		return orderedTupleLiteralPart;
@@ -355,6 +374,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OrderedTupleType createOrderedTupleType() {
 		OrderedTupleTypeImpl orderedTupleType = new OrderedTupleTypeImpl();
 		return orderedTupleType;
@@ -365,6 +385,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RaiseExp createRaiseExp() {
 		RaiseExpImpl raiseExp = new RaiseExpImpl();
 		return raiseExp;
@@ -375,6 +396,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ReturnExp createReturnExp() {
 		ReturnExpImpl returnExp = new ReturnExpImpl();
 		return returnExp;
@@ -385,6 +407,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public SwitchExp createSwitchExp() {
 		SwitchExpImpl switchExp = new SwitchExpImpl();
 		return switchExp;
@@ -395,6 +418,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TryExp createTryExp() {
 		TryExpImpl tryExp = new TryExpImpl();
 		return tryExp;
@@ -405,6 +429,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Typedef createTypedef() {
 		TypedefImpl typedef = new TypedefImpl();
 		return typedef;
@@ -415,6 +440,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UnlinkExp createUnlinkExp() {
 		UnlinkExpImpl unlinkExp = new UnlinkExpImpl();
 		return unlinkExp;
@@ -425,6 +451,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public UnpackExp createUnpackExp() {
 		UnpackExpImpl unpackExp = new UnpackExpImpl();
 		return unpackExp;
@@ -435,6 +462,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableInitExp createVariableInitExp() {
 		VariableInitExpImpl variableInitExp = new VariableInitExpImpl();
 		return variableInitExp;
@@ -445,6 +473,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public WhileExp createWhileExp() {
 		WhileExpImpl whileExp = new WhileExpImpl();
 		return whileExp;
@@ -475,6 +504,7 @@ public class ImperativeOCLFactoryImpl extends EFactoryImpl implements Imperative
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeOCLPackage getImperativeOCLPackage() {
 		return (ImperativeOCLPackage)getEPackage();
 	}

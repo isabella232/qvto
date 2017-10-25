@@ -283,7 +283,7 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link QVTOperationalPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -297,13 +297,14 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 		if (isInited) return (QVTOperationalPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		QVTOperationalPackageImpl theQVTOperationalPackage = (QVTOperationalPackageImpl)(ePackage instanceof QVTOperationalPackageImpl ? ePackage : new QVTOperationalPackageImpl());
+		Object registeredQVTOperationalPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		QVTOperationalPackageImpl theQVTOperationalPackage = registeredQVTOperationalPackage instanceof QVTOperationalPackageImpl ? (QVTOperationalPackageImpl)registeredQVTOperationalPackage : new QVTOperationalPackageImpl();
 
 		isInited = true;
 
 		// Initialize simple dependencies
 		ImperativeOCLPackage.eINSTANCE.eClass();
+		PivotPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theQVTOperationalPackage.createPackageContents();
@@ -314,7 +315,6 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 		// Mark meta-data to indicate it can't be changed
 		theQVTOperationalPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTOperationalPackage.eNS_URI, theQVTOperationalPackage);
 		return theQVTOperationalPackage;
@@ -1413,162 +1413,162 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getContextualProperty_InitExpression(), 
-		   source, 
+		  (getContextualProperty_InitExpression(),
+		   source,
 		   new String[] {
-			 "body", "ownerProperty"
-		   });	
+			   "body", "ownerProperty"
+		   });
 		addAnnotation
-		  (getContextualProperty_Overridden(), 
-		   source, 
+		  (getContextualProperty_Overridden(),
+		   source,
 		   new String[] {
-			 "body", "overriding"
-		   });	
+			   "body", "overriding"
+		   });
 		addAnnotation
-		  (getImperativeOperation_Overridden(), 
-		   source, 
+		  (getImperativeOperation_Overridden(),
+		   source,
 		   new String[] {
-			 "body", "overriding"
-		   });	
+			   "body", "overriding"
+		   });
 		addAnnotation
-		  (getMappingBody_EndSection(), 
-		   source, 
+		  (getMappingBody_EndSection(),
+		   source,
 		   new String[] {
-			 "body", "endOwner"
-		   });	
+			   "body", "endOwner"
+		   });
 		addAnnotation
-		  (getMappingBody_InitSection(), 
-		   source, 
+		  (getMappingBody_InitSection(),
+		   source,
 		   new String[] {
-			 "body", "initOwner"
-		   });	
+			   "body", "initOwner"
+		   });
 		addAnnotation
-		  (getMappingOperation_Disjunct(), 
-		   source, 
+		  (getMappingOperation_Disjunct(),
+		   source,
 		   new String[] {
-			 "body", "disjuncter"
-		   });	
+			   "body", "disjuncter"
+		   });
 		addAnnotation
-		  (getMappingOperation_Inherited(), 
-		   source, 
+		  (getMappingOperation_Inherited(),
+		   source,
 		   new String[] {
-			 "body", "inheriting"
-		   });	
+			   "body", "inheriting"
+		   });
 		addAnnotation
-		  (getMappingOperation_Merged(), 
-		   source, 
+		  (getMappingOperation_Merged(),
+		   source,
 		   new String[] {
-			 "body", "merging"
-		   });	
+			   "body", "merging"
+		   });
 		addAnnotation
-		  (getMappingOperation_RefinedRelation(), 
-		   source, 
+		  (getMappingOperation_RefinedRelation(),
+		   source,
 		   new String[] {
-			 "body", "refiningOperation"
-		   });	
+			   "body", "refiningOperation"
+		   });
 		addAnnotation
-		  (getMappingOperation_When(), 
-		   source, 
+		  (getMappingOperation_When(),
+		   source,
 		   new String[] {
-			 "body", "whenOwner"
-		   });	
+			   "body", "whenOwner"
+		   });
 		addAnnotation
-		  (getMappingOperation_Where(), 
-		   source, 
+		  (getMappingOperation_Where(),
+		   source,
 		   new String[] {
-			 "body", "whereOwner"
-		   });	
+			   "body", "whereOwner"
+		   });
 		addAnnotation
-		  (getMappingParameter_ReferredDomain(), 
-		   source, 
+		  (getMappingParameter_ReferredDomain(),
+		   source,
 		   new String[] {
-			 "body", "referringParameter"
-		   });	
+			   "body", "referringParameter"
+		   });
 		addAnnotation
-		  (getModelType_AdditionalCondition(), 
-		   source, 
+		  (getModelType_AdditionalCondition(),
+		   source,
 		   new String[] {
-			 "body", "condOwner"
-		   });	
+			   "body", "condOwner"
+		   });
 		addAnnotation
-		  (getModule_Entry(), 
-		   source, 
+		  (getModule_Entry(),
+		   source,
 		   new String[] {
-			 "body", "entryContext"
-		   });	
+			   "body", "entryContext"
+		   });
 		addAnnotation
-		  (getModule_OwnedTag(), 
-		   source, 
+		  (getModule_OwnedTag(),
+		   source,
 		   new String[] {
-			 "body", "owner"
-		   });	
+			   "body", "owner"
+		   });
 		addAnnotation
-		  (getModule_OwnedVariable(), 
-		   source, 
+		  (getModule_OwnedVariable(),
+		   source,
 		   new String[] {
-			 "body", "variableOwner"
-		   });	
+			   "body", "variableOwner"
+		   });
 		addAnnotation
-		  (getModuleImport_ImportedModule(), 
-		   source, 
+		  (getModuleImport_ImportedModule(),
+		   source,
 		   new String[] {
-			 "body", "importingElement"
-		   });	
+			   "body", "importingElement"
+		   });
 		addAnnotation
-		  (getObjectExp_ReferredObject(), 
-		   source, 
+		  (getObjectExp_ReferredObject(),
+		   source,
 		   new String[] {
-			 "body", "objectExpression"
-		   });	
+			   "body", "objectExpression"
+		   });
 		addAnnotation
-		  (getOperationBody_Content(), 
-		   source, 
+		  (getOperationBody_Content(),
+		   source,
 		   new String[] {
-			 "body", "contentOwner"
-		   });	
+			   "body", "contentOwner"
+		   });
 		addAnnotation
-		  (getOperationBody_Variable(), 
-		   source, 
+		  (getOperationBody_Variable(),
+		   source,
 		   new String[] {
-			 "body", "opBody"
-		   });	
+			   "body", "opBody"
+		   });
 		addAnnotation
-		  (getOperationalTransformation_IntermediateClass(), 
-		   source, 
+		  (getOperationalTransformation_IntermediateClass(),
+		   source,
 		   new String[] {
-			 "body", "transfClient"
-		   });	
+			   "body", "transfClient"
+		   });
 		addAnnotation
-		  (getOperationalTransformation_IntermediateProperty(), 
-		   source, 
+		  (getOperationalTransformation_IntermediateProperty(),
+		   source,
 		   new String[] {
-			 "body", "tranfClient"
-		   });	
+			   "body", "tranfClient"
+		   });
 		addAnnotation
-		  (getOperationalTransformation_ModelParameter(), 
-		   source, 
+		  (getOperationalTransformation_ModelParameter(),
+		   source,
 		   new String[] {
-			 "body", "module"
-		   });	
+			   "body", "module"
+		   });
 		addAnnotation
-		  (getOperationalTransformation_Refined(), 
-		   source, 
+		  (getOperationalTransformation_Refined(),
+		   source,
 		   new String[] {
-			 "body", "refinement"
-		   });	
+			   "body", "refinement"
+		   });
 		addAnnotation
-		  (getOperationalTransformation_Relation(), 
-		   source, 
+		  (getOperationalTransformation_Relation(),
+		   source,
 		   new String[] {
-			 "body", "owner"
-		   });	
+			   "body", "owner"
+		   });
 		addAnnotation
-		  (getResolveInExp_InMapping(), 
-		   source, 
+		  (getResolveInExp_InMapping(),
+		   source,
 		   new String[] {
-			 "body", "resolveExpression"
+			   "body", "resolveExpression"
 		   });
 	}
 

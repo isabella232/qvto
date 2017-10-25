@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 /**
  * An AbstractWrappingQVTOperationalVisitor delegates all visits wrapping the delegation in a call to a preVisit function and a postVisit function.
  */
-public abstract class AbstractWrappingQVTOperationalVisitor<R, C, D extends QVTOperationalVisitor<R>, P>
+public abstract class AbstractWrappingQVTOperationalVisitor<R, C, @NonNull D extends QVTOperationalVisitor<R>, P>
 	extends org.eclipse.qvto.examples.pivot.imperativeocl.util.AbstractWrappingImperativeOCLVisitor<R, C, D, P>
 	implements QVTOperationalVisitor<R>
 {

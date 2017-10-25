@@ -21,6 +21,7 @@ package	org.eclipse.qvto.examples.pivot.imperativeocl.util;
 import org.eclipse.jdt.annotation.NonNull;
 
 /**
+ * @noimplement This interface is not intended to be implemented by clients.
  */
 public interface ImperativeOCLVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {

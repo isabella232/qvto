@@ -29,7 +29,7 @@ public abstract class AbstractQVTOperationalVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTOperationalVisitor(C context) {

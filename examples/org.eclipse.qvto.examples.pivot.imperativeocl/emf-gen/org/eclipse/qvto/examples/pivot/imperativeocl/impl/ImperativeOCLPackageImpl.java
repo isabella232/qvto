@@ -314,7 +314,7 @@ public class ImperativeOCLPackageImpl extends EPackageImpl implements Imperative
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link ImperativeOCLPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -328,8 +328,8 @@ public class ImperativeOCLPackageImpl extends EPackageImpl implements Imperative
 		if (isInited) return (ImperativeOCLPackage)EPackage.Registry.INSTANCE.getEPackage(ImperativeOCLPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object ePackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ImperativeOCLPackageImpl theImperativeOCLPackage = (ImperativeOCLPackageImpl)(ePackage instanceof ImperativeOCLPackageImpl ? ePackage : new ImperativeOCLPackageImpl());
+		Object registeredImperativeOCLPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		ImperativeOCLPackageImpl theImperativeOCLPackage = registeredImperativeOCLPackage instanceof ImperativeOCLPackageImpl ? (ImperativeOCLPackageImpl)registeredImperativeOCLPackage : new ImperativeOCLPackageImpl();
 
 		isInited = true;
 
@@ -345,7 +345,6 @@ public class ImperativeOCLPackageImpl extends EPackageImpl implements Imperative
 		// Mark meta-data to indicate it can't be changed
 		theImperativeOCLPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(ImperativeOCLPackage.eNS_URI, theImperativeOCLPackage);
 		return theImperativeOCLPackage;
@@ -1377,198 +1376,198 @@ public class ImperativeOCLPackageImpl extends EPackageImpl implements Imperative
 	 * @generated
 	 */
 	protected void createEmofAnnotations() {
-		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
 		addAnnotation
-		  (getAltExp_Body(), 
-		   source, 
+		  (getAltExp_Body(),
+		   source,
 		   new String[] {
-			 "body", "altBodyOwner"
-		   });	
+			   "body", "altBodyOwner"
+		   });
 		addAnnotation
-		  (getAltExp_Condition(), 
-		   source, 
+		  (getAltExp_Condition(),
+		   source,
 		   new String[] {
-			 "body", "altCondOwner"
-		   });	
+			   "body", "altCondOwner"
+		   });
 		addAnnotation
-		  (getAssertExp_Assertion(), 
-		   source, 
+		  (getAssertExp_Assertion(),
+		   source,
 		   new String[] {
-			 "body", "assertOwner"
-		   });	
+			   "body", "assertOwner"
+		   });
 		addAnnotation
-		  (getAssignExp_DefaultValue(), 
-		   source, 
+		  (getAssignExp_DefaultValue(),
+		   source,
 		   new String[] {
-			 "body", "defaultOwner"
-		   });	
+			   "body", "defaultOwner"
+		   });
 		addAnnotation
-		  (getAssignExp_Left(), 
-		   source, 
+		  (getAssignExp_Left(),
+		   source,
 		   new String[] {
-			 "body", "leftOwner"
-		   });	
+			   "body", "leftOwner"
+		   });
 		addAnnotation
-		  (getAssignExp_Value(), 
-		   source, 
+		  (getAssignExp_Value(),
+		   source,
 		   new String[] {
-			 "body", "valueOwner"
-		   });	
+			   "body", "valueOwner"
+		   });
 		addAnnotation
-		  (getBlockExp_Body(), 
-		   source, 
+		  (getBlockExp_Body(),
+		   source,
 		   new String[] {
-			 "body", "blockOwner"
-		   });	
+			   "body", "blockOwner"
+		   });
 		addAnnotation
-		  (getCatchExp_Exception(), 
-		   source, 
+		  (getCatchExp_Exception(),
+		   source,
 		   new String[] {
-			 "body", "tryExpression"
-		   });	
+			   "body", "tryExpression"
+		   });
 		addAnnotation
-		  (getComputeExp_Body(), 
-		   source, 
+		  (getComputeExp_Body(),
+		   source,
 		   new String[] {
-			 "body", "computeOwner"
-		   });	
+			   "body", "computeOwner"
+		   });
 		addAnnotation
-		  (getComputeExp_ReturnedElement(), 
-		   source, 
+		  (getComputeExp_ReturnedElement(),
+		   source,
 		   new String[] {
-			 "body", "computeOwner"
-		   });	
+			   "body", "computeOwner"
+		   });
 		addAnnotation
-		  (getDictLiteralExp_Part(), 
-		   source, 
+		  (getDictLiteralExp_Part(),
+		   source,
 		   new String[] {
-			 "body", "partOwner"
-		   });	
+			   "body", "partOwner"
+		   });
 		addAnnotation
-		  (getDictLiteralPart_Key(), 
-		   source, 
+		  (getDictLiteralPart_Key(),
+		   source,
 		   new String[] {
-			 "body", "keyOwner"
-		   });	
+			   "body", "keyOwner"
+		   });
 		addAnnotation
-		  (getDictLiteralPart_Value(), 
-		   source, 
+		  (getDictLiteralPart_Value(),
+		   source,
 		   new String[] {
-			 "body", "valOwner"
-		   });	
+			   "body", "valOwner"
+		   });
 		addAnnotation
-		  (getDictionaryType_KeyType(), 
-		   source, 
+		  (getDictionaryType_KeyType(),
+		   source,
 		   new String[] {
-			 "body", "keyDict"
-		   });	
+			   "body", "keyDict"
+		   });
 		addAnnotation
-		  (getImperativeIterateExp_Target(), 
-		   source, 
+		  (getImperativeIterateExp_Target(),
+		   source,
 		   new String[] {
-			 "body", "tgtOwner"
-		   });	
+			   "body", "tgtOwner"
+		   });
 		addAnnotation
-		  (getImperativeLoopExp_Condition(), 
-		   source, 
+		  (getImperativeLoopExp_Condition(),
+		   source,
 		   new String[] {
-			 "body", "loopCondOwner"
-		   });	
+			   "body", "loopCondOwner"
+		   });
 		addAnnotation
-		  (getInstantiationExp_Argument(), 
-		   source, 
+		  (getInstantiationExp_Argument(),
+		   source,
 		   new String[] {
-			 "body", "argOwner"
-		   });	
+			   "body", "argOwner"
+		   });
 		addAnnotation
-		  (getListLiteralExp_Element(), 
-		   source, 
+		  (getListLiteralExp_Element(),
+		   source,
 		   new String[] {
-			 "body", "elementOwner"
-		   });	
+			   "body", "elementOwner"
+		   });
 		addAnnotation
-		  (getLogExp_Condition(), 
-		   source, 
+		  (getLogExp_Condition(),
+		   source,
 		   new String[] {
-			 "body", "logOwner"
-		   });	
+			   "body", "logOwner"
+		   });
 		addAnnotation
-		  (getOrderedTupleLiteralExp_Part(), 
-		   source, 
+		  (getOrderedTupleLiteralExp_Part(),
+		   source,
 		   new String[] {
-			 "body", "partOwner"
-		   });	
+			   "body", "partOwner"
+		   });
 		addAnnotation
-		  (getOrderedTupleLiteralPart_Value(), 
-		   source, 
+		  (getOrderedTupleLiteralPart_Value(),
+		   source,
 		   new String[] {
-			 "body", "tupValOwner"
-		   });	
+			   "body", "tupValOwner"
+		   });
 		addAnnotation
-		  (getOrderedTupleType_ElementType(), 
-		   source, 
+		  (getOrderedTupleType_ElementType(),
+		   source,
 		   new String[] {
-			 "body", "eltTuple"
-		   });	
+			   "body", "eltTuple"
+		   });
 		addAnnotation
-		  (getRaiseExp_Exception(), 
-		   source, 
+		  (getRaiseExp_Exception(),
+		   source,
 		   new String[] {
-			 "body", "raiseExpression"
-		   });	
+			   "body", "raiseExpression"
+		   });
 		addAnnotation
-		  (getSwitchExp_AlternativePart(), 
-		   source, 
+		  (getSwitchExp_AlternativePart(),
+		   source,
 		   new String[] {
-			 "body", "altOwner"
-		   });	
+			   "body", "altOwner"
+		   });
 		addAnnotation
-		  (getSwitchExp_ElsePart(), 
-		   source, 
+		  (getSwitchExp_ElsePart(),
+		   source,
 		   new String[] {
-			 "body", "elsePartOwner"
-		   });	
+			   "body", "elsePartOwner"
+		   });
 		addAnnotation
-		  (getTryExp_ExceptClause(), 
-		   source, 
+		  (getTryExp_ExceptClause(),
+		   source,
 		   new String[] {
-			 "body", "exceptOwner"
-		   });	
+			   "body", "exceptOwner"
+		   });
 		addAnnotation
-		  (getTryExp_TryBody(), 
-		   source, 
+		  (getTryExp_TryBody(),
+		   source,
 		   new String[] {
-			 "body", "tryBodyOwner"
-		   });	
+			   "body", "tryBodyOwner"
+		   });
 		addAnnotation
-		  (getUnlinkExp_Item(), 
-		   source, 
+		  (getUnlinkExp_Item(),
+		   source,
 		   new String[] {
-			 "body", "itemUnlink"
-		   });	
+			   "body", "itemUnlink"
+		   });
 		addAnnotation
-		  (getUnlinkExp_Target(), 
-		   source, 
+		  (getUnlinkExp_Target(),
+		   source,
 		   new String[] {
-			 "body", "tgtUnlink"
-		   });	
+			   "body", "tgtUnlink"
+		   });
 		addAnnotation
-		  (getVariableInitExp_ReferredVariable(), 
-		   source, 
+		  (getVariableInitExp_ReferredVariable(),
+		   source,
 		   new String[] {
-			 "body", "declaration"
-		   });	
+			   "body", "declaration"
+		   });
 		addAnnotation
-		  (getWhileExp_Body(), 
-		   source, 
+		  (getWhileExp_Body(),
+		   source,
 		   new String[] {
-			 "body", "whileOwner"
-		   });	
+			   "body", "whileOwner"
+		   });
 		addAnnotation
-		  (getWhileExp_Condition(), 
-		   source, 
+		  (getWhileExp_Condition(),
+		   source,
 		   new String[] {
-			 "body", "whileExpression"
+			   "body", "whileExpression"
 		   });
 	}
 

@@ -33,12 +33,12 @@ public abstract class AbstractExtendingQVTOperationalVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractExtendingQVTOperationalVisitor(C context) {
 		super(context);
-	}	
+	}
 
 	@Override
 	public R visitConstructor(org.eclipse.qvto.examples.pivot.qvtoperational.@NonNull Constructor object) {

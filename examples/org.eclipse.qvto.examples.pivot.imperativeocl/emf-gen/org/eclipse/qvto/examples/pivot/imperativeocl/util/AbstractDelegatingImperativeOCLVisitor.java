@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 /**
  * An AbstractDelegatingImperativeOCLVisitor delegates all visits.
  */
-public abstract class AbstractDelegatingImperativeOCLVisitor<R, C, D extends ImperativeOCLVisitor<R>>
+public abstract class AbstractDelegatingImperativeOCLVisitor<R, C, @NonNull D extends ImperativeOCLVisitor<R>>
 	extends org.eclipse.ocl.pivot.util.AbstractDelegatingVisitor<R, C, D>
 	implements ImperativeOCLVisitor<R>
 {

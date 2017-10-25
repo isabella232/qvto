@@ -29,7 +29,7 @@ public abstract class AbstractImperativeOCLVisitor<R, C>
 {
 	/**
 	 * Initializes me with an initial value for my result.
-	 * 
+	 *
 	 * @param context my initial result value
 	 */
 	protected AbstractImperativeOCLVisitor(C context) {
