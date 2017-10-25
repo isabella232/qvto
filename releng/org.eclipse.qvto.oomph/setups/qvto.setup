@@ -109,17 +109,7 @@
       <requirement
           name="org.eclipse.emf.sdk.feature.group"/>
       <requirement
-          name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.xtext.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.egit.feature.group"/>
-      <requirement
           name="org.eclipse.ocl.all.sdk.feature.group"/>
-      <requirement
-          name="org.eclipse.ocl.examples.feature.group"/>
-      <requirement
-          name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
       <description>Mandatory IDE for QVTo Developers</description>
     </setupTask>
   </setupTask>
@@ -205,7 +195,14 @@
           locateNestedProjects="true"/>
       <sourceLocator
           rootFolder="${qvto.git.clone.location/examples}"
-          locateNestedProjects="true"/>
+          locateNestedProjects="true">
+        <predicate
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:NamePredicate"
+              pattern="org.eclipse.qvto.examples.*"/>
+        </predicate>
+      </sourceLocator>
       <description>Development Projects</description>
     </setupTask>
     <setupTask
@@ -214,82 +211,64 @@
           name="QVTo Plugins">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml"/>
+            pattern="org.eclipse.m2m.qvt.oml*"/>
         <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.common.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.cst.parser"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.debug.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.ecore.imperativeocl"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.emf.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.ocl"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.project"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.runtime"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.runtime.jdt"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.tools.coverage"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.tools.coverage.startup"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.trace.edit"/>
+            xsi:type="predicates:NotPredicate">
+          <operand
+              xsi:type="predicates:OrPredicate">
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.*-feature"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.*\.feature"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.*\.doc"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.examples.blackbox"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.econ2009.tutorial"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.samples"/>
+            <operand
+                xsi:type="predicates:NamePredicate"
+                pattern="org.eclipse.m2m.qvt.oml.samples.simpleuml2rdb"/>
+          </operand>
+        </predicate>
       </workingSet>
       <workingSet
-          name="QVTo Features + Doc">
+          name="QVTo Features">
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.*-feature"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.*\.feature"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.*\.doc"/>
       </workingSet>
       <workingSet
           name="QVTo Tests">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.*.ui"/>
+            pattern="org.eclipse.m2m.tests.*"/>
+      </workingSet>
+      <workingSet
+          name="QVTo Doc">
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.tests.qvt.oml.*"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.tests.qvto.*"/>
+            pattern="org.eclipse.m2m.qvt.oml.*\.doc"/>
       </workingSet>
       <workingSet
           name="QVTo Examples">
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.examples.blackbox"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.econ2009.tutorial"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.m2m.qvt.oml.samples"/>
-        <predicate
-            xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.m2m.qvt.oml.samples.simpleuml2rdb"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="qvto.ecore2uml"/>
@@ -393,6 +372,25 @@
             pattern="org.eclipse.qvto.examples.*"/>
       </workingSet>
     </setupTask>
+    <stream
+        name="master"
+        label="Master">
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="QVTo Pivot IDE">
+        <requirement
+            name="org.eclipse.xtext.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.ocl.examples.feature.group"/>
+        <requirement
+            name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
+        <requirement
+            name="org.eclipse.egit.feature.group"/>
+        <description>Aditional IDE for QVTo Pivot Developers</description>
+      </setupTask>
+    </stream>
     <description>The experimental Pivot-based development environment for the QVTo project.</description>
   </project>
   <logicalProjectContainer
