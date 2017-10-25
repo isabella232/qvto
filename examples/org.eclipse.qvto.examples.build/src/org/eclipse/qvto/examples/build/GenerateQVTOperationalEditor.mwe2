@@ -113,7 +113,7 @@ Workflow {
     		// outline API
     		// fragment = outline.OutlineTreeProviderFragment auto-inject {}
     		// To show AS in the outline view
-    		fragment = org.eclipse.qvtd.cs2as.xtext.generator.CS2ASOutlineTreeProviderFragment auto-inject {} 
+//    		fragment = org.eclipse.qvtd.cs2as.xtext.generator.CS2ASOutlineTreeProviderFragment auto-inject {} 
     		
     		fragment = outline.QuickOutlineFragment auto-inject {}
     

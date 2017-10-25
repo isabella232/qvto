@@ -2,13 +2,13 @@ import  qvtocs : 'QVTOperationalCS.ecore#/'
 import  basecs : '/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/'
 import  qvto : '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperational.ecore#/'
 import  ocl : '/resource/org.eclipse.ocl.pivot/model/Pivot.ecore#/'
-import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.ocl'
+--import '/resource/org.eclipse.ocl.xtext.base/model/BaseCS2AS.ocl'
 import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalCS2ASHelpers.ocl' -- Moved to the AS project
 import '/resource/org.eclipse.qvto.examples.pivot.qvtoperational/model/QVTOperationalCS2ASLookup.ocl'  -- Moved to the AS project
 import 'QVTOperationalCS2ASDisambiguation.ocl'
 package qvtocs
 
-context TopLevelCS
+/*context TopLevelCS
 def : ast() : ocl::Model =
 	ocl::Model {
 		ownedPackages = let dummyPackage  = ocl::Package{
@@ -82,5 +82,5 @@ def : ast() : qvto::Library =
 	ownedOperations = ownedOperations.ast(), 
 	usedModelType = ownedParameters->collect(x | ast().lookupModelType(x.ownedType.oclAsType(TypedTypeRef2CS).ownedPathName)), 
 	isBlackbox = ownedQualifiers->exists(x | x = QualifierKindCS::blackbox) 
-	}
+	} */
 endpackage

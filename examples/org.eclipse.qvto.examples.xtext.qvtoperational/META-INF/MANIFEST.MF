@@ -13,7 +13,6 @@ Require-Bundle: org.eclipse.qvto.examples.xtext.imperativeocl;bundle-version="[1
  org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.qvto.examples.xtext.qvtoperational,
- org.eclipse.qvto.examples.xtext.qvtoperational.cs2as,
  org.eclipse.qvto.examples.xtext.qvtoperational.formatting,
  org.eclipse.qvto.examples.xtext.qvtoperational.generator,
  org.eclipse.qvto.examples.xtext.qvtoperational.parser.antlr,
