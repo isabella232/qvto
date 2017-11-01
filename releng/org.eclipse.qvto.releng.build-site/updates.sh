@@ -10,7 +10,7 @@
 updatesFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/updates/"
 group="modeling.mmt.qvt-oml"
 localZip="qvto.zip"
-projectName="QVTo"
+projectRepoName="QVTo"
 manageComposite="/shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml"
 
 if [ -n "${PUBLISH__BUILD_T}" ]
