@@ -397,7 +397,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <BUILD_T>N</BUILD_T>
+        <buildType>N</buildType>
       </properties>
       <build>
         <plugins>
@@ -424,7 +424,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <BUILD_T>I</BUILD_T>
+        <buildType>I</buildType>
       </properties>
       <build>
         <plugins>
@@ -451,7 +451,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <BUILD_T>S</BUILD_T>
+        <buildType>S</buildType>
       </properties>
       <build>
         <plugins>
@@ -478,7 +478,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <BUILD_T></BUILD_T>
+        <buildType></buildType>
       </properties>
       <build>
         <plugins>
@@ -505,7 +505,7 @@
         <activeByDefault>false</activeByDefault>
       </activation>
       <properties>
-        <BUILD_T></BUILD_T>
+        <buildType></buildType>
       </properties>
       <build>
         <plugins>
