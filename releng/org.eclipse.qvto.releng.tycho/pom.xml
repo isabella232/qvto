@@ -38,6 +38,7 @@
     <buildTimestamp>${maven.build.timestamp}</buildTimestamp>
     <buildId>${buildType}${buildTimestamp}${buildStream}</buildId>
     <buildStream>u</buildStream>
+    <buildStreamWithQuotes>'u'</buildStreamWithQuotes>
     <targetPlatform>targetPlatforms/unspecified</targetPlatform>
 
     <tycho.scmUrl>scm:git:https://git.eclipse.org/c/mmt/org.eclipse.qvto.git</tycho.scmUrl>
@@ -207,7 +208,7 @@
             <archive>
               <addMavenDescriptor>false</addMavenDescriptor>
             </archive>
-            <format>'v'yyyyMMdd'-'HHmm'${buildStream}'</format>
+            <format>'v'yyyyMMdd'-'HHmm${buildStreamWithQuotes}</format>
             <sourceReferences>
               <generate>true</generate>
             </sourceReferences>
@@ -458,6 +459,7 @@
       </activation>
       <properties>
         <buildStream></buildStream>
+        <buildStreamWithQuotes></buildStreamWithQuotes>
       </properties>
       <build>
         <plugins>
