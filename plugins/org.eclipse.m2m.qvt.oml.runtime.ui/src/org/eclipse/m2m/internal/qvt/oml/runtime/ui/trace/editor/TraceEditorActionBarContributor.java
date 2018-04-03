@@ -1,13 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2008 Borland Software Corporation and others.
- * 
+ * Copyright (c) 2007, 2018 Borland Software Corporation and others.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *   
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 428620
+ *     Ed Willink - bug 533155
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.ui.trace.editor;
 
@@ -21,17 +23,19 @@ import org.eclipse.ui.part.EditorActionBarContributor;
  * @author aigdalov
  */
 public class TraceEditorActionBarContributor extends EditorActionBarContributor {
-    private final TraceActionBarContributor myTraceActionBarContributor = new TraceActionBarContributor();
+	private final TraceActionBarContributor myTraceActionBarContributor = new TraceActionBarContributor();
 
 	@Override
 	public void contributeToToolBar(IToolBarManager toolBarManager) {
-        myTraceActionBarContributor.contributeToToolBar(toolBarManager);
+		myTraceActionBarContributor.contributeToToolBar(toolBarManager);
 	}
 
 	@Override
 	public void setActiveEditor(IEditorPart targetEditor) {
-		TraceEditorPart traceEditorPart = (TraceEditorPart) targetEditor;
-		TreeViewer viewer = traceEditorPart.getViewer();
-        myTraceActionBarContributor.setViewer(viewer);
+		if (targetEditor instanceof TraceEditorPart) {
+			TraceEditorPart traceEditorPart = (TraceEditorPart) targetEditor;
+			TreeViewer viewer = traceEditorPart.getViewer();
+			myTraceActionBarContributor.setViewer(viewer);
+		}
 	}
 }
