@@ -15,7 +15,6 @@ package org.eclipse.m2m.internal.qvt.oml.stdlib;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +56,7 @@ public class QVTUMLReflection
 					EStructuralFeature, EEnumLiteral, EParameter, EObject, 
 					CallOperationAction, SendSignalAction, Constraint> fUmlReflection;
 	
-	private final Map<Object, EClassifier> fTypeCache = new IdentityHashMap<Object, EClassifier>();
+	private final Map<Object, EClassifier> fTypeCache = new HashMap<Object, EClassifier>();
 	private final Map<Pair<EClassifier, EClassifier>, Integer> fRelationCache = new HashMap<Pair<EClassifier,EClassifier>, Integer>();
 			
 	public QVTUMLReflection(UMLReflection<EPackage, EClassifier, EOperation, 

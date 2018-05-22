@@ -451,6 +451,10 @@ public abstract class QvtEnvironmentBase extends EcoreEnvironment implements QVT
 				QvtOperationalStdLibrary.INSTANCE.getEnvironment().close();
 			}
 		}
+		
+		for (QvtEnvironmentBase extended : getAllExtendedModules()) {
+			extended.close();
+		}
 	}
 
 	public final void addImport(ImportKind kind, QvtEnvironmentBase importedEnv) {
