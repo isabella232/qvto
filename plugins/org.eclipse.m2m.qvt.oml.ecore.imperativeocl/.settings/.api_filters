@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.m2m.qvt.oml.ecore.imperativeocl" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="926941240">
+            <message_arguments>
+                <message_argument value="3.8.0"/>
+                <message_argument value="3.4.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src/org/eclipse/m2m/qvt/oml/ecore/ImperativeOCL/util/ImperativeOCLToStringVisitor.java" type="org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.util.ImperativeOCLToStringVisitor">
         <filter id="338792546">
             <message_arguments>
