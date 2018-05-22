@@ -37,14 +37,11 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelDesc;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
 import org.eclipse.osgi.util.NLS;
 
 /**
@@ -104,45 +101,9 @@ public class EmfUtil {
 	}
 
 	private static ResourceSet createResourceSet(Map<Object, Object> options) {
-		ResourceSet resourceSet = new ResourceSetImpl() {
-
-			@Override
-			protected Resource delegatedGetResource(URI uri, boolean loadOnDemand) {
-				Resource resource = super.delegatedGetResource(uri, loadOnDemand);
-				if (resource == null && false == loadOnDemand) {
-					resource = lookupMetamodelRegistry(uri);
-				}
-				return resource;
-			}
-
-			@Override
-			protected Resource demandCreateResource(URI uri) {
-				Resource resource = super.demandCreateResource(uri);
-				if (resource == null) {
-					resource = lookupMetamodelRegistry(uri);
-				}
-				return resource;
-			}
-
-			private Resource lookupMetamodelRegistry(URI uri) {
-				Resource resource = null;
-				URI trimmedURI = uri.trimFragment();
-				try {
-					IMetamodelDesc descriptor = MetamodelRegistry.getInstance().getMetamodelDesc(trimmedURI.toString());
-					EPackage ePackage = descriptor.getModel();
-					resource = ePackage.eResource();
-					if (resource == null) {
-						resource = new ResourceImpl(trimmedURI);
-						resource.getContents().add(ePackage);
-					}
-				} catch (EmfException e) {
-					EmfUtilPlugin.log(e);
-				}
-				return resource;
-			}
-
-		};
+		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet.getLoadOptions().putAll(options);
+		
 		return resourceSet;
 	}
 
@@ -477,12 +438,22 @@ public class EmfUtil {
 		}
 		return isUriExistsAsEObject(uri, rs, validateNonEmpty);
 	}
-
-
+	
+	public static EPackage getFirstEPackageContent(Resource resource) {
+		for (EObject content : resource.getContents()) {
+			if (content instanceof EPackage) {
+				return (EPackage) content;
+			}
+		}
+		return null;
+	}
+	
+	
 	public static final Adapter RESOURCE_PERSISTED_ADAPTER = new AdapterImpl();
 
 	public static final Map<Object, Object> DEFAULT_SAVE_OPTIONS = new HashMap<Object, Object>();
 	static {
 		DEFAULT_SAVE_OPTIONS.put(XMLResource.OPTION_ENCODING, "UTF-8"); //$NON-NLS-1$
 	}
+	
 }

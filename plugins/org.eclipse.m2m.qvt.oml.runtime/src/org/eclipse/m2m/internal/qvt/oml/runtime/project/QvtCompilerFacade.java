@@ -10,6 +10,7 @@
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bug 431082
  *******************************************************************************/
+
 package org.eclipse.m2m.internal.qvt.oml.runtime.project;
 
 import org.eclipse.core.resources.IFile;
@@ -18,7 +19,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.m2m.internal.qvt.oml.common.MdaException;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompiledUnit;
-import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QVTOCompiler;
 import org.eclipse.m2m.internal.qvt.oml.compiler.QvtCompilerOptions;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
@@ -57,7 +57,7 @@ public class QvtCompilerFacade {
 				throw new MdaException("Failed to resolve compilation unit: " + ifile); //$NON-NLS-1$
 			}			
 
-			final QVTOCompiler compiler = CompilerUtils.createCompiler();
+			final QVTOCompiler compiler = new QVTOCompiler();
 			final CompiledUnit module = compiler.compile(sourceUnit, compilerOptions, monitor);
 			
 			return new CompilationResult() {

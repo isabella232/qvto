@@ -48,10 +48,7 @@ public class TransformationRunner  {
 	private org.eclipse.m2m.qvt.oml.util.Trace fIncrementalTrace;
 	
 	
-	public TransformationRunner(URI transformationURI, 
-			EPackage.Registry packageRegistry,
-			List<URI> modelParamURIs) {
-		
+	public TransformationRunner(URI transformationURI, EPackage.Registry packageRegistry, List<URI> modelParamURIs) {
 		this(getTransformation(transformationURI, packageRegistry), modelParamURIs);
 	}
 	
@@ -231,5 +228,4 @@ public class TransformationRunner  {
 		
 		return Diagnostic.OK_INSTANCE;
 	}
-		
 }

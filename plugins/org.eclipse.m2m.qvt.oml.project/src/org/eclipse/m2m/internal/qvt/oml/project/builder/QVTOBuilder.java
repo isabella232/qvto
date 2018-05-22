@@ -10,6 +10,7 @@
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bugs 391289, 431082
  *******************************************************************************/
+
 package org.eclipse.m2m.internal.qvt.oml.project.builder;
 
 import java.io.IOException;
@@ -205,7 +206,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 			QvtCompilerOptions options = new QvtCompilerOptions();
 			options.setGenerateCompletionData(false);
 						
-	        QVTOCompiler compiler = CompilerUtils.createCompiler();
+	        QVTOCompiler compiler = new QVTOCompiler();
 	        List<UnitProxy> allUnits = UnitResolverFactory.Registry.INSTANCE.findAllUnits(URIUtils.getResourceURI(getProject()));
 	        
 	        subMonitor.worked(1);

@@ -187,8 +187,7 @@ public class DebugExecutorTest extends TestCase {
 	}
 	
     private List<DirectionKind> getParamKinds() {
-		InternalTransformationExecutor executor = new InternalTransformationExecutor(getTransformationUri(),
-				resSet.getPackageRegistry());
+		InternalTransformationExecutor executor = new InternalTransformationExecutor(getTransformationUri(), resSet.getPackageRegistry());
 
 		Diagnostic loadDiagnostic = executor.loadTransformation(new NullProgressMonitor());
 		if (!EmfUtilPlugin.isSuccess(loadDiagnostic)) {
