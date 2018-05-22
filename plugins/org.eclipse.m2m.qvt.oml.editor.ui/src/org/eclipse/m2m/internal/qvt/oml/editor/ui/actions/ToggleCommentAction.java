@@ -1,17 +1,20 @@
+/*******************************************************************************
+ * Copyright (c) 2016, 2018 Eclipse Modeling Project and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     S.Boyko - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.editor.ui.actions;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.eclipse.swt.custom.BusyIndicator;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.m2m.internal.qvt.oml.editor.ui.ActionMessages;
-import org.eclipse.m2m.internal.qvt.oml.editor.ui.Activator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
@@ -22,7 +25,12 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.TextUtilities;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
-
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.m2m.internal.qvt.oml.editor.ui.ActionMessages;
+import org.eclipse.m2m.internal.qvt.oml.editor.ui.Activator;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.TextEditorAction;
@@ -33,9 +41,9 @@ import org.eclipse.ui.texteditor.TextEditorAction;
  *
  */
 public final class ToggleCommentAction extends TextEditorAction {
-	
+
 	public static final String TOGGLE_COMMENT_ID = "org.eclipse.m2m.qvt.oml.editor.ui.toggle.comment"; //$NON-NLS-1$
-	
+
 	public static final String TOGGLE_COMMENT_NAME = "ToggleComment"; //$NON-NLS-1$
 
 	/** The text operation target */
@@ -129,8 +137,8 @@ public final class ToggleCommentAction extends TextEditorAction {
 					block.getLength(), false);
 
 			int[] lines = new int[regions.length * 2]; // [startline, endline,
-														// startline, endline,
-														// ...]
+			// startline, endline,
+			// ...]
 			for (int i = 0, j = 0; i < regions.length; i++, j += 2) {
 				// start line of region
 				lines[j] = getFirstCompleteLineOfRegion(regions[i], document);
@@ -288,7 +296,7 @@ public final class ToggleCommentAction extends TextEditorAction {
 
 		ITextEditor editor = getTextEditor();
 		if (fOperationTarget == null && editor != null)
-			fOperationTarget = (ITextOperationTarget) editor.getAdapter(ITextOperationTarget.class);
+			fOperationTarget = editor.getAdapter(ITextOperationTarget.class);
 
 		boolean isEnabled = (fOperationTarget != null && fOperationTarget.canDoOperation(ITextOperationTarget.PREFIX)
 				&& fOperationTarget.canDoOperation(ITextOperationTarget.STRIP_PREFIX));

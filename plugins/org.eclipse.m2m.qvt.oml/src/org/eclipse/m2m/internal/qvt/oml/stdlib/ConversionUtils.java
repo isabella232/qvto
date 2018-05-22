@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013, 2018 Eclipse Modeling Project and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     S.Boyko - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.stdlib;
 
 import org.eclipse.emf.ecore.EClassifier;
@@ -7,7 +17,7 @@ import org.eclipse.ocl.ecore.CollectionType;
 import org.eclipse.ocl.types.PrimitiveType;
 
 public class ConversionUtils {
-	
+
 	private ConversionUtils()
 	{}
 
@@ -15,60 +25,60 @@ public class ConversionUtils {
 		if (stringValue == null) {
 			return null;
 		}
-		
-        if (type instanceof DictionaryType) {
-        	return new ConversionDictionary((DictionaryType)type).createFromString(stringValue);
-        }
-        if (type instanceof CollectionType) {
-        	return new ConversionCollection((CollectionType)type).createFromString(stringValue);
-        }
-        
-        // QVT primitive type
-        // FIXME - should rather used primitive type singletons from the Standard library
-        try {
-	        if (isIntegerType(type)) {
-	            return new Integer(stringValue);
-	        } 
-	        if (isRealType(type)) {
-	            return new Double(stringValue);
-	        }
-        } catch (NumberFormatException e) {
-		     throw new IllegalArgumentException("Invalid value: '" + stringValue + "' for datatype: "+type.getName()); //$NON-NLS-1$ //$NON-NLS-2$
+
+		if (type instanceof DictionaryType) {
+			return new ConversionDictionary((DictionaryType)type).createFromString(stringValue);
 		}
-        
-        if (isStringType(type)) {
-            return new String(stringValue);
-        } 
-        
-        if (isBooleanType(type)) {
-            return Boolean.valueOf(stringValue);
-        } 
-        // Enumeration
-        if (type instanceof EDataType) {
-        	if(type.getEPackage() != null && type.getEPackage().getEFactoryInstance() != null) {
-	            Object value = type.getEPackage().getEFactoryInstance().createFromString((EDataType) type, stringValue);
-	            if (value != null) {
-	            	return value;
-	            }
+		if (type instanceof CollectionType) {
+			return new ConversionCollection((CollectionType)type).createFromString(stringValue);
+		}
+
+		// QVT primitive type
+		// FIXME - should rather used primitive type singletons from the Standard library
+		try {
+			if (isIntegerType(type)) {
+				return new Integer(stringValue);
 			}
-        }
-        
-        throw new IllegalArgumentException("Invalid value: '" + stringValue + "' for datatype: "+type.getName()); //$NON-NLS-1$ //$NON-NLS-2$
+			if (isRealType(type)) {
+				return new Double(stringValue);
+			}
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Invalid value: '" + stringValue + "' for datatype: "+type.getName()); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+
+		if (isStringType(type)) {
+			return new String(stringValue);
+		}
+
+		if (isBooleanType(type)) {
+			return Boolean.valueOf(stringValue);
+		}
+		// Enumeration
+		if (type instanceof EDataType) {
+			if(type.getEPackage() != null && type.getEPackage().getEFactoryInstance() != null) {
+				Object value = type.getEPackage().getEFactoryInstance().createFromString((EDataType) type, stringValue);
+				if (value != null) {
+					return value;
+				}
+			}
+		}
+
+		throw new IllegalArgumentException("Invalid value: '" + stringValue + "' for datatype: "+type.getName()); //$NON-NLS-1$ //$NON-NLS-2$
 	}
-	
+
 	public static void setupConversionDelegate(EClassifier type) {
-    	if (type instanceof DictionaryType) {
-    		EDataType.Internal internalType = (EDataType.Internal) type;
-    		if (internalType.getConversionDelegate() == null) {
-    			internalType.setConversionDelegate(new ConversionDictionary((DictionaryType)type));
-    		}
-    	}
-    	else if (type instanceof CollectionType) {
-    		EDataType.Internal internalType = (EDataType.Internal) type;
-    		if (internalType.getConversionDelegate() == null) {
-    			internalType.setConversionDelegate(new ConversionCollection((CollectionType)type));
-    		}
-        }
+		if (type instanceof DictionaryType) {
+			EDataType.Internal internalType = (EDataType.Internal) type;
+			if (internalType.getConversionDelegate() == null) {
+				internalType.setConversionDelegate(new ConversionDictionary((DictionaryType)type));
+			}
+		}
+		else if (type instanceof CollectionType) {
+			EDataType.Internal internalType = (EDataType.Internal) type;
+			if (internalType.getConversionDelegate() == null) {
+				internalType.setConversionDelegate(new ConversionCollection((CollectionType)type));
+			}
+		}
 	}
 
 	private static boolean isRealType(final EClassifier type) {
@@ -86,6 +96,6 @@ public class ConversionUtils {
 	public static boolean isStringType(final EClassifier type) {
 		return type instanceof org.eclipse.ocl.ecore.PrimitiveType && PrimitiveType.STRING_NAME.equals(((org.eclipse.ocl.ecore.PrimitiveType) type).getName());
 	}
-	
-	
+
+
 }
