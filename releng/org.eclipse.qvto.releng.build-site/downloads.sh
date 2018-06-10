@@ -17,10 +17,13 @@
 #    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
 #    PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #    PUBLISH__ALIAS          Non blank to use alias as part of final name
+#    PUBLISH__JAVADOC        The optional Javadoc zip to be published e.g. https://hudson.eclipse.org/qvt-oml/job/qvto-photon-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/javadoc/QVTo-javadoc.zip
 #
 dropsFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/downloads/drops/"
+javadocFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/javadoc/m2m.qvt.oml/"
 group="modeling.mmt.qvt-oml"
 zipPrefix="mmt-qvto-Update-"
+localZip="newJavadoc.zip"
 
 if [ -n "${PUBLISH__BUILD_T}" ]
 then
@@ -47,5 +50,22 @@ then
     chgrp -R ${group} ${zipFile} ${zipFile}.md5 ${zipFile}.sha1
     chmod -R g+w ${zipFile} ${zipFile}.md5 ${zipFile}.sha1
   popd
+  
+  if [ -f "${PUBLISH__JAVADOC}" ]
+  then
+    if [ ! -d "${javadocFolder}" ]
+    then
+      mkdir ${javadocFolder}
+    fi
+    pushd ${javadocFolder}
+      echo curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
+      echo unzip -ou ${localZip} -d new${PUBLISH__VERSION}
+      echo chgrp -R ${group} new${PUBLISH__VERSION}
+      echo chmod -R g+w new${PUBLISH__VERSION}
+      echo mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
+      echo mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+      echo rm -rf old${PUBLISH__VERSION} ${localZip}
+    popd
+  fi
 
 fi
