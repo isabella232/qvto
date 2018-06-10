@@ -16,11 +16,17 @@
     <resources>
       <resource>
         <directory>.</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>publisher.properties</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>.</directory>
         <filtering>false</filtering>
         <includes>
           <include>downloads.sh</include>
           <include>index.html</include>
-          <include>publisher.properties</include>
           <include>updates.sh</include>
         </includes>
       </resource>
