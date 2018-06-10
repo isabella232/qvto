@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="javadoc">
 	<target name="javadoc">
+		<!-- workspace defaults -->
+		<property name="generatedJavadoc" value="./target/javadoc" />
+		<property name="target.platform" value="${ant.home}/../.." />
+		<property name="javadoc" value="javadoc" />
+		<property name="zipFile" value="./target/QVTo-javadoc.zip" />
+
+		<echo message="Java home: ${java.home}" />
+		<echo message="Javadoc Java home: ${javadoc.java.home}" />
+		<echo message="Javadoc: ${javadoc}" />
+		<echo message="Javadoc output location: ${generatedJavadoc}" />
+		<echo message="target.platform path: ${target.platform}" />
+		<echo message="ZIP output location: ${zipFile}" />
+
 		<javadoc 
 			access="public" 
 			author="true" 
@@ -18,14 +31,15 @@
 			
 			doctitle="Operational QVT API" 
 			
-			destdir="doc"			
+			destdir="${generatedJavadoc}"
 			>
 			
-			<bottom><![CDATA[<i>Copyright &#169; 2008, 2015 Borland Software Corporation and others. All Rights Reserved.</i>]]></bottom>
+			<bottom><![CDATA[<i>Copyright &#169; 2008, 2018 Borland Software Corporation and others. All Rights Reserved.</i>]]></bottom>
 			
 			<classpath>
 				<!--pathelement path="${classpath}"/-->
       			<fileset dir="${target.platform}\plugins">
+			        <!--include name="lpg.runtime.java_*.jar"/-->
 			        <include name="org.eclipse.core.runtime_*.jar"/>
 			        <include name="org.eclipse.core.contenttype_*.jar"/>
 			        <include name="org.eclipse.core.resources_*.jar"/>
@@ -43,8 +57,8 @@
 			
 			<link offline="true" href="http://docs.oracle.com/javase/1.5.0/docs/api/" packagelistLoc=".\javadoc\java5"/>
 			<link offline="true" href="http://download.eclipse.org/modeling/emf/emf/javadoc/2.10.0/" packagelistLoc=".\javadoc\emf_210\"/>
-			<link offline="true" href="http://download.eclipse.org/modeling/mdt/ocl/javadoc/5.0.0/" packagelistLoc=".\javadoc\ocl_50"/>
-			<link offline="true" href="http://help.eclipse.org/luna/advanced/content.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/" packagelistLoc=".\javadoc\eclipse.platform.luna"/>
+			<link offline="true" href="http://download.eclipse.org/ocl/javadoc/6.3.0/" packagelistLoc=".\javadoc\ocl_63"/>
+			<link offline="true" href="http://help.eclipse.org/oxygen/topic/org.eclipse.platform.doc.isv/reference/api/overview-summary.html?cp=2_1_0" packagelistLoc=".\javadoc\eclipse.platform.oxygen"/>
 			
 			<tag name="generated" description="EMF generated code"></tag>
 			<tag name="model" description="EMF model element"></tag>
@@ -55,21 +69,32 @@
 			<sourcepath>
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml\src"/>
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml\_generated"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.common\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.common.ui\src"/>
+				<!--pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.cst.parser\src"/-->
+				<!--pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.cst.parser\_generated"/-->
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.ecore.imperativeocl\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.emf.util\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.emf.util.ui\src"/>
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.ocl\src"/>
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.runtime\src"/>
 				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.runtime.ui\src"/>
+				<pathelement location=".\..\..\plugins\org.eclipse.m2m.qvt.oml.ui\src"/>
 			</sourcepath>
     
-			<package name="org.eclipse.m2m.qvt.oml"/>
+			<!--package name="org.eclipse.m2m.qvt.oml"/>
 			<package name="org.eclipse.m2m.qvt.oml.blackbox.java"/>
 			<package name="org.eclipse.m2m.qvt.oml.util"/>
 			<package name="org.eclipse.m2m.internal.qvt.oml.expressions"/>
 			<package name="org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL"/>
 			<package name="org.eclipse.m2m.qvt.oml.ocl.legacy.libraries"/>
 			<package name="org.eclipse.m2m.qvt.oml.runtime.util"/>
-			<package name="org.eclipse.m2m.qvt.oml.runtime.ui.wizards"/>
+			<package name="org.eclipse.m2m.qvt.oml.runtime.ui.wizards"/-->
 
 		</javadoc>
+		
+		<!-- Compress the output javadoc in a zip file --> 
+		<echo message="Compress javadoc to: ${zipFile}" />
+		<zip destfile="${zipFile}" basedir="${generatedJavadoc}"></zip>
 	</target>
 </project>

@@ -16,12 +16,19 @@
     <resources>
       <resource>
         <directory>.</directory>
-        <filtering>true</filtering>
+        <filtering>false</filtering>
         <includes>
           <include>downloads.sh</include>
           <include>index.html</include>
           <include>publisher.properties</include>
           <include>updates.sh</include>
+        </includes>
+      </resource>
+      <resource>
+        <directory>../../doc/org.eclipse.m2m.qvt.oml.doc/target</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>QVTo-javadoc.zip</include>
         </includes>
       </resource>
     </resources>
@@ -53,46 +60,4 @@
       </plugin>
     </plugins>
   </build>
-  <profiles>
-    <profile>
-      <id>javadoc</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-antrun-plugin</artifactId>
-            <executions>
-              <execution>
-                <id>compile</id>
-                <phase>compile</phase>
-                <configuration>
-                  <target>
-                    <property name="mustCreateJavadoc" value="true"/>
-                    <property name="pluginsSourcesLocation" value="${project.basedir}/../../plugins"/>
-                    <property name="examplesSourcesLocation" value="${project.basedir}/../../examples"/>
-                    <property name="zipFile" value="${project.basedir}/../org.eclipse.qvto.releng.build-site/javadoc/QVTo-javadoc.zip"/>
-
-                    <echo message="mustCreateJavadoc: ${mustCreateJavadoc}"/>
-                    <echo message="pluginsSourcesLocation ${pluginsSourcesLocation}"/>
-                    <echo message="examplesSourcesLocation: ${examplesSourcesLocation}"/>
-                    <echo message="zipFile:  ${zipFile}"/>
-
-                    <ant antfile="${basedir}/javadoc.ant">
-                      <target name="create.javadoc"/>
-                    </ant>
-                  </target>
-                </configuration>
-                <goals>
-                  <goal>run</goal>
-                </goals>
-              </execution>
-            </executions>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>

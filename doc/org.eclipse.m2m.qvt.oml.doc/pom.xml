@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.eclipse.qvto-doc</groupId>
+    <artifactId>org.eclipse.qvto.doc-folder</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <groupId>org.eclipse.qvto-doc</groupId>
+  <artifactId>org.eclipse.m2m.qvt.oml.doc</artifactId>
+  <version>3.8.0-SNAPSHOT</version>
+  <packaging>eclipse-plugin</packaging>
+  <profiles>
+    <profile>
+      <id>javadoc</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>compile</id>
+                <phase>compile</phase>
+                <configuration>
+                  <target>
+                    <property name="generatedJavadoc" value="${project.build.directory}/javadoc"/>
+                    <property name="target.platform" value="${project.basedir}/../.."/>
+                    <property name="zipFile" value="${project.build.directory}/QVTo-javadoc.zip"/>
+
+                    <echo message="generatedJavadoc ${generatedJavadoc}"/>
+                    <echo message="target.platform  ${target.platform}"/>
+                    <echo message="zipFile: ${zipFile}"/>
+
+                    <ant antfile="${basedir}/build_javadoc.xml">
+                      <target name="javadoc"/>
+                    </ant>
+                  </target>
+                </configuration>
+                <goals>
+                  <goal>run</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+</project>
