@@ -56,7 +56,8 @@ then
     mkdir ${javadocFolder}
   fi
   pushd ${javadocFolder}
-    if [ curl -s -k ${PUBLISH__JAVADOC} > ${localZip} ]
+    curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
+    if [ $? -eq 0 ]
     then
       echo unzip -ou ${localZip} -d new${PUBLISH__VERSION}
       echo chgrp -R ${group} new${PUBLISH__VERSION}
