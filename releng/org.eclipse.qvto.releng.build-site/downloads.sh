@@ -59,7 +59,8 @@ then
     curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
     if [ $? -eq 0 ]
     then
-      if [ -f "${localZip}" ]
+      javadocSize=$(wc -c <"$localZip")
+      if [ ${javadocSize} -ge 100000 ]						# A small (423 byte) file is an HTTP 404 message
       then
         unzip -ou ${localZip} -d new${PUBLISH__VERSION}
         chgrp -R ${group} new${PUBLISH__VERSION}
