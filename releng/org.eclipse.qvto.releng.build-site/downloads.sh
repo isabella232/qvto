@@ -51,21 +51,20 @@ then
     chmod -R g+w ${zipFile} ${zipFile}.md5 ${zipFile}.sha1
   popd
   
-  if [ -f "${PUBLISH__JAVADOC}" ]
+  if [ ! -d "${javadocFolder}" ]
   then
-    if [ ! -d "${javadocFolder}" ]
+    mkdir ${javadocFolder}
+  fi
+  pushd ${javadocFolder}
+    if [ curl -s -k ${PUBLISH__JAVADOC} > ${localZip} ]
     then
-      mkdir ${javadocFolder}
-    fi
-    pushd ${javadocFolder}
-      echo curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
       echo unzip -ou ${localZip} -d new${PUBLISH__VERSION}
       echo chgrp -R ${group} new${PUBLISH__VERSION}
       echo chmod -R g+w new${PUBLISH__VERSION}
       echo mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
       echo mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
       echo rm -rf old${PUBLISH__VERSION} ${localZip}
-    popd
-  fi
+    fi
+  popd
 
 fi
