@@ -59,17 +59,20 @@ then
     curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
     if [ $? -eq 0 ]
     then
-      unzip -ou ${localZip} -d new${PUBLISH__VERSION}
-      chgrp -R ${group} new${PUBLISH__VERSION}
-      chmod -R g+w new${PUBLISH__VERSION}
-      rm -rf ${localZip}
-      if [ -d "${PUBLISH__VERSION}" ]
+      if [ -f "${localZip}" ]
       then
-        mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
-        mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
-        rm -rf old${PUBLISH__VERSION}
-      else
-        mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+        unzip -ou ${localZip} -d new${PUBLISH__VERSION}
+        chgrp -R ${group} new${PUBLISH__VERSION}
+        chmod -R g+w new${PUBLISH__VERSION}
+        rm -rf ${localZip}
+        if [ -d "${PUBLISH__VERSION}" ]
+        then
+          mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
+          mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+          rm -rf old${PUBLISH__VERSION}
+        else
+          mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+        fi
       fi
     fi
   popd
