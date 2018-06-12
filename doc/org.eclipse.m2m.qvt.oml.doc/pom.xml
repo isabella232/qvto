@@ -30,12 +30,23 @@
                 <configuration>
                   <target>
                     <property name="generatedJavadoc" value="${project.build.directory}/javadoc"/>
-                    <property name="target.platform" value="${project.basedir}/../.."/>
+                    <!--property name="target.platform" value="platform:"/-->
                     <property name="zipFile" value="${project.build.directory}/QVTo-javadoc.zip"/>
 
                     <echo message="generatedJavadoc ${generatedJavadoc}"/>
-                    <echo message="target.platform  ${target.platform}"/>
+                    <echo message="targetPlatform ${targetPlatform}"/>
+                    <echo message="target.platform ${target.platform}"/>
                     <echo message="zipFile: ${zipFile}"/>
+                    
+                <property name="compile_classpath" refid="maven.compile.classpath"/>
+                <property name="runtime_classpath" refid="maven.runtime.classpath"/>
+                <property name="test_classpath" refid="maven.test.classpath"/>
+                <property name="plugin_classpath" refid="maven.plugin.classpath"/>
+
+                <echo message="compile classpath: ${compile_classpath}"/>
+                <echo message="runtime classpath: ${runtime_classpath}"/>
+                <echo message="test classpath:    ${test_classpath}"/>
+                <echo message="plugin classpath:  ${plugin_classpath}"/>
 
                     <ant antfile="${basedir}/build_javadoc.xml">
                       <target name="javadoc"/>

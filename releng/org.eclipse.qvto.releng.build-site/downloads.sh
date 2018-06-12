@@ -17,7 +17,7 @@
 #    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
 #    PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #    PUBLISH__ALIAS          Non blank to use alias as part of final name
-#    PUBLISH__JAVADOC        The optional Javadoc zip to be published e.g. https://hudson.eclipse.org/qvt-oml/job/qvto-photon-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/javadoc/QVTo-javadoc.zip
+#    PUBLISH__JAVADOC        The optional Javadoc zip to be published e.g. https://hudson.eclipse.org/qvt-oml/job/qvto-photon-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/QVTo-javadoc.zip
 #
 dropsFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/downloads/drops/"
 javadocFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/javadoc/m2m.qvt.oml/"
