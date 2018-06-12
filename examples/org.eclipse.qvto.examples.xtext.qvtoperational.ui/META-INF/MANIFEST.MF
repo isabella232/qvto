@@ -20,8 +20,4 @@ Require-Bundle: org.eclipse.qvto.examples.xtext.qvtoperational;visibility:=reexp
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.qvto.examples.xtext.qvtoperational.ui.quickfix,
- org.eclipse.qvto.examples.xtext.qvtoperational.ui.contentassist,
- org.eclipse.qvto.examples.xtext.qvtoperational.ui.contentassist.antlr,
- org.eclipse.qvto.examples.xtext.qvtoperational.ui.internal
 Bundle-Activator: org.eclipse.qvto.examples.xtext.qvtoperational.ui.internal.QVTOperationalActivator

@@ -20,12 +20,4 @@ Require-Bundle: org.eclipse.qvto.examples.xtext.imperativeocl;visibility:=reexpo
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.qvto.examples.xtext.imperativeocl.ui,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.contentassist,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.contentassist.antlr,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.contentassist.antlr.internal;x-internal:=true,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.internal;x-internal:=true,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.labeling,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.outline,
- org.eclipse.qvto.examples.xtext.imperativeocl.ui.quickfix
 Bundle-Activator: org.eclipse.qvto.examples.xtext.imperativeocl.ui.internal.ImperativeOCLActivator

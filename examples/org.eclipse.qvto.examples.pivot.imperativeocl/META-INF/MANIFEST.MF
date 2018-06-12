@@ -14,3 +14,4 @@ Export-Package: org.eclipse.qvto.examples.pivot.imperativeocl,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.pivot;bundle-version="[1.0.0,2.0.0)";visibility:=reexport
 Bundle-ActivationPolicy: lazy
+Automatic-Module-Name: org.eclipse.qvto.examples.pivot.imperativeocl

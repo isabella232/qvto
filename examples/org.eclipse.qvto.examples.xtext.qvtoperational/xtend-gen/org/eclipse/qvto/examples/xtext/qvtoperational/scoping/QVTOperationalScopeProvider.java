@@ -3,8 +3,6 @@
  */
 package org.eclipse.qvto.examples.xtext.qvtoperational.scoping;
 
-import org.eclipse.qvto.examples.xtext.imperativeocl.scoping.ImperativeOCLScopeProvider;
-
 /**
  * This class contains custom scoping description.
  * 
@@ -12,5 +10,5 @@ import org.eclipse.qvto.examples.xtext.imperativeocl.scoping.ImperativeOCLScopeP
  * on how and when to use it
  */
 @SuppressWarnings("all")
-public class QVTOperationalScopeProvider extends ImperativeOCLScopeProvider {
+public class QVTOperationalScopeProvider /* implements org.eclipse.qvto.examples.xtext.imperativeocl.scoping.ImperativeOCLScopeProvider  */{
 }

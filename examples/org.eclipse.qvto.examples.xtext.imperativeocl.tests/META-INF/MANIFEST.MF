@@ -20,4 +20,4 @@ Import-Package: org.apache.log4j,
  org.junit.runners.model;version="4.5.0",
  org.hamcrest.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.qvto.examples.xtext.imperativeocl
+Automatic-Module-Name: org.eclipse.qvto.examples.xtext.imperativeocl.tests
