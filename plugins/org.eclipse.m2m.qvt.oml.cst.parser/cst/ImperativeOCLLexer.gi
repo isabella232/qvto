@@ -3,9 +3,9 @@
 -- *
 -- * Copyright (c) 2006, 2007 Borland Inc.
 -- * All rights reserved.   This program and the accompanying materials
--- * are made available under the terms of the Eclipse Public License v1.0
+-- * are made available under the terms of the Eclipse Public License v2.0
 -- * which accompanies this distribution, and is available at
--- * http://www.eclipse.org/legal/epl-v10.html
+-- * http://www.eclipse.org/legal/epl-v20.html
 -- *
 -- * Contributors:
 -- *   See Notice Declaration below
@@ -49,9 +49,9 @@
  *
  * Copyright (c) 2006-2008 Borland Inc.
  * All rights reserved.   This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
+ * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
+ * http://www.eclipse.org/legal/epl-v20.html
  *
  * Contributors:
  *   Borland - Initial API and implementation
