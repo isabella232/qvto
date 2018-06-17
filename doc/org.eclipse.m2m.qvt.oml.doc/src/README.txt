@@ -1,0 +1,1 @@
+This dummy file ensures that a checked out propject has the src folder required to ensure project has a classpath.
