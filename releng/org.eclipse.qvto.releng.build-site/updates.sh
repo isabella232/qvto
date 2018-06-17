@@ -12,8 +12,8 @@
 #
 #    Promote the PUBLISH__URL to an updates repository.
 #
-#    PUBLISH__URL            The zip to be published e.g. https://hudson.eclipse.org/qvt-oml/job/qvto-photon-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.8.0.v20171025-1600.zip
-#    PUBLISH__VERSION        Unqualified version e.g. 3.8.0
+#    PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.9.0.v20171025-1600.zip
+#    PUBLISH__VERSION        Unqualified version e.g. 3.9.0
 #    PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
 #    PUBLISH__QUALIFIER        Version qualifier e.g. v20171025-1600
 #
