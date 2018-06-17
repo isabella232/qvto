@@ -1,0 +1,64 @@
+# Contributing to QVT-OML
+
+Thanks for your interest in this project.
+
+## Project description
+
+The Eclipse QVT Operational component is an implementation of the Operational
+Mappings Language defined by Meta Object Facility™ (MOF™) 2.0
+Query/View/Transformation™ (QVT™). In long term, it aims to provide a
+complete implementation of the operational part of the standard. Operational QVT
+project provides a powerful Eclipse IDE: feature-rich editor (syntax
+highlighting, hovers, hyperlinks, code completion, templates, outlines, markers,
+etc.) debugger (conditional breakpoints, variables view, expressions view,
+watches) metamodel browser, trace view project builders, launch configurations
+deployment facilities and Ant support Java API for executing QVT transformations
+programmatically, support for the standalone execution of transformations
+support of Java Black-Box units and libraries seamless integration with JDT
+supporting co-development of QVTo and Java in single workspace Additional
+tooling QVTO Code Coverage provides: annotate the Operational QVT Editor to
+highlight covered and non-covered parts of transformation JUnit launch
+configuration to integrate with the JUnit test framework
+
+* https://projects.eclipse.org/projects/modeling.mmt.qvt-oml
+
+## Developer resources
+
+Information regarding source code management, builds, coding standards, and
+more.
+
+* https://projects.eclipse.org/projects/modeling.mmt.qvt-oml/developer
+
+The project maintains the following source code repositories
+
+* http://git.eclipse.org/c/mmt/org.eclipse.qvto.git
+
+This project uses Bugzilla to track ongoing development and issues.
+
+* Search for issues: https://eclipse.org/bugs/buglist.cgi?product=QVTo
+* Create a new report: https://eclipse.org/bugs/enter_bug.cgi?product=QVTo
+
+Be sure to search for existing bugs before you create another one. Remember that
+contributions are always welcome!
+
+## Eclipse Contributor Agreement
+
+Before your contribution can be accepted by the project team contributors must
+electronically sign the Eclipse Contributor Agreement (ECA).
+
+* http://www.eclipse.org/legal/ECA.php
+
+Commits that are provided by non-committers must have a Signed-off-by field in
+the footer indicating that the author is aware of the terms by which the
+contribution has been provided to the project. The non-committer must
+additionally have an Eclipse Foundation account and must have a signed Eclipse
+Contributor Agreement (ECA) on file.
+
+For more information, please see the Eclipse Committer Handbook:
+https://www.eclipse.org/projects/handbook/#resources-commit
+
+## Contact
+
+Contact the project developers via the project's "dev" list.
+
+* https://dev.eclipse.org/mailman/listinfo/qvto-dev
