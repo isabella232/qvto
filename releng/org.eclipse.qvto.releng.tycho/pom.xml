@@ -10,9 +10,6 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <prerequisites>
-    <maven>3.0</maven>
-  </prerequisites>
   <groupId>org.eclipse.qvto</groupId>
   <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
   <version>3.9.0-SNAPSHOT</version>
@@ -59,6 +56,7 @@
     <maven-clean-version>2.5</maven-clean-version>
     <maven-compiler-version>3.1</maven-compiler-version>
     <maven-deploy-version>2.8.1</maven-deploy-version>
+    <maven-enforcer-version>3.0.0-M2</maven-enforcer-version>
     <maven-install-version>2.5.1</maven-install-version>
     <maven-jar-version>2.5</maven-jar-version>
     <maven-javadoc-version>3.0.1</maven-javadoc-version>
@@ -86,6 +84,29 @@
    <sourceDirectory>src</sourceDirectory>
 
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <version>${maven-enforcer-version}</version>
+        <executions>
+          <execution>
+            <id>enforce-versions</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.0</version>
+                </requireMavenVersion>
+                <!--requireJavaVersion>
+                  <version>1.5</version>
+                </requireJavaVersion-->
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-maven-plugin</artifactId>
