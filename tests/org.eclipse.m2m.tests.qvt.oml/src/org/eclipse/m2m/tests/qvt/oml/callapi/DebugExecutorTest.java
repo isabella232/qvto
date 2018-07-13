@@ -26,7 +26,6 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -91,15 +90,10 @@ public class DebugExecutorTest extends TestCase {
         copyModelData();
         myData.prepare(myProject);
 		
-		resSet = getMetamodelResolutionRS();
+		resSet = new ResourceSetImpl();
 		paramKinds = getParamKinds();
 
-		factory = new TransformationRunnerFactory() {
-			@Override
-			protected TransformationRunner createRunner(URI transformationURI, Registry packageRegistry, List<URI> modelParamURIs) {
-				return super.createRunner(transformationURI, resSet.getPackageRegistry(), modelParamURIs);
-			}
-		};
+		factory = new TransformationRunnerFactory();
 		
 		factory.modelParamURI = new ArrayList<String>(paramKinds.size());
 		int inIndex = 0, outIndex = 0;
@@ -209,15 +203,6 @@ public class DebugExecutorTest extends TestCase {
 		return paramKinds;
     }
     
-    protected ResourceSet getMetamodelResolutionRS() {
-    	return TestUtil.getMetamodelResolutionRS(new ResourceSetImpl(), myData.getEcoreMetamodels(), new TestUtil.UriProvider() {
-			
-			public URI getModelUri(String model) {
-				return DebugExecutorTest.this.getModelUri(model);
-			}
-		});
-    }
-
     private void copyModelData() throws Exception {
         File srcFolder = TestUtil.getPluginRelativeFile(myData.getBundle(), myData.getTestDataFolder() + "/models/" + myData.getName()); //$NON-NLS-1$
         myDestFolder = new File(myProject.getProject().getLocation().toString() + "/models/" + myData.getName()); //$NON-NLS-1$
