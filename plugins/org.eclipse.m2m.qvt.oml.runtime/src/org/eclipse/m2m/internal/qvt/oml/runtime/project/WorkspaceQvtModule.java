@@ -34,7 +34,7 @@ public class WorkspaceQvtModule extends QvtModule {
         }
         
     	CompilationResult result = QvtCompilerFacade.getCompiledModule(myTransformationFile, options, null);  
-        myResourceSet = result.getCompiler().getResourceSet();
+        myResourceSet = result.getCompiledModule().getResourceSet();
     	return result.getCompiledModule();
     }
         

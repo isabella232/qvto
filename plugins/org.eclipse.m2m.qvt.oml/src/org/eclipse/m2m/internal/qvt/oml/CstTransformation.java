@@ -42,8 +42,7 @@ public class CstTransformation implements Transformation {
 	private EPackage.Registry fPackageRegistry;
 	private CompiledUnit fCompiledUnit;
 	private ExecutionDiagnostic fLoadDiagnostic;
-	private OperationalTransformation fTransformation;
-	
+	private OperationalTransformation fTransformation;	
 	private QVTOCompiler fCompiler;
 	
 	public CstTransformation(URI uri) {
@@ -54,14 +53,13 @@ public class CstTransformation implements Transformation {
 		if (uri == null) {
 			throw new IllegalArgumentException("null transformation URI"); //$NON-NLS-1$
 		}
-
 		fURI = uri;
 		fPackageRegistry = packageRegistry == null ? EPackage.Registry.INSTANCE : packageRegistry;
 	}
 	
 	protected CompiledUnit getCompiledUnit(IProgressMonitor monitor) throws MdaException {			
-		if (ExeXMISerializer.COMPILED_XMI_FILE_EXTENSION.equals(fURI.fileExtension())) {
-			return new CompiledUnit(fURI, getResourceSet());
+		if (ExeXMISerializer.COMPILED_XMI_FILE_EXTENSION.equals(fURI.fileExtension())) {		
+			return new CompiledUnit(fURI, getCompiler().getResourceSet());
 		}
 
 		UnitProxy proxy = UnitResolverFactory.Registry.INSTANCE.getUnit(fURI);
@@ -177,7 +175,7 @@ public class CstTransformation implements Transformation {
 			
 			for (Diagnostic error : compiledUnit.getErrors()) {
 				mainDiagnostic.add(error);
-			}		
+			}
 		}
 		
 		for (Diagnostic warning : compiledUnit.getWarnings()) {
@@ -247,7 +245,7 @@ public class CstTransformation implements Transformation {
 	}
 		
 	public ResourceSet getResourceSet() {
-		return getCompiler().getResourceSet();
+		return getUnit().getResourceSet();
 	}
 	
 	public CompiledUnit getUnit() {
@@ -259,6 +257,8 @@ public class CstTransformation implements Transformation {
 		if (getResourceSet() != null) {
 			EmfUtil.cleanupResourceSet(getResourceSet());
 		}
+				
+		getCompiler().cleanup();
 	}
 
 }

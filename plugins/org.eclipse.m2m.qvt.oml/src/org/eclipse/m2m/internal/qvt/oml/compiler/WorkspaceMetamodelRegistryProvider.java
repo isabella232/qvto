@@ -57,12 +57,11 @@ public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryPro
 		}
 		
 		if (resourceSet == null) {
-			resolutionRSet = new ResourceSetImpl();
-			resolutionRSet.setPackageRegistry(new EPackageRegistryImpl(registry));
+			resourceSet = new ResourceSetImpl();
+			resourceSet.setPackageRegistry(new EPackageRegistryImpl(registry));
 		}
-		else {
-			resolutionRSet = resourceSet;
-		}
+		
+		resolutionRSet = resourceSet;
 		
 		delegateRegistry = registry;
 		delegateProvider = new EmfStandaloneMetamodelRegistryProvider(delegateRegistry);

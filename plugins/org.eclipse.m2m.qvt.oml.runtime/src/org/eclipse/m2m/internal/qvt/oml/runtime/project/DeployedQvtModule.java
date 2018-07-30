@@ -76,7 +76,7 @@ public class DeployedQvtModule extends QvtModule {
             
             // FIXME - we should add support of uri fragment, being the name of the referred module
             myModule = myUnit.getModules().get(0);
-            myCompilationRs = qvtCompiler.getResourceSet();
+            myCompilationRs = myUnit.getResourceSet();
         }
         
         return myModule;

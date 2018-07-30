@@ -57,11 +57,12 @@ public class CompiledUnit {
 	private List<QvtMessage> fAllProblems;
 	private List<CompiledUnit> fImports;	
 	private List<QvtOperationalModuleEnv> moduleEnvs;
+	private ResourceSet fResourceSet;
 
 	// FIXME - add compilationUnit CST element
 	UnitCS fUnitCST;	
 	
-	CompiledUnit(List<String> qualifiedName, URI uri, List<? extends QvtOperationalModuleEnv> modules) {
+	CompiledUnit(List<String> qualifiedName, URI uri, List<? extends QvtOperationalModuleEnv> modules, ResourceSet resourceSet) {
 		if(qualifiedName == null || modules == null || uri == null) {
 			throw new IllegalArgumentException();
 		}
@@ -69,6 +70,8 @@ public class CompiledUnit {
 		this.fUri = uri;
 		this.fQname = qualifiedName;		
 		this.moduleEnvs = new ArrayList<QvtOperationalModuleEnv>(modules);
+		
+		this.fResourceSet = resourceSet;
 		
 		ArrayList<QvtMessage> problems = new ArrayList<QvtMessage>();
 		this.fAllProblems = problems;
@@ -95,7 +98,7 @@ public class CompiledUnit {
 		}
 		return rs;
 	}
-
+	
 	public CompiledUnit(URI xmiURI, ResourceSet resourceSet) {
 		this(resourceSet.getResource(xmiURI, true), new HashMap<URI, CompiledUnit>());
 	}
@@ -105,7 +108,9 @@ public class CompiledUnit {
 		this.moduleEnvs = new LinkedList<QvtOperationalModuleEnv>();
 						
 		this.fAllProblems = new ArrayList<QvtMessage>();
-		this.fImports = new UniqueEList<CompiledUnit>();		
+		this.fImports = new UniqueEList<CompiledUnit>();
+		
+		this.fResourceSet = unitXMIResource.getResourceSet();
 
 		unitMap.put(fUri, this);
 		
@@ -322,7 +327,11 @@ public class CompiledUnit {
 		
 	public List<QvtMessage> getProblems() {
 		return fAllProblems;
-	}		
+	}
+	
+	public ResourceSet getResourceSet() {
+		return fResourceSet;
+	}
 
 	@Override
 	public boolean equals(Object obj) {

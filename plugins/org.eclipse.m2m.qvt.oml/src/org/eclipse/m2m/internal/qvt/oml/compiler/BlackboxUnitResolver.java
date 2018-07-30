@@ -126,9 +126,8 @@ public class BlackboxUnitResolver implements UnitResolver {
 	    			modelEnvs.add(nextEnv);
 	    		}
 			}
-
-	    	
-	    	CompiledUnit compiledUnit = new CompiledUnit(Arrays.asList(ResolverUtils.getNameSegments(getQualifiedName())), getURI(), modelEnvs);
+	    		    	
+	    	CompiledUnit compiledUnit = new CompiledUnit(Arrays.asList(ResolverUtils.getNameSegments(getQualifiedName())), getURI(), modelEnvs, provider.getResolutionResourceSet());
 	    	Diagnostic loadProblems = contents.getProblems();
 			if(loadProblems != null) {
 	    		compiledUnit.addProblem(new QvtMessage(loadProblems.getMessage()));

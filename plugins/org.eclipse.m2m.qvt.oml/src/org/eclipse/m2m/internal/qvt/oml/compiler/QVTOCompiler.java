@@ -78,7 +78,6 @@ public class QVTOCompiler {
     private final Map<URI, CompiledUnit> fSource2Compiled = new HashMap<URI, CompiledUnit>();
     private final Stack<DependencyPathElement> fDependencyWalkPath = new Stack<DependencyPathElement>();    
     private final IMetamodelRegistryProvider fMetamodelRegistryProvider;
-    private final ResourceSet fResourceSet;
     private ResourceSetImpl fExeXMIResourceSet;
     private boolean fUseCompiledXMI = false;
 
@@ -152,8 +151,6 @@ public class QVTOCompiler {
     public QVTOCompiler(IMetamodelRegistryProvider metamodelRegistryProvider) {
         fMetamodelRegistryProvider = metamodelRegistryProvider;
         
-        fResourceSet = metamodelRegistryProvider.getResolutionResourceSet();
-        
 		fExeXMIResourceSet = CompiledUnit.createResourceSet();
 		if(getResourceSet() instanceof ResourceSetImpl) {
 			Map<URI, Resource> uriResourceMap = ((ResourceSetImpl) getResourceSet()).getURIResourceMap();
@@ -208,6 +205,7 @@ public class QVTOCompiler {
     		reader = createReader(source);
 	    	
     		Registry ePackageRegistry = getEPackageRegistry(source.getURI());
+    		    		
 			QvtOperationalFileEnv env = new QvtOperationalEnvFactory(ePackageRegistry).createEnvironment(source.getURI());
     		
         	if(options.isEnableCSTModelToken()) {
@@ -482,7 +480,20 @@ public class QVTOCompiler {
 		fExeXMIResourceSet.getResources().add(resource);
 
 		List<String> qualifiedName = getQualifiedNameSegments(unit);
-		return new CompiledUnit(qualifiedName, unit.getURI(), Collections.singletonList(env));
+		
+		ResourceSet resourceSet = new ResourceSetImpl() {
+			@Override
+			protected Resource delegatedGetResource(URI uri, boolean loadOnDemand) {
+				
+				// delegate to compiler's ResourceSet to prevent workspace metamodels from reloading twice
+				Resource resource = QVTOCompiler.this.getResourceSet().getResource(uri, false);
+				
+				return resource != null ? resource : super.delegatedGetResource(uri, loadOnDemand);
+			}
+		};
+		resourceSet.setPackageRegistry(env.getEPackageRegistry());
+				
+		return new CompiledUnit(qualifiedName, unit.getURI(), Collections.singletonList(env), resourceSet);
 	}
 
 	private static List<String> getQualifiedNameSegments(UnitProxy unit) {
@@ -505,7 +516,7 @@ public class QVTOCompiler {
 	}
 	
 	public ResourceSet getResourceSet() {
-		return fResourceSet;
+		return fMetamodelRegistryProvider.getResolutionResourceSet();
 	}
 	
 	public void cleanup() {
@@ -671,6 +682,5 @@ public class QVTOCompiler {
 		}
 		
 		return new EmfStandaloneMetamodelRegistryProvider(metamodelResourceSet.getPackageRegistry());
-	}
-		
+	}		
 }
