@@ -1,13 +1,14 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2018 Borland Software Corporation and others.
- * 
+ * Copyright (c) 2007, 2019 Borland Software Corporation and others.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 537609
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.launch;
 
@@ -25,34 +26,35 @@ import org.eclipse.m2m.internal.qvt.oml.common.Messages;
 import org.eclipse.osgi.util.NLS;
 
 
+@Deprecated
 public class ShallowProcess extends BaseProcess {
 
 	public ShallowProcess(ILaunch launch, IRunnable r) {
-        myLaunch = launch;
-        myRunnable = r;
-    }
-    
-    public void run() throws Exception {
-        run(null);
-    }
-    
-    public void run(IDebugTarget debugTarget) throws Exception {
-        myLaunch.addProcess(this);
-        try {
-            if(debugTarget != null) {
-                myLaunch.addDebugTarget(debugTarget);
-            }
-            myRunnable.run();
-        }
-        finally {
-            myRunnable = null;
-            if (DebugPlugin.getDefault() != null) {
-                DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] {new DebugEvent(this, DebugEvent.TERMINATE)});
-            }
-        }
-    }
-    
-    public String getLabel() {
+		myLaunch = launch;
+		myRunnable = r;
+	}
+
+	public void run() throws Exception {
+		run(null);
+	}
+
+	public void run(IDebugTarget debugTarget) throws Exception {
+		myLaunch.addProcess(this);
+		try {
+			if(debugTarget != null) {
+				myLaunch.addDebugTarget(debugTarget);
+			}
+			myRunnable.run();
+		}
+		finally {
+			myRunnable = null;
+			if (DebugPlugin.getDefault() != null) {
+				DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] {new DebugEvent(this, DebugEvent.TERMINATE)});
+			}
+		}
+	}
+
+	public String getLabel() {
 		String transformationURI = null;
 		ILaunchConfiguration configuration = myLaunch.getLaunchConfiguration();
 		if(configuration != null) {
@@ -62,42 +64,42 @@ public class ShallowProcess extends BaseProcess {
 				CommonPlugin.log(e.getStatus());
 			}
 		}
-		
-		return transformationURI != null 
-				? NLS.bind(Messages.ShallowProcess_LabelTransform, transformationURI) 
-						: Messages.ShallowProcess_Label;
-    }
 
-    public ILaunch getLaunch() {
-        return myLaunch;
-    }
+		return transformationURI != null
+				? NLS.bind(Messages.IProcess_LabelTransform, transformationURI)
+						: Messages.IProcess_Label;
+	}
 
-    public void setAttribute(String key, String value) {
-    }
+	public ILaunch getLaunch() {
+		return myLaunch;
+	}
 
-    public String getAttribute(String key) {
-        return null;
-    }
+	public void setAttribute(String key, String value) {
+	}
 
-    public int getExitValue() throws DebugException {
-        if(!isTerminated()) {
-            throw new DebugException(new Status(IStatus.ERROR, CommonPlugin.ID, 1, Messages.ShallowProcess_InvalidState, null));
-        }
-        
-        return 0;
-    }
+	public String getAttribute(String key) {
+		return null;
+	}
 
-    public boolean canTerminate() {
-        return !isTerminated();
-    }
+	public int getExitValue() throws DebugException {
+		if(!isTerminated()) {
+			throw new DebugException(new Status(IStatus.ERROR, CommonPlugin.ID, 1, Messages.IProcess_InvalidState, null));
+		}
 
-    public boolean isTerminated() {
-        return myRunnable == null;
-    }
+		return 0;
+	}
 
-    public void terminate() throws DebugException {
-    }
-    
-    private final ILaunch myLaunch;
-    private IRunnable myRunnable;
+	public boolean canTerminate() {
+		return !isTerminated();
+	}
+
+	public boolean isTerminated() {
+		return myRunnable == null;
+	}
+
+	public void terminate() throws DebugException {
+	}
+
+	private final ILaunch myLaunch;
+	private IRunnable myRunnable;
 }

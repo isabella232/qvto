@@ -185,8 +185,8 @@ public abstract class AbstractApplyTransformationTask extends Task {
         final List<URI> outUris = new ArrayList<URI>();
         final QvtTransformation transformation = getTransformationObject();
         try {
-            ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
-                public void run() throws Exception {
+//            ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
+//                public void run() throws Exception {
                 	try {	                		                	
 	            		Iterator<TargetUriData> itrTargetData = targetUris.iterator();
 	            		for (TransformationParameter transfParam : transformation.getParameters()) {
@@ -215,12 +215,12 @@ public abstract class AbstractApplyTransformationTask extends Task {
                 	finally {
                 		transformation.cleanup();
                 	}
-                }
-            };
+//                }
+//            };
             
-            r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transformation, r);
+//            r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transformation, r);
             
-            r.run();
+//            r.run();
             
             if (getProject() != null && getResultUriProperty() != null) {
             	int index = 1;

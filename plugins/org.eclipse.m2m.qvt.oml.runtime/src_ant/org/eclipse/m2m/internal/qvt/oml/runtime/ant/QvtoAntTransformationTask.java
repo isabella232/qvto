@@ -319,8 +319,8 @@ public class QvtoAntTransformationTask extends Task {
 		final QvtTransformation transformation = getTransformationObject();
 
 		try {
-			ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
-				public void run() throws Exception {
+//			ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
+//				public void run() throws Exception {
 					try {
 						URI traceUri = getTraceUri(QvtoAntTransformationTask.this);
 						boolean useTrace = myTrace == null ? false : myTrace.isGenerate();
@@ -349,12 +349,12 @@ public class QvtoAntTransformationTask extends Task {
 					finally {
 						transformation.cleanup();
 					}
-				}
+//				}
+//
+//			};
 
-			};
-
-			r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transformation, r);
-			r.run();
+//			r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transformation, r);
+//			r.run();
 		}
 		catch (Exception e) {
 			if(e instanceof RuntimeException && e instanceof QvtRuntimeException == false) {

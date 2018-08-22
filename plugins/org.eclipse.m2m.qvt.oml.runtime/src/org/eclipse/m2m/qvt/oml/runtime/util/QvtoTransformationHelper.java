@@ -126,8 +126,8 @@ public class QvtoTransformationHelper {
         	//options.setMetamodelResourceSet(wrappedMetamodelResourceSet);
         	transf.setQvtCompilerOptions(options);
         	
-            ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
-                public void run() throws Exception {
+//            ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
+//                public void run() throws Exception {
                 	List<ModelContent> inModels = new ArrayList<ModelContent>(inObjects.size());
                 	for (EObject inObj : inObjects) {
                 		inModels.add(new ModelContent(Collections.singletonList(inObj)));
@@ -136,12 +136,12 @@ public class QvtoTransformationHelper {
             				outExtents, outMainParams, outTraces, outConsole);
             		
             		transf.cleanup();
-                }
-
-            };
+//                }
+//
+//            };
             
-            r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transf, r);
-            r.run();
+//            r = QvtLaunchConfigurationDelegateBase.getSafeRunnable(transf, r);
+//            r.run();
             
             final List<ModelExtent> extents = new ArrayList<ModelExtent>();
             for (ModelExtentContents nextExtent : outExtents) {
@@ -176,9 +176,9 @@ public class QvtoTransformationHelper {
 		catch (MdaException e) {
 			throw new CoreException(e.getStatus() != null ? e.getStatus() : new Status(IStatus.ERROR, QvtRuntimePlugin.ID, e.getMessage()));
 		}
-		catch (CoreException e) {
-			throw e;
-		}
+//		catch (CoreException e) {
+//			throw e;
+//		}
 		catch (Exception e) {
 			throw new CoreException(new Status(IStatus.ERROR, QvtRuntimePlugin.ID, e.getMessage()));
 		}

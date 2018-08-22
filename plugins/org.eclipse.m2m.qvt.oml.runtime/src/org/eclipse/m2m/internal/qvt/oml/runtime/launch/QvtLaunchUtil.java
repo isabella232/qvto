@@ -199,7 +199,7 @@ public class QvtLaunchUtil {
     	return name + index;
     }
 
-	public static void doLaunch(QvtTransformation transformation, ILaunchConfiguration configuration, ExecutionContext context) throws Exception {
+	public static void doLaunch(QvtTransformation transformation, ILaunchConfiguration configuration, ExecutionContext context) throws CoreException, MdaException {
 			List<TargetUriData> targetUris = getTargetUris(configuration);
 						
 			List<URI> paramUris = new ArrayList<URI>(targetUris.size());

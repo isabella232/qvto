@@ -8,6 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 537609
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.runtime.launch;
 
@@ -83,6 +84,7 @@ public abstract class QvtLaunchConfigurationDelegateBase extends LaunchConfigura
         }
     }
     
+    @Deprecated
     public static BaseProcess.IRunnable getSafeRunnable(QvtTransformation transformation, IRunnable r) throws CoreException {
         return SafeRunner.getSafeRunnable(r);
     }    

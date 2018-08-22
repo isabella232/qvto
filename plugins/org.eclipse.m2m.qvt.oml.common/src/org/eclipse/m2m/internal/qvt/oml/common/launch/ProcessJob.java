@@ -1,10 +1,26 @@
+/*******************************************************************************
+ * Copyright (c) 2007, 2019 Borland Software Corporation and others.
+ * 
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v2.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
+ * 
+ * Contributors:
+ *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 537609
+ *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.launch;
 
 import org.eclipse.core.resources.WorkspaceJob;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
+import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IProcess;
@@ -23,6 +39,15 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 		
 		this.launch = launch;
 		this.proxy = proxy;
+		
+		addJobChangeListener(new JobChangeAdapter() {
+			@Override
+			public void done(IJobChangeEvent event) {
+				if (DebugPlugin.getDefault() != null) {
+            		DebugPlugin.getDefault().fireDebugEventSet(new DebugEvent[] {new DebugEvent(ProcessJob.this, DebugEvent.TERMINATE)});
+            	}
+			}
+		});
 	}
 	
 	public boolean canTerminate() {
@@ -33,7 +58,7 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 		return getResult() != null;
 	}
 
-	public void terminate() throws DebugException {
+	public void terminate() {
 		cancel();
 	}
 
@@ -49,8 +74,8 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 		}
 		
 		return transformationURI != null 
-				? NLS.bind(Messages.ShallowProcess_LabelTransform, transformationURI) 
-						: Messages.ShallowProcess_Label;
+				? NLS.bind(Messages.IProcess_LabelTransform, transformationURI) 
+						: Messages.IProcess_Label;
 	}
 
 	public ILaunch getLaunch() {
@@ -69,7 +94,7 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 
 	public int getExitValue() throws DebugException {
 		if(!isTerminated()) {
-            throw new DebugException(new Status(IStatus.ERROR, CommonPlugin.ID, 1, Messages.ShallowProcess_InvalidState, null));
+            throw new DebugException(new Status(IStatus.ERROR, CommonPlugin.ID, 1, Messages.IProcess_InvalidState, null));
         }
 		
 		return getResult().getSeverity();
