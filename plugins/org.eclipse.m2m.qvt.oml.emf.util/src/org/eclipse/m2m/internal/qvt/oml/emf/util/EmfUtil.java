@@ -8,7 +8,7 @@
  *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bug 428620
+ *     Christopher Gerking - bugs 428620, 537041
  *     Ed Willink - bug 533564
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.emf.util;

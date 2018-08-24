@@ -9,6 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Ed Willink - bug 533155
+ *     Christopher Gerking - bug 537041
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.emf.util.urimap;
 

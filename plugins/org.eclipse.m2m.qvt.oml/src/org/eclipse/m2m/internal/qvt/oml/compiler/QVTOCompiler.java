@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2017 Borland Software Corporation and others.
+ * Copyright (c) 2009, 2018 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -9,7 +9,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Alex Paperno - bugs 416584
- *     Christopher Gerking - bugs 326871, 391289, 431082, 486487
+ *     Christopher Gerking - bugs 326871, 391289, 431082, 486487, 537041
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
@@ -143,7 +143,7 @@ public class QVTOCompiler {
 	public QVTOCompiler(EPackage.Registry packageRegistry) {
 		this(
 			EMFPlugin.IS_ECLIPSE_RUNNING && EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE ? 
-			new WorkspaceMetamodelRegistryProvider(packageRegistry) : 
+			new ProjectMetamodelRegistryProvider(packageRegistry) : 
 			new EmfStandaloneMetamodelRegistryProvider(packageRegistry)
 		);		
 	}
@@ -678,7 +678,7 @@ public class QVTOCompiler {
 		
 	private static IMetamodelRegistryProvider createMetamodelRegistryProvider(ResourceSet metamodelResourceSet) {
 		if(EMFPlugin.IS_ECLIPSE_RUNNING && EMFPlugin.IS_RESOURCES_BUNDLE_AVAILABLE) {
-			return new WorkspaceMetamodelRegistryProvider(metamodelResourceSet);
+			return new ProjectMetamodelRegistryProvider(metamodelResourceSet);
 		}
 		
 		return new EmfStandaloneMetamodelRegistryProvider(metamodelResourceSet.getPackageRegistry());

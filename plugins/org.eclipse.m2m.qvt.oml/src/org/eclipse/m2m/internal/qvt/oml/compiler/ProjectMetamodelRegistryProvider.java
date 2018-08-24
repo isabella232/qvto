@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2014 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2018 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -8,6 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 537041
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
@@ -31,26 +32,26 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.ProjectMetamodelProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
 
-public class WorkspaceMetamodelRegistryProvider implements IMetamodelRegistryProvider {
+public class ProjectMetamodelRegistryProvider implements IMetamodelRegistryProvider {
 
 	private ResourceSet resolutionRSet;
 	private	Map<String, MetamodelRegistry> perProjectRegs;
 	private IMetamodelRegistryProvider delegateProvider;
 	private EPackage.Registry delegateRegistry;
 	
-	public WorkspaceMetamodelRegistryProvider() {
+	public ProjectMetamodelRegistryProvider() {
 		this(EPackage.Registry.INSTANCE);
 	}
 	
-	public WorkspaceMetamodelRegistryProvider(EPackage.Registry registry) {		
+	public ProjectMetamodelRegistryProvider(EPackage.Registry registry) {		
 		this(registry, null);
 	}
 		
-	public WorkspaceMetamodelRegistryProvider(ResourceSet resourceSet) {
+	public ProjectMetamodelRegistryProvider(ResourceSet resourceSet) {
 		this(resourceSet.getPackageRegistry(), resourceSet);
 	}
 	
-	private WorkspaceMetamodelRegistryProvider(EPackage.Registry registry, ResourceSet resourceSet) {
+	private ProjectMetamodelRegistryProvider(EPackage.Registry registry, ResourceSet resourceSet) {
 		
 		if(registry == null) {
 			throw new IllegalArgumentException();

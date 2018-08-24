@@ -29,7 +29,7 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEnv;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
 import org.eclipse.m2m.internal.qvt.oml.compiler.UnitProxy;
-import org.eclipse.m2m.internal.qvt.oml.compiler.WorkspaceMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.compiler.ProjectMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingMethodCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.MappingModuleCS;
 import org.eclipse.m2m.internal.qvt.oml.cst.UnitCS;
@@ -82,7 +82,7 @@ public class QvtCompletionData {
         myViewer = viewer;
         myDocument = viewer.getDocument();
         myOffset = offset;
-        myMetamodelProvider = new WorkspaceMetamodelRegistryProvider();        
+        myMetamodelProvider = new ProjectMetamodelRegistryProvider();        
         try {
         	// FIXME - accept other editor inputs
             myIFile = ((FileEditorInput) myEditor.getEditorInput()).getFile();

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016 Uwe Ritzmann and others.
+ * Copyright (c) 2016, 2018 Uwe Ritzmann and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -8,6 +8,7 @@
  * 
  * Contributors:
  *     Uwe Ritzmann - initial API and implementation
+ *     Christopher Gerking - bug 537041
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2015 Borland Software Corporation and others.
+ * Copyright (c) 2007, 2018 Borland Software Corporation and others.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -8,7 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - Bug 376274
+ *     Christopher Gerking - bugs 376274, 537041
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 
@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.m2m.internal.qvt.oml.compiler.CompilerUtils;
-import org.eclipse.m2m.internal.qvt.oml.compiler.WorkspaceMetamodelRegistryProvider;
+import org.eclipse.m2m.internal.qvt.oml.compiler.ProjectMetamodelRegistryProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfException;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtilPlugin;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
@@ -88,7 +88,7 @@ public class TestMetamodelRegistry extends TestCase {
         assertTrue(MetamodelURIMappingHelper.hasMappingResource(myProject.getProject()));  
         
         IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
-        metamodelRegistry = new WorkspaceMetamodelRegistryProvider().getRegistry(ctx);
+        metamodelRegistry = new ProjectMetamodelRegistryProvider().getRegistry(ctx);
 	}
 
 	private IMetamodelRegistryProvider.IRepositoryContext createContext() {
@@ -108,7 +108,7 @@ public class TestMetamodelRegistry extends TestCase {
 	public void testProjectContextRegistration() throws Exception {
         IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 
-        IMetamodelDesc metamodelDesc = new WorkspaceMetamodelRegistryProvider()
+        IMetamodelDesc metamodelDesc = new ProjectMetamodelRegistryProvider()
         	.getRegistry(ctx).getMetamodelDesc(METAMODEL_ID);
         assertNotNull(metamodelDesc);
         
@@ -128,7 +128,7 @@ public class TestMetamodelRegistry extends TestCase {
 	public void testNestedPackageRegistration() throws Exception {
 		IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 		
-        IMetamodelDesc metamodelDesc = new WorkspaceMetamodelRegistryProvider()
+        IMetamodelDesc metamodelDesc = new ProjectMetamodelRegistryProvider()
         	.getRegistry(ctx).getMetamodelDesc(METAMODEL_ID + "." + NESTED_PACKAGE_NAME);
         assertNotNull(metamodelDesc);
         
@@ -141,7 +141,7 @@ public class TestMetamodelRegistry extends TestCase {
 	public void testBug376644PackageRegistryFallback() throws Exception {
 		IMetamodelRegistryProvider.IRepositoryContext ctx = createContext();
 
-        IMetamodelDesc metamodelDesc = new WorkspaceMetamodelRegistryProvider()
+        IMetamodelDesc metamodelDesc = new ProjectMetamodelRegistryProvider()
         	.getRegistry(ctx).getMetamodelDesc(EcorePackage.eNS_URI);
         assertNotNull(metamodelDesc);
         assertTrue(EmfUtilPlugin.isSuccess(metamodelDesc.getLoadStatus()));

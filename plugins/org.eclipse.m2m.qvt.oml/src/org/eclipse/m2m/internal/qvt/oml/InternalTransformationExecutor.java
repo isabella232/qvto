@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2016 R.Dvorak and others.
+ * Copyright (c) 2009, 2018 R.Dvorak and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     Radek Dvorak - initial API and implementation
- *     Christopher Gerking - bug 431082
+ *     Christopher Gerking - bugs 431082, 537041
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml;
 
