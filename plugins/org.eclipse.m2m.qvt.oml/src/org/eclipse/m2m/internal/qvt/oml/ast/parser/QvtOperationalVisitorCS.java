@@ -8,7 +8,7 @@
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bugs 302594, 310991, 289982, 391289, 425634, 427237,
- *     						   433585, 433919, 438038
+ *     						   433585, 433919, 438038, 536601
  *     Alex Paperno - bugs 272869, 268636, 404647, 414363, 414363, 401521,
  *                         419299, 414619, 403440, 415024, 420970, 413391,
  *                         424584, 424869
@@ -2047,7 +2047,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		Set<String> moduleNames = new HashSet<String>(unitCS.getModules().size());
 
 		// 1st pass: module headers
-		subMonitor.subTask("Visit headers");
 		for(MappingModuleCS moduleCS : unitCS.getModules()) {
 			Module module = QvtOperationalParserUtil.createModule(moduleCS);
 			QvtOperationalModuleEnv moduleEnv = fileEnv.getFactory().createModuleEnvironment(module, fileEnv);
@@ -2067,7 +2066,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		}
 
 		// 2nd pass: imports and usages
-		subMonitor.subTask("Visit imports");
 		for(MappingModuleCS moduleCS : unitCS.getModules()) {
 			Module module = (Module) moduleCS.getAst();
 			importsCS(moduleCS, unit, module, moduleEnvsMap.get(moduleCS), importResolver);
@@ -2076,7 +2074,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		List<MappingModuleCS> sortedModuless = checkModuleLoops(unitCS, fileEnv);
 
 		// 3nd pass: intermediate Classes, module tags & renamings
-		subMonitor.subTask("Visit intermediate classes, tags and renamings");
 		for(MappingModuleCS moduleCS : sortedModuless) {
 			Module module = (Module) moduleCS.getAst();
 			QvtOperationalModuleEnv moduleEnv = moduleEnvsMap.get(moduleCS);
@@ -2091,7 +2088,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		}
 
 		// 4th pass: method headers
-		subMonitor.subTask("Visit operation headers");
 		HashMap<MappingModuleCS, HashMap<MappingMethodCS, ImperativeOperation>> methodMaps = new HashMap<MappingModuleCS, HashMap<MappingMethodCS, ImperativeOperation>>();
 		for(MappingModuleCS moduleCS : sortedModuless) {
 			HashMap<MappingMethodCS, ImperativeOperation> methodMap = visitMethodHeaders(moduleCS, moduleEnvsMap.get(moduleCS));
@@ -2100,7 +2096,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		}
 
 		// 5rd pass: properties
-		subMonitor.subTask("Visit properties");
 		for(MappingModuleCS moduleCS : sortedModuless) {
 			Module module = (Module) moduleCS.getAst();
 			createModuleProperties(module, moduleCS, moduleEnvsMap.get(moduleCS));
@@ -2108,7 +2103,6 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		}
 
 		// 6th pass: method bodies
-		subMonitor.subTask("Visit operation bodies");
 		for(MappingModuleCS moduleCS : sortedModuless) {
 			visitMethodBodies(moduleCS, methodMaps.get(moduleCS), moduleEnvsMap.get(moduleCS));
 			subMonitor.worked(1);
@@ -2444,6 +2438,8 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		if(myErrorNodes != null) {
 			myErrorNodes.clear();
 		}
+		
+		SubMonitor.done(myMonitor);
 	}
 
 	private void visitTagCS(QvtOperationalEnv env, TagCS ownedTagCS, Module module, EClassifier tagContextType) throws SemanticException {

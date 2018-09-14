@@ -32,6 +32,9 @@ public class CompilerMessages extends NLS {
 	public static String QvtCompilerFacade_compilingScript;
 	public static String QvtCompilerFacade_acquiringScript;
 	
+	public static String parsingTaskName;
+	public static String analyzingTaskName;
+	
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, CompilerMessages.class);

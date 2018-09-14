@@ -84,9 +84,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        return getConfig().getProjectDependencies(true);
    		}
    		finally {
-    		if (monitor != null) {
-    			monitor.done();
-    		}
+    		SubMonitor.done(monitor);
    		}
     }
     
@@ -119,9 +117,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	    	}, IContainer.INCLUDE_TEAM_PRIVATE_MEMBERS);
     	}
     	finally {
-    		if (monitor != null) {
-    			monitor.done();
-    		}
+    		SubMonitor.done(monitor);
     	}
     }
     
@@ -211,15 +207,12 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        
 	        subMonitor.worked(1);
 	        
-	        if(monitor.isCanceled()) {
-            	CompilerUtils.throwOperationCanceled();
-            }
-        	else if(isInterrupted()) {
+	        if(isInterrupted()) {
         		return;
         	}
 
 	        CompiledUnit[] units = compiler.compile(allUnits.toArray(new UnitProxy[allUnits.size()]),
-	        		options, subMonitor.newChild(8, SubMonitor.SUPPRESS_NONE));	        
+	        		options, subMonitor.split(8));	        
 	        		
 	        if(shouldSaveXMI()) {
 	        	ResourceSet metamodelResourceSet = compiler.getResourceSet();
@@ -232,7 +225,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        subMonitor.setWorkRemaining(units.length);
 				
 	        for (int i = 0; i < units.length; i++) {                    
-	        	if(monitor.isCanceled()) {
+	        	if(subMonitor.isCanceled()) {
 	            	CompilerUtils.throwOperationCanceled();
 	            }
 	        	else if(isInterrupted()) {
@@ -260,9 +253,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 			throw new CoreException(QVTOProjectPlugin.createStatus(IStatus.ERROR, e.getMessage(), e));
 		}
 		finally {
-			if (monitor != null) {
-				monitor.done();
-			}
+			SubMonitor.done(monitor);
 		}
     }
         

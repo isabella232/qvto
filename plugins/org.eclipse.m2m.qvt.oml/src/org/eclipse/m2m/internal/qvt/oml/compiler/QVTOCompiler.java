@@ -8,8 +8,8 @@
  *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Alex Paperno - bugs 416584
- *     Christopher Gerking - bugs 326871, 391289, 431082, 486487, 537041
+ *     Alex Paperno - bug 416584
+ *     Christopher Gerking - bugs 326871, 391289, 431082, 486487, 536601, 537041
  *     Ed Willink - bug 540971
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
@@ -178,20 +178,14 @@ public class QVTOCompiler {
 
 		try {
 			int i = 0;
-			for (UnitProxy nextSource : sources) {
-				if(subMonitor.isCanceled()) {
-					CompilerUtils.throwOperationCanceled();
-				}
-
-				result[i++] = compileSingleFile(nextSource, options, subMonitor.newChild(1, SubMonitor.SUPPRESS_NONE));
+			for (UnitProxy nextSource : sources) {				
+				result[i++] = compileSingleFile(nextSource, options, subMonitor.split(1));
 			}
 		} finally {
 			fDependencyWalkPath.clear();
 			afterCompileCleanup();
 
-			if (monitor != null) {
-				monitor.done();
-			}
+			SubMonitor.done(monitor);
 		}
 
 		return result;
@@ -272,34 +266,42 @@ public class QVTOCompiler {
 
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Analyze " + unit.getQualifiedName(), 10);
 
-		QvtOperationalFileEnv env = parseResult.env;
-		env.setQvtCompilerOptions(options);
-
-		CSTAnalysisResult result = new CSTAnalysisResult();
 		try {
-			QvtOperationalVisitorCS visitor = createAnalyzer(parseResult.parser, options, subMonitor.newChild(9));
-			UnitCS unitCS = parseResult.unitCS;
-			if(unitCS != null && !unitCS.getModules().isEmpty()) {
-				result.moduleEnvs = visitor.visitUnitCS(unitCS, unit, env, externalUnitElementsProvider, getResourceSet());
+			QvtOperationalFileEnv env = parseResult.env;
+			env.setQvtCompilerOptions(options);
+	
+			CSTAnalysisResult result = new CSTAnalysisResult();
+			QvtOperationalVisitorCS visitor = createAnalyzer(parseResult.parser, options, subMonitor.split(9));
+			try {
+				UnitCS unitCS = parseResult.unitCS;
+				if(unitCS != null && !unitCS.getModules().isEmpty()) {
+					result.moduleEnvs = visitor.visitUnitCS(unitCS, unit, env, externalUnitElementsProvider, getResourceSet());
+				}
+			} catch (SemanticException e) {
+				env.reportError(e.getLocalizedMessage(), 0, 0);
 			}
-		} catch (SemanticException e) {
-			env.reportError(e.getLocalizedMessage(), 0, 0);
-		}
-
-		if (options.isReportErrors()) {
-			subMonitor.setWorkRemaining(result.moduleEnvs.size());
-
-			for(QvtOperationalModuleEnv moduleEnv : result.moduleEnvs) {
-				moduleEnv.setCheckForDuplicateErrors(true);
-				QvtOperationalValidationVisitor validation = new QvtOperationalValidationVisitor(moduleEnv);
-				validation.visitModule(moduleEnv.getModuleContextType());
-				moduleEnv.setCheckForDuplicateErrors(false);
-
-				subMonitor.worked(1);
+			finally {
+				visitor.clear();
 			}
+						
+			if (options.isReportErrors()) {
+				subMonitor.setWorkRemaining(result.moduleEnvs.size());
+				
+				for(QvtOperationalModuleEnv moduleEnv : result.moduleEnvs) {
+	                moduleEnv.setCheckForDuplicateErrors(true);
+					QvtOperationalValidationVisitor validation = new QvtOperationalValidationVisitor(moduleEnv);
+					validation.visitModule(moduleEnv.getModuleContextType());
+					moduleEnv.setCheckForDuplicateErrors(false);
+					
+					subMonitor.worked(1);
+				}
+			}
+			
+			return result;
 		}
-
-		return result;
+		finally {
+			SubMonitor.done(monitor);
+		}
 	}
 
 	protected QvtOperationalVisitorCS createAnalyzer(AbstractQVTParser parser, QvtCompilerOptions options, IProgressMonitor monitor) {
@@ -353,14 +355,14 @@ public class QVTOCompiler {
 				fSource2Compiled.put(source.getURI(), blackbox);
 
 				return blackbox;
-			}
-
-			SubMonitor subMonitor = SubMonitor.convert(monitor, "Compile " + source.getURI().toString(), 10); //$NON-NLS-1$
-
-			// perform to syntax parsing
-			subMonitor.subTask("Parsing"); //$NON-NLS-1$
-			CSTParseResult parseResult = parse(source, options);
-			monitor.worked(1);
+        	}
+        	
+        	SubMonitor subMonitor = SubMonitor.convert(monitor, "Compile " + source.getURI().toString(), 3); //$NON-NLS-1$
+        	        	
+        	// perform to syntax parsing
+        	subMonitor.subTask(NLS.bind(CompilerMessages.parsingTaskName, source.getURI()));
+	    	CSTParseResult parseResult = parse(source, options);
+	    	subMonitor.worked(1);
 
 			QvtOperationalFileEnv env = parseResult.env;
 			dependencyElement.importerEnv = env;
@@ -368,10 +370,9 @@ public class QVTOCompiler {
 			UnitCS unitCS = parseResult.unitCS;
 			UnitResolverImpl unitResolver = new UnitResolverImpl(source);
 			List<ImportCS> allUnitImportsCS = parseResult.getImports();
-
-			subMonitor.subTask("Processing imports"); //$NON-NLS-1$
-			subMonitor.setWorkRemaining(allUnitImportsCS.size() + 1);
-
+	    	
+	    	subMonitor.setWorkRemaining(allUnitImportsCS.size() + 1);
+	    	
 			for (ImportCS nextImportCS : allUnitImportsCS) {
 				String importQNameStr = getQualifiedName(nextImportCS);
 				if(importQNameStr == null || importQNameStr.length() == 0) {
@@ -391,43 +392,43 @@ public class QVTOCompiler {
 					continue;
 				}
 
-				// check for cyclic import error condition
-				dependencyElement.currentProcessedImport = nextImportCS;
-
-				DependencyPathElement importerDependencyElement = findDependencyElement(importedUnit);
-				if(importerDependencyElement != null) {
-					ImportCS importedCS = importerDependencyElement.currentProcessedImport;
-					// not cached compiled unit yet, but we got here into a cycle
-					if(env != importerDependencyElement.importerEnv) {
-						reportCyclicImportError(importedUnit.getURI(), source.getURI(),
-								importedCS.getPathNameCS(), importerDependencyElement.importerEnv);
-					}
-
-					// report the cyclic problem in the opposite direction
-					reportCyclicImportError(source.getURI(), importedUnit.getURI(), nextImportCS.getPathNameCS(), env);
-					// skip addition to the list of imports
-					subMonitor.worked(1);
-					continue;
-				}
-
-				CompiledUnit compiledImport = doCompile(importedUnit, options, subMonitor.newChild(1, SubMonitor.SUPPRESS_NONE));
-
-				if(!compiledImport.getErrors().isEmpty()) {
-
-					String errorMessage	= NLS.bind(CompilerMessages.importHasCompilationError,
-							QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));
-
-					DiagnosticChain error = env.reportError(errorMessage, nextImportCS.getPathNameCS());
-
-					for (Diagnostic importError : compiledImport.getErrors()) {
-						error.add(importError);
-					}
-				}
-
-				if(compiledImports == null) {
-					// Note: Must be unique as we process import duplicates to report problems
-					compiledImports = new UniqueEList<CompiledUnit>();
-				}
+        		// check for cyclic import error condition
+        		dependencyElement.currentProcessedImport = nextImportCS;
+        		
+        		DependencyPathElement importerDependencyElement = findDependencyElement(importedUnit);
+        		if(importerDependencyElement != null) {
+	            	ImportCS importedCS = importerDependencyElement.currentProcessedImport;
+        			// not cached compiled unit yet, but we got here into a cycle 
+	            	if(env != importerDependencyElement.importerEnv) {
+	            		reportCyclicImportError(importedUnit.getURI(), source.getURI(),
+	            				importedCS.getPathNameCS(), importerDependencyElement.importerEnv);
+	            	}
+	            	
+	            	// report the cyclic problem in the opposite direction
+	            	reportCyclicImportError(source.getURI(), importedUnit.getURI(), nextImportCS.getPathNameCS(), env);
+	            	// skip addition to the list of imports
+	            	subMonitor.worked(1);
+	            	continue;			            		
+        		}
+        		
+        		CompiledUnit compiledImport = doCompile(importedUnit, options, subMonitor.split(1));
+            		
+    			if(!compiledImport.getErrors().isEmpty()) {
+    				
+    				String errorMessage	= NLS.bind(CompilerMessages.importHasCompilationError, 
+    						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));
+    				
+    				DiagnosticChain error = env.reportError(errorMessage, nextImportCS.getPathNameCS());
+    				
+    				for (Diagnostic importError : compiledImport.getErrors()) {
+    					error.add(importError);
+    				}   				
+    			}
+    				        				        			
+    			if(compiledImports == null) {
+    				// Note: Must be unique as we process import duplicates to report problems
+    				compiledImports = new UniqueEList<CompiledUnit>();
+    			}
 
 				compiledImports.add(compiledImport);
 
@@ -435,9 +436,10 @@ public class QVTOCompiler {
 				unitResolver.addUnit(importedUnitQName, compiledImport);
 
 			} // end of imports processing
-
-			// perform CST analysis
-			CSTAnalysisResult analysisResult = analyze(parseResult, source, unitResolver, options, subMonitor.newChild(1, SubMonitor.SUPPRESS_NONE));
+						
+	    	// perform CST analysis
+			subMonitor.subTask(NLS.bind(CompilerMessages.analyzingTaskName, source.getQualifiedName()));
+			CSTAnalysisResult analysisResult = analyze(parseResult, source, unitResolver, options, subMonitor.split(1));
 			if(options.isSourceLineNumbersEnabled()) {
 				addSourceLineNumberInfo(parseResult.parser, analysisResult, source);
 			}
@@ -469,10 +471,12 @@ public class QVTOCompiler {
 			return result;
 
 		} finally {
-			if (!fDependencyWalkPath.empty()) {
-				fDependencyWalkPath.pop();
-			}
-		}
+    		if (!fDependencyWalkPath.empty()) {
+    			fDependencyWalkPath.pop();
+    		}
+    		
+    		SubMonitor.done(monitor);
+    	}
 	}
 
 	private CompiledUnit getCompiledExeXMIUnit(final UnitProxy source) {
