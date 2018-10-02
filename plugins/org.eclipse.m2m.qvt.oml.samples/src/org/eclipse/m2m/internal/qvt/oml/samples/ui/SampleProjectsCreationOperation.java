@@ -8,6 +8,7 @@
  * 
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+ *     Christopher Gerking - bug 536601
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.samples.ui;
 
