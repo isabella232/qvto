@@ -73,8 +73,8 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        
     
 	@Override
-	protected IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {
-   		try {
+	protected IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {		
+		try {
 	        if (kind == IncrementalProjectBuilder.FULL_BUILD) {
 	            fullBuild(monitor);
 	        } else {
@@ -212,7 +212,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
         	}
 
 	        CompiledUnit[] units = compiler.compile(allUnits.toArray(new UnitProxy[allUnits.size()]),
-	        		options, subMonitor.split(8));	        
+	        		options, subMonitor.split(7));	        
 	        		
 	        if(shouldSaveXMI()) {
 	        	ResourceSet metamodelResourceSet = compiler.getResourceSet();
@@ -225,10 +225,9 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        subMonitor.setWorkRemaining(units.length);
 				
 	        for (int i = 0; i < units.length; i++) {                    
-	        	if(subMonitor.isCanceled()) {
-	            	CompilerUtils.throwOperationCanceled();
-	            }
-	        	else if(isInterrupted()) {
+	        	subMonitor.checkCanceled();
+	        	
+	        	if(isInterrupted()) {
 	        		return;
 	        	}
 	            
