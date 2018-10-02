@@ -23,7 +23,7 @@ import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.IWizardPage;
@@ -161,19 +161,19 @@ public class NewQVTProjectWizard extends Wizard implements INewWizard, IExecutab
 	}
 
 
-    private void doPostCreateProjectAction(IProject createdProject, IProgressMonitor monitor) throws CoreException {
-		monitor.beginTask("Create QVT source container", 2); //$NON-NLS-1$
+    private void doPostCreateProjectAction(IProject createdProject, IProgressMonitor monitor) throws CoreException {    	
+    	SubMonitor subMonitor = SubMonitor.convert(monitor, "Create QVT source container", 2); //$NON-NLS-1$
 	    	
     	IContainer srcContainer = fMainPage.getQVTSourceContainerHandle();
     	if(srcContainer instanceof IFolder) {
-        	SourceContainerUpdater.ensureDestinationExists((IFolder)srcContainer, new SubProgressMonitor(monitor, 1));    		
+        	SourceContainerUpdater.ensureDestinationExists((IFolder)srcContainer, subMonitor.split(1));    		
     	}
     	
     	QVTOBuilderConfig qvtConfig = QVTOBuilderConfig.getConfig(createdProject);
     	qvtConfig.setSourceContainer(srcContainer);
     	qvtConfig.addTransformationNature();
 
-    	monitor.worked(1);
+    	subMonitor.worked(1);
     }
     
     private INewQVTElementDestinationWizardDelegate getDestinationProvider() {

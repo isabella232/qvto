@@ -37,7 +37,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -102,14 +102,14 @@ public class SampleProjectsCreationOperation implements IRunnableWithProgress {
 		return myCreatedProject;
 	}
     
-    public void run(final IProgressMonitor monitor) throws InvocationTargetException {
+    public void run(final IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
         try {
             IWorkspaceRunnable op = new IWorkspaceRunnable() {
                 public void run(IProgressMonitor localMonitor) throws CoreException {
-                    localMonitor.beginTask(Messages.SampleProjectsCreationOperation_creatingProjects, 4);  
+                	SubMonitor subMonitor = SubMonitor.convert(localMonitor, Messages.SampleProjectsCreationOperation_creatingProjects, 5);
                     try {
-                        myCreatedProject = importProject(myProject, new SubProgressMonitor(localMonitor, 4));
-                        myCreatedProject.build(IncrementalProjectBuilder.FULL_BUILD, new SubProgressMonitor(localMonitor, 1));
+                        myCreatedProject = importProject(myProject, subMonitor.split(4));
+                        myCreatedProject.build(IncrementalProjectBuilder.FULL_BUILD, subMonitor.split(1));
                     }
                     catch (InterruptedException e) {
                         throw new OperationCanceledException();
@@ -117,15 +117,16 @@ public class SampleProjectsCreationOperation implements IRunnableWithProgress {
                     catch (InvocationTargetException e) {
                         throwCoreException(e);
                     }
+                    finally {
+                    	SubMonitor.done(monitor);
+                    }
                 }
             };
             ResourcesPlugin.getWorkspace().run(op, monitor);
         } catch (CoreException e) {
             throw new InvocationTargetException(e);
         } catch (OperationCanceledException e) {
-            throw e;
-        } finally {
-            monitor.done();
+            throw new InterruptedException();
         }
     }
     
@@ -174,68 +175,83 @@ public class SampleProjectsCreationOperation implements IRunnableWithProgress {
     private IProject importProject(final SampleProject sampleProject,
 			final IProgressMonitor monitor) throws CoreException,
 			InvocationTargetException, InterruptedException {
-		String path = sampleProject.getArchive();
-		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
-		
-		IProject project = root.getProject(sampleProject.getName());
-		if (project.exists()) {
-			final String overwrite = myProjectOverwriteQuery
-					.queryOverwrite(project.getName());
-			if (IOverwriteQuery.YES.equals(overwrite)
-					|| IOverwriteQuery.ALL.equals(overwrite)) {
-				project.delete(true, true, new SubProgressMonitor(monitor, 1));
-				project = root.getProject(sampleProject.getName());
-			} else if (IOverwriteQuery.NO.equals(overwrite)
-					|| IOverwriteQuery.NO_ALL.equals(overwrite)) {
-				return project;
-			} else {
-				throw new OperationCanceledException();
+    	    	
+    	try {
+    		SubMonitor subMonitor = SubMonitor.convert(monitor, 4);
+    		
+			String path = sampleProject.getArchive();
+			IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
+			
+			IProject project = root.getProject(sampleProject.getName());
+			if (project.exists()) {
+				final String overwrite = myProjectOverwriteQuery
+						.queryOverwrite(project.getName());
+				if (IOverwriteQuery.YES.equals(overwrite)
+						|| IOverwriteQuery.ALL.equals(overwrite)) {
+					project.delete(true, true, subMonitor.split(1));
+					project = root.getProject(sampleProject.getName());
+				} else if (IOverwriteQuery.NO.equals(overwrite)
+						|| IOverwriteQuery.NO_ALL.equals(overwrite)) {
+					return project;
+				} else {
+					throw new CoreException(Status.CANCEL_STATUS);
+				}
 			}
-		}
-		
-		project.create(new SubProgressMonitor(monitor, 1));
-		project.open(new NullProgressMonitor());
-		
-		Bundle bundle = Platform.getBundle(sampleProject.getNamespace());
-		ZipFile zipFile = getZipFileFromPluginDir(path, bundle);
-		importFilesFromZip(zipFile, project.getFullPath(), new SubProgressMonitor(monitor, 1));
-		createSampleManifest(project, sampleProject, new SubProgressMonitor(
-				monitor, 1));
-		IProjectDescription description = project.getDescription();
-
-		String tempName = "temp" + System.currentTimeMillis(); //$NON-NLS-1$
-		while (root.getProject(tempName).exists()) {
-			tempName += System.currentTimeMillis();
-		}
-		description.setName(tempName);
-		project.setDescription(description, null);
-		description.setName(sampleProject.getName());
-		project.setDescription(description, null);
-		return project;
+			
+			subMonitor.setWorkRemaining(3);
+			
+			project.create(subMonitor.split(1));
+			project.open(new NullProgressMonitor());
+			
+			Bundle bundle = Platform.getBundle(sampleProject.getNamespace());
+			ZipFile zipFile = getZipFileFromPluginDir(path, bundle);
+			importFilesFromZip(zipFile, project.getFullPath(), subMonitor.split(1));
+			createSampleManifest(project, sampleProject, subMonitor.split(1));
+			IProjectDescription description = project.getDescription();
+	
+			String tempName = "temp" + System.currentTimeMillis(); //$NON-NLS-1$
+			while (root.getProject(tempName).exists()) {
+				tempName += System.currentTimeMillis();
+			}
+			description.setName(tempName);
+			project.setDescription(description, null);
+			description.setName(sampleProject.getName());
+			project.setDescription(description, null);
+			return project;
+    	}
+    	finally {
+    		SubMonitor.done(monitor);
+    	}
 	}
 
     private IFile createSampleManifest(final IProject project,
             final SampleProject sampleProject, final IProgressMonitor monitor)
             throws CoreException {
-        IFile file = project.getFile(SAMPLE_PROPERTIES);
-        if (!file.exists()) {
-            try {
-                ByteArrayOutputStream out = new ByteArrayOutputStream();
-                Properties properties = new Properties();
-                createSampleManifestContent(sampleProject, properties);
-                properties.store(out, ""); //$NON-NLS-1$
-                out.flush();
-                String contents = out.toString();
-                out.close();
-                ByteArrayInputStream stream = new ByteArrayInputStream(contents
-                        .getBytes("UTF8")); //$NON-NLS-1$
-                file.create(stream, true, monitor);
-                stream.close();
-            } catch (UnsupportedEncodingException e) {
-            } catch (IOException e) {
-            }
-        }
-        return file;
+    	
+    	try {
+	        IFile file = project.getFile(SAMPLE_PROPERTIES);
+	        if (!file.exists()) {
+	            try {
+	                ByteArrayOutputStream out = new ByteArrayOutputStream();
+	                Properties properties = new Properties();
+	                createSampleManifestContent(sampleProject, properties);
+	                properties.store(out, ""); //$NON-NLS-1$
+	                out.flush();
+	                String contents = out.toString();
+	                out.close();
+	                ByteArrayInputStream stream = new ByteArrayInputStream(contents
+	                        .getBytes("UTF8")); //$NON-NLS-1$
+	                file.create(stream, true, monitor);
+	                stream.close();
+	            } catch (UnsupportedEncodingException e) {
+	            } catch (IOException e) {
+	            }
+	        }
+	        return file;
+    	}
+    	finally {
+    		SubMonitor.done(monitor);
+    	}
     }
 
     private void createSampleManifestContent(final SampleProject sampleProject,
@@ -274,7 +290,7 @@ public class SampleProjectsCreationOperation implements IRunnableWithProgress {
             InterruptedException {
         ZipFileStructureProvider structureProvider = new ZipFileStructureProvider(
                 srcZipFile);
-        ImportOperation op = new ImportOperation(destPath, structureProvider.getRoot(), structureProvider, myOverwriteQuery);
+        IRunnableWithProgress op = new ImportOperation(destPath, structureProvider.getRoot(), structureProvider, myOverwriteQuery);
         op.run(monitor);
     }
     

@@ -33,10 +33,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.m2m.internal.qvt.oml.ui.QVTUIPlugin;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 
@@ -65,16 +63,20 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 	}
 	
 	protected void createContents(IProgressMonitor monitor, IProject project) throws CoreException, InterruptedException {
+		SubMonitor.done(monitor);
 	}
 	
 	private void createBuildProperties(IProject project, IProgressMonitor monitor) throws CoreException {
+		
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 4);
+		
 		IFile buildProperties = project.getFile(BUILD_FILENAME_DESCRIPTOR);
 		StringWriter contents = new StringWriter();
 		PrintWriter wr = new PrintWriter(contents, true);
 		
 		if(fData.isCreateJava()) {
-			IPath sourceFolder = asBinIncludesFolder(createJavaFolder(fData.getSourceFolderName(), monitor));
-			IPath outFolder = asBinIncludesFolder(createJavaFolder(fData.getOutFolderName(), monitor));
+			IPath sourceFolder = asBinIncludesFolder(createJavaFolder(fData.getSourceFolderName(), subMonitor.split(1)));
+			IPath outFolder = asBinIncludesFolder(createJavaFolder(fData.getOutFolderName(), subMonitor.split(1)));
 
 			wr.append("source.. = ").println(sourceFolder.toString()); //$NON-NLS-1$
 			wr.append("output.. = ").println(outFolder.toString()); //$NON-NLS-1$
@@ -90,7 +92,7 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 			wr.append(indent).append('.');
 		}
 
-		IContainer qvtContainer = createJavaFolder(fData.getQVTSourceFolderName(), monitor);
+		IContainer qvtContainer = createJavaFolder(fData.getQVTSourceFolderName(), subMonitor.split(1));
 		IPath qvtFolder = asBinIncludesFolder(qvtContainer);
 		if(!fProjectHandle.equals(qvtContainer) || !fData.isCreateJava()) {
 			wr.println(",\\"); //$NON-NLS-1$
@@ -101,7 +103,7 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 		wr.flush();
 		
 		InputStream is = createContentStreamForNewFile(buildProperties, contents.getBuffer().toString());
-		buildProperties.create(is, false, monitor);
+		buildProperties.create(is, false, subMonitor.split(1));
 	}
 
 	private void createManifest(IFolder metaFolder, IProgressMonitor monitor) throws CoreException {
@@ -158,18 +160,20 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 	 */
 	@Override
 	protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException, InterruptedException {
-		SubMonitor progress = SubMonitor.convert(monitor, Messages.NewProjectCreationOperation_createQVTProjectTask, 2);
-
-		createProject(progress.newChild(1));
-		createContents(progress.newChild(1), fProjectHandle);
-		
-		monitor.done();
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.NewProjectCreationOperation_createQVTProjectTask, 2);
+				
+		try {
+			createProject(subMonitor.split(1));
+			createContents(subMonitor.split(1), fProjectHandle);
+		}
+		finally {
+			SubMonitor.done(monitor);
+		}
 	}
 
 
 	private void generateTopLevelPluginClass(IProgressMonitor monitor) throws CoreException {
 		fGenerator.generate(monitor);
-		monitor.done();
 	}
 
 	private PluginReference[] getDependencies() {
@@ -180,7 +184,13 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 	}
 	
 	private void createProject(IProgressMonitor monitor) throws CoreException {
-        SubMonitor subMonitor = SubMonitor.convert(monitor, 7);
+		
+		// compute total amount of work
+		int totalWork = 2;
+		totalWork += fData.isPlugin() ? 4 : 0;
+		totalWork += fData.isCreateJava() ? 2 : 0;
+		
+        SubMonitor subMonitor = SubMonitor.convert(monitor, totalWork);
 		
         URI location = URIUtil.toURI(fData.getLocation());
 
@@ -192,50 +202,37 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 		description.setLocationURI(location); 
 						
 		if(!fProjectHandle.exists()) {
-			fProjectHandle.create(description, subMonitor.newChild(1));
+			fProjectHandle.create(description, subMonitor.split(1));
 		}
-		subMonitor.setWorkRemaining(6);
+		subMonitor.setWorkRemaining(totalWork - 1);
 
-        if (subMonitor.isCanceled()) {
-            throw new OperationCanceledException();
-        }
-
-        fProjectHandle.open(IResource.BACKGROUND_REFRESH, subMonitor.newChild(1));
+        fProjectHandle.open(IResource.BACKGROUND_REFRESH, subMonitor.split(1));
         
         if (fData.isPlugin()) {
-			addNatureToProject(fProjectHandle, PLUGIN_NATURE, subMonitor.newChild(1));
+			addNatureToProject(fProjectHandle, PLUGIN_NATURE, subMonitor.split(1));
 			
 			fGenerator = new PluginClassCodeGenerator(fProjectHandle, fData);
-			
-			if(fData.isCreateJava()) {
-				JdtProjectIntegrationHelper.setupJava(fProjectHandle, true, 
-						fData.getSourceFolderName(), fData.getOutFolderName(), fData.getfExecutionEnv(), subMonitor.newChild(1));
-
-				if(fData.isDoGenerateClass()) {
-					generateTopLevelPluginClass(new SubProgressMonitor(monitor, 1));
-				}
-				monitor.worked(1);		
-			}
-			subMonitor.setWorkRemaining(3);
-			
-			// generate the manifest file
-			IFolder metaFolder = fProjectHandle.getFolder("META-INF"); //$NON-NLS-1$
-			metaFolder.create(true, true, subMonitor.newChild(1));
-
-			createManifest(metaFolder, subMonitor.newChild(1));
-			
-			// generate the build.properties file
-			createBuildProperties(fProjectHandle, subMonitor.newChild(1));
-
-		} else if(fData.isCreateJava()) {
-			subMonitor.setWorkRemaining(1);
-			JdtProjectIntegrationHelper.setupJava(fProjectHandle, false,
-					fData.getSourceFolderName(), fData.getOutFolderName(), fData.getfExecutionEnv(), subMonitor.newChild(1));
+        }
+        			
+		if(fData.isCreateJava()) {
+			JdtProjectIntegrationHelper.setupJava(fProjectHandle, true, 
+					fData.getSourceFolderName(), fData.getOutFolderName(), fData.getfExecutionEnv(), subMonitor.split(1));
 
 			if(fData.isDoGenerateClass()) {
-				generateTopLevelPluginClass(new SubProgressMonitor(monitor, 1));
-			}
-			monitor.worked(1);		
+				generateTopLevelPluginClass(subMonitor.split(1));
+			}	
+		}
+					
+		if (fData.isPlugin()) {
+			// generate the manifest file
+			IFolder metaFolder = fProjectHandle.getFolder("META-INF"); //$NON-NLS-1$
+			metaFolder.create(true, true, subMonitor.split(1));
+
+			createManifest(metaFolder, subMonitor.split(1));
+			
+			// generate the build.properties file
+			createBuildProperties(fProjectHandle, subMonitor.split(1));
+
 		}
 	}
 
@@ -284,14 +281,18 @@ class NewProjectCreationOperation extends WorkspaceModifyOperation {
 	}
 	
 	private IContainer createJavaFolder(String folderName, IProgressMonitor monitor) throws CoreException {
-		if(folderName == null || folderName.trim().length() == 0) {
-			return fProjectHandle;			
+		try {
+			if(folderName == null || folderName.trim().length() == 0) {
+				return fProjectHandle;			
+			}
+			
+			IFolder folder = fProjectHandle.getFolder(folderName);
+			if(!folder.exists()) {
+				folder.create(true, true, monitor);
+			}
+			return folder;
+		} finally {
+			SubMonitor.done(monitor);
 		}
-		
-		IFolder folder = fProjectHandle.getFolder(folderName);
-		if(!folder.exists()) {
-			folder.create(true, true, monitor);
-		}
-		return folder;
 	}	
 }
