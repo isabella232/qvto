@@ -111,7 +111,7 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 			}
 	
 			String unitFilePath = ResolverUtils.toNamespaceRelativeUnitFilePath(qualifiedName);
-			URI unitURI = URI.createURI(unitFilePath).resolve(baseURI, false);
+			URI unitURI = URI.createURI(unitFilePath).resolve(baseURI);
 			if(!URIConverter.INSTANCE.exists(unitURI, Collections.EMPTY_MAP)) {
 				return null;
 			}
