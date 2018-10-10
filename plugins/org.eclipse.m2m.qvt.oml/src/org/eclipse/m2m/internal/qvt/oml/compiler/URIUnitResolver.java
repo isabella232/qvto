@@ -7,10 +7,12 @@
  *
  * Contributors:
  *     Radek Dvorak - initial API and implementation
+ *     Christopher Gerking - bug 539910
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.compiler;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -68,13 +70,17 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 		fBaseURIs = new ArrayList<URI>(baseURIs.size());
 
 		for (URI uri : baseURIs) {
-			URI normalizedURI = uri;
-			if(!normalizedURI.hasTrailingPathSeparator()) {
-				// Note: URI represents the empty segment as trailing path separator
-				normalizedURI = normalizedURI.appendSegment(""); //$NON-NLS-1$
+			
+			if(uri.isRelative()) {
+				uri = URI.createFileURI(new File(uri.toFileString()).getAbsolutePath());
 			}
 			
-			fBaseURIs.add(normalizedURI);
+			if(!uri.hasTrailingPathSeparator()) {
+				// Note: URI represents the empty segment as trailing path separator
+				uri = uri.appendSegment(""); //$NON-NLS-1$
+			}
+						
+			fBaseURIs.add(uri);
 		}
 		
 		// enable resolution of black-box module dependencies and classpath imports
@@ -105,7 +111,7 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 			}
 	
 			String unitFilePath = ResolverUtils.toNamespaceRelativeUnitFilePath(qualifiedName);
-			URI unitURI = URI.createURI(unitFilePath).resolve(baseURI);
+			URI unitURI = URI.createURI(unitFilePath).resolve(baseURI, false);
 			if(!URIConverter.INSTANCE.exists(unitURI, Collections.EMPTY_MAP)) {
 				return null;
 			}
