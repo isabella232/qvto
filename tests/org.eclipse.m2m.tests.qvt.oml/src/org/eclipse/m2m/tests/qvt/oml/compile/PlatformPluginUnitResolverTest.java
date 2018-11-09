@@ -1,17 +1,18 @@
 /*******************************************************************************
  * Copyright (c) 2009, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- *   
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bug 537041
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.compile;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
@@ -34,39 +35,39 @@ import junit.framework.TestCase;
 public class PlatformPluginUnitResolverTest extends TestCase {
 
 	private Bundle fBundle;
-	
+
 	public PlatformPluginUnitResolverTest(String name) {
 		super(name);
 	}
-	
+
 	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
-		
+
 		fBundle = Platform.getBundle(AllTests.BUNDLE_ID);
 		assertNotNull(fBundle);
 	}
-	
+
 	@Test
 	public void testInRootUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle);
 		UnitProxy unit = resolver.resolveUnit("deployed.org.eclipse.Foo");
 		assertResolvedCompiledUnit(unit);
-		
+
 		assertEquals("deployed.org.eclipse", unit.getNamespace());
 		assertEquals("Foo", unit.getName());
 		assertEquals(URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/org/eclipse/Foo.qvto", false), //$NON-NLS-1$
 				unit.getURI());
 		assertNotNull(unit);
 	}
-	
+
 	@Test
 	public void testInContainerUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo");
 		assertResolvedCompiledUnit(unit);
-		
+
 		assertEquals("org.eclipse", unit.getNamespace());
 		assertEquals("Foo", unit.getName());
 		assertEquals(URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/org/eclipse/Foo.qvto", false), //$NON-NLS-1$
@@ -79,40 +80,40 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed"));
 		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo_xxxxxxx");
 		assertNull(unit);
-	}	
-	
+	}
+
 	@Test
 	public void testDefaultNSUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("deployed/org/eclipse"));
 		UnitProxy unit = resolver.resolveUnit("Foo"); //$NON-NLS-1$
 		assertResolvedCompiledUnit(unit);
-		
+
 		assertNull(unit.getNamespace());
 		assertEquals("Foo", unit.getName());
 		assertEquals(URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/org/eclipse/Foo.qvto", false), //$NON-NLS-1$
 				unit.getURI());
 		assertNotNull(unit);
 	}
-	
+
 	@Test
 	public void testCrossNSUnitResolver() throws Exception {
 		PlatformPluginUnitResolver resolver = new PlatformPluginUnitResolver(fBundle, new Path("/deployed"));
 		PlatformPluginUnitResolver.setupResolver(resolver, true, true);
-		
+
 		UnitProxy unit = resolver.resolveUnit("a.b.Foo"); //$NON-NLS-1$
 		assertResolvedCompiledUnit(unit);
-		
+
 		assertEquals("a.b", unit.getNamespace()); //$NON-NLS-1$
 		assertEquals("Foo", unit.getName()); //$NON-NLS-1$
 		assertEquals(URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/b/Foo.qvto", false), //$NON-NLS-1$
 				unit.getURI());
 		assertNotNull(unit);
 	}
-	
+
 	@Test
 	public void testUnitAccessByURI() throws Exception {
 		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.tests.qvt.oml/deployed/a/T1.qvto", false);
-		
+
 		UnitProxy unit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
 		assertResolvedCompiledUnit(unit);
 
@@ -124,17 +125,17 @@ public class PlatformPluginUnitResolverTest extends TestCase {
 		assertNotNull(unit);
 	}
 
-	
+
 	private void assertResolvedCompiledUnit(UnitProxy unit) {
 		assertNotNull("Unit must be resolved", unit); //$NON-NLS-1$
 		QVTOCompiler compiler = new QVTOCompiler();
 		try {
-			CompiledUnit compiledUnit = compiler.compile(unit, null, null);
+			CompiledUnit compiledUnit = compiler.compile(unit, null, (IProgressMonitor)null);
 			assertTrue("Unit must not have compilation errors", compiledUnit.getErrors().isEmpty()); //$NON-NLS-1$
 		} catch (MdaException e) {
 			fail(e.getLocalizedMessage());
 		}
 	}
-	
+
 
 }

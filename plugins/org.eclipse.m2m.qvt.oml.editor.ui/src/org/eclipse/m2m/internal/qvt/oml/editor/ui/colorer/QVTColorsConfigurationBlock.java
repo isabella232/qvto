@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2009, 2016 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
@@ -20,6 +20,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -136,10 +137,10 @@ class QVTColorsConfigurationBlock {
 
 	private final Object[] fMainColors;
 
-	private final String fDocumentation = Messages.ColorConfigBlock_DocCategory;	
+	private final String fDocumentation = Messages.ColorConfigBlock_DocCategory;
 
 	private final ColorDescriptor[] fDocColors;
-	
+
 	private final String fComments = Messages.ColorConfigBlock_CommentsCategory;
 
 	private final Object[] fCommentColors;
@@ -166,8 +167,8 @@ class QVTColorsConfigurationBlock {
 
 	private QVTColorManager fQVTColorManager;
 
-	private QvtEditor.SrcViewer fPreviewViewer;	
-	
+	private QvtEditor.SrcViewer fPreviewViewer;
+
 	private List<ColorDescriptor> fColorList = new ArrayList<ColorDescriptor>();
 
 
@@ -178,12 +179,12 @@ class QVTColorsConfigurationBlock {
 			IQVTColors.USER_MODEL_ELEMENT, IQVTColors.STDLIB_ELEMENT,
 			IQVTColors.INTERMEDIATE_DATA, IQVTColors.FATAL_ASSERT, };
 
-	private String[] fDocColorListModel = new String[] { 
+	private String[] fDocColorListModel = new String[] {
 			IQVTColors.DOC_TAG,
 			IQVTColors.DOC_OTHERS };
-	
+
 	private String[] fCommentColorListModel = new String[] {
-			IQVTColors.MULTILINE_COMMENT, 
+			IQVTColors.MULTILINE_COMMENT,
 			IQVTColors.LINE_COMMENT,
 			IQVTColors.TASK_TAG, };
 
@@ -202,7 +203,7 @@ class QVTColorsConfigurationBlock {
 				Activator.log(Activator.createStatus(IStatus.ERROR, "Missing syntax color key: " + nextKey, null)); //$NON-NLS-1$
 			}
 		}
-		
+
 		fMainColors = fColorList.toArray();
 		for (String nextKey: fCommentColorListModel) {
 			ColorDescriptor color = fQVTColorManager.getColor(nextKey);
@@ -212,7 +213,7 @@ class QVTColorsConfigurationBlock {
 		}
 		fCommentColors = fColorList.subList(fSyntaxColorListModel.length,
 				fColorList.size()).toArray(
-				new ColorDescriptor[fCommentColorListModel.length]);
+						new ColorDescriptor[fCommentColorListModel.length]);
 
 		for (String nextKey: fDocColorListModel) {
 			ColorDescriptor color = fQVTColorManager.getColor(nextKey);
@@ -223,8 +224,8 @@ class QVTColorsConfigurationBlock {
 		fDocColors = fColorList.subList(
 				fSyntaxColorListModel.length + fDocColorListModel.length + 1,
 				fColorList.size()).toArray(
-				new ColorDescriptor[fDocColorListModel.length]);
-		
+						new ColorDescriptor[fDocColorListModel.length]);
+
 		store.addKeys(createOverlayStoreKeys());
 	}
 
@@ -400,7 +401,7 @@ class QVTColorsConfigurationBlock {
 				}
 				if (fComments.equals(element)) {
 					return 2;
-				}				
+				}
 				return 0;
 			}
 		});
@@ -444,7 +445,7 @@ class QVTColorsConfigurationBlock {
 			public void widgetSelected(SelectionEvent e) {
 				ColorDescriptor item = getColorDescriptor();
 				PreferenceConverter.setValue(getPreferenceStore(), item.getColorKey(), fSyntaxForegroundColorEditor
-						.getColorValue());				
+						.getColorValue());
 			}
 		});
 
@@ -518,7 +519,7 @@ class QVTColorsConfigurationBlock {
 		Link link = new Link(colorComposite, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).hint(150, SWT.DEFAULT).applyTo(link);
 		link
-				.setText(Messages.ColorConfigBlock_PageMainText);
+		.setText(Messages.ColorConfigBlock_PageMainText);
 		link.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -566,23 +567,23 @@ class QVTColorsConfigurationBlock {
 		fFontMetrics = gc.getFontMetrics();
 		gc.dispose();
 	}
-	
+
 	private Control createPreviewer(Composite parent) {
 
 		IPreferenceStore store= new ChainedPreferenceStore(
 				new IPreferenceStore[] {
-						getPreferenceStore(),						
+						getPreferenceStore(),
 						Activator.getDefault().getPreferenceStore(),
-						EditorsUI.getPreferenceStore()		
-				} 
-		);
-		
-		fPreviewViewer = new QvtEditor.SrcViewer(parent, null, null, false, 
+						EditorsUI.getPreferenceStore()
+				}
+				);
+
+		fPreviewViewer = new QvtEditor.SrcViewer(parent, null, null, false,
 				SWT.V_SCROLL | SWT.H_SCROLL | SWT.BORDER);
-				
+
 		QvtConfiguration configuration = new QvtConfiguration(fQVTColorManager, store);
 		fPreviewViewer.configure(configuration);
-				
+
 		fPreviewViewer.getTextWidget().setFont(JFaceResources.getTextFont());
 		fPreviewViewer.setEditable(false);
 		fPreviewViewer.getTextWidget().setCursor(
@@ -590,37 +591,37 @@ class QVTColorsConfigurationBlock {
 						SWT.CURSOR_ARROW));
 		fPreviewViewer.getTextWidget().setCaret(null);
 
-		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.qvt.oml.editor.ui/preview/ColorSettingPreviewCode.qvto", true); //$NON-NLS-1$				
+		URI uri = URI.createPlatformPluginURI("/org.eclipse.m2m.qvt.oml.editor.ui/preview/ColorSettingPreviewCode.qvto", true); //$NON-NLS-1$
 		IDocument document = createPreviewDocument(uri);
 		new QvtDocumentSetupParticipant().setup(document);
-		fPreviewViewer.configure(configuration);	
+		fPreviewViewer.configure(configuration);
 		fPreviewViewer.setDocument(document);
 
 		final UnitProxy findUnit = UnitResolverFactory.Registry.INSTANCE.getUnit(uri);
 		assert findUnit != null;
-		try {			
+		try {
 			// TODO - log error on compilation errors
 			QVTOCompiler compiler = new QVTOCompiler(new EmfStandaloneMetamodelRegistryProvider());
-			final CompiledUnit compiledPreviewUnit = compiler.compile(findUnit, new QvtCompilerOptions(), null);
-			
+			final CompiledUnit compiledPreviewUnit = compiler.compile(findUnit, new QvtCompilerOptions(), (IProgressMonitor)null);
+
 			final SemanticHighlightingManager semanticHighlightingManager = new SemanticHighlightingManager() {
 				@Override
 				protected SemanticHighlightingReconciler createReconciler() {
 					return new SemanticHighlightingReconciler() {
 						@Override
-						protected CompiledUnit getModel() {						
+						protected CompiledUnit getModel() {
 							return compiledPreviewUnit;
 						}
 					};
 				}
 			};
-			
+
 			semanticHighlightingManager.install(fPreviewViewer, fQVTColorManager, store);
 			semanticHighlightingManager.getReconciler().reconciled(compiledPreviewUnit, new NullProgressMonitor());
-				
-			fPreviewViewer.invalidateTextPresentation();			
+
+			fPreviewViewer.invalidateTextPresentation();
 			hookPreviewUpdater(fPreviewViewer, store, fQVTColorManager);
-			
+
 		} catch (MdaException e) {
 			Activator.log(e);
 		}
@@ -628,8 +629,8 @@ class QVTColorsConfigurationBlock {
 		return fPreviewViewer.getControl();
 	}
 
-	/* 
-	 * TODO - consider separation into a reusable updater class 
+	/*
+	 * TODO - consider separation into a reusable updater class
 	 */
 	private void hookPreviewUpdater(final SourceViewer viewer, final IPreferenceStore preferenceStore, final QVTColorManager colorManager) {
 		final  org.eclipse.jface.util.IPropertyChangeListener fontChangeListener= new  org.eclipse.jface.util.IPropertyChangeListener() {
@@ -643,7 +644,7 @@ class QVTColorsConfigurationBlock {
 				}
 			}
 		};
-		
+
 		final org.eclipse.jface.util.IPropertyChangeListener propertyChangeListener= new org.eclipse.jface.util.IPropertyChangeListener() {
 			/*
 			 * @see org.eclipse.jface.util.IPropertyChangeListener#propertyChange(org.eclipse.jface.util.PropertyChangeEvent)
@@ -662,26 +663,26 @@ class QVTColorsConfigurationBlock {
 				JFaceResources.getFontRegistry().removeListener(fontChangeListener);
 			}
 		});
-		
+
 		JFaceResources.getFontRegistry().addListener(fontChangeListener);
 		preferenceStore.addPropertyChangeListener(propertyChangeListener);
 	}
-	
+
 	private IDocument createPreviewDocument(URI uri) {
-		StringWriter wr = new StringWriter();		
+		StringWriter wr = new StringWriter();
 		try {
 			InputStream is = URIConverter.INSTANCE.createInputStream(uri);
 			InputStreamReader reader = new InputStreamReader(new BufferedInputStream(is));
 			int c = 0;
 			while((c = reader.read()) != -1) {
-				wr.write((char)c);	
+				wr.write((char)c);
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace(new PrintWriter(wr));
 		}
-		
-		return new Document(wr.getBuffer().toString());		
+
+		return new Document(wr.getBuffer().toString());
 	}
 
 	protected final IPreferenceStore getPreferenceStore() {

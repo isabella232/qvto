@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2008, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bug 537041
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
@@ -44,30 +45,30 @@ public class TestExternHelperCall extends TestCase {
 	private static String fLibraryName = "FooLib";
 	private NonTransformationExecutionContext fExecContext;
 	private HelperOperationCall fCall;
-	
+
 	private String srcContainer = "parserTestData/externlib"; //$NON-NLS-1$
 
 	public TestExternHelperCall(String name) {
 		super(name);
 	}
-	
+
 	@Override
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
-		
+
 		setupLibrary(fLibraryName);
 	}
 
 	protected void setupLibrary(String libraryName) throws MdaException {
 		TestModuleResolver importResolver = TestModuleResolver.createTestPluginResolver(srcContainer);
 
-		QVTOCompiler compiler = new QVTOCompiler();			
+		QVTOCompiler compiler = new QVTOCompiler();
 		UnitProxy srcUnit = importResolver.resolveUnit(libraryName);
-		
-		CompiledUnit result = compiler.compile(srcUnit, new QvtCompilerOptions(), null);
+
+		CompiledUnit result = compiler.compile(srcUnit, new QvtCompilerOptions(), (IProgressMonitor)null);
 		assertTrue("Library must no have compilation errors", result.getErrors().size() == 0);
-		
+
 		Module module = result.getModules().get(0);
 		Helper operation = findOperationByName(module, getName());
 		assertNotNull("Library operation for the "+ getName() +"testcase not found", operation);
@@ -75,62 +76,62 @@ public class TestExternHelperCall extends TestCase {
 		HashSet<Module> importedModules = new HashSet<Module>();
 		importedModules.add(module);
 		QvtOperationalParserUtil.collectAllImports(module, importedModules);
-		
+
 		fExecContext = new NonTransformationExecutionContext(importedModules);
 		fCall = fExecContext.createHelperCall(operation);
 	}
-	
+
 	@Override
 	@After
 	protected void tearDown() throws Exception {
 		fExecContext.dispose();
 	}
-	
+
 	@Test
-	public void testEchoContextual() throws Exception {		
+	public void testEchoContextual() throws Exception {
 		Object callResult = fCall.invoke("self", new Object[] { "aStringArg", true });
 		assertEquals("self" + "ASTRINGARG" + "_suffix", callResult);
-		
+
 		callResult = fCall.invoke("self", new Object[] { "aStringArg", false });
-		assertEquals("self" + "aStringArg" + "_suffix", callResult);		
+		assertEquals("self" + "aStringArg" + "_suffix", callResult);
 	}
-	
+
 	@Test
 	public void testEchoContextless() throws Exception {
-		Object callResult = fCall.invoke(new Object[] { "aStringArg", true });		
+		Object callResult = fCall.invoke(new Object[] { "aStringArg", true });
 		assertEquals("ASTRINGARG" + "_suffix", callResult);
-		
+
 		callResult = fCall.invoke(new Object[] { "aStringArg", false });
 		assertEquals("aStringArg" + "_suffix", callResult);
-		
-	}	
-	
+
+	}
+
 	@Test
 	public void testHelperWithAssertFailed() throws Exception {
 		try {
-			Object callResult = fCall.invoke(null);		
+			Object callResult = fCall.invoke(null);
 			assertNotNull(callResult);
 		} catch (InvocationTargetException e) {
 			// OK, expected
 			assertTrue(e.getCause() instanceof QvtAssertionFailed);
 		} catch(Exception e1) {
-			fail("InvocationTargetException expected");  
+			fail("InvocationTargetException expected");
 		}
 	}
-	
+
 	@Test
 	public void testNoArgsHelper() throws Exception {
 		final String expectedResult = "testNoArgsHelper";
 		assertEquals(expectedResult, fCall.invoke(null));
 		assertEquals(expectedResult, fCall.invoke(new Object[0]));
 	}
-	
+
 	@Test
 	public void testHelperWithResolve() throws Exception {
 		final String expectedResult = "testHelperWithResolve";
-		assertEquals(expectedResult, fCall.invoke(EcoreFactory.eINSTANCE.createEClass(), new Object[0]));		
+		assertEquals(expectedResult, fCall.invoke(EcoreFactory.eINSTANCE.createEClass(), new Object[0]));
 	}
-	
+
 	@Test
 	public void testImportedVirtualCall() throws Exception {
 		// test imported operation call
@@ -139,32 +140,32 @@ public class TestExternHelperCall extends TestCase {
 		Module imported = mainModule.getModuleImport().get(0).getImportedModule();
 		assertNotNull(imported);
 		HelperOperationCall call = fExecContext.createHelperCall(findOperationByName(imported, "testImportedFooLibImport"));
-		// test virtual call semantics		
-		assertEquals("EClass", call.invoke(EcoreFactory.eINSTANCE.createEClass(), new Object[0]));		
-		assertEquals("EClassifier", call.invoke(EcoreFactory.eINSTANCE.createEDataType(), new Object[0]));		
+		// test virtual call semantics
+		assertEquals("EClass", call.invoke(EcoreFactory.eINSTANCE.createEClass(), new Object[0]));
+		assertEquals("EClassifier", call.invoke(EcoreFactory.eINSTANCE.createEDataType(), new Object[0]));
 	}
-	
+
 	@Test
 	public void testQueryNonContextual() throws Exception {
 		assertNotNull("Call must refer to operation", fCall.getOperation());
 		assertNotNull("Call must be imported from a library", fCall.getLibrary());
 		assertSame(QvtOperationalParserUtil.getOwningModule(fCall.getOperation()), fCall.getLibrary());
 		assertFalse(fCall.isContextual());
-		assertNull("Non-contextual operation must not have context type", fCall.getContextType());		
+		assertNull("Non-contextual operation must not have context type", fCall.getContextType());
 	}
-	
+
 	@Test
 	public void testQueryContextual()  throws Exception {
 		assertNotNull("Call must refer to operation", fCall.getOperation());
 		assertNotNull("Call must be imported from a library", fCall.getLibrary());
 		assertSame(QvtOperationalParserUtil.getOwningModule(fCall.getOperation()), fCall.getLibrary());
 		assertTrue(fCall.isContextual());
-		assertSame(EcorePackage.eINSTANCE.getEClass(), fCall.getContextType());		
+		assertSame(EcorePackage.eINSTANCE.getEClass(), fCall.getContextType());
 	}
-	
+
 	/*
 	 * Tests the Collection type as the context type
-	 */	
+	 */
 	@Test
 	public void testToUpperStrings() throws Exception {
 		ArrayList<String> self = new ArrayList<String>();
@@ -191,7 +192,7 @@ public class TestExternHelperCall extends TestCase {
 		assertEquals("COLLECTION SUCCESS", result);
 	}
 
-	private static Helper findOperationByName(Module module, String operationName) {		
+	private static Helper findOperationByName(Module module, String operationName) {
 		for (EOperation eOperation : module.getEOperations()) {
 			if(operationName.equals(eOperation.getName()) && eOperation instanceof Helper) {
 				return (Helper) eOperation;
