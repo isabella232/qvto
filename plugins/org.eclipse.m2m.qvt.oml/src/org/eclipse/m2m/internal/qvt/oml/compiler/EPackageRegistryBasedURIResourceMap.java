@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2009 Borland Software Corp.
+ * Copyright (c) 2009, 2018 Borland Software Corp.
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
