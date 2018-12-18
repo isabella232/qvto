@@ -184,7 +184,7 @@ public class QVTOCompiler {
 		} finally {
 			fDependencyWalkPath.clear();
 			afterCompileCleanup();
-
+			
 			SubMonitor.done(monitor);
 		}
 
@@ -283,7 +283,7 @@ public class QVTOCompiler {
 			finally {
 				visitor.clear();
 			}
-						
+							
 			if (options.isReportErrors()) {
 				subMonitor.setWorkRemaining(result.moduleEnvs.size());
 				
@@ -303,16 +303,16 @@ public class QVTOCompiler {
 			SubMonitor.done(monitor);
 		}
 	}
-
-	protected QvtOperationalVisitorCS createAnalyzer(AbstractQVTParser parser, QvtCompilerOptions options, IProgressMonitor monitor) {
-		return new QvtOperationalVisitorCS(parser, options, monitor);
-	}
-
-	protected void afterCompileCleanup() {
-		this.fSource2Compiled.clear();
-		this.fDependencyWalkPath.clear();
-		this.fExeXMIResourceSet.getResources().clear();
-	}
+    
+    protected QvtOperationalVisitorCS createAnalyzer(AbstractQVTParser parser, QvtCompilerOptions options, IProgressMonitor monitor) {
+    	return new QvtOperationalVisitorCS(parser, options, monitor);
+    }    
+    
+    protected void afterCompileCleanup() {
+    	this.fSource2Compiled.clear();
+    	this.fDependencyWalkPath.clear();
+    	this.fExeXMIResourceSet.getResources().clear();
+    }
 
 	/**
 	 * The main compilation method - the common entry point to the compilation
@@ -439,7 +439,9 @@ public class QVTOCompiler {
 						
 	    	// perform CST analysis
 			subMonitor.subTask(NLS.bind(CompilerMessages.analyzingTaskName, source.getQualifiedName()));
+
 			CSTAnalysisResult analysisResult = analyze(parseResult, source, unitResolver, options, subMonitor.split(1));
+
 			if(options.isSourceLineNumbersEnabled()) {
 				addSourceLineNumberInfo(parseResult.parser, analysisResult, source);
 			}

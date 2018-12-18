@@ -2031,24 +2031,25 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 			ASTBindingHelper.createCST2ASTBinding(outExpCS, objectExp, env);
 		}
 
-		if (isValidationChecked) {
-			validateObjectExp(objectExp, outExpCS, env);
-		}
+        if (isValidationChecked) {
+            validateObjectExp(objectExp, outExpCS, env);
+        }
+        
+        return objectExp;
+    }
+		
+       
+    public List<QvtOperationalModuleEnv> visitUnitCS(UnitCS unitCS, UnitProxy unit, QvtOperationalFileEnv fileEnv, ExternalUnitElementsProvider importResolver, ResourceSet resSet) throws SemanticException {
+    	SubMonitor subMonitor = SubMonitor.convert(myMonitor, "Visit " + unit.getQualifiedName(), 6 * unitCS.getModules().size()); //$NON-NLS-1$
+    	
+    	List<QvtOperationalModuleEnv> moduleEnvs = new LinkedList<QvtOperationalModuleEnv>();
+    	Map<MappingModuleCS, QvtOperationalModuleEnv> moduleEnvsMap = new HashMap<MappingModuleCS, QvtOperationalModuleEnv>(2);
+    	Set<String> moduleNames = new HashSet<String>(unitCS.getModules().size());
+    		    	
+    	// 1st pass: module headers
+    	for(MappingModuleCS moduleCS : unitCS.getModules()) {
+	        Module module = QvtOperationalParserUtil.createModule(moduleCS);
 
-		return objectExp;
-	}
-
-
-	public List<QvtOperationalModuleEnv> visitUnitCS(UnitCS unitCS, UnitProxy unit, QvtOperationalFileEnv fileEnv, ExternalUnitElementsProvider importResolver, ResourceSet resSet) throws SemanticException {
-		SubMonitor subMonitor = SubMonitor.convert(myMonitor, "Visit " + unit.getQualifiedName(), 6 * unitCS.getModules().size());
-
-		List<QvtOperationalModuleEnv> moduleEnvs = new LinkedList<QvtOperationalModuleEnv>();
-		Map<MappingModuleCS, QvtOperationalModuleEnv> moduleEnvsMap = new HashMap<MappingModuleCS, QvtOperationalModuleEnv>(2);
-		Set<String> moduleNames = new HashSet<String>(unitCS.getModules().size());
-
-		// 1st pass: module headers
-		for(MappingModuleCS moduleCS : unitCS.getModules()) {
-			Module module = QvtOperationalParserUtil.createModule(moduleCS);
 			QvtOperationalModuleEnv moduleEnv = fileEnv.getFactory().createModuleEnvironment(module, fileEnv);
 			moduleEnvsMap.put(moduleCS, moduleEnv);
 			moduleEnvs.add(moduleEnv);

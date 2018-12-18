@@ -170,7 +170,7 @@ public class InternalTransformationExecutor {
 			checkLegalModelParams(modelParameters);
 	
 			// ensure transformation unit is loaded
-			loadTransformation(progress.newChild(1));
+			loadTransformation(progress.split(1));
 			
 			// check if we have successfully loaded the transformation unit
 			if (!isSuccess(fLoadDiagnostic)) {
@@ -179,7 +179,7 @@ public class InternalTransformationExecutor {
 	
 			try {
 				return doExecute(modelParameters,
-						new Context(executionContext, progress.newChild(1)));
+						new Context(executionContext, progress.split(1)));
 			} catch (QvtRuntimeException e) {	
 				return createExecutionFailure(e);
 			}

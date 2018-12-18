@@ -71,7 +71,7 @@ public class QvtCompilerFacade {
 					UnitProxy inMemoryUnit = new InMemoryUnitProxy(unit.getNamespace(), unit.getName(), unit.getURI(), contents, unitResolver);
 					
 					QVTOCompiler compiler = new QVTOCompiler();				
-	                result = compiler.compile(inMemoryUnit, options, subMonitor.newChild(9, SubMonitor.SUPPRESS_NONE));
+	                result = compiler.compile(inMemoryUnit, options, subMonitor.split(9));
 				}                
             } catch (MdaException e) {
                 Activator.log(e);

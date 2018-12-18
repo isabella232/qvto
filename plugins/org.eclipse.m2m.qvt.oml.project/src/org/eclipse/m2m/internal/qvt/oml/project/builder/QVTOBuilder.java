@@ -225,7 +225,10 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	        subMonitor.setWorkRemaining(units.length);
 				
 	        for (int i = 0; i < units.length; i++) {                    
-	        	subMonitor.checkCanceled();
+	        	
+	        	if(subMonitor.isCanceled()) {
+	        		CompilerUtils.throwOperationCanceled();
+	        	};
 	        	
 	        	if(isInterrupted()) {
 	        		return;
