@@ -7,7 +7,7 @@
  *
  * Contributors:
  *     Radek Dvorak - initial API and implementation
- *     Christopher Gerking - Bug394188
+ *     Christopher Gerking - bugs 394188, 539910
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml.compile;
 
@@ -132,6 +132,34 @@ public class URIUnitResolverTest extends TestCase {
 			baseURI = baseURI.trimSegments(1);
 		}
 		assertEquals(baseURI.appendSegments(new String[] { "deployed", "org", "eclipse", "Foo.qvto"}),				
+				unit.getURI());
+		
+		UnitProxy unitByURI = UnitResolverFactory.Registry.INSTANCE.getUnit(unit.getURI());		
+		assertNotNull(unitByURI);		
+		assertContents(unitByURI);
+		assertEquals(unit.getURI(), unitByURI.getURI());		
+		
+		// expect default namespace as we had no knowledge about
+		assertNull(unitByURI.getNamespace());
+		assertEquals(unitByURI.getName(), unitByURI.getQualifiedName());
+	}
+	
+	@Test
+	public void testRelativeURI() throws Exception {
+				
+		URI baseURI = URI.createURI(".");
+		
+		URIUnitResolver resolver = new URIUnitResolver(baseURI);
+		UnitProxy unit = resolver.resolveUnit("deployed.org.eclipse.Foo");
+		
+		assertNotNull(unit);
+		assertContents(unit);
+		
+		assertEquals("deployed.org.eclipse", unit.getNamespace());
+		assertEquals("Foo", unit.getName());
+	
+		// test direct unit proxy constructor for a URI
+		assertEquals(URI.createFileURI(new File(baseURI.toFileString()).getCanonicalPath()).appendSegments(new String[] { "deployed", "org", "eclipse", "Foo.qvto"}),				
 				unit.getURI());
 		
 		UnitProxy unitByURI = UnitResolverFactory.Registry.INSTANCE.getUnit(unit.getURI());		
