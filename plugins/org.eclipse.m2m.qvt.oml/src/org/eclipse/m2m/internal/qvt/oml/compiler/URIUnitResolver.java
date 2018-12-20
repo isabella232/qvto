@@ -68,19 +68,20 @@ public class URIUnitResolver extends DelegatingUnitResolver {
 		}
 		
 		fBaseURIs = new ArrayList<URI>(baseURIs.size());
-
+		
 		for (URI uri : baseURIs) {
+			URI normalizedURI = uri;
 			
-			if(uri.isRelative()) {
-				uri = URI.createFileURI(new File(uri.toFileString()).getAbsolutePath());
+			if(normalizedURI.isFile() && normalizedURI.scheme() == null) {
+				normalizedURI = URI.createFileURI(new File(normalizedURI.toFileString()).getAbsolutePath());
 			}
 			
-			if(!uri.hasTrailingPathSeparator()) {
+			if(!normalizedURI.hasTrailingPathSeparator()) {
 				// Note: URI represents the empty segment as trailing path separator
-				uri = uri.appendSegment(""); //$NON-NLS-1$
+				normalizedURI = normalizedURI.appendSegment(""); //$NON-NLS-1$
 			}
-						
-			fBaseURIs.add(uri);
+									
+			fBaseURIs.add(normalizedURI);
 		}
 		
 		// enable resolution of black-box module dependencies and classpath imports
