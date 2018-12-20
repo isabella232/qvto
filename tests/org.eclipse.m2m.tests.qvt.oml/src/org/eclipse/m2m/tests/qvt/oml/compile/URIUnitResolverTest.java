@@ -147,19 +147,19 @@ public class URIUnitResolverTest extends TestCase {
 	@Test
 	public void testRelativeURI() throws Exception {
 				
-		URI baseURI = URI.createURI(".");
+		URI baseURI = URI.createURI("./deployed");
 		
 		URIUnitResolver resolver = new URIUnitResolver(baseURI);
-		UnitProxy unit = resolver.resolveUnit("deployed.org.eclipse.Foo");
+		UnitProxy unit = resolver.resolveUnit("org.eclipse.Foo");
 		
 		assertNotNull(unit);
 		assertContents(unit);
 		
-		assertEquals("deployed.org.eclipse", unit.getNamespace());
+		assertEquals("org.eclipse", unit.getNamespace());
 		assertEquals("Foo", unit.getName());
 	
 		// test direct unit proxy constructor for a URI
-		assertEquals(URI.createFileURI(new File(baseURI.toFileString()).getCanonicalPath()).appendSegments(new String[] { "deployed", "org", "eclipse", "Foo.qvto"}),				
+		assertEquals(URI.createFileURI(new File(baseURI.toFileString()).getCanonicalPath()).appendSegments(new String[] { "org", "eclipse", "Foo.qvto"}),				
 				unit.getURI());
 		
 		UnitProxy unitByURI = UnitResolverFactory.Registry.INSTANCE.getUnit(unit.getURI());		
