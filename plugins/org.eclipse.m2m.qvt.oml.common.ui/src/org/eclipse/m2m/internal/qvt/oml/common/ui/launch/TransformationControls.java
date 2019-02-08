@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2007, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
@@ -33,7 +33,7 @@ import org.eclipse.swt.widgets.Text;
 
 public class TransformationControls {
     private TransformationControls() {}
-    
+
     public static IUriGroup createUriGroup(Composite parent, IModelParameterInfo paramInfo, ResourceSet validationRS) {
     	Group group = new Group(parent, SWT.NONE);
     	group.setText(getParameterName(paramInfo));
@@ -43,7 +43,7 @@ public class TransformationControls {
         data.horizontalSpan = GRID;
         data.verticalIndent = 2;
         group.setLayoutData(data);
-    	
+
         if (paramInfo.isInParameter()) {
 	        UriGroupIn uriGroup = new UriGroupIn(group, Messages.TargetUriSelector_Uri, validationRS);
 	        return uriGroup;
@@ -57,7 +57,7 @@ public class TransformationControls {
             return uriGroup;
         }
     }
-    
+
     private static String getParameterName(IModelParameterInfo paramInfo) {
     	String typeName;
     	if (paramInfo.getDirection() == Direction.out
@@ -71,18 +71,18 @@ public class TransformationControls {
     		}
     	}
     	else {
-    		typeName = EmfUtil.getFullName(paramInfo.getEntryParamType()); 
+    		typeName = EmfUtil.getFullName(paramInfo.getEntryParamType());
     		typeName += '@';
 	    	typeName += paramInfo.getModelTypeName();
     	}
-    	return paramInfo.getDirection().name().toUpperCase() + "  " + paramInfo.getName() //$NON-NLS-1$ 
+    	return paramInfo.getDirection().name().toUpperCase() + "  " + paramInfo.getName() //$NON-NLS-1$
     			+ " : " + typeName; //$NON-NLS-1$
     }
-    
+
     public static Button createButton(Composite parent,String text){
         return createButton(parent, text, SWT.PUSH, GridData.BEGINNING);
     }
-    
+
     public static Button createButton(Composite parent,String text,int style,int gridData){
         Button button = new Button(parent,style);
         button.setText(text);
@@ -90,7 +90,7 @@ public class TransformationControls {
         button.setLayoutData(data);
         return button;
     }
-    
+
     public static Button createCheckBox(Composite parent,String text){
         Button button = new Button(parent,SWT.CHECK);
         button.setText(text);
@@ -99,7 +99,7 @@ public class TransformationControls {
         button.setLayoutData(data);
         return button;
     }
-    
+
     public static Label createLabel(Composite parent, String text, int span){
         Label label = new Label(parent, SWT.NONE);
         label.setText(text);
@@ -108,38 +108,38 @@ public class TransformationControls {
         label.setLayoutData(data);
         return label;
     }
-    
+
     public static Text createText(Composite parent, int span) {
         return createText(parent, SWT.BORDER, span);
     }
-    
+
     public static Text createText(Composite parent, int style, int span) {
         final Text text = new Text(parent, style);
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         gd.horizontalSpan = span;
-        text.setLayoutData(gd);     
-        
+        text.setLayoutData(gd);
+
         return text;
     }
-    
+
     public static IStatus makeStatus(int code,String message){
         return new Status(code,CommonPlugin.ID,code,message,null);
     }
-    
+
     public static boolean statusToTab(IStatus status, ISetMessage tab) {
         tab.setMessage(null);
         tab.setErrorMessage(null);
-        
+
         if(status == null) {
             return true;
         }
-        
+
         switch(status.getSeverity()) {
             case IStatus.ERROR: {
                 tab.setErrorMessage(status.getMessage());
                 return false;
             }
-            
+
             case IStatus.WARNING: {
             	if (tab instanceof ISetMessageEx) {
                     ((ISetMessageEx) tab).setWarningMessage(status.getMessage());
@@ -149,7 +149,7 @@ public class TransformationControls {
             	}
                 return true;
             }
-            
+
             default: {
             	if (tab instanceof ISetMessageEx) {
                     tab.setMessage(status.getMessage());

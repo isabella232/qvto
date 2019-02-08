@@ -30,7 +30,7 @@ import org.eclipse.m2m.tests.qvt.oml.util.TestUtil;
 public class CompletionTests {
 
 	public static Test suite() {
-		TestSuite suite = new TestSuite("Operational QVT code completion"); //$NON-NLS-1$
+		TestSuite suite = new TestSuite("QVT Operational code completion"); //$NON-NLS-1$
 		try {
 			TestSuite generalSuite = new TestSuite("general"); //$NON-NLS-1$
 			TestSuite detachedSuite = new TestSuite("detached"); //$NON-NLS-1$
