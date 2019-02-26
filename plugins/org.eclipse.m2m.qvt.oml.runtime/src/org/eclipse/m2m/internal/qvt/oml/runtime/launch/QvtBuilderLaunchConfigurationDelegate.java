@@ -66,18 +66,12 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 
 			@Override
 			public IStatus runInWorkspace(IProgressMonitor jobMonitor) throws CoreException {
-				try {
-					if(BUILD_TYPE_CLEAN.equals(buildType)) {
-						clean(project, configuration);
-					}
-					else {
-						build(project, configuration, printWriter, jobMonitor);
-					}
+				if(BUILD_TYPE_CLEAN.equals(buildType)) {
+					clean(project, configuration);
 				}
-				catch (MdaException e) {
-					throw new CoreException(e.getStatus());
+				else {
+					build(project, configuration, printWriter, jobMonitor);
 				}
-
 				return Status.OK_STATUS;
 			}
 		};
@@ -88,7 +82,7 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 	}
 
 	private void build(final IProject project, final ILaunchConfiguration configuration, final PrintWriter printWriter,
-			final IProgressMonitor monitor) throws CoreException, MdaException {
+			final IProgressMonitor monitor) throws CoreException {
 
 		String moduleUri = QvtLaunchUtil.getTransformationURI(configuration);
 		final QvtInterpretedTransformation transformation;
@@ -116,7 +110,7 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 		}
 	}
 
-	private void clean(IProject project, ILaunchConfiguration configuration) throws CoreException, MdaException {
+	private void clean(IProject project, ILaunchConfiguration configuration) throws CoreException {
 		String moduleUri = QvtLaunchUtil.getTransformationURI(configuration);
 		final QvtInterpretedTransformation transformation;
 		try {
@@ -126,7 +120,12 @@ public class QvtBuilderLaunchConfigurationDelegate extends LaunchConfigurationDe
 			return;
 		}
 
-		List<TransformationParameter> transfParams = transformation.getParameters();
+		List<TransformationParameter> transfParams;
+		try {
+			transfParams = transformation.getParameters();
+		} catch (MdaException e) {
+			throw new CoreException(e.getStatus());
+		}
 		List<TargetUriData> targetUris = QvtLaunchUtil.getTargetUris(configuration);
 		for (int i = 0, n = targetUris.size(); i < n; ++i) {
 			if (transfParams.size() > i && transfParams.get(i).getDirectionKind() == DirectionKind.OUT) {
