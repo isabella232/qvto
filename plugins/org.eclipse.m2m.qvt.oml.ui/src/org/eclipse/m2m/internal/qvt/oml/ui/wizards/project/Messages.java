@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2007, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
@@ -15,7 +15,7 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.m2m.internal.qvt.oml.ui.wizards.project.messages"; //$NON-NLS-1$
-	
+
 	public static String QvtMetamodelMappingPage_addBtnLabel;
 
 	public static String QvtMetamodelMappingPage_addNewMappingTitle;
@@ -47,12 +47,12 @@ public class Messages extends NLS {
 	public static String QvtMetamodelMappingPage_sourceURILabel;
 
 	public static String QvtMetamodelMappingPage_targetURILabel;
-	
+
 	public static String QvtMetamodelMappingPage_loadResourceMetamodelError;
 
-	public static String QvtMetamodelMappingPage_URIAlreadyMapped;	
+	public static String QvtMetamodelMappingPage_URIAlreadyMapped;
 
-	public static String QvtSettingsPropertyPage_NoBuilder;	
+	public static String QvtSettingsPropertyPage_NoBuilder;
 	public static String QvtSettingsPropertyPage_SourceContainerLabel;
 	public static String QvtSettingsPropertyPage_ContainerDoesNotExist;
 	public static String QvtSettingsPropertyPage_BrowseLabel;
@@ -67,8 +67,8 @@ public class Messages extends NLS {
 	public static String SourceContainerConfigBlock_MoveExistingSources;
 
 	public static String SourceContainerConfigBlock_saveBuilderConfigError;
-	
-	
+
+
 	public static String SourceContainerUpdater_InvalidSourceFolder;
 
 	public static String SourceContainerUpdater_NonBlankSourceFolderExpected;
@@ -83,7 +83,7 @@ public class Messages extends NLS {
 	public static String ConvertionPage_ProjectsListTitle;
 	public static String ConvertionPage_SelectAll;
 	public static String ConvertionPage_DeselectAll;
-	
+
 	public static String ContentPage_pGroup;
 	public static String ContentPage_pid;
 	public static String ContentPage_pversion;
@@ -103,7 +103,7 @@ public class Messages extends NLS {
 	public static String ContentPage_invalidId;
 	public static String ContentPage_title;
 	public static String ContentPage_desc;
-	
+
 	public static String ProjectStructurePage_createProjectType;
 	public static String ProjectStructurePage_createSimpleProject;
 	public static String ProjectStructurePage_createSimplePluginProject;
@@ -126,14 +126,15 @@ public class Messages extends NLS {
 
 	public static String NewQVTProjectCreationPage_SourceContainerTooltip;
 
+	public static String NewQVTProjectWizard_Create;
 	public static String NewQVTProjectWizard_Error;
 	public static String NewQVTProjectWizard_ErrorSeeLog;
-	
+
 	public static String WizardListSelectionPage_title;
 	public static String WizardListSelectionPage_message;
 	public static String WizardListSelectionPage_desc;
 	public static String WizardListSelectionPage_label;
-	
+
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

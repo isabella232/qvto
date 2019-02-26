@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.m2m.internal.qvt.oml.Messages;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QVTParsingOptions;
@@ -172,19 +173,19 @@ public class QVTOCompiler {
 			options = getDefaultOptions();
 		}
 
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Compile sources", sources.length); //$NON-NLS-1$
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Messages.Compiler_CompileSources, sources.length);
 
 		CompiledUnit[] result = new CompiledUnit[sources.length];
 
 		try {
 			int i = 0;
-			for (UnitProxy nextSource : sources) {				
+			for (UnitProxy nextSource : sources) {
 				result[i++] = compileSingleFile(nextSource, options, subMonitor.split(1));
 			}
 		} finally {
 			fDependencyWalkPath.clear();
 			afterCompileCleanup();
-			
+
 			SubMonitor.done(monitor);
 		}
 
@@ -264,12 +265,12 @@ public class QVTOCompiler {
 	private CSTAnalysisResult analyze(CSTParseResult parseResult, UnitProxy unit,
 			ExternalUnitElementsProvider externalUnitElementsProvider, QvtCompilerOptions options, IProgressMonitor monitor) {
 
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Analyze " + unit.getQualifiedName(), 10);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, NLS.bind(Messages.Compiler_Analyze, unit.getQualifiedName()), 10);
 
 		try {
 			QvtOperationalFileEnv env = parseResult.env;
 			env.setQvtCompilerOptions(options);
-	
+
 			CSTAnalysisResult result = new CSTAnalysisResult();
 			QvtOperationalVisitorCS visitor = createAnalyzer(parseResult.parser, options, subMonitor.split(9));
 			try {
@@ -283,31 +284,31 @@ public class QVTOCompiler {
 			finally {
 				visitor.clear();
 			}
-							
+
 			if (options.isReportErrors()) {
 				subMonitor.setWorkRemaining(result.moduleEnvs.size());
-				
+
 				for(QvtOperationalModuleEnv moduleEnv : result.moduleEnvs) {
 	                moduleEnv.setCheckForDuplicateErrors(true);
 					QvtOperationalValidationVisitor validation = new QvtOperationalValidationVisitor(moduleEnv);
 					validation.visitModule(moduleEnv.getModuleContextType());
 					moduleEnv.setCheckForDuplicateErrors(false);
-					
+
 					subMonitor.worked(1);
 				}
 			}
-			
+
 			return result;
 		}
 		finally {
 			SubMonitor.done(monitor);
 		}
 	}
-    
+
     protected QvtOperationalVisitorCS createAnalyzer(AbstractQVTParser parser, QvtCompilerOptions options, IProgressMonitor monitor) {
     	return new QvtOperationalVisitorCS(parser, options, monitor);
-    }    
-    
+    }
+
     protected void afterCompileCleanup() {
     	this.fSource2Compiled.clear();
     	this.fDependencyWalkPath.clear();
@@ -356,9 +357,9 @@ public class QVTOCompiler {
 
 				return blackbox;
         	}
-        	
-        	SubMonitor subMonitor = SubMonitor.convert(monitor, "Compile " + source.getURI().toString(), 3); //$NON-NLS-1$
-        	        	
+
+        	SubMonitor subMonitor = SubMonitor.convert(monitor, NLS.bind(Messages.Compiler_Compile, source.getURI().toString()), 3);
+
         	// perform to syntax parsing
         	subMonitor.subTask(NLS.bind(CompilerMessages.parsingTaskName, source.getURI()));
 	    	CSTParseResult parseResult = parse(source, options);
@@ -370,9 +371,9 @@ public class QVTOCompiler {
 			UnitCS unitCS = parseResult.unitCS;
 			UnitResolverImpl unitResolver = new UnitResolverImpl(source);
 			List<ImportCS> allUnitImportsCS = parseResult.getImports();
-	    	
+
 	    	subMonitor.setWorkRemaining(allUnitImportsCS.size() + 1);
-	    	
+
 			for (ImportCS nextImportCS : allUnitImportsCS) {
 				String importQNameStr = getQualifiedName(nextImportCS);
 				if(importQNameStr == null || importQNameStr.length() == 0) {
@@ -394,37 +395,37 @@ public class QVTOCompiler {
 
         		// check for cyclic import error condition
         		dependencyElement.currentProcessedImport = nextImportCS;
-        		
+
         		DependencyPathElement importerDependencyElement = findDependencyElement(importedUnit);
         		if(importerDependencyElement != null) {
 	            	ImportCS importedCS = importerDependencyElement.currentProcessedImport;
-        			// not cached compiled unit yet, but we got here into a cycle 
+        			// not cached compiled unit yet, but we got here into a cycle
 	            	if(env != importerDependencyElement.importerEnv) {
 	            		reportCyclicImportError(importedUnit.getURI(), source.getURI(),
 	            				importedCS.getPathNameCS(), importerDependencyElement.importerEnv);
 	            	}
-	            	
+
 	            	// report the cyclic problem in the opposite direction
 	            	reportCyclicImportError(source.getURI(), importedUnit.getURI(), nextImportCS.getPathNameCS(), env);
 	            	// skip addition to the list of imports
 	            	subMonitor.worked(1);
-	            	continue;			            		
+	            	continue;
         		}
-        		
+
         		CompiledUnit compiledImport = doCompile(importedUnit, options, subMonitor.split(1));
-            		
+
     			if(!compiledImport.getErrors().isEmpty()) {
-    				
-    				String errorMessage	= NLS.bind(CompilerMessages.importHasCompilationError, 
+
+    				String errorMessage	= NLS.bind(CompilerMessages.importHasCompilationError,
     						QvtOperationalParserUtil.getStringRepresentation(nextImportCS.getPathNameCS()));
-    				
+
     				DiagnosticChain error = env.reportError(errorMessage, nextImportCS.getPathNameCS());
-    				
+
     				for (Diagnostic importError : compiledImport.getErrors()) {
     					error.add(importError);
-    				}   				
+    				}
     			}
-    				        				        			
+
     			if(compiledImports == null) {
     				// Note: Must be unique as we process import duplicates to report problems
     				compiledImports = new UniqueEList<CompiledUnit>();
@@ -436,7 +437,7 @@ public class QVTOCompiler {
 				unitResolver.addUnit(importedUnitQName, compiledImport);
 
 			} // end of imports processing
-						
+
 	    	// perform CST analysis
 			subMonitor.subTask(NLS.bind(CompilerMessages.analyzingTaskName, source.getQualifiedName()));
 
@@ -476,7 +477,7 @@ public class QVTOCompiler {
     		if (!fDependencyWalkPath.empty()) {
     			fDependencyWalkPath.pop();
     		}
-    		
+
     		SubMonitor.done(monitor);
     	}
 	}

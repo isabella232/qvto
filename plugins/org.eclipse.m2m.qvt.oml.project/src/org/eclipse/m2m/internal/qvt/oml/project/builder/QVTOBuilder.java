@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2009, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *     Christopher Gerking - bugs 391289, 431082, 537041
@@ -40,6 +40,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtMessage;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.common.MDAConstants;
@@ -56,71 +57,72 @@ import org.eclipse.m2m.internal.qvt.oml.emf.util.Logger;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.URIUtils;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.MetamodelRegistry;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.urimap.MetamodelURIMappingHelper;
+import org.eclipse.m2m.internal.qvt.oml.project.Messages;
 import org.eclipse.m2m.internal.qvt.oml.project.QVTOProjectPlugin;
 import org.eclipse.m2m.internal.qvt.oml.project.nature.NatureUtils;
 
 
 
 public class QVTOBuilder extends IncrementalProjectBuilder {
-	
+
     public static final String SAVE_AST_XMI = "internal.save.xmi"; //$NON-NLS-1$
 
 	public interface BuildListener {
         void buildPerformed();
     }
-	
+
     private QVTOBuilderConfig myConfig;
-	        
-    
+
+
 	@Override
-	protected IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {		
+	protected IProject[] build(int kind, Map<String,String> args, IProgressMonitor monitor) throws CoreException {
 		try {
 	        if (kind == IncrementalProjectBuilder.FULL_BUILD) {
 	            fullBuild(monitor);
 	        } else {
 	            incrementalBuild(monitor);
 	        }
-   		
+
 	        return getConfig().getProjectDependencies(true);
    		}
    		finally {
     		SubMonitor.done(monitor);
    		}
     }
-    
+
     private void fullBuild(IProgressMonitor monitor) throws CoreException {
         rebuildAll(monitor);
     }
-    
+
     @Override
-	protected void clean(final IProgressMonitor monitor) throws CoreException {        
+	protected void clean(final IProgressMonitor monitor) throws CoreException {
     	try {
-	    	final SubMonitor subMonitor = SubMonitor.convert(monitor, "Clean " + getProject().getName(), 2); //$NON-NLS-1$
-	    			
+	    	final SubMonitor subMonitor = SubMonitor.convert(monitor, NLS.bind(Messages.Builder_Clean, getProject().getName()), 2);
+
 	    	getProject().accept(new IResourceProxyVisitor() {
 				public boolean visit(IResourceProxy proxy) throws CoreException {
 					subMonitor.setWorkRemaining(2);
-					
+
 					boolean isFile = proxy.getType() == IResource.FILE;
-					
+
 					if (isFile) {
 						if (MDAConstants.QVTO_FILE_EXTENSION.equals(proxy.requestFullPath().getFileExtension())) {
 							proxy.requestResource().deleteMarkers(QVTOProjectPlugin.PROBLEM_MARKER, true, IResource.DEPTH_INFINITE);
 						}
 					}
-					
+
 					subMonitor.worked(1);
-					
+
 					return !isFile;
 				}
-	    		
+
 	    	}, IContainer.INCLUDE_TEAM_PRIVATE_MEMBERS);
     	}
     	finally {
     		SubMonitor.done(monitor);
     	}
     }
-    
+
     private void incrementalBuild(IProgressMonitor monitor) throws CoreException {
     	boolean needsRebuild = hasQVTModification(getProject());
     	if(!needsRebuild) {
@@ -131,14 +133,14 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 				if(needsRebuild) {
 					break;
 				}
-			}    		
+			}
     	}
 
         if(needsRebuild) {
             rebuildAll(monitor);
         }
     }
-    
+
     private boolean hasQVTModification(final IProject project) throws CoreException {
     	IResourceDelta delta = getDelta(project);
 
@@ -151,7 +153,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
                 			// update QVT source container if its folder is moved
                 			IContainer srcContainer = QVTOBuilderConfig.getConfig(project).getSourceContainer();
                 			if(delta.getMovedFromPath().equals(srcContainer.getFullPath())) {
-                				try {			
+                				try {
                 					QVTOBuilderConfig config = QVTOBuilderConfig.getConfig(project);
                 					config.setSourceContainer((IFolder)delta.getResource());
                 					config.save();
@@ -168,83 +170,83 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 	                    	"plugin.xml".equals(projectRelativePath.toString()) || //$NON-NLS-1$
 	                    	"META-INF/MANIFEST.MF".equals(projectRelativePath.toString())) { //$NON-NLS-1$
 	                        rebuild[0] = true;
-	                        return false;                    	
+	                        return false;
 	                    }
 	                    if (MDAConstants.QVTO_FILE_EXTENSION.equals(projectRelativePath.getFileExtension())) {
 	                        rebuild[0] = true;
 	                        return false;
 	                    }
-	                    
+
 	                    IFile mappingsFile = MetamodelURIMappingHelper.getMappingFileHandle(project);
 	                    if(mappingsFile != null && mappingsFile.exists() && projectRelativePath.equals(mappingsFile.getProjectRelativePath())) {
 	                        rebuild[0] = true;
 	                        return false;
 	                    }
-	                    
+
 	                    if(delta.getResource().getType() == IResource.FILE && MetamodelRegistry.isMetamodelFileName(delta.getResource().getName())) {
 	                        rebuild[0] = true;
 	                        return false;
 	                    }
                 	}
-                    
+
                     return true;
                 }
             });
         }
         return rebuild[0];
     }
-    
+
     private void rebuildAll(IProgressMonitor monitor) throws CoreException {
-    	
-		SubMonitor subMonitor = SubMonitor.convert(monitor, "Build " + getProject().getName(), 10); //$NON-NLS-1$
-		
-		try {	
+
+		SubMonitor subMonitor = SubMonitor.convert(monitor, NLS.bind(Messages.Builder_Build, getProject().getName()), 10);
+
+		try {
 			QvtCompilerOptions options = new QvtCompilerOptions();
 			options.setGenerateCompletionData(false);
-						
+
 	        QVTOCompiler compiler = new QVTOCompiler();
 	        List<UnitProxy> allUnits = UnitResolverFactory.Registry.INSTANCE.findAllUnits(URIUtils.getResourceURI(getProject()));
-	        
+
 	        subMonitor.worked(1);
-	        
+
 	        if(isInterrupted()) {
         		return;
         	}
 
 	        CompiledUnit[] units = compiler.compile(allUnits.toArray(new UnitProxy[allUnits.size()]),
-	        		options, subMonitor.split(7));	        
-	        		
+	        		options, subMonitor.split(7));
+
 	        if(shouldSaveXMI()) {
 	        	ResourceSet metamodelResourceSet = compiler.getResourceSet();
 	        	Registry registry = MetamodelURIMappingHelper.mappingsToEPackageRegistry(getProject(), metamodelResourceSet);
 	        	ExeXMISerializer.saveUnitXMI(units, registry != null ? registry : EPackage.Registry.INSTANCE);
-	        	
+
 	        	subMonitor.worked(1);
 	        }
-	        
+
 	        subMonitor.setWorkRemaining(units.length);
-				
-	        for (int i = 0; i < units.length; i++) {                    
-	        	
+
+	        for (int i = 0; i < units.length; i++) {
+
 	        	if(subMonitor.isCanceled()) {
 	        		CompilerUtils.throwOperationCanceled();
 	        	};
-	        	
+
 	        	if(isInterrupted()) {
 	        		return;
 	        	}
-	            
+
 	        	CompiledUnit nextUnit = units[i];
 	        	URI sourceURI = nextUnit.getURI();
 	        	IFile sourceFile = URIUtils.getFile(sourceURI);
-	        	
+
 	        	sourceFile.deleteMarkers(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
-	
-	            List<QvtMessage> messages = nextUnit.getProblems();            
-	            for (QvtMessage nextMessage : messages) {	            	
+
+	            List<QvtMessage> messages = nextUnit.getProblems();
+	            for (QvtMessage nextMessage : messages) {
 	                createQvtMarker(sourceFile, nextMessage);
 	            }
-	            
+
 	            subMonitor.worked(1);
 	        }
 		}
@@ -258,7 +260,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 			SubMonitor.done(monitor);
 		}
     }
-        
+
     private void createQvtMarker(IFile curFile, QvtMessage e) {
         Map<String, Object> attributes = new HashMap<String, Object>();
         attributes.put(IMarker.CHAR_START, Integer.valueOf(e.getOffset()));
@@ -274,11 +276,11 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
         }
         catch (CoreException e1) {
             Logger.getLogger().log(Logger.WARNING, "QVTOBuilder: failed to create marker", e1);//$NON-NLS-1$
-        }                   
+        }
     }
-    
+
     private int convertSeverity(Diagnostic diagnostic) {
-    	
+
     	switch (diagnostic.getSeverity()) {
 			case Diagnostic.ERROR:
 				return IMarker.SEVERITY_ERROR;
@@ -294,11 +296,11 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 
     private QVTOBuilderConfig getConfig() throws CoreException {
         if (myConfig == null) {
-            myConfig = QVTOBuilderConfig.getConfig(getProject());            
+            myConfig = QVTOBuilderConfig.getConfig(getProject());
         }
         return myConfig;
     }
-        
+
     public static String getFileContents(IFile file) {
     	try {
     		return FileUtil.getStreamContents(file.getContents(), file.getCharset());
@@ -307,7 +309,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
     		return ""; //$NON-NLS-1$
     	}
     }
-    
+
     private boolean shouldSaveXMI() {
 		try {
 			ICommand buildCommand = NatureUtils.findCommand(getProject(), QVTOProjectPlugin.BUILDER_ID);
@@ -321,7 +323,7 @@ public class QVTOBuilder extends IncrementalProjectBuilder {
 			QVTOProjectPlugin.log(e);
 		}
 
-		return false;		
+		return false;
     }
 
 }

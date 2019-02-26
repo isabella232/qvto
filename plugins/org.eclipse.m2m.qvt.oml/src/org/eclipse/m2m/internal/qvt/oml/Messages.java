@@ -1,11 +1,11 @@
 /*******************************************************************************
  * Copyright (c) 2007, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *******************************************************************************/
@@ -45,10 +45,16 @@ public class Messages extends NLS {
 	public static String QvtNamesChecker_namespaceIndentifierKindName;
 
 	public static String QvtNamesChecker_reservedQVTWord;
-	
+
 	public static String InvalidSourceForOperationCall;
-	
+
 	public static String FailToLoadTraceForIncrementalUpdateExecution;
+
+	public static String Compiler_Analyze;
+	public static String Compiler_Compile;
+	public static String Compiler_CompileSources;
+	public static String Executor_Executing;
+	public static String Visitor_Visit;
 
 	static {
 		// initialize resource bundle

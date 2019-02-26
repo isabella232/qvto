@@ -63,48 +63,48 @@ import org.eclipse.ocl.ecore.SendSignalAction;
 
 /**
  * Internal transformation executor
- * 
+ *
  * @since 3.0
  */
 public class InternalTransformationExecutor {
 
 	private ExecutionDiagnostic fLoadDiagnostic;
 	private OperationalTransformation fOperationalTransformation;
-	private QvtOperationalEnvFactory fEnvFactory;	
+	private QvtOperationalEnvFactory fEnvFactory;
 	private Transformation fTransformation;
 
 	/**
 	 * Constructs the executor for the given transformation URI.
 	 * <p>
 	 * No attempt to resolve and load the transformation is done at this step
-	 * 
+	 *
 	 * @param uri
 	 *            the URI of an existing transformation
 	 */
 	public InternalTransformationExecutor(URI uri) {
 		this(new CstTransformation(uri));
 	}
-	
+
 	public InternalTransformationExecutor(URI uri, EPackage.Registry registry) {
 		this(new CstTransformation(uri, registry));
 	}
-	
+
 	public InternalTransformationExecutor(Transformation transformation) {
 		if (transformation == null) {
 			throw new IllegalArgumentException("null transformation"); //$NON-NLS-1$
 		}
-		
+
 		fTransformation = transformation;
 	}
-	
+
 	public URI getURI() {
 		return fTransformation.getURI();
 	}
-	
+
 	public ResourceSet getResourceSet() {
 		return fTransformation.getResourceSet();
 	}
-		
+
 	/**
 	 * Attempts to load the transformation referred by this executor and checks
 	 * if it is valid for execution.
@@ -112,7 +112,7 @@ public class InternalTransformationExecutor {
 	 * <b>Remark:</b></br> Only the first performs the actual transformation
 	 * loading, subsequent calls to this method will return the existing
 	 * diagnostic.
-	 * 
+	 *
 	 * @return the diagnostic indicating possible problems of the load action
 	 */
 	public Diagnostic loadTransformation(IProgressMonitor monitor) {
@@ -121,12 +121,12 @@ public class InternalTransformationExecutor {
 				doLoad(monitor);
 			}
 			return fLoadDiagnostic;
-		} 
+		}
 		finally {
 			monitor.done();
 		}
 	}
-	
+
 	/**
 	 * Retrieves compiled unit if the referencing URI gets successfully resolved
 	 * <p>
@@ -134,22 +134,22 @@ public class InternalTransformationExecutor {
 	 * load if not already done before by direct call to
 	 * {@linkplain #loadTransformation()} or
 	 * {@linkplain #execute(ExecutionContext, ModelExtent...)}
-	 * 
+	 *
 	 * @return compiled unit or <code>null</code> if it failed to be obtained
 	 */
 	public CompiledUnit getUnit() {
 		return fTransformation.getUnit();
-	}	
+	}
 
 	/**
 	 * Executes the transformation referred by this executor using the given
 	 * model parameters and execution context.
-	 * 
+	 *
 	 * @param executionContext
 	 *            the context object keeping the execution environment details
 	 * @param modelParameters
 	 *            the actual model arguments to the transformation
-	 * 
+	 *
 	 * @return the diagnostic object indicating the execution result status,
 	 *         also keeping the details of possible problems
 	 * @throws IllegalArgumentException
@@ -161,26 +161,26 @@ public class InternalTransformationExecutor {
 		if (executionContext == null) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		IProgressMonitor monitor = executionContext.getProgressMonitor();
-				
-		try {							
-			SubMonitor progress = SubMonitor.convert(monitor, "Execute " + getURI().toString(), 2); //$NON-NLS-1$
-						
+
+		try {
+			SubMonitor progress = SubMonitor.convert(monitor, NLS.bind(Messages.Executor_Executing, getURI().toString()), 2);
+
 			checkLegalModelParams(modelParameters);
-	
+
 			// ensure transformation unit is loaded
 			loadTransformation(progress.split(1));
-			
+
 			// check if we have successfully loaded the transformation unit
 			if (!isSuccess(fLoadDiagnostic)) {
 				return fLoadDiagnostic;
 			}
-	
+
 			try {
 				return doExecute(modelParameters,
 						new Context(executionContext, progress.split(1)));
-			} catch (QvtRuntimeException e) {	
+			} catch (QvtRuntimeException e) {
 				return createExecutionFailure(e);
 			}
 		} finally {
@@ -209,7 +209,7 @@ public class InternalTransformationExecutor {
 		InternalEvaluator rawEvaluator = (InternalEvaluator) evaluator;
 
 		Object evalResult = rawEvaluator.execute(fOperationalTransformation);
-		
+
 		// unpack the internal extents into the passed model parameters
 		if (evalResult instanceof QvtEvaluationResult) {
 			int extentIndex = 0;
@@ -218,7 +218,7 @@ public class InternalTransformationExecutor {
 				if (p.getKind() == DirectionKind.IN) {
 					continue;
 				}
-				
+
 				ModelExtentContents extent = ((QvtEvaluationResult) evalResult).getModelExtents().get(extentIndex++);
 				args[i].setContents(extent.getAllRootElements());
 			}
@@ -229,31 +229,31 @@ public class InternalTransformationExecutor {
 			for (Object nextResultArg : resultArgs) {
 				ModelInstance modelInstance = (ModelInstance) nextResultArg;
 				ModelParameterExtent extent = modelInstance.getExtent();
-	
+
 				List<EObject> allRootElements = extent.getContents().getAllRootElements();
 				try {
 					args[i++].setContents(allRootElements);
 				} catch (UnsupportedOperationException e) {
-					return new ExecutionDiagnosticImpl(Diagnostic.ERROR, ExecutionDiagnostic.MODEL_PARAMETER_MISMATCH, 
+					return new ExecutionDiagnosticImpl(Diagnostic.ERROR, ExecutionDiagnostic.MODEL_PARAMETER_MISMATCH,
 							NLS.bind(Messages.ReadOnlyExtentModificationError, i - 1));
 				}
 			}
 		}
-		
+
 		// do some handy processing with traces
 		Trace traces = evaluationEnv.getAdapter(InternalEvaluationEnv.class).getTraces();
 		handleExecutionTraces(traces);
-		
+
 		return ExecutionDiagnosticImpl.createOkInstance();
 	}
-	
+
 	protected void handleExecutionTraces(Trace traces) {
 		// nothing interesting here
 	}
-		
+
 	private void doLoad(IProgressMonitor monitor) {
 		fOperationalTransformation = fTransformation.getTransformation(monitor);
-		
+
 		fLoadDiagnostic = fTransformation.getDiagnostic();
 	}
 
@@ -293,12 +293,12 @@ public class InternalTransformationExecutor {
 
 		return result;
 	}
-	
+
 	public OperationalTransformation getTransformation() {
 		loadTransformation(new NullProgressMonitor());
 		return fOperationalTransformation;
 	}
-	
+
 	public void setEnvironmentFactory(QvtOperationalEnvFactory factory) {
 		fEnvFactory = factory;
 	}
@@ -306,10 +306,10 @@ public class InternalTransformationExecutor {
 	protected QvtOperationalEnvFactory getEnvironmentFactory() {
 		return fEnvFactory != null ? fEnvFactory : new QvtOperationalEnvFactory();
 	}
-	
+
 	public void cleanup() {
 		setEnvironmentFactory(null);
-		
+
 		fTransformation.cleanup();
 	}
 
@@ -344,7 +344,7 @@ public class InternalTransformationExecutor {
 		ExecutionDiagnosticImpl diagnostic = new ExecutionDiagnosticImpl(severity,
 				code, message, data);
 		diagnostic.setStackTrace(qvtRuntimeException.getQvtStackTrace());
-				
+
 		return diagnostic;
 	}
 
@@ -361,16 +361,16 @@ public class InternalTransformationExecutor {
 			}
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "QVTO-Executor: " + fTransformation.getURI(); //$NON-NLS-1$
 	}
-		
+
 	public static class TracesAwareExecutor extends InternalTransformationExecutor {
-		
+
 		private Trace fTraces;
-		
+
 		public TracesAwareExecutor(URI uri, EPackage.Registry registry) {
 			super(uri, registry);
 		}
@@ -378,21 +378,21 @@ public class InternalTransformationExecutor {
 		public TracesAwareExecutor(URI uri) {
 			super(uri);
 		}
-		
+
 		public TracesAwareExecutor(Transformation transformation) {
 			super(transformation);
 		}
-					
+
 		public Trace getTraces() {
 			return fTraces;
 		}
 
 		@Override
-		protected void handleExecutionTraces(Trace traces) {				
+		protected void handleExecutionTraces(Trace traces) {
 			super.handleExecutionTraces(traces);
 			fTraces = traces;
 		}
-		
+
 		@Override
 		public void cleanup() {
 			super.cleanup();
@@ -400,5 +400,5 @@ public class InternalTransformationExecutor {
 		}
 
 	}
-	
+
 }

@@ -53,6 +53,7 @@ import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.m2m.internal.qvt.oml.Messages;
 import org.eclipse.m2m.internal.qvt.oml.NLS;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.binding.ASTBindingHelper;
@@ -2034,18 +2035,18 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
         if (isValidationChecked) {
             validateObjectExp(objectExp, outExpCS, env);
         }
-        
+
         return objectExp;
     }
-		
-       
+
+
     public List<QvtOperationalModuleEnv> visitUnitCS(UnitCS unitCS, UnitProxy unit, QvtOperationalFileEnv fileEnv, ExternalUnitElementsProvider importResolver, ResourceSet resSet) throws SemanticException {
-    	SubMonitor subMonitor = SubMonitor.convert(myMonitor, "Visit " + unit.getQualifiedName(), 6 * unitCS.getModules().size()); //$NON-NLS-1$
-    	
+    	SubMonitor subMonitor = SubMonitor.convert(myMonitor, NLS.bind(Messages.Visitor_Visit, unit.getQualifiedName()), 6 * unitCS.getModules().size());
+
     	List<QvtOperationalModuleEnv> moduleEnvs = new LinkedList<QvtOperationalModuleEnv>();
     	Map<MappingModuleCS, QvtOperationalModuleEnv> moduleEnvsMap = new HashMap<MappingModuleCS, QvtOperationalModuleEnv>(2);
     	Set<String> moduleNames = new HashSet<String>(unitCS.getModules().size());
-    		    	
+
     	// 1st pass: module headers
     	for(MappingModuleCS moduleCS : unitCS.getModules()) {
 	        Module module = QvtOperationalParserUtil.createModule(moduleCS);
@@ -2439,7 +2440,7 @@ CallOperationAction, SendSignalAction, Constraint, EClass, EObject> { 	// FIXME 
 		if(myErrorNodes != null) {
 			myErrorNodes.clear();
 		}
-		
+
 		SubMonitor.done(myMonitor);
 	}
 
