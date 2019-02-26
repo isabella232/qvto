@@ -36,6 +36,7 @@ import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironment;
 import org.eclipse.jdt.launching.environments.IExecutionEnvironmentsManager;
 import org.eclipse.jface.util.Policy;
+import org.eclipse.m2m.internal.qvt.oml.jdt.debug.ui.launch.DebugPDEMessages;
 import org.eclipse.m2m.internal.qvt.oml.ui.wizards.project.JdtProjectIntegration;
 import org.eclipse.pde.internal.core.util.CoreUtility;
 import org.eclipse.swt.widgets.Combo;
@@ -68,7 +69,7 @@ public class JdtProjectIntegrationImpl implements JdtProjectIntegration {
 		IJavaProject javaProject = JavaCore.create(project);
 		javaProject.setOutputLocation(binContainer.getFullPath(), monitor);
 
-		monitor.subTask("Setting the classpath...");  //$NON-NLS-1$
+		monitor.subTask(DebugPDEMessages.Setup_SettingClasspath);
 
 		IClasspathEntry[] entries = new IClasspathEntry[isPDE ? 3 : 1];
 		if (isPDE) {

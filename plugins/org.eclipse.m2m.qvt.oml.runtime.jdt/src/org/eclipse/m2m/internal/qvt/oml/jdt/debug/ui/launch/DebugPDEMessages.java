@@ -17,6 +17,8 @@ public class DebugPDEMessages extends NLS {
 
 	public static String QVTOMainTab_mustRunAsQVTApp;
 
+	public static String Setup_SettingClasspath;
+
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, DebugPDEMessages.class);
