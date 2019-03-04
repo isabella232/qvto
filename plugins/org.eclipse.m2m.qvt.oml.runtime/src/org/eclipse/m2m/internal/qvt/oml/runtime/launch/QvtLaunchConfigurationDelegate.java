@@ -52,7 +52,7 @@ public class QvtLaunchConfigurationDelegate extends QvtLaunchConfigurationDelega
 				try {
 					IStatus status = QvtLaunchConfigurationDelegateBase.validate(qvtTransformation, configuration);
 					if(status.getSeverity() > IStatus.WARNING) {
-						return status;
+						throw new CoreException(status);
 					}
 
 					ExecutionContext context = QvtLaunchUtil.createContext(configuration, new WriterLog(streamsProxy.getOutputWriter()), monitor);
