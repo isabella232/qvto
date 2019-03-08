@@ -1,14 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2019 Borland Software Corporation and others.
- * 
+ * Copyright (c) 2018, 2019 Christopher Gerking and others.
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- * 
+ *
  * Contributors:
- *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bug 537609
+ *     Christopher Gerking - initial API and implementation, bug 537609
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.common.launch;
 
@@ -30,16 +29,16 @@ import org.eclipse.m2m.internal.qvt.oml.common.Messages;
 import org.eclipse.osgi.util.NLS;
 
 public abstract class ProcessJob extends WorkspaceJob implements IProcess {
-	
+
 	private ILaunch launch;
 	private IStreamsProxy proxy;
-	
+
 	public ProcessJob(String name, ILaunch launch, IStreamsProxy proxy) {
 		super(name);
-		
+
 		this.launch = launch;
 		this.proxy = proxy;
-		
+
 		addJobChangeListener(new JobChangeAdapter() {
 			@Override
 			public void done(IJobChangeEvent event) {
@@ -49,12 +48,12 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 			}
 		});
 	}
-	
+
 	public boolean canTerminate() {
 		return !isTerminated();
 	}
-		
-	public boolean isTerminated() {		
+
+	public boolean isTerminated() {
 		return getResult() != null;
 	}
 
@@ -72,9 +71,9 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 				CommonPlugin.log(e.getStatus());
 			}
 		}
-		
-		return transformationURI != null 
-				? NLS.bind(Messages.IProcess_LabelTransform, transformationURI) 
+
+		return transformationURI != null
+				? NLS.bind(Messages.IProcess_LabelTransform, transformationURI)
 						: Messages.IProcess_Label;
 	}
 
@@ -96,7 +95,7 @@ public abstract class ProcessJob extends WorkspaceJob implements IProcess {
 		if(!isTerminated()) {
             throw new DebugException(new Status(IStatus.ERROR, CommonPlugin.ID, 1, Messages.IProcess_InvalidState, null));
         }
-		
+
 		return getResult().getSeverity();
 	}
 }
