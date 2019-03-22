@@ -15,7 +15,7 @@ ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.reposit
 
 The SimRel aggregator is configured by GIT\org.eclipse.simrel.build\mmt-qvto.aggrcon to use an explicit milestone entry
 
-So edit mmt-qvto.aggrcon to update 
+So edit qvto.aggrcon to update 
 location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.9.3/S201805290850"
 commit with a comment such as [qvto] 3.9.3M5 for Photon and Push to Gerrit (refs/for/master)
 If that comes back with SUCCESS, push to master
