@@ -7,8 +7,10 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.m2m.internal.qvt.oml.cst,
+ org.eclipse.m2m.internal.qvt.oml.cst.completion.parser,
+ org.eclipse.m2m.internal.qvt.oml.cst.impl;x-internal:=true,
  org.eclipse.m2m.internal.qvt.oml.cst.parser,
- org.eclipse.m2m.internal.qvt.oml.cst.completion.parser
+ org.eclipse.m2m.internal.qvt.oml.cst.util;x-internal:=true
 Require-Bundle: org.eclipse.ocl;bundle-version="[3.0.0,4.0.0)",
  org.eclipse.osgi;bundle-version="[3.5.0,4.0.0)";resolution:=optional
 Bundle-ActivationPolicy: lazy

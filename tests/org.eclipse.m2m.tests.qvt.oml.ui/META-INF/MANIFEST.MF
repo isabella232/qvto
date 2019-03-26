@@ -23,3 +23,10 @@ Require-Bundle: org.eclipse.core.resources,
  org.junit;bundle-version="[4.5.0,5.0.0)"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Automatic-Module-Name: org.eclipse.m2m.tests.qvt.oml.ui
+Export-Package: org.eclipse.m2m.internal.tests.qvt.oml.debugger;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui.completion;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui.editor;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui.mypackage;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui.mypackage.impl;x-internal:=true,
+ org.eclipse.m2m.internal.tests.qvt.oml.ui.mypackage.util;x-internal:=true

@@ -22,6 +22,7 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml.runtime;x-internal:=true,
    org.eclipse.m2m.qvt.oml.runtime.jdt,
    org.eclipse.m2m.tests.qvt.oml",
  org.eclipse.m2m.internal.qvt.oml.runtime.project.config;x-friends:="org.eclipse.m2m.qvt.oml.runtime.ui",
+ org.eclipse.m2m.internal.qvt.oml.runtime.resource;x-internal:=true,
  org.eclipse.m2m.internal.qvt.oml.runtime.util;x-friends:="org.eclipse.m2m.qvt.oml.runtime.ui,org.eclipse.m2m.tests.qvt.oml",
  org.eclipse.m2m.qvt.oml.runtime.util
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)",
