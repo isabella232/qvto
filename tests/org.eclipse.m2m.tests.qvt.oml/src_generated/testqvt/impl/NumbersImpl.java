@@ -23,11 +23,11 @@ import testqvt.TestqvtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link testqvt.impl.NumbersImpl#getBigInteger100 <em>Big Integer100</em>}</li>
  *   <li>{@link testqvt.impl.NumbersImpl#getBigDecimal100 <em>Big Decimal100</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -210,7 +210,7 @@ public class NumbersImpl extends EObjectImpl implements Numbers {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (bigInteger100: ");
 		result.append(bigInteger100);
 		result.append(", bigDecimal100: ");

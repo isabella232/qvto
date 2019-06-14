@@ -19,13 +19,13 @@ package testqvt;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link testqvt.BooleanElement#isIsSmallBoolean <em>Is Small Boolean</em>}</li>
  *   <li>{@link testqvt.BooleanElement#isSmallBoolean <em>Small Boolean</em>}</li>
  *   <li>{@link testqvt.BooleanElement#getIsLargeBoolean <em>Is Large Boolean</em>}</li>
  *   <li>{@link testqvt.BooleanElement#getLargeBoolean <em>Large Boolean</em>}</li>
  * </ul>
- * </p>
  *
  * @see testqvt.TestqvtPackage#getBooleanElement()
  * @model

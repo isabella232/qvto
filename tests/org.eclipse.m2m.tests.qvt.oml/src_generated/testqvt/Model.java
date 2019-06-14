@@ -21,10 +21,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link testqvt.Model#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @see testqvt.TestqvtPackage#getModel()
  * @model

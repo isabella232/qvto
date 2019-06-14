@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link testqvt.Numbers#getBigInteger100 <em>Big Integer100</em>}</li>
  *   <li>{@link testqvt.Numbers#getBigDecimal100 <em>Big Decimal100</em>}</li>
  * </ul>
- * </p>
  *
  * @see testqvt.TestqvtPackage#getNumbers()
  * @model

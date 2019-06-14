@@ -24,13 +24,13 @@ import testqvt.TestqvtPackage;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link testqvt.impl.BooleanElementImpl#isIsSmallBoolean <em>Is Small Boolean</em>}</li>
  *   <li>{@link testqvt.impl.BooleanElementImpl#isSmallBoolean <em>Small Boolean</em>}</li>
  *   <li>{@link testqvt.impl.BooleanElementImpl#getIsLargeBoolean <em>Is Large Boolean</em>}</li>
  *   <li>{@link testqvt.impl.BooleanElementImpl#getLargeBoolean <em>Large Boolean</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -227,9 +227,9 @@ public class BooleanElementImpl extends ElementImpl implements BooleanElement {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case TestqvtPackage.BOOLEAN_ELEMENT__IS_SMALL_BOOLEAN:
-				return isIsSmallBoolean() ? Boolean.TRUE : Boolean.FALSE;
+				return isIsSmallBoolean();
 			case TestqvtPackage.BOOLEAN_ELEMENT__SMALL_BOOLEAN:
-				return isSmallBoolean() ? Boolean.TRUE : Boolean.FALSE;
+				return isSmallBoolean();
 			case TestqvtPackage.BOOLEAN_ELEMENT__IS_LARGE_BOOLEAN:
 				return getIsLargeBoolean();
 			case TestqvtPackage.BOOLEAN_ELEMENT__LARGE_BOOLEAN:
@@ -247,10 +247,10 @@ public class BooleanElementImpl extends ElementImpl implements BooleanElement {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TestqvtPackage.BOOLEAN_ELEMENT__IS_SMALL_BOOLEAN:
-				setIsSmallBoolean(((Boolean)newValue).booleanValue());
+				setIsSmallBoolean((Boolean)newValue);
 				return;
 			case TestqvtPackage.BOOLEAN_ELEMENT__SMALL_BOOLEAN:
-				setSmallBoolean(((Boolean)newValue).booleanValue());
+				setSmallBoolean((Boolean)newValue);
 				return;
 			case TestqvtPackage.BOOLEAN_ELEMENT__IS_LARGE_BOOLEAN:
 				setIsLargeBoolean((Boolean)newValue);
@@ -315,7 +315,7 @@ public class BooleanElementImpl extends ElementImpl implements BooleanElement {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isSmallBoolean: ");
 		result.append(isSmallBoolean);
 		result.append(", smallBoolean: ");

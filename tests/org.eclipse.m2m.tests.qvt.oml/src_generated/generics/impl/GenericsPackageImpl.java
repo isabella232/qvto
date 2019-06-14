@@ -73,7 +73,7 @@ public class GenericsPackageImpl extends EPackageImpl implements GenericsPackage
 
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
-	 * 
+	 *
 	 * <p>This method is used to initialize {@link GenericsPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
@@ -87,7 +87,8 @@ public class GenericsPackageImpl extends EPackageImpl implements GenericsPackage
 		if (isInited) return (GenericsPackage)EPackage.Registry.INSTANCE.getEPackage(GenericsPackage.eNS_URI);
 
 		// Obtain or create and register package
-		GenericsPackageImpl theGenericsPackage = (GenericsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof GenericsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new GenericsPackageImpl());
+		Object registeredGenericsPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		GenericsPackageImpl theGenericsPackage = registeredGenericsPackage instanceof GenericsPackageImpl ? (GenericsPackageImpl)registeredGenericsPackage : new GenericsPackageImpl();
 
 		isInited = true;
 
@@ -100,7 +101,6 @@ public class GenericsPackageImpl extends EPackageImpl implements GenericsPackage
 		// Mark meta-data to indicate it can't be changed
 		theGenericsPackage.freeze();
 
-  
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(GenericsPackage.eNS_URI, theGenericsPackage);
 		return theGenericsPackage;

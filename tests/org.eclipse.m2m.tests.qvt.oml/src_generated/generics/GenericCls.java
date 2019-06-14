@@ -22,10 +22,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link generics.GenericCls#getValues <em>Values</em>}</li>
  * </ul>
- * </p>
  *
  * @see generics.GenericsPackage#getGenericCls()
  * @model EBounds="generics.MyNumber"
@@ -34,7 +34,6 @@ import org.eclipse.emf.ecore.EObject;
 public interface GenericCls<E extends Number> extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Values</b></em>' attribute list.
-	 * The list contents are of type {@link E}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Values</em>' attribute list isn't clear,

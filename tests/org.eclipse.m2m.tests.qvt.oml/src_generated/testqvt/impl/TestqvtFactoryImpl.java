@@ -39,7 +39,7 @@ public class TestqvtFactoryImpl extends EFactoryImpl implements TestqvtFactory {
 	 */
 	public static TestqvtFactory init() {
 		try {
-			TestqvtFactory theTestqvtFactory = (TestqvtFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/m2m/qvt/oml/testqvt"); 
+			TestqvtFactory theTestqvtFactory = (TestqvtFactory)EPackage.Registry.INSTANCE.getEFactory(TestqvtPackage.eNS_URI);
 			if (theTestqvtFactory != null) {
 				return theTestqvtFactory;
 			}
