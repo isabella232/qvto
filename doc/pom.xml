@@ -9,7 +9,7 @@
   <parent>
     <groupId>org.eclipse.qvto</groupId>
     <artifactId>org.eclipse.qvto.releng.tycho</artifactId>
-    <version>3.9.3-SNAPSHOT</version>
+    <version>3.9.4-SNAPSHOT</version>
     <relativePath>../releng/org.eclipse.qvto.releng.tycho</relativePath>
   </parent>
   <modules>
