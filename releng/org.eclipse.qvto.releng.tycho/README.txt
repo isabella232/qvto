@@ -28,6 +28,7 @@ cd ~/downloads/mmt/qvto/downloads/drops/3.9.4
 
 Archives are accessible at
 cd /home/data/httpd/archive.eclipse.org/mmt/qvto/downloads/drops
+cd /home/data/httpd/archive.eclipse.org/mmt/qvto/updates/releases
 
 --------
 
