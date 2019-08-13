@@ -22,7 +22,7 @@ group="modeling.mmt.qvt-oml"
 localZip="qvto.zip"
 projectRepoName="QVTo"
 manageComposite="/shared/common/apache-ant-latest/bin/ant -f /shared/modeling/tools/promotion/manage-composite.xml"
-externalUpdatesFolder="http://download.eclipse.org/mmt/qvto/updates/"
+externalUpdatesFolder="https://download.eclipse.org/mmt/qvto/updates/"
 
 while getopts u:v:t:q: option
 do
