@@ -1,30 +1,30 @@
 The Tycho build automatically promotes downloads and updates, so no cron job help is necessary.
 
 The updates can be checked by looking for the new entry on https://www.eclipse.org/mmt/downloads/?project=qvto
-or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.9.4/S201805290850
+or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.10.0/S201805290850
 
 However operations on composite repositories are not automated, partly because they are sufficiently important to deserve manual attention. 
 
 A new milestone build can be added to the composite repository by:
 
 logon to build.eclipse.org
-cd ~/downloads/mmt/qvto/updates/milestones/3.9.4
-ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201805290850 [ -Dcomposite.name="QVTo 3.9.4 milestones" ]
+cd ~/downloads/mmt/qvto/updates/milestones/3.10.0
+ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201805290850 [ -Dcomposite.name="QVTo 3.10.0 milestones" ]
 
-(This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.9.4)
+(This can be checked by installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.10.0)
 
 The SimRel aggregator is configured by GIT\org.eclipse.simrel.build\mmt-qvto.aggrcon to use an explicit milestone entry
 
 So edit qvto.aggrcon to update 
-location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.9.4/S201805290850"
-commit with a comment such as [qvto] 3.9.4M5 for Photon and Push to Gerrit (refs/for/master)
+location="http://download.eclipse.org/mmt/qvto/updates/milestones/3.10.0/S201805290850"
+commit with a comment such as [qvto] 3.10.0M5 for Photon and Push to Gerrit (refs/for/master)
 If that comes back with SUCCESS, push to master
 
 Once a release has been promoted update mmt-qvto.aggrcon to the final release
-location="http://download.eclipse.org/mmt/qvto/updates/releases/3.9.4"
+location="http://download.eclipse.org/mmt/qvto/updates/releases/3.10.0"
 
 Downloads are accessible at
-cd ~/downloads/mmt/qvto/downloads/drops/3.9.4
+cd ~/downloads/mmt/qvto/downloads/drops/3.10.0
 
 Archives are accessible at
 cd /home/data/httpd/archive.eclipse.org/mmt/qvto/downloads/drops
