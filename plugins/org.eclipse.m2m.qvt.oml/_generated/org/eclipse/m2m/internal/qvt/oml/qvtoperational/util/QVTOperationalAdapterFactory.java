@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2007 Borland Software Corporation
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- *   
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  */
@@ -13,17 +13,16 @@ package org.eclipse.m2m.internal.qvt.oml.qvtoperational.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.m2m.internal.qvt.oml.qvtoperational.*;
+import org.eclipse.m2m.internal.qvt.oml.qvtoperational.Dummy;
+import org.eclipse.m2m.internal.qvt.oml.qvtoperational.QVTOperationalPackage;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
+ * @since 3.10
  * <!-- end-user-doc -->
  * @see org.eclipse.m2m.internal.qvt.oml.qvtoperational.QVTOperationalPackage
  * @generated
@@ -82,16 +81,16 @@ public class QVTOperationalAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected QVTOperationalSwitch<Adapter> modelSwitch =
-		new QVTOperationalSwitch<Adapter>() {
-			@Override
-			public Adapter caseDummy(Dummy object) {
-				return createDummyAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+			new QVTOperationalSwitch<Adapter>() {
+		@Override
+		public Adapter caseDummy(Dummy object) {
+			return createDummyAdapter();
+		}
+		@Override
+		public Adapter defaultCase(EObject object) {
+			return createEObjectAdapter();
+		}
+	};
 
 	/**
 	 * Creates an adapter for the <code>target</code>.

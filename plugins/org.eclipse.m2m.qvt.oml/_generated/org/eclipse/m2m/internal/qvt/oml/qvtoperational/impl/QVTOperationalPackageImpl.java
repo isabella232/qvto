@@ -28,6 +28,7 @@ import org.eclipse.ocl.utilities.UtilitiesPackage;
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
+ * @since 3.10
  * <!-- end-user-doc -->
  * @generated
  */

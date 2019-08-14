@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Dummy</b></em>'.
+ * @since 3.10
  * <!-- end-user-doc -->
  *
  * <!-- begin-model-doc -->
