@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2007, 2018 Borland Software Corporation and others.
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- *   
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  *
@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ConstructorBody;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ContextualProperty;
 import org.eclipse.m2m.internal.qvt.oml.expressions.DirectionKind;
@@ -50,6 +49,8 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ResolveInExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VarParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VisitableASTNode;
+import org.eclipse.m2m.internal.qvt.oml.qvtoperational.QVTOperationalPackage;
+import org.eclipse.m2m.internal.qvt.oml.qvtoperational.impl.QVTOperationalPackageImpl;
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
 import org.eclipse.ocl.types.TypesPackage;
 import org.eclipse.ocl.utilities.UtilitiesPackage;
@@ -256,36 +257,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
 	 * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#eNS_URI
 	 * @see #init()
-	 * @generated NOT
 	 */
 	private ExpressionsPackageImpl() {
 		super(eNS_URI, ExpressionsFactory.eINSTANCE);
 
-		QVTO_ROOT_PACKAGE.getESubpackages().add(this);
-	}
-
-	/**
-	 * Root package of the QVT Operational model, which we have to "fake out"
-	 * because EMF will not generate it.
-	 */
-	public static final EPackage QVTO_ROOT_PACKAGE;
-	
-	static {
-        class QVTOPackageImpl extends EPackageImpl {
-			@Override
-			protected Resource createResource(String uri) {
-				return super.createResource(uri);
-			}
-		}
-        
-        QVTOPackageImpl qvtoPackage = new QVTOPackageImpl();
-        qvtoPackage.setName("qvtoperational"); //$NON-NLS-1$
-        qvtoPackage.setNsPrefix("qvtoperational"); //$NON-NLS-1$
-        qvtoPackage.setNsURI("http://www.eclipse.org/QVT/1.0.0/Operational"); //$NON-NLS-1$
-        qvtoPackage.createResource(qvtoPackage.getNsURI());
-		
-		QVTO_ROOT_PACKAGE = qvtoPackage;
-		EPackage.Registry.INSTANCE.put(QVTO_ROOT_PACKAGE.getNsURI(), QVTO_ROOT_PACKAGE);
 	}
 
 	/**
@@ -324,11 +299,17 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		org.eclipse.ocl.expressions.ExpressionsPackage.eINSTANCE.eClass();
 		org.eclipse.ocl.ecore.EcorePackage.eINSTANCE.eClass();
 
+		// Obtain or create and register interdependencies
+		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(QVTOperationalPackage.eNS_URI);
+		QVTOperationalPackageImpl theQVTOperationalPackage = (QVTOperationalPackageImpl)(registeredPackage instanceof QVTOperationalPackageImpl ? registeredPackage : QVTOperationalPackage.eINSTANCE);
+
 		// Create package meta-data objects
 		theExpressionsPackage.createPackageContents();
+		theQVTOperationalPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theExpressionsPackage.initializePackageContents();
+		theQVTOperationalPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theExpressionsPackage.freeze();
@@ -1856,9 +1837,6 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEEnum(importKindEEnum, ImportKind.class, "ImportKind"); //$NON-NLS-1$
 		addEEnumLiteral(importKindEEnum, ImportKind.EXTENSION);
 		addEEnumLiteral(importKindEEnum, ImportKind.ACCESS);
-
-		// Create resource
-		createResource(eNS_URI);
 
 		// Create annotations
 		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
