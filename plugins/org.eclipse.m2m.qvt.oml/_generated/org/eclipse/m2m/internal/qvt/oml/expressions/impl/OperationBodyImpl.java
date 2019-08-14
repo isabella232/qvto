@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -43,6 +42,7 @@ import org.eclipse.ocl.utilities.Visitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationBodyImpl#getStartPosition <em>Start Position</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationBodyImpl#getEndPosition <em>End Position</em>}</li>
@@ -51,7 +51,6 @@ import org.eclipse.ocl.utilities.Visitor;
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationBodyImpl#getOperation <em>Operation</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationBodyImpl#getVariable <em>Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -213,7 +212,7 @@ public class OperationBodyImpl extends EObjectImpl implements OperationBody {
 	 */
 	public ImperativeOperation getOperation() {
 		if (eContainerFeatureID() != ExpressionsPackage.OPERATION_BODY__OPERATION) return null;
-		return (ImperativeOperation)eContainer();
+		return (ImperativeOperation)eInternalContainer();
 	}
 
 	/**
@@ -276,7 +275,7 @@ public class OperationBodyImpl extends EObjectImpl implements OperationBody {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(final U v) {
 		if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {
 		  @SuppressWarnings("unchecked")    		
 		  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    	
@@ -475,11 +474,6 @@ public class OperationBodyImpl extends EObjectImpl implements OperationBody {
 				default: return -1;
 			}
 		}
-		if (baseClass == EObject.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == EModelElement.class) {
 			switch (derivedFeatureID) {
 				case ExpressionsPackage.OPERATION_BODY__EANNOTATIONS: return EcorePackage.EMODEL_ELEMENT__EANNOTATIONS;
@@ -503,11 +497,6 @@ public class OperationBodyImpl extends EObjectImpl implements OperationBody {
 				default: return -1;
 			}
 		}
-		if (baseClass == EObject.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == EModelElement.class) {
 			switch (baseFeatureID) {
 				case EcorePackage.EMODEL_ELEMENT__EANNOTATIONS: return ExpressionsPackage.OPERATION_BODY__EANNOTATIONS;
@@ -526,7 +515,7 @@ public class OperationBodyImpl extends EObjectImpl implements OperationBody {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (startPosition: "); //$NON-NLS-1$
 		result.append(startPosition);
 		result.append(", endPosition: "); //$NON-NLS-1$

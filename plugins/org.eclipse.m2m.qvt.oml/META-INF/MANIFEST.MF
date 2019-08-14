@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.m2m.qvt.oml;singleton:=true
 Bundle-Version: 3.9.3.qualifier
+Bundle-ClassPath: .
 Bundle-Activator: org.eclipse.m2m.internal.qvt.oml.QvtPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -39,7 +40,8 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml;
    org.eclipse.m2m.qvt.oml.ocl,
    org.eclipse.m2m.qvt.oml.runtime.jdt,
    org.eclipse.m2m.tests.qvt.oml",
- org.eclipse.m2m.internal.qvt.oml.blackbox.java;x-friends:="org.eclipse.m2m.qvt.oml.runtime.jdt",
+ org.eclipse.m2m.internal.qvt.oml.blackbox.java;
+  x-friends:="org.eclipse.m2m.qvt.oml.runtime.jdt",
  org.eclipse.m2m.internal.qvt.oml.compiler;
   x-friends:="org.eclipse.m2m.qvt.oml.editor.ui,
    org.eclipse.m2m.tests.qvt.oml,
@@ -65,8 +67,12 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml;
    org.eclipse.m2m.tests.qvt.oml,
    org.eclipse.m2m.qvt.oml.debug.core",
  org.eclipse.m2m.internal.qvt.oml.expressions.impl;x-internal:=true,
- org.eclipse.m2m.internal.qvt.oml.expressions.util;x-friends:="org.eclipse.m2m.qvt.oml.runtime",
- org.eclipse.m2m.internal.qvt.oml.library;x-friends:="org.eclipse.m2m.qvt.oml.runtime,org.eclipse.m2m.tests.qvt.oml,org.eclipse.m2m.qvt.oml.debug.core",
+ org.eclipse.m2m.internal.qvt.oml.expressions.util;
+  x-friends:="org.eclipse.m2m.qvt.oml.runtime",
+ org.eclipse.m2m.internal.qvt.oml.library;
+  x-friends:="org.eclipse.m2m.qvt.oml.runtime,
+   org.eclipse.m2m.tests.qvt.oml,
+   org.eclipse.m2m.qvt.oml.debug.core",
  org.eclipse.m2m.internal.qvt.oml.stdlib;
   x-friends:="org.eclipse.m2m.qvt.oml.runtime,
    org.eclipse.m2m.qvt.oml.ocl,
@@ -80,21 +86,24 @@ Export-Package: org.eclipse.m2m.internal.qvt.oml;
    org.eclipse.m2m.qvt.oml.runtime.ui,
    org.eclipse.m2m.qvt.oml.trace.edit",
  org.eclipse.m2m.internal.qvt.oml.trace.impl;x-internal:=true,
- org.eclipse.m2m.internal.qvt.oml.trace.util;x-friends:="org.eclipse.m2m.qvt.oml.trace.edit",
+ org.eclipse.m2m.internal.qvt.oml.trace.util;
+  x-friends:="org.eclipse.m2m.qvt.oml.trace.edit",
  org.eclipse.m2m.qvt.oml,
  org.eclipse.m2m.qvt.oml.blackbox.java,
  org.eclipse.m2m.qvt.oml.util
-Comment: org.eclipse.equinox.common 3.8 required to support org.eclipse.core.runtime.SubMonitor.split() and done(), see Bug 536601
+Comment: org.eclipse.equinox.common 3.8 required to support org.eclipse.core.runtime.SubMonitor.split() and done(),
+  see Bug 536601
 Require-Bundle: org.eclipse.equinox.common;bundle-version="[3.8.0,4.0.0)",
  org.eclipse.core.runtime;bundle-version="[3.4.0,4.0.0)",
  org.eclipse.core.resources;bundle-version="[3.4.0,4.0.0)",
- org.eclipse.emf.ecore;bundle-version="[2.8.0,3.0.0)",
+ org.eclipse.emf.ecore;bundle-version="[2.8.0,3.0.0)";visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="[2.5.0,3.0.0)",
  org.eclipse.emf.ecore.change;bundle-version="[2.4.0,3.0.0)",
  org.eclipse.m2m.qvt.oml.common;bundle-version="[3.1.0,4.0.0)";visibility:=reexport,
  org.eclipse.m2m.qvt.oml.cst.parser;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
  org.eclipse.ocl.ecore;bundle-version="[3.1.0,4.0.0)";visibility:=reexport,
- org.eclipse.m2m.qvt.oml.ecore.imperativeocl;bundle-version="[3.0.0,4.0.0)";visibility:=reexport
+ org.eclipse.m2m.qvt.oml.ecore.imperativeocl;bundle-version="[3.0.0,4.0.0)";visibility:=reexport,
+ org.eclipse.ocl;visibility:=reexport
 Eclipse-BuddyPolicy: registered
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

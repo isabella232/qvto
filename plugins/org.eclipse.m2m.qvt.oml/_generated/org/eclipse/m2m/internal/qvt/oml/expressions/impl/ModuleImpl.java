@@ -33,7 +33,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.m2m.internal.qvt.oml.expressions.EntryOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
-import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.internal.qvt.oml.expressions.VisitableASTNode;
 import org.eclipse.ocl.ecore.Variable;
@@ -48,6 +47,7 @@ import org.eclipse.ocl.utilities.Visitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl#getNsURI <em>Ns URI</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl#getNsPrefix <em>Ns Prefix</em>}</li>
@@ -65,11 +65,10 @@ import org.eclipse.ocl.utilities.Visitor;
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl#getOwnedVariable <em>Owned Variable</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImpl#getUsedModelType <em>Used Model Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
-public class ModuleImpl extends EClassImpl implements Module {
+public class ModuleImpl extends EClassImpl implements org.eclipse.m2m.internal.qvt.oml.expressions.Module {
 	/**
 	 * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -625,7 +624,7 @@ public class ModuleImpl extends EClassImpl implements Module {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(final U v) {
 		if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {
 		  @SuppressWarnings("unchecked")    		
 		  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    	
@@ -1026,7 +1025,7 @@ public class ModuleImpl extends EClassImpl implements Module {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (nsURI: "); //$NON-NLS-1$
 		result.append(nsURI);
 		result.append(", nsPrefix: "); //$NON-NLS-1$

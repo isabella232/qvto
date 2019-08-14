@@ -19,7 +19,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EModelElement;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -31,7 +30,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ImportKind;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
-import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.ocl.utilities.ASTNode;
 import org.eclipse.ocl.utilities.UtilitiesPackage;
@@ -43,6 +41,7 @@ import org.eclipse.ocl.utilities.Visitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImportImpl#getStartPosition <em>Start Position</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImportImpl#getEndPosition <em>End Position</em>}</li>
@@ -52,7 +51,6 @@ import org.eclipse.ocl.utilities.Visitor;
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImportImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ModuleImportImpl#getModule <em>Module</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -132,7 +130,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * @generated
 	 * @ordered
 	 */
-	protected Module importedModule;
+	protected org.eclipse.m2m.internal.qvt.oml.expressions.Module importedModule;
 
 	/**
 	 * The default value of the '{@link #getKind() <em>Kind</em>}' attribute.
@@ -244,9 +242,9 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Module getModule() {
+	public org.eclipse.m2m.internal.qvt.oml.expressions.Module getModule() {
 		if (eContainerFeatureID() != ExpressionsPackage.MODULE_IMPORT__MODULE) return null;
-		return (Module)eContainer();
+		return (org.eclipse.m2m.internal.qvt.oml.expressions.Module)eInternalContainer();
 	}
 
 	/**
@@ -254,7 +252,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetModule(Module newModule, NotificationChain msgs) {
+	public NotificationChain basicSetModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module newModule, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newModule, ExpressionsPackage.MODULE_IMPORT__MODULE, msgs);
 		return msgs;
 	}
@@ -264,7 +262,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setModule(Module newModule) {
+	public void setModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module newModule) {
 		if (newModule != eInternalContainer() || (eContainerFeatureID() != ExpressionsPackage.MODULE_IMPORT__MODULE && newModule != null)) {
 			if (EcoreUtil.isAncestor(this, newModule))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString()); //$NON-NLS-1$
@@ -272,7 +270,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newModule != null)
-				msgs = ((InternalEObject)newModule).eInverseAdd(this, ExpressionsPackage.MODULE__MODULE_IMPORT, Module.class, msgs);
+				msgs = ((InternalEObject)newModule).eInverseAdd(this, ExpressionsPackage.MODULE__MODULE_IMPORT, org.eclipse.m2m.internal.qvt.oml.expressions.Module.class, msgs);
 			msgs = basicSetModule(newModule, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -285,10 +283,10 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Module getImportedModule() {
+	public org.eclipse.m2m.internal.qvt.oml.expressions.Module getImportedModule() {
 		if (importedModule != null && importedModule.eIsProxy()) {
 			InternalEObject oldImportedModule = (InternalEObject)importedModule;
-			importedModule = (Module)eResolveProxy(oldImportedModule);
+			importedModule = (org.eclipse.m2m.internal.qvt.oml.expressions.Module)eResolveProxy(oldImportedModule);
 			if (importedModule != oldImportedModule) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.MODULE_IMPORT__IMPORTED_MODULE, oldImportedModule, importedModule));
@@ -302,7 +300,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Module basicGetImportedModule() {
+	public org.eclipse.m2m.internal.qvt.oml.expressions.Module basicGetImportedModule() {
 		return importedModule;
 	}
 
@@ -311,8 +309,8 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setImportedModule(Module newImportedModule) {
-		Module oldImportedModule = importedModule;
+	public void setImportedModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module newImportedModule) {
+		org.eclipse.m2m.internal.qvt.oml.expressions.Module oldImportedModule = importedModule;
 		importedModule = newImportedModule;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.MODULE_IMPORT__IMPORTED_MODULE, oldImportedModule, importedModule));
@@ -344,7 +342,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(final U v) {
 		if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {
 		  @SuppressWarnings("unchecked")    		
 		  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    	
@@ -378,7 +376,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 			case ExpressionsPackage.MODULE_IMPORT__MODULE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetModule((Module)otherEnd, msgs);
+				return basicSetModule((org.eclipse.m2m.internal.qvt.oml.expressions.Module)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -408,7 +406,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case ExpressionsPackage.MODULE_IMPORT__MODULE:
-				return eInternalContainer().eInverseRemove(this, ExpressionsPackage.MODULE__MODULE_IMPORT, Module.class, msgs);
+				return eInternalContainer().eInverseRemove(this, ExpressionsPackage.MODULE__MODULE_IMPORT, org.eclipse.m2m.internal.qvt.oml.expressions.Module.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -464,13 +462,13 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 				getBinding().addAll((Collection<? extends ModelType>)newValue);
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__IMPORTED_MODULE:
-				setImportedModule((Module)newValue);
+				setImportedModule((org.eclipse.m2m.internal.qvt.oml.expressions.Module)newValue);
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__KIND:
 				setKind((ImportKind)newValue);
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__MODULE:
-				setModule((Module)newValue);
+				setModule((org.eclipse.m2m.internal.qvt.oml.expressions.Module)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -497,13 +495,13 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 				getBinding().clear();
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__IMPORTED_MODULE:
-				setImportedModule((Module)null);
+				setImportedModule((org.eclipse.m2m.internal.qvt.oml.expressions.Module)null);
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__KIND:
 				setKind(KIND_EDEFAULT);
 				return;
 			case ExpressionsPackage.MODULE_IMPORT__MODULE:
-				setModule((Module)null);
+				setModule((org.eclipse.m2m.internal.qvt.oml.expressions.Module)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -549,11 +547,6 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 				default: return -1;
 			}
 		}
-		if (baseClass == EObject.class) {
-			switch (derivedFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == EModelElement.class) {
 			switch (derivedFeatureID) {
 				case ExpressionsPackage.MODULE_IMPORT__EANNOTATIONS: return EcorePackage.EMODEL_ELEMENT__EANNOTATIONS;
@@ -577,11 +570,6 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 				default: return -1;
 			}
 		}
-		if (baseClass == EObject.class) {
-			switch (baseFeatureID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == EModelElement.class) {
 			switch (baseFeatureID) {
 				case EcorePackage.EMODEL_ELEMENT__EANNOTATIONS: return ExpressionsPackage.MODULE_IMPORT__EANNOTATIONS;
@@ -600,7 +588,7 @@ public class ModuleImportImpl extends EObjectImpl implements ModuleImport {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (startPosition: "); //$NON-NLS-1$
 		result.append(startPosition);
 		result.append(", endPosition: "); //$NON-NLS-1$

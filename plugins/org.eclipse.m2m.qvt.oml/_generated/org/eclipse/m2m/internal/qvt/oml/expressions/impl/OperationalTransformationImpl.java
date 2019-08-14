@@ -33,12 +33,12 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationalTransformationImpl#getIntermediateClass <em>Intermediate Class</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationalTransformationImpl#getIntermediateProperty <em>Intermediate Property</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.OperationalTransformationImpl#getModelParameter <em>Model Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

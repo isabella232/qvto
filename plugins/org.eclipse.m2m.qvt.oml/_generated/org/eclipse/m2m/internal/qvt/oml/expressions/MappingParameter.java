@@ -21,10 +21,10 @@ package org.eclipse.m2m.internal.qvt.oml.expressions;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.MappingParameter#getExtent <em>Extent</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#getMappingParameter()
  * @model

@@ -33,13 +33,13 @@ import org.eclipse.ocl.utilities.Visitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.VarParameterImpl#getEOperation <em>EOperation</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.VarParameterImpl#getCtxOwner <em>Ctx Owner</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.VarParameterImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.VarParameterImpl#getResOwner <em>Res Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -97,7 +97,7 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 */
 	public EOperation getEOperation() {
 		if (eContainerFeatureID() != ExpressionsPackage.VAR_PARAMETER__EOPERATION) return null;
-		return (EOperation)eContainer();
+		return (EOperation)eInternalContainer();
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 */
 	public ImperativeOperation getCtxOwner() {
 		if (eContainerFeatureID() != ExpressionsPackage.VAR_PARAMETER__CTX_OWNER) return null;
-		return (ImperativeOperation)eContainer();
+		return (ImperativeOperation)eInternalContainer();
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 */
 	public ImperativeOperation getResOwner() {
 		if (eContainerFeatureID() != ExpressionsPackage.VAR_PARAMETER__RES_OWNER) return null;
-		return (ImperativeOperation)eContainer();
+		return (ImperativeOperation)eInternalContainer();
 	}
 
 	/**
@@ -209,7 +209,7 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	 * @generated
 	 */
 	@Override
-	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(final U v) {
 		if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {
 		  @SuppressWarnings("unchecked")    		
 		  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    	
@@ -401,7 +401,7 @@ public class VarParameterImpl extends VariableImpl implements VarParameter {
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (kind: "); //$NON-NLS-1$
 		result.append(kind);
 		result.append(')');

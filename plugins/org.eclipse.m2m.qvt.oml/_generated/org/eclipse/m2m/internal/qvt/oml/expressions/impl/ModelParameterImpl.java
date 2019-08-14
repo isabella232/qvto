@@ -21,8 +21,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Model Parameter</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */

@@ -24,10 +24,10 @@ import org.eclipse.ocl.utilities.Visitor;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.MappingCallExpImpl#isIsStrict <em>Is Strict</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -105,7 +105,7 @@ public class MappingCallExpImpl extends ImperativeCallExpImpl implements Mapping
 	 * @generated
 	 */
 	@Override
-	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v) {
+	public <T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(final U v) {
 		if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {
 		  @SuppressWarnings("unchecked")    		
 		  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    	
@@ -181,7 +181,7 @@ public class MappingCallExpImpl extends ImperativeCallExpImpl implements Mapping
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isStrict: "); //$NON-NLS-1$
 		result.append((eFlags & IS_STRICT_EFLAG) != 0);
 		result.append(')');

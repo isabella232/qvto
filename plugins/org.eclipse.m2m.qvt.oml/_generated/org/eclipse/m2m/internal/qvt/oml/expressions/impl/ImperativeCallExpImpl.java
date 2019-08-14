@@ -26,10 +26,10 @@ import org.eclipse.ocl.ecore.impl.OperationCallExpImpl;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.ImperativeCallExpImpl#isIsVirtual <em>Is Virtual</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -169,7 +169,7 @@ public class ImperativeCallExpImpl extends OperationCallExpImpl implements Imper
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
+		StringBuilder result = new StringBuilder(super.toString());
 		result.append(" (isVirtual: "); //$NON-NLS-1$
 		result.append((eFlags & IS_VIRTUAL_EFLAG) != 0);
 		result.append(')');

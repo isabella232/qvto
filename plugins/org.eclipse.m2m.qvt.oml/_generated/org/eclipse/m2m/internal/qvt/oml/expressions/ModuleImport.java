@@ -22,13 +22,13 @@ import org.eclipse.ocl.utilities.Visitor;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getBinding <em>Binding</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getImportedModule <em>Imported Module</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getKind <em>Kind</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getModule <em>Module</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#getModuleImport()
  * @model
@@ -68,13 +68,13 @@ public interface ModuleImport extends VisitableASTNode, EModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Module</em>' container reference.
-	 * @see #setModule(Module)
+	 * @see #setModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module)
 	 * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#getModuleImport_Module()
 	 * @see org.eclipse.m2m.internal.qvt.oml.expressions.Module#getModuleImport
 	 * @model opposite="moduleImport"
 	 * @generated
 	 */
-	Module getModule();
+	org.eclipse.m2m.internal.qvt.oml.expressions.Module getModule();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getModule <em>Module</em>}' container reference.
@@ -84,7 +84,7 @@ public interface ModuleImport extends VisitableASTNode, EModelElement {
 	 * @see #getModule()
 	 * @generated
 	 */
-	void setModule(Module value);
+	void setModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module value);
 
 	/**
 	 * Returns the value of the '<em><b>Imported Module</b></em>' reference.
@@ -95,12 +95,12 @@ public interface ModuleImport extends VisitableASTNode, EModelElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Imported Module</em>' reference.
-	 * @see #setImportedModule(Module)
+	 * @see #setImportedModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module)
 	 * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#getModuleImport_ImportedModule()
 	 * @model required="true"
 	 * @generated
 	 */
-	Module getImportedModule();
+	org.eclipse.m2m.internal.qvt.oml.expressions.Module getImportedModule();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport#getImportedModule <em>Imported Module</em>}' reference.
@@ -110,7 +110,7 @@ public interface ModuleImport extends VisitableASTNode, EModelElement {
 	 * @see #getImportedModule()
 	 * @generated
 	 */
-	void setImportedModule(Module value);
+	void setImportedModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module value);
 
 	/**
 	 * Returns the value of the '<em><b>Kind</b></em>' attribute.
@@ -144,7 +144,7 @@ public interface ModuleImport extends VisitableASTNode, EModelElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='if(v instanceof org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) {\r\n  @SuppressWarnings(\"unchecked\")    \t\t\r\n  org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor<T> visitorExt = (org.eclipse.m2m.internal.qvt.oml.expressions.util.QVTOperationalVisitor) v;    \t\r\n  return visitorExt.visitModuleImport(this);\r\n}\r\nreturn org.eclipse.m2m.internal.qvt.oml.expressions.util.ForeignVisitorDefaultValue.getDefaultValueForVisitor(v);'"
+	 * @model
 	 * @generated
 	 */
 	<T, U extends Visitor<T, ?, ?, ?, ?, ?, ?, ?, ?, ?>> T accept(U v);

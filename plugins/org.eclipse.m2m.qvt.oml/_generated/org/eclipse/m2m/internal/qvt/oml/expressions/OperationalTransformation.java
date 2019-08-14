@@ -25,18 +25,18 @@ import org.eclipse.emf.ecore.EStructuralFeature;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation#getIntermediateClass <em>Intermediate Class</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation#getIntermediateProperty <em>Intermediate Property</em>}</li>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.OperationalTransformation#getModelParameter <em>Model Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage#getOperationalTransformation()
  * @model
  * @generated
  */
-public interface OperationalTransformation extends Module {
+public interface OperationalTransformation extends org.eclipse.m2m.internal.qvt.oml.expressions.Module {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

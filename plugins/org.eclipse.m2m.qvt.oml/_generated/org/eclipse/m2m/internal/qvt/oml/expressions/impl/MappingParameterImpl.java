@@ -27,10 +27,10 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.m2m.internal.qvt.oml.expressions.impl.MappingParameterImpl#getExtent <em>Extent</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

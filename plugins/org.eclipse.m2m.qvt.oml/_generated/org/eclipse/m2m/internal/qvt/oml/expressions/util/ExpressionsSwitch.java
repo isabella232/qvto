@@ -11,8 +11,6 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.expressions.util;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EModelElement;
@@ -23,7 +21,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EParameter;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.ETypedElement;
-import org.eclipse.m2m.internal.qvt.oml.expressions.*;
+import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.m2m.internal.qvt.oml.expressions.Constructor;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ConstructorBody;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ContextualProperty;
 import org.eclipse.m2m.internal.qvt.oml.expressions.EntryOperation;
@@ -38,7 +37,6 @@ import org.eclipse.m2m.internal.qvt.oml.expressions.MappingOperation;
 import org.eclipse.m2m.internal.qvt.oml.expressions.MappingParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelParameter;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModelType;
-import org.eclipse.m2m.internal.qvt.oml.expressions.Module;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ModuleImport;
 import org.eclipse.m2m.internal.qvt.oml.expressions.ObjectExp;
 import org.eclipse.m2m.internal.qvt.oml.expressions.OperationBody;
@@ -73,7 +71,7 @@ import org.eclipse.ocl.utilities.Visitable;
  * @see org.eclipse.m2m.internal.qvt.oml.expressions.ExpressionsPackage
  * @generated
  */
-public class ExpressionsSwitch<T> {
+public class ExpressionsSwitch<T> extends Switch<T> {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -101,14 +99,16 @@ public class ExpressionsSwitch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @param ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -118,26 +118,7 @@ public class ExpressionsSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
 			case ExpressionsPackage.CONSTRUCTOR: {
@@ -213,17 +194,17 @@ public class ExpressionsSwitch<T> {
 				if (result == null) result = caseImperativeExpression(imperativeCallExp);
 				if (result == null) result = caseEcore_FeatureCallExp(imperativeCallExp);
 				if (result == null) result = caseOperationCallExp(imperativeCallExp);
-				if (result == null) result = caseEcore_OCLExpression(imperativeCallExp);
 				if (result == null) result = caseEcore_CallExp(imperativeCallExp);
 				if (result == null) result = caseFeatureCallExp(imperativeCallExp);
+				if (result == null) result = caseEcore_OCLExpression(imperativeCallExp);
+				if (result == null) result = caseCallExp(imperativeCallExp);
 				if (result == null) result = caseETypedElement(imperativeCallExp);
 				if (result == null) result = caseOCLExpression(imperativeCallExp);
-				if (result == null) result = caseCallExp(imperativeCallExp);
+				if (result == null) result = caseCallingASTNode(imperativeCallExp);
 				if (result == null) result = caseENamedElement(imperativeCallExp);
 				if (result == null) result = caseTypedElement(imperativeCallExp);
 				if (result == null) result = caseVisitable(imperativeCallExp);
 				if (result == null) result = caseASTNode(imperativeCallExp);
-				if (result == null) result = caseCallingASTNode(imperativeCallExp);
 				if (result == null) result = caseEModelElement(imperativeCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -249,9 +230,9 @@ public class ExpressionsSwitch<T> {
 				if (result == null) result = caseEPackage(library);
 				if (result == null) result = caseVisitableASTNode(library);
 				if (result == null) result = caseEClassifier(library);
-				if (result == null) result = caseENamedElement(library);
 				if (result == null) result = caseVisitable(library);
 				if (result == null) result = caseASTNode(library);
+				if (result == null) result = caseENamedElement(library);
 				if (result == null) result = caseEModelElement(library);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -275,17 +256,17 @@ public class ExpressionsSwitch<T> {
 				if (result == null) result = caseImperativeExpression(mappingCallExp);
 				if (result == null) result = caseEcore_FeatureCallExp(mappingCallExp);
 				if (result == null) result = caseOperationCallExp(mappingCallExp);
-				if (result == null) result = caseEcore_OCLExpression(mappingCallExp);
 				if (result == null) result = caseEcore_CallExp(mappingCallExp);
 				if (result == null) result = caseFeatureCallExp(mappingCallExp);
+				if (result == null) result = caseEcore_OCLExpression(mappingCallExp);
+				if (result == null) result = caseCallExp(mappingCallExp);
 				if (result == null) result = caseETypedElement(mappingCallExp);
 				if (result == null) result = caseOCLExpression(mappingCallExp);
-				if (result == null) result = caseCallExp(mappingCallExp);
+				if (result == null) result = caseCallingASTNode(mappingCallExp);
 				if (result == null) result = caseENamedElement(mappingCallExp);
 				if (result == null) result = caseTypedElement(mappingCallExp);
 				if (result == null) result = caseVisitable(mappingCallExp);
 				if (result == null) result = caseASTNode(mappingCallExp);
-				if (result == null) result = caseCallingASTNode(mappingCallExp);
 				if (result == null) result = caseEModelElement(mappingCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -352,15 +333,15 @@ public class ExpressionsSwitch<T> {
 				return result;
 			}
 			case ExpressionsPackage.MODULE: {
-				Module module = (Module)theEObject;
+				org.eclipse.m2m.internal.qvt.oml.expressions.Module module = (org.eclipse.m2m.internal.qvt.oml.expressions.Module)theEObject;
 				T result = caseModule(module);
 				if (result == null) result = caseEClass(module);
 				if (result == null) result = caseEPackage(module);
 				if (result == null) result = caseVisitableASTNode(module);
 				if (result == null) result = caseEClassifier(module);
-				if (result == null) result = caseENamedElement(module);
 				if (result == null) result = caseVisitable(module);
 				if (result == null) result = caseASTNode(module);
+				if (result == null) result = caseENamedElement(module);
 				if (result == null) result = caseEModelElement(module);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -409,9 +390,9 @@ public class ExpressionsSwitch<T> {
 				if (result == null) result = caseEPackage(operationalTransformation);
 				if (result == null) result = caseVisitableASTNode(operationalTransformation);
 				if (result == null) result = caseEClassifier(operationalTransformation);
-				if (result == null) result = caseENamedElement(operationalTransformation);
 				if (result == null) result = caseVisitable(operationalTransformation);
 				if (result == null) result = caseASTNode(operationalTransformation);
+				if (result == null) result = caseENamedElement(operationalTransformation);
 				if (result == null) result = caseEModelElement(operationalTransformation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -491,21 +472,6 @@ public class ExpressionsSwitch<T> {
 	 * @generated
 	 */
 	public T caseConstructor(Constructor object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Module</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModule(Module object) {
 		return null;
 	}
 
@@ -776,6 +742,21 @@ public class ExpressionsSwitch<T> {
 	 * @generated
 	 */
 	public T caseModelType(ModelType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Module</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseModule(org.eclipse.m2m.internal.qvt.oml.expressions.Module object) {
 		return null;
 	}
 
@@ -1225,6 +1206,7 @@ public class ExpressionsSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}
