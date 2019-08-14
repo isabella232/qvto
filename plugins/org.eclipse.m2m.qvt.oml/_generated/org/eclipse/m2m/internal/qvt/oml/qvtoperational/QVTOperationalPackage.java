@@ -51,7 +51,7 @@ public interface QVTOperationalPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/QVT/1.0.0/Operational"; //$NON-NLS-1$
+	String eNS_URI = "http://www.eclipse.org/qvt/1.0.0/Operational"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.

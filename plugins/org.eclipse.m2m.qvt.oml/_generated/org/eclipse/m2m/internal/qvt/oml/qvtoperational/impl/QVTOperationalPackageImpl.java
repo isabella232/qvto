@@ -1,34 +1,28 @@
 /**
  * Copyright (c) 2007 Borland Software Corporation
- * 
+ *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
- *   
+ *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
  */
 package org.eclipse.m2m.internal.qvt.oml.qvtoperational.impl;
 
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.m2m.internal.qvt.oml.expressions.impl.ExpressionsPackageImpl;
-
 import org.eclipse.m2m.internal.qvt.oml.qvtoperational.Dummy;
 import org.eclipse.m2m.internal.qvt.oml.qvtoperational.QVTOperationalFactory;
 import org.eclipse.m2m.internal.qvt.oml.qvtoperational.QVTOperationalPackage;
-
 import org.eclipse.m2m.qvt.oml.ecore.ImperativeOCL.ImperativeOCLPackage;
-
 import org.eclipse.ocl.expressions.ExpressionsPackage;
-
 import org.eclipse.ocl.types.TypesPackage;
-
 import org.eclipse.ocl.utilities.UtilitiesPackage;
 
 /**
@@ -72,6 +66,20 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 	}
 
 	/**
+	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
+	 *
+	 * This wrapper ensure that the legacy eNS_URI typo is also registered.
+	 */
+	public static QVTOperationalPackage init() {
+		boolean wasInited = isInited;
+		QVTOperationalPackage theQVTOperationalPackage = initGen();
+		if (!wasInited && !EMFPlugin.IS_ECLIPSE_RUNNING) {
+			EPackage.Registry.INSTANCE.put("http://www.eclipse.org/QVT/1.0.0/Operational", theQVTOperationalPackage);
+		}
+		return theQVTOperationalPackage;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -90,7 +98,7 @@ public class QVTOperationalPackageImpl extends EPackageImpl implements QVTOperat
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static QVTOperationalPackage init() {
+	public static QVTOperationalPackage initGen() {
 		if (isInited) return (QVTOperationalPackage)EPackage.Registry.INSTANCE.getEPackage(QVTOperationalPackage.eNS_URI);
 
 		// Obtain or create and register package
