@@ -14,7 +14,7 @@
 #
 #    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.9.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 3.9.0
-#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #    -a PUBLISH__ALIAS          Non blank to use alias as part of final name
 #    -j PUBLISH__JAVADOC        The optional Javadoc zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/QVTo-javadoc.zip

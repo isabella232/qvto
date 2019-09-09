@@ -14,7 +14,7 @@
 #
 #    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.9.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 3.9.0
-#    -t PUBLISH__BUILD_T        Build type N/I/S, blank suppresses promotion
+#    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER        Version qualifier e.g. v20171025-1600
 #
 updatesFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/updates/"
@@ -54,6 +54,11 @@ then
     buildFolder="${updatesFolder}milestones"
     buildRepoName="Milestones"
     externalFolder="${externalUpdatesFolder}milestones/${PUBLISH__VERSION}/${tQualifier}"
+  elif [ "${PUBLISH__BUILD_T}" = "R" ]
+  then
+    buildFolder="${updatesFolder}releases"
+    buildRepoName="Release"
+    externalFolder="${externalUpdatesFolder}releases/${PUBLISH__VERSION}"
   else
     buildFolder="${updatesFolder}other"
     externalFolder="${externalUpdatesFolder}other/${PUBLISH__VERSION}"
@@ -109,6 +114,15 @@ then
         chmod -R g+w ${tQualifier}
         ${manageComposite} add -Dchild.repository=${tQualifier} -Dcomposite.name="${projectRepoName} ${PUBLISH__VERSION} ${buildRepoName} Repository"
       popd
+    elif [ "${PUBLISH__BUILD_T}" = "R" ]
+    then
+      curl -s -k ${PUBLISH__URL} > ${localZip}
+      unzip -ou ${localZip} -d new${PUBLISH__VERSION}
+      chgrp -R ${group} new${PUBLISH__VERSION}
+      chmod -R g+w new${PUBLISH__VERSION}
+      mv ${PUBLISH__VERSION} old${PUBLISH__VERSION}
+      mv new${PUBLISH__VERSION} ${PUBLISH__VERSION}
+      rm -rf old${PUBLISH__VERSION} ${localZip}
 
     fi
 
