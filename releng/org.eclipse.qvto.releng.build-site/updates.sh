@@ -15,7 +15,7 @@
 #    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.9.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 3.9.0
 #    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
-#    -q PUBLISH__QUALIFIER        Version qualifier e.g. v20171025-1600
+#    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #
 updatesFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/updates/"
 group="modeling.mmt.qvt-oml"
@@ -43,25 +43,25 @@ then
   then
     buildFolder="${updatesFolder}nightly"
     buildRepoName="Nightly"
-    externalFolder="${externalUpdatesFolder}nightly/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "I" ]
   then
     buildFolder="${updatesFolder}interim"
     buildRepoName="Interim"
-    externalFolder="${externalUpdatesFolder}interim/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   elif [ "${PUBLISH__BUILD_T}" = "S" ]
   then
     buildFolder="${updatesFolder}milestones"
     buildRepoName="Milestones"
-    externalFolder="${externalUpdatesFolder}milestones/${PUBLISH__VERSION}/${tQualifier}"
+    latestRelativeReference="../${PUBLISH__VERSION}/${tQualifier}"
   elif [ "${PUBLISH__BUILD_T}" = "R" ]
   then
     buildFolder="${updatesFolder}releases"
-    buildRepoName="Release"
-    externalFolder="${externalUpdatesFolder}releases/${PUBLISH__VERSION}"
+    buildRepoName="Releases"
+    latestRelativeReference="../${PUBLISH__VERSION}"
   else
     buildFolder="${updatesFolder}other"
-    externalFolder="${externalUpdatesFolder}other/${PUBLISH__VERSION}"
+    latestRelativeReference="../${PUBLISH__VERSION}"
     buildRepoName="Other"
   fi
 
@@ -128,7 +128,7 @@ then
 
     mkdir ${buildFolder}/newlatest
     pushd ${buildFolder}/newlatest
-      ${manageComposite} add -Dchild.repository=${externalFolder} -Dcomposite.name="${projectRepoName} Latest ${PUBLISH__VERSION} ${buildRepoName} Repository"
+      ${manageComposite} add -Dchild.repository=${latestRelativeReference} -Dcomposite.name="${projectRepoName} Latest ${PUBLISH__VERSION} ${buildRepoName} Repository"
     popd
     if [ -d "latest" ]
     then
