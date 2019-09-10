@@ -158,11 +158,11 @@
               <ws>win32</ws>
               <arch>x86_64</arch>
             </environment>
-            <environment>
+            <!--environment>
               <os>linux</os>
               <ws>gtk</ws>
               <arch>x86</arch>
-            </environment>
+            </environment-->
             <environment>
               <os>linux</os>
               <ws>gtk</ws>
@@ -307,10 +307,10 @@
           <groupId>org.eclipse.tycho</groupId>
            <artifactId>tycho-surefire-plugin</artifactId>
            <version>${tycho-version}</version>
-           <configuration>
+           <!--configuration>
              <argLine>${tycho.testArgLine} -Xms40m -Xmx1G ${os-jvm-flags}</argLine>
              <failIfNoTests>false</failIfNoTests>
-           </configuration>
+           </configuration-->
         </plugin>
         <plugin>
           <groupId>org.eclipse.tycho</groupId>
