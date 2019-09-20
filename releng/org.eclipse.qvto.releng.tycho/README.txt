@@ -4,20 +4,20 @@ The Tycho build minimises the need for shell activity by auto-registering in P2 
 The qvto.aggrcon file is in the ssh://'committer-name'@git.eclipse.org:29418/simrel/org.eclipse.simrel.build.git repo.
 
 The updates can be checked by looking for the new entry on https://www.eclipse.org/mmt/downloads/?project=qvto
-or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.10.0/S201805290850
-or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/releases/3.10.0
+or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/milestones/3.10.1/S201805290850
+or installing new software from e.g. http://download.eclipse.org/mmt/qvto/updates/releases/3.10.1
 
 A new milestone build was formerly manually added to the composite repository by:
 
 logon to build.eclipse.org
-cd ~/downloads/mmt/qvto/updates/milestones/3.10.0
-ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201805290850 [ -Dcomposite.name="QVTo 3.10.0 milestones" ]
+cd ~/downloads/mmt/qvto/updates/milestones/3.10.1
+ant -f /shared/modeling/tools/promotion/manage-composite.xml add -Dchild.repository=S201805290850 [ -Dcomposite.name="QVTo 3.10.1 milestones" ]
 
 The SimRel aggregator is configured by GIT\org.eclipse.simrel.build\mmt-qvto.aggrcon to use an explicit milestone entry
 
 So edit qvto.aggrcon in to update 
-location="https://download.eclipse.org/mmt/qvto/updates/milestones/3.10.0/S201805290850"
-commit with a comment such as [qvto] 3.10.0M1 for 2019-09 and Push to Gerrit (refs/for/master)
+location="https://download.eclipse.org/mmt/qvto/updates/milestones/3.10.1/S201805290850"
+commit with a comment such as [qvto] 3.10.1M1 for 2019-09 and Push to Gerrit (refs/for/master)
 The Push dialog identifies a Gerrit such as https://git.eclipse.org/r/149210
 Open the Gerrit, Open the Buld job and its console
 When the build succeeds, refresh the Gerrit, Click CodeReview+2, Click Submit.
@@ -26,15 +26,15 @@ Refresh
 RC builds are just aliases for regular S builds.
 The final R build rebuilds the final RC build and is built as late as possible for contribution to the final SimRel build.
 For the R  build update qvto.aggrcon to
-location="http://download.eclipse.org/mmt/qvto/updates/releases/3.10.0"
+location="http://download.eclipse.org/mmt/qvto/updates/releases/3.10.1"
 
 After a few hours the mirrors can be checked by:
-https://www.eclipse.org/downloads/download.php?file=/mmt/qvto/updates/releases/3.10.0&format=xml
+https://www.eclipse.org/downloads/download.php?file=/mmt/qvto/updates/releases/3.10.1&format=xml
 
 Disable the Promoter job until GIT has been updated for the next release number.
 
 Downloads are accessible at
-cd ~/downloads/mmt/qvto/downloads/drops/3.10.0
+cd ~/downloads/mmt/qvto/downloads/drops/3.10.1
 
 Archives are accessible at
 cd /home/data/httpd/archive.eclipse.org/mmt/qvto/downloads/drops
