@@ -65,3 +65,21 @@ Publish JUnit test report: tests/*.test*/target/surefire-reports/*.xml,tests/*.t
 Archive the artefacts: releng/org.eclipse.qvto.releng.build-site/target/*.zip,releng/org.eclipse.qvto.releng.build-site/target/publisher.properties,releng/org.eclipse.qvto.releng.build-site/target/downloads.sh,releng/org.eclipse.qvto.releng.build-site/target/updates.sh
 
 Trigger Promoter when stable using releng/org.eclipse.qvto.releng.build-site/target/publisher.properties
+
+
+
+
+ssh genie.qvt-oml@projects-storage.eclipse.org ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=3.9.4
+ssh genie.qvt-oml@projects-storage.eclipse.org ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=3.9.4
+
+
+
+ssh genie.qvt-oml@projects-storage.eclipse.org pwd; more /shared/modeling/tools/promotion/manage-composite.xml
+
+
+ssh genie.qvt-oml@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvto/updates/nightly; ls
+
+ssh genie.qvt-oml@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvto/updates/nightly; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=3.9.4
+
+ssh genie.qvt-oml@projects-storage.eclipse.org ls /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases /home/data/httpd/archive.eclipse.org/mmt/qvto/updates/releases
+ssh genie.qvt-oml@projects-storage.eclipse.org cp -pR /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases/3.9.0/ /home/data/httpd/archive.eclipse.org/mmt/qvto/updates/releases
