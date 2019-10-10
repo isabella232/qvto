@@ -10,14 +10,13 @@
 #     E.D.Willink - initial API and implementation
 #*******************************************************************************
 #
-#	Promote the PUBLISH__URL to the downloads 'page'.
+#	Promote ~/publish.zip to the downloads 'page'.
+#	Promote ~/javadoc.zip to the downloads 'page'.
 #
-#    -u PUBLISH__URL            The zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/org.eclipse.qvto-3.9.0.v20171025-1600.zip
 #    -v PUBLISH__VERSION        Unqualified version e.g. 3.9.0
 #    -t PUBLISH__BUILD_T        Build type N/I/S/R, blank suppresses promotion
 #    -q PUBLISH__QUALIFIER      Version qualifier e.g. v20171025-1600
 #    -a PUBLISH__ALIAS          Non blank to use alias as part of final name
-#    -j PUBLISH__JAVADOC        The optional Javadoc zip to be published e.g. https://ci.eclipse.org/qvt-oml/job/qvto-master/25/artifact/releng/org.eclipse.qvto.releng.build-site/target/QVTo-javadoc.zip
 #
 dropsFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/downloads/drops/"
 javadocFolder="/home/data/httpd/download.eclipse.org/mmt/qvto/javadoc/m2m.qvt.oml/"
@@ -25,16 +24,14 @@ group="modeling.mmt.qvt-oml"
 zipPrefix="mmt-qvto-Update-"
 localZip="newJavadoc.zip"
 
-while getopts u:v:t:q:a:j: option
+while getopts v:t:q:a: option
 do
 case "${option}"
 in
-u) PUBLISH__URL=${OPTARG};;
 v) PUBLISH__VERSION=${OPTARG};;
 t) PUBLISH__BUILD_T=${OPTARG};;
 q) PUBLISH__QUALIFIER=${OPTARG};;
 a) PUBLISH__ALIAS=${OPTARG};;
-j) PUBLISH__JAVADOC=${OPTARG};;
 esac
 done
 
@@ -56,7 +53,7 @@ then
   zipFile="${zipPrefix}${fileStem}.zip"
 
   pushd ${versionFolder}
-    curl -s -k ${PUBLISH__URL} > ${zipFile}
+    cp ~/publish.zip ${zipFile}
     md5sum -b ${zipFile} > ${zipFile}.md5
     sha512sum -b ${zipFile} > ${zipFile}.sha1
     # make sure permissions are for the intended group
@@ -69,7 +66,7 @@ then
     mkdir ${javadocFolder}
   fi
   pushd ${javadocFolder}
-    curl -s -k ${PUBLISH__JAVADOC} > ${localZip}
+    cp ~/javadoc.zip > ${localZip}
     if [ $? -eq 0 ]
     then
       javadocSize=$(wc -c <"$localZip")
