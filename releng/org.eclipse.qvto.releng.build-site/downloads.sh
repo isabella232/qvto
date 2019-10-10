@@ -66,7 +66,7 @@ then
     mkdir ${javadocFolder}
   fi
   pushd ${javadocFolder}
-    cp ~/javadoc.zip > ${localZip}
+    cp ~/javadoc.zip ${localZip}
     if [ $? -eq 0 ]
     then
       javadocSize=$(wc -c <"$localZip")
