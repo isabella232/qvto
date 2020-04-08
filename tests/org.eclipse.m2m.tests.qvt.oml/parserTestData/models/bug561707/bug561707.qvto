@@ -1,0 +1,34 @@
+modeltype ecore uses 'http://www.eclipse.org/emf/2002/Ecore';
+
+transformation bug561707(out output : ecore);
+
+property child = object EEnumLiteral{};
+property parent = object EEnum{};
+
+main() {
+
+	parent.eLiterals += child;
+	assert fatal (parent.eLiterals->includes(child));
+
+	output.removeElement(parent);
+	map steal();
+	assert fatal (parent.eLiterals->includes(child));
+	
+	map output();
+}
+
+mapping output() : EEnum {
+	init {
+		result := parent;
+	}
+	
+	name := 'parent';
+}
+
+mapping steal() : EEnumLiteral {
+	init {
+		result := child;
+	}
+	
+	name := 'child';	
+}
