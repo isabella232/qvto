@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2007, 2018 Borland Software Corporation and others
+ * Copyright (c) 2007, 2020 Borland Software Corporation and others
  * 
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
@@ -11,7 +11,7 @@
  *     Christopher Gerking - bugs 302594, 309762, 310991, 325192, 377882, 388325, 
  *     							  392080, 392153, 394498, 397215, 397218, 269744, 
  *     							  415660, 415315, 414642, 427237, 428618, 425069,
- *     							  463410, 486579, 425066
+ *     							  463410, 486579, 425066, 561707
  *     Alex Paperno - bugs 294127, 416584, 419299, 267917, 420970, 424584
  *     Christine Gerpheide - bug 432969
  *******************************************************************************/
@@ -859,7 +859,7 @@ implements QvtOperationalEvaluationVisitor, InternalEvaluator, DeferredAssignmen
         	if (resultValue instanceof EObject) {
         		EObject eObject = (EObject) resultValue;
         		
-        		if (eObject.eResource() == null) {
+        		if (eObject.eResource() == null && eObject.eContainer() == null) {
         			getOperationalEvaluationEnv().putInstanceToExtent(eObject, ((MappingParameter) varParam).getExtent());
         		}
         	}
