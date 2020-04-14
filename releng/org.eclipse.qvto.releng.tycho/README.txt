@@ -74,7 +74,9 @@ ssh genie.qvt-oml@projects-storage.eclipse.org rm -rf  /home/data/httpd/download
 ssh genie.qvt-oml@projects-storage.eclipse.org ls -la /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases
 ssh genie.qvt-oml@projects-storage.eclipse.org pwd ; cd /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases ; pwd ; ls -la
 ssh genie.qvt-oml@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=3.4.1
-ssh genie.qvt-oml@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvto/updates/releases/3.4.1
+
+ssh genie.qvt-oml@projects-storage.eclipse.org cd /home/data/httpd/download.eclipse.org/mmt/qvto/updates/milestones ; ant -f /shared/modeling/tools/promotion/manage-composite.xml remove -Dchild.repository=3.4.1
+ssh genie.qvt-oml@projects-storage.eclipse.org rm -rf /home/data/httpd/download.eclipse.org/mmt/qvto/updates/milestones/3.4.1
 
 -- Drops archiving ---- and edit GIT\mmt\downloads\extras-qvto.php
 ssh genie.qvt-oml@projects-storage.eclipse.org ls -la /home/data/httpd/archive.eclipse.org/mmt/qvto/downloads/drops
