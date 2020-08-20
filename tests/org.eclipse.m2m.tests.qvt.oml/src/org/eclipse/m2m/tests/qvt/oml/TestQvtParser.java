@@ -8,11 +8,15 @@
  *
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
+<<<<<<< Upstream, based on origin/ewillink/566216
 <<<<<<< Upstream, based on ewillink/565747
  *     Christopher Gerking - bugs 472482, 537041, 562177
 =======
  *     Christopher Gerking - bugs 537041, 562177, 566216
 >>>>>>> 925cb1f [566216] Add parser test case to demonstrate the LSP violation
+=======
+ *     Christopher Gerking - bugs 537041, 562177, 566230
+>>>>>>> 561088c [566230] Add parser test case
  *******************************************************************************/
 package org.eclipse.m2m.tests.qvt.oml;
 
@@ -236,6 +240,7 @@ public class TestQvtParser extends TestCase {
 						TestData.createSourceChecked("bug472482", 1, 1), //$NON-NLS-1$
 						TestData.createSourceChecked("bug565747", 0, 0), //$NON-NLS-1$
 						TestData.createSourceChecked("bug566216", 1, 2), //$NON-NLS-1$
+						TestData.createSourceChecked("bug566230", 2, 0), //$NON-NLS-1$
 				}
 				);
 	}
