@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2016, 2018 Christopher Gerking and others.
+ * Copyright (c) 2016, 2020 Christopher Gerking and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v2.0
  * which accompanies this distribution, and is available at
@@ -84,11 +84,13 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		Map<String, JdtDescriptor> projectDescriptors = descriptors.get(project);
 		
 		if (projectDescriptors != null) {
-			return projectDescriptors.get(qualifiedName);
+			if (projectDescriptors.containsKey(qualifiedName)) {
+				return projectDescriptors.get(qualifiedName);
+			}
+		} else {
+			projectDescriptors = new HashMap<String, JdtBlackboxProvider.JdtDescriptor>();
+			descriptors.put(project, projectDescriptors);
 		}
-
-		projectDescriptors = new HashMap<String, JdtBlackboxProvider.JdtDescriptor>();
-		descriptors.put(project, projectDescriptors);
 				
 		try {
 			if (!project.hasNature(JavaCore.NATURE_ID)) {
@@ -117,6 +119,9 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 				return descriptor;
 			}
 			catch (ClassNotFoundException e) {
+				return null;
+			}
+			catch (NoClassDefFoundError e) {
 				return null;
 			}
 
@@ -176,13 +181,28 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 	
 	@Override
 	public void cleanup() {
+		ProjectClassLoader.resetAllProjectClassLoaders();
 		descriptors.clear();		
 	}
 	
+	/**
+	 * @deprecated Call {@link #reset(IJavaProject)} instead.
+	 */
+	@Deprecated
 	public static void clearDescriptors(IProject project) {
 		descriptors.remove(project);
 	}
 	
+	static boolean requiresReset(IJavaProject javaProject) {
+		return descriptors.containsKey(javaProject.getProject()) 
+				|| ProjectClassLoader.isProjectClassLoaderExisting(javaProject);
+	}
+	
+	static void reset(IJavaProject javaProject) {
+		ProjectClassLoader.resetProjectClassLoader(javaProject);
+		descriptors.remove(javaProject.getProject());
+	}
+		
 	private class JdtDescriptor extends JavaBlackboxProvider.JavaUnitDescriptor {
 		
 		private final Class<?> fModuleJavaClass;

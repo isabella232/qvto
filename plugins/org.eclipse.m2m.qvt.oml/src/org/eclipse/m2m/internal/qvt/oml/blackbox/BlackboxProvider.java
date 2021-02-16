@@ -8,7 +8,7 @@
  *   
  * Contributors:
  *     Borland Software Corporation - initial API and implementation
- *     Christopher Gerking - bugs 289982, 326871, 427237
+ *     Christopher Gerking - bugs 289982, 326871, 427237, 472482
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
@@ -18,13 +18,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EOperation;
-import org.eclipse.m2m.internal.qvt.oml.NLS;
-import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalEvaluationEnv;
 import org.eclipse.m2m.internal.qvt.oml.ast.env.QvtOperationalModuleEnv;
-import org.eclipse.m2m.internal.qvt.oml.ast.parser.ValidationMessages;
+import org.eclipse.m2m.internal.qvt.oml.ast.parser.QvtOperationalUtil;
 import org.eclipse.m2m.internal.qvt.oml.compiler.BlackboxUnitResolver;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstance;
 import org.eclipse.m2m.internal.qvt.oml.evaluator.ModuleInstanceFactory;
@@ -100,37 +99,28 @@ public abstract class BlackboxProvider {
 			String qualifiedName, ResolutionContext resolutionContext);
 	
 	public abstract void cleanup();
-	
-	private void handleBlackboxException(BlackboxException e, BlackboxUnitDescriptor descriptor) {
 		
-		Diagnostic diagnostic = e.getDiagnostic();
-		if(diagnostic != null) {
-			QvtPlugin.logDiagnostic(diagnostic);					
-		} else {
-			QvtPlugin.error(NLS.bind(ValidationMessages.FailedToLoadUnit, 
-					new Object[] { descriptor.getQualifiedName() }), e);
-		}
-		
+	private ResolutionContext getResolutionContext(QvtOperationalModuleEnv env) {
+		URI sourceURI = QvtOperationalUtil.getSourceURI(env);
+		return sourceURI != null ? new ResolutionContextImpl(sourceURI) : GLOBAL_RESOLUTION_CONTEXT;
 	}
 	
 	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (BlackboxUnitDescriptor d : getUnitDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
-			if (env.getImportedNativeLibs().isEmpty()) {
-				try {
-					d.load(new LoadContext(env.getEPackageRegistry()));
-				} catch (BlackboxException e) {
-					handleBlackboxException(e, d);
-					
-					continue;
-				}
-			}
-			else {
+		for (BlackboxUnitDescriptor d : getUnitDescriptors(getResolutionContext(env))) {
+			
+			if (!env.getImportedNativeLibs().isEmpty()) {
 				if (!env.getImportedNativeLibs().containsKey(d.getURI())) {
 					continue;
 				}
 			}
 			
+			try {
+				d.load(new LoadContext(env.getEPackageRegistry()));
+			} catch (BlackboxException e) {				
+				continue;
+			}
+						
 			Collection<CallHandler> handlers = d.getBlackboxCallHandler(operation, env);
 			if (!handlers.isEmpty()) {
 				if (result.isEmpty()) {
@@ -144,20 +134,18 @@ public abstract class BlackboxProvider {
 	
 	public Collection<CallHandler> getBlackboxCallHandler(OperationalTransformation transformation, QvtOperationalModuleEnv env) {
 		Collection<CallHandler> result = Collections.emptyList();
-		for (BlackboxUnitDescriptor d : getUnitDescriptors(GLOBAL_RESOLUTION_CONTEXT)) {
-			if (env.getImportedNativeLibs().isEmpty()) {
-				try {
-					d.load(new LoadContext(env.getEPackageRegistry()));
-				} catch (BlackboxException e) {
-					handleBlackboxException(e, d);
-					
-					continue;
-				}
-			}
-			else {
+		for (BlackboxUnitDescriptor d : getUnitDescriptors(getResolutionContext(env))) {
+			
+			if (!env.getImportedNativeLibs().isEmpty()) {
 				if (!env.getImportedNativeLibs().containsKey(d.getURI())) {
 					continue;
 				}
+			}
+			
+			try {
+				d.load(new LoadContext(env.getEPackageRegistry()));
+			} catch (BlackboxException e) {				
+				continue;
 			}
 			
 			Collection<CallHandler> handlers = d.getBlackboxCallHandler(transformation, env);
