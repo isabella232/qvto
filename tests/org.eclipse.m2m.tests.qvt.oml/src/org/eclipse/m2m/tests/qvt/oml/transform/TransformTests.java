@@ -33,6 +33,7 @@ import org.eclipse.m2m.tests.qvt.oml.bbox.AnnotatedJavaLibrary;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug289982_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug425066_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.Bug427237_Library;
+import org.eclipse.m2m.tests.qvt.oml.bbox.Bug565747_Library;
 import org.eclipse.m2m.tests.qvt.oml.bbox.SimpleJavaLibrary;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -583,7 +584,12 @@ public class TransformTests extends TestCase {
         		new FilesToFilesData("bug490998"), //$NON-NLS-1$ 
         		new FilesToFilesData("bug492966"), //$NON-NLS-1$
         		new FilesToFilesData("bug561707", Collections.<String>emptyList(), Collections.singletonList("out.ecore")), //$NON-NLS-1$
-        		new FilesToFilesData("bug565747"), //$NON-NLS-1$
+        		new FilesToFilesData("bug565747") { //$NON-NLS-1$
+        			@Override
+        			public void prepare(BlackboxRegistry blackboxRegistry) {
+        				blackboxRegistry.registerModule(Bug565747_Library.class, "org.bar.Foo", "Bug565747_Lib");
+        			}
+        		},
         		new FilesToFilesData("bug566216") {
         			@Override
         			public void prepare(BlackboxRegistry blackboxRegistry) {
