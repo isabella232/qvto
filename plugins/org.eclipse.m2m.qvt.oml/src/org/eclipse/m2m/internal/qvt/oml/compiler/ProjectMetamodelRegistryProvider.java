@@ -23,11 +23,8 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EPackageRegistryImpl;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.m2m.internal.qvt.oml.emf.util.EmfUtil;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.EmfStandaloneMetamodelProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelProvider;
 import org.eclipse.m2m.internal.qvt.oml.emf.util.mmregistry.IMetamodelRegistryProvider;
@@ -66,42 +63,7 @@ public class ProjectMetamodelRegistryProvider implements IMetamodelRegistryProvi
 		}
 		
 		if (resourceSet instanceof ResourceSetImpl) {
-		
-			((ResourceSetImpl) resourceSet).setURIResourceMap(new HashMap<URI, Resource>() {
-				
-				public Resource get(Object key) {
-					Resource resource = super.get(key);
-					
-					if (key instanceof URI) {
-						URI uri = (URI) key;
-					
-						if (uri.isPlatformResource()) {
-							if (!URIConverter.INSTANCE.exists(uri, null)) {
-								if (!(resource instanceof Resource)) {
-									URI platformPluginUri = URI.createPlatformPluginURI(uri.toPlatformString(false), false);	
-									
-									try {
-										Resource pluginResource = EmfUtil.loadResource(platformPluginUri);
-										EPackage rootPackage = EmfUtil.getFirstEPackageContent(pluginResource);
-											
-										if (rootPackage != null) {
-											EPackage ePackage = registry.getEPackage(rootPackage.getNsURI());
-											
-											if (ePackage != null) {
-												resource = ePackage.eResource();
-												put(uri, resource);
-											}
-										}
-									}
-									catch(Exception e) {}
-								}
-							}
-						}
-					}				
-					
-					return resource;
-				}
-			});
+			((ResourceSetImpl) resourceSet).setURIResourceMap(new PlatformNamespaceUriResourceMap(registry));			
 		}
 		
 		resolutionRSet = resourceSet;
