@@ -150,28 +150,31 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		try {
 			IJavaProject javaProject = JavaCore.create(project);
 			IResource folder = ResourcesPlugin.getWorkspace().getRoot().findMember(javaProject.getOutputLocation());
-			final String folderPath = folder.getFullPath().toString();
-
-			folder.accept(new IResourceProxyVisitor() {
-
-				public boolean visit(IResourceProxy proxy) throws CoreException {
-					if (proxy.getType() == IResource.FOLDER) {
-						return true;
-					}
-					if (proxy.getType() == IResource.FILE) {
-						if (proxy.getName().endsWith(".class")) {
-							String filePath = proxy.requestFullPath().toString();
-							filePath = filePath.substring(0, filePath.length() - 6);
-							if (filePath.startsWith(folderPath)) {
-								filePath = filePath.substring(folderPath.length() + 1);
-							}
-							classes.add(filePath.replace('/', '.'));
+			
+			if (folder != null) {
+				final String folderPath = folder.getFullPath().toString();
+	
+				folder.accept(new IResourceProxyVisitor() {
+	
+					public boolean visit(IResourceProxy proxy) throws CoreException {
+						if (proxy.getType() == IResource.FOLDER) {
+							return true;
 						}
+						if (proxy.getType() == IResource.FILE) {
+							if (proxy.getName().endsWith(".class")) {
+								String filePath = proxy.requestFullPath().toString();
+								filePath = filePath.substring(0, filePath.length() - 6);
+								if (filePath.startsWith(folderPath)) {
+									filePath = filePath.substring(folderPath.length() + 1);
+								}
+								classes.add(filePath.replace('/', '.'));
+							}
+						}
+						return false;
 					}
-					return false;
-				}
-
-			}, IResource.NONE);
+	
+				}, IResource.NONE);
+			}
 		} catch (CoreException e) {
 			// ignore
 		}

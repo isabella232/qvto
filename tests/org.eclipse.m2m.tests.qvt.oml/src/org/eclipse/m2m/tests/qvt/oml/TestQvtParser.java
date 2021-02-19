@@ -269,8 +269,16 @@ public class TestQvtParser extends TestCase {
 		if (destinationFolder.exists()) {
 			FileUtil.delete(destinationFolder);
 		}
-		
+				
 		BlackboxRegistry.INSTANCE.cleanup();
+						
+		IJavaProject javaProject = JavaCore.create(myProject.getProject());
+		if (javaProject.exists()) {		
+			javaProject.setOutputLocation(javaProject.getPath().append("bin"), new NullProgressMonitor());
+			IProjectDescription desc = myProject.getProject().getDescription();
+			NatureUtils.removeNature(desc, JavaCore.NATURE_ID);
+			myProject.getProject().setDescription(desc, new NullProgressMonitor());
+		}
 	}
 
 	public TestProject getTestProject() {
@@ -455,7 +463,7 @@ public class TestQvtParser extends TestCase {
 					new NullProgressMonitor());
 
 			IJavaProject javaProject = JavaCore.create(myProject.getProject());
-
+			
 			if (workspace.getRoot().exists(binPath)) {
 				javaProject.setOutputLocation(binPath,
 						new NullProgressMonitor());
