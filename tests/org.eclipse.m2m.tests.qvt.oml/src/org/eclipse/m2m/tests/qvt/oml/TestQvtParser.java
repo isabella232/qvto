@@ -241,6 +241,7 @@ public class TestQvtParser extends TestCase {
 						TestData.createSourceChecked("bug565747", 0, 0), //$NON-NLS-1$
 						TestData.createSourceChecked("bug566216", 1, 2), //$NON-NLS-1$
 						TestData.createSourceChecked("bug566230", 2, 0), //$NON-NLS-1$
+						TestData.createSourceChecked("bug570407", 0, 0).includeMetamodel("bug570407.ecore"), //$NON-NLS-1$
 				}
 				);
 	}
