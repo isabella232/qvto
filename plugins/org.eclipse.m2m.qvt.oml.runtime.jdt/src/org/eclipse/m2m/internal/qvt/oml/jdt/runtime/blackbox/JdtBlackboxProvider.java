@@ -27,7 +27,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.m2m.internal.qvt.oml.QvtPlugin;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.BlackboxUnitDescriptor;
 import org.eclipse.m2m.internal.qvt.oml.blackbox.ResolutionContext;
@@ -125,7 +124,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 				return null;
 			}
 
-		} catch (JavaModelException e) {
+		} catch (CoreException e) {
 			QvtPlugin.error(e);
 		} catch (MalformedURLException e) {
 			QvtPlugin.error(e);
