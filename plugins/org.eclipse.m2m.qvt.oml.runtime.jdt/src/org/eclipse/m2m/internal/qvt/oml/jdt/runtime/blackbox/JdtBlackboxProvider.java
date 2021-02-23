@@ -56,7 +56,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 
 		List<BlackboxUnitDescriptor> descriptors = new ArrayList<BlackboxUnitDescriptor>();
 		for (IProject p : projects) {
-			final List<String> classes = getAllClasses(p);
+			final List<String> classes = getAllClasses(p, resolutionContext);
 			
 			for (String qualifiedName : classes) {
 				BlackboxUnitDescriptor jdtUnitDescriptor = getJdtUnitDescriptor(p, qualifiedName);
@@ -144,7 +144,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		return resource.getProject();
 	}
 	
-	private List<String> getAllClasses(IProject project) {
+	private List<String> getAllClasses(IProject project, ResolutionContext context) {
 		final List<String> classes = new ArrayList<String>();
 
 		try {
@@ -162,12 +162,17 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 						}
 						if (proxy.getType() == IResource.FILE) {
 							if (proxy.getName().endsWith(".class")) {
-								String filePath = proxy.requestFullPath().toString();
-								filePath = filePath.substring(0, filePath.length() - 6);
-								if (filePath.startsWith(folderPath)) {
-									filePath = filePath.substring(folderPath.length() + 1);
+								if (!proxy.getName().contains("$")) {
+									String filePath = proxy.requestFullPath().toString();
+									filePath = filePath.substring(0, filePath.length() - 6);
+									if (filePath.startsWith(folderPath)) {
+										filePath = filePath.substring(folderPath.length() + 1);
+									}
+									String fqn = filePath.replace('/', '.');
+									if (context.getImports().isEmpty() || context.getImports().contains(fqn)) {
+										classes.add(fqn);
+									}
 								}
-								classes.add(filePath.replace('/', '.'));
 							}
 						}
 						return false;
@@ -178,7 +183,7 @@ public class JdtBlackboxProvider extends JavaBlackboxProvider {
 		} catch (CoreException e) {
 			// ignore
 		}
-
+		
 		return classes;
 	}
 	

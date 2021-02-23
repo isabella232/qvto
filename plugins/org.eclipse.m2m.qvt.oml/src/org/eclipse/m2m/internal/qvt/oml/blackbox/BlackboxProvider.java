@@ -12,10 +12,12 @@
  *******************************************************************************/
 package org.eclipse.m2m.internal.qvt.oml.blackbox;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
@@ -102,7 +104,13 @@ public abstract class BlackboxProvider {
 		
 	private ResolutionContext getResolutionContext(QvtOperationalModuleEnv env) {
 		URI sourceURI = QvtOperationalUtil.getSourceURI(env);
-		return sourceURI != null ? new ResolutionContextImpl(sourceURI) : GLOBAL_RESOLUTION_CONTEXT;
+		
+		Collection<String> imports = new ArrayList<String>();
+		for (Set<String> importSet : env.getImportedNativeLibs().values()) {
+			imports.addAll(importSet);
+		}
+		
+		return sourceURI != null ? new ResolutionContextImpl(sourceURI, imports) : GLOBAL_RESOLUTION_CONTEXT;
 	}
 	
 	public Collection<CallHandler> getBlackboxCallHandler(ImperativeOperation operation, QvtOperationalModuleEnv env) {
